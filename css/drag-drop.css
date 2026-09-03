@@ -1,0 +1,205 @@
+/**
+ * RhyRhy English - Drag & Drop Storage Dock Styles
+ * Desktop HTML5 drag & Mobile touch drag support.
+ */
+
+/* Storage Dock at Bottom */
+.storage-dock-overlay {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(140%);
+  z-index: 999;
+  width: calc(100% - 32px);
+  max-width: 480px;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.storage-dock-overlay.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.storage-drop-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 24px;
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px dashed var(--primary-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.storage-dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--primary), #9333EA);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.storage-dock-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.storage-dock-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.storage-dock-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Hover-active Drop Target */
+.storage-dock-overlay.hover-active .storage-drop-zone {
+  border-style: solid;
+  border-color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 28px var(--accent-emerald-glow);
+  transform: scale(1.04);
+}
+
+.storage-dock-overlay.hover-active .storage-dock-icon {
+  transform: scale(1.15) rotate(-8deg);
+  background: linear-gradient(135deg, var(--accent-emerald), #059669);
+}
+
+.storage-dock-overlay.hover-active .storage-dock-title {
+  color: #6EE7B7;
+}
+
+/* Pulse pop animation on drop */
+.pulse-pop {
+  animation: pulseGlow 0.5s ease;
+}
+
+/* Being dragged state */
+.is-dragging {
+  opacity: 0.45;
+  border-style: dashed !important;
+}
+
+.is-touch-dragging {
+  opacity: 0.6;
+  border-color: var(--primary) !important;
+}
+
+/* Mobile Touch Ghost Element */
+.touch-drag-ghost {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+  max-width: 260px;
+  transform: translate(-50%, -50%) rotate(3deg);
+}
+
+.ghost-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-light);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.ghost-en {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Save Toast Feedback */
+.save-toast-notification {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  max-width: 380px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.save-toast-notification.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.toast-icon.success {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald);
+}
+
+.toast-icon.info {
+  background-color: rgba(99, 102, 241, 0.15);
+  color: var(--primary-light);
+}
+
+.toast-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.toast-sentence {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+
+@media (max-width: 640px) {
+  .save-toast-notification {
+    left: 16px;
+    right: 16px;
+    top: auto;
+    bottom: 24px;
+    max-width: none;
+  }
+}

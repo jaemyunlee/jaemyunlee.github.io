@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="famGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="famShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="100" height="100" rx="22" fill="url(#famGrad)"/>
+
+  <!-- ================= DAD (Black Hair, Back Left) ================= -->
+  <g id="dad">
+    <!-- Shirt -->
+    <path d="M12 58 C12 50 20 46 29 46 C38 46 46 50 46 58 L46 66 L12 66 Z" fill="#2563EB"/>
+    <path d="M25 46 L29 52 L33 46 Z" fill="#FFFFFF"/>
+    <rect x="25" y="40" width="8" height="8" rx="2" fill="#FBD4B4"/>
+    <ellipse cx="29" cy="30" rx="11" ry="12" fill="#FBD4B4"/>
+    <!-- Black Hair -->
+    <path d="M17 30 C16 19 21 14 30 14 C39 14 42 17 42 24 C40 23 37 22 31 23 C25 24 20 27 19 32 Z" fill="#111827"/>
+    <path d="M17 28 Q17 22 23 18 Q31 15 41 22 Q40 26 39 29 Q37 24 30 22 Q22 21 17 28 Z" fill="#1F2937"/>
+    <!-- Eyes -->
+    <ellipse cx="24.5" cy="29.5" rx="1.2" ry="1.5" fill="#111827"/>
+    <ellipse cx="33.5" cy="29.5" rx="1.2" ry="1.5" fill="#111827"/>
+    <!-- Smile -->
+    <path d="M26 34.5 Q29 38 32 34.5" fill="none" stroke="#9A3412" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= MOM (Blonde Hair, Back Right) ================= -->
+  <g id="mom">
+    <!-- Blonde Hair (Back) -->
+    <path d="M55 33 C53 18 60 12 70 12 C82 12 87 19 86 34 C86 44 82 52 79 54 L61 54 C57 50 55 43 55 33 Z" fill="#F59E0B"/>
+    <!-- Shirt -->
+    <path d="M52 58 C52 50 61 46 70 46 C79 46 88 50 88 58 L88 66 L52 66 Z" fill="#EC4899"/>
+    <rect x="66" y="40" width="8" height="8" rx="2" fill="#FDE2D1"/>
+    <ellipse cx="70" cy="30" rx="10.5" ry="11.5" fill="#FDE2D1"/>
+    <!-- Blonde Hair (Front) -->
+    <path d="M56 28 C57 17 65 13 72 13 C80 13 84 17 84 25 C79 19 72 18 64 21 C60 23 58 26 56 28 Z" fill="#FBBF24"/>
+    <path d="M80 23 C83 30 83 38 81 44 C79 42 79 35 77 29 Z" fill="#FDE68A"/>
+    <path d="M56 25 C54 31 55 39 58 43 C59 39 59 32 58 27 Z" fill="#FDE68A"/>
+    <!-- Eyes & Lashes -->
+    <ellipse cx="66" cy="29.5" rx="1.2" ry="1.4" fill="#1E293B"/>
+    <ellipse cx="74" cy="29.5" rx="1.2" ry="1.4" fill="#1E293B"/>
+    <path d="M64 27.5 L66.5 28.5" stroke="#1E293B" stroke-width="0.7" stroke-linecap="round"/>
+    <path d="M76 27.5 L73.5 28.5" stroke="#1E293B" stroke-width="0.7" stroke-linecap="round"/>
+    <!-- Blush -->
+    <circle cx="63" cy="32.5" r="1.8" fill="#F43F5E" opacity="0.35"/>
+    <circle cx="77" cy="32.5" r="1.8" fill="#F43F5E" opacity="0.35"/>
+    <!-- Smile -->
+    <path d="M67.5 34.5 Q70 38 72.5 34.5" fill="none" stroke="#BE123C" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= 5-YEAR-OLD BOY (Brown Hair, Front Left) ================= -->
+  <g id="boy-5yo" filter="url(#famShadow)">
+    <!-- Shirt -->
+    <path d="M10 98 C10 82 20 75 31 75 C42 75 52 82 52 98 Z" fill="#10B981"/>
+    <!-- Collar Detail -->
+    <path d="M27 75 L31 81 L35 75 Z" fill="#D1FAE5"/>
+    <rect x="27" y="69" width="8" height="8" rx="2" fill="#FBD4B4"/>
+    <!-- 5yo Head (bigger than 1yo baby) -->
+    <ellipse cx="31" cy="59" rx="10.5" ry="11" fill="#FBD4B4"/>
+    <!-- Full Brown Kid Hair -->
+    <path d="M19 59 C18 47 23 41 32 41 C41 41 45 47 44 55 C41 49 36 48 30 49 C24 50 20 53 19 59 Z" fill="#78350F"/>
+    <path d="M22 50 Q26 44 34 44 Q41 44 42 50 Q36 46 30 46 Q25 46 22 50 Z" fill="#92400E"/>
+    <!-- Expressive Kid Eyes -->
+    <ellipse cx="26.5" cy="58" rx="1.3" ry="1.5" fill="#111827"/>
+    <ellipse cx="35.5" cy="58" rx="1.3" ry="1.5" fill="#111827"/>
+    <circle cx="26.9" cy="57.6" r="0.4" fill="#FFFFFF"/>
+    <circle cx="35.9" cy="57.6" r="0.4" fill="#FFFFFF"/>
+    <!-- Cheeks -->
+    <circle cx="23.5" cy="61" r="1.6" fill="#F43F5E" opacity="0.3"/>
+    <circle cx="38.5" cy="61" r="1.6" fill="#F43F5E" opacity="0.3"/>
+    <!-- Confident 5yo Kid Smile -->
+    <path d="M27.5 63.5 Q31 68 34.5 63.5" fill="none" stroke="#9A3412" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= 1-YEAR-OLD BABY BOY (Brown Hair Tuft, Front Right) ================= -->
+  <g id="baby-1yo" filter="url(#famShadow)">
+    <!-- Baby Onesie / Romper -->
+    <path d="M50 98 C50 85 58 79 68 79 C78 79 86 85 86 98 Z" fill="#38BDF8"/>
+    <!-- Baby Bib with Star motif -->
+    <path d="M60 80 Q68 88 76 80 Q74 91 68 91 Q62 91 60 80 Z" fill="#FEF08A"/>
+    <polygon points="68,83 69,85.5 71.5,85.5 69.5,87 70.5,89.5 68,88 65.5,89.5 66.5,87 64.5,85.5 67,85.5" fill="#F59E0B"/>
+    <!-- Tiny Baby Neck -->
+    <rect x="65" y="74" width="6" height="6" rx="2" fill="#FDE2D1"/>
+    <!-- Chubby Baby Head with round cheeks -->
+    <ellipse cx="68" cy="67" rx="8.5" ry="8.5" fill="#FDE2D1"/>
+    <circle cx="61.5" cy="68.5" r="3.2" fill="#FDE2D1"/>
+    <circle cx="74.5" cy="68.5" r="3.2" fill="#FDE2D1"/>
+    <!-- Soft Brown Baby Hair (adorable tuft / baby swirl on top) -->
+    <path d="M62 61 C61 55 64 53 68 53 C72 53 75 55 74 61 C72 57 69 56 66 57 Z" fill="#78350F"/>
+    <path d="M67 53 Q69 48 72 50 Q73 53 69 52 Z" fill="#92400E"/>
+    <!-- Big Sparkling Baby Eyes -->
+    <circle cx="64.5" cy="66" r="1.6" fill="#0F172A"/>
+    <circle cx="71.5" cy="66" r="1.6" fill="#0F172A"/>
+    <circle cx="65" cy="65.3" r="0.6" fill="#FFFFFF"/>
+    <circle cx="72" cy="65.3" r="0.6" fill="#FFFFFF"/>
+    <!-- Rosy Chubby Baby Cheeks -->
+    <circle cx="60.5" cy="69" r="2.2" fill="#FB7185" opacity="0.45"/>
+    <circle cx="75.5" cy="69" r="2.2" fill="#FB7185" opacity="0.45"/>
+    <!-- Adorable Happy Baby Smile -->
+    <path d="M65.5 70.5 Q68 74.5 70.5 70.5 Z" fill="#BE123C"/>
+  </g>
+</svg>

@@ -1,0 +1,619 @@
+/**
+ * RhyRhy English - Step 4 Review Player & Step Navigation Styles
+ */
+
+/* ==========================================================================
+   Step Navigation Tabs (1, 2, 3, 4)
+   ========================================================================== */
+.lesson-step-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lesson-step-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.step-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.step-tab-btn:hover {
+  color: var(--text-main);
+  background-color: var(--surface-color-alt);
+}
+
+.step-tab-btn.active {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #FFFFFF;
+  border-color: var(--primary-light);
+  box-shadow: 0 2px 10px var(--primary-glow);
+}
+
+.step-tab-btn .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.step-tab-btn.active .step-num {
+  background: #FFFFFF;
+  color: var(--primary);
+}
+
+/* ==========================================================================
+   Step 4: Review Section & Music Player Bar
+   ========================================================================== */
+.review-section-wrapper {
+  margin-top: 24px;
+  margin-bottom: 48px;
+}
+
+/* Music Player Bar (Like a Music App) */
+.review-player-bar {
+  position: sticky;
+  top: calc(var(--nav-height) + 12px);
+  z-index: 40;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.25s ease;
+}
+
+.review-player-bar.is-playing {
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 12px 36px var(--primary-glow);
+}
+
+.player-bar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Track Info */
+.player-track-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Sound Wave Equalizer */
+.sound-wave-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.sound-wave-box .wave-bar {
+  width: 4px;
+  height: 6px;
+  background-color: var(--text-subtle);
+  border-radius: 2px;
+  transition: height 0.2s ease, background-color 0.2s ease;
+}
+
+.review-player-bar.is-playing .sound-wave-box .wave-bar {
+  background: linear-gradient(180deg, var(--accent-emerald), var(--primary-light));
+  animation: soundWaveAnim 1s ease-in-out infinite alternate;
+}
+
+.review-player-bar.is-playing .sound-wave-box .wave-bar:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.review-player-bar.is-playing .sound-wave-box .wave-bar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.review-player-bar.is-playing .sound-wave-box .wave-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.review-player-bar.is-playing .sound-wave-box .wave-bar:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes soundWaveAnim {
+  0% {
+    height: 4px;
+  }
+
+  100% {
+    height: 22px;
+  }
+}
+
+.player-text-details {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player-track-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.player-track-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+/* Central Controls */
+.player-controls-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-player-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-player-step:hover {
+  background: var(--surface-color-alt);
+  color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+.btn-player-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary) 0%, #4F46E5 100%);
+  border: none;
+  border-radius: var(--radius-full);
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 4px 16px var(--primary-glow);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-player-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+/* Secondary Options */
+.player-controls-side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-play-all-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn-play-all-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-color: var(--text-subtle);
+}
+
+.btn-play-all-toggle.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(5, 150, 105, 0.3) 100%);
+  color: #34D399;
+  border-color: #10B981;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+}
+
+.btn-play-all-toggle.active:hover {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #10B981;
+}
+
+.btn-speed-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 10px;
+  background: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-speed-toggle:hover {
+  color: #FFFFFF;
+  background: var(--surface-color-alt);
+}
+
+/* Scrubber / Progress Bar */
+.player-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.player-time-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.player-progress-track {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.player-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--accent-emerald));
+  border-radius: var(--radius-full);
+  transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   Sentence Cards List
+   ========================================================================== */
+.review-sentence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.quiz-sentence-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: var(--surface-color);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.22s ease;
+}
+
+.quiz-sentence-card:hover {
+  border-color: var(--surface-border-hover);
+  background-color: rgba(30, 41, 59, 0.8);
+}
+
+.quiz-sentence-card.playing {
+  border-color: var(--primary);
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.14) 0%, rgba(30, 41, 59, 0.9) 100%);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.quiz-sentence-card.playing::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent-emerald), var(--primary-light));
+  border-radius: 0 4px 4px 0;
+}
+
+.sentence-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.sentence-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.sentence-index-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-subtle);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.sentence-keyword-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* Highlighted English Expression */
+.sentence-en-text {
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.quiz-vocab-highlight {
+  background: rgba(99, 102, 241, 0.28);
+  color: #A5B4FC;
+  border: 1px solid rgba(99, 102, 241, 0.55);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-weight: 800;
+}
+
+.sentence-kr-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.sentence-explanation-text {
+  font-size: 0.82rem;
+  color: var(--text-subtle);
+  line-height: 1.45;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  margin-top: 6px;
+}
+
+/* Card Actions */
+.sentence-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.btn-card-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1.5px solid rgba(99, 102, 241, 0.35);
+  border-radius: var(--radius-md);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-card-play:hover {
+  background: rgba(99, 102, 241, 0.28);
+  border-color: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.quiz-sentence-card.playing .btn-card-play {
+  background: var(--primary);
+  border-color: var(--primary-light);
+  color: #FFFFFF;
+}
+
+.btn-card-bookmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--surface-color);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  color: var(--text-subtle);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-card-bookmark:hover {
+  color: var(--accent-amber);
+  border-color: var(--accent-amber);
+}
+
+.btn-card-bookmark.saved {
+  color: var(--accent-amber);
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.12);
+}
+
+/* Mobile Responsive: Super Simple, Single-Row Audio Player */
+@media (max-width: 768px) {
+  .review-player-bar {
+    top: calc(var(--nav-height) + 6px);
+    padding: 8px 16px;
+    border-radius: var(--radius-lg);
+    gap: 0;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+  }
+
+  .player-bar-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  /* Left: Show simple 01/21 sentence indicator on mobile */
+  .player-track-info {
+    display: flex !important;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sound-wave-box,
+  .player-track-title {
+    display: none !important;
+  }
+
+  .player-track-badge {
+    font-size: 0.82rem;
+    font-weight: 800;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #A5B4FC;
+    background: rgba(99, 102, 241, 0.16);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    padding: 4px 8px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  /* Center: Previous, Play/Pause (current), Next */
+  .player-controls-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-player-step {
+    width: 38px;
+    height: 38px;
+  }
+
+  .btn-player-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Right: Just "전체" Button (Active / Inactive Toggle) */
+  .player-controls-side {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .btn-speed-toggle {
+    display: none !important;
+  }
+
+  .btn-play-all-toggle {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    gap: 6px;
+    border-radius: var(--radius-full);
+  }
+
+  /* Hide progress scrubber on mobile */
+  .player-progress-row {
+    display: none !important;
+  }
+
+  /* Sentence Cards */
+  .quiz-sentence-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 14px;
+    scroll-margin-top: 140px;
+  }
+
+  .sentence-card-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .btn-card-play {
+    flex: 1;
+  }
+}

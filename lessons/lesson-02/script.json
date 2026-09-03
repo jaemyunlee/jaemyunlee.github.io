@@ -1,0 +1,44 @@
+[
+  {
+    "id": "s1",
+    "start": 0.0,
+    "end": 4.1,
+    "en": "Good morning! Welcome to Brooklyn Roast.",
+    "kr": "좋은 아침입니다! 브루클린 로스트에 오신 것을 환영해요."
+  },
+  {
+    "id": "s2",
+    "start": 4.2,
+    "end": 8.0,
+    "en": "Can I get an iced coffee to go, please?",
+    "kr": "아이스 아메리카노 한 잔 테이크아웃으로 부탁드릴게요."
+  },
+  {
+    "id": "s3",
+    "start": 8.1,
+    "end": 12.8,
+    "en": "Sure thing! Would you like whole milk, skim milk, or a plant-based option?",
+    "kr": "물론이죠! 일반 우유, 저지방 우유, 아니면 식물성 우유로 드릴까요?"
+  },
+  {
+    "id": "s4",
+    "start": 12.9,
+    "end": 17.5,
+    "en": "Could you substitute oat milk for whole milk?",
+    "kr": "우유 대신 오트 밀크로 바꿀 수 있나요?"
+  },
+  {
+    "id": "s5",
+    "start": 17.6,
+    "end": 22.4,
+    "en": "You got it. Also, what is your most popular pastry today?",
+    "kr": "알겠습니다. 그리고 오늘 가장 인기 있는 빵은 무엇인가요?"
+  },
+  {
+    "id": "s6",
+    "start": 22.5,
+    "end": 28.0,
+    "en": "Our warm almond croissants just came straight out of the oven.",
+    "kr": "방금 오븐에서 갓 구워져 나온 따뜻한 아몬드 크루아상이 최고예요."
+  }
+]

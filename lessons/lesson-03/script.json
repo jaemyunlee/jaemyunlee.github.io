@@ -1,0 +1,37 @@
+[
+  {
+    "id": "s1",
+    "start": 0.0,
+    "end": 4.5,
+    "en": "Attention passengers on flight 824 to London Heathrow.",
+    "kr": "런던 히드로행 824편 승객 여러분께 안내 말씀 드립니다."
+  },
+  {
+    "id": "s2",
+    "start": 4.6,
+    "end": 9.2,
+    "en": "Where is the departure gate for my flight?",
+    "kr": "제 비행기 탑승구는 어디인가요?"
+  },
+  {
+    "id": "s3",
+    "start": 9.3,
+    "end": 14.1,
+    "en": "Your gate is B22, located down the hallway to your right.",
+    "kr": "탑승구는 B22이며, 오른쪽 복도를 따라 내려가시면 있습니다."
+  },
+  {
+    "id": "s4",
+    "start": 14.2,
+    "end": 19.8,
+    "en": "How many pieces of carry-on luggage can I bring onboard?",
+    "kr": "기내 수하물로 몇 개까지 반입할 수 있나요?"
+  },
+  {
+    "id": "s5",
+    "start": 19.9,
+    "end": 26.0,
+    "en": "Please have your boarding pass and passport ready for inspection.",
+    "kr": "검사를 위해 탑승권과 여권을 준비해 주세요."
+  }
+]

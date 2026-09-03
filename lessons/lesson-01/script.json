@@ -1,0 +1,646 @@
+[
+  {
+    "id": "s1",
+    "start": 0,
+    "end": 2.54,
+    "en": "Where are you going this Saturday?",
+    "kr": "이번 주 토요일에 어디 가요?"
+  },
+  {
+    "id": "s2",
+    "start": 2.54,
+    "end": 4.97,
+    "en": "I'm leaving.",
+    "kr": "저 떠나요."
+  },
+  {
+    "id": "s3",
+    "start": 4.97,
+    "end": 8.86,
+    "en": "Getting away for the night.",
+    "kr": "하룻밤 놀러 가요."
+  },
+  {
+    "id": "s4",
+    "start": 9.02,
+    "end": 15.1,
+    "en": "No, I'm going, I'm gonna drive down to the Bay Area to go see Big Bang.",
+    "kr": "아니, 차 타고 베이 에어리어(Bay Area)로 내려갈 거예요. 빅뱅 보러요."
+  },
+  {
+    "id": "s5",
+    "start": 15.1,
+    "end": 15.67,
+    "en": "how did it",
+    "kr": "어쩌다가 알게 됐어요?"
+  },
+  {
+    "id": "s6",
+    "start": 15.67,
+    "end": 21.01,
+    "en": "well it was when the new song came out for some reason i looked up",
+    "kr": "글쎄요, 신곡이 나왔을 때 왠지 찾아보게 됐는데,"
+  },
+  {
+    "id": "s7",
+    "start": 21.01,
+    "end": 23.59,
+    "en": "i knew they were going on a world tour but i didn't really know where",
+    "kr": "월드 투어를 한다는 건 알았는데, 정확히 어디로 가는지는 몰랐거든요."
+  },
+  {
+    "id": "s8",
+    "start": 23.59,
+    "end": 27.84,
+    "en": "i had seen kind of stuff of them starting in Korea",
+    "kr": "한국에서 시작한다는 얘기는 좀 봤거든요."
+  },
+  {
+    "id": "s9",
+    "start": 27.84,
+    "end": 32.99,
+    "en": "And I just happened to look like, oh, it'd be interesting to see where they're going in the U.S.",
+    "kr": "그래서 그냥 우연히, '오, 미국에서는 어디로 갈까?' 궁금해서 찾아보게 된 거예요."
+  },
+  {
+    "id": "s10",
+    "start": 32.99,
+    "end": 40.1,
+    "en": "And it turned out they're only going to two cities, Oakland and New Jersey, somewhere in New Jersey. I don't know where.",
+    "kr": "근데 딱 두 도시만 가는 거 있죠. 오클랜드랑 뉴저지요. 뉴저지 어딘가라는데, 정확한 곳은 모르겠어요."
+  },
+  {
+    "id": "s11",
+    "start": 40.1,
+    "end": 42.5,
+    "en": "And Oakland's not far from here.",
+    "kr": "근데 오클랜드는 여기서 안 멀거든요."
+  },
+  {
+    "id": "s12",
+    "start": 42.5,
+    "end": 46.46,
+    "en": "And that's two of the three U.S. dates are in Oakland.",
+    "kr": "게다가 미국 3개 일정 중에 두 개가 오클랜드에서 열리는 거예요."
+  },
+  {
+    "id": "s13",
+    "start": 46.46,
+    "end": 49.76,
+    "en": "So then it's like, oh, I should go!",
+    "kr": "그래서 '아, 이건 가야 해!' 했죠."
+  },
+  {
+    "id": "s14",
+    "start": 50.39,
+    "end": 55.98,
+    "en": "So obviously, Jaemyun can't go with me because someone has to watch the kids.",
+    "kr": "당연히 재면이는 저랑 같이 못 가요. 누군가는 애들을 봐야 하니까요."
+  },
+  {
+    "id": "s15",
+    "start": 55.98,
+    "end": 60.66,
+    "en": "So I thought it was pretty unlikely that I would get to go and find someone.",
+    "kr": "그래서 같이 갈 사람을 구해서 가게 될 확률은 낮다고 생각했어요."
+  },
+  {
+    "id": "s16",
+    "start": 60.66,
+    "end": 61.95,
+    "en": "I didn't want to go by myself.",
+    "kr": "혼자 가기는 싫었거든요."
+  },
+  {
+    "id": "s17",
+    "start": 61.95,
+    "end": 64.99,
+    "en": "So trying to find someone to go, you know,",
+    "kr": "그래서 같이 갈 사람을 찾아봤죠."
+  },
+  {
+    "id": "s18",
+    "start": 64.99,
+    "end": 67.94,
+    "en": "I do have friends who listen to Korean music, but not much.",
+    "kr": "한국 음악을 듣는 친구들이 있긴 한데, 즐겨 듣는 정도는 아니에요."
+  },
+  {
+    "id": "s19",
+    "start": 67.94,
+    "end": 72.51,
+    "en": "But anyways, I decided to ask my cousin if she wanted to go.",
+    "kr": "아무튼, 사촌에게 같이 갈 생각 있는지 물어보기로 했어요."
+  },
+  {
+    "id": "s20",
+    "start": 72.51,
+    "end": 88.25,
+    "en": "And I don't know if she knows anything about them, if she's ever heard any of their music. If she's ever listened to Kpop, other than like Kpop demon hunters, maybe. Or, you know, hearing BTS.",
+    "kr": "사촌이 빅뱅에 대해 아는 게 있는지, 노래를 들어본 적이라도 있는지 모르겠어요. K팝을 들어본 적이 있는지도요. '케이팝 데몬 헌터스' 같은 거 빼고요. 아, 아니면 BTS 노래는 들어봤겠네요."
+  },
+  {
+    "id": "s21",
+    "start": 88.25,
+    "end": 93.02,
+    "en": "I'm sure she teaches middle school. So I'm sure she's heard some.",
+    "kr": "중학교 교사니까 분명 들어봤을 거예요."
+  },
+  {
+    "id": "s22",
+    "start": 93.02,
+    "end": 95.65,
+    "en": "But anyway, she is going to go with me.",
+    "kr": "아무튼, 사촌이 같이 가기로 했어요!"
+  },
+  {
+    "id": "s23",
+    "start": 95.65,
+    "end": 99.01,
+    "en": "So I'm going to drive down, pick her up.",
+    "kr": "그래서 제가 차로 내려가서 사촌을 픽업하고,"
+  },
+  {
+    "id": "s24",
+    "start": 99.01,
+    "end": 102.72,
+    "en": "And then we're going to drive all the way down together with her family.",
+    "kr": "사촌네 가족이랑 다 같이 차를 타고 쭉 내려갈 거예요."
+  },
+  {
+    "id": "s25",
+    "start": 102.72,
+    "end": 107.36,
+    "en": "And then go to the concert and spend the night!",
+    "kr": "그리고 콘서트에 갔다가 하룻밤 자고 올 거예요!"
+  },
+  {
+    "id": "s26",
+    "start": 107.36,
+    "end": 118.66,
+    "en": "We got tickets that are pretty much in the back, the nosebleed section. Cheapest tickets.",
+    "kr": "티켓은 거의 맨 뒷자리로 구했어요. 제일 꼭대기 구역이요. 제일 싼 티켓이죠."
+  },
+  {
+    "id": "s27",
+    "start": 118.66,
+    "end": 124.26,
+    "en": "Actually, the cheapest and the tickets I got, I think it was like a $ 10 difference.",
+    "kr": "사실 제일 싼 거랑 제가 산 티켓이 한 10달러 정도밖에 차이가 안 났어요."
+  },
+  {
+    "id": "s28",
+    "start": 124.26,
+    "end": 125.57,
+    "en": "Hopefully Amy doesn't mind.",
+    "kr": "에이미가 신경 안 썼으면 좋겠네요."
+  },
+  {
+    "id": "s29",
+    "start": 125.57,
+    "end": 126.66,
+    "en": "If not, I'll just pay for it.",
+    "kr": "신경 쓰인다면 그냥 제가 낼 거예요."
+  },
+  {
+    "id": "s30",
+    "start": 126.66,
+    "end": 135.33,
+    "en": "Because it was a much better view between that $ 10. And I was like, it's just worth getting that better view.",
+    "kr": "왜냐하면 그 10달러 차이로 시야가 훨씬 더 좋았거든요. 그래서 그만큼 더 낼 가치가 있다고 생각했어요."
+  },
+  {
+    "id": "s31",
+    "start": 135.33,
+    "end": 137.86,
+    "en": "So yeah, so we're, we have a decent view.",
+    "kr": "네, 그래서 꽤 괜찮은 자리예요."
+  },
+  {
+    "id": "s32",
+    "start": 137.86,
+    "end": 143.04,
+    "en": "It's not like it's on the side or like at a weird or obstructed angle or anything,",
+    "kr": "너무 측면이거나 이상한 각도이거나 시야가 가려지는 곳도 아니에요."
+  },
+  {
+    "id": "s33",
+    "start": 143.04,
+    "end": 147.39,
+    "en": "but it, they were each 150.",
+    "kr": "근데 티켓이 각각 150달러였어요."
+  },
+  {
+    "id": "s34",
+    "start": 147.39,
+    "end": 153.5,
+    "en": "I don't like how the ticket website advertised it.",
+    "kr": "티켓 웹사이트 광고 방식이 정말 마음에 안 들어요."
+  },
+  {
+    "id": "s35",
+    "start": 153.5,
+    "end": 162.87,
+    "en": "They made it definitely seem that that was the price for two tickets. Not each ticket, even though I selected, I wanted to get two tickets.",
+    "kr": "꼭 그게 티켓 두 장 가격인 것처럼 보이게 만들어 놨더라고요. 티켓 두 장을 선택했는데도 장당 가격이었던 거예요."
+  },
+  {
+    "id": "s36",
+    "start": 162.87,
+    "end": 168.64,
+    "en": "But, but, Compared to what we paid in Korea for tickets,",
+    "kr": "하지만 예전에 한국에서 샀던 티켓 가격이랑 비교하면..."
+  },
+  {
+    "id": "s37",
+    "start": 168.64,
+    "end": 172.98,
+    "en": "how many years ago? Six years ago?",
+    "kr": "그게 몇 년 전이죠? 6년 전인가?"
+  },
+  {
+    "id": "s38",
+    "start": 172.98,
+    "end": 173.96,
+    "en": "I was like, it's decent.",
+    "kr": "꽤 괜찮은 가격이라 생각했어요."
+  },
+  {
+    "id": "s39",
+    "start": 173.96,
+    "end": 178.55,
+    "en": "And when am I going to go again? So I got them.",
+    "kr": "그리고 제가 또 언제 가보겠어요? 그래서 그냥 샀어요."
+  },
+  {
+    "id": "s40",
+    "start": 178.55,
+    "end": 185.25,
+    "en": "All the tickets now, it's like everyone buys them at once and then sells them, resells it.",
+    "kr": "요즘은 사람들이 티켓을 한꺼번에 다 사재기한 다음에 다시 팔더라고요, 리셀을 하는 거죠."
+  },
+  {
+    "id": "s41",
+    "start": 185.25,
+    "end": 187.44,
+    "en": "So yeah, there were no tickets.",
+    "kr": "그래서 남은 티켓이 없었어요."
+  },
+  {
+    "id": "s42",
+    "start": 187.44,
+    "end": 192.48,
+    "en": "I don't know when they officially went on sale, but it seemed like everything was sold.",
+    "kr": "언제 공식 판매가 시작됐는지는 모르겠지만, 전부 매진된 것 같았어요."
+  },
+  {
+    "id": "s43",
+    "start": 192.48,
+    "end": 194.24,
+    "en": "At least that's what I understood,",
+    "kr": "적어도 제가 알기론 그랬는데,"
+  },
+  {
+    "id": "s44",
+    "start": 194.24,
+    "end": 195.74,
+    "en": "but I don't know for sure.",
+    "kr": "확실히는 모르겠네요."
+  },
+  {
+    "id": "s45",
+    "start": 195.74,
+    "end": 202.38,
+    "en": "The concerts had already started in Korea by the time I bought a ticket for Oakland.",
+    "kr": "제가 오클랜드 티켓을 샀을 때는 이미 한국에서는 콘서트가 시작된 후였어요."
+  },
+  {
+    "id": "s46",
+    "start": 202.38,
+    "end": 204.3,
+    "en": "How did you come to like Big Bang?",
+    "kr": "어떻게 빅뱅을 좋아하게 된 거예요?"
+  },
+  {
+    "id": "s47",
+    "start": 206.37,
+    "end": 213.82,
+    "en": "When I first got to Korea, I'd say there was a couple of people in my office who really liked Big Bang.",
+    "kr": "제가 한국에 처음 갔을 때, 사무실에 빅뱅을 정말 좋아하는 분들이 몇 명 있었어요."
+  },
+  {
+    "id": "s48",
+    "start": 213.82,
+    "end": 216.22,
+    "en": "I feel like Fantastic Baby.",
+    "kr": "제 생각엔 'Fantastic Baby' 때였던 것 같아요."
+  },
+  {
+    "id": "s49",
+    "start": 216.22,
+    "end": 218.75,
+    "en": "I don't know what year that came out,",
+    "kr": "그 노래가 몇 년도에 나왔는지는 모르겠지만,"
+  },
+  {
+    "id": "s50",
+    "start": 218.75,
+    "end": 229.73,
+    "en": "but... it was still pretty popular like playing Like, you'd hear it on the radio or places were playing it a lot.",
+    "kr": "...그때도 인기가 엄청 많아서 라디오나 여기저기서 노래가 엄청 많이 흘러나왔어요."
+  },
+  {
+    "id": "s51",
+    "start": 229.73,
+    "end": 235.17,
+    "en": "So I feel like somehow through that, I started to like it a lot and listening to it.",
+    "kr": "그래서 아마 그 덕분에 자연스럽게 좋아하게 되고 많이 듣게 된 것 같아요."
+  },
+  {
+    "id": "s52",
+    "start": 235.17,
+    "end": 243.65,
+    "en": "And then when we met, I feel like you had told me stories of, like, you dancing to it in Hong Kong and stuff like that. I don't know.",
+    "kr": "그리고 우리 만났을 때, 자기가 예전에 홍콩에서 그 노래에 맞춰 춤췄다고 얘기했었잖아요. 뭐 그런 얘기들요. 잘은 모르지만."
+  },
+  {
+    "id": "s53",
+    "start": 243.65,
+    "end": 246.8,
+    "en": "And then it just, it was fun groups,",
+    "kr": "그리고 참 재미있는 그룹이었죠."
+  },
+  {
+    "id": "s54",
+    "start": 246.8,
+    "end": 256.19,
+    "en": "and when they had their last concert in korea before going into the military service we went and got tickets and went",
+    "kr": "군대 가기 전에 한국에서 마지막 콘서트 했을 때 우리가 티켓 구해서 갔었잖아요."
+  },
+  {
+    "id": "s55",
+    "start": 256.19,
+    "end": 259.43,
+    "en": "and you got really mad at me for spending so much money",
+    "kr": "그때 나 돈 너무 많이 썼다고 엄청 화냈었죠."
+  },
+  {
+    "id": "s56",
+    "start": 259.43,
+    "end": 261.59,
+    "en": "how much was it? it was a lot",
+    "kr": "얼마였죠? 꽤 비쌌는데."
+  },
+  {
+    "id": "s57",
+    "start": 261.59,
+    "end": 268.32,
+    "en": "i think i spent it was probably $500 in total for our two tickets i think",
+    "kr": "제 생각엔 티켓 두 장에 총 500달러 정도 썼던 것 같아요."
+  },
+  {
+    "id": "s58",
+    "start": 268.32,
+    "end": 271.3,
+    "en": "if..  i think it was around there",
+    "kr": "음.. 그 정도 했던 것 같아요."
+  },
+  {
+    "id": "s59",
+    "start": 271.3,
+    "end": 273.6,
+    "en": "i think they were like two three hundred each or something",
+    "kr": "한 장에 한 2, 3백 달러 정도 했었던 것 같아요."
+  },
+  {
+    "id": "s60",
+    "start": 274.72,
+    "end": 277.23,
+    "en": "They were also nosebleed seats,",
+    "kr": "그때도 완전 꼭대기 뒷자리였는데,"
+  },
+  {
+    "id": "s61",
+    "start": 277.23,
+    "end": 284.93,
+    "en": "but you had just had surgery a couple weeks, maybe a month before on your knees.",
+    "kr": "자기가 무릎 수술을 받은 지 몇 주, 아니면 한 달 정도밖에 안 됐을 때였죠."
+  },
+  {
+    "id": "s62",
+    "start": 284.93,
+    "end": 288.06,
+    "en": "Well, one knee. And",
+    "kr": "음, 한쪽 무릎이요. 그리고"
+  },
+  {
+    "id": "s63",
+    "start": 288.06,
+    "end": 293.09,
+    "en": "we should have called in advance to say that, but we didn't.",
+    "kr": "미리 전화해서 상황을 말했어야 했는데, 그러질 않았어요."
+  },
+  {
+    "id": "s64",
+    "start": 293.09,
+    "end": 301.24,
+    "en": "And there was no way you were in a cast up past your knee to your thigh, like all the way down,  were walking with crutches",
+    "kr": "게다가 자기는 그때 깁스를 하고 있었잖아요. 무릎을 지나 허벅지까지, 다리 전체에 말이에요. 목발을 짚고 걷고 있었는데"
+  },
+  {
+    "id": "s65",
+    "start": 301.24,
+    "end": 306.43,
+    "en": "there was no way you were getting up to those seats and like no way getting down",
+    "kr": "그 자리까지 올라가는 건 절대 무리였죠. 내려오는 것도 불가능했고,"
+  },
+  {
+    "id": "s66",
+    "start": 306.43,
+    "end": 308.03,
+    "en": "and it's just a safety thing as well",
+    "kr": "무엇보다 안전상의 문제도 있었고요."
+  },
+  {
+    "id": "s67",
+    "start": 308.03,
+    "end": 310.31,
+    "en": "so they were not happy",
+    "kr": "그래서 스태프분들이 안 좋아하셨지만,"
+  },
+  {
+    "id": "s68",
+    "start": 310.31,
+    "end": 321.12,
+    "en": "but they finally just put us in to one of the handicap seats which ended up having an amazing view",
+    "kr": "결국 우리를 장애인석 중 하나로 안내해 주셨어요. 결과적으로 뷰가 엄청나게 좋았죠."
+  },
+  {
+    "id": "s69",
+    "start": 321.12,
+    "end": 322.47,
+    "en": "we were very lucky",
+    "kr": "우리가 정말 운이 좋았어요."
+  },
+  {
+    "id": "s70",
+    "start": 322.47,
+    "end": 323.64,
+    "en": "i should have called ahead of time",
+    "kr": "미리 전화를 했어야 했는데,"
+  },
+  {
+    "id": "s71",
+    "start": 323.64,
+    "end": 326.37,
+    "en": "but i just didn't even think about it at that time",
+    "kr": "그때는 그냥 그 생각조차 못 했거든요."
+  },
+  {
+    "id": "s72",
+    "start": 326.37,
+    "end": 327.87,
+    "en": "so...",
+    "kr": "그래서..."
+  },
+  {
+    "id": "s73",
+    "start": 327.87,
+    "end": 331.71,
+    "en": "Yeah, we got good seats for them.",
+    "kr": "네, 어쨌든 그 콘서트에서 좋은 자리에 앉았죠."
+  },
+  {
+    "id": "s74",
+    "start": 331.71,
+    "end": 335.52,
+    "en": "What is your favorite Big Bang song?",
+    "kr": "빅뱅 노래 중에 최애 곡이 뭐예요?"
+  },
+  {
+    "id": "s75",
+    "start": 340.38,
+    "end": 344.35,
+    "en": "I mean, just, like, the normal, like, hits.",
+    "kr": "글쎄요, 그냥 평범한 히트곡들이요."
+  },
+  {
+    "id": "s76",
+    "start": 344.35,
+    "end": 346.95,
+    "en": "Fantastic Baby, Bang Bang Bang are good.",
+    "kr": "Fantastic Baby나 뱅뱅뱅도 좋고요."
+  },
+  {
+    "id": "s77",
+    "start": 346.95,
+    "end": 348.67,
+    "en": "I do like the new one.",
+    "kr": "신곡도 좋아해요."
+  },
+  {
+    "id": "s78",
+    "start": 348.67,
+    "end": 353.86,
+    "en": "The first time I heard it, I didn't love it, but it did grow on me quite a lot.",
+    "kr": "처음 들었을 땐 그다지 끌리지 않았는데, 듣다 보니까 꽤 좋아지더라고요."
+  },
+  {
+    "id": "s79",
+    "start": 354.62,
+    "end": 357.28,
+    "en": "I don't know the names well enough to give you,",
+    "kr": "제목을 다 기억할 정도로 잘 아는 건 아니지만요."
+  },
+  {
+    "id": "s80",
+    "start": 357.28,
+    "end": 358.56,
+    "en": "but",
+    "kr": "하지만..."
+  },
+  {
+    "id": "s81",
+    "start": 358.56,
+    "end": 361.18,
+    "en": "I mean, it's not the best timing right now.",
+    "kr": "사실 지금 타이밍이 좀 안 좋긴 해요."
+  },
+  {
+    "id": "s82",
+    "start": 361.18,
+    "end": 362.1,
+    "en": "I'm a bit stressed",
+    "kr": "스트레스를 좀 받고 있거든요."
+  },
+  {
+    "id": "s83",
+    "start": 362.1,
+    "end": 366.21,
+    "en": "because I have a lot of assignments due Sunday,",
+    "kr": "일요일까지 내야 할 과제가 너무 많아서요."
+  },
+  {
+    "id": "s84",
+    "start": 366.21,
+    "end": 376.74,
+    "en": "but I'm happy to be going with my cousin and spending some time with her and her husband and his family seeing their daughter Hope.",
+    "kr": "그래도 사촌이랑 같이 가게 돼서, 사촌 남편과 그 가족들, 그리고 조카 호프(Hope)도 볼 수 있어서 기뻐요."
+  },
+  {
+    "id": "s85",
+    "start": 376.74,
+    "end": 379.74,
+    "en": "But",
+    "kr": "하지만..."
+  },
+  {
+    "id": "s86",
+    "start": 379.74,
+    "end": 384.22,
+    "en": "I'm sorry you guys can't come with me.",
+    "kr": "너희들이랑 같이 못 가서 아쉽긴 해요."
+  },
+  {
+    "id": "s87",
+    "start": 384.22,
+    "end": 386.04,
+    "en": "It would be fun to go together.",
+    "kr": "다 같이 가면 재밌었을 텐데."
+  },
+  {
+    "id": "s88",
+    "start": 386.04,
+    "end": 387.94,
+    "en": "Like I do wish we could go together",
+    "kr": "우리 다 같이 가면 정말 좋았을 텐데요,"
+  },
+  {
+    "id": "s89",
+    "start": 387.94,
+    "end": 389.42,
+    "en": "because we went to the last one,",
+    "kr": "지난번에는 같이 갔었으니까요."
+  },
+  {
+    "id": "s90",
+    "start": 389.42,
+    "end": 391.69,
+    "en": "but it's just with the kids.",
+    "kr": "근데 아이들이 있으니까"
+  },
+  {
+    "id": "s91",
+    "start": 391.69,
+    "end": 393.87,
+    "en": "It's hard.",
+    "kr": "쉽지가 않네요."
+  },
+  {
+    "id": "s92",
+    "start": 393.87,
+    "end": 398.32,
+    "en": "Enjoy your time with my mom and uncle.",
+    "kr": "엄마랑 삼촌이랑 즐거운 시간 보내요."
+  }
+]

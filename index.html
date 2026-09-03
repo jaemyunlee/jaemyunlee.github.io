@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>현서네 리얼 영어 - 국제 가족의 생생한 생활 영어</title>
+  <meta name="description"
+    content="Mobile-first English learning platform. Learn vocabulary with pre-video quizzes, watch native YouTube videos with interactive bilingual scripts, save sentences, and comment.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#4F46E5">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="./assets/icons/icon.svg">
+
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/navigation.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+  <link rel="stylesheet" href="./css/video-script.css">
+  <link rel="stylesheet" href="./css/drag-drop.css">
+  <link rel="stylesheet" href="./css/modal.css">
+
+  <style>
+    /* Hero Section Styles */
+    .hero-section {
+      padding: 36px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.95fr;
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-text-col {
+      text-align: left;
+    }
+
+    .hero-top-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: var(--radius-full);
+      color: #F8FAFC;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-badge-pill:hover {
+      background: rgba(239, 68, 68, 0.22);
+      border-color: rgba(239, 68, 68, 0.65);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(239, 68, 68, 0.35);
+      color: #FFFFFF;
+    }
+
+    .free-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(5, 150, 105, 0.28));
+      border: 1.5px solid var(--accent-emerald);
+      border-radius: var(--radius-full);
+      color: #34D399;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+      animation: pulseFreeGlow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseFreeGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+        transform: scale(1);
+      }
+
+      50% {
+        box-shadow: 0 0 24px rgba(16, 185, 129, 0.55);
+        transform: scale(1.03);
+      }
+    }
+
+    .free-sparkle {
+      font-size: 0.95rem;
+    }
+
+    .free-guarantee {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #34D399;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .free-guarantee svg {
+      stroke: #10B981;
+      flex-shrink: 0;
+    }
+
+    .hero-badge-pill:hover {
+      background: rgba(239, 68, 68, 0.22);
+      border-color: rgba(239, 68, 68, 0.65);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(239, 68, 68, 0.35);
+      color: #FFFFFF;
+    }
+
+    .youtube-badge-icon {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-badge-pill:hover .youtube-badge-icon {
+      transform: scale(1.12);
+    }
+
+    .external-link-arrow {
+      color: var(--text-muted);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .hero-badge-pill:hover .external-link-arrow {
+      transform: translate(2px, -2px);
+      color: #FFFFFF;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      line-height: 1.22;
+      margin-bottom: 14px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFFFFF 60%, var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      word-break: keep-all;
+    }
+
+    .hero-korean-lead {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #E0E7FF;
+      line-height: 1.55;
+      margin-bottom: 12px;
+      word-break: keep-all;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+
+    .hero-subtitle strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .hero-action-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .btn-hero-start {
+      padding: 12px 22px;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 4px 18px var(--primary-glow);
+    }
+
+    /* Hero Image Card */
+    .hero-image-col {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image-card {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(99, 102, 241, 0.22);
+      transform: perspective(1000px) rotateY(-2deg);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+      background-color: var(--surface-color);
+    }
+
+    .hero-image-card:hover {
+      transform: perspective(1000px) rotateY(0deg) translateY(-4px);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.75), 0 0 38px rgba(99, 102, 241, 0.32);
+    }
+
+    .hero-family-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 18px 16px;
+      background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.75) 45%, rgba(15, 23, 42, 0.96) 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hero-image-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: rgba(99, 102, 241, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      align-self: flex-start;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-image-caption {
+      font-size: 0.92rem;
+      color: #F8FAFC;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Resume Card */
+    .resume-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: linear-gradient(135deg, #1E1B4B, #1E293B);
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      box-shadow: 0 8px 30px var(--primary-glow);
+    }
+
+    .resume-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      color: #FFFFFF;
+    }
+
+    .resume-info p {
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .hero-text-col {
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 2.15rem;
+      }
+
+      .hero-korean-lead {
+        font-size: 1.15rem;
+      }
+
+      .hero-top-badges {
+        justify-content: center;
+      }
+
+      .hero-action-row {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .free-guarantee {
+        justify-content: center;
+      }
+
+      .hero-image-card {
+        transform: none;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .hero-image-card:hover {
+        transform: translateY(-2px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 1.9rem;
+      }
+
+      .hero-korean-lead {
+        font-size: 1.08rem;
+      }
+
+      .resume-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .resume-card .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.65rem;
+      }
+
+      .btn-hero-start {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="main-nav" id="main-nav"></header>
+
+  <main class="app-container">
+    <!-- Resume Banner (Dynamically Displayed when returning user has played quiz/video) -->
+    <section id="resume-banner-container" class="resume-section" style="display: none;"></section>
+
+    <!-- Hero Header -->
+    <section class="hero-section" id="hero-section">
+      <div class="hero-grid">
+        <div class="hero-text-col">
+          <div class="hero-top-badges">
+            <a href="https://www.youtube.com/@happyfamily8" target="_blank" rel="noopener noreferrer"
+              class="hero-badge-pill" title="현서네 유튜브 채널 (@happyfamily8) 바로가기">
+              <svg class="youtube-badge-icon" viewBox="0 0 24 24" width="18" height="18" fill="#FF0000">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+              <span>현서네 리얼 영어 YouTube</span>
+              <svg class="external-link-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17l9.2-9.2M17 17V8H8" />
+              </svg>
+            </a>
+            <span class="free-badge-pill">
+              <span class="free-sparkle">✨</span> 100% 무료 학습
+            </span>
+          </div>
+
+          <h1 class="hero-title">
+            국제 가족의 생생한<br>생활 영어를 들려드립니다
+          </h1>
+          <p class="hero-subtitle">
+            영상 시청 전 <strong>3분 퀴즈</strong>로 핵심 어휘와 표현을 먼저 익히고,
+            유튜브 영상과 <strong>동기화된 한영 자막 스크립트</strong>로 원어민 발음을 듣고, <strong>배운 내용으로 직접 문장을</strong> 작성 해봐요
+          </p>
+
+          <div class="hero-action-row">
+            <a href="./lessons/lesson-01/index.html" class="btn btn-primary btn-hero-start">
+              <span>첫 레슨 무료로 시작하기</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <div class="free-guarantee">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              <span>회원가입 없이 누구나 전 과정 100% 무료</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image-col">
+          <div class="hero-image-card">
+            <img src="./assets/img/family-playful.jpg"
+              srcset="./assets/img/family-playful.jpg 1200w, ./assets/img/family-studio.jpg 1200w"
+              sizes="(max-width: 768px) 100vw, 520px" alt="현서네 리얼 영어 - 미국인 엄마, 한국인 아빠, 두 아들" class="hero-family-img"
+              loading="eager" width="520" height="390" />
+            <div class="hero-image-overlay">
+              <div class="hero-image-badge">
+                <span>❤️</span> 열심히 컨텐츠를 만들어 볼게요!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Latest Lessons Cards View Section -->
+    <section class="lessons-catalog-section" id="lessons">
+      <div class="section-header-catalog">
+        <div class="catalog-badge">
+          <span>✨</span> The Latest Lessons
+        </div>
+        <h2 class="catalog-title">The Latest Lessons (최신 레슨)</h2>
+        <p class="catalog-subtitle">
+          가장 최근에 업데이트된 레슨부터 먼저 학습해보세요.<br>
+          원하는 레슨 카드를 선택해 퀴즈와 영상 스크립트 학습을 시작해보세요!
+        </p>
+      </div>
+
+      <div class="lessons-cards-grid" id="lessons-cards-container">
+        <!-- Rendered dynamically by App.renderLessonsCatalog() with { sort: 'desc', limit: 5 } -->
+      </div>
+
+      <div class="catalog-view-all-row" style="text-align: center; margin-top: 36px;">
+        <a href="./lessons.html" class="btn btn-outline"
+          style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; font-weight: 700; border-radius: var(--radius-full);">
+          <span>전체 레슨 모두 보기 (View All Lessons)</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Core Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      App.init();
+
+      // Check if user has previously played any quiz or completed a lesson
+      const hasProgress = Storage.hasAnyProgress();
+      const resumeBanner = document.getElementById('resume-banner-container');
+
+      if (hasProgress && resumeBanner) {
+        let lastActiveId = Storage.getLastActiveLesson();
+        const activeProg = Storage.getProgress(lastActiveId);
+        const activeLessonObj = App.lessons.find(l => l.id === lastActiveId) || App.lessons[0];
+
+        resumeBanner.style.display = 'block';
+        resumeBanner.innerHTML = `
+          <div class="resume-card animate-fade-in" style="margin-bottom: 28px;">
+            <div class="resume-info">
+              <span class="badge badge-primary" style="margin-bottom: 6px;">이어하기 (Resume Learning)</span>
+              <h3>${activeLessonObj.icon} ${activeLessonObj.title}</h3>
+              <p>${activeProg.completed ? '🎉 이 레슨의 퀴즈를 모두 완료했습니다! 영상과 스크립트를 복습해보세요.' : `📝 퀴즈 진행 중: ${activeProg.currentQuestionIndex + 1}번 문제 / 총 3문제`}</p>
+            </div>
+            <a href="./${activeLessonObj.path}index.html" class="btn btn-primary">
+              <span>${activeProg.completed ? '레슨 복습하기' : '이어서 퀴즈 풀기'}</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </a>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+
+</html>
