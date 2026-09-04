@@ -40,7 +40,7 @@
 .reflection-title {
   font-size: 1.35rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: var(--text-main);
   margin-bottom: 6px;
 }
 
@@ -53,7 +53,7 @@
 
 /* Vocabulary & Expression Pick Section */
 .vocab-picks-section {
-  background: rgba(15, 23, 42, 0.65);
+  background: var(--surface-color-alt);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
   padding: 16px 18px;
@@ -97,7 +97,7 @@
   background: rgba(99, 102, 241, 0.12);
   border: 1px solid rgba(99, 102, 241, 0.35);
   border-radius: var(--radius-full);
-  color: #FFFFFF;
+  color: var(--text-main);
   font-size: 0.88rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -120,7 +120,7 @@
 
 .chip-phrase {
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .chip-meaning {
@@ -155,7 +155,7 @@
 
 .encouragement-text {
   font-size: 0.88rem;
-  color: #CBD5E1;
+  color: var(--text-muted);
   line-height: 1.6;
   word-break: keep-all;
   margin: 0;
@@ -179,7 +179,7 @@
   background-color: var(--bg-color);
   border: 1.5px solid var(--surface-border);
   border-radius: var(--radius-md);
-  color: #FFFFFF;
+  color: var(--text-main);
   font-size: 1rem;
   font-family: inherit;
   resize: vertical;
@@ -441,7 +441,7 @@
 .first-visit-title {
   font-size: 1.3rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: var(--text-main);
   line-height: 1.35;
   letter-spacing: -0.01em;
 }
@@ -459,7 +459,7 @@
   gap: 12px;
   padding: 12px 14px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--surface-color-alt);
   border: 1px solid var(--surface-border);
   text-align: left;
 }
@@ -478,7 +478,7 @@
 .point-title {
   font-size: 0.92rem;
   font-weight: 700;
-  color: #F1F5F9;
+  color: var(--text-main);
   margin-bottom: 3px;
 }
 
@@ -489,7 +489,7 @@
 }
 
 .point-desc strong {
-  color: #F8FAFC;
+  color: var(--text-main);
 }
 
 .first-visit-point-card.warning {
@@ -572,12 +572,24 @@
   box-sizing: border-box;
 }
 
+[data-theme="light"] .btn-request-sync-button {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(220, 38, 38, 0.35);
+  color: #B91C1C;
+}
+
 .btn-request-sync-button:hover {
   background: rgba(239, 68, 68, 0.22);
   border-color: #EF4444;
   color: #FFFFFF;
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(239, 68, 68, 0.35);
+}
+
+[data-theme="light"] .btn-request-sync-button:hover {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(220, 38, 38, 0.6);
+  color: #991B1B;
 }
 
 @media (max-width: 640px) {
@@ -591,6 +603,7 @@
 
   .first-visit-title {
     font-size: 1.15rem;
+    color: var(--text-main);
   }
 
   .first-visit-point-card {
