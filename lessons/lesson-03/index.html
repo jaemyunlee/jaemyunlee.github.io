@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="../../css/navigation.css">
   <link rel="stylesheet" href="../../css/quiz.css">
   <link rel="stylesheet" href="../../css/video-script.css">
-  <link rel="stylesheet" href="../../css/drag-drop.css">
   <link rel="stylesheet" href="../../css/modal.css">
   <link rel="stylesheet" href="../../css/review-player.css">
 </head>
@@ -126,21 +125,6 @@
     </section>
   </main>
 
-  <!-- Bottom Drag & Drop Storage Dock -->
-  <div class="storage-dock-overlay" id="storage-dock-overlay" aria-hidden="true">
-    <div class="storage-drop-zone" id="storage-drop-zone">
-      <div class="storage-dock-icon">
-        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-        </svg>
-      </div>
-      <div class="storage-dock-text">
-        <span class="storage-dock-title">Drop here to Save!</span>
-        <span class="storage-dock-desc">Add sentence to your bank</span>
-      </div>
-    </div>
-  </div>
-
   <div class="celebration-overlay" id="celebration-overlay" aria-hidden="true"></div>
 
   <!-- Notification Toast Container -->
@@ -151,7 +135,6 @@
   <script src="../../js/storage.js"></script>
   <script src="../../js/markdown-quiz-parser.js"></script>
   <script src="../../js/quiz-engine.js"></script>
-  <script src="../../js/drag-drop.js"></script>
   <script src="../../js/video-script.js"></script>
   <script src="../../js/celebration.js"></script>
   <script src="../../js/youtube-comment.js"></script>
@@ -168,14 +151,6 @@
       const celebrationManager = new CelebrationManager({
         lottiePath: '../../assets/lottie/celebration.json'
       });
-
-      const dragDropManager = new DragDropManager({
-        lessonId: LESSON_ID,
-        storageDock: '#storage-dock-overlay',
-        dropZone: '#storage-drop-zone',
-        onSave: () => App.updateSentenceBadge()
-      });
-      dragDropManager.init();
 
       const quizSection = document.getElementById('quiz-section');
       const lessonHeader = document.querySelector('.lesson-header-section');
@@ -217,11 +192,18 @@
       commentManager.init();
 
       // Unified Step Navigation (1, 2, 3, 4) with LocalStorage Memory
+      let currentActiveStep = 1;
       const showStep = (stepNumber, scroll = true) => {
         const step = Math.min(4, Math.max(1, stepNumber));
+        currentActiveStep = step;
         Storage.setCurrentStep(LESSON_ID, step);
 
         if (step3Modal) step3Modal.style.display = 'none';
+
+        // Pause video player if leaving step 2
+        if (step !== 2 && videoPlayer) {
+          videoPlayer.pause();
+        }
 
         if (step !== 4 && reviewPlayer) {
           reviewPlayer.pause();
@@ -238,32 +220,45 @@
           btn.classList.toggle('active', s === step);
         });
 
-        if (statusBadge) {
-          if (step === 1) {
-            statusBadge.textContent = 'Step 1: Quiz';
-            statusBadge.className = 'badge badge-emerald';
-          } else if (step === 2) {
-            statusBadge.textContent = 'Step 2: Video & Script';
-            statusBadge.className = 'badge badge-primary';
-          } else if (step === 3) {
-            statusBadge.textContent = 'Step 3: Writing & Comments';
-            statusBadge.className = 'badge badge-amber';
-          } else if (step === 4) {
-            statusBadge.textContent = 'Step 4: Review & Audio Player';
-            statusBadge.className = 'badge badge-emerald';
+        // Horizontally scroll tabs:
+        // Step 1 & 2: Show Step 1, Step 2, and Step 3 together (left: 0)
+        // Step 3 & 4: Scroll left to show Step 3 and Step 4 together without dragging
+        const tabsNav = document.getElementById('lesson-step-tabs');
+        if (tabsNav) {
+          const maxScroll = tabsNav.scrollWidth - tabsNav.clientWidth;
+          if (maxScroll > 0) {
+            const targetLeft = (step <= 2) ? 0 : maxScroll;
+            tabsNav.scrollTo({ left: targetLeft, behavior: scroll ? 'smooth' : 'auto' });
           }
         }
 
-        if (step === 2 && !videoPlayer) {
-          videoPlayer = new VideoScriptPlayer({
-            lessonId: LESSON_ID,
-            youtubeId: metadata.youtubeId || 'dQw4w9WgXcQ',
-            scriptData: scriptData,
-            dragDropManager: dragDropManager,
-            onVideoEnd: () => showStep3Nudge(),
-            onScriptComplete: () => showStep3Nudge()
-          });
-          videoPlayer.init();
+        // Update Status Badge (Consistent green highlight across all steps)
+        if (statusBadge) {
+          statusBadge.className = 'badge badge-emerald';
+          if (step === 1) {
+            statusBadge.textContent = 'Step 1: Quiz';
+          } else if (step === 2) {
+            statusBadge.textContent = 'Step 2: Listening';
+          } else if (step === 3) {
+            statusBadge.textContent = 'Step 3: Writing';
+          } else if (step === 4) {
+            statusBadge.textContent = 'Step 4: Review';
+          }
+        }
+
+        if (step === 2) {
+          if (!videoPlayer) {
+            videoPlayer = new VideoScriptPlayer({
+              lessonId: LESSON_ID,
+              youtubeId: metadata.youtubeId || 'dQw4w9WgXcQ',
+              scriptData: scriptData,
+              onVideoEnd: () => showStep3Nudge(),
+              onScriptComplete: () => showStep3Nudge()
+            });
+            videoPlayer.init();
+          } else {
+            videoPlayer.onStepShow();
+          }
         }
 
         if (step === 4 && loadedQuizzes.length > 0) {
@@ -273,24 +268,26 @@
               lessonId: LESSON_ID,
               quizzes: loadedQuizzes,
               audioBaseUrl: './audio/',
-              celebrationManager: celebrationManager,
-              dragDropManager: dragDropManager
+              speakerName: metadata?.speaker?.name || 'Kelly',
+              speakerAvatar: metadata?.speaker?.avatar || '../../assets/img/avatars/kelly.jpg',
+              celebrationManager: celebrationManager
             });
             reviewPlayer.init();
           }
         }
 
-        if (step === 3) {
-          setTimeout(() => {
-            commentManager.nudgeFocus();
-          }, 300);
-        }
-
+        // Uniform Scroll to fit active contents section across all steps
         if (scroll) {
           try {
-            if (step === 2 && videoSection) {
+            let targetSection = null;
+            if (step === 1) targetSection = quizSection;
+            else if (step === 2) targetSection = videoSection;
+            else if (step === 3) targetSection = document.getElementById('reflection-card') || reflectionSection;
+            else if (step === 4) targetSection = reviewSection;
+
+            if (targetSection) {
               const navHeight = 70;
-              const y = videoSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+              const y = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
               window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
             } else {
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -301,11 +298,59 @@
         }
       };
 
+      // Step Navigation Tabs Click Binding
       document.querySelectorAll('.step-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const s = parseInt(btn.dataset.step, 10);
           showStep(s, true);
         });
+      });
+
+      // Swipe Left / Right to Navigate Steps on Touch Devices
+      const appMain = document.querySelector('main.app-container') || document.body;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      appMain.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        // Ignore interactions inside inputs, textareas, sliders, buttons, media players, or links
+        if (e.target.closest('input, textarea, select, button, iframe, .video-toolbar, .plyr, .audio-player-card, a')) {
+          touchStartX = 0;
+          return;
+        }
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive: true });
+
+      appMain.addEventListener('touchend', (e) => {
+        if (!touchStartX) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        const duration = Date.now() - touchStartTime;
+
+        // Swipe detected: horizontal distance >= 50px, predominantly horizontal (1.5x of vertical), duration <= 600ms
+        if (Math.abs(diffX) >= 50 && Math.abs(diffX) > Math.abs(diffY) * 1.5 && duration <= 600) {
+          if (diffX < 0 && currentActiveStep < 4) {
+            // Swipe Left (<-) -> Next Step
+            showStep(currentActiveStep + 1, true);
+          } else if (diffX > 0 && currentActiveStep > 1) {
+            // Swipe Right (->) -> Previous Step
+            showStep(currentActiveStep - 1, true);
+          }
+        }
+        touchStartX = 0;
+      }, { passive: true });
+
+      // Pause playback if user switches tabs or minimizes browser
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (videoPlayer) videoPlayer.pause();
+          if (reviewPlayer) reviewPlayer.pause();
+        }
       });
 
       // Global click delegation for '영상 & 대본 보러가기' button

@@ -43,24 +43,7 @@ class YouTubeCommentManager {
       if (!phrase || seen.has(phrase.toLowerCase())) continue;
       seen.add(phrase.toLowerCase());
 
-      // Derive clean Korean hint from explanation or korean field
-      let meaning = '';
-      if (q.explanation) {
-        const quoteMatch = q.explanation.match(/["']([^"']+)["'](?:는|은|라는)?\s*["']?([^"'\.]+)["']?/);
-        if (quoteMatch && quoteMatch[2]) {
-          meaning = quoteMatch[2].trim();
-        } else {
-          meaning = q.explanation.replace(/^[“"'][^"']+["']\s*(?:은|는|라는)?\s*/, '').replace(/입니다\.?$/, '').trim();
-        }
-      }
-      if (!meaning && q.korean) {
-        meaning = q.korean.split(/[,.]/)[0].trim();
-      }
-      if (meaning.length > 25) {
-        meaning = meaning.substring(0, 22) + '...';
-      }
-
-      items.push({ phrase, meaning });
+      items.push({ phrase });
     }
 
     return items;
@@ -94,7 +77,6 @@ class YouTubeCommentManager {
             <button type="button" class="vocab-pick-chip" data-phrase="${this._escapeHtml(item.phrase)}" title="문장에 '${this._escapeHtml(item.phrase)}' 추가하기">
               <span class="chip-plus">+</span>
               <strong class="chip-phrase">${this._escapeHtml(item.phrase)}</strong>
-              ${item.meaning ? `<span class="chip-meaning">(${this._escapeHtml(item.meaning)})</span>` : ''}
             </button>
           `).join('')}
         </div>

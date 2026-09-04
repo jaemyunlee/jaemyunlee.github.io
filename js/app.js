@@ -57,8 +57,9 @@ const App = {
       this.renderLessonsCatalog('#lessons-cards-container', { sort: 'desc', limit: 5 });
     }
 
-    // First-visit browser storage notice popup
-    this._checkFirstVisitNotice();
+    // Clean up any stale leftover modal overlays from previous sessions
+    const staleModal = document.getElementById('first-visit-storage-modal');
+    if (staleModal) staleModal.remove();
   },
 
   _getBasePath() {
@@ -686,100 +687,6 @@ const App = {
           });
       });
     }
-  },
-
-  _checkFirstVisitNotice() {
-    if (typeof Storage === 'undefined' || Storage.isStorageNoticeSeen()) return;
-
-    // Show popup slightly after initial page render for smooth experience
-    setTimeout(() => {
-      this._renderFirstVisitModal();
-    }, 500);
-  },
-
-  _renderFirstVisitModal() {
-    if (document.getElementById('first-visit-storage-modal')) return;
-
-    const overlay = document.createElement('div');
-    overlay.id = 'first-visit-storage-modal';
-    overlay.className = 'first-visit-modal-overlay';
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-labelledby', 'storage-notice-title');
-
-    overlay.innerHTML = `
-      <div class="first-visit-modal-card">
-        <div class="first-visit-header">
-          <div class="first-visit-icon-wrap" aria-hidden="true">💾</div>
-          <div class="first-visit-badge">📌 꼭 확인해주세요!</div>
-          <h2 class="first-visit-title" id="storage-notice-title">
-            학습 기록 저장 및 보관 안내
-          </h2>
-        </div>
-
-        <div class="first-visit-points">
-          <div class="first-visit-point-card">
-            <div class="point-icon">🔒</div>
-            <div class="point-content">
-              <h4 class="point-title">현재 브라우저에 영구 자동 저장</h4>
-              <p class="point-desc">
-                별도의 번거로운 회원가입 없이, 퀴즈 진도·북마크한 문장·작성한 영작문 등 모든 학습 내역이 <strong>현재 사용 중인 브라우저(Local Storage)에 영구적으로 안전하게 저장</strong>됩니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="first-visit-point-card warning">
-            <div class="point-icon">⚠️</div>
-            <div class="point-content">
-              <h4 class="point-title">다른 기기/브라우저 접속 시 주의</h4>
-              <p class="point-desc">
-                서버가 아닌 현재 브라우저에만 저장되므로, <strong>다른 기기(휴대폰 ↔ PC)나 다른 브라우저(Chrome ↔ Safari)</strong>로 접속하시면 기존 학습 기록이 자동으로 연동되지 않습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="first-visit-point-card request">
-            <div class="point-icon">☁️</div>
-            <div class="point-content">
-              <h4 class="point-title">기기 간 기록 연동을 원하시나요?</h4>
-              <p class="point-desc">
-                어디서든 끊김 없이 학습 기록을 보관하고 기기 간 동기화할 수 있는 <strong>클라우드 계정 연동 기능</strong>이 필요하시다면 언제든지 편하게 요청해 주세요!
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="first-visit-actions">
-          <button type="button" class="btn btn-primary btn-dismiss-storage-notice" id="btn-dismiss-storage-notice">
-            <span>✓ 확인했습니다 (이 기기에서 시작하기)</span>
-          </button>
-          <a href="https://www.youtube.com/@happyfamily8" target="_blank" rel="noopener noreferrer" class="btn-request-sync" title="현서네 유튜브 채널에 기능 요청 남기기">
-            <span>💬 계정 연동 기능 요청 / 피드백 남기기 →</span>
-          </a>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(overlay);
-
-    const closeBtn = overlay.querySelector('#btn-dismiss-storage-notice');
-    const dismissModal = () => {
-      Storage.setStorageNoticeSeen();
-      overlay.classList.add('closing');
-      setTimeout(() => {
-        overlay.remove();
-      }, 250);
-    };
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', dismissModal);
-    }
-
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        dismissModal();
-      }
-    });
   }
 };
 

@@ -263,16 +263,25 @@ class QuizEngine {
     // Fill-in & Listening: Enter key submission
     if (input) {
       input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' || e.keyCode === 13) {
           e.preventDefault();
-          this._handleCheck(q);
+          e.stopPropagation();
+          input.blur();
+          // Defer checking slightly so the virtual keyboard dismissal and Enter event cycle finish completely
+          setTimeout(() => {
+            this._handleCheck(q);
+          }, 80);
         }
       });
     }
 
     // Check button click
     if (checkBtn) {
-      checkBtn.addEventListener('click', () => this._handleCheck(q));
+      checkBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (input) input.blur();
+        this._handleCheck(q);
+      });
     }
 
     // Hint button click
@@ -282,7 +291,7 @@ class QuizEngine {
         hintBox.innerHTML = `
           <div class="hint-content">
             <span class="hint-label">💡 힌트:</span>
-            <span class="hint-letters">${this._escapeHtml(q.hint)}</span>
+            ${this._renderHintHtml(q)}
           </div>
         `;
         if (input) input.focus();
@@ -518,8 +527,18 @@ class QuizEngine {
 
       const nextBtn = actionsBox.querySelector('#btn-next-question');
       if (nextBtn) {
-        setTimeout(() => nextBtn.focus(), 50);
-        nextBtn.addEventListener('click', () => {
+        // Prevent any trailing virtual keyboard Enter key or touch bounce from advancing automatically
+        let canAdvance = false;
+        setTimeout(() => {
+          canAdvance = true;
+        }, 400);
+
+        nextBtn.addEventListener('click', (e) => {
+          if (!canAdvance) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
           if (isLast) {
             this.completeAll();
           } else {
@@ -529,19 +548,14 @@ class QuizEngine {
       }
     }
 
-    // Allow user to hit Enter key to advance comfortably
-    const handleNextKey = (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        document.removeEventListener('keydown', handleNextKey);
-        if (isLast) {
-          this.completeAll();
-        } else {
-          this.nextQuestion();
-        }
-      }
-    };
-    document.addEventListener('keydown', handleNextKey, { once: true });
+    // Smoothly ensure result and explanation are visible so mobile user can review before manually clicking next
+    if (feedbackBox) {
+      setTimeout(() => {
+        try {
+          feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (_) { }
+      }, 100);
+    }
   }
 
   _disableActions() {
@@ -706,6 +720,72 @@ class QuizEngine {
     } catch (_) {
       window.scrollTo(0, 0);
     }
+  }
+
+  _renderHintHtml(q) {
+    if (!q) return '';
+    const answer = (q.answer || '').trim();
+    if (!answer) {
+      return `<span class="hint-letters">${this._escapeHtml(q.hint || '')}</span>`;
+    }
+
+    const words = answer.split(/\s+/);
+    const isListening = q.type === 'listening';
+
+    const wordsHtml = words.map(word => {
+      const match = word.match(/^(.*?)([.,!?;:]*)$/);
+      const clean = match ? match[1] : word;
+      const punct = match ? match[2] : '';
+
+      const alphaIndices = [];
+      for (let i = 0; i < clean.length; i++) {
+        if (/[a-zA-Z0-9]/.test(clean[i])) {
+          alphaIndices.push(i);
+        }
+      }
+
+      if (alphaIndices.length <= 1) {
+        const p = punct ? `<span class="hint-char punct">${this._escapeHtml(punct)}</span>` : '';
+        return `<span class="hint-word" aria-label="${this._escapeHtml(word)}"><span class="hint-char revealed">${this._escapeHtml(clean)}</span>${p}</span>`;
+      }
+
+      let revealed;
+      if (isListening) {
+        const cutoff = alphaIndices.length <= 2 ? alphaIndices.length : 2;
+        revealed = new Set(alphaIndices.slice(0, cutoff));
+      } else {
+        revealed = alphaIndices.length === 2
+          ? new Set([alphaIndices[0]])
+          : new Set([alphaIndices[0], alphaIndices[alphaIndices.length - 1]]);
+      }
+
+      let charsHtml = '';
+      let i = 0;
+      while (i < clean.length) {
+        if (revealed.has(i)) {
+          // Group consecutive revealed letters so syllable letters remain unified
+          let seg = clean[i];
+          while (i + 1 < clean.length && revealed.has(i + 1)) {
+            i++;
+            seg += clean[i];
+          }
+          charsHtml += `<span class="hint-char revealed">${this._escapeHtml(seg)}</span>`;
+        } else if (/[a-zA-Z0-9]/.test(clean[i])) {
+          charsHtml += `<span class="hint-char blank">_</span>`;
+        } else {
+          charsHtml += `<span class="hint-char symbol">${this._escapeHtml(clean[i])}</span>`;
+        }
+        i++;
+      }
+
+      if (punct) {
+        charsHtml += `<span class="hint-char punct">${this._escapeHtml(punct)}</span>`;
+      }
+
+      return `<span class="hint-word" aria-label="${this._escapeHtml(word)}">${charsHtml}</span>`;
+    }).join('');
+
+    return `<div class="hint-words-container">${wordsHtml}</div>`;
   }
 
   _escapeHtml(str) {

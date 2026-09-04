@@ -3,7 +3,7 @@
  * Caches application shell, quizzes, scripts, audio files, and Lottie animations
  * so users can study offline.
  */
-const CACHE_NAME = 'rhyrhy-cache-v1';
+const CACHE_NAME = 'rhyrhy-cache-v8';
 
 const STATIC_ASSETS = [
   './',
@@ -13,13 +13,13 @@ const STATIC_ASSETS = [
   './css/navigation.css',
   './css/quiz.css',
   './css/video-script.css',
-  './css/drag-drop.css',
+  './css/review-player.css',
   './css/modal.css',
   './js/storage.js',
   './js/markdown-quiz-parser.js',
   './js/quiz-engine.js',
   './js/video-script.js',
-  './js/drag-drop.js',
+  './js/review-player.js',
   './js/youtube-comment.js',
   './js/celebration.js',
   './js/app.js',
@@ -27,13 +27,14 @@ const STATIC_ASSETS = [
   './assets/img/family.jpeg',
   './assets/img/family-playful.jpg',
   './assets/img/family-studio.jpg',
+  './assets/img/avatars/kelly.jpg',
   './assets/lottie/celebration.json',
   './assets/vendor/lottie.min.js',
+  './lessons.html',
   './lessons/lesson-01/index.html',
   './lessons/lesson-01/metadata.json',
   './lessons/lesson-01/quiz.md',
   './lessons/lesson-01/script.json',
-  './lessons/lesson-01/audio/cats.wav',
   './lessons/lesson-02/index.html',
   './lessons/lesson-02/metadata.json',
   './lessons/lesson-02/quiz.md',
@@ -49,9 +50,15 @@ const STATIC_ASSETS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(CACHE_NAME).then(async (cache) => {
       console.log('[SW] Pre-caching static assets');
-      return cache.addAll(STATIC_ASSETS);
+      await Promise.allSettled(
+        STATIC_ASSETS.map((asset) =>
+          cache.add(asset).catch((err) => {
+            console.warn('[SW] Could not pre-cache asset:', asset, err);
+          })
+        )
+      );
     }).then(() => self.skipWaiting())
   );
 });
@@ -74,8 +81,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Skip YouTube API, embeds, or chrome-extension requests
+  // Skip non-GET, YouTube API, embeds, or chrome-extension requests
   if (
+    event.request.method !== 'GET' ||
     url.hostname.includes('youtube.com') ||
     url.hostname.includes('googlevideo.com') ||
     url.hostname.includes('googleapis.com') ||
@@ -84,24 +92,38 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Stale-while-revalidate / cache-first strategy for local assets
+  // Network-First for HTML navigation requests to prevent stale freezes
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const resClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // Stale-while-revalidate / cache-first strategy for static assets
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const resClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, resClone);
-          });
-        }
-        return networkResponse;
-      }).catch((err) => {
-        console.log('[SW] Offline fetch fallback for:', event.request.url);
-        return cachedResponse;
-      });
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const resClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, resClone);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
 
       return cachedResponse || fetchPromise;
     })
   );
 });
-

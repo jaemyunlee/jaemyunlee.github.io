@@ -127,7 +127,7 @@ const MarkdownQuizParser = {
 
   /**
    * Generates hint for Fill-in-the-blank:
-   * First and last letter of each word (e.g. "cats" -> "c _ _ s", "early bird" -> "e _ _ _ y  b _ _ d")
+   * First and last letter of each word (e.g. "cats" -> "c _ _ s", "early bird" -> "e _ _ _ y   b _ _ d")
    * @param {string} text
    * @returns {string}
    */
@@ -135,25 +135,42 @@ const MarkdownQuizParser = {
     if (!text) return '';
     const words = text.trim().split(/\s+/);
     return words.map(word => {
-      // Preserve punctuation
-      const clean = word.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '');
-      const punct = word.slice(clean.length);
+      const match = word.match(/^(.*?)([.,!?;:]*)$/);
+      const clean = match ? match[1] : word;
+      const punct = match ? match[2] : '';
 
-      if (clean.length <= 1) {
+      const alphaIndices = [];
+      for (let i = 0; i < clean.length; i++) {
+        if (/[a-zA-Z0-9]/.test(clean[i])) {
+          alphaIndices.push(i);
+        }
+      }
+
+      if (alphaIndices.length <= 1) {
         return clean + punct;
       }
-      if (clean.length === 2) {
-        return `${clean[0]} _${punct}`;
+
+      const revealed = alphaIndices.length === 2
+        ? new Set([alphaIndices[0]])
+        : new Set([alphaIndices[0], alphaIndices[alphaIndices.length - 1]]);
+
+      let res = '';
+      for (let i = 0; i < clean.length; i++) {
+        if (revealed.has(i)) {
+          res += (res && res[res.length - 1] !== ' ' && res[res.length - 1] !== '-' ? ' ' : '') + clean[i];
+        } else if (/[a-zA-Z0-9]/.test(clean[i])) {
+          res += (res && res[res.length - 1] !== ' ' && res[res.length - 1] !== '-' ? ' ' : '') + '_';
+        } else {
+          res += clean[i];
+        }
       }
-      // First letter + underscores + last letter
-      const middleUnderscores = Array(clean.length - 2).fill('_').join(' ');
-      return `${clean[0]} ${middleUnderscores} ${clean[clean.length - 1]}${punct}`;
+      return res + punct;
     }).join('   ');
   },
 
   /**
    * Generates hint for Listening & Fill-in-the-blank:
-   * First two letters of each word (e.g. "cats" -> "c a _ _", "pastry" -> "p a _ _ _ _")
+   * First two letters of each word kept together without artificial space (e.g. "cats" -> "ca _ _", "pastry" -> "pa _ _ _ _")
    * @param {string} text
    * @returns {string}
    */
@@ -161,15 +178,31 @@ const MarkdownQuizParser = {
     if (!text) return '';
     const words = text.trim().split(/\s+/);
     return words.map(word => {
-      const clean = word.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '');
-      const punct = word.slice(clean.length);
+      const match = word.match(/^(.*?)([.,!?;:]*)$/);
+      const clean = match ? match[1] : word;
+      const punct = match ? match[2] : '';
 
-      if (clean.length <= 2) {
-        return clean + punct;
+      const alphaIndices = [];
+      for (let i = 0; i < clean.length; i++) {
+        if (/[a-zA-Z0-9]/.test(clean[i])) {
+          alphaIndices.push(i);
+        }
       }
-      const firstTwo = clean.slice(0, 2);
-      const remainingUnderscores = Array(clean.length - 2).fill('_').join(' ');
-      return `${firstTwo[0]} ${firstTwo[1]} ${remainingUnderscores}${punct}`;
+
+      const cutoff = alphaIndices.length <= 2 ? alphaIndices.length : 2;
+      const revealed = new Set(alphaIndices.slice(0, cutoff));
+
+      let res = '';
+      for (let i = 0; i < clean.length; i++) {
+        if (revealed.has(i)) {
+          res += clean[i];
+        } else if (/[a-zA-Z0-9]/.test(clean[i])) {
+          res += (res && res[res.length - 1] !== ' ' && res[res.length - 1] !== '-' ? ' ' : '') + '_';
+        } else {
+          res += clean[i];
+        }
+      }
+      return res + punct;
     }).join('   ');
   },
 

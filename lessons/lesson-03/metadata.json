@@ -6,5 +6,9 @@
   "level": "Intermediate",
   "duration": "5:15",
   "vocabCount": 3,
+  "speaker": {
+    "name": "Kelly",
+    "avatar": "../../assets/img/avatars/kelly.jpg"
+  },
   "description": "Navigate international airports with confidence using essential phrases for check-in, customs, and boarding."
 }

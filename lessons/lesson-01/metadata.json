@@ -6,5 +6,9 @@
   "level": "Beginner to Intermediate",
   "duration": "6:38",
   "vocabCount": 21,
+  "speaker": {
+    "name": "Kelly",
+    "avatar": "../../assets/img/avatars/kelly.jpg"
+  },
   "description": "켈리가 빅뱅 콘서트를 가게 된 사연과 어떻게 빅뱅을 좋아하게 되었는지 들으면서 영어 표현을 배워봐요"
 }

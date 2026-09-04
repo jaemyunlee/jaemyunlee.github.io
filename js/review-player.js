@@ -14,7 +14,8 @@ class ReviewPlayer {
     this.audioBaseUrl = options.audioBaseUrl || './audio/';
     this.audioFiles = options.audioFiles || []; // Optional explicit list of audio filenames
     this.celebrationManager = options.celebrationManager;
-    this.dragDropManager = options.dragDropManager;
+    this.speakerName = options.speakerName || 'Kelly';
+    this.speakerAvatar = options.speakerAvatar || '../../assets/img/avatars/kelly.jpg';
 
     this.currentIndex = 0;
     this.isPlaying = false;
@@ -212,6 +213,15 @@ class ReviewPlayer {
 
       return `
               <div class="quiz-sentence-card ${idx === 0 ? 'active' : ''}" data-index="${idx}" id="quiz-card-${idx}">
+                <!-- Speaker Avatar Column (Kelly is talking to you) -->
+                <div class="sentence-speaker-col">
+                  <div class="sentence-speaker-avatar-wrap">
+                    <img src="${this._escapeHtml(this.speakerAvatar)}" alt="${this._escapeHtml(this.speakerName)}" class="sentence-speaker-avatar" loading="lazy" />
+                    <span class="speaker-online-dot" aria-hidden="true"></span>
+                  </div>
+                  <span class="sentence-speaker-name">${this._escapeHtml(this.speakerName)}</span>
+                </div>
+
                 <div class="sentence-card-content">
                   <div class="sentence-card-header">
                     <span class="sentence-index-pill">Sentence ${(idx + 1).toString().padStart(2, '0')}</span>

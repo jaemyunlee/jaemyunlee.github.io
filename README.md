@@ -19,10 +19,10 @@ A mobile-first, static English learning web application designed for YouTube vid
    - **Bilingual Subtitles**: Switch between Both (EN + KR), English only, and Korean only.
    - **Click-to-Seek**: Clicking any sentence jumps the YouTube player directly to that moment.
    - **Auto-Scroll & Highlight**: Active sentence glows and scrolls into view as the video plays.
-4. **Drag & Drop Sentence Bank**:
-   - Drag any sentence card (using mouse on desktop or touch gestures on mobile) to reveal the floating bottom storage dock.
-   - Dropping the sentence saves it to `localStorage` grouped by lesson.
-   - Review and manage saved sentences anytime from the top navigation bar.
+4. **1-Click Sentence Bank (단어장)**:
+   - Easily save any key sentence or expression to your personal vocabulary bank with a single bookmark click.
+   - Saved sentences are organized in `localStorage` grouped by lesson.
+   - Review, listen to audio, and manage saved sentences anytime from the top navigation drawer.
 5. **Post-Video Reflection, YouTube Comments & Lottie Celebration**:
    - Prompts the user to write their own English sentence using what they learned.
    - Posts comments directly to YouTube via YouTube Data API v3 (or one-click copy & deep link).
@@ -45,14 +45,14 @@ A mobile-first, static English learning web application designed for YouTube vid
 │   ├── navigation.css           # Header, lesson switcher drawer, offline banner
 │   ├── quiz.css                 # Quiz card, fill-in-the-blank, multiple-choice, listening
 │   ├── video-script.css         # Split-screen responsive layouts, subtitle styling
-│   ├── drag-drop.css            # Bottom storage dock, touch ghost, drop animations
+│   ├── review-player.css        # Sentence audio player & continuous playback styles
 │   └── modal.css                # Reflection composer, Lottie overlay, modals
 ├── js/
 │   ├── storage.js               # LocalStorage manager (progress, history, saved sentences)
 │   ├── markdown-quiz-parser.js  # Parses quiz Markdown files at runtime
 │   ├── quiz-engine.js           # Quiz state machine (hints, skips, animations, gating)
 │   ├── video-script.js          # YouTube player sync, bilingual script, auto-scroll
-│   ├── drag-drop.js             # Desktop HTML5 drag & mobile touch drag handler
+│   ├── review-player.js         # Continuous sentence audio review player
 │   ├── youtube-comment.js       # Reflection prompt, YouTube API posting & fallback
 │   ├── celebration.js           # Lottie confetti & milestone celebration trigger
 │   └── app.js                   # Navigation, lesson switching, drawers, PWA registration

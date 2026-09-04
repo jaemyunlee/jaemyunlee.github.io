@@ -8,7 +8,6 @@ class VideoScriptPlayer {
     this.lessonId = options.lessonId;
     this.youtubeId = options.youtubeId || 'N5IqYrNUqmQ';
     this.scriptData = options.scriptData || [];
-    this.dragDropManager = options.dragDropManager;
     this.onVideoEnd = options.onVideoEnd || (() => { });
     this.onScriptComplete = options.onScriptComplete || (() => { });
     this.hasCompletedNudgeTriggered = false;
@@ -32,6 +31,7 @@ class VideoScriptPlayer {
 
     this.scriptListContainer = document.getElementById('script-list-container');
     this.videoContainer = document.getElementById('youtube-player-container');
+    this.lastTime = 0;
   }
 
   init() {
@@ -104,6 +104,12 @@ class VideoScriptPlayer {
         events: {
           onReady: () => {
             this.playerReady = true;
+            if (this.lastTime > 0.5) {
+              try {
+                this.player.seekTo(this.lastTime, true);
+                this.player.pauseVideo();
+              } catch (_) { }
+            }
             try {
               if (this.player && typeof this.player.unloadModule === 'function') {
                 this.player.unloadModule('captions');
@@ -271,6 +277,14 @@ class VideoScriptPlayer {
       this._startTimeTracking();
       this._updatePlayPauseButton(true);
     } else {
+      if (this.player && typeof this.player.getCurrentTime === 'function') {
+        try {
+          const cur = this.player.getCurrentTime();
+          if (typeof cur === 'number' && !isNaN(cur) && cur > 0) {
+            this.lastTime = cur;
+          }
+        } catch (_) { }
+      }
       this._stopTimeTracking();
       this._updatePlayPauseButton(false);
       if (event.data === window.YT.PlayerState.ENDED) {
@@ -294,6 +308,49 @@ class VideoScriptPlayer {
     }
   }
 
+  pause() {
+    if (this.isFallbackMode) {
+      this._pauseFallbackSync();
+      this._updatePlayPauseButton(false);
+      this.lastTime = this.simTime;
+    } else if (this.player) {
+      try {
+        if (typeof this.player.getCurrentTime === 'function') {
+          const t = this.player.getCurrentTime();
+          if (typeof t === 'number' && !isNaN(t) && t > 0) {
+            this.lastTime = t;
+          }
+        }
+        if (typeof this.player.pauseVideo === 'function') {
+          this.player.pauseVideo();
+        }
+      } catch (e) {
+        console.warn('Could not pause YouTube player:', e);
+      }
+      this._stopTimeTracking();
+      this._updatePlayPauseButton(false);
+    }
+  }
+
+  onStepShow() {
+    if (this.isFallbackMode) {
+      this._updateFallbackUI();
+    } else if (this.player && typeof this.player.getCurrentTime === 'function') {
+      try {
+        const cur = this.player.getCurrentTime();
+        // If the player reset to beginning (0) but user had previously paused at lastTime > 0.5s:
+        if (this.lastTime > 0.5 && cur < 0.5) {
+          if (typeof this.player.seekTo === 'function') {
+            this.player.seekTo(this.lastTime, true);
+          }
+          if (typeof this.player.pauseVideo === 'function') {
+            this.player.pauseVideo();
+          }
+        }
+      } catch (_) { }
+    }
+  }
+
   togglePlayPause() {
     if (this.isFallbackMode) {
       if (this.simTimer) {
@@ -309,7 +366,7 @@ class VideoScriptPlayer {
           ? this.player.getPlayerState()
           : -1;
         if (state === 1) { // 1 = PLAYING
-          this.player.pauseVideo();
+          this.pause();
         } else {
           this.player.playVideo();
         }
@@ -351,6 +408,9 @@ class VideoScriptPlayer {
   }
 
   _syncCurrentTime(currentTime) {
+    if (typeof currentTime === 'number' && !isNaN(currentTime) && currentTime > 0) {
+      this.lastTime = currentTime;
+    }
     let activeIdx = -1;
     for (let i = 0; i < this.scriptData.length; i++) {
       const item = this.scriptData[i];

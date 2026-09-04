@@ -78,7 +78,7 @@
 
 ## Quiz 12
 - **Type**: fill-in-the-blank
-- **English**: And then go to the concert and [spend] the night!
+- **English**: And then go to the concert and [spend the night]!
 - **Korean**: 그리고 콘서트에 갔다가 하룻밤 자고 올 거예요!
 - **Explanation**: "spend the night"은 어디서 "하룻밤을 묵다 / 자고 오다"를 뜻하는 자연스러운 숙어 표현입니다.
 
@@ -90,13 +90,13 @@
 
 ## Quiz 14
 - **Type**: fill-in-the-blank
-- **English**: I do not know when they officially [went on] sale, but it seemed like everything was sold.
+- **English**: I do not know when they officially [went on sale], but it seemed like everything was sold.
 - **Korean**: 언제 공식 판매가 시작되었는지는 모르겠지만, 전부 매진된 것 같았어요.
 - **Explanation**: "go on sale"은 "판매가 시작되다"를 의미합니다. 과거형은 "went on sale"입니다.
 
 ## Quiz 15
 - **Type**: fill-in-the-blank
-- **English**: I do not know what year that [came out].
+- **English**: I do not know [what year that came out].
 - **Korean**: 그 노래가 몇 년도에 나왔는지는 잘 모르겠어요.
 - **Explanation**: 곡이나 작품이 세상에 "발매되다, 출시되다"는 "come out", 과거형은 "came out"입니다.
 
@@ -108,7 +108,7 @@
 
 ## Quiz 17
 - **Type**: fill-in-the-blank
-- **English**: The first time I heard it, I did not love it, but it did [grow on] me quite a lot.
+- **English**: The first time I heard it, I did not love it, but it did [grow on me] quite a lot.
 - **Korean**: 처음 들었을 때는 별로 안 끌렸는데, 들을수록 점점 마음에 들더라고요.
 - **Explanation**: "grow on (someone)"은 어떤 노래나 대상이 "들을수록/시간이 지날수록 점점 좋아지다"를 의미하는 매우 매력적인 구동사입니다.
 
@@ -121,7 +121,7 @@
 ## Quiz 19
 - **Type**: listening
 - **Audio**: audio/it was when the new song came out.wav
-- **English**: It was when the new song [came out].
+- **English**: It was when the [new song came out].
 - **Korean**: 신곡이 나왔을 때였어요.
 - **Explanation**: "come out"은 앨범이나 신곡이 "발매되다 / 출시되다 / 나오다"를 뜻하는 일상 표현입니다. 과거형은 "came out"입니다.
 
