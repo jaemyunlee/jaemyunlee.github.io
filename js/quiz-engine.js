@@ -8,7 +8,11 @@ class QuizEngine {
       ? document.querySelector(options.container)
       : options.container;
     this.lessonId = options.lessonId;
-    this.quizzes = options.quizzes || [];
+    this.originalQuizzes = (options.quizzes || []).map((q, idx) => ({
+      ...q,
+      _origIndex: typeof q._origIndex === 'number' ? q._origIndex : idx
+    }));
+    this.quizzes = [...this.originalQuizzes];
     this.onComplete = options.onComplete || (() => { });
     this.onProgressChange = options.onProgressChange || (() => { });
     this.onStartVideo = options.onStartVideo || null;
@@ -376,11 +380,27 @@ class QuizEngine {
     }
   }
 
-  _recordResult(index, isCorrect) {
+  _recordResult(indexOrQuiz, isCorrect) {
     if (!this.state.questionResults) {
       this.state.questionResults = {};
     }
-    this.state.questionResults[index] = !!isCorrect;
+    let targetIndex = this.currentIndex;
+    if (typeof indexOrQuiz === 'object' && indexOrQuiz !== null) {
+      if (typeof indexOrQuiz._origIndex === 'number') {
+        targetIndex = indexOrQuiz._origIndex;
+      } else if (Array.isArray(this.originalQuizzes)) {
+        const found = this.originalQuizzes.findIndex(oq => oq === indexOrQuiz || (oq.korean === indexOrQuiz.korean && oq.answer === indexOrQuiz.answer));
+        if (found !== -1) targetIndex = found;
+      }
+    } else if (typeof indexOrQuiz === 'number') {
+      const q = this.quizzes[indexOrQuiz];
+      if (q && typeof q._origIndex === 'number') {
+        targetIndex = q._origIndex;
+      } else {
+        targetIndex = indexOrQuiz;
+      }
+    }
+    this.state.questionResults[targetIndex] = !!isCorrect;
     Storage.saveProgress(this.lessonId, this.state);
   }
 
@@ -402,7 +422,7 @@ class QuizEngine {
       input.classList.add('correct');
       input.disabled = true;
       const passedFirstAttempt = !this.questionFailed;
-      this._recordResult(this.currentIndex, passedFirstAttempt);
+      this._recordResult(q, passedFirstAttempt);
       this._showNextStep(q, passedFirstAttempt, false);
     } else {
       this.questionFailed = true;
@@ -430,7 +450,7 @@ class QuizEngine {
     }
 
     this.questionFailed = true;
-    this._recordResult(this.currentIndex, false);
+    this._recordResult(q, false);
     this._showNextStep(q, false, true);
   }
 
@@ -452,7 +472,7 @@ class QuizEngine {
 
       // Multiple choice is failed if user could not make right choice at first!
       const passedFirstAttempt = !this.questionFailed;
-      this._recordResult(this.currentIndex, passedFirstAttempt);
+      this._recordResult(q, passedFirstAttempt);
       this._showNextStep(q, passedFirstAttempt, false);
     } else {
       // Mark as failed at first attempt!
@@ -589,33 +609,84 @@ class QuizEngine {
   }
 
   renderCompletedState() {
-    const total = this.quizzes.length;
+    // Dismiss any active celebration overlay to ensure smooth interaction
+    const overlay = document.getElementById('celebration-overlay');
+    if (overlay) {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    const masterQuizzes = (this.originalQuizzes && this.originalQuizzes.length > 0)
+      ? this.originalQuizzes
+      : this.quizzes;
+    const total = masterQuizzes.length;
     const results = this.state.questionResults || {};
     let correctCount = 0;
-    for (let i = 0; i < total; i++) {
-      if (results[i] === true) {
+    const failedQuizzes = [];
+
+    masterQuizzes.forEach((q, idx) => {
+      const qIndex = typeof q._origIndex === 'number' ? q._origIndex : idx;
+      if (results[qIndex] === true) {
         correctCount++;
+      } else {
+        failedQuizzes.push(q);
       }
-    }
+    });
+
     // Fallback if completed previously without detailed results
     if (Object.keys(results).length === 0 && this.state.completed) {
       correctCount = total;
+      failedQuizzes.length = 0;
     }
 
-    const wrongCount = Math.max(0, total - correctCount);
+    const wrongCount = failedQuizzes.length;
     const percent = total > 0 ? Math.round((correctCount / total) * 100) : 100;
 
     let scoreTitle = '모든 퀴즈 완료! 🎓';
     let scoreDesc = '이번 레슨의 핵심 어휘와 표현 퀴즈를 모두 마쳤습니다.';
     if (percent === 100) {
       scoreTitle = '완벽합니다! 100점 만점! 🏆';
-      scoreDesc = '모든 문제를 첫 시도에 완벽하게 맞히셨습니다! 대단해요!';
+      scoreDesc = '모든 문제를 완벽하게 맞히셨습니다! 대단해요!';
     } else if (percent >= 80) {
       scoreTitle = '훌륭한 성적입니다! 🌟';
-      scoreDesc = '대부분의 핵심 표현을 첫 시도에 잘 맞히셨습니다!';
+      scoreDesc = '대부분의 핵심 표현을 잘 맞히셨습니다!';
     } else {
       scoreTitle = '퀴즈 완료! 다시 도전해보세요! 💪';
       scoreDesc = '틀린 문제를 다시 복습하여 100점에 도전해보세요!';
+    }
+
+    let actionsHtml = '';
+    if (wrongCount > 0) {
+      actionsHtml = `
+        <button type="button" class="btn btn-primary btn-replay-quiz" id="btn-replay-failed" title="틀린 ${wrongCount}문제만 모아서 다시 풉니다">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <polyline points="23 20 23 14 17 14"></polyline>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+          </svg>
+          <span>틀린 문제 다시 풀기 (${wrongCount}문제)</span>
+        </button>
+        <button type="button" class="btn-step2-secondary" id="btn-replay-all" title="처음부터 모든 퀴즈 다시 풀기">
+          <span>전체 다시 풀기</span>
+        </button>
+        <button type="button" class="btn-goto-step2" id="btn-goto-video" title="Step 2: 영상 시청 & 스크립트 학습으로 이동">
+          <span>영상 & 대본 보러가기 ▶</span>
+        </button>
+      `;
+    } else {
+      actionsHtml = `
+        <button type="button" class="btn-step2-secondary" id="btn-replay-all" title="처음부터 모든 퀴즈 다시 풀기">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <polyline points="23 20 23 14 17 14"></polyline>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+          </svg>
+          <span>전체 퀴즈 다시 풀기 (Replay All)</span>
+        </button>
+        <button type="button" class="btn-goto-step2" id="btn-goto-video" title="Step 2: 영상 시청 & 스크립트 학습으로 이동">
+          <span>영상 & 대본 보러가기 ▶</span>
+        </button>
+      `;
     }
 
     this.container.innerHTML = `
@@ -633,7 +704,7 @@ class QuizEngine {
         <div class="quiz-score-summary">
           <div class="quiz-score-main">
             <span class="quiz-score-number">${correctCount} / ${total}</span>
-            <span class="quiz-score-sublabel">첫 시도에 맞힌 문제 (${percent}%)</span>
+            <span class="quiz-score-sublabel">맞힌 문제 (${percent}%)</span>
           </div>
 
           <div class="quiz-score-grid">
@@ -653,18 +724,7 @@ class QuizEngine {
         </div>
 
         <div class="quiz-completed-actions" style="margin-top: 24px;">
-          <!-- Replay Button replaces 영상 시청 & 스크립트 학습 버튼 -->
-          <button type="button" class="btn btn-primary btn-replay-quiz" id="btn-replay-quiz">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="1 4 1 10 7 10"></polyline>
-              <polyline points="23 20 23 14 17 14"></polyline>
-              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-            </svg>
-            <span>퀴즈 다시 풀기 (Replay)</span>
-          </button>
-          <button type="button" class="btn-step2-secondary" id="btn-goto-video" title="Step 2: 영상 시청 & 스크립트 학습으로 이동">
-            <span>영상 & 대본 보러가기 ▶</span>
-          </button>
+          ${actionsHtml}
         </div>
       </div>
     `;
@@ -675,10 +735,17 @@ class QuizEngine {
       window.scrollTo(0, 0);
     }
 
-    const replayBtn = this.container.querySelector('#btn-replay-quiz');
-    if (replayBtn) {
-      replayBtn.addEventListener('click', () => {
-        this.restartQuiz();
+    const replayFailedBtn = this.container.querySelector('#btn-replay-failed');
+    if (replayFailedBtn) {
+      replayFailedBtn.addEventListener('click', () => {
+        this.restartQuiz(true);
+      });
+    }
+
+    const replayAllBtn = this.container.querySelector('#btn-replay-all');
+    if (replayAllBtn) {
+      replayAllBtn.addEventListener('click', () => {
+        this.restartQuiz(false);
       });
     }
 
@@ -686,33 +753,50 @@ class QuizEngine {
     if (videoBtn) {
       videoBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation();
+        const overlay = document.getElementById('celebration-overlay');
+        if (overlay) {
+          overlay.classList.remove('active');
+          overlay.setAttribute('aria-hidden', 'true');
+        }
         if (typeof this.onStartVideo === 'function') {
           this.onStartVideo();
-        } else {
-          const step2Tab = document.querySelector('.step-tab-btn[data-step="2"]');
-          if (step2Tab) {
-            step2Tab.click();
-          } else {
-            const quizSection = document.getElementById('quiz-section');
-            const videoSection = document.getElementById('video-section');
-            if (quizSection) quizSection.style.display = 'none';
-            if (videoSection) {
-              videoSection.style.display = 'block';
-              videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }
+        }
+        const step2Tab = document.querySelector('.step-tab-btn[data-step="2"]');
+        if (step2Tab && !step2Tab.classList.contains('active')) {
+          step2Tab.click();
         }
       });
     }
   }
 
-  restartQuiz() {
+  restartQuiz(onlyFailed = false) {
+    const overlay = document.getElementById('celebration-overlay');
+    if (overlay) {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    if (onlyFailed) {
+      const results = this.state.questionResults || {};
+      const failed = this.originalQuizzes.filter(q => results[q._origIndex] !== true);
+      if (failed.length > 0) {
+        this.quizzes = failed;
+        failed.forEach(q => {
+          delete this.state.questionResults[q._origIndex];
+        });
+      } else {
+        this.quizzes = [...this.originalQuizzes];
+        this.state.questionResults = {};
+      }
+    } else {
+      this.quizzes = [...this.originalQuizzes];
+      this.state.questionResults = {};
+    }
+
     this.currentIndex = 0;
     this.questionFailed = false;
     this.state.completed = false;
     this.state.currentQuestionIndex = 0;
-    this.state.questionResults = {};
     Storage.saveProgress(this.lessonId, this.state);
     this.renderCurrentQuestion();
     try {

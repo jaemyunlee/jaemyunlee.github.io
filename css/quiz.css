@@ -726,6 +726,36 @@
   transform: translateY(0);
 }
 
+.btn-goto-step2 {
+  padding: 14px 26px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.btn-goto-step2:hover {
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.5);
+  color: #FFFFFF;
+}
+
+.btn-goto-step2:active {
+  transform: translateY(0);
+}
+
 /* Floating Bottom Quick-Jump Dock */
 .bottom-video-cta-dock {
   position: fixed;

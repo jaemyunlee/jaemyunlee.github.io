@@ -402,15 +402,8 @@
           lessonId: LESSON_ID,
           quizzes: quizzes,
           onComplete: (info) => {
-            if (!info.alreadyCompleted) {
-              celebrationManager.celebrate({
-                title: '모든 퀴즈 완료! ✈️',
-                message: '핵심 어휘와 표현을 모두 마스터하셨습니다. 이제 영상을 시청해보세요!',
-                actionLabel: '영상 & 대본 학습으로 이동 ▶',
-                onAction: () => {
-                  showStep(2, true);
-                }
-              });
+            if (!info.alreadyCompleted && celebrationManager) {
+              celebrationManager._launchConfettiParticles();
             }
           },
           onStartVideo: () => {
