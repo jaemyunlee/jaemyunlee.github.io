@@ -6,11 +6,15 @@
   top: 0;
   z-index: 1000;
   width: 100%;
-  background: rgba(15, 23, 42, 0.94);
+  background: var(--nav-bg, rgba(15, 23, 42, 0.94));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--surface-border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] .main-nav {
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
 }
 
 .nav-inner {
@@ -69,7 +73,7 @@
   font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #F8FAFC;
+  color: var(--text-main);
   white-space: nowrap;
 }
 
@@ -137,7 +141,7 @@
 
 .lesson-menu-label {
   font-weight: 600;
-  color: #FFFFFF;
+  color: var(--text-main);
   letter-spacing: -0.01em;
 }
 
@@ -317,13 +321,13 @@
 
 .btn-nav-action:hover:not(.disabled) {
   background-color: var(--surface-color);
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .btn-nav-action.active {
   background: rgba(99, 102, 241, 0.16);
   border-color: rgba(99, 102, 241, 0.4);
-  color: #FFFFFF;
+  color: var(--primary-light);
 }
 
 .btn-nav-action.disabled {
@@ -343,6 +347,64 @@
   border-radius: var(--radius-full);
   font-size: 0.72rem;
   font-weight: 700;
+}
+
+/* Theme Toggle Button */
+.btn-theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  background: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.btn-theme-toggle:hover {
+  background-color: var(--surface-color-alt);
+  border-color: var(--surface-border-hover);
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-theme-toggle:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+
+/* Light theme: show Moon icon to switch to Dark */
+[data-theme="light"] .theme-icon-sun {
+  display: none !important;
+}
+[data-theme="light"] .theme-icon-moon {
+  display: flex !important;
+  color: #4F46E5;
+}
+
+/* Dark theme: show Sun icon to switch to Light */
+:root:not([data-theme="light"]) .theme-icon-sun,
+[data-theme="dark"] .theme-icon-sun {
+  display: flex !important;
+  color: #F59E0B;
+}
+:root:not([data-theme="light"]) .theme-icon-moon,
+[data-theme="dark"] .theme-icon-moon {
+  display: none !important;
 }
 
 .history-unlocked-dot {
