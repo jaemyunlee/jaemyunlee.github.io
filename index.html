@@ -466,6 +466,7 @@
 
   <!-- Core Scripts -->
   <script src="./js/storage.js"></script>
+  <script src="./js/analytics.js"></script>
   <script src="./js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -488,7 +489,7 @@
               <h3>${activeLessonObj.icon} ${activeLessonObj.title}</h3>
               <p>${activeProg.completed ? '🎉 이 레슨의 퀴즈를 모두 완료했습니다! 영상과 스크립트를 복습해보세요.' : `📝 퀴즈 진행 중: ${activeProg.currentQuestionIndex + 1}번 문제 / 총 3문제`}</p>
             </div>
-            <a href="./${activeLessonObj.path}index.html" class="btn btn-primary">
+            <a href="./${activeLessonObj.path}index.html" class="btn btn-primary" id="btn-resume-lesson">
               <span>${activeProg.completed ? '레슨 복습하기' : '이어서 퀴즈 풀기'}</span>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
@@ -496,6 +497,15 @@
             </a>
           </div>
         `;
+
+        const resumeBtn = document.getElementById('btn-resume-lesson');
+        if (resumeBtn) {
+          resumeBtn.addEventListener('click', () => {
+            if (typeof Analytics !== 'undefined') {
+              Analytics.trackLessonCardClick(lastActiveId, activeLessonObj.title);
+            }
+          });
+        }
       }
     });
   </script>

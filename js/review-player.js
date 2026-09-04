@@ -482,6 +482,10 @@ class ReviewPlayer {
           this.playSentence(0);
         } else {
           this.pause();
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackStepComplete(this.lessonId, 4, { playAllFinished: true });
+            Analytics.trackLessonComplete(this.lessonId);
+          }
           if (typeof App !== 'undefined' && App.showToast) {
             App.showToast('🎉 모든 문장 연속 복습을 마쳤습니다!');
           }

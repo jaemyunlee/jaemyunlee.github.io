@@ -143,6 +143,7 @@
   <!-- Core Scripts -->
   <script src="../../assets/vendor/lottie.min.js"></script>
   <script src="../../js/storage.js"></script>
+  <script src="../../js/analytics.js"></script>
   <script src="../../js/markdown-quiz-parser.js"></script>
   <script src="../../js/quiz-engine.js"></script>
   <script src="../../js/video-script.js"></script>
@@ -216,6 +217,12 @@
         console.warn('Could not load script.json', e);
       }
 
+      // Initialize Analytics for Lesson 01
+      if (typeof Analytics !== 'undefined') {
+        Analytics.init();
+        Analytics.trackLessonView(LESSON_ID, metadata.title || 'Lesson 1: Morning Routine & Daily Habits');
+      }
+
       const commentManager = new YouTubeCommentManager({
         lessonId: LESSON_ID,
         youtubeId: metadata.youtubeId || 'N5IqYrNUqmQ',
@@ -234,6 +241,10 @@
         const step = Math.min(4, Math.max(1, stepNumber));
         currentActiveStep = step;
         Storage.setCurrentStep(LESSON_ID, step);
+
+        if (typeof Analytics !== 'undefined') {
+          Analytics.trackStepView(LESSON_ID, step);
+        }
 
         if (step3Modal) step3Modal.style.display = 'none';
 
@@ -293,8 +304,18 @@
               lessonId: LESSON_ID,
               youtubeId: metadata.youtubeId || 'N5IqYrNUqmQ',
               scriptData: scriptData,
-              onVideoEnd: () => showStep3Nudge(),
-              onScriptComplete: () => showStep3Nudge()
+              onVideoEnd: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'video_end' });
+                }
+                showStep3Nudge();
+              },
+              onScriptComplete: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'script_complete' });
+                }
+                showStep3Nudge();
+              }
             });
             videoPlayer.init();
           } else {
@@ -417,6 +438,9 @@
 
       if (btnModalGotoStep3) {
         btnModalGotoStep3.addEventListener('click', () => {
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'modal_button' });
+          }
           showStep(3, true);
         });
       }
@@ -429,6 +453,9 @@
       // Script list completion banner click
       document.addEventListener('click', (e) => {
         if (e.target.closest('#btn-banner-goto-step3')) {
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'banner_button' });
+          }
           showStep(3, true);
         }
       });
@@ -448,6 +475,12 @@
           lessonId: LESSON_ID,
           quizzes: quizzes,
           onComplete: (info) => {
+            if (typeof Analytics !== 'undefined') {
+              Analytics.trackStepComplete(LESSON_ID, 1, {
+                alreadyCompleted: !!info.alreadyCompleted,
+                totalQuizzes: (quizzes && quizzes.length) || 0
+              });
+            }
             if (!info.alreadyCompleted && celebrationManager) {
               celebrationManager._launchConfettiParticles();
             }

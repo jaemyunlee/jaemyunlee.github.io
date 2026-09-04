@@ -42,6 +42,11 @@ const App = {
 
   init(currentLessonId = null) {
     this.currentLessonId = currentLessonId;
+
+    if (typeof Analytics !== 'undefined') {
+      Analytics.init();
+    }
+
     this._renderNavigationBar();
     this._renderSavedSentencesDrawer();
     this._initOfflineDetection();
@@ -56,6 +61,18 @@ const App = {
       // Landing page: show 5 latest lessons from latest on top
       this.renderLessonsCatalog('#lessons-cards-container', { sort: 'desc', limit: 5 });
     }
+
+    // Global delegation for lesson card clicks in catalog
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.lesson-catalog-card');
+      if (card && e.target.closest('a')) {
+        const id = card.id ? card.id.replace('card-', '') : '';
+        const lessonObj = this.lessons.find(l => l.id === id);
+        if (typeof Analytics !== 'undefined' && id) {
+          Analytics.trackLessonCardClick(id, lessonObj ? lessonObj.title : '');
+        }
+      }
+    });
 
     // Clean up any stale leftover modal overlays from previous sessions
     const staleModal = document.getElementById('first-visit-storage-modal');
