@@ -133,7 +133,7 @@ class YouTubeCommentManager {
         <!-- Actions -->
         <div class="reflection-actions">
           <div class="api-status-info" id="api-status-info">
-            <span class="safe-badge-pill" style="display: inline-flex; align-items: center; gap: 6px; color: #6EE7B7; font-weight: 600;">
+            <span class="safe-badge-pill" style="display: inline-flex; align-items: center; gap: 6px; color: var(--accent-emerald); font-weight: 600;">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10B981" stroke-width="2.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
@@ -266,7 +266,7 @@ class YouTubeCommentManager {
             <polyline points="20 6 9 17 4 12"/>
           </svg>
           <div>
-            <strong style="color: #6EE7B7; font-size: 1.05rem;">🎉 나만의 문장이 단어장에 안전하게 저장되었습니다!</strong>
+            <strong style="color: var(--accent-emerald); font-size: 1.05rem;">🎉 나만의 문장이 단어장에 안전하게 저장되었습니다!</strong>
             <p style="margin: 6px 0 10px; color: var(--text-muted); line-height: 1.6;">
               ${copied ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>새로 열린 유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong> 후 등록해보세요!' : '새로 열린 유튜브 영상 댓글창에 문장을 등록해보세요!'}
             </p>

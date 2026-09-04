@@ -143,6 +143,10 @@ a:hover {
   color: #C7D2FE;
 }
 
+[data-theme="light"] a:hover {
+  color: var(--primary-hover);
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
@@ -217,10 +221,22 @@ a:hover {
   border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
+[data-theme="light"] .badge-primary {
+  background: rgba(99, 102, 241, 0.12);
+  color: #4338CA;
+  border-color: rgba(99, 102, 241, 0.32);
+}
+
 .badge-emerald {
   background: var(--accent-emerald-glow);
   color: var(--accent-emerald);
   border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="light"] .badge-emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: #065F46;
+  border-color: rgba(16, 185, 129, 0.32);
 }
 
 /* Shake and Fade Keyframes */

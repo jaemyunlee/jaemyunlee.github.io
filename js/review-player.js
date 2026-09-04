@@ -193,7 +193,7 @@ class ReviewPlayer {
 
         <!-- Section Intro & Guidance -->
         <div style="margin-bottom: 20px;">
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: #FFFFFF; margin-bottom: 6px;">
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
             퀴즈 핵심 문장 총복습 (Sentence Review) 🎧
           </h3>
           <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.55;">

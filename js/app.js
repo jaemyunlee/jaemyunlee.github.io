@@ -751,7 +751,7 @@ const App = {
         </svg>
       </div>
       <div class="toast-content">
-        <div class="toast-title" style="font-weight: 600; font-size: 0.95rem; color: #FFFFFF;">${message}</div>
+        <div class="toast-title" style="font-weight: 600; font-size: 0.95rem; color: var(--text-main);">${message}</div>
       </div>
     `;
     document.body.appendChild(toast);

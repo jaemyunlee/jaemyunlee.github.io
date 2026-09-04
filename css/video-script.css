@@ -118,7 +118,7 @@
 
 .completion-banner-text h4 {
   font-size: 1.1rem;
-  color: #FFFFFF;
+  color: var(--text-main);
   margin-bottom: 4px;
 }
 
@@ -176,7 +176,7 @@
 .nudge-modal-title {
   font-size: 1.35rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: var(--text-main);
   margin-bottom: 10px;
 }
 
@@ -259,11 +259,23 @@
   margin-left: auto;
 }
 
+[data-theme="light"] .btn-yt-direct {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(220, 38, 38, 0.35);
+  color: #B91C1C;
+}
+
 .btn-yt-direct:hover {
   background: rgba(239, 68, 68, 0.25);
   border-color: rgba(239, 68, 68, 0.7);
   transform: translateY(-1px);
   color: #FFFFFF;
+}
+
+[data-theme="light"] .btn-yt-direct:hover {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(220, 38, 38, 0.6);
+  color: #991B1B;
 }
 
 /* Fallback & Embed Restriction Overlay */
@@ -516,7 +528,7 @@
   justify-content: space-between;
   padding: 16px 20px;
   border-bottom: 1px solid var(--surface-border);
-  background: rgba(30, 41, 59, 0.95);
+  background: var(--surface-color);
   backdrop-filter: blur(8px);
 }
 
@@ -552,7 +564,7 @@
 
 .btn-toggle-sub.active {
   background-color: var(--surface-color-alt);
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 /* Script List & Cards */
@@ -656,6 +668,10 @@
 }
 
 .script-sentence-card.active .sentence-en {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .script-sentence-card.active .sentence-en {
   color: #FFFFFF;
 }
 
