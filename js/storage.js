@@ -9,7 +9,8 @@ const Storage = {
     SAVED_SENTENCES: 'rhyrhy_saved_sentences',
     LAST_LESSON: 'rhyrhy_last_lesson',
     USER_SETTINGS: 'rhyrhy_settings',
-    STORAGE_NOTICE: 'rhyrhy_storage_notice_seen'
+    STORAGE_NOTICE: 'rhyrhy_storage_notice_seen',
+    FIRST_SAVE_NOTICE: 'rhyrhy_first_save_notice_seen'
   },
 
   /**
@@ -100,6 +101,29 @@ const Storage = {
       localStorage.setItem(this.KEYS.STORAGE_NOTICE, 'true');
     } catch (e) {
       console.warn('LocalStorage error setting notice flag', e);
+    }
+  },
+
+  /**
+   * Check if the first sentence save notice has already been seen
+   * @returns {boolean}
+   */
+  isFirstSaveNoticeSeen() {
+    try {
+      return localStorage.getItem(this.KEYS.FIRST_SAVE_NOTICE) === 'true';
+    } catch (e) {
+      return false;
+    }
+  },
+
+  /**
+   * Mark the first sentence save notice as seen
+   */
+  setFirstSaveNoticeSeen() {
+    try {
+      localStorage.setItem(this.KEYS.FIRST_SAVE_NOTICE, 'true');
+    } catch (e) {
+      console.warn('LocalStorage error setting first save notice flag', e);
     }
   },
 

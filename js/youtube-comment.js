@@ -221,8 +221,9 @@ class YouTubeCommentManager {
 
     // 3. Mark lesson completed in history
     Storage.recordLessonCompletion(this.lessonId, this.lessonMetadata);
-    if (typeof App !== 'undefined' && App.updateSentenceBadge) {
-      App.updateSentenceBadge();
+    if (typeof App !== 'undefined') {
+      if (App.updateSentenceBadge) App.updateSentenceBadge();
+      if (App.checkFirstSentenceSaveNotice) App.checkFirstSentenceSaveNotice();
     }
 
     // 4. Copy to clipboard

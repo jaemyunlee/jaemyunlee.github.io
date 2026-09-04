@@ -658,6 +658,109 @@ const App = {
     }, duration);
   },
 
+  /**
+   * Check if user is saving a sentence for the very first time.
+   * If so, display a notification modal informing that all data is persisted
+   * in the local browser cache, and link to the YouTube community posts for cloud storage requests.
+   */
+  checkFirstSentenceSaveNotice() {
+    if (typeof Storage === 'undefined') return;
+    if (Storage.isFirstSaveNoticeSeen()) return;
+    Storage.setFirstSaveNoticeSeen();
+
+    // Small delay so user sees initial saved toast smoothly
+    setTimeout(() => {
+      this._renderFirstSaveNoticeModal();
+    }, 300);
+  },
+
+  _renderFirstSaveNoticeModal() {
+    if (document.getElementById('first-save-storage-modal')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'first-save-storage-modal';
+    overlay.className = 'first-visit-modal-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-labelledby', 'first-save-title');
+
+    overlay.innerHTML = `
+      <div class="first-visit-modal-card">
+        <div class="first-visit-header">
+          <div class="first-visit-icon-wrap" aria-hidden="true">
+            ⭐
+          </div>
+          <div>
+            <span class="first-visit-badge">단어장 저장 안내 • Local Storage</span>
+          </div>
+          <h3 class="first-visit-title" id="first-save-title">
+            첫 번째 문장이 단어장에 저장되었습니다!
+          </h3>
+        </div>
+
+        <div class="first-visit-points">
+          <div class="first-visit-point-card">
+            <span class="point-icon" aria-hidden="true">💾</span>
+            <div class="point-content">
+              <h4 class="point-title">현재 기기 브라우저 캐시에 안전하게 보관됩니다</h4>
+              <p class="point-desc">
+                저장하신 문장들은 현재 사용 중인 기기의 <strong>브라우저 캐시(로컬 저장소)</strong>에 안전하게 보관됩니다. 브라우저 캐시를 완전히 삭제하지 않는 한 언제든 복습하실 수 있습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="first-visit-point-card request">
+            <span class="point-icon" aria-hidden="true">☁️</span>
+            <div class="point-content">
+              <h4 class="point-title">모든 기기 클라우드 동기화가 필요하신가요?</h4>
+              <p class="point-desc">
+                스마트폰, 태블릿, PC 등 여러 기기에서 실시간으로 단어장을 연동하고 영구 보관할 수 있는 <strong>클라우드 서버 기능</strong>이 필요하시다면, 유튜브 채널 커뮤니티에 의견을 남겨주세요!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="first-visit-actions">
+          <a href="https://www.youtube.com/@happyfamily8/posts" target="_blank" rel="noopener noreferrer" class="btn-request-sync-button" id="btn-request-cloud-sync" title="현서네 유튜브 커뮤니티 새 창으로 열기">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="color: #EF4444; flex-shrink: 0;">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            <span>유튜브 커뮤니티에 클라우드 기능 요청하기 ↗</span>
+          </a>
+
+          <button type="button" class="btn btn-primary btn-dismiss-storage-notice" id="btn-dismiss-first-save">
+            확인 (계속 학습하기)
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    const closeModal = () => {
+      overlay.classList.add('closing');
+      setTimeout(() => overlay.remove(), 250);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') closeModal();
+    };
+
+    const dismissBtn = overlay.querySelector('#btn-dismiss-first-save');
+    if (dismissBtn) {
+      dismissBtn.addEventListener('click', closeModal);
+    }
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', onKeyDown);
+  },
+
   _initOfflineDetection() {
     const banner = document.getElementById('offline-banner');
     const updateStatus = () => {

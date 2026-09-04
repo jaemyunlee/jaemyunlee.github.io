@@ -666,6 +666,9 @@ class ReviewPlayer {
         if (typeof App.showToast === 'function') {
           App.showToast('⭐ 단어장에 문장이 저장되었습니다!', 'success');
         }
+        if (typeof App.checkFirstSentenceSaveNotice === 'function') {
+          App.checkFirstSentenceSaveNotice();
+        }
       }
       window.dispatchEvent(new CustomEvent('saved-sentences-updated'));
     }
