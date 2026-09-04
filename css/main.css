@@ -1,12 +1,15 @@
 /**
  * RhyRhy English - Core & Mobile-First Base Styles
  */
-:root {
+:root,
+[data-theme="dark"] {
   --bg-color: #0F172A;
   --surface-color: #1E293B;
   --surface-color-alt: #334155;
   --surface-border: rgba(255, 255, 255, 0.08);
   --surface-border-hover: rgba(255, 255, 255, 0.16);
+  --nav-bg: rgba(15, 23, 42, 0.94);
+  --modal-overlay-bg: rgba(15, 23, 42, 0.75);
 
   --primary: #6366F1;
   --primary-hover: #4F46E5;
@@ -34,6 +37,45 @@
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
 
   --nav-height: 64px;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg-color: #F8FAFC;
+  --surface-color: #FFFFFF;
+  --surface-color-alt: #F1F5F9;
+  --surface-border: rgba(15, 23, 42, 0.09);
+  --surface-border-hover: rgba(15, 23, 42, 0.18);
+  --nav-bg: rgba(255, 255, 255, 0.94);
+  --modal-overlay-bg: rgba(15, 23, 42, 0.45);
+
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  --primary-light: #6366F1;
+  --primary-glow: rgba(79, 70, 229, 0.15);
+
+  --accent-emerald: #059669;
+  --accent-emerald-glow: rgba(5, 150, 105, 0.15);
+  --accent-amber: #D97706;
+  --accent-rose: #E11D48;
+  --accent-sky: #0284C7;
+
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --text-subtle: #94A3B8;
+
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
+
+  color-scheme: light;
+}
+
+body.theme-transitioning,
+body.theme-transitioning *,
+body.theme-transitioning *::before,
+body.theme-transitioning *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
 }
 
 *,

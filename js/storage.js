@@ -12,7 +12,8 @@ const Storage = {
     STORAGE_NOTICE: 'rhyrhy_storage_notice_seen',
     FIRST_SAVE_NOTICE: 'rhyrhy_first_save_notice_seen',
     LESSON_ACCESS_PREFIX: 'rhyrhy_access_',
-    STUDY_TIME_PREFIX: 'rhyrhy_study_time_'
+    STUDY_TIME_PREFIX: 'rhyrhy_study_time_',
+    THEME: 'rhyrhy_theme'
   },
 
   /**
@@ -141,6 +142,38 @@ const Storage = {
       return parseInt(localStorage.getItem(key) || '0', 10);
     } catch (e) {
       return 0;
+    }
+  },
+
+  /**
+   * Get user's preferred theme ('dark' or 'light')
+   * Checks localStorage, falls back to system prefers-color-scheme, or defaults to 'dark'
+   * @returns {'dark' | 'light'}
+   */
+  getTheme() {
+    try {
+      const saved = localStorage.getItem(this.KEYS.THEME);
+      if (saved === 'dark' || saved === 'light') return saved;
+
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
+      }
+    } catch (e) {
+      console.warn('LocalStorage error reading theme', e);
+    }
+    return 'dark';
+  },
+
+  /**
+   * Set user's preferred theme
+   * @param {'dark' | 'light'} theme
+   */
+  setTheme(theme) {
+    try {
+      const val = (theme === 'light') ? 'light' : 'dark';
+      localStorage.setItem(this.KEYS.THEME, val);
+    } catch (e) {
+      console.warn('LocalStorage error saving theme', e);
     }
   },
 
