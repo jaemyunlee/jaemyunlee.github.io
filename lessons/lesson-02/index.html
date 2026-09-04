@@ -133,6 +133,7 @@
   <!-- Core Scripts -->
   <script src="../../assets/vendor/lottie.min.js"></script>
   <script src="../../js/storage.js"></script>
+  <script src="../../js/analytics.js"></script>
   <script src="../../js/markdown-quiz-parser.js"></script>
   <script src="../../js/quiz-engine.js"></script>
   <script src="../../js/video-script.js"></script>
@@ -151,29 +152,6 @@
       const celebrationManager = new CelebrationManager({
         lottiePath: '../../assets/lottie/celebration.json'
       });
-
-      const quizSection = document.getElementById('quiz-section');
-      const lessonHeader = document.querySelector('.lesson-header-section');
-      const videoSection = document.getElementById('video-section');
-      const reflectionSection = document.getElementById('reflection-section');
-      const statusBadge = document.getElementById('lesson-status-badge');
-
-      let metadata = {};
-      let scriptData = [];
-
-      try {
-        const metaRes = await fetch('./metadata.json');
-        if (metaRes.ok) metadata = await metaRes.json();
-      } catch (e) {
-        console.warn('Could not load metadata.json', e);
-      }
-
-      try {
-        const scriptRes = await fetch('./script.json');
-        if (scriptRes.ok) scriptData = await scriptRes.json();
-      } catch (e) {
-        console.warn('Could not load script.json', e);
-      }
 
       const quizSection = document.getElementById('quiz-section');
       const lessonHeader = document.querySelector('.lesson-header-section');
@@ -202,6 +180,12 @@
         console.warn('Could not load script.json', e);
       }
 
+      // Initialize Analytics for Lesson 02
+      if (typeof Analytics !== 'undefined') {
+        Analytics.init();
+        Analytics.trackLessonView(LESSON_ID, metadata.title || 'Lesson 2: Ordering at a Trendy Cafe');
+      }
+
       const commentManager = new YouTubeCommentManager({
         lessonId: LESSON_ID,
         youtubeId: metadata.youtubeId || 'dQw4w9WgXcQ',
@@ -220,6 +204,10 @@
         const step = Math.min(4, Math.max(1, stepNumber));
         currentActiveStep = step;
         Storage.setCurrentStep(LESSON_ID, step);
+
+        if (typeof Analytics !== 'undefined') {
+          Analytics.trackStepView(LESSON_ID, step);
+        }
 
         if (step3Modal) step3Modal.style.display = 'none';
 
@@ -275,8 +263,18 @@
               lessonId: LESSON_ID,
               youtubeId: metadata.youtubeId || 'dQw4w9WgXcQ',
               scriptData: scriptData,
-              onVideoEnd: () => showStep3Nudge(),
-              onScriptComplete: () => showStep3Nudge()
+              onVideoEnd: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'video_end' });
+                }
+                showStep3Nudge();
+              },
+              onScriptComplete: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'script_complete' });
+                }
+                showStep3Nudge();
+              }
             });
             videoPlayer.init();
           } else {
@@ -397,6 +395,9 @@
 
       if (btnModalGotoStep3) {
         btnModalGotoStep3.addEventListener('click', () => {
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'modal_button' });
+          }
           showStep(3, true);
         });
       }
@@ -408,6 +409,9 @@
 
       document.addEventListener('click', (e) => {
         if (e.target.closest('#btn-banner-goto-step3')) {
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'banner_button' });
+          }
           showStep(3, true);
         }
       });
@@ -425,6 +429,12 @@
           lessonId: LESSON_ID,
           quizzes: quizzes,
           onComplete: (info) => {
+            if (typeof Analytics !== 'undefined') {
+              Analytics.trackStepComplete(LESSON_ID, 1, {
+                alreadyCompleted: !!info.alreadyCompleted,
+                totalQuizzes: (quizzes && quizzes.length) || 0
+              });
+            }
             if (!info.alreadyCompleted && celebrationManager) {
               celebrationManager._launchConfettiParticles();
             }

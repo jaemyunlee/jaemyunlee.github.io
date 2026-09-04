@@ -10,7 +10,9 @@ const Storage = {
     LAST_LESSON: 'rhyrhy_last_lesson',
     USER_SETTINGS: 'rhyrhy_settings',
     STORAGE_NOTICE: 'rhyrhy_storage_notice_seen',
-    FIRST_SAVE_NOTICE: 'rhyrhy_first_save_notice_seen'
+    FIRST_SAVE_NOTICE: 'rhyrhy_first_save_notice_seen',
+    LESSON_ACCESS_PREFIX: 'rhyrhy_access_',
+    STUDY_TIME_PREFIX: 'rhyrhy_study_time_'
   },
 
   /**
@@ -78,6 +80,67 @@ const Storage = {
       this.setLastActiveLesson(lessonId);
     } catch (e) {
       console.warn('LocalStorage error saving current step', e);
+    }
+  },
+
+  /**
+   * Increment and retrieve cumulative access count for a lesson
+   * @param {string} lessonId
+   * @returns {number}
+   */
+  incrementLessonAccessCount(lessonId) {
+    try {
+      const key = this.KEYS.LESSON_ACCESS_PREFIX + lessonId;
+      const count = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+      localStorage.setItem(key, String(count));
+      return count;
+    } catch (e) {
+      console.warn('LocalStorage error saving lesson access count', e);
+      return 1;
+    }
+  },
+
+  /**
+   * Get cumulative access count for a lesson
+   * @param {string} lessonId
+   * @returns {number}
+   */
+  getLessonAccessCount(lessonId) {
+    try {
+      const key = this.KEYS.LESSON_ACCESS_PREFIX + lessonId;
+      return parseInt(localStorage.getItem(key) || '0', 10);
+    } catch (e) {
+      return 0;
+    }
+  },
+
+  /**
+   * Accumulate foreground study time in seconds for a lesson
+   * @param {string} lessonId
+   * @param {number} seconds
+   */
+  recordStudyTime(lessonId, seconds) {
+    try {
+      if (!seconds || seconds <= 0) return;
+      const key = this.KEYS.STUDY_TIME_PREFIX + lessonId;
+      const current = parseInt(localStorage.getItem(key) || '0', 10);
+      localStorage.setItem(key, String(current + Math.round(seconds)));
+    } catch (e) {
+      console.warn('LocalStorage error recording study time', e);
+    }
+  },
+
+  /**
+   * Get total accumulated study time in seconds for a lesson
+   * @param {string} lessonId
+   * @returns {number}
+   */
+  getStudyTime(lessonId) {
+    try {
+      const key = this.KEYS.STUDY_TIME_PREFIX + lessonId;
+      return parseInt(localStorage.getItem(key) || '0', 10);
+    } catch (e) {
+      return 0;
     }
   },
 

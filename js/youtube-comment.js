@@ -237,6 +237,14 @@ class YouTubeCommentManager {
       }
     }
 
+    // Track Step 3 completion in Analytics funnel
+    if (typeof Analytics !== 'undefined') {
+      Analytics.trackStepComplete(this.lessonId, 3, {
+        action: 'comment_submitted',
+        copied: copied
+      });
+    }
+
     // 5. Open YouTube video in new tab
     const ytUrl = `https://www.youtube.com/watch?v=${this.youtubeId}`;
     window.open(ytUrl, '_blank', 'noopener,noreferrer');
