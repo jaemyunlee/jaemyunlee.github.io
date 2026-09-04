@@ -11,9 +11,17 @@ class CelebrationManager {
 
   init() {
     if (!this.container) {
+      this.container = document.getElementById('celebration-overlay');
+    }
+    if (!this.container) {
       this.container = document.createElement('div');
       this.container.id = 'celebration-overlay';
       this.container.className = 'celebration-overlay';
+      document.body.appendChild(this.container);
+    }
+
+    // Always ensure modal markup and event handlers exist inside the container
+    if (!this.container.querySelector('.celebration-modal')) {
       this.container.setAttribute('aria-hidden', 'true');
       this.container.innerHTML = `
         <div class="celebration-backdrop"></div>
@@ -30,7 +38,6 @@ class CelebrationManager {
           </div>
         </div>
       `;
-      document.body.appendChild(this.container);
 
       const closeBtn = this.container.querySelector('#btn-close-celebration');
       if (closeBtn) {
@@ -99,9 +106,19 @@ class CelebrationManager {
 
     // Also trigger vibrant canvas confetti burst
     this._launchConfettiParticles();
+
+    // Escape key dismissal
+    this._escHandler = (e) => {
+      if (e.key === 'Escape') this.hide();
+    };
+    document.addEventListener('keydown', this._escHandler);
   }
 
   hide() {
+    if (this._escHandler) {
+      document.removeEventListener('keydown', this._escHandler);
+      this._escHandler = null;
+    }
     if (this.container) {
       this.container.classList.remove('active');
       this.container.setAttribute('aria-hidden', 'true');

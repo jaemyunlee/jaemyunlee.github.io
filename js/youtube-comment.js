@@ -286,12 +286,11 @@ class YouTubeCommentManager {
       App.showToast('📋 문장 복사 & 단어장 저장 완료! 유튜브 댓글창에 붙여넣어 보세요.', 'success');
     }
 
-    // Trigger celebratory Lottie animation
+    // Trigger celebratory confetti burst
     if (this.celebrationManager) {
-      this.celebrationManager.celebrate({
-        title: '멋진 도전입니다! 🎉',
-        message: `작성하신 문장이 단어장에 안전하게 저장되었으며, 이번 레슨을 완주하셨습니다!`
-      });
+      if (typeof this.celebrationManager._launchConfettiParticles === 'function') {
+        this.celebrationManager._launchConfettiParticles();
+      }
     }
   }
 
