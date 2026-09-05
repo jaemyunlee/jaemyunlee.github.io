@@ -36,11 +36,14 @@ jobs:
       - name: Ensure .nojekyll exists
         run: touch .nojekyll
 
+      - name: Build and Hash Assets (Issue #3)
+        run: node scripts/build.js
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload root directory as the static site artifact
-          path: '.'
+          # Upload production dist directory as the static site artifact
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment

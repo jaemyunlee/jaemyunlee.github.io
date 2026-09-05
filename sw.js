@@ -97,7 +97,7 @@ self.addEventListener('fetch', (event) => {
   // Network-First for HTML navigation requests to prevent stale freezes
   if (event.request.mode === 'navigate') {
     event.respondWith(
-      fetch(event.request)
+      fetch(new Request(event.request, { cache: 'no-cache' }))
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const resClone = networkResponse.clone();

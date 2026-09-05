@@ -1,0 +1,19 @@
+{
+  "name": "rhyrhyenglish",
+  "version": "1.0.0",
+  "description": "RhyRhy English - International family real-life English learning web app",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "serve": "python3 -m http.server 8855",
+    "preview": "python3 -m http.server 8855 -d dist"
+  },
+  "keywords": [
+    "english-learning",
+    "pwa",
+    "quiz",
+    "korean-english"
+  ],
+  "author": "jaemyun",
+  "license": "MIT"
+}
