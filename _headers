@@ -1,0 +1,24 @@
+# Browser Caching Headers (Issue #3)
+
+# HTML files and navigation: Always check server for latest deployment
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Service worker: Must never be cached long-term so updates are checked immediately
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Static hashed CSS assets: 1 year immutable cache
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static hashed JS assets: 1 year immutable cache
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static media and assets: 1 year immutable cache
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
