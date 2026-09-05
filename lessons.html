@@ -117,15 +117,21 @@
       user-select: none;
     }
 
-    .btn-sort-pill:hover {
+    .btn-sort-pill:hover:not(.active) {
       color: var(--text-main);
       background: var(--surface-color-alt);
     }
 
     .btn-sort-pill.active {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: #FFFFFF;
+      background: var(--primary);
+      color: #FFFFFF !important;
       box-shadow: 0 2px 10px var(--primary-glow);
+    }
+
+    [data-theme="light"] .btn-sort-pill.active {
+      background: var(--primary);
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
     }
 
     .btn-sort-pill svg {

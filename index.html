@@ -264,6 +264,28 @@
       display: block;
     }
 
+    .hero-family-img-dark {
+      display: block;
+    }
+
+    .hero-family-img-light {
+      display: none;
+    }
+
+    [data-theme="light"] .hero-family-img-dark {
+      display: none !important;
+    }
+
+    [data-theme="light"] .hero-family-img-light {
+      display: block !important;
+    }
+
+    [data-theme="light"] .hero-image-card {
+      border: 2px solid rgba(99, 102, 241, 0.18);
+      box-shadow: 0 16px 36px rgba(79, 70, 229, 0.1), 0 4px 14px rgba(15, 23, 42, 0.05);
+      background-color: #FFFFFF;
+    }
+
     .hero-image-overlay {
       position: absolute;
       bottom: 0;
@@ -274,6 +296,10 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+    }
+
+    [data-theme="light"] .hero-image-overlay {
+      background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.35) 40%, rgba(255, 255, 255, 0.92) 100%);
     }
 
     .hero-image-badge {
@@ -290,6 +316,13 @@
       border-radius: var(--radius-full);
       align-self: flex-start;
       border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    [data-theme="light"] .hero-image-badge {
+      background: rgba(79, 70, 229, 0.92);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 2px 10px rgba(79, 70, 229, 0.25);
     }
 
     .hero-image-caption {
@@ -315,9 +348,10 @@
     }
 
     [data-theme="light"] .resume-card {
-      background: linear-gradient(135deg, #EEF2FF 0%, #FFFFFF 100%);
-      border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.12);
+      background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.35);
+      border-left: 5px solid var(--primary);
+      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.1);
     }
 
     .resume-info h3 {
@@ -465,9 +499,13 @@
 
         <div class="hero-image-col">
           <div class="hero-image-card">
+            <!-- Dark mode hero image -->
             <img src="./assets/img/family-playful.jpg"
-              srcset="./assets/img/family-playful.jpg 1200w, ./assets/img/family-studio.jpg 1200w"
-              sizes="(max-width: 768px) 100vw, 520px" alt="현서네 리얼 영어 - 미국인 엄마, 한국인 아빠, 두 아들" class="hero-family-img"
+              alt="현서네 리얼 영어 - 미국인 엄마, 한국인 아빠, 두 아들" class="hero-family-img hero-family-img-dark"
+              loading="eager" width="520" height="390" />
+            <!-- Light mode hero image -->
+            <img src="./assets/img/family-light.jpg"
+              alt="현서네 리얼 영어 - 미국인 엄마, 한국인 아빠, 두 아들" class="hero-family-img hero-family-img-light"
               loading="eager" width="520" height="390" />
             <div class="hero-image-overlay">
               <div class="hero-image-badge">
