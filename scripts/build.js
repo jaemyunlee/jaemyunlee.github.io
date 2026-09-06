@@ -24,6 +24,87 @@ const NO_CACHE_META_TAGS = `
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">`;
 
+// Curated curiosity headline mapping for Open Graph previews (Issue #6)
+const CURATED_HEADLINES = {
+  'lesson-01-1': '"우연히 ~하다" 원어민은 일상에서 어떻게 말할까요?',
+  'lesson-01-2': '"당연히, 명백하게" 영어 대화에서 자연스럽게 쓰는 표현은?',
+  'lesson-01-3': '"하늘석(맨 꼭대기 좌석)"을 영어로 뭐라고 할까요?',
+  'lesson-01-4': '"시야(뷰)가 꽤 괜찮아요" 원어민 실생활 표현은?',
+  'lesson-01-5': '"시야 방해석(제한석)"을 공연장 예매할 때 뭐라고 부를까요?',
+  'lesson-01-6': '"가격이 꽤 괜찮네!" 원어민이 가장 즐겨쓰는 단어는?',
+  'lesson-01-7': '"적어도 내가 알기로는" 영어로 자연스럽게 말하면?',
+  'lesson-01-8': '"그 노래를 좋아하기 시작했어" 영어로 뭐라고 할까요?',
+  'lesson-01-9': '"다리에 깁스를 하고 있어" 영어로 뭐라고 할까요?',
+  'lesson-01-10': '"절대 갈 수 있는 방법이 없었죠" 원어민 빈출 강조 표현은?',
+  'lesson-01-11': '"알고 보니 ~였어요" 일상에서 가장 많이 쓰는 구동사는?',
+  'lesson-01-12': '"콘서트 끝나고 하룻밤 자고 오다" 영어로 뭐라고 할까요?',
+  'lesson-01-13': '"신경 쓰지 않았으면 좋겠어요" 영어로 어떻게 말할까요?',
+  'lesson-01-14': '"언제 공식 판매가 시작되었나요?" 원어민 판매 시작 표현은?',
+  'lesson-01-15': '"그 노래가 몇 년도에 나왔지?" 출시/발매되다는 영어로?',
+  'lesson-01-16': '"대략 그 가격대쯤이었어" 대략을 나타내는 자연스러운 표현은?',
+  'lesson-01-17': '"들을수록 점점 마음에 들어요" 시간이 갈수록 좋아진다는 영어로?',
+  'lesson-01-18': '"일요일까지 제출해야 해" 마감/기한을 뜻하는 단어는?',
+  'lesson-01-19': '"신곡이 발매되었을 때였어요" 원어민 발음 퀴즈! 영어로?',
+  'lesson-01-20': '"가능성이 매우 희박해요" 희박하다는 영어로 뭐라고 할까요?',
+  'lesson-01-21': '"결국 최고의 자리를 얻게 되었어요" 결국 ~한 결과가 되다는?',
+  'lesson-02-1': '"아이스 아메리카노 테이크아웃이요" 미국 카페에서 자연스러운 주문법은?',
+  'lesson-02-2': '"우유를 오트 밀크로 바꿔주세요" 카페 옵션 변경 영어로?',
+  'lesson-02-3': '"오늘 제일 인기 있는 빵이 뭐예요?" 베이커리 인기 메뉴 영어로?',
+  'lesson-03-1': '"탑승구(Gate)가 어디인가요?" 공항 필수 안내 영어로?',
+  'lesson-03-2': '"기내 반입 수하물 몇 개까지 돼요?" 비행기 기내 가방 영어로?',
+  'lesson-03-3': '"탑승권과 여권을 준비해 주세요" 공항 출국 심사 필수 영어로?',
+};
+
+function escapeAttr(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function parseQuizMarkdown(content) {
+  const blocks = content.split(/##\s*Quiz\s*\d+/i).slice(1);
+  return blocks.map((block, i) => {
+    const typeM = block.match(/-\s*\*\*Type\*\*:\s*([^\n]+)/i);
+    const enM = block.match(/-\s*\*\*English\*\*:\s*([^\n]+)/i);
+    const koM = block.match(/-\s*\*\*Korean\*\*:\s*([^\n]+)/i);
+    const ansM = block.match(/-\s*\*\*Answer\*\*:\s*([^\n]+)/i);
+    const expM = block.match(/-\s*\*\*Explanation\*\*:\s*([^\n]+)/i);
+    const audioM = block.match(/-\s*\*\*Audio\*\*:\s*([^\n]+)/i);
+
+    const typeStr = typeM ? typeM[1].trim().toLowerCase() : 'multiple-choice';
+    const english = enM ? enM[1].trim() : '';
+    const korean = koM ? koM[1].trim() : '';
+    let answer = ansM ? ansM[1].trim() : '';
+    const explanation = expM ? expM[1].trim() : '';
+    const audio = audioM ? audioM[1].trim() : '';
+
+    let options = [];
+    const bracketM = english.match(/\[(.*?)\]/);
+    if (bracketM) {
+      if (typeStr.includes('multiple') || typeStr.includes('choice')) {
+        options = bracketM[1].split(',').map(s => s.trim()).filter(Boolean);
+        if (!answer && options.length > 0) answer = options[0];
+      } else {
+        if (!answer) answer = bracketM[1].trim();
+      }
+    }
+
+    return {
+      num: i + 1,
+      type: typeStr.includes('multiple') || typeStr.includes('choice') ? 'multiple-choice' : (typeStr.includes('listen') ? 'listening' : 'fill-in-the-blank'),
+      english,
+      korean,
+      answer,
+      options,
+      explanation,
+      audio
+    };
+  });
+}
+
 /**
  * Computes an 8-character hex content hash for a buffer or string
  */
@@ -173,13 +254,84 @@ function build() {
   }
 
   // Copy root HTML files
-  const rootHtmlFiles = ['index.html', 'lessons.html'];
+  const rootHtmlFiles = ['index.html', 'lessons.html', 'quiz.html'];
   for (const htmlFile of rootHtmlFiles) {
     const src = path.join(ROOT_DIR, htmlFile);
     const dest = path.join(DIST_DIR, htmlFile);
     if (fs.existsSync(src)) {
       fs.copyFileSync(src, dest);
     }
+  }
+
+  // 4b. Pre-Render Dedicated Static Quiz Pages (Issue #6: Share link)
+  const quizTemplatePath = path.join(ROOT_DIR, 'quiz.html');
+  let quizCount = 0;
+
+  if (fs.existsSync(quizTemplatePath)) {
+    const quizTemplate = fs.readFileSync(quizTemplatePath, 'utf8');
+    const lessonsDir = path.join(ROOT_DIR, 'lessons');
+    const lessonDirs = fs.readdirSync(lessonsDir).filter(f => f.startsWith('lesson-') && fs.statSync(path.join(lessonsDir, f)).isDirectory()).sort();
+
+    for (const lessonId of lessonDirs) {
+      const quizMdPath = path.join(lessonsDir, lessonId, 'quiz.md');
+      if (!fs.existsSync(quizMdPath)) continue;
+
+      const quizMdContent = fs.readFileSync(quizMdPath, 'utf8');
+      const quizzes = parseQuizMarkdown(quizMdContent);
+
+      for (const q of quizzes) {
+        const headlineKey = `${lessonId}-${q.num}`;
+        const headline = CURATED_HEADLINES[headlineKey] || `"${q.korean}" 영어로 뭐라고 할까요?`;
+        const ogTitle = `[현서네 리얼 영어] ${headline}`;
+        const ogDesc = `원어민 실생활 영어 퀴즈! "${q.korean}" 표현을 직접 맞혀보세요.`;
+        const ogImg = `https://rhyrhyenglish.site/assets/img/og/${lessonId}-q${q.num}.png`;
+        const ogUrl = `https://rhyrhyenglish.site/quiz/${lessonId}/q${q.num}.html`;
+
+        // Render HTML for depth 2 (quiz/lesson-XX/qYY.html)
+        let pageHtmlDepth2 = quizTemplate
+          .replace(/href="\.\//g, 'href="../../')
+          .replace(/src="\.\//g, 'src="../../')
+          .replace(/<title>.*?<\/title>/, `<title>${escapeAttr(ogTitle)}</title>`)
+          .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapeAttr(ogTitle)}">`)
+          .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapeAttr(ogDesc)}">`)
+          .replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${ogImg}">`)
+          .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${ogUrl}">`)
+          .replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapeAttr(ogTitle)}">`)
+          .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapeAttr(ogDesc)}">`)
+          .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${ogImg}">`);
+
+        // Embed quiz data for zero-latency instant rendering
+        const quizDataJson = JSON.stringify({ lessonId, num: q.num, ...q });
+        const embeddedTag = `<script id="quiz-data" type="application/json">${quizDataJson}</script>\n</body>`;
+        pageHtmlDepth2 = pageHtmlDepth2.replace('</body>', embeddedTag);
+
+        // Render HTML for depth 3 (quiz/lesson-XX/qYY/index.html)
+        const pageHtmlDepth3 = pageHtmlDepth2
+          .replace(/href="\.\.\/\.\.\//g, 'href="../../../')
+          .replace(/src="\.\.\/\.\.\//g, 'src="../../../');
+
+        // Write to dist/quiz/lesson-XX/qYY.html and dist/quiz/lesson-XX/qYY/index.html
+        const distLessonQuizDir = path.join(DIST_DIR, 'quiz', lessonId);
+        fs.mkdirSync(distLessonQuizDir, { recursive: true });
+        fs.writeFileSync(path.join(distLessonQuizDir, `q${q.num}.html`), pageHtmlDepth2, 'utf8');
+
+        const distPrettyDir = path.join(distLessonQuizDir, `q${q.num}`);
+        fs.mkdirSync(distPrettyDir, { recursive: true });
+        fs.writeFileSync(path.join(distPrettyDir, 'index.html'), pageHtmlDepth3, 'utf8');
+
+        // Also write to workspace ROOT_DIR/quiz/ for local dev server
+        const rootLessonQuizDir = path.join(ROOT_DIR, 'quiz', lessonId);
+        fs.mkdirSync(rootLessonQuizDir, { recursive: true });
+        fs.writeFileSync(path.join(rootLessonQuizDir, `q${q.num}.html`), pageHtmlDepth2, 'utf8');
+
+        const rootPrettyDir = path.join(rootLessonQuizDir, `q${q.num}`);
+        fs.mkdirSync(rootPrettyDir, { recursive: true });
+        fs.writeFileSync(path.join(rootPrettyDir, 'index.html'), pageHtmlDepth3, 'utf8');
+
+        quizCount++;
+      }
+    }
+    console.log(`  🎯 Pre-rendered ${quizCount} dedicated static quiz pages in dist/quiz/`);
   }
 
   // 5. Rewrite Asset References & Inject No-Cache Meta in all HTML files in dist/

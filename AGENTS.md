@@ -71,3 +71,24 @@ To guarantee that new deployments are delivered immediately to all users while m
   - Preview production build: `npm run preview`
   - Local source dev server: `npm run serve`
 - **CI/CD**: GitHub Pages deploys `dist/` via `.github/workflows/deploy.yml`. Never bypass the build step in GitHub Actions.
+
+---
+
+## 5. Quiz Sharing & Open Graph (OG) Image Protocol (Issue #6)
+
+To maximize viral curiosity and organic engagement across social sharing platforms (KakaoTalk, Twitter/X, Instagram, SMS):
+
+### A. Dedicated Quiz Pages
+- Every individual quiz question has its own standalone shareable page at `/quiz/lesson-XX/qYY.html` (and `/quiz/lesson-XX/qYY/index.html`).
+- Statically pre-rendered during build (`node scripts/build.js`) with custom `<meta property="og:title">`, `<meta property="og:description">`, `<meta property="og:image">`, and `<meta property="og:url">` tags so crawlers render rich previews without client JavaScript.
+- Embedded JSON `<script id="quiz-data" type="application/json">` eliminates runtime fetch latency.
+- **Post-Answer Referral Modal**: Upon submitting an answer, visitors see feedback, the complete sentence, and **exactly one main action button**:
+  `[ 🚀 전체 레슨 바로 학습하기 ]` (navigating to `/lessons/lesson-XX/index.html`).
+
+### B. Pre-Generated 1200x630 OG Teaser Images
+- Every quiz question has a pre-rendered 1200x630 card in `assets/img/og/lesson-XX-qYY.png`.
+- Features curiosity-provoking headlines (e.g., `"하늘석(맨 꼭대기 좌석)"을 영어로 뭐라고 할까요?`), a cloze sentence teaser (`We got tickets in the [ ? ] section`), and RhyRhy English branding.
+- **When creating a new lesson or question**:
+  1. Add headline mappings in `scripts/generate-og-images.py` and `scripts/build.js` (`CURATED_HEADLINES`).
+  2. Run `python3 scripts/generate-og-images.py` to generate the image assets.
+  3. Run `npm run build` to pre-render static HTML pages in `dist/quiz/`.
