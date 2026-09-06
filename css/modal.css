@@ -630,3 +630,288 @@
     padding: 12px 16px;
   }
 }
+
+/* ==========================================================================
+   PWA Installation Prompt Modal (Issue #9)
+   ========================================================================== */
+
+.pwa-install-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(10, 15, 29, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .pwa-install-modal-overlay {
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pwa-install-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pwa-install-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 26px 22px 22px;
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.55),
+              0 0 0 1px rgba(255, 255, 255, 0.08);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .pwa-install-card {
+  background: #FFFFFF;
+  border-color: rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.2),
+              0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.pwa-install-modal-overlay.active .pwa-install-card {
+  transform: translateY(0) scale(1);
+}
+
+.pwa-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.pwa-celebration-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(16, 185, 129, 0.14);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="light"] .pwa-celebration-pill {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.pwa-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pwa-close-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-main);
+}
+
+.pwa-app-profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.pwa-app-icon-wrap {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.pwa-app-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
+  background: #4F46E5;
+}
+
+.pwa-app-badge-free {
+  position: absolute;
+  bottom: -4px;
+  right: -6px;
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.pwa-app-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pwa-app-name {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 2px;
+  letter-spacing: -0.01em;
+}
+
+.pwa-app-tagline {
+  font-size: 0.85rem;
+  color: var(--accent-indigo);
+  font-weight: 600;
+  margin: 0;
+}
+
+[data-theme="light"] .pwa-app-tagline {
+  color: #4F46E5;
+}
+
+.pwa-app-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0 0 18px;
+}
+
+.pwa-app-desc strong {
+  color: var(--text-main);
+}
+
+.pwa-features-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+[data-theme="light"] .pwa-features-grid {
+  background: #F8FAFC;
+  border-color: #E2E8F0;
+}
+
+.pwa-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pwa-feature-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pwa-feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pwa-feature-text strong {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.pwa-feature-text span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.pwa-actions-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-pwa-install {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #EC4899 100%);
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-pwa-install:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.55);
+}
+
+.btn-pwa-install:active {
+  transform: translateY(0);
+}
+
+.btn-pwa-dismiss {
+  background: transparent;
+  border: none;
+  color: var(--text-subtle);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-pwa-dismiss:hover {
+  color: var(--text-main);
+  background: var(--surface-hover);
+}
+
+@media (max-width: 480px) {
+  .pwa-install-card {
+    padding: 22px 18px 18px;
+  }
+
+  .pwa-app-name {
+    font-size: 1.1rem;
+  }
+
+  .btn-pwa-install {
+    font-size: 0.95rem;
+    padding: 13px 18px;
+  }
+}

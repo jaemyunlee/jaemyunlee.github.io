@@ -261,6 +261,22 @@ class ReviewPlayer {
             `;
     }).join('')}
         </div>
+
+        <!-- Lesson Finish Card -->
+        <div class="lesson-finish-card" id="lesson-finish-card">
+          <div class="finish-card-badge">🏆 Lesson 1 전체 완료!</div>
+          <h4 class="finish-card-title">오늘의 4단계 학습을 모두 완주하셨습니다!</h4>
+          <p class="finish-card-desc">퀴즈부터 원어민 영상, 한영 스크립트, 나만의 문장 작성, 그리고 핵심 문장 복습까지 훌륭하게 끝마치셨어요.</p>
+          <div class="finish-card-actions">
+            <button type="button" class="btn-finish-complete" id="btn-finish-complete">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span>🎉 학습 완료 & 축하하기</span>
+            </button>
+            <a href="/lessons.html" class="btn-finish-catalog">전체 레슨 목록</a>
+          </div>
+        </div>
       </div>
     `;
 
@@ -269,6 +285,26 @@ class ReviewPlayer {
   }
 
   _bindControls() {
+    // Lesson Finish Button
+    const finishBtn = this.container.querySelector('#btn-finish-complete');
+    if (finishBtn) {
+      finishBtn.addEventListener('click', () => {
+        if (this.celebrationManager) {
+          this.celebrationManager._launchConfettiParticles();
+        }
+        if (typeof Analytics !== 'undefined') {
+          Analytics.trackStepComplete(this.lessonId, 4, { manualComplete: true });
+          Analytics.trackLessonComplete(this.lessonId);
+        }
+        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+          App.showToast('🏆 축하합니다! 오늘의 4단계 학습을 모두 완료했습니다!');
+        }
+        if (typeof PWAManager !== 'undefined') {
+          PWAManager.checkAndPrompt(this.lessonId);
+        }
+      });
+    }
+
     // Play/Pause Main Toggle
     const toggleBtn = this.container.querySelector('#btn-player-toggle');
     if (toggleBtn) {
@@ -488,6 +524,9 @@ class ReviewPlayer {
           }
           if (typeof App !== 'undefined' && App.showToast) {
             App.showToast('🎉 모든 문장 연속 복습을 마쳤습니다!');
+          }
+          if (typeof PWAManager !== 'undefined') {
+            PWAManager.checkAndPrompt(this.lessonId);
           }
         }
       }, 700);
