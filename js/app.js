@@ -866,6 +866,20 @@ const App = {
         navigator.serviceWorker.register(swPath)
           .then(reg => {
             console.log('RhyRhy PWA ServiceWorker registered with scope:', reg.scope);
+
+            // Proactively check for newer service worker on every load
+            if (typeof reg.update === 'function') {
+              reg.update().catch(() => {});
+            }
+
+            // When new SW activates and claims clients, refresh to load fresh code
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+              if (!refreshing) {
+                refreshing = true;
+                window.location.reload();
+              }
+            });
           })
           .catch(err => {
             console.log('RhyRhy ServiceWorker registration failed:', err);
