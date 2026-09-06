@@ -47,6 +47,35 @@
   color: var(--text-muted);
 }
 
+.quiz-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-share-btn:hover {
+  color: var(--primary-light);
+  border-color: var(--primary-light);
+  background-color: rgba(99, 102, 241, 0.08);
+}
+
+.quiz-share-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.quiz-share-btn:hover svg {
+  transform: scale(1.1);
+}
+
 .quiz-progress-track {
   width: 100%;
   height: 6px;

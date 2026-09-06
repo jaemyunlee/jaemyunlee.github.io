@@ -75,8 +75,20 @@ class QuizEngine {
       <div class="quiz-card" role="region" aria-label="Lesson Quiz Question">
         <div class="quiz-header">
           <div class="quiz-step-info">
-            <span class="quiz-badge">Quiz ${currentNum} of ${total}</span>
-            <span class="quiz-type-tag">${this._getTypeBadge(q.type)}</span>
+            <div style="display: inline-flex; align-items: center; gap: 8px;">
+              <span class="quiz-badge">Quiz ${currentNum} of ${total}</span>
+              <span class="quiz-type-tag">${this._getTypeBadge(q.type)}</span>
+            </div>
+            <button type="button" class="quiz-share-btn" id="quiz-share-btn" aria-label="이 퀴즈 공유하기" title="이 문제 링크 공유하기">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+              <span>공유하기</span>
+            </button>
           </div>
           <div class="quiz-progress-track" aria-hidden="true">
             <div class="quiz-progress-bar" style="width: ${progressPercent}%;"></div>
@@ -99,7 +111,7 @@ class QuizEngine {
       </div>
     `;
 
-    this._bindEvents(q);
+    this._bindEvents(q, currentNum);
 
     // Ensure page scrolls to top when moving to a new quiz
     try {
@@ -320,6 +332,16 @@ class QuizEngine {
       });
     }
 
+    // Quiz share button click
+    const shareBtn = this.container.querySelector('#quiz-share-btn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this._shareQuiz(q, currentNum);
+      });
+    }
+
     // Listening speaker button
     if (q.type === 'listening') {
       const speakerBtn = this.container.querySelector('#speaker-play-btn');
@@ -328,6 +350,33 @@ class QuizEngine {
           this.playAudio(q.audio, q.english.replace(/\[|\]/g, ''));
         });
       }
+    }
+  }
+
+  _shareQuiz(q, currentNum) {
+    const origin = window.location.origin || 'https://rhyrhyenglish.site';
+    const shareUrl = `${origin}/quiz/${this.lessonId}/q${currentNum}.html`;
+    const title = `[현서네 리얼 영어] Quiz ${currentNum} - "${q.korean}"`;
+    const text = '원어민 실생활 영어 퀴즈에 도전해보세요!';
+
+    if (navigator.share) {
+      navigator.share({
+        title,
+        text,
+        url: shareUrl
+      }).catch(() => {});
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+          App.showToast('📋 퀴즈 공유 링크가 복사되었습니다!', 'success');
+        } else {
+          alert('퀴즈 공유 링크가 복사되었습니다:\n' + shareUrl);
+        }
+      }).catch(() => {
+        prompt('퀴즈 공유 링크를 복사하세요:', shareUrl);
+      });
+    } else {
+      prompt('퀴즈 공유 링크를 복사하세요:', shareUrl);
     }
   }
 
