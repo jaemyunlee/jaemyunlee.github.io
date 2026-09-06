@@ -212,21 +212,10 @@ class YouTubeCommentManager {
     // 1. Format sentence with branding hint
     const formattedComment = `${sentence}\n\n(현서네 리얼 영어 3분 챌린지로 작성된 문장입니다 ✨)`;
 
-    // 2. Save reflection sentence to user's local sentence bank
-    Storage.saveSentence(this.lessonId, {
-      en: sentence,
-      kr: '내가 직접 작성한 문장 (My Reflection)',
-      timestamp: 0
-    });
-
-    // 3. Mark lesson completed in history
+    // 2. Mark lesson progress in history (sentences are saved only in Step 4 review)
     Storage.recordLessonCompletion(this.lessonId, this.lessonMetadata);
-    if (typeof App !== 'undefined') {
-      if (App.updateSentenceBadge) App.updateSentenceBadge();
-      if (App.checkFirstSentenceSaveNotice) App.checkFirstSentenceSaveNotice();
-    }
 
-    // 4. Copy to clipboard
+    // 3. Copy to clipboard
     let copied = false;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       try {
@@ -245,18 +234,18 @@ class YouTubeCommentManager {
       });
     }
 
-    // 5. Open YouTube video in new tab
+    // 4. Open YouTube video in new tab
     const ytUrl = `https://www.youtube.com/watch?v=${this.youtubeId}`;
     window.open(ytUrl, '_blank', 'noopener,noreferrer');
 
-    // 6. Update Button UI
+    // 5. Update Button UI
     if (postBtn) {
       postBtn.disabled = false;
       postBtn.className = 'btn btn-outline btn-post-comment';
-      postBtn.innerHTML = `<span>문장 저장 & 복사 완료! ✓</span>`;
+      postBtn.innerHTML = `<span>댓글 복사 완료! ✓</span>`;
     }
 
-    // 7. Show clear, reassuring feedback
+    // 6. Show clear, reassuring feedback
     if (feedback) {
       feedback.style.display = 'block';
       feedback.className = 'reflection-feedback success';
@@ -266,7 +255,7 @@ class YouTubeCommentManager {
             <polyline points="20 6 9 17 4 12"/>
           </svg>
           <div>
-            <strong style="color: var(--accent-emerald); font-size: 1.05rem;">🎉 나만의 문장이 단어장에 안전하게 저장되었습니다!</strong>
+            <strong style="color: var(--accent-emerald); font-size: 1.05rem;">🎉 작성하신 댓글 문장이 클립보드에 복사되었습니다!</strong>
             <p style="margin: 6px 0 10px; color: var(--text-muted); line-height: 1.6;">
               ${copied ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>새로 열린 유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong> 후 등록해보세요!' : '새로 열린 유튜브 영상 댓글창에 문장을 등록해보세요!'}
             </p>
@@ -291,7 +280,7 @@ class YouTubeCommentManager {
     }
 
     if (typeof App !== 'undefined' && App.showToast) {
-      App.showToast('📋 문장 복사 & 단어장 저장 완료! 유튜브 댓글창에 붙여넣어 보세요.', 'success');
+      App.showToast('📋 댓글 문장이 복사되었습니다! 유튜브 댓글창에 붙여넣어 보세요.', 'success');
     }
 
     // Trigger celebratory confetti burst

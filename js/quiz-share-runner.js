@@ -23,6 +23,14 @@
       await this.loadQuizData();
       this.render();
       this.bindEvents();
+
+      if (typeof Analytics !== 'undefined') {
+        Analytics.init();
+        Analytics.trackEvent('quiz_view', {
+          lesson_id: this.lessonId,
+          question_num: this.qNum
+        });
+      }
     }
 
     setupThemeToggle() {
@@ -139,7 +147,10 @@
       // Question body
       let bodyHtml = '';
       if (q.type === 'multiple-choice') {
-        const options = q.options || [];
+        if (!q._shuffledOptions) {
+          q._shuffledOptions = this.shuffleArray(q.options || []);
+        }
+        const options = q._shuffledOptions;
         const optionsHtml = options.map((opt, idx) => `
           <button type="button" class="standalone-choice-btn" data-answer="${this.escapeHtml(opt)}">
             <span class="standalone-choice-marker">${String.fromCharCode(65 + idx)}</span>
@@ -376,6 +387,14 @@
       // Play audio on answer
       this.playAudio();
 
+      if (typeof Analytics !== 'undefined') {
+        Analytics.trackEvent('quiz_answer', {
+          lesson_id: this.lessonId,
+          question_num: this.qNum,
+          correct: isCorrect ? 1 : 0
+        });
+      }
+
       // Show Post-Answer Referral Modal after a small delay
       setTimeout(() => {
         this.openReferralModal(isCorrect);
@@ -444,6 +463,14 @@
       if (fullLessonBtn) {
         fullLessonBtn.href = `/lessons/${this.lessonId}/index.html`;
         fullLessonBtn.textContent = '🚀 전체 레슨 바로 학습하기';
+        fullLessonBtn.onclick = () => {
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackEvent('quiz_referral_click', {
+              lesson_id: this.lessonId,
+              question_num: this.qNum
+            });
+          }
+        };
       }
 
       modal.classList.add('active');
@@ -463,6 +490,10 @@
       const title = this.quizData
         ? `[현서네 리얼 영어] "${this.quizData.korean}" 영어 퀴즈`
         : '현서네 리얼 영어 퀴즈';
+
+      if (typeof Analytics !== 'undefined' && typeof Analytics.trackQuizShare === 'function') {
+        Analytics.trackQuizShare(this.lessonId, this.qNum);
+      }
 
       if (navigator.share) {
         navigator.share({
@@ -515,6 +546,15 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+    }
+
+    shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
     }
   }
 

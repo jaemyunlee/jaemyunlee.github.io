@@ -160,7 +160,13 @@ class QuizEngine {
     const beforeText = parts[0] || '';
     const afterText = parts[1] || '';
 
-    const optionsHtml = (q.options || []).map((opt, idx) => `
+    // Randomize option order so the correct answer is not always the first option (Option A)
+    if (!q._shuffledOptions) {
+      q._shuffledOptions = this._shuffleArray(q.options || []);
+    }
+    const displayOptions = q._shuffledOptions;
+
+    const optionsHtml = displayOptions.map((opt, idx) => `
       <button 
         type="button" 
         class="choice-btn" 
@@ -359,7 +365,9 @@ class QuizEngine {
     const origin = window.location.origin || 'https://rhyrhyenglish.site';
     const shareUrl = `${origin}/quiz/${this.lessonId}/q${qNum}.html`;
     const title = `[현서네 리얼 영어] Quiz ${qNum} - "${q.korean}"`;
-    const text = '원어민 실생활 영어 퀴즈에 도전해보세요!';
+    if (typeof Analytics !== 'undefined' && typeof Analytics.trackQuizShare === 'function') {
+      Analytics.trackQuizShare(this.lessonId, qNum);
+    }
 
     if (navigator.share) {
       navigator.share({
@@ -931,6 +939,15 @@ class QuizEngine {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  _shuffleArray(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
   }
 }
 

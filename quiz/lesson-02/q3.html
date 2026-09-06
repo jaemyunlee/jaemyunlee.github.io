@@ -36,6 +36,14 @@
     (function(){try{var t=localStorage.getItem('rhyrhy_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
   </script>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +121,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="../../js/analytics.js"></script>
   <script src="../../js/markdown-quiz-parser.js"></script>
   <script src="../../js/quiz-share-runner.js"></script>
 <script id="quiz-data" type="application/json">{"lessonId":"lesson-02","num":3,"type":"listening","english":"What is your most popular [pastry] today?","korean":"오늘 가장 인기 있는 베이커리 빵은 무엇인가요?","answer":"pastry","options":[],"explanation":"\"Pastry\" refers to baked goods like croissants, scones, or danishes.","audio":"audio/order.wav"}</script>

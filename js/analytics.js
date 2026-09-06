@@ -44,7 +44,7 @@ const Analytics = {
         window.location.hostname === '127.0.0.1' ||
         window.location.protocol === 'file:'
       );
-      this.isDebug = isLocalhost || Boolean(window.DEBUG_ANALYTICS);
+      this.isDebug = isLocalhost || Boolean(window.DEBUG_ANALYTICS) || (typeof window !== 'undefined' && window.location.search && window.location.search.includes('debug'));
 
       // Check support for VisibilityStateEntry performance API
       if (typeof performance !== 'undefined' && typeof performance.getEntriesByType === 'function') {
@@ -54,17 +54,10 @@ const Analytics = {
 
       // Initialize gtag dataLayer
       window.dataLayer = window.dataLayer || [];
-      if (typeof window.gtag !== 'function') {
-        window.gtag = function () {
-          window.dataLayer.push(arguments);
-        };
+      function gtag() {
+        window.dataLayer.push(arguments);
       }
-
-      window.gtag('js', new Date());
-      window.gtag('config', this.measurementId, {
-        send_page_view: true,
-        cookie_flags: 'SameSite=None;Secure'
-      });
+      window.gtag = window.gtag || gtag;
 
       // Inject gtag.js script tag dynamically if not already present
       const scriptSrc = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(this.measurementId)}`;
@@ -76,13 +69,19 @@ const Analytics = {
         document.head.appendChild(script);
       }
 
+      window.gtag('js', new Date());
+      window.gtag('config', this.measurementId, {
+        send_page_view: true,
+        debug_mode: this.isDebug
+      });
+
       // Listen for tab visibility changes to pause/resume foreground dwell tracking
       this._bindVisibilityListeners();
 
       this.initialized = true;
 
       if (this.isDebug) {
-        console.debug(`%c[GA4 📊]%c Initialized with ID: ${this.measurementId} (Debug Mode)`, 'color: #10B981; font-weight: bold;', 'color: inherit;');
+        console.debug(`%c[GA4 📊]%c Initialized with ID: ${this.measurementId} (Debug Mode: ${this.isDebug})`, 'color: #10B981; font-weight: bold;', 'color: inherit;');
       }
     } catch (err) {
       console.warn('[Analytics] Initialization error:', err);
@@ -100,12 +99,28 @@ const Analytics = {
         this.init();
       }
 
+      // Sanitize parameters for GA4 (convert booleans to 1/0, stringify objects, drop undefined)
+      const sanitized = {};
+      for (const [key, val] of Object.entries(params)) {
+        if (typeof val === 'boolean') {
+          sanitized[key] = val ? 1 : 0;
+        } else if (val !== undefined && val !== null) {
+          sanitized[key] = typeof val === 'object' ? JSON.stringify(val) : val;
+        }
+      }
+
+      const payload = {
+        transport_type: 'beacon',
+        ...sanitized
+      };
+
       if (this.isDebug) {
-        console.debug(`%c[GA4 📊 Event: ${eventName}]%c`, 'color: #3B82F6; font-weight: bold;', 'color: inherit;', params);
+        payload.debug_mode = true;
+        console.debug(`%c[GA4 📊 Event: ${eventName}]%c`, 'color: #3B82F6; font-weight: bold;', 'color: inherit;', payload);
       }
 
       if (typeof window.gtag === 'function') {
-        window.gtag('event', eventName, params);
+        window.gtag('event', eventName, payload);
       }
     } catch (err) {
       console.warn('[Analytics] trackEvent error:', err);
@@ -128,10 +143,18 @@ const Analytics = {
       accessCount = Storage.incrementLessonAccessCount(lessonId);
     }
 
+    // 1. Custom lesson_view event
     this.trackEvent('lesson_view', {
       lesson_id: lessonId,
       lesson_title: lessonTitle,
       access_count: accessCount
+    });
+
+    // 2. Standard GA4 view_item event (recognized natively in all GA4 standard reports)
+    this.trackEvent('view_item', {
+      item_id: lessonId,
+      item_name: lessonTitle || lessonId,
+      item_category: 'lesson'
     });
 
     // Start study duration timer for this lesson
@@ -156,11 +179,19 @@ const Analytics = {
     this.activeStepStartTime = Date.now();
     this.stepAccumulatedSeconds = 0;
 
+    // 1. Custom funnel event
     this.trackEvent('lesson_funnel_step', {
       lesson_id: lessonId,
       step_number: step,
       step_name: stepName
     });
+
+    // 2. If Step 1: standard GA4 tutorial_begin
+    if (step === 1) {
+      this.trackEvent('tutorial_begin', {
+        item_id: lessonId
+      });
+    }
   },
 
   /**
@@ -176,12 +207,19 @@ const Analytics = {
     // Also record duration for this step
     const elapsedSeconds = this._flushStudyDuration();
 
+    // 1. Custom completion event
     this.trackEvent('lesson_step_complete', {
       lesson_id: lessonId,
       step_number: step,
       step_name: stepName,
       step_duration_seconds: elapsedSeconds,
       ...metadata
+    });
+
+    // 2. Standard GA4 level_up event
+    this.trackEvent('level_up', {
+      level: step,
+      character: lessonId
     });
   },
 
@@ -198,10 +236,16 @@ const Analytics = {
       totalLessonStudySeconds = Storage.getStudyTime(lessonId);
     }
 
+    // 1. Custom completion event
     this.trackEvent('lesson_complete', {
       lesson_id: lessonId,
       total_study_seconds: totalLessonStudySeconds,
       ...metadata
+    });
+
+    // 2. Standard GA4 tutorial_complete event
+    this.trackEvent('tutorial_complete', {
+      item_id: lessonId
     });
   },
 
@@ -211,9 +255,36 @@ const Analytics = {
    * @param {string} lessonTitle
    */
   trackLessonCardClick(lessonId, lessonTitle = '') {
+    // 1. Custom event
     this.trackEvent('lesson_click', {
       lesson_id: lessonId,
       lesson_title: lessonTitle
+    });
+
+    // 2. Standard GA4 select_content event
+    this.trackEvent('select_content', {
+      content_type: 'lesson',
+      item_id: lessonId
+    });
+  },
+
+  /**
+   * Track quiz sharing action
+   * @param {string} lessonId
+   * @param {number} questionNum
+   */
+  trackQuizShare(lessonId, questionNum = 1) {
+    // 1. Custom event
+    this.trackEvent('quiz_share', {
+      lesson_id: lessonId,
+      question_num: questionNum
+    });
+
+    // 2. Standard GA4 share event
+    this.trackEvent('share', {
+      method: 'web_share',
+      content_type: 'quiz',
+      item_id: `${lessonId}_q${questionNum}`
     });
   },
 
@@ -273,30 +344,34 @@ const Analytics = {
    */
   _bindVisibilityListeners() {
     // 1. Tab visibility changes (switched tabs, minimized browser)
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        // Tab went into background: accumulate active foreground time and pause timer
-        if (this.activeStepStartTime) {
-          const now = Date.now();
-          const chunk = Math.round((now - this.activeStepStartTime) / 1000);
-          if (chunk > 0) {
-            this.stepAccumulatedSeconds += chunk;
+    if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          // Tab went into background: accumulate active foreground time and pause timer
+          if (this.activeStepStartTime) {
+            const now = Date.now();
+            const chunk = Math.round((now - this.activeStepStartTime) / 1000);
+            if (chunk > 0) {
+              this.stepAccumulatedSeconds += chunk;
+            }
+            this.activeStepStartTime = null;
           }
-          this.activeStepStartTime = null;
+        } else {
+          // Tab returned to foreground: restart active timer
+          this.activeStepStartTime = Date.now();
         }
-      } else {
-        // Tab returned to foreground: restart active timer
-        this.activeStepStartTime = Date.now();
-      }
-    });
+      });
+    }
 
     // 2. Page unloading / navigating away: flush any remaining foreground duration
-    const flushOnExit = () => {
-      this._flushStudyDuration();
-    };
+    if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+      const flushOnExit = () => {
+        this._flushStudyDuration();
+      };
 
-    window.addEventListener('pagehide', flushOnExit);
-    window.addEventListener('beforeunload', flushOnExit);
+      window.addEventListener('pagehide', flushOnExit);
+      window.addEventListener('beforeunload', flushOnExit);
+    }
   }
 };
 

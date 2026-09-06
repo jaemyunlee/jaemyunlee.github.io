@@ -36,6 +36,14 @@
     (function(){try{var t=localStorage.getItem('rhyrhy_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
   </script>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +121,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="../../js/analytics.js"></script>
   <script src="../../js/markdown-quiz-parser.js"></script>
   <script src="../../js/quiz-share-runner.js"></script>
 <script id="quiz-data" type="application/json">{"lessonId":"lesson-01","num":13,"type":"fill-in-the-blank","english":"Hopefully Amy does not [mind].","korean":"에이미가 신경 안 썼으면 좋겠네요 (언짢아하지 않았으면 해요).","answer":"mind","options":[],"explanation":"\"mind\"는 \"신경 쓰다, 언짢아하다, 개의치 않다\"의 의미로 쓰입니다. \"does not mind\"는 \"신경 쓰지 않다\"입니다.","audio":""}</script>
