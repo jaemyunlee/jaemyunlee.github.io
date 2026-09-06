@@ -259,7 +259,8 @@ class QuizEngine {
     `;
   }
 
-  _bindEvents(q) {
+  _bindEvents(q, currentNum) {
+    const qNum = typeof currentNum === 'number' ? currentNum : (typeof q._origIndex === 'number' ? q._origIndex + 1 : this.currentIndex + 1);
     const input = this.container.querySelector('#quiz-blank-input');
     const hintBtn = this.container.querySelector('#btn-hint');
     const skipBtn = this.container.querySelector('#btn-skip');
@@ -338,7 +339,7 @@ class QuizEngine {
       shareBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this._shareQuiz(q, currentNum);
+        this._shareQuiz(q, qNum);
       });
     }
 
@@ -353,10 +354,11 @@ class QuizEngine {
     }
   }
 
-  _shareQuiz(q, currentNum) {
+  _shareQuiz(q, questionNum) {
+    const qNum = typeof questionNum === 'number' ? questionNum : (typeof q._origIndex === 'number' ? q._origIndex + 1 : this.currentIndex + 1);
     const origin = window.location.origin || 'https://rhyrhyenglish.site';
-    const shareUrl = `${origin}/quiz/${this.lessonId}/q${currentNum}.html`;
-    const title = `[현서네 리얼 영어] Quiz ${currentNum} - "${q.korean}"`;
+    const shareUrl = `${origin}/quiz/${this.lessonId}/q${qNum}.html`;
+    const title = `[현서네 리얼 영어] Quiz ${qNum} - "${q.korean}"`;
     const text = '원어민 실생활 영어 퀴즈에 도전해보세요!';
 
     if (navigator.share) {
