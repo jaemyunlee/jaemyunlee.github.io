@@ -67,24 +67,12 @@ A mobile-first, static English learning web application designed for YouTube vid
 │       ├── multiple-choice.md
 │       └── listening.md
 └── lessons/
-    ├── lesson-01/               # Morning Routine & Daily Habits
-    │   ├── index.html           # Dedicated URL path for Lesson 1
-    │   ├── metadata.json        # Video ID, title, level, description
-    │   ├── quiz.md              # Templatized Markdown quiz file
-    │   ├── script.json          # Bilingual script with timestamps
-    │   └── audio/               # cats.wav
-    ├── lesson-02/               # Ordering at a Trendy Cafe
-    │   ├── index.html
-    │   ├── metadata.json
-    │   ├── quiz.md
-    │   ├── script.json
-    │   └── audio/               # coffee.wav, order.wav
-    └── lesson-03/               # Airport & Travel Essentials
-        ├── index.html
-        ├── metadata.json
-        ├── quiz.md
-        ├── script.json
-        └── audio/               # travel.wav
+    └── lesson-01/               # Big Bang Concert & Daily English Quizzes
+        ├── index.html           # Dedicated URL path for Lesson 1
+        ├── metadata.json        # Video ID, title, level, description
+        ├── quiz.md              # Templatized Markdown quiz file
+        ├── script.json          # Bilingual script with timestamps
+        └── audio/               # Native speaker audio files
 ```
 
 ---

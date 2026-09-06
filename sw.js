@@ -39,18 +39,7 @@ const STATIC_ASSETS = [
   './lessons/lesson-01/index.html',
   './lessons/lesson-01/metadata.json',
   './lessons/lesson-01/quiz.md',
-  './lessons/lesson-01/script.json',
-  './lessons/lesson-02/index.html',
-  './lessons/lesson-02/metadata.json',
-  './lessons/lesson-02/quiz.md',
-  './lessons/lesson-02/script.json',
-  './lessons/lesson-02/audio/coffee.wav',
-  './lessons/lesson-02/audio/order.wav',
-  './lessons/lesson-03/index.html',
-  './lessons/lesson-03/metadata.json',
-  './lessons/lesson-03/quiz.md',
-  './lessons/lesson-03/script.json',
-  './lessons/lesson-03/audio/travel.wav'
+  './lessons/lesson-01/script.json'
 ];
 
 self.addEventListener('install', (event) => {

@@ -15,28 +15,6 @@ const App = {
       duration: '6:38',
       vocabCount: 21,
       path: 'lessons/lesson-01/'
-    },
-    {
-      id: 'lesson-02',
-      shortTitle: 'Lesson 2',
-      topic: 'Cafe Ordering',
-      icon: '☕',
-      title: 'Ordering at a Trendy Cafe',
-      subtitle: '트렌디한 카페에서 커스텀 음료 주문과 바리스타와의 자연스러운 영어 대화',
-      duration: '4:10',
-      vocabCount: 3,
-      path: 'lessons/lesson-02/'
-    },
-    {
-      id: 'lesson-03',
-      shortTitle: 'Lesson 3',
-      topic: 'Airport & Travel',
-      icon: '✈️',
-      title: 'Airport & Travel Essentials',
-      subtitle: '해외 여행 공항 체크인, 게이트 안내방송, 수속 필수 표현 완벽 정복',
-      duration: '5:15',
-      vocabCount: 3,
-      path: 'lessons/lesson-03/'
     }
   ],
 
