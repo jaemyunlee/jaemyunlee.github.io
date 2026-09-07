@@ -92,3 +92,30 @@ To maximize viral curiosity and organic engagement across social sharing platfor
   1. Add headline mappings in `scripts/generate-og-images.py` and `scripts/build.js` (`CURATED_HEADLINES`).
   2. Run `python3 scripts/generate-og-images.py` to generate the image assets.
   3. Run `npm run build` to pre-render static HTML pages in `dist/quiz/`.
+
+---
+
+## 6. GitHub Issue Workflow: One-by-One, Feature Branches & Pull Requests
+
+To ensure clean revision history, traceability, and robust continuous integration:
+
+### A. Strict One-by-One Issue Resolution
+- **One Issue per Iteration**: Never bundle multiple issues into a single branch or PR. Address issues strictly one at a time.
+
+### B. Dedicated Feature / Bugfix Branches
+- **Branch Naming**: Always branch off the latest `main` with a descriptive name matching the issue type and number:
+  - Bug fixes: `fix/issue-XX-short-description` (e.g., `fix/issue-12-shared-quiz-navbar`)
+  - Enhancements: `feat/issue-XX-short-description` (e.g., `feat/issue-13-saved-audio-player`)
+- **Never Commit Directly to `main`**: All modifications for an issue must reside on its dedicated branch.
+
+### C. Pull Request & Merge Workflow
+1. **Verification Before PR**:
+   - Run unit/E2E tests (`npm test` / `npx playwright test`).
+   - Run production build (`npm run build`).
+2. **Push & Create PR**:
+   - Push branch to remote: `git push origin <branch-name>`.
+   - Create PR using GitHub CLI: `gh pr create --title "..." --body "..."`.
+3. **Merge via PR**:
+   - Merge PR into `main` using `gh pr merge --squash --delete-branch` (or standard PR merge).
+   - Ensure GitHub Pages Actions deployment succeeds.
+4. **Close Issue**: Confirm the associated GitHub issue is closed upon merge.
