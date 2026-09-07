@@ -7,7 +7,7 @@ module.exports = defineConfig({
   workers: 1,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  reporter: 'list',
+  reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: 'http://127.0.0.1:8855',
     trace: 'on-first-retry',
@@ -23,9 +23,9 @@ module.exports = defineConfig({
     },
   ],
   webServer: {
-    command: 'python3 -m http.server 8855 -d dist',
+    command: 'node scripts/build.js && python3 -m http.server 8855 -d dist',
     url: 'http://127.0.0.1:8855',
     reuseExistingServer: true,
-    timeout: 10000,
+    timeout: 15000,
   },
 });
