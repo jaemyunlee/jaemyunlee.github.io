@@ -78,6 +78,21 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     const trackTitle = page.locator('#saved-player-title');
     await expect(trackTitle).toHaveText('I just happened to look.');
 
+    // Verify Step 4 review-player styling parity (Issue #17)
+    await expect(playerBar).toHaveClass(/review-player-bar/);
+    const waveBox = page.locator('#saved-wave-box');
+    await expect(waveBox).toBeVisible();
+    await expect(waveBox.locator('.wave-bar')).toHaveCount(4);
+
+    const currentTime = page.locator('#saved-player-current-time');
+    const totalTime = page.locator('#saved-player-total-time');
+    const progressTrack = page.locator('#saved-player-progress-track');
+    const progressBar = page.locator('#saved-player-progress-bar');
+    await expect(currentTime).toBeVisible();
+    await expect(totalTime).toBeVisible();
+    await expect(progressTrack).toHaveClass(/player-progress-track/);
+    await expect(progressBar).toHaveClass(/player-progress-fill/);
+
     // 1. Play track 1
     const toggleBtn = page.locator('#btn-saved-toggle');
     await toggleBtn.click();
@@ -112,7 +127,15 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     const card3 = page.locator('#saved-card-sent_test_3');
     await expect(card3).toHaveClass(/is-playing/);
 
-    // 5. Pause playback
+    // 5. Test seeking on progress track
+    await progressTrack.click({ position: { x: 50, y: 3 } });
+
+    // 6. Test light mode theme compatibility (Issue #2 & Issue #17)
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    await expect(playerBar).toHaveClass(/is-playing/);
+    await expect(card3).toHaveClass(/is-playing/);
+
+    // 7. Pause playback
     await toggleBtn.click();
     await expect(playerBar).not.toHaveClass(/is-playing/);
     await expect(card3).not.toHaveClass(/is-playing/);

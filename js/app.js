@@ -533,62 +533,73 @@ const App = {
             <button type="button" class="btn-drawer-close" id="btn-close-sentences" aria-label="Close drawer">✕</button>
           </div>
 
-          <!-- Sticky Audio Player Bar for Saved Sentences (Issue #13) -->
-          <div class="saved-player-bar" id="saved-player-bar" style="display: none;">
-            <div class="saved-player-top">
-              <div class="saved-player-info">
+          <!-- Sticky Audio Player Bar for Saved Sentences (Issue #13 & #17: Step 4 Review Style) -->
+          <div class="saved-player-bar review-player-bar" id="saved-player-bar" style="display: none;">
+            <div class="player-bar-top">
+              <!-- Left: Current Track Details & Wave Equalizer -->
+              <div class="player-track-info">
                 <div class="sound-wave-box" id="saved-wave-box" aria-hidden="true">
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                 </div>
-                <div class="saved-player-text">
-                  <div class="saved-player-meta">
-                    <span class="saved-player-badge" id="saved-player-badge">01/01</span>
+                <div class="player-text-details">
+                  <div class="player-track-header-row">
+                    <span class="player-track-badge" id="saved-player-badge">01/01</span>
                     <span class="saved-player-status" id="saved-player-status">READY</span>
                   </div>
-                  <div class="saved-player-title" id="saved-player-title" title="저장된 문장 연속 재생">저장된 문장 연속 재생</div>
+                  <div class="player-track-title" id="saved-player-title" title="저장된 문장 연속 재생">저장된 문장 연속 재생</div>
                 </div>
               </div>
             </div>
 
-            <div class="saved-player-controls">
-              <button type="button" class="btn-player-step" id="btn-saved-prev" title="이전 문장 (|◀)" aria-label="이전 문장">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                  <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                </svg>
-              </button>
+            <!-- Controls Row: Prev, Play/Pause, Next & Side Modes -->
+            <div class="player-controls-row">
+              <div class="player-controls-main">
+                <button type="button" class="btn-player-step" id="btn-saved-prev" title="이전 문장 (|◀)" aria-label="이전 문장">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                  </svg>
+                </button>
 
-              <button type="button" class="btn-player-toggle" id="btn-saved-toggle" title="재생 / 일시정지" aria-label="재생">
-                <svg class="icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-                <svg class="icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display: none;">
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-              </button>
+                <button type="button" class="btn-player-toggle" id="btn-saved-toggle" title="재생 / 일시정지" aria-label="재생">
+                  <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                </button>
 
-              <button type="button" class="btn-player-step" id="btn-saved-next" title="다음 문장 (▶|)" aria-label="다음 문장">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                </svg>
-              </button>
+                <button type="button" class="btn-player-step" id="btn-saved-next" title="다음 문장 (▶|)" aria-label="다음 문장">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                  </svg>
+                </button>
+              </div>
 
-              <button type="button" class="btn-play-all-toggle active" id="btn-saved-playall" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 연속 재생">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                </svg>
-                <span class="playall-text">전체</span>
-              </button>
+              <div class="player-controls-side">
+                <button type="button" class="btn-play-all-toggle active" id="btn-saved-playall" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 연속 재생">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                  </svg>
+                  <span class="playall-text">전체</span>
+                </button>
 
-              <button type="button" class="btn-speed-toggle" id="btn-saved-speed" title="재생 속도 조절" aria-label="재생 속도">
-                1.0x
-              </button>
+                <button type="button" class="btn-speed-toggle" id="btn-saved-speed" title="재생 속도 조절" aria-label="재생 속도">
+                  1.0x
+                </button>
+              </div>
             </div>
 
-            <div class="saved-player-progress-wrap" id="saved-progress-wrap">
-              <div class="saved-player-progress-bar" id="saved-player-progress-bar" style="width: 0%;"></div>
+            <!-- Scrubber & Time Display Row (Step 4 Review Player Style) -->
+            <div class="player-progress-row">
+              <span class="player-time-label" id="saved-player-current-time">0:00</span>
+              <div class="player-progress-track" id="saved-player-progress-track" title="클릭하여 탐색">
+                <div class="player-progress-fill" id="saved-player-progress-bar" style="width: 0%;"></div>
+              </div>
+              <span class="player-time-label" id="saved-player-total-time">0:00</span>
             </div>
           </div>
 
@@ -1077,12 +1088,33 @@ const SavedAudioPlayer = {
     });
   },
 
+  _formatTime(seconds) {
+    if (isNaN(seconds) || seconds < 0) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  },
+
   _bindAudioEvents() {
     this.audio.addEventListener('timeupdate', () => {
-      if (!this.audio.duration || isNaN(this.audio.duration)) return;
-      const pct = Math.min(100, Math.max(0, (this.audio.currentTime / this.audio.duration) * 100));
+      const curLabel = document.getElementById('saved-player-current-time');
+      const totalLabel = document.getElementById('saved-player-total-time');
       const bar = document.getElementById('saved-player-progress-bar');
-      if (bar) bar.style.width = `${pct}%`;
+
+      if (curLabel) curLabel.textContent = this._formatTime(this.audio.currentTime);
+
+      if (this.audio.duration && !isNaN(this.audio.duration)) {
+        if (totalLabel) totalLabel.textContent = this._formatTime(this.audio.duration);
+        const pct = Math.min(100, Math.max(0, (this.audio.currentTime / this.audio.duration) * 100));
+        if (bar) bar.style.width = `${pct}%`;
+      }
+    });
+
+    this.audio.addEventListener('loadedmetadata', () => {
+      const totalLabel = document.getElementById('saved-player-total-time');
+      if (totalLabel && this.audio.duration && !isNaN(this.audio.duration)) {
+        totalLabel.textContent = this._formatTime(this.audio.duration);
+      }
     });
 
     this.audio.addEventListener('play', () => {
@@ -1098,6 +1130,8 @@ const SavedAudioPlayer = {
     });
 
     this.audio.addEventListener('ended', () => {
+      const bar = document.getElementById('saved-player-progress-bar');
+      if (bar) bar.style.width = '100%';
       this._onTrackEnded();
     });
 
@@ -1113,12 +1147,23 @@ const SavedAudioPlayer = {
     const nextBtn = document.getElementById('btn-saved-next');
     const playAllBtn = document.getElementById('btn-saved-playall');
     const speedBtn = document.getElementById('btn-saved-speed');
+    const progressTrack = document.getElementById('saved-player-progress-track');
 
     if (prevBtn) prevBtn.addEventListener('click', () => this.prev());
     if (toggleBtn) toggleBtn.addEventListener('click', () => this.togglePlayPause());
     if (nextBtn) nextBtn.addEventListener('click', () => this.next());
     if (playAllBtn) playAllBtn.addEventListener('click', () => this.togglePlayAll());
     if (speedBtn) speedBtn.addEventListener('click', () => this.cycleSpeed());
+
+    if (progressTrack) {
+      progressTrack.addEventListener('click', (e) => {
+        if (!this.audio || !this.audio.duration || isNaN(this.audio.duration)) return;
+        const rect = progressTrack.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+        this.audio.currentTime = ratio * this.audio.duration;
+      });
+    }
   },
 
   _initMediaSession() {
@@ -1277,7 +1322,11 @@ const SavedAudioPlayer = {
     this._updateTrackInfo();
     this._updateMediaSession(item, base);
 
+    const curLabel = document.getElementById('saved-player-current-time');
+    const totalLabel = document.getElementById('saved-player-total-time');
     const progressBar = document.getElementById('saved-player-progress-bar');
+    if (curLabel) curLabel.textContent = '0:00';
+    if (totalLabel) totalLabel.textContent = '0:00';
     if (progressBar) progressBar.style.width = '0%';
 
     if (audioUrl) {
