@@ -98,4 +98,44 @@ test.describe('Quiz Share Functionality (Issue #11)', () => {
     await expect(toast).toBeVisible();
     await expect(toast).toContainText('복사되었습니다');
   });
+
+  test('Standalone quiz page features unified app navigation bar (Issue #12)', async ({ page }) => {
+    const pageErrors = [];
+    page.on('pageerror', (err) => pageErrors.push(err.message));
+
+    await page.goto('/quiz/lesson-01/q3.html');
+
+    // 1. Check unified main-nav exists
+    const mainNav = page.locator('#main-nav');
+    await expect(mainNav).toBeVisible({ timeout: 5000 });
+
+    // 2. Old quiz-share-header must not exist
+    const oldHeader = page.locator('.quiz-share-header');
+    await expect(oldHeader).toHaveCount(0);
+
+    // 3. Brand element with vector logo exists
+    const brand = mainNav.locator('.nav-brand');
+    await expect(brand).toBeVisible();
+    await expect(brand).toContainText('RhyRhy');
+
+    // 4. Lessons link exists
+    const lessonsLink = page.locator('#btn-nav-lessons');
+    await expect(lessonsLink).toBeVisible();
+    const lessonsHref = await lessonsLink.getAttribute('href');
+    expect(lessonsHref).toMatch(/lessons\.html$/);
+
+    // 5. Saved sentences button exists
+    const savedBtn = page.locator('#btn-open-sentences');
+    await expect(savedBtn).toBeVisible();
+
+    // 6. Theme toggle works
+    const themeBtn = page.locator('#btn-toggle-theme');
+    await expect(themeBtn).toBeVisible();
+    const initialTheme = await page.locator('html').getAttribute('data-theme');
+    await themeBtn.click();
+    const updatedTheme = await page.locator('html').getAttribute('data-theme');
+    expect(updatedTheme).not.toBe(initialTheme);
+
+    expect(pageErrors).toHaveLength(0);
+  });
 });

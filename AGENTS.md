@@ -97,25 +97,32 @@ To maximize viral curiosity and organic engagement across social sharing platfor
 
 ## 6. GitHub Issue Workflow: One-by-One, Feature Branches & Pull Requests
 
+> [!IMPORTANT]
+> **MANDATORY WORKFLOW**: All GitHub issues must be handled strictly **one by one**. Always create a **new branch** for each issue, submit a **Pull Request (PR)**, and merge into `main` via the PR (`gh pr merge`). Direct commits/pushes to `main` or merging locally without a PR are strictly prohibited.
+
 To ensure clean revision history, traceability, and robust continuous integration:
 
 ### A. Strict One-by-One Issue Resolution
-- **One Issue per Iteration**: Never bundle multiple issues into a single branch or PR. Address issues strictly one at a time.
+- **One Issue per Cycle**: Never bundle multiple issues into a single branch or PR. Address issues strictly one at a time.
+- **Sequential Progression**: Only begin the next issue after the current issue's PR has been merged into `main`, deleted, and the issue is confirmed closed.
 
 ### B. Dedicated Feature / Bugfix Branches
-- **Branch Naming**: Always branch off the latest `main` with a descriptive name matching the issue type and number:
+- **Fresh Branch from `main`**: Before starting any issue, pull latest `main` (`git checkout main && git pull origin main`) and create a new branch.
+- **Branch Naming**: Match the issue type and number:
   - Bug fixes: `fix/issue-XX-short-description` (e.g., `fix/issue-12-shared-quiz-navbar`)
   - Enhancements: `feat/issue-XX-short-description` (e.g., `feat/issue-13-saved-audio-player`)
 - **Never Commit Directly to `main`**: All modifications for an issue must reside on its dedicated branch.
 
 ### C. Pull Request & Merge Workflow
 1. **Verification Before PR**:
-   - Run unit/E2E tests (`npm test` / `npx playwright test`).
+   - Run unit/E2E tests (`npm test` or `npx playwright test`).
    - Run production build (`npm run build`).
 2. **Push & Create PR**:
    - Push branch to remote: `git push origin <branch-name>`.
-   - Create PR using GitHub CLI: `gh pr create --title "..." --body "..."`.
+   - Create PR using GitHub CLI: `gh pr create --title "<type>: <title> (#XX)" --body "Closes #XX\n\n### Summary\n..."`.
 3. **Merge via PR**:
-   - Merge PR into `main` using `gh pr merge --squash --delete-branch` (or standard PR merge).
-   - Ensure GitHub Pages Actions deployment succeeds.
-4. **Close Issue**: Confirm the associated GitHub issue is closed upon merge.
+   - Merge PR into `main` using `gh pr merge --squash --delete-branch`.
+   - Never merge locally or push directly to `main`.
+4. **Post-Merge Sync**:
+   - Switch back to `main`: `git checkout main && git pull origin main`.
+   - Confirm the associated GitHub issue is closed.
