@@ -12,65 +12,7 @@
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.quiz-share-header {
-  border-bottom: 1px solid var(--surface-border);
-  background: var(--surface-color);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.quiz-share-nav {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.quiz-share-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 800;
-  font-size: 1.15rem;
-}
-
-.quiz-share-brand-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
-  background: rgba(79, 70, 229, 0.15);
-  color: var(--primary-light);
-  border: 1px solid rgba(79, 70, 229, 0.3);
-}
-
-.quiz-share-nav-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.nav-link-lessons {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: var(--radius-md);
-  transition: all 0.2s;
-}
-
-.nav-link-lessons:hover {
-  color: var(--primary-light);
-  background: rgba(79, 70, 229, 0.08);
-}
+/* Navigation styles are provided by navigation.css (.main-nav) */
 
 /* Quiz Content Area */
 .quiz-share-main {

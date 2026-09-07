@@ -59,9 +59,18 @@ const App = {
   },
 
   _getBasePath() {
-    // If currentLessonId starts with 'lesson-', we are in /lessons/lesson-XX/ -> '../../'
-    // Otherwise at root (index.html, lessons.html) -> './'
-    return (this.currentLessonId && this.currentLessonId.startsWith('lesson-')) ? '../../' : './';
+    if (typeof window !== 'undefined' && window.location) {
+      const pathname = window.location.pathname || '';
+      // If in /quiz/lesson-XX/qYY/ (depth 3)
+      if (pathname.includes('/quiz/') && /\/quiz\/[^/]+\/[^/]+\//.test(pathname)) {
+        return '../../../';
+      }
+      // If in /quiz/lesson-XX/qYY.html or /lessons/lesson-XX/ (depth 2)
+      if (pathname.includes('/quiz/') || pathname.includes('/lessons/')) {
+        return '../../';
+      }
+    }
+    return (this.currentLessonId && (this.currentLessonId.startsWith('lesson-') || this.currentLessonId.startsWith('quiz-'))) ? '../../' : './';
   },
 
   _renderNavigationBar() {

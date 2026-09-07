@@ -58,25 +58,7 @@
 
 <body class="quiz-share-page">
   <!-- Top Navigation Bar -->
-  <header class="quiz-share-header">
-    <div class="quiz-share-nav">
-      <a href="/" class="quiz-share-brand" aria-label="현서네 리얼 영어 홈">
-        <span style="font-size: 1.3rem;">✨</span>
-        <span>현서네 리얼 영어</span>
-        <span class="quiz-share-brand-badge">QUIZ</span>
-      </a>
-
-      <div class="quiz-share-nav-right">
-        <a href="/lessons.html" class="nav-link-lessons">전체 레슨</a>
-        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="테마 변경" title="다크/라이트 모드 전환">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"/>
-            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
+  <header class="main-nav" id="main-nav"></header>
 
   <!-- Main Quiz Container -->
   <main class="quiz-share-main" id="main-content">
@@ -122,6 +104,8 @@
 
   <!-- Scripts -->
   <script src="../../js/analytics.js"></script>
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/app.js"></script>
   <script src="../../js/markdown-quiz-parser.js"></script>
   <script src="../../js/quiz-share-runner.js"></script>
 <script id="quiz-data" type="application/json">{"lessonId":"lesson-01","num":1,"type":"multiple-choice","english":"I just [happened to, planned to, refused to, hesitated to] look.","korean":"그냥 우연히 찾아보게 되었어요.","answer":"happened to","options":["happened to","planned to","refused to","hesitated to"],"explanation":"\"happen to (동사)\"는 \"우연히 ~하다\"라는 뜻의 매우 자연스러운 일상 표현입니다.","audio":""}</script>
