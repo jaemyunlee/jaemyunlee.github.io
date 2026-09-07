@@ -318,6 +318,7 @@ const Storage = {
         id: sentence.id || 'sent_' + Date.now(),
         en: sentence.en,
         kr: sentence.kr,
+        audio: sentence.audio || '',
         timestamp: sentence.timestamp || 0,
         savedAt: new Date().toISOString()
       });

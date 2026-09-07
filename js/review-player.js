@@ -32,6 +32,12 @@ class ReviewPlayer {
     if (!this.container) return;
     this.render();
     this._bindControls();
+
+    window.addEventListener('saved-player-started', () => {
+      if (this.isPlaying) {
+        this.pause();
+      }
+    });
   }
 
   setQuizzes(quizzes, audioFiles = null) {
@@ -428,6 +434,9 @@ class ReviewPlayer {
     if (index < 0 || index >= this.quizzes.length) return;
 
     this.stopAudio();
+    if (typeof App !== 'undefined' && App.savedPlayer && App.savedPlayer.isPlaying) {
+      App.savedPlayer.pause();
+    }
     this.currentIndex = index;
     this.isPlaying = true;
 
@@ -688,9 +697,11 @@ class ReviewPlayer {
       }
       window.dispatchEvent(new CustomEvent('saved-sentences-updated'));
     } else {
+      const audioUrl = this._resolveAudioUrl(index);
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
         kr: kr,
+        audio: audioUrl || '',
         timestamp: 0
       });
 
