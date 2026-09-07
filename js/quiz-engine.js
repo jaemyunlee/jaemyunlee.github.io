@@ -365,28 +365,82 @@ class QuizEngine {
     const origin = window.location.origin || 'https://rhyrhyenglish.site';
     const shareUrl = `${origin}/quiz/${this.lessonId}/q${qNum}.html`;
     const title = `[현서네 리얼 영어] Quiz ${qNum} - "${q.korean}"`;
+    const text = '원어민 실생활 영어 퀴즈에 도전해보세요!';
+
     if (typeof Analytics !== 'undefined' && typeof Analytics.trackQuizShare === 'function') {
       Analytics.trackQuizShare(this.lessonId, qNum);
     }
 
-    if (navigator.share) {
+    const shareBtn = this.container.querySelector('#quiz-share-btn');
+    const setButtonFeedback = () => {
+      if (!shareBtn) return;
+      shareBtn.classList.add('copied');
+      const span = shareBtn.querySelector('span');
+      const origText = span ? span.textContent : '';
+      if (span) span.textContent = '복사됨! ✓';
+      setTimeout(() => {
+        shareBtn.classList.remove('copied');
+        if (span) span.textContent = origText || '공유하기';
+      }, 1600);
+    };
+
+    const copyFallback = () => {
+      let copied = false;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          setButtonFeedback();
+          if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+            App.showToast('📋 퀴즈 공유 링크가 복사되었습니다!', 'success');
+          }
+        }).catch(() => {
+          fallbackTextarea();
+        });
+      } else {
+        fallbackTextarea();
+      }
+
+      function fallbackTextarea() {
+        try {
+          const textArea = document.createElement('textarea');
+          textArea.value = shareUrl;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          textArea.style.top = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          copied = document.execCommand('copy');
+          textArea.remove();
+        } catch (_) {}
+
+        if (copied) {
+          setButtonFeedback();
+          if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+            App.showToast('📋 퀴즈 공유 링크가 복사되었습니다!', 'success');
+          }
+        } else {
+          prompt('퀴즈 공유 링크를 복사하세요:', shareUrl);
+        }
+      }
+    };
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+    if (isMobile && navigator.share) {
       navigator.share({
         title,
         text,
         url: shareUrl
-      }).catch(() => {});
-    } else if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(shareUrl).then(() => {
-        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
-          App.showToast('📋 퀴즈 공유 링크가 복사되었습니다!', 'success');
-        } else {
-          alert('퀴즈 공유 링크가 복사되었습니다:\n' + shareUrl);
+      }).then(() => {
+        setButtonFeedback();
+      }).catch((err) => {
+        // Only skip fallback if the user cancelled the system share sheet
+        if (err && (err.name === 'AbortError' || err.name === 'NotAllowedError')) {
+          return;
         }
-      }).catch(() => {
-        prompt('퀴즈 공유 링크를 복사하세요:', shareUrl);
+        copyFallback();
       });
     } else {
-      prompt('퀴즈 공유 링크를 복사하세요:', shareUrl);
+      copyFallback();
     }
   }
 

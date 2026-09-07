@@ -94,6 +94,12 @@
   box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
 }
 
+.quiz-share-btn.copied {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45) !important;
+  transform: scale(1.04);
+}
+
 .quiz-share-btn svg {
   stroke: #ffffff;
   transition: transform 0.25s ease;

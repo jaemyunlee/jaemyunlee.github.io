@@ -872,10 +872,11 @@ const App = {
               reg.update().catch(() => {});
             }
 
-            // When new SW activates and claims clients, refresh to load fresh code
+            // When an updated SW activates and claims clients, refresh to load fresh code
+            const hadController = Boolean(navigator.serviceWorker.controller);
             let refreshing = false;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
-              if (!refreshing) {
+              if (!refreshing && hadController) {
                 refreshing = true;
                 window.location.reload();
               }
