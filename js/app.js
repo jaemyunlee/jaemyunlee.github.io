@@ -31,6 +31,10 @@ const App = {
     this._initOfflineDetection();
     this._registerServiceWorker();
     this.updateSentenceBadge();
+    if (this.savedPlayer) {
+      this.savedPlayer.init(this);
+      this.savedPlayer.updatePlaylist();
+    }
     this._renderFooter();
 
     // Render lessons cards catalog if container exists on page
@@ -529,12 +533,75 @@ const App = {
             <button type="button" class="btn-drawer-close" id="btn-close-sentences" aria-label="Close drawer">✕</button>
           </div>
 
+          <!-- Sticky Audio Player Bar for Saved Sentences (Issue #13) -->
+          <div class="saved-player-bar" id="saved-player-bar" style="display: none;">
+            <div class="saved-player-top">
+              <div class="saved-player-info">
+                <div class="sound-wave-box" id="saved-wave-box" aria-hidden="true">
+                  <span class="wave-bar"></span>
+                  <span class="wave-bar"></span>
+                  <span class="wave-bar"></span>
+                  <span class="wave-bar"></span>
+                </div>
+                <div class="saved-player-text">
+                  <div class="saved-player-meta">
+                    <span class="saved-player-badge" id="saved-player-badge">01/01</span>
+                    <span class="saved-player-status" id="saved-player-status">READY</span>
+                  </div>
+                  <div class="saved-player-title" id="saved-player-title" title="저장된 문장 연속 재생">저장된 문장 연속 재생</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="saved-player-controls">
+              <button type="button" class="btn-player-step" id="btn-saved-prev" title="이전 문장 (|◀)" aria-label="이전 문장">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="btn-player-toggle" id="btn-saved-toggle" title="재생 / 일시정지" aria-label="재생">
+                <svg class="icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display: none;">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="btn-player-step" id="btn-saved-next" title="다음 문장 (▶|)" aria-label="다음 문장">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="btn-play-all-toggle active" id="btn-saved-playall" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 연속 재생">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                </svg>
+                <span class="playall-text">전체</span>
+              </button>
+
+              <button type="button" class="btn-speed-toggle" id="btn-saved-speed" title="재생 속도 조절" aria-label="재생 속도">
+                1.0x
+              </button>
+            </div>
+
+            <div class="saved-player-progress-wrap" id="saved-progress-wrap">
+              <div class="saved-player-progress-bar" id="saved-player-progress-bar" style="width: 0%;"></div>
+            </div>
+          </div>
+
           <div class="drawer-body" id="saved-sentences-list">
             <!-- Rendered dynamically -->
           </div>
         </div>
       `;
       document.body.appendChild(drawer);
+    }
+
+    if (this.savedPlayer) {
+      this.savedPlayer.init(this);
     }
 
     const openBtn = document.getElementById('btn-open-sentences');
@@ -631,6 +698,7 @@ const App = {
           </div>
         `;
       } else {
+        let globalIndex = 0;
         list.innerHTML = lessonKeys.map(lesId => {
           const items = allSentences[lesId] || [];
           if (items.length === 0) return '';
@@ -649,36 +717,90 @@ const App = {
                 </a>
               </h4>
               <div class="saved-sentences-sublist">
-                ${items.map(item => `
-                  <div class="saved-sentence-card" id="saved-card-${item.id}">
-                    <div class="saved-card-text">
-                      <p class="saved-en">"${item.en}"</p>
-                      <p class="saved-kr">${item.kr}</p>
+                ${items.map(item => {
+                  const trackIdx = globalIndex++;
+                  return `
+                    <div class="saved-sentence-card" id="saved-card-${item.id}" data-id="${item.id}" data-index="${trackIdx}">
+                      <button 
+                        type="button" 
+                        class="btn-card-play" 
+                        data-index="${trackIdx}" 
+                        data-id="${item.id}" 
+                        title="이 문장 듣기"
+                        aria-label="이 문장 듣기"
+                      >
+                        <svg class="icon-card-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg class="icon-card-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
+                          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                      </button>
+                      <div class="saved-card-text">
+                        <p class="saved-en">"${item.en}"</p>
+                        <p class="saved-kr">${item.kr}</p>
+                      </div>
+                      <button 
+                        type="button" 
+                        class="btn-delete-sentence" 
+                        data-lesson="${lesId}" 
+                        data-id="${item.id}" 
+                        data-index="${trackIdx}"
+                        title="Remove sentence"
+                        aria-label="Remove sentence"
+                      >
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="3 6 5 6 21 6"/>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                      </button>
                     </div>
-                    <button 
-                      type="button" 
-                      class="btn-delete-sentence" 
-                      data-lesson="${lesId}" 
-                      data-id="${item.id}"
-                      title="Remove sentence"
-                    >
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"/>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                      </svg>
-                    </button>
-                  </div>
-                `).join('')}
+                  `;
+                }).join('')}
               </div>
             </div>
           `;
         }).join('');
 
+        // Bind card play buttons
+        list.querySelectorAll('.btn-card-play').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const idx = parseInt(btn.dataset.index, 10);
+            if (this.savedPlayer && this.savedPlayer.isPlaying && this.savedPlayer.currentIndex === idx) {
+              this.savedPlayer.pause();
+            } else if (this.savedPlayer) {
+              this.savedPlayer.play(idx);
+            }
+          });
+        });
+
+        // Clicking on card text also triggers playback
+        list.querySelectorAll('.saved-card-text').forEach(textEl => {
+          textEl.addEventListener('click', () => {
+            const card = textEl.closest('.saved-sentence-card');
+            if (!card || !this.savedPlayer) return;
+            const idx = parseInt(card.dataset.index, 10);
+            if (!isNaN(idx)) {
+              if (this.savedPlayer.isPlaying && this.savedPlayer.currentIndex === idx) {
+                this.savedPlayer.pause();
+              } else {
+                this.savedPlayer.play(idx);
+              }
+            }
+          });
+        });
+
         // Bind delete events
         list.querySelectorAll('.btn-delete-sentence').forEach(btn => {
-          btn.addEventListener('click', () => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
             const lId = btn.dataset.lesson;
             const sId = btn.dataset.id;
+            const idx = parseInt(btn.dataset.index, 10);
+            if (this.savedPlayer && this.savedPlayer.currentIndex === idx) {
+              this.savedPlayer.pause();
+            }
             Storage.removeSavedSentence(lId, sId);
             this.updateSentenceBadge();
             window.dispatchEvent(new CustomEvent('saved-sentences-updated'));
@@ -688,6 +810,10 @@ const App = {
       }
     } catch (renderErr) {
       console.error('Error rendering saved sentences drawer:', renderErr);
+    }
+
+    if (this.savedPlayer) {
+      this.savedPlayer.updatePlaylist();
     }
 
     const panel = drawer.querySelector('.drawer-panel');
@@ -899,7 +1025,436 @@ const App = {
   }
 };
 
+// Known audio files for Lesson 01 (maps keyword to WAV audio filename in lessons/lesson-01/audio/)
+const LESSON_01_AUDIO_MAP = [
+  { key: 'just happened to look', file: 'I just happened to look.wav' },
+  { key: 'watch the kids', file: 'obviously Jaemyun cant go with me because someone has to watch the kids..wav' },
+  { key: 'nosebleed', file: 'We got tickets that are pretty much in the back the nosebleed section..wav' },
+  { key: 'decent view', file: 'we have a decent view..wav' },
+  { key: 'weird or obstructed angle', file: 'Its not like its on the side or like at a weird or obstructed angle or anything.wav' },
+  { key: 'compared to what we paid', file: 'Compared to what we paid in Korea for tickets its decent.wav' },
+  { key: 'at least thats what i understood', file: 'At least thats what I understood.wav' },
+  { key: 'started to like it a lot', file: 'I started to like it a lot and listening to it..wav' },
+  { key: 'cast up past your knee', file: 'you were in a cast up past your knee to your thigh like all the way down.wav' },
+  { key: 'getting up to those seats', file: 'there was no way you were getting up to those seats.wav' },
+  { key: 'only going to two cities', file: 'it turned out theyre only going to two citiesOakland and New Jersey.wav' },
+  { key: 'concert and spend the night', file: 'And then go to the concert and spend the night.wav' },
+  { key: 'amy doesnt mind', file: 'Hopefully Amy doesnt mind..wav' },
+  { key: 'seemed like everything was sold', file: 'I dont know when they officially went on sale but it seemed like everything was sold..wav' },
+  { key: 'what year that came out', file: 'I dont know what year that came out.wav' },
+  { key: 'around there', file: 'i think it was around there.wav' },
+  { key: 'grow on me', file: 'The first time I heard it I didnt love it but it did grow on me quite a lot..wav' },
+  { key: 'assignments due sunday', file: 'because I have a lot of assignments due Sunday.wav' },
+  { key: 'when the new song came out', file: 'it was when the new song came out.wav' },
+  { key: 'unlikely that i would get to go', file: 'So I thought it was pretty unlikely that I would get to go and find someone..wav' },
+  { key: 'handicap seats', file: 'but they finally just put us in to one of the handicap seats which ended up having an amazing view.wav' }
+];
+
+const SavedAudioPlayer = {
+  app: null,
+  audio: null,
+  playlist: [],
+  currentIndex: 0,
+  isPlaying: false,
+  isPlayAll: true,
+  playbackRate: 1.0,
+
+  init(app) {
+    this.app = app;
+    if (this._initialized) return;
+    this._initialized = true;
+
+    // Single reusable Audio element for mobile background playback
+    this.audio = new Audio();
+    this.audio.preload = 'auto';
+
+    this._bindAudioEvents();
+    this._bindUiEvents();
+    this._initMediaSession();
+
+    window.addEventListener('saved-sentences-updated', () => {
+      this.updatePlaylist();
+    });
+  },
+
+  _bindAudioEvents() {
+    this.audio.addEventListener('timeupdate', () => {
+      if (!this.audio.duration || isNaN(this.audio.duration)) return;
+      const pct = Math.min(100, Math.max(0, (this.audio.currentTime / this.audio.duration) * 100));
+      const bar = document.getElementById('saved-player-progress-bar');
+      if (bar) bar.style.width = `${pct}%`;
+    });
+
+    this.audio.addEventListener('play', () => {
+      this.isPlaying = true;
+      this._updateVisualState();
+      this._setMediaSessionPlaybackState('playing');
+    });
+
+    this.audio.addEventListener('pause', () => {
+      this.isPlaying = false;
+      this._updateVisualState();
+      this._setMediaSessionPlaybackState('paused');
+    });
+
+    this.audio.addEventListener('ended', () => {
+      this._onTrackEnded();
+    });
+
+    this.audio.addEventListener('error', (e) => {
+      console.warn('Audio error on saved sentence, falling back to TTS:', e);
+      this._fallbackTts();
+    });
+  },
+
+  _bindUiEvents() {
+    const prevBtn = document.getElementById('btn-saved-prev');
+    const toggleBtn = document.getElementById('btn-saved-toggle');
+    const nextBtn = document.getElementById('btn-saved-next');
+    const playAllBtn = document.getElementById('btn-saved-playall');
+    const speedBtn = document.getElementById('btn-saved-speed');
+
+    if (prevBtn) prevBtn.addEventListener('click', () => this.prev());
+    if (toggleBtn) toggleBtn.addEventListener('click', () => this.togglePlayPause());
+    if (nextBtn) nextBtn.addEventListener('click', () => this.next());
+    if (playAllBtn) playAllBtn.addEventListener('click', () => this.togglePlayAll());
+    if (speedBtn) speedBtn.addEventListener('click', () => this.cycleSpeed());
+  },
+
+  _initMediaSession() {
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.setActionHandler('play', () => this.resume());
+        navigator.mediaSession.setActionHandler('pause', () => this.pause());
+        navigator.mediaSession.setActionHandler('previoustrack', () => this.prev());
+        navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
+      } catch (err) {
+        console.warn('MediaSession handler error:', err);
+      }
+    }
+  },
+
+  _setMediaSessionPlaybackState(state) {
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.playbackState = state;
+      } catch (_) {}
+    }
+  },
+
+  updatePlaylist() {
+    if (typeof Storage === 'undefined') return;
+    const all = Storage.getAllSavedSentences();
+    const list = [];
+
+    Object.entries(all).forEach(([lesId, items]) => {
+      if (Array.isArray(items)) {
+        items.forEach(item => {
+          list.push({
+            ...item,
+            lessonId: lesId
+          });
+        });
+      }
+    });
+
+    this.playlist = list;
+
+    const bar = document.getElementById('saved-player-bar');
+    if (!bar) return;
+
+    if (this.playlist.length === 0) {
+      this.pause();
+      bar.style.display = 'none';
+      return;
+    }
+
+    bar.style.display = 'flex';
+
+    if (this.currentIndex >= this.playlist.length) {
+      this.currentIndex = Math.max(0, this.playlist.length - 1);
+    }
+
+    this._updateTrackInfo();
+    this._highlightActiveCard();
+  },
+
+  _updateTrackInfo() {
+    if (this.playlist.length === 0) return;
+    const item = this.playlist[this.currentIndex];
+    if (!item) return;
+
+    const badge = document.getElementById('saved-player-badge');
+    const title = document.getElementById('saved-player-title');
+    const status = document.getElementById('saved-player-status');
+
+    const curNum = (this.currentIndex + 1).toString().padStart(2, '0');
+    const totalNum = this.playlist.length.toString().padStart(2, '0');
+
+    if (badge) badge.textContent = `${curNum}/${totalNum}`;
+    if (title) {
+      title.textContent = item.en;
+      title.title = `${item.en} (${item.kr})`;
+    }
+    if (status) {
+      status.textContent = this.isPlaying ? 'PLAYING' : 'READY';
+      status.className = `saved-player-status ${this.isPlaying ? 'playing' : ''}`;
+    }
+  },
+
+  _updateVisualState() {
+    const bar = document.getElementById('saved-player-bar');
+    const toggleBtn = document.getElementById('btn-saved-toggle');
+    const status = document.getElementById('saved-player-status');
+    const waveBox = document.getElementById('saved-wave-box');
+
+    if (bar) {
+      bar.classList.toggle('is-playing', this.isPlaying);
+    }
+
+    if (toggleBtn) {
+      const playIcon = toggleBtn.querySelector('.icon-play');
+      const pauseIcon = toggleBtn.querySelector('.icon-pause');
+      if (playIcon) playIcon.style.display = this.isPlaying ? 'none' : 'block';
+      if (pauseIcon) pauseIcon.style.display = this.isPlaying ? 'block' : 'none';
+      toggleBtn.setAttribute('title', this.isPlaying ? '일시정지' : '재생');
+      toggleBtn.setAttribute('aria-label', this.isPlaying ? '일시정지' : '재생');
+    }
+
+    if (status) {
+      status.textContent = this.isPlaying ? 'PLAYING' : 'PAUSED';
+      status.className = `saved-player-status ${this.isPlaying ? 'playing' : ''}`;
+    }
+
+    if (waveBox) {
+      waveBox.classList.toggle('playing', this.isPlaying);
+    }
+
+    this._highlightActiveCard();
+  },
+
+  _highlightActiveCard() {
+    const cards = document.querySelectorAll('.saved-sentence-card');
+    const activeItem = this.playlist[this.currentIndex];
+
+    cards.forEach(card => {
+      const cardId = card.getAttribute('data-id') || (card.id ? card.id.replace('saved-card-', '') : '');
+      const isCurrent = activeItem && cardId === activeItem.id;
+
+      card.classList.toggle('is-playing', Boolean(isCurrent && this.isPlaying));
+      card.classList.toggle('is-selected', Boolean(isCurrent));
+
+      const playIcon = card.querySelector('.icon-card-play');
+      const pauseIcon = card.querySelector('.icon-card-pause');
+      if (playIcon && pauseIcon) {
+        if (isCurrent && this.isPlaying) {
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+        } else {
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+        }
+      }
+    });
+  },
+
+  play(index = null) {
+    if (this.playlist.length === 0) return;
+
+    if (index !== null) {
+      this.currentIndex = Math.max(0, Math.min(this.playlist.length - 1, index));
+    }
+
+    const item = this.playlist[this.currentIndex];
+    if (!item) return;
+
+    // Pause any other page players (e.g. Step 4 ReviewPlayer)
+    window.dispatchEvent(new CustomEvent('saved-player-started'));
+
+    const base = this.app ? this.app._getBasePath() : './';
+    const audioUrl = this._resolveAudioUrl(item, base);
+
+    this._updateTrackInfo();
+    this._updateMediaSession(item, base);
+
+    const progressBar = document.getElementById('saved-player-progress-bar');
+    if (progressBar) progressBar.style.width = '0%';
+
+    if (audioUrl) {
+      if (this.audio.src !== audioUrl) {
+        this.audio.src = audioUrl;
+      }
+      this.audio.playbackRate = this.playbackRate;
+      this.audio.currentTime = 0;
+      const p = this.audio.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(err => {
+          console.warn('Audio play prevented or error:', err);
+          this._fallbackTts();
+        });
+      }
+    } else {
+      this._fallbackTts();
+    }
+  },
+
+  _fallbackTts() {
+    const item = this.playlist[this.currentIndex];
+    if (!item) return;
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(item.en);
+      u.lang = 'en-US';
+      u.rate = this.playbackRate * 0.92;
+      u.onstart = () => {
+        this.isPlaying = true;
+        this._updateVisualState();
+        this._setMediaSessionPlaybackState('playing');
+      };
+      u.onend = () => {
+        this._onTrackEnded();
+      };
+      u.onerror = () => {
+        this._onTrackEnded();
+      };
+      window.speechSynthesis.speak(u);
+    } else {
+      setTimeout(() => this._onTrackEnded(), 1800);
+    }
+  },
+
+  _onTrackEnded() {
+    if (this.isPlayAll) {
+      if (this.currentIndex < this.playlist.length - 1) {
+        this.next();
+      } else {
+        // Loop back to start
+        this.currentIndex = 0;
+        this.play(0);
+      }
+    } else {
+      this.isPlaying = false;
+      this._updateVisualState();
+      this._setMediaSessionPlaybackState('paused');
+    }
+  },
+
+  pause() {
+    if (this.audio) {
+      this.audio.pause();
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    this.isPlaying = false;
+    this._updateVisualState();
+    this._setMediaSessionPlaybackState('paused');
+  },
+
+  resume() {
+    if (this.playlist.length === 0) return;
+    if (this.audio && this.audio.src && !this.audio.ended && this.audio.currentTime > 0) {
+      this.audio.playbackRate = this.playbackRate;
+      this.audio.play().catch(() => this.play(this.currentIndex));
+    } else {
+      this.play(this.currentIndex);
+    }
+  },
+
+  togglePlayPause() {
+    if (this.isPlaying) {
+      this.pause();
+    } else {
+      this.resume();
+    }
+  },
+
+  next() {
+    if (this.playlist.length === 0) return;
+    const nextIdx = (this.currentIndex + 1) % this.playlist.length;
+    this.play(nextIdx);
+  },
+
+  prev() {
+    if (this.playlist.length === 0) return;
+    const prevIdx = (this.currentIndex - 1 + this.playlist.length) % this.playlist.length;
+    this.play(prevIdx);
+  },
+
+  cycleSpeed() {
+    const rates = [1.0, 1.25, 0.85];
+    const curIdx = rates.indexOf(this.playbackRate);
+    const nextIdx = (curIdx + 1) % rates.length;
+    this.playbackRate = rates[nextIdx];
+
+    if (this.audio) {
+      this.audio.playbackRate = this.playbackRate;
+    }
+
+    const btn = document.getElementById('btn-saved-speed');
+    if (btn) btn.textContent = `${this.playbackRate.toFixed(2).replace(/\.00$/, '.0')}x`;
+  },
+
+  togglePlayAll() {
+    this.isPlayAll = !this.isPlayAll;
+    const btn = document.getElementById('btn-saved-playall');
+    if (btn) {
+      btn.classList.toggle('active', this.isPlayAll);
+      btn.title = this.isPlayAll ? '전체 연속 재생 켜짐 (클릭 시 끄기)' : '전체 연속 재생 꺼짐 (한 문장만 재생)';
+    }
+  },
+
+  _updateMediaSession(item, base) {
+    if ('mediaSession' in navigator && item) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: item.en,
+          artist: '현서네 리얼 영어 (RhyRhy English)',
+          album: 'My Saved Sentences',
+          artwork: [
+            { src: `${base}assets/icons/icon-192.png`, sizes: '192x192', type: 'image/png' },
+            { src: `${base}assets/icons/icon-512.png`, sizes: '512x512', type: 'image/png' }
+          ]
+        });
+      } catch (err) {
+        console.warn('MediaSession metadata error:', err);
+      }
+    }
+  },
+
+  _resolveAudioUrl(item, base) {
+    if (!item) return null;
+
+    // 1. Explicit item.audio property
+    if (item.audio) {
+      if (item.audio.startsWith('http') || item.audio.startsWith('data:')) {
+        return item.audio;
+      }
+      if (item.audio.startsWith('./') || item.audio.startsWith('/')) {
+        return item.audio;
+      }
+      const clean = item.audio.replace(/^audio\//, '');
+      return `${base}lessons/${item.lessonId || 'lesson-01'}/audio/${clean}`;
+    }
+
+    // 2. Map lookup for Lesson 01
+    const lesId = item.lessonId || 'lesson-01';
+    if (lesId === 'lesson-01') {
+      const cleanText = (item.en || '').toLowerCase().replace(/['".,!?;:\-]/g, '').trim();
+      for (const mapItem of LESSON_01_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-01/audio/${mapItem.file}`);
+        }
+      }
+    }
+
+    return null;
+  }
+};
+
+App.savedPlayer = SavedAudioPlayer;
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = App;
 }
-

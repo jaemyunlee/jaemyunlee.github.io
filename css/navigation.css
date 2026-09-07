@@ -1044,3 +1044,206 @@
     align-items: flex-start;
   }
 }
+
+/* ==========================================================================
+   Saved Sentences Audio Player Bar (Issue #13)
+   ========================================================================== */
+.saved-player-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--surface-border);
+  padding: 12px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+[data-theme="light"] .saved-player-bar {
+  background: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+.saved-player-bar.is-playing {
+  background: linear-gradient(180deg, rgba(79, 70, 229, 0.08) 0%, var(--surface-color) 100%);
+  border-bottom-color: rgba(99, 102, 241, 0.4);
+}
+
+[data-theme="light"] .saved-player-bar.is-playing {
+  background: linear-gradient(180deg, rgba(79, 70, 229, 0.05) 0%, #FFFFFF 100%);
+}
+
+.saved-player-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.saved-player-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.saved-player-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.saved-player-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.saved-player-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary-light);
+  letter-spacing: 0.5px;
+}
+
+.saved-player-status {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.saved-player-status.playing {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="light"] .saved-player-status.playing {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.saved-player-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.saved-player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.saved-player-controls .btn-player-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: var(--surface-color-alt, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--surface-border);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.saved-player-controls .btn-player-step:hover {
+  background: var(--surface-border-hover);
+  transform: scale(1.05);
+}
+
+.saved-player-controls .btn-player-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.saved-player-controls .btn-player-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.saved-player-progress-wrap {
+  width: 100%;
+  height: 3px;
+  background: var(--surface-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.saved-player-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-emerald), var(--primary-light));
+  border-radius: var(--radius-full);
+  transition: width 0.15s linear;
+}
+
+/* Card Play Button */
+.btn-card-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: var(--radius-full);
+  background: var(--surface-color-alt, rgba(255, 255, 255, 0.06));
+  border: 1px solid var(--surface-border);
+  color: var(--primary-light);
+  cursor: pointer;
+  margin-top: 2px;
+  transition: all 0.2s ease;
+}
+
+.btn-card-play:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+  transform: scale(1.06);
+}
+
+.saved-sentence-card.is-playing {
+  border-color: var(--accent-emerald) !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="light"] .saved-sentence-card.is-playing {
+  background: rgba(16, 185, 129, 0.06) !important;
+  border-color: #059669 !important;
+}
+
+.saved-sentence-card.is-playing .btn-card-play {
+  background: var(--accent-emerald);
+  color: #FFFFFF;
+  border-color: var(--accent-emerald);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
