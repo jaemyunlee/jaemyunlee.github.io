@@ -62,6 +62,53 @@ const App = {
     if (staleModal) staleModal.remove();
   },
 
+  _escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  },
+
+  formatHighlightedSentence(english, expression) {
+    if (!english) return '';
+    let expr = (expression || '').trim();
+
+    // If expression not explicitly stored, detect known lesson expressions
+    if (!expr) {
+      const known = [
+        'what year that came out', 'new song came out', 'spend the night',
+        'went on sale', 'grow on me', 'turned out', 'happened to',
+        'in a cast', 'started to', 'ended up', 'obstructed',
+        'Obviously', 'nosebleed', 'At least', 'unlikely',
+        'no way', 'decent', 'around', 'mind', 'due'
+      ];
+      // Sort by length descending so longer phrases match first
+      known.sort((a, b) => b.length - a.length);
+      const found = known.find(k => english.toLowerCase().includes(k.toLowerCase()));
+      if (found) {
+        const match = english.match(new RegExp(found.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+        expr = match ? match[0] : found;
+      }
+    }
+
+    if (/\[[^\]]+\]/.test(english)) {
+      return this._escapeHtml(english).replace(
+        /\[[^\]]+\]/,
+        `<mark class="quiz-vocab-highlight">${this._escapeHtml(expr)}</mark>`
+      );
+    }
+
+    if (expr) {
+      const escaped = expr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${escaped})`, 'gi');
+      return this._escapeHtml(english).replace(regex, `<mark class="quiz-vocab-highlight">$1</mark>`);
+    }
+
+    return this._escapeHtml(english);
+  },
+
   _getBasePath() {
     if (typeof window !== 'undefined' && window.location) {
       const pathname = window.location.pathname || '';
@@ -740,16 +787,16 @@ const App = {
                         title="이 문장 듣기"
                         aria-label="이 문장 듣기"
                       >
-                        <svg class="icon-card-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <svg class="icon-card-play" viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
-                        <svg class="icon-card-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
+                        <svg class="icon-card-pause" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display: none;">
                           <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                         </svg>
                       </button>
                       <div class="saved-card-text">
-                        <p class="saved-en">"${item.en}"</p>
-                        <p class="saved-kr">${item.kr}</p>
+                        <p class="saved-en">${this.formatHighlightedSentence(item.en, item.expression)}</p>
+                        <p class="saved-kr">${this._escapeHtml(item.kr)}</p>
                       </div>
                       <button 
                         type="button" 

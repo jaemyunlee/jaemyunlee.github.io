@@ -701,6 +701,8 @@ class ReviewPlayer {
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
         kr: kr,
+        expression: quiz.answer || '',
+        rawEn: quiz.english || '',
         audio: audioUrl || '',
         timestamp: 0
       });

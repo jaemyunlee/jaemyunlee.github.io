@@ -93,6 +93,21 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await expect(progressTrack).toHaveClass(/player-progress-track/);
     await expect(progressBar).toHaveClass(/player-progress-fill/);
 
+    // Verify expression highlights (Step 4 Parity)
+    const card1Highlight = page.locator('#saved-card-sent_test_1 .quiz-vocab-highlight');
+    await expect(card1Highlight).toBeVisible();
+    await expect(card1Highlight).toHaveText('happened to');
+
+    const card2Highlight = page.locator('#saved-card-sent_test_2 .quiz-vocab-highlight');
+    await expect(card2Highlight).toBeVisible();
+    await expect(card2Highlight).toHaveText('decent');
+
+    // Verify compact card play button (24px to give more space to sentences)
+    const cardPlayBtn = page.locator('#saved-card-sent_test_1 .btn-card-play');
+    const btnBox = await cardPlayBtn.boundingBox();
+    expect(btnBox.width).toBeLessThanOrEqual(28);
+    expect(btnBox.height).toBeLessThanOrEqual(28);
+
     // 1. Play track 1
     const toggleBtn = page.locator('#btn-saved-toggle');
     await toggleBtn.click();

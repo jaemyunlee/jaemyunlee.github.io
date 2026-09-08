@@ -593,40 +593,76 @@
 }
 
 .saved-sentence-card {
+  position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   background-color: var(--bg-color);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
-  padding: 12px 14px;
+  padding: 10px 12px;
   margin-bottom: 8px;
-  transition: border-color 0.2s;
+  overflow: hidden;
+  transition: all 0.22s ease;
 }
 
 .saved-sentence-card:hover {
   border-color: var(--surface-border-hover);
 }
 
+.saved-card-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
 .saved-card-text .saved-en {
   color: var(--text-main);
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-weight: 600;
+  line-height: 1.55;
   margin-bottom: 4px;
 }
 
 .saved-card-text .saved-kr {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+/* Vocabulary Expression Highlight (Step 4 Review Parity) */
+.quiz-vocab-highlight {
+  background: rgba(99, 102, 241, 0.28);
+  color: #A5B4FC;
+  border: 1px solid rgba(99, 102, 241, 0.55);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-weight: 800;
+  display: inline-block;
+  line-height: 1.3;
+}
+
+[data-theme="light"] .quiz-vocab-highlight {
+  color: #4338CA;
+  background: rgba(99, 102, 241, 0.14);
+  border-color: rgba(99, 102, 241, 0.35);
 }
 
 .btn-delete-sentence {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  flex-shrink: 0;
   background: transparent;
   border: none;
   color: var(--text-subtle);
   cursor: pointer;
-  padding: 4px;
+  padding: 2px;
+  margin-top: 3px;
   border-radius: var(--radius-sm);
   transition: all 0.2s;
 }
@@ -1387,20 +1423,22 @@
   box-shadow: 0 0 10px var(--primary-glow);
 }
 
-/* Card Play Button */
+/* Card Play Button (Compact to give maximum space for sentences) */
 .btn-card-play {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
   border-radius: var(--radius-full);
   background: var(--surface-color-alt, rgba(255, 255, 255, 0.06));
   border: 1px solid var(--surface-border);
   color: var(--primary-light);
   cursor: pointer;
-  margin-top: 2px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  padding: 0;
   transition: all 0.2s ease;
 }
 
@@ -1408,5 +1446,5 @@
   background: var(--primary);
   color: #FFFFFF;
   border-color: var(--primary);
-  transform: scale(1.06);
+  transform: scale(1.1);
 }
