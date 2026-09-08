@@ -156,32 +156,4 @@ test.describe('Subtitle Display Controls & Light Mode Contrast (Issue #43)', () 
     const activeBorderColor = await activeBtn.evaluate(el => window.getComputedStyle(el).borderColor);
     expect(activeBorderColor).toBe('rgb(129, 140, 248)');
   });
-
-  test('Visual verification: capture screenshots of subtitle controls across modes', async ({ page }) => {
-    const artifactDir = '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792';
-    await page.goto('/lessons/lesson-01/index.html');
-
-    // 1. Light mode - 'both' active
-    const themeBtn = page.locator('#btn-toggle-theme');
-    const curTheme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
-    if (curTheme !== 'light') {
-      await themeBtn.click();
-    }
-    await page.locator('.step-tab-btn[data-step="3"]').click();
-    await page.waitForTimeout(400);
-
-    const scriptCol = page.locator('#script-panel-main');
-    await scriptCol.screenshot({ path: `${artifactDir}/subtitles_light_both.png` });
-
-    // 2. Light mode - 'off' active
-    await page.locator('button[data-subtitle-mode="off"]').click();
-    await page.waitForTimeout(300);
-    await scriptCol.screenshot({ path: `${artifactDir}/subtitles_light_off.png` });
-
-    // 3. Dark mode - 'both' active
-    await themeBtn.click();
-    await page.locator('button[data-subtitle-mode="both"]').click();
-    await page.waitForTimeout(300);
-    await scriptCol.screenshot({ path: `${artifactDir}/subtitles_dark_both.png` });
-  });
 });
