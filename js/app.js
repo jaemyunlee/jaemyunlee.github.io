@@ -1295,6 +1295,7 @@ const SavedAudioPlayer = {
   isPlaying: false,
   isPlayAll: true,
   playbackRate: 1.0,
+  _isFallbackActive: false,
 
   init(app) {
     this.app = app;
@@ -1400,7 +1401,9 @@ const SavedAudioPlayer = {
 
     this.audio.addEventListener('error', (e) => {
       console.warn('Audio error on saved sentence, falling back to TTS:', e);
-      this._fallbackTts();
+      if (this.isPlaying && !this._isFallbackActive) {
+        this._fallbackTts();
+      }
     });
   },
 
@@ -1535,8 +1538,13 @@ const SavedAudioPlayer = {
     }
 
     if (status) {
-      status.textContent = this.isPlaying ? 'PLAYING' : 'PAUSED';
-      status.className = `saved-player-status ${this.isPlaying ? 'playing' : ''}`;
+      if (this._isFallbackActive && this.isPlaying) {
+        status.textContent = 'TTS';
+        status.className = 'saved-player-status playing fallback-tts';
+      } else {
+        status.textContent = this.isPlaying ? 'PLAYING' : 'PAUSED';
+        status.className = `saved-player-status ${this.isPlaying ? 'playing' : ''}`;
+      }
     }
 
     if (waveBox) {
@@ -1625,6 +1633,14 @@ const SavedAudioPlayer = {
     window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'saved-player' } }));
     window.dispatchEvent(new CustomEvent('saved-player-started'));
 
+    // Cancel any active speech synthesis (TTS) before playing new track
+    if ('speechSynthesis' in window) {
+      try {
+        window.speechSynthesis.cancel();
+      } catch (_) {}
+    }
+    this._isFallbackActive = false;
+
     const base = this.app ? this.app._getBasePath() : './';
     const audioUrl = this._resolveAudioUrl(item, base);
 
@@ -1650,7 +1666,10 @@ const SavedAudioPlayer = {
       if (p && typeof p.catch === 'function') {
         p.catch(err => {
           console.warn('Audio play prevented or error:', err);
-          this._fallbackTts();
+          if (!this.isPlaying) return;
+          if (!this._isFallbackActive) {
+            this._fallbackTts();
+          }
         });
       }
 
@@ -1670,29 +1689,58 @@ const SavedAudioPlayer = {
   },
 
   _fallbackTts() {
+    if (this._isFallbackActive) return;
+    this._isFallbackActive = true;
+
+    if (this.audio) {
+      try {
+        this.audio.pause();
+      } catch (_) {}
+    }
+
     const item = this.playlist[this.currentIndex];
-    if (!item) return;
+    if (!item) {
+      this._isFallbackActive = false;
+      return;
+    }
+
+    const status = document.getElementById('saved-player-status');
+    if (status) {
+      status.textContent = 'TTS';
+      status.className = 'saved-player-status playing fallback-tts';
+    }
 
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+      try {
+        window.speechSynthesis.cancel();
+      } catch (_) {}
       const u = new SpeechSynthesisUtterance(item.en);
       u.lang = 'en-US';
       u.rate = this.playbackRate * 0.92;
       u.onstart = () => {
         this.isPlaying = true;
         this._updateVisualState(true);
+        if (status) {
+          status.textContent = 'TTS';
+          status.className = 'saved-player-status playing fallback-tts';
+        }
         this._setMediaSessionPlaybackState('playing');
       };
       u.onend = () => {
+        this._isFallbackActive = false;
         this._onTrackEnded();
       };
       u.onerror = (err) => {
         console.warn('TTS speech synthesis error:', err);
+        this._isFallbackActive = false;
         setTimeout(() => this._onTrackEnded(), 1200);
       };
       window.speechSynthesis.speak(u);
     } else {
-      setTimeout(() => this._onTrackEnded(), 1800);
+      setTimeout(() => {
+        this._isFallbackActive = false;
+        this._onTrackEnded();
+      }, 1800);
     }
   },
 
@@ -1713,11 +1761,14 @@ const SavedAudioPlayer = {
   },
 
   pause() {
+    this._isFallbackActive = false;
     if (this.audio) {
       this.audio.pause();
     }
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+      try {
+        window.speechSynthesis.cancel();
+      } catch (_) {}
     }
     this.isPlaying = false;
     this._updateVisualState(false);
@@ -1804,14 +1855,45 @@ const SavedAudioPlayer = {
 
     // 1. Explicit item.audio property
     if (item.audio) {
-      if (item.audio.startsWith('http') || item.audio.startsWith('data:')) {
-        return item.audio;
+      const rawAudio = String(item.audio).trim();
+      if (rawAudio.startsWith('http://') || rawAudio.startsWith('https://') || rawAudio.startsWith('data:') || rawAudio.startsWith('blob:')) {
+        return rawAudio;
       }
-      if (item.audio.startsWith('./') || item.audio.startsWith('/')) {
-        return item.audio;
+
+      // Decode URI components in case it was stored encoded (e.g. %20)
+      let clean = '';
+      try {
+        clean = decodeURIComponent(rawAudio);
+      } catch (_) {
+        clean = rawAudio;
       }
-      const clean = item.audio.replace(/^audio\//, '');
-      return encodeURI(`${base}lessons/${item.lessonId || 'lesson-01'}/audio/${clean}`);
+
+      // Determine lessonId: from item.lessonId, or parse from path if present
+      let lesId = item.lessonId;
+      const lessonMatch = clean.match(/lessons\/([^/]+)\/audio\//);
+      if (lessonMatch) {
+        lesId = lessonMatch[1];
+      }
+      if (!lesId) {
+        lesId = 'lesson-01';
+      }
+
+      // Extract filename only
+      if (clean.includes('/audio/')) {
+        clean = clean.substring(clean.lastIndexOf('/audio/') + 7);
+      } else if (clean.startsWith('audio/')) {
+        clean = clean.substring(6);
+      } else if (clean.startsWith('./audio/')) {
+        clean = clean.substring(8);
+      } else {
+        clean = clean.replace(/^(\.\/|\/)+/, '');
+      }
+
+      clean = clean.split('?')[0].split('#')[0].trim();
+
+      if (clean) {
+        return encodeURI(`${base}lessons/${lesId}/audio/${clean}`);
+      }
     }
 
     // 2. Map lookup for Lesson 01 and Lesson 02

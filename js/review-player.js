@@ -744,13 +744,32 @@ class ReviewPlayer {
       }
       window.dispatchEvent(new CustomEvent('saved-sentences-updated'));
     } else {
-      const audioUrl = this._resolveAudioUrl(index);
+      // Save clean audio filename without locking to page depth (e.g. './audio/')
+      let cleanAudio = '';
+      if (this.audioFiles && this.audioFiles[index]) {
+        cleanAudio = this.audioFiles[index];
+      } else if (quiz.audio) {
+        cleanAudio = quiz.audio;
+      } else {
+        cleanAudio = this._resolveAudioUrl(index) || '';
+      }
+      if (cleanAudio.includes('/audio/')) {
+        cleanAudio = cleanAudio.substring(cleanAudio.lastIndexOf('/audio/') + 7);
+      } else if (cleanAudio.startsWith('./audio/')) {
+        cleanAudio = cleanAudio.substring(8);
+      } else if (cleanAudio.startsWith('audio/')) {
+        cleanAudio = cleanAudio.substring(6);
+      }
+      try {
+        cleanAudio = decodeURIComponent(cleanAudio).trim();
+      } catch (_) {}
+
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
         kr: kr,
         expression: quiz.answer || '',
         rawEn: quiz.english || '',
-        audio: audioUrl || '',
+        audio: cleanAudio,
         timestamp: 0
       });
 
