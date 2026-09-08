@@ -116,7 +116,7 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     const lesson02Card = page.locator('#card-lesson-02');
     await expect(lesson02Card).toBeVisible({ timeout: 5000 });
     await expect(lesson02Card).toContainText('웨인 삼촌의 산골 오두막 이야기');
-    await expect(lesson02Card).toContainText('5:43');
+    await expect(lesson02Card).toContainText('5:48');
     await expect(lesson02Card).toContainText('19 퀴즈');
 
     // Check home page latest lessons

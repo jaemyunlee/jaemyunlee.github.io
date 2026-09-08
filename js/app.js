@@ -135,7 +135,7 @@ const App = {
       icon: '🏕️',
       title: '웨인 삼촌의 산골 오두막 이야기',
       subtitle: '1963년부터 이어진 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 표현',
-      duration: '5:43',
+      duration: '5:48',
       vocabCount: 19,
       path: 'lessons/lesson-02/'
     }
