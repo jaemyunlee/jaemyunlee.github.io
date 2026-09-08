@@ -576,11 +576,11 @@ class VideoScriptPlayer {
         <h4>모든 스크립트 학습을 완료하셨습니다!</h4>
         <p>오늘 배운 핵심 어휘와 표현을 활용해 직접 나만의 문장을 영작해볼까요?</p>
       </div>
-      <button type="button" class="btn btn-primary btn-goto-step3" id="btn-banner-goto-step3">
-        <span>✍️ Step 3: 문장 작성 & 댓글 남기기 ▶</span>
+      <button type="button" class="btn btn-primary btn-goto-step4" id="btn-banner-goto-step4">
+        <span>✍️ Step 4: 영작하고 댓글 남기기 ▶</span>
       </button>
     `;
-    const bannerBtn = completionBanner.querySelector('#btn-banner-goto-step3');
+    const bannerBtn = completionBanner.querySelector('#btn-banner-goto-step4');
     if (bannerBtn) {
       bannerBtn.addEventListener('click', () => {
         this._triggerScriptComplete();

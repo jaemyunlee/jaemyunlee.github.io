@@ -54,20 +54,20 @@
       </button>
       <button type="button" class="step-tab-btn" data-step="2">
         <span class="step-num">2</span>
-        <span class="step-label">영상 & 대본</span>
+        <span class="step-label">핵심 문장</span>
       </button>
       <button type="button" class="step-tab-btn" data-step="3">
         <span class="step-num">3</span>
-        <span class="step-label">영작 & 댓글</span>
+        <span class="step-label">전체 영상</span>
       </button>
       <button type="button" class="step-tab-btn" data-step="4">
         <span class="step-num">4</span>
-        <span class="step-label">문장 총복습 🎧</span>
+        <span class="step-label">영작하기</span>
       </button>
     </nav>
 
-    <!-- Pre-Video Quizzes Section -->
-    <section class="quiz-section-wrapper" id="quiz-section" aria-label="Pre-Video Quizzes">
+    <!-- Step 1: Pre-Video Quizzes Section -->
+    <section class="quiz-section-wrapper" id="quiz-section" aria-label="Step 1: Quizzes">
       <div id="quiz-container">
         <!-- Rendered dynamically by QuizEngine -->
         <div style="text-align: center; padding: 40px;">
@@ -76,8 +76,14 @@
       </div>
     </section>
 
-    <!-- Video & Interactive Script Section (Step 2) -->
-    <section class="video-section" id="video-section" aria-label="Video and Interactive Script"
+    <!-- Step 2: Key Sentences & Audio Player Section -->
+    <section class="review-section-wrapper" id="review-section" aria-label="Step 2: Key Sentences and Audio Player"
+      style="display: none;">
+      <div id="review-player-container"></div>
+    </section>
+
+    <!-- Step 3: Video & Interactive Script Section -->
+    <section class="video-section" id="video-section" aria-label="Step 3: Video and Interactive Script"
       style="display: none; margin-top: 24px;">
 
       <div class="video-script-grid" id="video-script-grid">
@@ -137,15 +143,9 @@
       </div>
     </section>
 
-    <!-- Post-Video Reflection & YouTube Comment Nudge (Step 3) -->
-    <section class="reflection-wrapper" id="reflection-section" style="display: none;">
+    <!-- Step 4: Writing & Commenting Section -->
+    <section class="reflection-wrapper" id="reflection-section" aria-label="Step 4: Writing and Commenting" style="display: none;">
       <div id="reflection-container"></div>
-    </section>
-
-    <!-- Step 4: Final Review & Audio Player Section -->
-    <section class="review-section-wrapper" id="review-section" aria-label="Step 4: Review and Audio Player"
-      style="display: none;">
-      <div id="review-player-container"></div>
     </section>
   </main>
 
@@ -261,23 +261,24 @@
           Analytics.trackStepView(LESSON_ID, step);
         }
 
-        if (step3Modal) step3Modal.style.display = 'none';
+        const nudgeModal = document.getElementById('step4-nudge-modal') || document.getElementById('step3-nudge-modal');
+        if (nudgeModal) nudgeModal.style.display = 'none';
 
-        // Pause video player if leaving step 2
-        if (step !== 2 && videoPlayer) {
-          videoPlayer.pause();
+        // Pause review audio if leaving step 2
+        if (step !== 2 && reviewPlayer) {
+          reviewPlayer.pause();
         }
 
-        // Pause review audio if leaving step 4
-        if (step !== 4 && reviewPlayer) {
-          reviewPlayer.pause();
+        // Pause video player if leaving step 3
+        if (step !== 3 && videoPlayer) {
+          videoPlayer.pause();
         }
 
         // Manage Section Displays
         if (quizSection) quizSection.style.display = (step === 1) ? 'block' : 'none';
-        if (videoSection) videoSection.style.display = (step === 2) ? 'block' : 'none';
-        if (reflectionSection) reflectionSection.style.display = (step === 3) ? 'block' : 'none';
-        if (reviewSection) reviewSection.style.display = (step === 4) ? 'block' : 'none';
+        if (reviewSection) reviewSection.style.display = (step === 2) ? 'block' : 'none';
+        if (videoSection) videoSection.style.display = (step === 3) ? 'block' : 'none';
+        if (reflectionSection) reflectionSection.style.display = (step === 4) ? 'block' : 'none';
 
         // Update Step Tab Buttons
         const tabBtns = document.querySelectorAll('.step-tab-btn');
@@ -302,45 +303,18 @@
         if (statusBadge) {
           statusBadge.className = 'badge badge-emerald';
           if (step === 1) {
-            statusBadge.textContent = 'Step 1: Quiz';
+            statusBadge.textContent = 'Step 1: 퀴즈';
           } else if (step === 2) {
-            statusBadge.textContent = 'Step 2: Listening';
+            statusBadge.textContent = 'Step 2: 핵심 문장';
           } else if (step === 3) {
-            statusBadge.textContent = 'Step 3: Writing';
+            statusBadge.textContent = 'Step 3: 전체 영상';
           } else if (step === 4) {
-            statusBadge.textContent = 'Step 4: Review';
+            statusBadge.textContent = 'Step 4: 영작하기';
           }
         }
 
-        // Lazy-init Video Player on Step 2
-        if (step === 2) {
-          if (!videoPlayer) {
-            videoPlayer = new VideoScriptPlayer({
-              lessonId: LESSON_ID,
-              youtubeId: metadata.youtubeId || 'N5IqYrNUqmQ',
-              scriptData: scriptData,
-              onVideoEnd: () => {
-                if (typeof Analytics !== 'undefined') {
-                  Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'video_end' });
-                }
-                showStep3Nudge();
-              },
-              onScriptComplete: () => {
-                if (typeof Analytics !== 'undefined') {
-                  Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'script_complete' });
-                }
-                showStep3Nudge();
-              }
-            });
-            videoPlayer.init();
-            window.videoPlayer = videoPlayer;
-          } else {
-            videoPlayer.onStepShow();
-          }
-        }
-
-        // Lazy-init Review Player on Step 4
-        if (step === 4 && loadedQuizzes.length > 0) {
+        // Lazy-init Review Player on Step 2 (핵심 문장)
+        if (step === 2 && loadedQuizzes.length > 0) {
           if (!reviewPlayer) {
             reviewPlayer = new ReviewPlayer({
               container: '#review-player-container',
@@ -350,10 +324,40 @@
               audioFiles: LESSON_01_AUDIO_FILES,
               speakerName: metadata?.speaker?.name || 'Kelly',
               speakerAvatar: metadata?.speaker?.avatar || '../../assets/img/avatars/kelly.jpg',
-              celebrationManager: celebrationManager
+              celebrationManager: celebrationManager,
+              onComplete: () => {
+                showStep(3, true);
+              }
             });
             reviewPlayer.init();
             window.reviewPlayer = reviewPlayer;
+          }
+        }
+
+        // Lazy-init Video Player on Step 3 (전체 영상)
+        if (step === 3) {
+          if (!videoPlayer) {
+            videoPlayer = new VideoScriptPlayer({
+              lessonId: LESSON_ID,
+              youtubeId: metadata.youtubeId || 'N5IqYrNUqmQ',
+              scriptData: scriptData,
+              onVideoEnd: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'video_end' });
+                }
+                showStep4Nudge();
+              },
+              onScriptComplete: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'script_complete' });
+                }
+                showStep4Nudge();
+              }
+            });
+            videoPlayer.init();
+            window.videoPlayer = videoPlayer;
+          } else {
+            videoPlayer.onStepShow();
           }
         }
 
@@ -362,9 +366,9 @@
           try {
             let targetSection = null;
             if (step === 1) targetSection = quizSection;
-            else if (step === 2) targetSection = videoSection;
-            else if (step === 3) targetSection = document.getElementById('reflection-card') || reflectionSection;
-            else if (step === 4) targetSection = reviewSection;
+            else if (step === 2) targetSection = reviewSection;
+            else if (step === 3) targetSection = videoSection;
+            else if (step === 4) targetSection = document.getElementById('reflection-card') || reflectionSection;
 
             if (targetSection) {
               const navHeight = 70;
@@ -434,46 +438,49 @@
         }
       });
 
-      // Global click delegation for '영상 & 대본 보러가기' button
+      // Global click delegation for Step 2 '핵심 문장 보러가기' button
       document.addEventListener('click', (e) => {
-        if (e.target.closest('#btn-goto-video')) {
+        if (e.target.closest('#btn-goto-video') || e.target.closest('#btn-goto-sentences')) {
           e.preventDefault();
           showStep(2, true);
+        } else if (e.target.closest('#btn-goto-step3')) {
+          e.preventDefault();
+          showStep(3, true);
         }
       });
 
-      // Step 3 Nudge Popup Modal
-      const step3Modal = document.getElementById('step3-nudge-modal');
-      const btnModalGotoStep3 = document.getElementById('btn-modal-goto-step3');
+      // Step 4 Nudge Popup Modal
+      const step4Modal = document.getElementById('step4-nudge-modal') || document.getElementById('step3-nudge-modal');
+      const btnModalGotoStep4 = document.getElementById('btn-modal-goto-step4') || document.getElementById('btn-modal-goto-step3');
       const btnModalCloseNudge = document.getElementById('btn-modal-close-nudge');
 
-      const showStep3Nudge = () => {
-        if (step3Modal) {
-          step3Modal.style.display = 'flex';
+      const showStep4Nudge = () => {
+        if (step4Modal) {
+          step4Modal.style.display = 'flex';
         }
       };
 
-      if (btnModalGotoStep3) {
-        btnModalGotoStep3.addEventListener('click', () => {
+      if (btnModalGotoStep4) {
+        btnModalGotoStep4.addEventListener('click', () => {
           if (typeof Analytics !== 'undefined') {
-            Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'modal_button' });
+            Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'modal_button' });
           }
-          showStep(3, true);
+          showStep(4, true);
         });
       }
       if (btnModalCloseNudge) {
         btnModalCloseNudge.addEventListener('click', () => {
-          if (step3Modal) step3Modal.style.display = 'none';
+          if (step4Modal) step4Modal.style.display = 'none';
         });
       }
 
       // Script list completion banner click
       document.addEventListener('click', (e) => {
-        if (e.target.closest('#btn-banner-goto-step3')) {
+        if (e.target.closest('#btn-banner-goto-step4') || e.target.closest('#btn-banner-goto-step3')) {
           if (typeof Analytics !== 'undefined') {
-            Analytics.trackStepComplete(LESSON_ID, 2, { trigger: 'banner_button' });
+            Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'banner_button' });
           }
-          showStep(3, true);
+          showStep(4, true);
         }
       });
 
@@ -516,19 +523,19 @@
     });
   </script>
 
-  <!-- Step 3 Nudge Popup Modal -->
-  <div class="nudge-modal-overlay" id="step3-nudge-modal" style="display: none;" role="dialog" aria-modal="true"
+  <!-- Step 4 Nudge Popup Modal -->
+  <div class="nudge-modal-overlay" id="step4-nudge-modal" style="display: none;" role="dialog" aria-modal="true"
     aria-labelledby="nudge-modal-title">
     <div class="nudge-modal-card">
-      <div class="nudge-modal-icon">🎉</div>
-      <h3 class="nudge-modal-title" id="nudge-modal-title">영상 & 스크립트 학습 완료!</h3>
+      <div class="nudge-modal-icon">🎬</div>
+      <h3 class="nudge-modal-title" id="nudge-modal-title">전체 영상 & 대본 학습 완료!</h3>
       <p class="nudge-modal-desc">
-        모든 대화 스크립트를 끝까지 학습하셨습니다.<br>
+        영상과 대본을 모두 집중해서 학습하셨습니다.<br>
         이제 오늘 배운 핵심 어휘와 표현을 활용해 <strong>나만의 문장을 직접 영작</strong>하고, <strong>유튜브에 댓글</strong>을 남겨보세요!
       </p>
       <div class="nudge-modal-actions">
-        <button type="button" class="btn btn-primary btn-modal-step3" id="btn-modal-goto-step3">
-          <span>✍️ Step 3: 문장 작성 & 댓글 남기기</span>
+        <button type="button" class="btn btn-primary btn-modal-step4" id="btn-modal-goto-step4">
+          <span>✍️ Step 4: 영작하고 댓글 남기기</span>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />

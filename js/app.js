@@ -567,20 +567,20 @@ const App = {
     }
 
     container.innerHTML = list.map(les => {
+      const isCompleted = Storage.isLessonCompleted(les.id);
       const prog = Storage.getProgress(les.id);
-      const isCompleted = !!prog.completed;
-      const inProgress = !isCompleted && prog.currentQuestionIndex > 0;
+      const inProgress = !isCompleted && (prog.currentQuestionIndex > 0 || (prog.currentStep && prog.currentStep > 1));
 
       let statusBadgeHtml = `<span class="badge badge-emerald">100% 무료</span>`;
       let actionBtnText = `<span>학습 시작하기</span>`;
       let actionBtnClass = `btn-primary`;
 
       if (isCompleted) {
-        statusBadgeHtml = `<span class="badge badge-emerald">✓ 학습 완료</span>`;
+        statusBadgeHtml = `<span class="badge badge-completed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 학습 완료</span>`;
         actionBtnText = `<span>다시 복습하기 ✓</span>`;
         actionBtnClass = `btn-outline`;
       } else if (inProgress) {
-        statusBadgeHtml = `<span class="badge badge-primary">Q${prog.currentQuestionIndex + 1}번 푸는 중</span>`;
+        statusBadgeHtml = `<span class="badge badge-primary">학습 진행 중</span>`;
         actionBtnText = `<span>이어서 학습하기 ▶</span>`;
         actionBtnClass = `btn-primary`;
       }

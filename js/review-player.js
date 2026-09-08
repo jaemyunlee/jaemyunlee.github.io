@@ -14,6 +14,7 @@ class ReviewPlayer {
     this.audioBaseUrl = options.audioBaseUrl || './audio/';
     this.audioFiles = options.audioFiles || []; // Optional explicit list of audio filenames
     this.celebrationManager = options.celebrationManager;
+    this.onComplete = options.onComplete || null;
     this.speakerName = options.speakerName || 'Kelly';
     this.speakerAvatar = options.speakerAvatar || '../../assets/img/avatars/kelly.jpg';
 
@@ -182,10 +183,10 @@ class ReviewPlayer {
         <!-- Section Intro & Guidance -->
         <div style="margin-bottom: 20px;">
           <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
-            퀴즈 핵심 문장 총복습 (Sentence Review) 🎧
+            핵심 문장 듣기 (Key Sentences) 🎧
           </h3>
           <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.55;">
-            오늘 퀴즈에서 학습한 핵심 표현이 형광펜으로 강조되어 있습니다. 상단의 <strong>[전체 연속 재생]</strong> 버튼을 눌러 음악 앱처럼 편안하게 귀로 듣고 따라 말해보세요!
+            퀴즈에서 학습한 핵심 표현을 원어민 음성으로 귀에 익혀보세요. 상단의 <strong>[전체 연속 재생]</strong> 버튼을 누르면 다음 문장이 연속으로 재생됩니다!
           </p>
         </div>
 
@@ -250,19 +251,18 @@ class ReviewPlayer {
     }).join('')}
         </div>
 
-        <!-- Lesson Finish Card -->
-        <div class="lesson-finish-card" id="lesson-finish-card">
-          <div class="finish-card-badge">🏆 Lesson 1 전체 완료!</div>
-          <h4 class="finish-card-title">오늘의 4단계 학습을 모두 완주하셨습니다!</h4>
-          <p class="finish-card-desc">퀴즈부터 원어민 영상, 한영 스크립트, 나만의 문장 작성, 그리고 핵심 문장 복습까지 훌륭하게 끝마치셨어요.</p>
-          <div class="finish-card-actions">
-            <button type="button" class="btn-finish-complete" id="btn-finish-complete">
+        <!-- Step 2 Completion & Next Step Card -->
+        <div class="step-completion-card" id="step2-complete-card">
+          <div class="step-complete-badge">✨ 2단계 핵심 문장 완료!</div>
+          <h4 class="step-complete-title">핵심 문장을 모두 귀로 익히셨습니다!</h4>
+          <p class="step-complete-desc">이제 전체 영상에서 이 표현들이 실제 대화 맥락 속에서 어떻게 쓰이는지 확인해보세요.</p>
+          <div class="step-complete-actions">
+            <button type="button" class="btn-goto-step3" id="btn-goto-step3" title="Step 3: 전체 영상 및 대본 학습으로 이동">
+              <span>🎬 다음 단계: 전체 영상 보러가기</span>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"/>
+                <polyline points="9 18 15 12 9 6"/>
               </svg>
-              <span>🎉 학습 완료 & 축하하기</span>
             </button>
-            <a href="/lessons.html" class="btn-finish-catalog">전체 레슨 목록</a>
           </div>
         </div>
       </div>
@@ -273,22 +273,17 @@ class ReviewPlayer {
   }
 
   _bindControls() {
-    // Lesson Finish Button
-    const finishBtn = this.container.querySelector('#btn-finish-complete');
-    if (finishBtn) {
-      finishBtn.addEventListener('click', () => {
-        if (this.celebrationManager) {
-          this.celebrationManager._launchConfettiParticles();
-        }
-        if (typeof Analytics !== 'undefined') {
-          Analytics.trackStepComplete(this.lessonId, 4, { manualComplete: true });
-          Analytics.trackLessonComplete(this.lessonId);
-        }
-        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
-          App.showToast('🏆 축하합니다! 오늘의 4단계 학습을 모두 완료했습니다!');
-        }
-        if (typeof PWAManager !== 'undefined') {
-          PWAManager.checkAndPrompt(this.lessonId);
+    // Step 2 Next Step Button (Advance to Step 3: Interactive Video)
+    const gotoStep3Btn = this.container.querySelector('#btn-goto-step3');
+    if (gotoStep3Btn) {
+      gotoStep3Btn.addEventListener('click', () => {
+        if (typeof this.onComplete === 'function') {
+          this.onComplete();
+        } else if (typeof window !== 'undefined' && typeof window.showStep === 'function') {
+          window.showStep(3, true);
+        } else {
+          const step3Tab = document.querySelector('.step-tab-btn[data-step="3"]');
+          if (step3Tab) step3Tab.click();
         }
       });
     }
@@ -579,14 +574,10 @@ class ReviewPlayer {
         } else {
           this.pause();
           if (typeof Analytics !== 'undefined') {
-            Analytics.trackStepComplete(this.lessonId, 4, { playAllFinished: true });
-            Analytics.trackLessonComplete(this.lessonId);
+            Analytics.trackStepComplete(this.lessonId, 2, { playAllFinished: true });
           }
           if (typeof App !== 'undefined' && App.showToast) {
-            App.showToast('🎉 모든 문장 연속 복습을 마쳤습니다!');
-          }
-          if (typeof PWAManager !== 'undefined') {
-            PWAManager.checkAndPrompt(this.lessonId);
+            App.showToast('🎉 핵심 문장 연속 듣기를 마쳤습니다! 다음 영상 단계로 넘어가보세요.');
           }
         }
       }, 700);

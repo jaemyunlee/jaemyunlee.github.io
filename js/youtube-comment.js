@@ -212,7 +212,8 @@ class YouTubeCommentManager {
     // 1. Format sentence with branding hint
     const formattedComment = `${sentence}\n\n(현서네 리얼 영어 3분 챌린지로 작성된 문장입니다 ✨)`;
 
-    // 2. Mark lesson progress in history (sentences are saved only in Step 4 review)
+    // 2. Mark entire lesson complete in storage
+    Storage.setLessonCompleted(this.lessonId, true);
     Storage.recordLessonCompletion(this.lessonId, this.lessonMetadata);
 
     // 3. Copy to clipboard
@@ -226,12 +227,13 @@ class YouTubeCommentManager {
       }
     }
 
-    // Track Step 3 completion in Analytics funnel
+    // Track Step 4 & Lesson completion in Analytics funnel
     if (typeof Analytics !== 'undefined') {
-      Analytics.trackStepComplete(this.lessonId, 3, {
+      Analytics.trackStepComplete(this.lessonId, 4, {
         action: 'comment_submitted',
         copied: copied
       });
+      Analytics.trackLessonComplete(this.lessonId);
     }
 
     // 4. Open YouTube video in new tab
@@ -242,45 +244,42 @@ class YouTubeCommentManager {
     if (postBtn) {
       postBtn.disabled = false;
       postBtn.className = 'btn btn-outline btn-post-comment';
-      postBtn.innerHTML = `<span>댓글 복사 완료! ✓</span>`;
+      postBtn.innerHTML = `<span>댓글 복사 완료! ✓ (학습 완료)</span>`;
     }
 
-    // 6. Show clear, reassuring feedback
+    // 6. Show clear, reassuring completion feedback
     if (feedback) {
       feedback.style.display = 'block';
       feedback.className = 'reflection-feedback success';
       feedback.innerHTML = `
         <div class="feedback-inner">
-          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#10B981" stroke-width="2.5">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#10B981" stroke-width="2.5">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
           <div>
-            <strong style="color: var(--accent-emerald); font-size: 1.05rem;">🎉 작성하신 댓글 문장이 클립보드에 복사되었습니다!</strong>
-            <p style="margin: 6px 0 10px; color: var(--text-muted); line-height: 1.6;">
-              ${copied ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>새로 열린 유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong> 후 등록해보세요!' : '새로 열린 유튜브 영상 댓글창에 문장을 등록해보세요!'}
+            <strong style="color: var(--accent-emerald); font-size: 1.15rem; display: block; margin-bottom: 4px;">🏆 축하합니다! 오늘의 4단계 학습을 모두 완주하셨습니다!</strong>
+            <p style="margin: 6px 0 12px; color: var(--text-muted); line-height: 1.6;">
+              ${copied ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>새로 열린 유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong> 후 등록해보세요!' : '새로 열린 유튜브 영상 댓글창에 작성한 문장을 등록해보세요!'}
             </p>
             <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
-              <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 7px 16px; font-size: 0.85rem; border-radius: var(--radius-full);">
-                <span>유튜브 댓글창 다시 열기 ↗</span>
+              <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 8px 18px; font-size: 0.88rem; border-radius: var(--radius-full);">
+                <span>유튜브 댓글창 열기 ↗</span>
               </a>
-              <button type="button" class="btn btn-primary btn-goto-step4" id="btn-goto-step4" style="padding: 7px 18px; font-size: 0.85rem; border-radius: var(--radius-full);">
-                <span>Step 4 문장 총복습 시작하기 ➔</span>
-              </button>
+              <a href="/lessons.html" class="btn btn-outline" style="padding: 8px 18px; font-size: 0.88rem; border-radius: var(--radius-full);">
+                <span>전체 레슨 목록 보기</span>
+              </a>
             </div>
           </div>
         </div>
       `;
 
-      const step4Btn = feedback.querySelector('#btn-goto-step4');
-      if (step4Btn && this.onComplete) {
-        step4Btn.addEventListener('click', () => {
-          this.onComplete();
-        });
+      if (this.onComplete) {
+        this.onComplete();
       }
     }
 
     if (typeof App !== 'undefined' && App.showToast) {
-      App.showToast('📋 댓글 문장이 복사되었습니다! 유튜브 댓글창에 붙여넣어 보세요.', 'success');
+      App.showToast('🏆 축하합니다! 오늘의 4단계 학습을 모두 완료했습니다!', 'success');
     }
 
     // Trigger celebratory confetti burst
@@ -288,6 +287,11 @@ class YouTubeCommentManager {
       if (typeof this.celebrationManager._launchConfettiParticles === 'function') {
         this.celebrationManager._launchConfettiParticles();
       }
+    }
+
+    // Check PWA installation prompt upon lesson complete
+    if (typeof PWAManager !== 'undefined') {
+      PWAManager.checkAndPrompt(this.lessonId);
     }
   }
 

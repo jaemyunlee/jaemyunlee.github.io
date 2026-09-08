@@ -241,6 +241,21 @@ a:hover {
   border-color: rgba(16, 185, 129, 0.32);
 }
 
+.badge-completed {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[data-theme="light"] .badge-completed {
+  background: rgba(16, 185, 129, 0.14);
+  color: #047857;
+  border-color: rgba(5, 150, 105, 0.35);
+}
+
 /* Shake and Fade Keyframes */
 @keyframes shakeAnim {
 
