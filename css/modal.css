@@ -83,6 +83,10 @@
   color: var(--text-subtle);
 }
 
+[data-theme="light"] .vocab-picks-hint {
+  color: #475569;
+}
+
 .vocab-chips-container {
   display: flex;
   flex-wrap: wrap;
