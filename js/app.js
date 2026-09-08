@@ -3,6 +3,118 @@
  * Initializes global navigation, lesson switcher, saved sentences drawer,
  * offline status notifications, and PWA service worker.
  */
+/**
+ * AudioPlayerComponent - Reusable Audio Player UI Component
+ * Guarantees 100% visual and structural parity across Saved Sentences Drawer
+ * (both mobile & desktop viewports) and Step 4 Review Player.
+ */
+const AudioPlayerComponent = {
+  render(options = {}) {
+    const {
+      containerId = 'review-player-bar',
+      idPrefix = 'player', // 'player' or 'saved'
+      badgeText = '01/01',
+      titleText = '',
+      variant = 'standard', // 'standard' (responsive) or 'mobile' (compact single row)
+      extraClasses = '',
+      isPlayAll = true,
+      speed = '1.0x',
+      style = ''
+    } = options;
+
+    const isSaved = idPrefix === 'saved';
+    const badgeId = isSaved ? 'saved-player-badge' : 'player-track-badge';
+    const titleId = isSaved ? 'saved-player-title' : 'player-track-title';
+    const waveBoxId = isSaved ? 'saved-wave-box' : '';
+    const prevBtnId = `btn-${idPrefix}-prev`;
+    const toggleBtnId = `btn-${idPrefix}-toggle`;
+    const nextBtnId = `btn-${idPrefix}-next`;
+    const playallBtnId = `btn-${idPrefix}-playall`;
+    const speedBtnId = `btn-${idPrefix}-speed`;
+    const curTimeId = isSaved ? 'saved-player-current-time' : 'player-current-time';
+    const progressTrackId = isSaved ? 'saved-player-progress-track' : 'player-progress-track';
+    const progressFillId = isSaved ? 'saved-player-progress-bar' : 'player-progress-fill';
+    const totalTimeId = isSaved ? 'saved-player-total-time' : 'player-total-time';
+
+    const variantClass = variant === 'mobile' ? 'player-variant-mobile' : '';
+    const classes = ['review-player-bar', variantClass, extraClasses].filter(Boolean).join(' ');
+    const safeTitle = (titleText || '').replace(/"/g, '&quot;');
+
+    return `
+      <div class="${classes}" id="${containerId}" ${style ? `style="${style}"` : ''}>
+        <div class="player-bar-top">
+          <!-- Left: Current Track Details -->
+          <div class="player-track-info">
+            <div class="sound-wave-box" ${waveBoxId ? `id="${waveBoxId}"` : ''} aria-hidden="true">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+            </div>
+            <div class="player-text-details">
+              ${isSaved ? `<div class="player-track-header-row"><span class="player-track-badge" id="${badgeId}">${badgeText}</span><span class="saved-player-status" id="saved-player-status" style="display:none;">READY</span></div>` : `<span class="player-track-badge" id="${badgeId}">${badgeText}</span>`}
+              <div class="player-track-title" id="${titleId}" title="${safeTitle}">
+                ${titleText || ''}
+              </div>
+            </div>
+          </div>
+
+          <!-- Center: Audio Playback Controls -->
+          <div class="player-controls-main">
+            <button type="button" class="btn-player-step" id="${prevBtnId}" title="이전 문장 (|◀)" aria-label="이전 문장">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+              </svg>
+            </button>
+
+            <button type="button" class="btn-player-toggle" id="${toggleBtnId}" title="재생 / 일시정지" aria-label="재생 / 일시정지">
+              <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+            </button>
+
+            <button type="button" class="btn-player-step" id="${nextBtnId}" title="다음 문장 (▶|)" aria-label="다음 문장">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Right: Play All, Loop & Speed Modes -->
+          <div class="player-controls-side">
+            <button type="button" class="btn-play-all-toggle ${isPlayAll ? 'active' : ''}" id="${playallBtnId}" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 재생">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+              <span class="playall-text">전체</span>
+            </button>
+
+            <button type="button" class="btn-speed-toggle" id="${speedBtnId}" title="재생 속도 조절" aria-label="재생 속도">
+              ${speed}
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrubber & Time Display -->
+        <div class="player-progress-row">
+          <span class="player-time-label" id="${curTimeId}">0:00</span>
+          <div class="player-progress-track" id="${progressTrackId}">
+            <div class="player-progress-fill" id="${progressFillId}"></div>
+          </div>
+          <span class="player-time-label" id="${totalTimeId}">0:00</span>
+        </div>
+      </div>
+    `;
+  }
+};
+
+if (typeof window !== 'undefined') {
+  window.AudioPlayerComponent = AudioPlayerComponent;
+}
+
 const App = {
   lessons: [
     {
@@ -60,6 +172,53 @@ const App = {
     // Clean up any stale leftover modal overlays from previous sessions
     const staleModal = document.getElementById('first-visit-storage-modal');
     if (staleModal) staleModal.remove();
+  },
+
+  _escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  },
+
+  formatHighlightedSentence(english, expression) {
+    if (!english) return '';
+    let expr = (expression || '').trim();
+
+    // If expression not explicitly stored, detect known lesson expressions
+    if (!expr) {
+      const known = [
+        'what year that came out', 'new song came out', 'spend the night',
+        'went on sale', 'grow on me', 'turned out', 'happened to',
+        'in a cast', 'started to', 'ended up', 'obstructed',
+        'Obviously', 'nosebleed', 'At least', 'unlikely',
+        'no way', 'decent', 'around', 'mind', 'due'
+      ];
+      // Sort by length descending so longer phrases match first
+      known.sort((a, b) => b.length - a.length);
+      const found = known.find(k => english.toLowerCase().includes(k.toLowerCase()));
+      if (found) {
+        const match = english.match(new RegExp(found.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+        expr = match ? match[0] : found;
+      }
+    }
+
+    if (/\[[^\]]+\]/.test(english)) {
+      return this._escapeHtml(english).replace(
+        /\[[^\]]+\]/,
+        `<mark class="quiz-vocab-highlight">${this._escapeHtml(expr)}</mark>`
+      );
+    }
+
+    if (expr) {
+      const escaped = expr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${escaped})`, 'gi');
+      return this._escapeHtml(english).replace(regex, `<mark class="quiz-vocab-highlight">$1</mark>`);
+    }
+
+    return this._escapeHtml(english);
   },
 
   _getBasePath() {
@@ -533,64 +692,18 @@ const App = {
             <button type="button" class="btn-drawer-close" id="btn-close-sentences" aria-label="Close drawer">✕</button>
           </div>
 
-          <!-- Sticky Audio Player Bar for Saved Sentences (Issue #13) -->
-          <div class="saved-player-bar" id="saved-player-bar" style="display: none;">
-            <div class="saved-player-top">
-              <div class="saved-player-info">
-                <div class="sound-wave-box" id="saved-wave-box" aria-hidden="true">
-                  <span class="wave-bar"></span>
-                  <span class="wave-bar"></span>
-                  <span class="wave-bar"></span>
-                  <span class="wave-bar"></span>
-                </div>
-                <div class="saved-player-text">
-                  <div class="saved-player-meta">
-                    <span class="saved-player-badge" id="saved-player-badge">01/01</span>
-                    <span class="saved-player-status" id="saved-player-status">READY</span>
-                  </div>
-                  <div class="saved-player-title" id="saved-player-title" title="저장된 문장 연속 재생">저장된 문장 연속 재생</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="saved-player-controls">
-              <button type="button" class="btn-player-step" id="btn-saved-prev" title="이전 문장 (|◀)" aria-label="이전 문장">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                  <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                </svg>
-              </button>
-
-              <button type="button" class="btn-player-toggle" id="btn-saved-toggle" title="재생 / 일시정지" aria-label="재생">
-                <svg class="icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-                <svg class="icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display: none;">
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-              </button>
-
-              <button type="button" class="btn-player-step" id="btn-saved-next" title="다음 문장 (▶|)" aria-label="다음 문장">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                </svg>
-              </button>
-
-              <button type="button" class="btn-play-all-toggle active" id="btn-saved-playall" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 연속 재생">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                </svg>
-                <span class="playall-text">전체</span>
-              </button>
-
-              <button type="button" class="btn-speed-toggle" id="btn-saved-speed" title="재생 속도 조절" aria-label="재생 속도">
-                1.0x
-              </button>
-            </div>
-
-            <div class="saved-player-progress-wrap" id="saved-progress-wrap">
-              <div class="saved-player-progress-bar" id="saved-player-progress-bar" style="width: 0%;"></div>
-            </div>
-          </div>
+          <!-- Sticky Audio Player Bar for Saved Sentences (Issue #13 & #17: Step 4 Review Style) -->
+          ${AudioPlayerComponent.render({
+            containerId: 'saved-player-bar',
+            idPrefix: 'saved',
+            badgeText: '01/01',
+            titleText: '저장된 문장 연속 재생',
+            variant: 'mobile',
+            extraClasses: 'saved-player-bar',
+            style: 'display: none;',
+            isPlayAll: true,
+            speed: '1.0x'
+          })}
 
           <div class="drawer-body" id="saved-sentences-list">
             <!-- Rendered dynamically -->
@@ -723,22 +836,22 @@ const App = {
                     <div class="saved-sentence-card" id="saved-card-${item.id}" data-id="${item.id}" data-index="${trackIdx}">
                       <button 
                         type="button" 
-                        class="btn-card-play" 
+                        class="btn-card-play btn-saved-card-play" 
                         data-index="${trackIdx}" 
                         data-id="${item.id}" 
                         title="이 문장 듣기"
                         aria-label="이 문장 듣기"
                       >
-                        <svg class="icon-card-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <svg class="icon-card-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
-                        <svg class="icon-card-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
+                        <svg class="icon-card-pause" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="display: none;">
                           <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                         </svg>
                       </button>
                       <div class="saved-card-text">
-                        <p class="saved-en">"${item.en}"</p>
-                        <p class="saved-kr">${item.kr}</p>
+                        <p class="saved-en">${this.formatHighlightedSentence(item.en, item.expression)}</p>
+                        <p class="saved-kr">${this._escapeHtml(item.kr)}</p>
                       </div>
                       <button 
                         type="button" 
@@ -749,7 +862,7 @@ const App = {
                         title="Remove sentence"
                         aria-label="Remove sentence"
                       >
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
                           <polyline points="3 6 5 6 21 6"/>
                           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                         </svg>
@@ -995,6 +1108,24 @@ const App = {
 
   _registerServiceWorker() {
     if ('serviceWorker' in navigator) {
+      // In local development (localhost / 127.0.0.1), unregister service workers
+      // so live-reload and source updates work cleanly without caching conflicts
+      const isLocalhost = Boolean(
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '[::1]'
+      );
+
+      if (isLocalhost && !window.location.search.includes('pwa=true')) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          for (const reg of registrations) {
+            reg.unregister();
+            console.log('[Dev] Unregistered ServiceWorker on localhost for live reload');
+          }
+        });
+        return;
+      }
+
       window.addEventListener('load', () => {
         // Calculate root sw.js path
         const swPath = this._getBasePath() + 'sw.js';
@@ -1077,27 +1208,50 @@ const SavedAudioPlayer = {
     });
   },
 
+  _formatTime(seconds) {
+    if (isNaN(seconds) || seconds < 0) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  },
+
   _bindAudioEvents() {
     this.audio.addEventListener('timeupdate', () => {
-      if (!this.audio.duration || isNaN(this.audio.duration)) return;
-      const pct = Math.min(100, Math.max(0, (this.audio.currentTime / this.audio.duration) * 100));
+      const curLabel = document.getElementById('saved-player-current-time');
+      const totalLabel = document.getElementById('saved-player-total-time');
       const bar = document.getElementById('saved-player-progress-bar');
-      if (bar) bar.style.width = `${pct}%`;
+
+      if (curLabel) curLabel.textContent = this._formatTime(this.audio.currentTime);
+
+      if (this.audio.duration && !isNaN(this.audio.duration)) {
+        if (totalLabel) totalLabel.textContent = this._formatTime(this.audio.duration);
+        const pct = Math.min(100, Math.max(0, (this.audio.currentTime / this.audio.duration) * 100));
+        if (bar) bar.style.width = `${pct}%`;
+      }
+    });
+
+    this.audio.addEventListener('loadedmetadata', () => {
+      const totalLabel = document.getElementById('saved-player-total-time');
+      if (totalLabel && this.audio.duration && !isNaN(this.audio.duration)) {
+        totalLabel.textContent = this._formatTime(this.audio.duration);
+      }
     });
 
     this.audio.addEventListener('play', () => {
       this.isPlaying = true;
-      this._updateVisualState();
+      this._updateVisualState(true);
       this._setMediaSessionPlaybackState('playing');
     });
 
     this.audio.addEventListener('pause', () => {
       this.isPlaying = false;
-      this._updateVisualState();
+      this._updateVisualState(false);
       this._setMediaSessionPlaybackState('paused');
     });
 
     this.audio.addEventListener('ended', () => {
+      const bar = document.getElementById('saved-player-progress-bar');
+      if (bar) bar.style.width = '100%';
       this._onTrackEnded();
     });
 
@@ -1113,12 +1267,23 @@ const SavedAudioPlayer = {
     const nextBtn = document.getElementById('btn-saved-next');
     const playAllBtn = document.getElementById('btn-saved-playall');
     const speedBtn = document.getElementById('btn-saved-speed');
+    const progressTrack = document.getElementById('saved-player-progress-track');
 
     if (prevBtn) prevBtn.addEventListener('click', () => this.prev());
     if (toggleBtn) toggleBtn.addEventListener('click', () => this.togglePlayPause());
     if (nextBtn) nextBtn.addEventListener('click', () => this.next());
     if (playAllBtn) playAllBtn.addEventListener('click', () => this.togglePlayAll());
     if (speedBtn) speedBtn.addEventListener('click', () => this.cycleSpeed());
+
+    if (progressTrack) {
+      progressTrack.addEventListener('click', (e) => {
+        if (!this.audio || !this.audio.duration || isNaN(this.audio.duration)) return;
+        const rect = progressTrack.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+        this.audio.currentTime = ratio * this.audio.duration;
+      });
+    }
   },
 
   _initMediaSession() {
@@ -1176,7 +1341,7 @@ const SavedAudioPlayer = {
     }
 
     this._updateTrackInfo();
-    this._highlightActiveCard();
+    this._highlightActiveCard(this.isPlaying);
   },
 
   _updateTrackInfo() {
@@ -1202,7 +1367,7 @@ const SavedAudioPlayer = {
     }
   },
 
-  _updateVisualState() {
+  _updateVisualState(shouldScroll = false) {
     const bar = document.getElementById('saved-player-bar');
     const toggleBtn = document.getElementById('btn-saved-toggle');
     const status = document.getElementById('saved-player-status');
@@ -1230,12 +1395,13 @@ const SavedAudioPlayer = {
       waveBox.classList.toggle('playing', this.isPlaying);
     }
 
-    this._highlightActiveCard();
+    this._highlightActiveCard(shouldScroll);
   },
 
-  _highlightActiveCard() {
+  _highlightActiveCard(shouldScroll = false) {
     const cards = document.querySelectorAll('.saved-sentence-card');
     const activeItem = this.playlist[this.currentIndex];
+    let activeCard = null;
 
     cards.forEach(card => {
       const cardId = card.getAttribute('data-id') || (card.id ? card.id.replace('saved-card-', '') : '');
@@ -1255,7 +1421,46 @@ const SavedAudioPlayer = {
           pauseIcon.style.display = 'none';
         }
       }
+
+      if (isCurrent) {
+        activeCard = card;
+      }
     });
+
+    if (shouldScroll && activeCard && this.isPlaying) {
+      requestAnimationFrame(() => {
+        this._scrollToActiveCard(activeCard);
+      });
+    }
+  },
+
+  _scrollToActiveCard(card) {
+    if (!card) return;
+    const list = document.getElementById('saved-sentences-list');
+    if (!list) return;
+
+    if (this.currentIndex === 0) {
+      try {
+        list.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (_) {
+        list.scrollTop = 0;
+      }
+      return;
+    }
+
+    const listRect = list.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const relativeOffset = cardRect.top - listRect.top;
+    const targetScrollTop = Math.max(0, list.scrollTop + relativeOffset - 12);
+
+    try {
+      list.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    } catch (_) {
+      list.scrollTop = targetScrollTop;
+    }
   },
 
   play(index = null) {
@@ -1274,10 +1479,16 @@ const SavedAudioPlayer = {
     const base = this.app ? this.app._getBasePath() : './';
     const audioUrl = this._resolveAudioUrl(item, base);
 
+    this.isPlaying = true;
     this._updateTrackInfo();
+    this._updateVisualState(true);
     this._updateMediaSession(item, base);
 
+    const curLabel = document.getElementById('saved-player-current-time');
+    const totalLabel = document.getElementById('saved-player-total-time');
     const progressBar = document.getElementById('saved-player-progress-bar');
+    if (curLabel) curLabel.textContent = '0:00';
+    if (totalLabel) totalLabel.textContent = '0:00';
     if (progressBar) progressBar.style.width = '0%';
 
     if (audioUrl) {
@@ -1309,14 +1520,15 @@ const SavedAudioPlayer = {
       u.rate = this.playbackRate * 0.92;
       u.onstart = () => {
         this.isPlaying = true;
-        this._updateVisualState();
+        this._updateVisualState(true);
         this._setMediaSessionPlaybackState('playing');
       };
       u.onend = () => {
         this._onTrackEnded();
       };
-      u.onerror = () => {
-        this._onTrackEnded();
+      u.onerror = (err) => {
+        console.warn('TTS speech synthesis error:', err);
+        setTimeout(() => this._onTrackEnded(), 1200);
       };
       window.speechSynthesis.speak(u);
     } else {
@@ -1335,7 +1547,7 @@ const SavedAudioPlayer = {
       }
     } else {
       this.isPlaying = false;
-      this._updateVisualState();
+      this._updateVisualState(false);
       this._setMediaSessionPlaybackState('paused');
     }
   },
@@ -1348,7 +1560,7 @@ const SavedAudioPlayer = {
       window.speechSynthesis.cancel();
     }
     this.isPlaying = false;
-    this._updateVisualState();
+    this._updateVisualState(false);
     this._setMediaSessionPlaybackState('paused');
   },
 
@@ -1356,6 +1568,8 @@ const SavedAudioPlayer = {
     if (this.playlist.length === 0) return;
     if (this.audio && this.audio.src && !this.audio.ended && this.audio.currentTime > 0) {
       this.audio.playbackRate = this.playbackRate;
+      this.isPlaying = true;
+      this._updateVisualState(true);
       this.audio.play().catch(() => this.play(this.currentIndex));
     } else {
       this.play(this.currentIndex);
@@ -1454,7 +1668,9 @@ const SavedAudioPlayer = {
 };
 
 App.savedPlayer = SavedAudioPlayer;
+App.AudioPlayerComponent = AudioPlayerComponent;
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = App;
+  module.exports.AudioPlayerComponent = AudioPlayerComponent;
 }

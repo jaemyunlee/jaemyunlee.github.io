@@ -127,75 +127,44 @@ class ReviewPlayer {
 
     this.container.innerHTML = `
       <div class="review-player-section">
-        <!-- Top Sticky Music Player Bar -->
+        <!-- Top Sticky Music Player Bar (Unified AudioPlayerComponent) -->
+        ${((typeof AudioPlayerComponent !== 'undefined' ? AudioPlayerComponent : (typeof window !== 'undefined' ? window.AudioPlayerComponent : null))?.render({
+          containerId: 'review-player-bar',
+          idPrefix: 'player',
+          badgeText: `01/${this.quizzes.length.toString().padStart(2, '0')}`,
+          titleText: firstSentence,
+          variant: 'standard',
+          isPlayAll: true,
+          speed: '1.0x'
+        })) || `
         <div class="review-player-bar" id="review-player-bar">
           <div class="player-bar-top">
-            <!-- Left: Current Track Details -->
             <div class="player-track-info">
               <div class="sound-wave-box" aria-hidden="true">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
+                <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
               </div>
               <div class="player-text-details">
-                <span class="player-track-badge" id="player-track-badge">
-                  01/${this.quizzes.length.toString().padStart(2, '0')}
-                </span>
-                <div class="player-track-title" id="player-track-title" title="${this._escapeHtml(firstSentence)}">
-                  ${this._escapeHtml(firstSentence)}
-                </div>
+                <span class="player-track-badge" id="player-track-badge">01/${this.quizzes.length.toString().padStart(2, '0')}</span>
+                <div class="player-track-title" id="player-track-title" title="${this._escapeHtml(firstSentence)}">${this._escapeHtml(firstSentence)}</div>
               </div>
             </div>
-
-            <!-- Center: Audio Playback Controls -->
             <div class="player-controls-main">
-              <button type="button" class="btn-player-step" id="btn-player-prev" title="이전 문장 (|◀)">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                </svg>
-              </button>
-
-              <button type="button" class="btn-player-toggle" id="btn-player-toggle" title="재생 / 일시정지">
-                <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-                <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-              </button>
-
-              <button type="button" class="btn-player-step" id="btn-player-next" title="다음 문장 (▶|)">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                </svg>
-              </button>
+              <button type="button" class="btn-player-step" id="btn-player-prev" title="이전 문장 (|◀)"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+              <button type="button" class="btn-player-toggle" id="btn-player-toggle" title="재생 / 일시정지"><svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+              <button type="button" class="btn-player-step" id="btn-player-next" title="다음 문장 (▶|)"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
             </div>
-
-            <!-- Right: Play All, Loop & Speed Modes -->
             <div class="player-controls-side">
-              <button type="button" class="btn-play-all-toggle active" id="btn-player-playall" title="전체 재생 켜짐 (클릭 시 끄기)">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                </svg>
-                <span class="playall-text">전체</span>
-              </button>
-
-              <button type="button" class="btn-speed-toggle" id="btn-player-speed" title="재생 속도 조절">
-                1.0x
-              </button>
+              <button type="button" class="btn-play-all-toggle active" id="btn-player-playall" title="전체 재생 켜짐 (클릭 시 끄기)"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><span class="playall-text">전체</span></button>
+              <button type="button" class="btn-speed-toggle" id="btn-player-speed" title="재생 속도 조절">1.0x</button>
             </div>
           </div>
-
-          <!-- Bottom: Scrubber & Time Display -->
           <div class="player-progress-row">
             <span class="player-time-label" id="player-current-time">0:00</span>
-            <div class="player-progress-track" id="player-progress-track">
-              <div class="player-progress-fill" id="player-progress-fill"></div>
-            </div>
+            <div class="player-progress-track" id="player-progress-track"><div class="player-progress-fill" id="player-progress-fill"></div></div>
             <span class="player-time-label" id="player-total-time">0:00</span>
           </div>
         </div>
+        `}
 
         <!-- Section Intro & Guidance -->
         <div style="margin-bottom: 20px;">
@@ -701,6 +670,8 @@ class ReviewPlayer {
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
         kr: kr,
+        expression: quiz.answer || '',
+        rawEn: quiz.english || '',
         audio: audioUrl || '',
         timestamp: 0
       });

@@ -76,9 +76,12 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Skip non-GET, YouTube API, embeds, or chrome-extension requests
+  // Skip non-GET, live reload SSE endpoint, YouTube API, embeds, or chrome-extension requests
   if (
     event.request.method !== 'GET' ||
+    url.pathname === '/_reload' ||
+    url.pathname.startsWith('/_') ||
+    (event.request.headers && event.request.headers.get('Accept') === 'text/event-stream') ||
     url.hostname.includes('youtube.com') ||
     url.hostname.includes('googlevideo.com') ||
     url.hostname.includes('googleapis.com') ||
@@ -106,7 +109,20 @@ self.addEventListener('fetch', (event) => {
   // Stale-while-revalidate / cache-first strategy for static assets
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request)
+      if (cachedResponse) {
+        // Revalidate in background
+        fetch(event.request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              const resClone = networkResponse.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+            }
+          })
+          .catch(() => {});
+        return cachedResponse;
+      }
+
+      return fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const resClone = networkResponse.clone();
@@ -116,9 +132,13 @@ self.addEventListener('fetch', (event) => {
           }
           return networkResponse;
         })
-        .catch(() => cachedResponse);
-
-      return cachedResponse || fetchPromise;
+        .catch(() => {
+          return new Response('Network error and asset not cached', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: new Headers({ 'Content-Type': 'text/plain' })
+          });
+        });
     })
   );
 });
