@@ -1053,6 +1053,24 @@ const App = {
 
   _registerServiceWorker() {
     if ('serviceWorker' in navigator) {
+      // In local development (localhost / 127.0.0.1), unregister service workers
+      // so live-reload and source updates work cleanly without caching conflicts
+      const isLocalhost = Boolean(
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '[::1]'
+      );
+
+      if (isLocalhost && !window.location.search.includes('pwa=true')) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          for (const reg of registrations) {
+            reg.unregister();
+            console.log('[Dev] Unregistered ServiceWorker on localhost for live reload');
+          }
+        });
+        return;
+      }
+
       window.addEventListener('load', () => {
         // Calculate root sw.js path
         const swPath = this._getBasePath() + 'sw.js';

@@ -43,19 +43,18 @@ const RELOAD_SCRIPT = `
 <script>
 (function() {
   if (window.location.protocol === 'file:') return;
-  var es = new EventSource('/_reload');
-  es.onmessage = function(e) {
-    if (e.data === 'reload') {
-      console.log('[LiveReload] Change detected, reloading page...');
-      window.location.reload();
-    }
-  };
-  es.onerror = function() {
-    es.close();
-    setTimeout(function() {
-      window.location.reload();
-    }, 1500);
-  };
+  try {
+    var es = new EventSource('/_reload');
+    es.onmessage = function(e) {
+      if (e.data === 'reload') {
+        console.log('[LiveReload] Change detected, reloading page...');
+        window.location.reload();
+      }
+    };
+    es.onerror = function() {
+      // Silent error handler: do NOT reload on error to prevent infinite reload loops
+    };
+  } catch (_) {}
 })();
 </script>
 `;
@@ -139,6 +138,28 @@ const server = http.createServer((req, res) => {
     req.on('close', () => {
       sseClients.delete(res);
     });
+    return;
+  }
+
+  // Self-cleaning Service Worker for local development
+  // Ensures stale caches never intercept localhost dev requests
+  if (pathname === '/sw.js') {
+    res.writeHead(200, {
+      'Content-Type': 'text/javascript; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+    res.end(`
+      self.addEventListener('install', () => self.skipWaiting());
+      self.addEventListener('activate', (e) => {
+        e.waitUntil(
+          caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))))
+            .then(() => self.registration.unregister())
+            .then(() => self.clients.claim())
+        );
+      });
+    `);
     return;
   }
 
