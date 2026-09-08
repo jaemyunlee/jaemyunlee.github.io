@@ -453,7 +453,8 @@ class VideoScriptPlayer {
           if (this.isFallbackMode) {
             this.simTime = loopItem.start;
             this._updateFallbackUI();
-          } else if (this.player && typeof this.player.seekTo === 'function') {
+          }
+          if (this.player && typeof this.player.seekTo === 'function') {
             try {
               this.player.seekTo(loopItem.start, true);
               this.player.playVideo();
@@ -580,7 +581,8 @@ class VideoScriptPlayer {
       this._updateFallbackUI();
       this._startFallbackSync();
       this._updatePlayPauseButton(true);
-    } else if (this.player && typeof this.player.seekTo === 'function') {
+    }
+    if (this.player && typeof this.player.seekTo === 'function') {
       try {
         this.player.seekTo(item.start, true);
         this.player.playVideo();

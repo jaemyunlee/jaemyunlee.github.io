@@ -72,6 +72,8 @@ test.describe('Loop Playback for Interactive Script Cards (Issue #22)', () => {
     // Set mock player to verify seekTo behavior
     await page.evaluate(() => {
       window.__seekCalls = [];
+      window.videoPlayer.isFallbackMode = false;
+      window.videoPlayer._renderPlayerFallback = () => {};
       if (!window.videoPlayer.player) {
         window.videoPlayer.player = {};
       }
