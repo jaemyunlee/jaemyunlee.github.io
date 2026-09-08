@@ -136,7 +136,7 @@ const App = {
       title: '웨인 삼촌의 산골 오두막 이야기',
       subtitle: '1963년부터 이어진 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 표현',
       duration: '5:43',
-      vocabCount: 18,
+      vocabCount: 19,
       path: 'lessons/lesson-02/'
     }
   ],
@@ -1252,6 +1252,7 @@ const LESSON_02_AUDIO_MAP = [
   { key: 'headlight and a battery', file: 'we managed to use a headlight and a battery for lights..wav' },
   { key: 'spring built that was up on the hill', file: 'we just used buckets or bottles for water until we had a spring built that was up on the hill..wav' },
   { key: 'midway through summer', file: 'we had water midway through summer and then we ran out..wav' },
+  { key: 'when they passed', file: 'when they passed Gene and Patty had moved up here. to take care of the property..wav' },
   { key: 'inner tubes and air mattresses', file: 'we would all have inner tubes and air mattresses..wav' },
   { key: 'creek all afternoon', file: 'we would play in the creek all afternoon till we were like blue-lipped..wav' },
   { key: 'chores done in the morning', file: 'we could only get in the creek after we got our chores done in the morning..wav' },

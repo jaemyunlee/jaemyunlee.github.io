@@ -2,6 +2,7 @@
 - we [managed to] use a headlight and a battery for lights.
 - we just used buckets or bottles for water until we had [a spring] built that was up on the hill.
 - we had water [midway through] summer and then we ran out.
+- when they [passed] Gene and Patty had moved up here. to take care of the property.
 - we would all have [inner tubes] and air mattresses.
 - we would play in the creek [all afternoon] till we were like blue-lipped.
 - we could only get in the creek after we got our [chores] done in the morning.

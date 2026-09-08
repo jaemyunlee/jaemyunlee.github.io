@@ -30,7 +30,7 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     await expect(tab4.locator('.step-label')).toHaveText('영작하기');
   });
 
-  test('Lesson 02 loads all 18 quizzes with 70% multiple-choice, 20% fill-in-the-blank, and 10% listening', async ({ page }) => {
+  test('Lesson 02 loads all 19 quizzes with 70% multiple-choice, 20% fill-in-the-blank, and 10% listening', async ({ page }) => {
     await page.goto('/lessons/lesson-02/index.html');
 
     // Wait for quiz container to render first question
@@ -46,24 +46,28 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
       quizzes.forEach(q => {
         counts[q.type] = (counts[q.type] || 0) + 1;
       });
-      return { total: quizzes.length, counts, sampleQ1: quizzes[0], sampleQ14: quizzes[13], sampleQ17: quizzes[16] };
+      return { total: quizzes.length, counts, sampleQ1: quizzes[0], sampleQ5: quizzes[4], sampleQ15: quizzes[14], sampleQ18: quizzes[17] };
     });
 
-    expect(quizDistribution.total).toBe(18);
-    expect(quizDistribution.counts['multiple-choice']).toBe(13); // ~72.2% (70%)
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(3);  // ~16.7% (20%)
-    expect(quizDistribution.counts['listening']).toBe(2);          // ~11.1% (10%)
+    expect(quizDistribution.total).toBe(19);
+    expect(quizDistribution.counts['multiple-choice']).toBe(14); // ~73.7% (70%)
+    expect(quizDistribution.counts['fill-in-the-blank']).toBe(3);  // ~15.8% (20%)
+    expect(quizDistribution.counts['listening']).toBe(2);          // ~10.5% (10%)
 
     // Check sample multiple choice
     expect(quizDistribution.sampleQ1.answer).toBe('property');
     expect(quizDistribution.sampleQ1.options).toContain('property');
 
+    // Check newly added Q5 multiple choice
+    expect(quizDistribution.sampleQ5.answer).toBe('passed');
+    expect(quizDistribution.sampleQ5.options).toContain('passed');
+
     // Check sample fill-in-the-blank
-    expect(quizDistribution.sampleQ14.answer).toBe('moldy');
+    expect(quizDistribution.sampleQ15.answer).toBe('moldy');
 
     // Check sample listening
-    expect(quizDistribution.sampleQ17.answer).toBe('mining');
-    expect(quizDistribution.sampleQ17.audio).toContain('mining equipment');
+    expect(quizDistribution.sampleQ18.answer).toBe('mining');
+    expect(quizDistribution.sampleQ18.audio).toContain('mining equipment');
   });
 
   test('Step navigation switches between Step 1, Step 2, Step 3, and Step 4', async ({ page }) => {
@@ -81,7 +85,7 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     const sentenceCards = reviewSection.locator('.quiz-sentence-card');
     await expect(sentenceCards.first()).toBeVisible({ timeout: 5000 });
     const count = await sentenceCards.count();
-    expect(count).toBe(18);
+    expect(count).toBe(19);
 
     // Switch to Step 3 (전체 영상)
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
@@ -113,7 +117,7 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     await expect(lesson02Card).toBeVisible({ timeout: 5000 });
     await expect(lesson02Card).toContainText('웨인 삼촌의 산골 오두막 이야기');
     await expect(lesson02Card).toContainText('5:43');
-    await expect(lesson02Card).toContainText('18 퀴즈');
+    await expect(lesson02Card).toContainText('19 퀴즈');
 
     // Check home page latest lessons
     await page.goto('/index.html');
