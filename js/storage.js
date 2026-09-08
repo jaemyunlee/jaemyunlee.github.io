@@ -234,6 +234,33 @@ const Storage = {
   },
 
   /**
+   * Set overall lesson completion status (all 4 steps completed, including writing)
+   * @param {string} lessonId
+   * @param {boolean} completed
+   */
+  setLessonCompleted(lessonId, completed = true) {
+    const prog = this.getProgress(lessonId);
+    prog.lessonCompleted = completed;
+    if (completed) prog.completed = true;
+    this.saveProgress(lessonId, prog);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('lesson-completed-updated', { detail: { lessonId, completed } }));
+    }
+  },
+
+  /**
+   * Check if an entire lesson (all 4 steps) is completed
+   * @param {string} lessonId
+   * @returns {boolean}
+   */
+  isLessonCompleted(lessonId) {
+    const prog = this.getProgress(lessonId);
+    if (prog && prog.lessonCompleted) return true;
+    const history = this.getHistory();
+    return history.some(h => h.lessonId === lessonId && (h.lessonCompleted || h.quizzesPassed));
+  },
+
+  /**
    * Record lesson completion in history
    * @param {string} lessonId
    * @param {object} metadata
@@ -246,7 +273,8 @@ const Storage = {
       title: metadata.title || lessonId,
       level: metadata.level || 'Intermediate',
       completedAt: new Date().toISOString(),
-      quizzesPassed: true
+      quizzesPassed: true,
+      lessonCompleted: true
     };
 
     if (existingIndex >= 0) {
@@ -260,6 +288,9 @@ const Storage = {
     } catch (e) {
       console.warn('LocalStorage error saving history', e);
     }
+
+    // Also update progress
+    this.setLessonCompleted(lessonId, true);
   },
 
   /**

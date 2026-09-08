@@ -67,10 +67,10 @@ test.describe('Audio Coordination & Continuous Background Playback (Issue #19)',
   test('Mutual exclusivity: Playing SavedAudioPlayer pauses ReviewPlayer and vice versa', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
 
-    // Switch to Step 4 via step tab button
-    const step4Tab = page.locator('.step-tab-btn[data-step="4"]');
-    await expect(step4Tab).toBeVisible({ timeout: 10000 });
-    await step4Tab.click();
+    // Switch to Step 2 (핵심 문장 / ReviewPlayer) via step tab button
+    const step2Tab = page.locator('.step-tab-btn[data-step="2"]');
+    await expect(step2Tab).toBeVisible({ timeout: 10000 });
+    await step2Tab.click();
 
     // Wait for review player container to be ready
     await expect(page.locator('#review-player-bar')).toBeVisible({ timeout: 10000 });
@@ -154,10 +154,10 @@ test.describe('Audio Coordination & Continuous Background Playback (Issue #19)',
   test('Background audio does NOT pause on visibilitychange (hidden state)', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
 
-    // Switch to Step 4 via step tab button
-    const step4Tab = page.locator('.step-tab-btn[data-step="4"]');
-    await expect(step4Tab).toBeVisible({ timeout: 10000 });
-    await step4Tab.click();
+    // Switch to Step 2 (핵심 문장 / ReviewPlayer) via step tab button
+    const step2Tab = page.locator('.step-tab-btn[data-step="2"]');
+    await expect(step2Tab).toBeVisible({ timeout: 10000 });
+    await step2Tab.click();
     await expect(page.locator('#review-player-bar')).toBeVisible({ timeout: 10000 });
 
     await page.evaluate(() => {
@@ -183,9 +183,9 @@ test.describe('Audio Coordination & Continuous Background Playback (Issue #19)',
   test('ReviewPlayer DOM elements and inter-track preloader exist in document.body', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
 
-    const step4Tab = page.locator('.step-tab-btn[data-step="4"]');
-    await expect(step4Tab).toBeVisible({ timeout: 10000 });
-    await step4Tab.click();
+    const step2Tab = page.locator('.step-tab-btn[data-step="2"]');
+    await expect(step2Tab).toBeVisible({ timeout: 10000 });
+    await step2Tab.click();
     await expect(page.locator('#review-player-bar')).toBeVisible({ timeout: 10000 });
 
     // Play a sentence to initialize audio elements

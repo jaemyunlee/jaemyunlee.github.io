@@ -3,7 +3,7 @@
  * Caches application shell, quizzes, scripts, audio files, and Lottie animations
  * so users can study offline.
  */
-const CACHE_NAME = 'rhyrhy-cache-v20';
+const CACHE_NAME = 'rhyrhy-cache-v22';
 
 const STATIC_ASSETS = [
   './',
@@ -76,9 +76,10 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Skip non-GET, live reload SSE endpoint, YouTube API, embeds, or chrome-extension requests
+  // Skip non-GET, live reload SSE endpoint, localhost dev requests, YouTube API, embeds, or chrome-extension requests
   if (
     event.request.method !== 'GET' ||
+    ((url.hostname === 'localhost' || url.hostname === '127.0.0.1') && !url.searchParams.has('pwa')) ||
     url.pathname === '/_reload' ||
     url.pathname.startsWith('/_') ||
     (event.request.headers && event.request.headers.get('Accept') === 'text/event-stream') ||

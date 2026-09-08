@@ -887,6 +887,25 @@
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
 }
 
+.lesson-catalog-card.completed {
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.lesson-catalog-card.completed::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: linear-gradient(90deg, #10B981, #34D399);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="light"] .lesson-catalog-card.completed {
+  border-color: rgba(5, 150, 105, 0.4);
+}
+
 .lesson-catalog-card:hover {
   transform: translateY(-4px);
   border-color: var(--primary-light);

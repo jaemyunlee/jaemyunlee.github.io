@@ -4,12 +4,12 @@ test.describe('Step 4 Review Player Theming (Issue #10)', () => {
   test('Playing sentence card has light styling in light mode without dark slate background', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
 
-    // Switch to Step 4 via step tab button
-    const step4Tab = page.locator('.step-tab-btn[data-step="4"]');
-    await expect(step4Tab).toBeVisible({ timeout: 5000 });
-    await step4Tab.click();
+    // Switch to Step 2 (핵심 문장 / ReviewPlayer) via step tab button
+    const step2Tab = page.locator('.step-tab-btn[data-step="2"]');
+    await expect(step2Tab).toBeVisible({ timeout: 5000 });
+    await step2Tab.click();
 
-    // Verify Step 4 review player container is visible
+    // Verify Step 2 review player container is visible
     const reviewList = page.locator('.review-sentence-list');
     await expect(reviewList).toBeVisible();
 

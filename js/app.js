@@ -130,6 +130,31 @@ const App = {
     }
   ],
 
+  getNextLesson(currentLessonId) {
+    if (!this.lessons || !this.lessons.length) return null;
+    const index = this.lessons.findIndex(l => l.id === currentLessonId);
+    if (index !== -1 && index + 1 < this.lessons.length) {
+      return this.lessons[index + 1];
+    }
+    const match = (currentLessonId || '').match(/lesson-(\d+)/);
+    if (match) {
+      const nextNum = parseInt(match[1], 10) + 1;
+      const nextId = `lesson-${String(nextNum).padStart(2, '0')}`;
+      const found = this.lessons.find(l => l.id === nextId);
+      if (found) return found;
+    }
+    return null;
+  },
+
+  getNextLessonUrl(currentLessonId) {
+    const next = this.getNextLesson(currentLessonId);
+    if (next && next.path) {
+      const cleanPath = next.path.replace(/^\/+/, '');
+      return '/' + cleanPath + (cleanPath.endsWith('/') ? 'index.html' : '/index.html');
+    }
+    return '/lessons.html';
+  },
+
   init(currentLessonId = null) {
     this.currentLessonId = currentLessonId;
 
@@ -567,20 +592,20 @@ const App = {
     }
 
     container.innerHTML = list.map(les => {
+      const isCompleted = Storage.isLessonCompleted(les.id);
       const prog = Storage.getProgress(les.id);
-      const isCompleted = !!prog.completed;
-      const inProgress = !isCompleted && prog.currentQuestionIndex > 0;
+      const inProgress = !isCompleted && (prog.currentQuestionIndex > 0 || (prog.currentStep && prog.currentStep > 1));
 
       let statusBadgeHtml = `<span class="badge badge-emerald">100% 무료</span>`;
       let actionBtnText = `<span>학습 시작하기</span>`;
       let actionBtnClass = `btn-primary`;
 
       if (isCompleted) {
-        statusBadgeHtml = `<span class="badge badge-emerald">✓ 학습 완료</span>`;
+        statusBadgeHtml = `<span class="badge badge-completed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 학습 완료</span>`;
         actionBtnText = `<span>다시 복습하기 ✓</span>`;
         actionBtnClass = `btn-outline`;
       } else if (inProgress) {
-        statusBadgeHtml = `<span class="badge badge-primary">Q${prog.currentQuestionIndex + 1}번 푸는 중</span>`;
+        statusBadgeHtml = `<span class="badge badge-primary">학습 진행 중</span>`;
         actionBtnText = `<span>이어서 학습하기 ▶</span>`;
         actionBtnClass = `btn-primary`;
       }
@@ -1123,6 +1148,9 @@ const App = {
             console.log('[Dev] Unregistered ServiceWorker on localhost for live reload');
           }
         });
+        if ('caches' in window) {
+          caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))));
+        }
         return;
       }
 

@@ -782,8 +782,8 @@ class QuizEngine {
         <button type="button" class="btn-step2-secondary" id="btn-replay-all" title="처음부터 모든 퀴즈 다시 풀기">
           <span>전체 다시 풀기</span>
         </button>
-        <button type="button" class="btn-goto-step2" id="btn-goto-video" title="Step 2: 영상 시청 & 스크립트 학습으로 이동">
-          <span>영상 & 대본 보러가기 ▶</span>
+        <button type="button" class="btn-goto-step2" id="btn-goto-video" title="Step 2: 핵심 문장 학습으로 이동">
+          <span>핵심 문장 보러가기 🎧</span>
         </button>
       `;
     } else {
@@ -796,8 +796,8 @@ class QuizEngine {
           </svg>
           <span>전체 퀴즈 다시 풀기 (Replay All)</span>
         </button>
-        <button type="button" class="btn-goto-step2" id="btn-goto-video" title="Step 2: 영상 시청 & 스크립트 학습으로 이동">
-          <span>영상 & 대본 보러가기 ▶</span>
+        <button type="button" class="btn-goto-step2" id="btn-goto-video" title="Step 2: 핵심 문장 학습으로 이동">
+          <span>핵심 문장 보러가기 🎧</span>
         </button>
       `;
     }

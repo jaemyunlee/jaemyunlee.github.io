@@ -77,13 +77,15 @@ let debounceTimer = null;
 function handleFileChange(eventType, filename) {
   if (!filename) return;
 
-  // Ignore dist, git, logs, scratch, temporary files
+  // Ignore dist, git, logs, scratch, temporary files, test-results, tests
   if (
     filename.startsWith('.git') ||
     filename.startsWith('dist') ||
     filename.startsWith('node_modules') ||
     filename.startsWith('scratch') ||
     filename.startsWith('.temp') ||
+    filename.startsWith('test-results') ||
+    filename.startsWith('tests') ||
     filename.endsWith('.tmp') ||
     filename.endsWith('~')
   ) {
