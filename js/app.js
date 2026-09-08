@@ -1239,13 +1239,13 @@ const SavedAudioPlayer = {
 
     this.audio.addEventListener('play', () => {
       this.isPlaying = true;
-      this._updateVisualState();
+      this._updateVisualState(true);
       this._setMediaSessionPlaybackState('playing');
     });
 
     this.audio.addEventListener('pause', () => {
       this.isPlaying = false;
-      this._updateVisualState();
+      this._updateVisualState(false);
       this._setMediaSessionPlaybackState('paused');
     });
 
@@ -1341,7 +1341,7 @@ const SavedAudioPlayer = {
     }
 
     this._updateTrackInfo();
-    this._highlightActiveCard();
+    this._highlightActiveCard(this.isPlaying);
   },
 
   _updateTrackInfo() {
@@ -1367,7 +1367,7 @@ const SavedAudioPlayer = {
     }
   },
 
-  _updateVisualState() {
+  _updateVisualState(shouldScroll = false) {
     const bar = document.getElementById('saved-player-bar');
     const toggleBtn = document.getElementById('btn-saved-toggle');
     const status = document.getElementById('saved-player-status');
@@ -1395,12 +1395,13 @@ const SavedAudioPlayer = {
       waveBox.classList.toggle('playing', this.isPlaying);
     }
 
-    this._highlightActiveCard();
+    this._highlightActiveCard(shouldScroll);
   },
 
-  _highlightActiveCard() {
+  _highlightActiveCard(shouldScroll = false) {
     const cards = document.querySelectorAll('.saved-sentence-card');
     const activeItem = this.playlist[this.currentIndex];
+    let activeCard = null;
 
     cards.forEach(card => {
       const cardId = card.getAttribute('data-id') || (card.id ? card.id.replace('saved-card-', '') : '');
@@ -1420,7 +1421,46 @@ const SavedAudioPlayer = {
           pauseIcon.style.display = 'none';
         }
       }
+
+      if (isCurrent) {
+        activeCard = card;
+      }
     });
+
+    if (shouldScroll && activeCard && this.isPlaying) {
+      requestAnimationFrame(() => {
+        this._scrollToActiveCard(activeCard);
+      });
+    }
+  },
+
+  _scrollToActiveCard(card) {
+    if (!card) return;
+    const list = document.getElementById('saved-sentences-list');
+    if (!list) return;
+
+    if (this.currentIndex === 0) {
+      try {
+        list.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (_) {
+        list.scrollTop = 0;
+      }
+      return;
+    }
+
+    const listRect = list.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const relativeOffset = cardRect.top - listRect.top;
+    const targetScrollTop = Math.max(0, list.scrollTop + relativeOffset - 12);
+
+    try {
+      list.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    } catch (_) {
+      list.scrollTop = targetScrollTop;
+    }
   },
 
   play(index = null) {
@@ -1439,7 +1479,9 @@ const SavedAudioPlayer = {
     const base = this.app ? this.app._getBasePath() : './';
     const audioUrl = this._resolveAudioUrl(item, base);
 
+    this.isPlaying = true;
     this._updateTrackInfo();
+    this._updateVisualState(true);
     this._updateMediaSession(item, base);
 
     const curLabel = document.getElementById('saved-player-current-time');
@@ -1478,14 +1520,15 @@ const SavedAudioPlayer = {
       u.rate = this.playbackRate * 0.92;
       u.onstart = () => {
         this.isPlaying = true;
-        this._updateVisualState();
+        this._updateVisualState(true);
         this._setMediaSessionPlaybackState('playing');
       };
       u.onend = () => {
         this._onTrackEnded();
       };
-      u.onerror = () => {
-        this._onTrackEnded();
+      u.onerror = (err) => {
+        console.warn('TTS speech synthesis error:', err);
+        setTimeout(() => this._onTrackEnded(), 1200);
       };
       window.speechSynthesis.speak(u);
     } else {
@@ -1504,7 +1547,7 @@ const SavedAudioPlayer = {
       }
     } else {
       this.isPlaying = false;
-      this._updateVisualState();
+      this._updateVisualState(false);
       this._setMediaSessionPlaybackState('paused');
     }
   },
@@ -1517,7 +1560,7 @@ const SavedAudioPlayer = {
       window.speechSynthesis.cancel();
     }
     this.isPlaying = false;
-    this._updateVisualState();
+    this._updateVisualState(false);
     this._setMediaSessionPlaybackState('paused');
   },
 
@@ -1525,6 +1568,8 @@ const SavedAudioPlayer = {
     if (this.playlist.length === 0) return;
     if (this.audio && this.audio.src && !this.audio.ended && this.audio.currentTime > 0) {
       this.audio.playbackRate = this.playbackRate;
+      this.isPlaying = true;
+      this._updateVisualState(true);
       this.audio.play().catch(() => this.play(this.currentIndex));
     } else {
       this.play(this.currentIndex);

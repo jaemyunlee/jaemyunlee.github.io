@@ -319,4 +319,107 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     expect(desktopCardInfo.btnWidth).toBe(28);
     expect(desktopCardInfo.btnHeight).toBe(28);
   });
+
+  test('Currently playing sentence card automatically scrolls to top of drawer list when playback begins or advances', async ({ page }) => {
+    // Seed 8 saved sentences with real WAV files to ensure valid playback and scrolling in drawer
+    await page.addInitScript(() => {
+      const audioFiles = [
+        'audio/I just happened to look.wav',
+        'audio/we have a decent view..wav',
+        'audio/And then go to the concert and spend the night.wav',
+        'audio/At least thats what I understood.wav',
+        'audio/Compared to what we paid in Korea for tickets its decent.wav',
+        'audio/Hopefully Amy doesnt mind..wav',
+        'audio/I dont know what year that came out.wav',
+        'audio/I started to like it a lot and listening to it..wav'
+      ];
+      const sentences = [];
+      for (let i = 1; i <= 8; i++) {
+        sentences.push({
+          id: `scroll_test_${i}`,
+          en: `Test sentence number ${i} for scrolling verification in saved drawer.`,
+          kr: `스크롤 테스트 문장 ${i}번 입니다.`,
+          audio: audioFiles[i - 1]
+        });
+      }
+      localStorage.setItem('rhyrhy_saved_sentences', JSON.stringify({
+        'lesson-01': sentences
+      }));
+    });
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/index.html');
+
+    // Open saved sentences drawer
+    await page.click('#btn-open-sentences');
+    await page.waitForSelector('#saved-sentences-drawer.open');
+
+    const drawerBody = page.locator('#saved-sentences-list');
+    await expect(drawerBody).toBeVisible();
+
+    // Initial state: scrollTop is 0
+    const initialScrollTop = await drawerBody.evaluate(el => el.scrollTop);
+    expect(initialScrollTop).toBe(0);
+
+    // Advance to track 5 by clicking next button on the sticky player bar
+    const nextBtn = page.locator('#btn-saved-next');
+    for (let step = 0; step < 4; step++) {
+      await nextBtn.click();
+      await page.waitForTimeout(100);
+    }
+
+    // Verify track 5 is playing
+    const trackBadge = page.locator('#saved-player-badge');
+    await expect(trackBadge).toHaveText('05/08');
+
+    const card5 = page.locator('#saved-card-scroll_test_5');
+    await expect(card5).toHaveClass(/is-playing/);
+
+    // Wait for smooth scroll to finish
+    await page.waitForTimeout(600);
+
+    // Assert drawerBody scrolled down significantly (> 150px)
+    const scrolledTop = await drawerBody.evaluate(el => el.scrollTop);
+    expect(scrolledTop).toBeGreaterThan(150);
+
+    // Assert card 5 is positioned right near top of drawerBody
+    const relativePosition5 = await page.evaluate(() => {
+      const body = document.getElementById('saved-sentences-list');
+      const card = document.getElementById('saved-card-scroll_test_5');
+      const bodyRect = body.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      return cardRect.top - bodyRect.top;
+    });
+
+    // Card should be near top (within 24px)
+    expect(relativePosition5).toBeGreaterThanOrEqual(0);
+    expect(relativePosition5).toBeLessThanOrEqual(24);
+
+    // Advance to track 6 via next button
+    await nextBtn.click();
+    await expect(trackBadge).toHaveText('06/08');
+    const card6 = page.locator('#saved-card-scroll_test_6');
+    await expect(card6).toHaveClass(/is-playing/);
+    await page.waitForTimeout(600);
+
+    const relativePosition6 = await page.evaluate(() => {
+      const body = document.getElementById('saved-sentences-list');
+      const card = document.getElementById('saved-card-scroll_test_6');
+      const bodyRect = body.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      return cardRect.top - bodyRect.top;
+    });
+    expect(relativePosition6).toBeGreaterThanOrEqual(0);
+    expect(relativePosition6).toBeLessThanOrEqual(24);
+
+    // Click inline play on card 1 to play track 1 and verify scrolling back to top (scrollTop === 0)
+    await page.click('#saved-card-scroll_test_1 .btn-card-play');
+    await expect(trackBadge).toHaveText('01/08');
+    const card1 = page.locator('#saved-card-scroll_test_1');
+    await expect(card1).toHaveClass(/is-playing/);
+    await page.waitForTimeout(600);
+
+    const topAfterCard1 = await drawerBody.evaluate(el => el.scrollTop);
+    expect(topAfterCard1).toBe(0);
+  });
 });
