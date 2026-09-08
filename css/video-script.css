@@ -660,6 +660,87 @@
   background-color: rgba(99, 102, 241, 0.18);
 }
 
+/* Card Loop Button (Issue #22) */
+.btn-card-loop {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 26px;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  color: var(--text-subtle);
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn-card-loop:hover {
+  color: var(--primary-light);
+  border-color: var(--primary-light);
+  background-color: var(--surface-color-alt);
+}
+
+.btn-card-loop.active {
+  background: var(--primary);
+  color: #FFFFFF !important;
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.btn-card-loop.active .icon-loop {
+  animation: loop-spin 3s linear infinite;
+}
+
+@keyframes loop-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-card-loop.active .icon-loop {
+    animation: none;
+  }
+}
+
+/* Light Mode Overrides for Loop Button */
+[data-theme="light"] .btn-card-loop {
+  background-color: #FFFFFF;
+  border-color: var(--surface-border);
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .btn-card-loop:hover {
+  background-color: var(--surface-color-alt);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+[data-theme="light"] .btn-card-loop.active {
+  background: var(--primary);
+  color: #FFFFFF !important;
+  border-color: var(--primary-hover);
+  box-shadow: 0 2px 10px var(--primary-glow);
+}
+
+/* Loop Active Card Highlight */
+.script-sentence-card.loop-active {
+  border-color: var(--primary);
+}
+
+[data-theme="dark"] .script-sentence-card.loop-active {
+  box-shadow: 0 0 14px var(--primary-glow);
+}
+
+[data-theme="light"] .script-sentence-card.loop-active {
+  background: rgba(79, 70, 229, 0.04);
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.12);
+}
+
 .script-card-body .sentence-en {
   font-size: 1.05rem;
   font-weight: 600;

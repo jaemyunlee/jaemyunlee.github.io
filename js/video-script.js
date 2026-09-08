@@ -32,6 +32,10 @@ class VideoScriptPlayer {
     this.scriptListContainer = document.getElementById('script-list-container');
     this.videoContainer = document.getElementById('youtube-player-container');
     this.lastTime = 0;
+
+    // Single-card loop playback state (Issue #22)
+    this.loopingSentenceIndex = null;
+    this.isLoopSeeking = false;
   }
 
   init() {
@@ -256,6 +260,15 @@ class VideoScriptPlayer {
 
     this.simTimer = setInterval(() => {
       this.simTime += 0.2 * this.simRate;
+
+      // Handle loop playback in fallback mode
+      if (this.loopingSentenceIndex !== null && this.loopingSentenceIndex >= 0) {
+        const loopItem = this.scriptData[this.loopingSentenceIndex];
+        if (loopItem && this.simTime >= loopItem.end) {
+          this.simTime = loopItem.start;
+        }
+      }
+
       this._updateFallbackUI();
 
       if (this.simTime >= this.maxDuration) {
@@ -430,6 +443,30 @@ class VideoScriptPlayer {
     if (typeof currentTime === 'number' && !isNaN(currentTime) && currentTime > 0) {
       this.lastTime = currentTime;
     }
+
+    // Check single-card loop condition (Issue #22)
+    if (this.loopingSentenceIndex !== null && this.loopingSentenceIndex >= 0) {
+      const loopItem = this.scriptData[this.loopingSentenceIndex];
+      if (loopItem && currentTime >= loopItem.end) {
+        if (!this.isLoopSeeking) {
+          this.isLoopSeeking = true;
+          if (this.isFallbackMode) {
+            this.simTime = loopItem.start;
+            this._updateFallbackUI();
+          } else if (this.player && typeof this.player.seekTo === 'function') {
+            try {
+              this.player.seekTo(loopItem.start, true);
+              this.player.playVideo();
+            } catch (_) { }
+          }
+          setTimeout(() => {
+            this.isLoopSeeking = false;
+          }, 250);
+        }
+        return;
+      }
+    }
+
     let activeIdx = -1;
     for (let i = 0; i < this.scriptData.length; i++) {
       const item = this.scriptData[i];
@@ -489,6 +526,11 @@ class VideoScriptPlayer {
     const item = this.scriptData[index];
     if (!item) return;
 
+    // If jumping to a different sentence, cancel previous single-card loop
+    if (this.loopingSentenceIndex !== null && this.loopingSentenceIndex !== index) {
+      this.clearLoop(false);
+    }
+
     if (this.isFallbackMode) {
       // If clicking the active sentence while playing, pause it
       if (this.activeSentenceIndex === index && this.simTimer) {
@@ -517,6 +559,71 @@ class VideoScriptPlayer {
     this.setActiveSentence(index);
   }
 
+  toggleLoop(index) {
+    if (this.loopingSentenceIndex === index) {
+      this.clearLoop(true);
+    } else {
+      this.setLoop(index);
+    }
+  }
+
+  setLoop(index) {
+    const item = this.scriptData[index];
+    if (!item) return;
+
+    this.loopingSentenceIndex = index;
+    this._updateLoopUI();
+
+    // Start playback from this sentence immediately
+    if (this.isFallbackMode) {
+      this.simTime = item.start;
+      this._updateFallbackUI();
+      this._startFallbackSync();
+      this._updatePlayPauseButton(true);
+    } else if (this.player && typeof this.player.seekTo === 'function') {
+      try {
+        this.player.seekTo(item.start, true);
+        this.player.playVideo();
+      } catch (_) { }
+    }
+
+    this.setActiveSentence(index);
+
+    if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+      const timeFormatted = this._formatTimestamp(item.start);
+      App.showToast(`🔁 [${timeFormatted}] 문장 구간 반복 재생`);
+    }
+  }
+
+  clearLoop(showToast = true) {
+    const hadLoop = this.loopingSentenceIndex !== null;
+    this.loopingSentenceIndex = null;
+    this._updateLoopUI();
+
+    if (hadLoop && showToast && typeof App !== 'undefined' && typeof App.showToast === 'function') {
+      App.showToast('구간 반복이 해제되었습니다.');
+    }
+  }
+
+  _updateLoopUI() {
+    if (!this.scriptListContainer) return;
+    const cards = this.scriptListContainer.querySelectorAll('.script-sentence-card');
+    cards.forEach((card, idx) => {
+      const isLooping = this.loopingSentenceIndex === idx;
+      card.classList.toggle('loop-active', isLooping);
+      const loopBtn = card.querySelector('.btn-card-loop');
+      if (loopBtn) {
+        loopBtn.classList.toggle('active', isLooping);
+        loopBtn.setAttribute('aria-pressed', isLooping ? 'true' : 'false');
+        loopBtn.title = isLooping ? '구간 반복 끄기 (Click to cancel loop)' : '이 문장 구간 반복 재생 (Loop)';
+        const label = loopBtn.querySelector('.loop-label');
+        if (label) {
+          label.textContent = isLooping ? '반복 중' : '구간 반복';
+        }
+      }
+    });
+  }
+
   renderScriptItems() {
     if (!this.scriptListContainer) return;
 
@@ -524,7 +631,8 @@ class VideoScriptPlayer {
 
     this.scriptData.forEach((item, index) => {
       const card = document.createElement('div');
-      card.className = 'script-sentence-card';
+      const isLooping = this.loopingSentenceIndex === index;
+      card.className = `script-sentence-card${isLooping ? ' loop-active' : ''}`;
       card.dataset.index = index;
       card.dataset.start = item.start;
       card.dataset.end = item.end;
@@ -542,6 +650,15 @@ class VideoScriptPlayer {
             </svg>
             ${timeFormatted}
           </span>
+          <button type="button" class="btn-card-loop ${isLooping ? 'active' : ''}" data-index="${index}" title="${isLooping ? '구간 반복 끄기 (Click to cancel loop)' : '이 문장 구간 반복 재생 (Loop)'}" aria-label="이 문장 구간 반복 재생" aria-pressed="${isLooping ? 'true' : 'false'}">
+            <svg class="icon-loop" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 2l4 4-4 4"/>
+              <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+              <path d="M7 22l-4-4 4-4"/>
+              <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+            </svg>
+            <span class="loop-label">${isLooping ? '반복 중' : '구간 반복'}</span>
+          </button>
         </div>
 
         <div class="script-card-body">
@@ -550,6 +667,15 @@ class VideoScriptPlayer {
         </div>
       `;
 
+      // Loop button click binding
+      const loopBtn = card.querySelector('.btn-card-loop');
+      if (loopBtn) {
+        loopBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleLoop(index);
+        });
+      }
+
       // Jump to video or pause on card click
       card.addEventListener('click', () => {
         this.seekToSentence(index);
@@ -557,6 +683,7 @@ class VideoScriptPlayer {
 
       // Keyboard navigation (Enter or Space)
       card.addEventListener('keydown', (e) => {
+        if (e.target.closest('.btn-card-loop')) return;
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           this.seekToSentence(index);
