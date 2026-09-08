@@ -12,6 +12,7 @@ class YouTubeCommentManager {
     this.lessonMetadata = options.lessonMetadata || {};
     this.quizzes = options.quizzes || [];
     this.celebrationManager = options.celebrationManager;
+    this.nextLessonUrl = options.nextLessonUrl || null;
     this.onComplete = options.onComplete || null;
     this.container = typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -247,6 +248,8 @@ class YouTubeCommentManager {
       postBtn.innerHTML = `<span>댓글 복사 완료! ✓ (학습 완료)</span>`;
     }
 
+    const nextLessonUrl = this.getNextLessonUrl();
+
     // 6. Show clear, reassuring completion feedback
     if (feedback) {
       feedback.style.display = 'block';
@@ -257,16 +260,16 @@ class YouTubeCommentManager {
             <polyline points="20 6 9 17 4 12"/>
           </svg>
           <div>
-            <strong style="color: var(--accent-emerald); font-size: 1.15rem; display: block; margin-bottom: 4px;">🏆 축하합니다! 오늘의 4단계 학습을 모두 완주하셨습니다!</strong>
-            <p style="margin: 6px 0 12px; color: var(--text-muted); line-height: 1.6;">
-              ${copied ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>새로 열린 유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong> 후 등록해보세요!' : '새로 열린 유튜브 영상 댓글창에 작성한 문장을 등록해보세요!'}
+            <strong style="color: var(--accent-emerald); font-size: 1.15rem; display: block; margin-bottom: 4px;">🏆 축하합니다! 오늘의 레슨을 모두 완주하셨습니다!</strong>
+            <p style="margin: 6px 0 14px; color: var(--text-muted); line-height: 1.6;">
+              ${copied ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong> 후 나만의 멋진 문장을 남겨보세요!' : '유튜브 영상 댓글창으로 이동해 작성한 문장을 댓글로 남겨보세요!'}
             </p>
             <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
-              <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 8px 18px; font-size: 0.88rem; border-radius: var(--radius-full);">
-                <span>유튜브 댓글창 열기 ↗</span>
+              <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="btn-goto-youtube-comment" style="padding: 9px 20px; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-full);">
+                <span>💬 유튜브에 댓글 남기러 가기 ↗</span>
               </a>
-              <a href="/lessons.html" class="btn btn-outline" style="padding: 8px 18px; font-size: 0.88rem; border-radius: var(--radius-full);">
-                <span>전체 레슨 목록 보기</span>
+              <a href="${nextLessonUrl}" class="btn btn-outline" id="btn-goto-next-lesson" style="padding: 9px 20px; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-full);">
+                <span>다음 레슨 공부하기 ▶</span>
               </a>
             </div>
           </div>
@@ -279,7 +282,7 @@ class YouTubeCommentManager {
     }
 
     if (typeof App !== 'undefined' && App.showToast) {
-      App.showToast('🏆 축하합니다! 오늘의 4단계 학습을 모두 완료했습니다!', 'success');
+      App.showToast('🏆 축하합니다! 오늘의 레슨을 모두 완료했습니다!', 'success');
     }
 
     // Trigger celebratory confetti burst
@@ -293,6 +296,26 @@ class YouTubeCommentManager {
     if (typeof PWAManager !== 'undefined') {
       PWAManager.checkAndPrompt(this.lessonId);
     }
+  }
+
+  getNextLessonUrl() {
+    if (this.nextLessonUrl) return this.nextLessonUrl;
+    if (typeof App !== 'undefined' && typeof App.getNextLessonUrl === 'function') {
+      return App.getNextLessonUrl(this.lessonId);
+    }
+    const match = (this.lessonId || '').match(/lesson-(\d+)/);
+    if (match) {
+      const nextNum = parseInt(match[1], 10) + 1;
+      const nextId = `lesson-${String(nextNum).padStart(2, '0')}`;
+      if (typeof App !== 'undefined' && Array.isArray(App.lessons)) {
+        const found = App.lessons.find(l => l.id === nextId);
+        if (found && found.path) {
+          const cleanPath = found.path.replace(/^\/+/, '');
+          return '/' + cleanPath + (cleanPath.endsWith('/') ? 'index.html' : '/index.html');
+        }
+      }
+    }
+    return '/lessons.html';
   }
 
   nudgeFocus() {

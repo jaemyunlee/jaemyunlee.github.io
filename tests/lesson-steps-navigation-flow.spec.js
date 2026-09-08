@@ -127,7 +127,22 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     // Verify completion feedback card is rendered
     const feedback = page.locator('#reflection-feedback');
     await expect(feedback).toBeVisible();
-    await expect(feedback).toContainText('축하합니다! 오늘의 4단계 학습을 모두 완주하셨습니다!');
+    await expect(feedback).toContainText('축하합니다! 오늘의 레슨을 모두 완주하셨습니다!');
+
+    // Verify YouTube comment button and Next Lesson button
+    const ytCommentBtn = feedback.locator('#btn-goto-youtube-comment');
+    await expect(ytCommentBtn).toBeVisible();
+    await expect(ytCommentBtn).toContainText('유튜브에 댓글 남기러 가기');
+    await expect(ytCommentBtn).toHaveAttribute('href', /youtube\.com/);
+
+    const nextLessonBtn = feedback.locator('#btn-goto-next-lesson');
+    await expect(nextLessonBtn).toBeVisible();
+    await expect(nextLessonBtn).toContainText('다음 레슨 공부하기');
+    await expect(nextLessonBtn).toHaveAttribute('href', /lessons/);
+
+    // Old step 4 review button should not exist
+    const oldStep4Btn = feedback.locator('#btn-goto-step4');
+    await expect(oldStep4Btn).toHaveCount(0);
 
     // Button updates with completion indicator
     await expect(submitBtn).toContainText('학습 완료');

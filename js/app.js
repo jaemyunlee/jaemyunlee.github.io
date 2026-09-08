@@ -130,6 +130,31 @@ const App = {
     }
   ],
 
+  getNextLesson(currentLessonId) {
+    if (!this.lessons || !this.lessons.length) return null;
+    const index = this.lessons.findIndex(l => l.id === currentLessonId);
+    if (index !== -1 && index + 1 < this.lessons.length) {
+      return this.lessons[index + 1];
+    }
+    const match = (currentLessonId || '').match(/lesson-(\d+)/);
+    if (match) {
+      const nextNum = parseInt(match[1], 10) + 1;
+      const nextId = `lesson-${String(nextNum).padStart(2, '0')}`;
+      const found = this.lessons.find(l => l.id === nextId);
+      if (found) return found;
+    }
+    return null;
+  },
+
+  getNextLessonUrl(currentLessonId) {
+    const next = this.getNextLesson(currentLessonId);
+    if (next && next.path) {
+      const cleanPath = next.path.replace(/^\/+/, '');
+      return '/' + cleanPath + (cleanPath.endsWith('/') ? 'index.html' : '/index.html');
+    }
+    return '/lessons.html';
+  },
+
   init(currentLessonId = null) {
     this.currentLessonId = currentLessonId;
 
