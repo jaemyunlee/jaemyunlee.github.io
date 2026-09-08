@@ -219,6 +219,10 @@ const MarkdownQuizParser = {
   }
 };
 
+if (typeof window !== 'undefined') {
+  window.MarkdownQuizParser = MarkdownQuizParser;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = MarkdownQuizParser;
 }

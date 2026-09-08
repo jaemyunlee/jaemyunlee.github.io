@@ -127,6 +127,17 @@ const App = {
       duration: '6:43',
       vocabCount: 21,
       path: 'lessons/lesson-01/'
+    },
+    {
+      id: 'lesson-02',
+      shortTitle: 'Lesson 2',
+      topic: "Uncle Wayne's Cabin",
+      icon: '🏕️',
+      title: '웨인 삼촌의 산골 오두막 이야기',
+      subtitle: '1963년부터 이어진 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 표현',
+      duration: '5:43',
+      vocabCount: 18,
+      path: 'lessons/lesson-02/'
     }
   ],
 
@@ -1235,6 +1246,28 @@ const LESSON_01_AUDIO_MAP = [
   { key: 'handicap seats', file: 'but they finally just put us in to one of the handicap seats which ended up having an amazing view.wav' }
 ];
 
+// Known audio files for Lesson 02 (maps keyword to WAV audio filename in lessons/lesson-02/audio/)
+const LESSON_02_AUDIO_MAP = [
+  { key: 'nothing here on the property', file: 'There was nothing here on the property..wav' },
+  { key: 'headlight and a battery', file: 'we managed to use a headlight and a battery for lights..wav' },
+  { key: 'spring built that was up on the hill', file: 'we just used buckets or bottles for water until we had a spring built that was up on the hill..wav' },
+  { key: 'midway through summer', file: 'we had water midway through summer and then we ran out..wav' },
+  { key: 'inner tubes and air mattresses', file: 'we would all have inner tubes and air mattresses..wav' },
+  { key: 'creek all afternoon', file: 'we would play in the creek all afternoon till we were like blue-lipped..wav' },
+  { key: 'chores done in the morning', file: 'we could only get in the creek after we got our chores done in the morning..wav' },
+  { key: 'been a treat', file: 'its been a treat.wav' },
+  { key: 'dry creek', file: 'The creek itself is called Dry Creek not because it ran dry of water because when back in the 1800s or 1890s whenever....wav' },
+  { key: 'feeds a lake downstream', file: 'our creek feeds a lake downstream..wav' },
+  { key: 'stock it like three times', file: 'Its known for fishing. they stock it like three times a year..wav' },
+  { key: 'added on to three times', file: 'through the years it got added on to three times..wav' },
+  { key: 'strip it right down the inside', file: 'we had a water line break and it flooded the whole place. we had to strip it right down the inside..wav' },
+  { key: 'all the way down to the studs', file: 'we had to strip it all the way down to the studs so the building would dry out and wouldnt get moldy..wav' },
+  { key: 'build the house to make it level', file: 'They had to build the house to make it level..wav' },
+  { key: 'getting up in age', file: 'As they were getting up in age and didnt have to worry about falls anymore..wav' },
+  { key: 'moms memorial bell', file: 'That was my moms memorial bell that we built and this was mining equipment that we found up in the hills..wav' },
+  { key: 'kelly get to enjoy it', file: 'Now Kelly get to enjoy it..wav' }
+];
+
 const SavedAudioPlayer = {
   app: null,
   audio: null,
@@ -1762,13 +1795,19 @@ const SavedAudioPlayer = {
       return encodeURI(`${base}lessons/${item.lessonId || 'lesson-01'}/audio/${clean}`);
     }
 
-    // 2. Map lookup for Lesson 01
+    // 2. Map lookup for Lesson 01 and Lesson 02
     const lesId = item.lessonId || 'lesson-01';
+    const cleanText = (item.en || '').toLowerCase().replace(/['".,!?;:\-]/g, '').trim();
     if (lesId === 'lesson-01') {
-      const cleanText = (item.en || '').toLowerCase().replace(/['".,!?;:\-]/g, '').trim();
       for (const mapItem of LESSON_01_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
           return encodeURI(`${base}lessons/lesson-01/audio/${mapItem.file}`);
+        }
+      }
+    } else if (lesId === 'lesson-02') {
+      for (const mapItem of LESSON_02_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-02/audio/${mapItem.file}`);
         }
       }
     }
