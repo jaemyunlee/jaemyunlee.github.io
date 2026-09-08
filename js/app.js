@@ -1148,6 +1148,9 @@ const App = {
             console.log('[Dev] Unregistered ServiceWorker on localhost for live reload');
           }
         });
+        if ('caches' in window) {
+          caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))));
+        }
         return;
       }
 
