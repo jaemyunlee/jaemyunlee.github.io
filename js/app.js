@@ -781,16 +781,16 @@ const App = {
                     <div class="saved-sentence-card" id="saved-card-${item.id}" data-id="${item.id}" data-index="${trackIdx}">
                       <button 
                         type="button" 
-                        class="btn-card-play" 
+                        class="btn-card-play btn-saved-card-play" 
                         data-index="${trackIdx}" 
                         data-id="${item.id}" 
                         title="이 문장 듣기"
                         aria-label="이 문장 듣기"
                       >
-                        <svg class="icon-card-play" viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                        <svg class="icon-card-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
-                        <svg class="icon-card-pause" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display: none;">
+                        <svg class="icon-card-pause" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="display: none;">
                           <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                         </svg>
                       </button>
@@ -807,7 +807,7 @@ const App = {
                         title="Remove sentence"
                         aria-label="Remove sentence"
                       >
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
                           <polyline points="3 6 5 6 21 6"/>
                           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                         </svg>

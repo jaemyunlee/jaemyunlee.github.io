@@ -158,4 +158,94 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     // No uncaught exceptions
     expect(pageErrors).toHaveLength(0);
   });
+
+  test('Check saved-sentence-card and play button styles on desktop and mobile', async ({ page }) => {
+    // Seed saved sentences
+    await page.addInitScript(() => {
+      localStorage.setItem('rhyrhy_saved_sentences', JSON.stringify({
+        'lesson-01': [
+          {
+            id: 'sent_test_1',
+            en: 'What happened to your arm?',
+            kr: '팔은 어쩌다가 다치셨어요?',
+            expression: 'happened to',
+            audio: 'audio/sent-05.wav'
+          },
+          {
+            id: 'sent_test_2',
+            en: 'We have a decent view of the stage.',
+            kr: '무대가 꽤 잘 보이는 자리예요.',
+            expression: 'decent',
+            audio: 'audio/sent-04.wav'
+          }
+        ]
+      }));
+    });
+
+    // 1. Desktop test on /lessons/lesson-01/index.html
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/lessons/lesson-01/index.html');
+    await page.click('#btn-open-sentences');
+    await page.waitForSelector('#saved-sentences-drawer.open');
+
+    // Click play on track 1 to see playing state
+    await page.click('#btn-saved-toggle');
+    await page.waitForTimeout(300);
+
+    await page.screenshot({
+      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/desktop_lesson_playing_card.png'
+    });
+
+    const desktopCardInfo = await page.evaluate(() => {
+      const card = document.querySelector('#saved-card-sent_test_1');
+      const btn = card.querySelector('.btn-card-play');
+      const csBtn = window.getComputedStyle(btn);
+      const playIcon = btn.querySelector('.icon-card-play');
+      const pauseIcon = btn.querySelector('.icon-card-pause');
+      return {
+        cardWidth: card.getBoundingClientRect().width,
+        btnWidth: btn.getBoundingClientRect().width,
+        btnHeight: btn.getBoundingClientRect().height,
+        padding: csBtn.padding,
+        display: csBtn.display,
+        playIconDisplay: playIcon ? window.getComputedStyle(playIcon).display : null,
+        pauseIconDisplay: pauseIcon ? window.getComputedStyle(pauseIcon).display : null
+      };
+    });
+    console.log('DESKTOP CARD INFO:', JSON.stringify(desktopCardInfo));
+
+    // 2. Mobile test on /lessons/lesson-01/index.html (width: 390)
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForTimeout(300);
+
+    // Save light mode screenshot
+    await page.screenshot({
+      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_light.png'
+    });
+
+    // Toggle dark mode and save screenshot
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    await page.waitForTimeout(200);
+    await page.screenshot({
+      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_dark.png'
+    });
+
+    const mobileCardInfo = await page.evaluate(() => {
+      const card = document.querySelector('#saved-card-sent_test_1');
+      const btn = card.querySelector('.btn-card-play');
+      const csBtn = window.getComputedStyle(btn);
+      return {
+        cardWidth: card.getBoundingClientRect().width,
+        btnWidth: btn.getBoundingClientRect().width,
+        btnHeight: btn.getBoundingClientRect().height,
+        flex: csBtn.flex,
+        padding: csBtn.padding
+      };
+    });
+
+    expect(mobileCardInfo.btnWidth).toBe(28);
+    expect(mobileCardInfo.btnHeight).toBe(28);
+    expect(desktopCardInfo.btnWidth).toBe(28);
+    expect(desktopCardInfo.btnHeight).toBe(28);
+  });
 });

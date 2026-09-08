@@ -604,7 +604,7 @@
   margin-top: 4px;
 }
 
-.btn-card-play {
+.sentence-card-actions .btn-card-play {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -621,14 +621,14 @@
   transition: all 0.2s ease;
 }
 
-.btn-card-play:hover {
+.sentence-card-actions .btn-card-play:hover {
   background: rgba(99, 102, 241, 0.28);
   border-color: var(--primary-light);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px var(--primary-glow);
 }
 
-.quiz-sentence-card.playing .btn-card-play {
+.quiz-sentence-card.playing .sentence-card-actions .btn-card-play {
   background: var(--primary);
   border-color: var(--primary-light);
   color: #FFFFFF;
@@ -794,7 +794,7 @@
     margin-top: 2px;
   }
 
-  .btn-card-play {
+  .sentence-card-actions .btn-card-play {
     flex: 1;
   }
 }
