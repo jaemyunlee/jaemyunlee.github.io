@@ -38,6 +38,21 @@ class VideoScriptPlayer {
     this.renderScriptItems();
     this.initYouTubePlayer();
     this._bindControls();
+
+    // Global audio coordination: pause video when any other player starts
+    window.addEventListener('app-audio-started', (e) => {
+      if (e.detail && e.detail.source !== 'video-player') {
+        this.pause();
+      }
+    });
+
+    window.addEventListener('saved-player-started', () => {
+      this.pause();
+    });
+
+    window.addEventListener('review-player-started', () => {
+      this.pause();
+    });
   }
 
   initYouTubePlayer() {
@@ -233,6 +248,8 @@ class VideoScriptPlayer {
   }
 
   _startFallbackSync() {
+    window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'video-player' } }));
+    window.dispatchEvent(new CustomEvent('video-player-started'));
     this._pauseFallbackSync();
     const toggleBtn = this.videoContainer.querySelector('#btn-sync-toggle');
     if (toggleBtn) toggleBtn.textContent = '⏸ 일시 정지';
@@ -274,6 +291,8 @@ class VideoScriptPlayer {
   _onPlayerStateChange(event) {
     // YT.PlayerState: PLAYING = 1, PAUSED = 2, ENDED = 0
     if (event.data === window.YT.PlayerState.PLAYING) {
+      window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'video-player' } }));
+      window.dispatchEvent(new CustomEvent('video-player-started'));
       this._startTimeTracking();
       this._updatePlayPauseButton(true);
     } else {
@@ -694,6 +713,10 @@ class VideoScriptPlayer {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
   }
+}
+
+if (typeof window !== 'undefined') {
+  window.VideoScriptPlayer = VideoScriptPlayer;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
