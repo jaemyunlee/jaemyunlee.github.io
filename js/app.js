@@ -169,6 +169,14 @@ const App = {
   init(currentLessonId = null) {
     this.currentLessonId = currentLessonId;
 
+    if (this.currentLessonId && this.currentLessonId.startsWith('lesson-')) {
+      Storage.setActiveLessonPage(this.currentLessonId);
+      Storage.setLessonInProgress(this.currentLessonId);
+    } else {
+      // Non-lesson page (home, catalog, quiz-share, etc.): clear active lesson page
+      Storage.clearActiveLessonPage();
+    }
+
     if (typeof Analytics !== 'undefined') {
       Analytics.init();
     }
@@ -493,6 +501,16 @@ const App = {
           this.closeSavedSentencesDrawer();
         }
       }
+
+      // Clear active lesson page whenever user navigates away from lesson to Home or Catalog
+      const exitLink = e.target.closest('.nav-brand, #btn-nav-lessons, a[href*="index.html"], a[href*="lessons.html"], a.footer-link');
+      if (exitLink) {
+        const href = exitLink.getAttribute('href') || '';
+        // If navigating to index.html or lessons.html (and not to another lesson subpath)
+        if (href.includes('lessons.html') || (href.includes('index.html') && !href.includes('lessons/lesson-'))) {
+          Storage.clearActiveLessonPage();
+        }
+      }
     });
   },
 
@@ -629,11 +647,11 @@ const App = {
     }
 
     container.innerHTML = list.map(les => {
-      const isCompleted = Storage.isLessonCompleted(les.id);
-      const prog = Storage.getProgress(les.id);
-      const inProgress = !isCompleted && (prog.currentQuestionIndex > 0 || (prog.currentStep && prog.currentStep > 1));
+      const lessonState = Storage.getLessonState(les.id); // 'completed' | 'in-progress' | 'not-started'
+      const isCompleted = lessonState === 'completed';
+      const inProgress = lessonState === 'in-progress';
 
-      let statusBadgeHtml = `<span class="badge badge-emerald">100% 무료</span>`;
+      let statusBadgeHtml = `<span class="badge badge-not-started"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg> 시작 전</span>`;
       let actionBtnText = `<span>학습 시작하기</span>`;
       let actionBtnClass = `btn-primary`;
 
@@ -642,13 +660,13 @@ const App = {
         actionBtnText = `<span>다시 복습하기 ✓</span>`;
         actionBtnClass = `btn-outline`;
       } else if (inProgress) {
-        statusBadgeHtml = `<span class="badge badge-primary">학습 진행 중</span>`;
+        statusBadgeHtml = `<span class="badge badge-in-progress"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg> 학습 중</span>`;
         actionBtnText = `<span>이어서 학습하기 ▶</span>`;
         actionBtnClass = `btn-primary`;
       }
 
       return `
-        <article class="lesson-catalog-card ${isCompleted ? 'completed' : ''}" id="card-${les.id}">
+        <article class="lesson-catalog-card state-${lessonState} ${isCompleted ? 'completed' : ''} ${inProgress ? 'in-progress' : ''}" id="card-${les.id}">
           <div class="lesson-card-top">
             <div class="lesson-card-badges">
               <span class="badge badge-primary">${les.shortTitle}</span>

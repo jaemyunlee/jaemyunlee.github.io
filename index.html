@@ -19,6 +19,24 @@
   <script>
     (function(){try{var t=localStorage.getItem('rhyrhy_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
   </script>
+  <!-- Session Resumption: Route returning users to their active lesson page if they left from a lesson -->
+  <script>
+    (function() {
+      try {
+        var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+        var isBackForward = navEntries && navEntries[0] && navEntries[0].type === 'back_forward';
+        var search = window.location.search || '';
+        if (isBackForward || search.indexOf('redirect=false') !== -1 || search.indexOf('home=1') !== -1) {
+          localStorage.removeItem('rhyrhy_active_lesson_page');
+          return;
+        }
+        var activeLesson = localStorage.getItem('rhyrhy_active_lesson_page');
+        if (activeLesson && typeof activeLesson === 'string' && /^lesson-\d+$/.test(activeLesson)) {
+          window.location.replace('./lessons/' + activeLesson + '/index.html');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2"></script>
   <script>

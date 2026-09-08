@@ -13,6 +13,8 @@ const Storage = {
     FIRST_SAVE_NOTICE: 'rhyrhy_first_save_notice_seen',
     LESSON_ACCESS_PREFIX: 'rhyrhy_access_',
     STUDY_TIME_PREFIX: 'rhyrhy_study_time_',
+    ACTIVE_LESSON_PAGE: 'rhyrhy_active_lesson_page',
+    IN_PROGRESS_PREFIX: 'rhyrhy_in_progress_',
     THEME: 'rhyrhy_theme'
   },
 
@@ -467,6 +469,100 @@ const Storage = {
     } catch (_) {
       return 'lesson-01';
     }
+  },
+
+  /**
+   * Set the actively viewed lesson page for session resumption
+   * @param {string} lessonId
+   */
+  setActiveLessonPage(lessonId) {
+    try {
+      if (lessonId) {
+        localStorage.setItem(this.KEYS.ACTIVE_LESSON_PAGE, lessonId);
+      }
+    } catch (_) { }
+  },
+
+  /**
+   * Get the actively viewed lesson page
+   * @returns {string|null}
+   */
+  getActiveLessonPage() {
+    try {
+      return localStorage.getItem(this.KEYS.ACTIVE_LESSON_PAGE) || null;
+    } catch (_) {
+      return null;
+    }
+  },
+
+  /**
+   * Clear the active lesson page (called on navigating to home/catalog)
+   */
+  clearActiveLessonPage() {
+    try {
+      localStorage.removeItem(this.KEYS.ACTIVE_LESSON_PAGE);
+    } catch (_) { }
+  },
+
+  /**
+   * Mark a lesson as in progress
+   * @param {string} lessonId
+   * @param {boolean} inProgress
+   */
+  setLessonInProgress(lessonId, inProgress = true) {
+    try {
+      if (inProgress) {
+        localStorage.setItem(this.KEYS.IN_PROGRESS_PREFIX + lessonId, 'true');
+      } else {
+        localStorage.removeItem(this.KEYS.IN_PROGRESS_PREFIX + lessonId);
+      }
+    } catch (_) { }
+  },
+
+  /**
+   * Check if a lesson is in progress (started quizzes or steps 1-3, but not completed)
+   * @param {string} lessonId
+   * @returns {boolean}
+   */
+  isLessonInProgress(lessonId) {
+    if (this.isLessonCompleted(lessonId)) return false;
+    try {
+      if (localStorage.getItem(this.KEYS.IN_PROGRESS_PREFIX + lessonId) === 'true') {
+        return true;
+      }
+      const step = localStorage.getItem('rhyrhy_step_' + lessonId);
+      if (step !== null) return true;
+
+      const progData = localStorage.getItem(this.KEYS.PROGRESS_PREFIX + lessonId);
+      if (progData) {
+        const prog = JSON.parse(progData);
+        if (prog && (prog.completed || prog.currentQuestionIndex > 0 || (prog.answeredQuestions && Object.keys(prog.answeredQuestions).length > 0))) {
+          return true;
+        }
+      }
+
+      if (this.getLessonAccessCount(lessonId) > 0) return true;
+      if (this.getStudyTime(lessonId) > 0) return true;
+    } catch (_) { }
+    return false;
+  },
+
+  /**
+   * Get the three-state progress status for a lesson:
+   * - 'completed': Triggered by clicking either button on Step 4
+   * - 'in-progress': Started quizzes or steps 1-3, but not completed
+   * - 'not-started': Default state, neither completed nor in progress
+   * @param {string} lessonId
+   * @returns {'completed' | 'in-progress' | 'not-started'}
+   */
+  getLessonState(lessonId) {
+    if (this.isLessonCompleted(lessonId)) {
+      return 'completed';
+    }
+    if (this.isLessonInProgress(lessonId)) {
+      return 'in-progress';
+    }
+    return 'not-started';
   },
 
   /**

@@ -74,13 +74,21 @@ test.describe('Loop Playback for Interactive Script Cards (Issue #22)', () => {
       window.__seekCalls = [];
       window.videoPlayer.isFallbackMode = false;
       window.videoPlayer._renderPlayerFallback = () => {};
-      if (!window.videoPlayer.player) {
-        window.videoPlayer.player = {};
-      }
-      window.videoPlayer.player.seekTo = (time, allowSeek) => {
-        window.__seekCalls.push({ time, allowSeek });
+      window.videoPlayer._createPlayer = () => {};
+      const mockPlayer = {
+        seekTo: (time, allowSeek) => {
+          window.__seekCalls.push({ time, allowSeek });
+        },
+        playVideo: () => {}
       };
-      window.videoPlayer.player.playVideo = () => {};
+      window.videoPlayer.player = mockPlayer;
+      try {
+        Object.defineProperty(window.videoPlayer, 'player', {
+          get: () => mockPlayer,
+          set: () => {},
+          configurable: true
+        });
+      } catch (_) {}
     });
 
     const secondCard = page.locator('.script-sentence-card').nth(1);
