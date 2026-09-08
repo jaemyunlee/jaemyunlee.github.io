@@ -61,6 +61,13 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     const videoSection = page.locator('#video-section');
     await expect(videoSection).toBeVisible();
 
+    // Verify bottom banner button text does not contain 'Step 3'
+    const bannerBtn = page.locator('#btn-banner-goto-step4, #btn-banner-goto-step3');
+    await expect(bannerBtn).toBeVisible();
+    const bannerText = await bannerBtn.textContent();
+    expect(bannerText).not.toContain('Step 3');
+    expect(bannerText).toContain('문장 작성 & 댓글 남기기');
+
     // Trigger video completion modal
     await page.evaluate(() => {
       const modal = document.getElementById('step4-nudge-modal') || document.getElementById('step3-nudge-modal');
@@ -78,6 +85,13 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     const reflectionSection = page.locator('#reflection-section');
     await expect(reflectionSection).toBeVisible();
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    await expect(tab4).toHaveClass(/active/);
+
+    // Also test navigating directly from banner button
+    await tab3.click();
+    await expect(videoSection).toBeVisible();
+    await bannerBtn.click();
+    await expect(reflectionSection).toBeVisible();
     await expect(tab4).toHaveClass(/active/);
   });
 

@@ -129,7 +129,8 @@
   word-break: keep-all;
 }
 
-.btn-goto-step3 {
+.btn-goto-step3,
+.btn-goto-step4 {
   padding: 10px 22px;
   font-weight: 700;
   font-size: 0.92rem;
