@@ -503,6 +503,49 @@
   word-spacing: 0.8em;
 }
 
+/* Light Mode Hint Styling - High Contrast & Maximum Legibility (Issue #25) */
+[data-theme="light"] .quiz-hint-box {
+  background: #FEF3C7;
+  border: 1px solid #FCD34D;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.08);
+}
+
+[data-theme="light"] .hint-label {
+  color: #92400E;
+  font-weight: 800;
+}
+
+[data-theme="light"] .hint-word {
+  background: #FFFFFF;
+  border: 1.5px solid #FCD34D;
+  box-shadow: 0 1px 4px rgba(180, 83, 9, 0.12);
+}
+
+[data-theme="light"] .hint-char.revealed {
+  color: #92400E;
+  font-weight: 800;
+}
+
+[data-theme="light"] .hint-char.blank {
+  color: #334155;
+  font-weight: 900;
+}
+
+[data-theme="light"] .hint-char.symbol,
+[data-theme="light"] .hint-char.punct {
+  color: #1E293B;
+  font-weight: 800;
+}
+
+[data-theme="light"] .hint-letters {
+  color: #92400E;
+  font-weight: 800;
+}
+
+[data-theme="light"] .sub-hint-text {
+  color: #475569;
+}
+
 .quiz-feedback {
   min-height: 28px;
   margin-bottom: 16px;
