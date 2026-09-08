@@ -105,18 +105,35 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     const reflectionSection = page.locator('#reflection-section');
     await expect(reflectionSection).toBeVisible();
 
-    // Fill sentence in textarea
+    const copyBtn = page.locator('#btn-copy-sentence');
+    const youtubeBtn = page.locator('#btn-post-comment');
     const textarea = page.locator('#user-reflection-sentence');
-    await textarea.fill('I just happened to practice English today and it was great!');
 
-    // Mock window.open to prevent popup
+    // 1. Copy button is initially disabled; YouTube button is always active
+    await expect(copyBtn).toBeDisabled();
+    await expect(youtubeBtn).toBeEnabled();
+
+    // 2. Typing in textarea activates copy button
+    await textarea.fill('I just happened to practice English today and it was great!');
+    await expect(copyBtn).toBeEnabled();
+
+    // Mock clipboard API and window.open
     await page.evaluate(() => {
+      window.__copiedText = '';
+      navigator.clipboard.writeText = async (text) => {
+        window.__copiedText = text;
+      };
       window.open = () => {};
     });
 
-    // Click submit/copy comment button
-    const submitBtn = page.locator('#btn-post-comment');
-    await submitBtn.click();
+    // 3. Click copy button -> copies sentence to clipboard
+    await copyBtn.click();
+    await expect(copyBtn).toContainText('문장 복사 완료');
+    const copiedText = await page.evaluate(() => window.__copiedText);
+    expect(copiedText).toContain('I just happened to practice English today');
+
+    // 4. Click YouTube button (always active) -> completes lesson and renders feedback
+    await youtubeBtn.click();
 
     // Verify storage has lesson completed
     const isCompleted = await page.evaluate(() => {
@@ -129,10 +146,14 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     await expect(feedback).toBeVisible();
     await expect(feedback).toContainText('축하합니다! 오늘의 레슨을 모두 완주하셨습니다!');
 
+    // Verify YouTube community post link and encouragement
+    const communityLink = feedback.locator('a[href="https://www.youtube.com/@happyfamily8/posts"]');
+    await expect(communityLink).toBeVisible();
+    await expect(feedback).toContainText('유튜브 커뮤니티');
+
     // Verify YouTube comment button and Next Lesson button
     const ytCommentBtn = feedback.locator('#btn-goto-youtube-comment');
     await expect(ytCommentBtn).toBeVisible();
-    await expect(ytCommentBtn).toContainText('유튜브에 댓글 남기러 가기');
     await expect(ytCommentBtn).toHaveAttribute('href', /youtube\.com/);
 
     const nextLessonBtn = feedback.locator('#btn-goto-next-lesson');
@@ -145,7 +166,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     await expect(oldStep4Btn).toHaveCount(0);
 
     // Button updates with completion indicator
-    await expect(submitBtn).toContainText('학습 완료');
+    await expect(youtubeBtn).toContainText('학습 완료');
   });
 
   test('Completed lesson displays visual completion badge and checkmark in catalog and home page', async ({ page }) => {

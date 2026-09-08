@@ -142,11 +142,19 @@ class YouTubeCommentManager {
             </span>
           </div>
           <div class="reflection-buttons">
+            <button type="button" class="btn btn-outline btn-copy-sentence" id="btn-copy-sentence" disabled title="문장을 작성하면 활성화됩니다">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copy-btn-text">📋 문장 클립보드에 복사</span>
+            </button>
+
             <button type="button" class="btn btn-primary btn-post-comment" id="btn-post-comment">
               <svg class="yt-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
-              <span>문장 복사 & 유튜브 댓글 남기기 ↗</span>
+              <span>유튜브 영상 보러가기 ↗</span>
             </button>
           </div>
         </div>
@@ -158,7 +166,21 @@ class YouTubeCommentManager {
 
   _bindEvents() {
     const postBtn = this.container.querySelector('#btn-post-comment');
+    const copyBtn = this.container.querySelector('#btn-copy-sentence');
     const textarea = this.container.querySelector('#user-reflection-sentence');
+
+    // Update copyBtn state based on textarea input
+    const updateCopyBtnState = () => {
+      if (copyBtn && textarea) {
+        const hasText = textarea.value.trim().length > 0;
+        copyBtn.disabled = !hasText;
+      }
+    };
+
+    if (textarea) {
+      textarea.addEventListener('input', updateCopyBtnState);
+      updateCopyBtnState();
+    }
 
     // Bind vocab pick chips to insert into textarea
     const chips = this.container.querySelectorAll('.vocab-pick-chip');
@@ -167,20 +189,47 @@ class YouTubeCommentManager {
         const phrase = chip.dataset.phrase;
         if (phrase) {
           this._insertPhraseToTextarea(phrase);
+          updateCopyBtnState();
         }
       });
     });
 
+    // Copy sentence button handler
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const sentence = textarea ? textarea.value.trim() : '';
+        if (!sentence) return;
+
+        const formatted = `${sentence}\n\n(현서네 리얼 영어 3분 챌린지로 작성된 문장입니다 ✨)`;
+        let copied = false;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(formatted);
+            copied = true;
+          } catch (err) {
+            console.warn('Clipboard write failed:', err);
+          }
+        }
+
+        const btnText = copyBtn.querySelector('#copy-btn-text') || copyBtn.querySelector('span');
+        if (btnText) {
+          btnText.textContent = '문장 복사 완료! ✓';
+          setTimeout(() => {
+            if (btnText) btnText.textContent = '📋 문장 클립보드에 복사';
+          }, 2500);
+        }
+
+        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+          App.showToast('📋 작성하신 문장이 클립보드에 복사되었습니다! 유튜브 댓글창에 붙여넣어 보세요.', 'success');
+        }
+      });
+    }
+
+    // YouTube link button (always active)
     if (postBtn) {
       postBtn.addEventListener('click', () => {
         const sentence = textarea ? textarea.value.trim() : '';
-        if (!sentence) {
-          textarea.classList.add('shake');
-          setTimeout(() => textarea.classList.remove('shake'), 500);
-          return;
-        }
-
-        this.postComment(sentence);
+        this.openYouTubeAndComplete(sentence);
       });
     }
   }
@@ -206,32 +255,37 @@ class YouTubeCommentManager {
     }
   }
 
-  async postComment(sentence) {
+  async openYouTubeAndComplete(sentence = '') {
     const postBtn = this.container.querySelector('#btn-post-comment');
+    const textarea = this.container.querySelector('#user-reflection-sentence');
     const feedback = this.container.querySelector('#reflection-feedback');
+    const textToUse = (typeof sentence === 'string' && sentence.trim())
+      ? sentence.trim()
+      : (textarea ? textarea.value.trim() : '');
 
-    // 1. Format sentence with branding hint
-    const formattedComment = `${sentence}\n\n(현서네 리얼 영어 3분 챌린지로 작성된 문장입니다 ✨)`;
-
-    // 2. Mark entire lesson complete in storage
+    // 1. Mark entire lesson complete in storage
     Storage.setLessonCompleted(this.lessonId, true);
     Storage.recordLessonCompletion(this.lessonId, this.lessonMetadata);
 
-    // 3. Copy to clipboard
+    // 2. Auto-copy sentence to clipboard if written
     let copied = false;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      try {
-        await navigator.clipboard.writeText(formattedComment);
-        copied = true;
-      } catch (err) {
-        console.warn('Clipboard write failed:', err);
+    if (textToUse) {
+      const formattedComment = `${textToUse}\n\n(현서네 리얼 영어 3분 챌린지로 작성된 문장입니다 ✨)`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(formattedComment);
+          copied = true;
+        } catch (err) {
+          console.warn('Clipboard write failed:', err);
+        }
       }
     }
 
-    // Track Step 4 & Lesson completion in Analytics funnel
+    // 3. Track Step 4 & Lesson completion in Analytics
     if (typeof Analytics !== 'undefined') {
       Analytics.trackStepComplete(this.lessonId, 4, {
-        action: 'comment_submitted',
+        action: 'youtube_opened',
+        hasSentence: !!textToUse,
         copied: copied
       });
       Analytics.trackLessonComplete(this.lessonId);
@@ -245,31 +299,47 @@ class YouTubeCommentManager {
     if (postBtn) {
       postBtn.disabled = false;
       postBtn.className = 'btn btn-outline btn-post-comment';
-      postBtn.innerHTML = `<span>댓글 복사 완료! ✓ (학습 완료)</span>`;
+      postBtn.innerHTML = `<span>✓ 학습 완료 (유튜브 영상 열림)</span>`;
     }
 
     const nextLessonUrl = this.getNextLessonUrl();
 
-    // 6. Show clear, reassuring completion feedback
+    // 6. Show clear completion feedback & encourage comments & community
     if (feedback) {
       feedback.style.display = 'block';
       feedback.className = 'reflection-feedback success';
       feedback.innerHTML = `
         <div class="feedback-inner">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#10B981" stroke-width="2.5">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
           <div>
-            <strong style="color: var(--accent-emerald); font-size: 1.15rem; display: block; margin-bottom: 4px;">🏆 축하합니다! 오늘의 레슨을 모두 완주하셨습니다!</strong>
-            <p style="margin: 6px 0 14px; color: var(--text-muted); line-height: 1.6;">
-              ${copied ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong> 후 나만의 멋진 문장을 남겨보세요!' : '유튜브 영상 댓글창으로 이동해 작성한 문장을 댓글로 남겨보세요!'}
+            <strong style="color: var(--accent-emerald); font-size: 1.18rem; display: block; margin-bottom: 6px;">
+              🏆 축하합니다! 오늘의 레슨을 모두 완주하셨습니다!
+            </strong>
+            <p style="margin: 6px 0 12px; color: var(--text-main); line-height: 1.6; font-size: 0.95rem;">
+              ${copied 
+                ? '작성하신 문장이 <strong>클립보드에 자동 복사</strong>되었습니다.<br>새 창으로 열린 유튜브 영상 댓글창에서 <strong>붙여넣기(Ctrl+V / Cmd+V)</strong>하여 나만의 멋진 문장을 남겨보세요!' 
+                : '새 창으로 열린 유튜브 영상에 내가 직접 만든 문장을 댓글로 남겨보세요!'}
+              <br>여러분의 소중한 댓글과 참여는 현서네 리얼 영어가 계속해서 양질의 무료 서비스를 이어가는 데 가장 큰 힘이 됩니다. 💖
             </p>
+
+            <div class="community-notice-box">
+              <p style="margin: 0; color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                💬 오늘 학습은 어떠셨나요? 여러분의 소중한 학습 후기와 의견을 
+                <a href="https://www.youtube.com/@happyfamily8/posts" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-weight: 700; text-decoration: underline;">
+                  현서네 유튜브 커뮤니티 게시판
+                </a>
+                에도 자유롭게 들려주세요! 함께 응원하며 더 즐겁게 영어를 배울 수 있습니다.
+              </p>
+            </div>
+
             <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
-              <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="btn-goto-youtube-comment" style="padding: 9px 20px; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-full);">
-                <span>💬 유튜브에 댓글 남기러 가기 ↗</span>
-              </a>
-              <a href="${nextLessonUrl}" class="btn btn-outline" id="btn-goto-next-lesson" style="padding: 9px 20px; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-full);">
+              <a href="${nextLessonUrl}" class="btn btn-primary" id="btn-goto-next-lesson" style="padding: 10px 22px; font-size: 0.92rem; font-weight: 700; border-radius: var(--radius-full);">
                 <span>다음 레슨 공부하기 ▶</span>
+              </a>
+              <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="btn-goto-youtube-comment" style="padding: 10px 20px; font-size: 0.9rem; font-weight: 600; border-radius: var(--radius-full);">
+                <span>🎬 유튜브 영상 다시 열기 ↗</span>
               </a>
             </div>
           </div>
@@ -296,6 +366,11 @@ class YouTubeCommentManager {
     if (typeof PWAManager !== 'undefined') {
       PWAManager.checkAndPrompt(this.lessonId);
     }
+  }
+
+  // Alias for backward compatibility
+  postComment(sentence) {
+    return this.openYouTubeAndComplete(sentence);
   }
 
   getNextLessonUrl() {
