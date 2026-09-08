@@ -465,7 +465,26 @@ const Storage = {
    */
   getLastActiveLesson() {
     try {
-      return localStorage.getItem(this.KEYS.LAST_LESSON) || 'lesson-01';
+      const last = localStorage.getItem(this.KEYS.LAST_LESSON);
+      if (last && last.startsWith('lesson-')) return last;
+
+      const activePage = localStorage.getItem(this.KEYS.ACTIVE_LESSON_PAGE);
+      if (activePage && activePage.startsWith('lesson-')) return activePage;
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key) continue;
+        if (
+          key.startsWith(this.KEYS.IN_PROGRESS_PREFIX) ||
+          key.startsWith(this.KEYS.PROGRESS_PREFIX) ||
+          key.startsWith('rhyrhy_step_') ||
+          key.startsWith(this.KEYS.LESSON_ACCESS_PREFIX)
+        ) {
+          const match = key.match(/lesson-\d+/);
+          if (match) return match[0];
+        }
+      }
+      return 'lesson-01';
     } catch (_) {
       return 'lesson-01';
     }
@@ -579,6 +598,37 @@ const Storage = {
         if (key && key.startsWith(this.KEYS.PROGRESS_PREFIX)) {
           const val = JSON.parse(localStorage.getItem(key));
           if (val && (val.completed || val.currentQuestionIndex > 0 || (val.answeredQuestions && Object.keys(val.answeredQuestions).length > 0))) {
+            return true;
+          }
+        }
+      }
+    } catch (_) { }
+    return false;
+  },
+
+  /**
+   * Check if user has ever studied or visited any lesson
+   * @returns {boolean}
+   */
+  hasEverStudied() {
+    if (this.hasAnyProgress()) return true;
+    try {
+      if (this.getTotalSavedSentenceCount() > 0) return true;
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key) continue;
+        if (
+          key.startsWith(this.KEYS.PROGRESS_PREFIX) ||
+          key.startsWith(this.KEYS.IN_PROGRESS_PREFIX) ||
+          key.startsWith('rhyrhy_step_') ||
+          key.startsWith(this.KEYS.LESSON_ACCESS_PREFIX) ||
+          key.startsWith(this.KEYS.STUDY_TIME_PREFIX) ||
+          key === this.KEYS.LAST_LESSON ||
+          key === this.KEYS.ACTIVE_LESSON_PAGE
+        ) {
+          const val = localStorage.getItem(key);
+          if (val && val !== 'null' && val !== 'undefined') {
             return true;
           }
         }

@@ -158,4 +158,86 @@ test.describe('Landing Page Redesign & 5-Step Learning Flow (Issue #39)', () => 
       await page.screenshot({ path: path.join(ARTIFACT_DIR, 'flow_cards_mobile.png') });
     }
   });
+
+  test('5. Hero action button shows "첫 레슨 무료로 시작하기" for first-time visitors', async ({ page }) => {
+    // Ensure completely clean storage
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
+
+    await page.goto('/index.html');
+
+    const heroActionRow = page.locator('#hero-action-row');
+    await expect(heroActionRow).toBeVisible();
+
+    const heroBtn = heroActionRow.locator('#btn-hero-start');
+    await expect(heroBtn).toBeVisible();
+    await expect(heroBtn).toContainText('첫 레슨 무료로 시작하기');
+    await expect(heroBtn).toHaveAttribute('href', expect.stringContaining('lessons/lesson-01/index.html'));
+  });
+
+  test('6. Hero action button displays "이어서 학습하기" and redirects to studied lesson for returning learners', async ({ page }) => {
+    // Scenario A: User studied lesson-01
+    await page.addInitScript(() => {
+      localStorage.clear();
+      localStorage.setItem('rhyrhy_progress_lesson-01', JSON.stringify({
+        completed: false,
+        currentQuestionIndex: 2,
+        score: 2,
+        timestamp: Date.now()
+      }));
+      localStorage.setItem('rhyrhy_last_lesson', 'lesson-01');
+    });
+
+    await page.goto('/index.html');
+
+    const heroActionRow = page.locator('#hero-action-row');
+    await expect(heroActionRow).toBeVisible();
+
+    const heroBtn = heroActionRow.locator('#btn-hero-start');
+    await expect(heroBtn).toBeVisible();
+    await expect(heroBtn).toContainText('이어서 학습하기');
+    await expect(heroBtn).toHaveAttribute('href', expect.stringContaining('lessons/lesson-01/index.html'));
+
+    // Click button and verify navigation to lesson-01
+    await Promise.all([
+      page.waitForURL(/lessons\/lesson-01\/index\.html/),
+      heroBtn.click()
+    ]);
+    expect(page.url()).toContain('lessons/lesson-01/index.html');
+
+    // Scenario B: User studied lesson-02
+    await page.addInitScript(() => {
+      localStorage.clear();
+      localStorage.setItem('rhyrhy_last_lesson', 'lesson-02');
+      localStorage.setItem('rhyrhy_step_lesson-02', '2');
+    });
+
+    await page.goto('/index.html');
+    const heroBtnL2 = page.locator('#hero-action-row #btn-hero-start');
+    await expect(heroBtnL2).toContainText('이어서 학습하기');
+    await expect(heroBtnL2).toHaveAttribute('href', expect.stringContaining('lessons/lesson-02/index.html'));
+
+    await Promise.all([
+      page.waitForURL(/lessons\/lesson-02\/index\.html/),
+      heroBtnL2.click()
+    ]);
+    expect(page.url()).toContain('lessons/lesson-02/index.html');
+
+    // Scenario C: Lesson 01 is completed -> button advances to lesson-02
+    await page.addInitScript(() => {
+      localStorage.clear();
+      localStorage.setItem('rhyrhy_progress_lesson-01', JSON.stringify({
+        completed: true,
+        lessonCompleted: true,
+        score: 3
+      }));
+      localStorage.setItem('rhyrhy_last_lesson', 'lesson-01');
+    });
+
+    await page.goto('/index.html');
+    const heroBtnCompleted = page.locator('#hero-action-row #btn-hero-start');
+    await expect(heroBtnCompleted).toContainText('이어서 학습하기');
+    await expect(heroBtnCompleted).toHaveAttribute('href', expect.stringContaining('lessons/lesson-02/index.html'));
+  });
 });
