@@ -1,4 +1,16 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
+
+const ARTIFACT_DIR = '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792';
+
+async function safeScreenshot(page, filename) {
+  if (!process.env.CI && fs.existsSync(ARTIFACT_DIR)) {
+    try {
+      await page.screenshot({ path: path.join(ARTIFACT_DIR, filename) });
+    } catch (_) {}
+  }
+}
 
 test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', () => {
   test('Empty state: when no sentences are saved, player bar is hidden', async ({ page }) => {
@@ -218,14 +230,10 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await expect(page.locator('.saved-player-bar .player-progress-row')).toBeHidden();
 
     // Capture visual artifact for user walkthrough
-    await page.screenshot({
-      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_mobile_view.png'
-    });
+    await safeScreenshot(page, 'saved_player_mobile_view.png');
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.waitForTimeout(200);
-    await page.screenshot({
-      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_desktop_view.png'
-    });
+    await safeScreenshot(page, 'saved_player_desktop_view.png');
   });
 
   test('Check saved-sentence-card and play button styles on desktop and mobile', async ({ page }) => {
@@ -261,9 +269,7 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await page.click('#btn-saved-toggle');
     await page.waitForTimeout(300);
 
-    await page.screenshot({
-      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/desktop_lesson_playing_card.png'
-    });
+    await safeScreenshot(page, 'desktop_lesson_playing_card.png');
 
     const desktopCardInfo = await page.evaluate(() => {
       const card = document.querySelector('#saved-card-sent_test_1');
@@ -288,16 +294,12 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await page.waitForTimeout(300);
 
     // Save light mode screenshot
-    await page.screenshot({
-      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_light.png'
-    });
+    await safeScreenshot(page, 'saved_player_light.png');
 
     // Toggle dark mode and save screenshot
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
     await page.waitForTimeout(200);
-    await page.screenshot({
-      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_dark.png'
-    });
+    await safeScreenshot(page, 'saved_player_dark.png');
 
     const mobileCardInfo = await page.evaluate(() => {
       const card = document.querySelector('#saved-card-sent_test_1');
