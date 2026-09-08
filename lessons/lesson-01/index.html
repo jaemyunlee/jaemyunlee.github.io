@@ -246,7 +246,7 @@
         container: '#reflection-container',
         nextLessonUrl: (typeof App !== 'undefined' && App.getNextLessonUrl) ? App.getNextLessonUrl(LESSON_ID) : '/lessons.html',
         onComplete: () => {
-          showStep(4, true);
+          showStep(4, false);
         }
       });
       commentManager.init();

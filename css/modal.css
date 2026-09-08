@@ -272,6 +272,32 @@
   color: #6EE7B7;
 }
 
+[data-theme="light"] .reflection-feedback {
+  background: rgba(5, 150, 105, 0.08);
+  border: 1px solid rgba(5, 150, 105, 0.25);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .btn-copy-sentence:disabled {
+  background-color: transparent;
+  color: var(--text-subtle) !important;
+  border-color: var(--surface-border);
+  opacity: 0.7;
+}
+
+[data-theme="light"] .btn-copy-sentence:not(:disabled) {
+  background-color: var(--surface-color);
+  color: var(--text-main) !important;
+  border-color: var(--primary-light);
+}
+
+[data-theme="light"] .btn-copy-sentence:not(:disabled):hover,
+[data-theme="light"] .btn-copy-sentence:not(:disabled):focus {
+  background-color: var(--surface-color-alt);
+  color: var(--primary) !important;
+  border-color: var(--primary);
+}
+
 .reflection-feedback.warning {
   background: rgba(245, 158, 11, 0.12);
   border-color: rgba(245, 158, 11, 0.28);
