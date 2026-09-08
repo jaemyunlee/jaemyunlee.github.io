@@ -338,12 +338,12 @@ function build() {
     // A. Rewrite CSS links
     for (const [origFile, info] of Object.entries(hashMap)) {
       if (info.type === 'css') {
-        // Match href="...css/filename.css"
-        const cssRegex = new RegExp(`(href=["'][^"']*css/)${origFile}(["'])`, 'g');
+        // Match href="...css/filename.css" (with optional query parameters)
+        const cssRegex = new RegExp(`(href=["'][^"']*css/)${origFile}(?:\\?[^"']*)?(["'])`, 'g');
         htmlContent = htmlContent.replace(cssRegex, `$1${info.hashed}$2`);
       } else if (info.type === 'js') {
-        // Match src="...js/filename.js"
-        const jsRegex = new RegExp(`(src=["'][^"']*js/)${origFile}(["'])`, 'g');
+        // Match src="...js/filename.js" (with optional query parameters)
+        const jsRegex = new RegExp(`(src=["'][^"']*js/)${origFile}(?:\\?[^"']*)?(["'])`, 'g');
         htmlContent = htmlContent.replace(jsRegex, `$1${info.hashed}$2`);
       }
     }

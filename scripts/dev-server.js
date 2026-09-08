@@ -199,6 +199,20 @@ const server = http.createServer((req, res) => {
       }
 
       let modifiedHtml = html;
+
+      // Inject cache-busting query parameter on internal script and CSS links
+      const cacheBust = Date.now();
+      modifiedHtml = modifiedHtml.replace(/(<script\b[^>]*?\bsrc=["'])([^"']+)(["'][^>]*>)/gi, (match, prefix, src, suffix) => {
+        if (/^https?:\/\/|^\/\//i.test(src)) return match;
+        const delim = src.includes('?') ? '&' : '?';
+        return `${prefix}${src}${delim}t=${cacheBust}${suffix}`;
+      });
+      modifiedHtml = modifiedHtml.replace(/(<link\b[^>]*?\bhref=["'])([^"']+\.css)(["'][^>]*>)/gi, (match, prefix, href, suffix) => {
+        if (/^https?:\/\/|^\/\//i.test(href)) return match;
+        const delim = href.includes('?') ? '&' : '?';
+        return `${prefix}${href}${delim}t=${cacheBust}${suffix}`;
+      });
+
       if (modifiedHtml.includes('</body>')) {
         modifiedHtml = modifiedHtml.replace('</body>', RELOAD_SCRIPT + '\n</body>');
       } else if (modifiedHtml.includes('</html>')) {
@@ -209,7 +223,7 @@ const server = http.createServer((req, res) => {
 
       res.writeHead(200, {
         'Content-Type': contentType,
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
         'Pragma': 'no-cache',
         'Expires': '0'
       });
