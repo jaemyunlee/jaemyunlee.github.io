@@ -1466,12 +1466,18 @@
 
 .saved-sentences-drawer .review-player-bar,
 .saved-sentences-drawer .saved-player-bar,
-.player-variant-mobile,
 .saved-player-bar {
   padding: 8px 16px;
   border-radius: var(--radius-lg);
   gap: 0;
-  margin-bottom: 16px;
+  margin: 16px 20px 0 20px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+}
+
+.player-variant-mobile {
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  gap: 0;
   box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
 }
 
