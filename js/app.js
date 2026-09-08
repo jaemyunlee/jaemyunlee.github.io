@@ -1357,11 +1357,51 @@ const SavedAudioPlayer = {
   isPlayAll: true,
   playbackRate: 1.0,
   _isFallbackActive: false,
+  _isChangingTrack: false,
+  _wakeLock: null,
+
+  _ensureAudioSession() {
+    if (typeof navigator !== 'undefined' && 'audioSession' in navigator) {
+      try {
+        if (navigator.audioSession.type !== 'playback') {
+          navigator.audioSession.type = 'playback';
+        }
+      } catch (err) {
+        console.warn('AudioSession error:', err);
+      }
+    }
+  },
+
+  async _requestWakeLock() {
+    if (typeof navigator !== 'undefined' && 'wakeLock' in navigator && typeof navigator.wakeLock.request === 'function') {
+      try {
+        if (!this._wakeLock) {
+          this._wakeLock = await navigator.wakeLock.request('screen');
+          this._wakeLock.addEventListener('release', () => {
+            this._wakeLock = null;
+          });
+        }
+      } catch (_) {
+        this._wakeLock = null;
+      }
+    }
+  },
+
+  async _releaseWakeLock() {
+    if (this._wakeLock) {
+      try {
+        await this._wakeLock.release();
+      } catch (_) {}
+      this._wakeLock = null;
+    }
+  },
 
   init(app) {
     this.app = app;
     if (this._initialized) return;
     this._initialized = true;
+
+    this._ensureAudioSession();
 
     // Attach primary Audio element to DOM to preserve WebKit background audio session privilege
     if (!this.audio) {
@@ -1379,10 +1419,13 @@ const SavedAudioPlayer = {
       this.preloaderAudio = document.createElement('audio');
       this.preloaderAudio.id = 'saved-audio-preloader';
       this.preloaderAudio.preload = 'auto';
+      this.preloaderAudio.muted = true; // MUST be muted so WebKit background audio session is not interrupted
       this.preloaderAudio.style.display = 'none';
       if (document.body) {
         document.body.appendChild(this.preloaderAudio);
       }
+    } else {
+      this.preloaderAudio.muted = true;
     }
 
     this._bindAudioEvents();
@@ -1391,6 +1434,15 @@ const SavedAudioPlayer = {
 
     window.addEventListener('saved-sentences-updated', () => {
       this.updatePlaylist();
+    });
+
+    // Re-request wake lock and sync UI on returning to visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && this.isPlaying) {
+        this._requestWakeLock();
+        this._updateTrackInfo();
+        this._updateVisualState(false);
+      }
     });
 
     // Global audio coordination: pause when any other player starts
@@ -1432,6 +1484,7 @@ const SavedAudioPlayer = {
         if (totalLabel) totalLabel.textContent = this._formatTime(this.audio.duration);
         const pct = Math.min(100, Math.max(0, (this.audio.currentTime / this.audio.duration) * 100));
         if (bar) bar.style.width = `${pct}%`;
+        this._updateMediaSessionPositionState();
       }
     });
 
@@ -1439,6 +1492,7 @@ const SavedAudioPlayer = {
       const totalLabel = document.getElementById('saved-player-total-time');
       if (totalLabel && this.audio.duration && !isNaN(this.audio.duration)) {
         totalLabel.textContent = this._formatTime(this.audio.duration);
+        this._updateMediaSessionPositionState();
       }
     });
 
@@ -1449,9 +1503,12 @@ const SavedAudioPlayer = {
     });
 
     this.audio.addEventListener('pause', () => {
+      // Ignore synthetic pause event when changing track src during continuous playback
+      if (this._isChangingTrack) return;
       this.isPlaying = false;
       this._updateVisualState(false);
       this._setMediaSessionPlaybackState('paused');
+      this._releaseWakeLock();
     });
 
     this.audio.addEventListener('ended', () => {
@@ -1503,10 +1560,39 @@ const SavedAudioPlayer = {
         navigator.mediaSession.setActionHandler('seekto', (details) => {
           if (details && details.seekTime !== undefined && this.audio && this.audio.duration) {
             this.audio.currentTime = details.seekTime;
+            this._updateMediaSessionPositionState();
+          }
+        });
+        navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+          const skip = (details && details.seekOffset) || 5;
+          if (this.audio) {
+            this.audio.currentTime = Math.max(0, this.audio.currentTime - skip);
+            this._updateMediaSessionPositionState();
+          }
+        });
+        navigator.mediaSession.setActionHandler('seekforward', (details) => {
+          const skip = (details && details.seekOffset) || 5;
+          if (this.audio && this.audio.duration) {
+            this.audio.currentTime = Math.min(this.audio.duration, this.audio.currentTime + skip);
+            this._updateMediaSessionPositionState();
           }
         });
       } catch (err) {
         console.warn('MediaSession handler error:', err);
+      }
+    }
+  },
+
+  _updateMediaSessionPositionState() {
+    if ('mediaSession' in navigator && typeof navigator.mediaSession.setPositionState === 'function') {
+      if (this.audio && this.audio.duration && !isNaN(this.audio.duration) && isFinite(this.audio.duration) && this.audio.duration > 0) {
+        try {
+          navigator.mediaSession.setPositionState({
+            duration: this.audio.duration,
+            playbackRate: this.playbackRate,
+            position: Math.min(this.audio.currentTime, this.audio.duration)
+          });
+        } catch (_) {}
       }
     }
   },
@@ -1690,6 +1776,9 @@ const SavedAudioPlayer = {
     const item = this.playlist[this.currentIndex];
     if (!item) return;
 
+    this._ensureAudioSession();
+    this._requestWakeLock();
+
     // Pause any other page players (e.g. Step 4 ReviewPlayer, Step 2 VideoPlayer)
     window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'saved-player' } }));
     window.dispatchEvent(new CustomEvent('saved-player-started'));
@@ -1709,6 +1798,7 @@ const SavedAudioPlayer = {
     this._updateTrackInfo();
     this._updateVisualState(true);
     this._updateMediaSession(item, base);
+    this._setMediaSessionPlaybackState('playing');
 
     const curLabel = document.getElementById('saved-player-current-time');
     const totalLabel = document.getElementById('saved-player-total-time');
@@ -1718,28 +1808,36 @@ const SavedAudioPlayer = {
     if (progressBar) progressBar.style.width = '0%';
 
     if (audioUrl) {
-      if (this.audio.src !== audioUrl) {
-        this.audio.src = audioUrl;
-      }
-      this.audio.playbackRate = this.playbackRate;
-      this.audio.currentTime = 0;
-      const p = this.audio.play();
-      if (p && typeof p.catch === 'function') {
-        p.catch(err => {
-          console.warn('Audio play prevented or error:', err);
-          if (!this.isPlaying) return;
-          if (!this._isFallbackActive) {
-            this._fallbackTts();
-          }
-        });
+      this._isChangingTrack = true;
+      try {
+        if (this.audio.src !== audioUrl) {
+          this.audio.src = audioUrl;
+        }
+        this.audio.playbackRate = this.playbackRate;
+        this.audio.currentTime = 0;
+        const p = this.audio.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(err => {
+            console.warn('Audio play prevented or error:', err);
+            if (!this.isPlaying) return;
+            if (!this._isFallbackActive) {
+              this._fallbackTts();
+            }
+          });
+        }
+      } finally {
+        setTimeout(() => {
+          this._isChangingTrack = false;
+        }, 150);
       }
 
-      // Preload the next sentence in background to eliminate inter-track gap
+      // Preload the next sentence in background with muted preloader
       if (this.playlist.length > 1 && this.isPlayAll) {
         const nextIdx = (this.currentIndex + 1) % this.playlist.length;
         const nextItem = this.playlist[nextIdx];
         const nextUrl = this._resolveAudioUrl(nextItem, base);
         if (nextUrl && this.preloaderAudio) {
+          this.preloaderAudio.muted = true;
           this.preloaderAudio.src = nextUrl;
           this.preloaderAudio.load();
         }
@@ -1818,6 +1916,7 @@ const SavedAudioPlayer = {
       this.isPlaying = false;
       this._updateVisualState(false);
       this._setMediaSessionPlaybackState('paused');
+      this._releaseWakeLock();
     }
   },
 
@@ -1834,16 +1933,20 @@ const SavedAudioPlayer = {
     this.isPlaying = false;
     this._updateVisualState(false);
     this._setMediaSessionPlaybackState('paused');
+    this._releaseWakeLock();
   },
 
   resume() {
     if (this.playlist.length === 0) return;
+    this._ensureAudioSession();
+    this._requestWakeLock();
     window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'saved-player' } }));
     window.dispatchEvent(new CustomEvent('saved-player-started'));
     if (this.audio && this.audio.src && !this.audio.ended && this.audio.currentTime > 0) {
       this.audio.playbackRate = this.playbackRate;
       this.isPlaying = true;
       this._updateVisualState(true);
+      this._setMediaSessionPlaybackState('playing');
       this.audio.play().catch(() => this.play(this.currentIndex));
     } else {
       this.play(this.currentIndex);

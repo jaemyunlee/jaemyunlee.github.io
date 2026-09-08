@@ -29,8 +29,21 @@ class ReviewPlayer {
     this.progressInterval = null;
   }
 
+  _ensureAudioSession() {
+    if (typeof navigator !== 'undefined' && 'audioSession' in navigator) {
+      try {
+        if (navigator.audioSession.type !== 'playback') {
+          navigator.audioSession.type = 'playback';
+        }
+      } catch (err) {
+        console.warn('AudioSession error:', err);
+      }
+    }
+  }
+
   init() {
     if (!this.container) return;
+    this._ensureAudioSession();
     this.render();
     this._bindControls();
 
@@ -470,16 +483,20 @@ class ReviewPlayer {
             this.preloaderAudio = document.createElement('audio');
             this.preloaderAudio.id = 'review-audio-preloader';
             this.preloaderAudio.preload = 'auto';
+            this.preloaderAudio.muted = true;
             this.preloaderAudio.style.display = 'none';
             if (document.body) {
               document.body.appendChild(this.preloaderAudio);
             }
+          } else {
+            this.preloaderAudio.muted = true;
           }
           this.preloaderAudio.src = nextAudioUrl;
           this.preloaderAudio.load();
         }
       }
 
+      this._ensureAudioSession();
       const playPromise = this.currentAudio.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
