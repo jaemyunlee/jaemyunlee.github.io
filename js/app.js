@@ -172,6 +172,7 @@ const App = {
     if (this.currentLessonId && this.currentLessonId.startsWith('lesson-')) {
       Storage.setActiveLessonPage(this.currentLessonId);
       Storage.setLessonInProgress(this.currentLessonId);
+      Storage.setLastActiveLesson(this.currentLessonId);
     } else {
       // Non-lesson page (home, catalog, quiz-share, etc.): clear active lesson page
       Storage.clearActiveLessonPage();
@@ -200,6 +201,9 @@ const App = {
       // Landing page: show 5 latest lessons from latest on top
       this.renderLessonsCatalog('#lessons-cards-container', { sort: 'desc', limit: 5 });
     }
+
+    // Update hero call-to-action button if present on page
+    this.updateHeroStartButton();
 
     // Global delegation for lesson card clicks in catalog
     document.addEventListener('click', (e) => {
@@ -241,6 +245,63 @@ const App = {
           }, 150);
         }
       }, { passive: true });
+    }
+  },
+
+  /**
+   * Update the hero call-to-action button on landing page:
+   * If the user has ever studied in lessons, displays "이어서 학습하기" and redirects to
+   * the active / next lesson page when clicked.
+   * For first-time visitors, defaults to "첫 레슨 무료로 시작하기" pointing to lesson 1.
+   */
+  updateHeroStartButton() {
+    const heroBtn = document.querySelector('#hero-action-row .btn-hero-start') || document.getElementById('btn-hero-start');
+    if (!heroBtn) return;
+
+    if (typeof Storage !== 'undefined' && Storage.hasEverStudied()) {
+      let targetLessonId = Storage.getLastActiveLesson() || 'lesson-01';
+
+      // If the last active lesson is completely finished, advance to the next uncompleted lesson if available
+      if (Storage.isLessonCompleted(targetLessonId)) {
+        const next = this.getNextLesson(targetLessonId);
+        if (next && !Storage.isLessonCompleted(next.id)) {
+          targetLessonId = next.id;
+        }
+      }
+
+      const targetLesson = this.lessons.find(l => l.id === targetLessonId) || this.lessons[0];
+      const base = this._getBasePath();
+      const rawPath = (targetLesson.path || `lessons/${targetLesson.id}/`).replace(/^\/+/, '');
+      const cleanPath = rawPath.endsWith('/') ? rawPath : `${rawPath}/`;
+      const targetUrl = `${base}${cleanPath}index.html`;
+
+      heroBtn.href = targetUrl;
+      const textSpan = heroBtn.querySelector('span');
+      if (textSpan) {
+        textSpan.textContent = '이어서 학습하기';
+      }
+      heroBtn.setAttribute('title', `${targetLesson.title} 이어서 학습하기`);
+      heroBtn.setAttribute('data-target-lesson', targetLesson.id);
+
+      if (!heroBtn._studyClickBound) {
+        heroBtn._studyClickBound = true;
+        heroBtn.addEventListener('click', () => {
+          if (typeof Analytics !== 'undefined') {
+            const curTargetId = heroBtn.getAttribute('data-target-lesson') || targetLesson.id;
+            const curLesson = this.lessons.find(l => l.id === curTargetId);
+            Analytics.trackLessonCardClick(curTargetId, curLesson ? curLesson.title : 'Hero Resume');
+          }
+        });
+      }
+    } else {
+      const base = this._getBasePath();
+      heroBtn.href = `${base}lessons/lesson-01/index.html`;
+      const textSpan = heroBtn.querySelector('span');
+      if (textSpan) {
+        textSpan.textContent = '첫 레슨 무료로 시작하기';
+      }
+      heroBtn.setAttribute('title', '첫 레슨 무료로 시작하기');
+      heroBtn.setAttribute('data-target-lesson', 'lesson-01');
     }
   },
 

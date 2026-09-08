@@ -362,36 +362,342 @@
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
     }
 
-    /* Resume Card */
-    .resume-card {
+    /* Learning Flow Section (Issue #39) */
+    .learning-flow-section {
+      margin-bottom: 56px;
+      padding: 36px 28px;
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.65) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    [data-theme="light"] .learning-flow-section {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      box-shadow: 0 12px 36px rgba(15, 23, 42, 0.05);
+    }
+
+    .flow-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 36px;
+    }
+
+    .flow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      background: rgba(99, 102, 241, 0.14);
+      border: 1px solid rgba(99, 102, 241, 0.32);
+      border-radius: var(--radius-full);
+      color: #A5B4FC;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    [data-theme="light"] .flow-badge {
+      background: rgba(99, 102, 241, 0.08);
+      border-color: rgba(99, 102, 241, 0.25);
+      color: #4338CA;
+    }
+
+    .flow-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: #FFFFFF;
+      word-break: keep-all;
+    }
+
+    [data-theme="light"] .flow-title {
+      color: #0F172A;
+    }
+
+    .flow-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .flow-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .flow-step-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 22px 18px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] .flow-step-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+    }
+
+    .flow-step-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 0 20px rgba(99, 102, 241, 0.15);
+    }
+
+    [data-theme="light"] .flow-step-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.09);
+    }
+
+    .flow-step-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      background: linear-gradient(135deg, #1E1B4B, #1E293B);
-      border: 1.5px solid var(--primary);
-      border-radius: var(--radius-lg);
-      padding: 20px 24px;
-      box-shadow: 0 8px 30px var(--primary-glow);
+      margin-bottom: 16px;
     }
 
-    [data-theme="light"] .resume-card {
-      background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
-      border: 1.5px solid rgba(99, 102, 241, 0.35);
-      border-left: 5px solid var(--primary);
-      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.1);
+    .flow-step-num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: 1px;
+      color: #A5B4FC;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
     }
 
-    .resume-info h3 {
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-      color: var(--text-main);
+    [data-theme="light"] .flow-step-num {
+      color: #4338CA;
+      background: rgba(99, 102, 241, 0.1);
+      border-color: rgba(99, 102, 241, 0.25);
     }
 
-    .resume-info p {
-      font-size: 0.88rem;
+    .flow-step-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    .tag-quiz {
+      color: #F59E0B;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .tag-audio {
+      color: #818CF8;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .tag-video {
+      color: #FB7185;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .tag-write {
+      color: #34D399;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .tag-repeat {
+      color: #38BDF8;
+      background: rgba(14, 165, 233, 0.15);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+
+    [data-theme="light"] .tag-quiz {
+      color: #B45309;
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    [data-theme="light"] .tag-audio {
+      color: #4338CA;
+      background: rgba(99, 102, 241, 0.1);
+      border-color: rgba(99, 102, 241, 0.25);
+    }
+
+    [data-theme="light"] .tag-video {
+      color: #BE123C;
+      background: rgba(244, 63, 94, 0.1);
+      border-color: rgba(244, 63, 94, 0.25);
+    }
+
+    [data-theme="light"] .tag-write {
+      color: #047857;
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    [data-theme="light"] .tag-repeat {
+      color: #0369A1;
+      background: rgba(14, 165, 233, 0.1);
+      border-color: rgba(14, 165, 233, 0.25);
+    }
+
+    .flow-step-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .icon-wrap-quiz {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+    }
+
+    .icon-wrap-audio {
+      background: rgba(99, 102, 241, 0.15);
+      color: #818CF8;
+    }
+
+    .icon-wrap-video {
+      background: rgba(244, 63, 94, 0.15);
+      color: #FB7185;
+    }
+
+    .icon-wrap-write {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+    }
+
+    .icon-wrap-repeat {
+      background: rgba(14, 165, 233, 0.15);
+      color: #38BDF8;
+    }
+
+    [data-theme="light"] .icon-wrap-quiz {
+      background: rgba(245, 158, 11, 0.12);
+      color: #D97706;
+    }
+
+    [data-theme="light"] .icon-wrap-audio {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4F46E5;
+    }
+
+    [data-theme="light"] .icon-wrap-video {
+      background: rgba(244, 63, 94, 0.12);
+      color: #E11D48;
+    }
+
+    [data-theme="light"] .icon-wrap-write {
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+    }
+
+    [data-theme="light"] .icon-wrap-repeat {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0284C7;
+    }
+
+    .flow-step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.42;
+      color: #F8FAFC;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    [data-theme="light"] .flow-step-title {
+      color: #0F172A;
+    }
+
+    .flow-step-desc {
+      font-size: 0.84rem;
       color: var(--text-muted);
+      line-height: 1.55;
+      word-break: keep-all;
+      margin: 0;
+    }
+
+    [data-theme="light"] .flow-step-desc {
+      color: #475569;
+    }
+
+    .btn-hero-flow-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 18px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #E2E8F0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-hero-flow-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      color: #FFFFFF;
+    }
+
+    [data-theme="light"] .btn-hero-flow-link {
+      color: #4338CA;
+      background: rgba(99, 102, 241, 0.06);
+      border-color: rgba(99, 102, 241, 0.25);
+    }
+
+    [data-theme="light"] .btn-hero-flow-link:hover {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.45);
+      color: #3730A3;
+    }
+
+    @media (max-width: 1024px) {
+      .flow-steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .learning-flow-section {
+        padding: 28px 18px;
+        margin-bottom: 42px;
+      }
+
+      .flow-title {
+        font-size: 1.55rem;
+      }
+
+      .flow-steps-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .flow-step-card {
+        padding: 18px 16px;
+      }
     }
 
     @media (max-width: 860px) {
@@ -445,15 +751,6 @@
       .hero-korean-lead {
         font-size: 1.08rem;
       }
-
-      .resume-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .resume-card .btn {
-        width: 100%;
-      }
     }
 
     @media (max-width: 480px) {
@@ -475,8 +772,6 @@
   <header class="main-nav" id="main-nav"></header>
 
   <main class="app-container">
-    <!-- Resume Banner (Dynamically Displayed when returning user has played quiz/video) -->
-    <section id="resume-banner-container" class="resume-section" style="display: none;"></section>
 
     <!-- Hero Header -->
     <section class="hero-section" id="hero-section">
@@ -504,16 +799,22 @@
             국제 가족의 생생한<br>생활 영어를 들려드립니다
           </h1>
           <p class="hero-subtitle">
-            영상 시청 전 <strong>3분 퀴즈</strong>로 핵심 어휘와 표현을 먼저 익히고,
-            유튜브 영상과 <strong>동기화된 한영 자막 스크립트</strong>로 원어민 발음을 듣고, <strong>배운 내용으로 직접 문장을</strong> 작성 해봐요
+            선행 퀴즈부터 원어민 음성, 동기화 스크립트, 실전 영작, 일상 속 흘려듣기까지 —<br>
+            <strong>5단계 과학적 학습 루틴</strong>으로 입과 귀에 체화되는 현서네 리얼 영어를 시작해보세요!
           </p>
 
-          <div class="hero-action-row">
-            <a href="./lessons/lesson-01/index.html" class="btn btn-primary btn-hero-start">
+          <div class="hero-action-row" id="hero-action-row">
+            <a href="./lessons/lesson-01/index.html" class="btn btn-primary btn-hero-start" id="btn-hero-start">
               <span>첫 레슨 무료로 시작하기</span>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <a href="#learning-flow" class="btn-hero-flow-link" title="5단계 학습법 살펴보기">
+              <span>💡 5단계 학습법 보기</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 5v14M19 12l-7 7-7-7" />
               </svg>
             </a>
             <div class="free-guarantee">
@@ -542,6 +843,111 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5-Step Real English Learning Flow Section (Issue #39) -->
+    <section class="learning-flow-section" id="learning-flow">
+      <div class="flow-header">
+        <div class="flow-badge">
+          <span>✨</span> How RhyRhy English Works
+        </div>
+        <h2 class="flow-title">현서네 5단계 리얼 영어 학습법</h2>
+        <p class="flow-subtitle">
+          단순 시청을 넘어 장기 기억으로 자연스럽게 체화되는 과학적인 5단계 학습 루틴입니다.
+        </p>
+      </div>
+
+      <div class="flow-steps-grid">
+        <!-- Step 1 -->
+        <div class="flow-step-card" data-step="1">
+          <div class="flow-step-top">
+            <span class="flow-step-num">STEP 01</span>
+            <span class="flow-step-tag tag-quiz">선행 퀴즈</span>
+          </div>
+          <div class="flow-step-icon-wrap icon-wrap-quiz" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+          </div>
+          <h3 class="flow-step-title">3분 퀴즈로 핵심 어휘 선행 학습</h3>
+          <p class="flow-step-desc">
+            전체 영상을 보기 전, 3분 퀴즈로 영상 속 핵심 단어와 표현을 먼저 가볍게 익힙니다.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flow-step-card" data-step="2">
+          <div class="flow-step-top">
+            <span class="flow-step-num">STEP 02</span>
+            <span class="flow-step-tag tag-audio">음성 프리뷰</span>
+          </div>
+          <div class="flow-step-icon-wrap icon-wrap-audio" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+            </svg>
+          </div>
+          <h3 class="flow-step-title">원어민 음성으로 핵심 문장 듣기</h3>
+          <p class="flow-step-desc">
+            영상 시청 전, 원어민의 정확한 실제 발음과 억양으로 주요 문장을 귀로 먼저 체화합니다.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flow-step-card" data-step="3">
+          <div class="flow-step-top">
+            <span class="flow-step-num">STEP 03</span>
+            <span class="flow-step-tag tag-video">전체 영상</span>
+          </div>
+          <div class="flow-step-icon-wrap icon-wrap-video" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+          <h3 class="flow-step-title">전체 영상 & 동기화 자막 시청</h3>
+          <p class="flow-step-desc">
+            동기화된 한영 자막 스크립트와 함께 전체 영상을 시청하며 생생한 맥락 속 진짜 영어를 학습합니다.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flow-step-card" data-step="4">
+          <div class="flow-step-top">
+            <span class="flow-step-num">STEP 04</span>
+            <span class="flow-step-tag tag-write">실전 영작</span>
+          </div>
+          <div class="flow-step-icon-wrap icon-wrap-write" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <h3 class="flow-step-title">배운 표현으로 나만의 문장 영작</h3>
+          <p class="flow-step-desc">
+            새로 익힌 표현을 내 실제 생활과 연결해 직접 영작하고, 유튜브 댓글로 공유하며 학습을 완성합니다.
+          </p>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="flow-step-card" data-step="5">
+          <div class="flow-step-top">
+            <span class="flow-step-num">STEP 05</span>
+            <span class="flow-step-tag tag-repeat">장기 기억</span>
+          </div>
+          <div class="flow-step-icon-wrap icon-wrap-repeat" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 1l4 4-4 4"/>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+              <path d="M7 23l-4-4 4-4"/>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+            </svg>
+          </div>
+          <h3 class="flow-step-title">일상 속 백그라운드 흘려듣기</h3>
+          <p class="flow-step-desc">
+            산책이나 집안일 등 일상 활동 중 저장한 문장을 백그라운드로 연속 재생하며 무의식 장기 기억으로 굳힙니다.
+          </p>
         </div>
       </div>
     </section>
@@ -583,42 +989,6 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       App.init();
-
-      // Check if user has previously played any quiz or completed a lesson
-      const hasProgress = Storage.hasAnyProgress();
-      const resumeBanner = document.getElementById('resume-banner-container');
-
-      if (hasProgress && resumeBanner) {
-        let lastActiveId = Storage.getLastActiveLesson();
-        const activeProg = Storage.getProgress(lastActiveId);
-        const activeLessonObj = App.lessons.find(l => l.id === lastActiveId) || App.lessons[0];
-
-        resumeBanner.style.display = 'block';
-        resumeBanner.innerHTML = `
-          <div class="resume-card animate-fade-in" style="margin-bottom: 28px;">
-            <div class="resume-info">
-              <span class="badge badge-primary" style="margin-bottom: 6px;">이어하기 (Resume Learning)</span>
-              <h3>${activeLessonObj.icon} ${activeLessonObj.title}</h3>
-              <p>${activeProg.completed ? '🎉 이 레슨의 퀴즈를 모두 완료했습니다! 영상과 스크립트를 복습해보세요.' : `📝 퀴즈 진행 중: ${activeProg.currentQuestionIndex + 1}번 문제 / 총 3문제`}</p>
-            </div>
-            <a href="./${activeLessonObj.path}index.html" class="btn btn-primary" id="btn-resume-lesson">
-              <span>${activeProg.completed ? '레슨 복습하기' : '이어서 퀴즈 풀기'}</span>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
-          </div>
-        `;
-
-        const resumeBtn = document.getElementById('btn-resume-lesson');
-        if (resumeBtn) {
-          resumeBtn.addEventListener('click', () => {
-            if (typeof Analytics !== 'undefined') {
-              Analytics.trackLessonCardClick(lastActiveId, activeLessonObj.title);
-            }
-          });
-        }
-      }
     });
   </script>
 </body>
