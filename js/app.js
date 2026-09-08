@@ -3,6 +3,118 @@
  * Initializes global navigation, lesson switcher, saved sentences drawer,
  * offline status notifications, and PWA service worker.
  */
+/**
+ * AudioPlayerComponent - Reusable Audio Player UI Component
+ * Guarantees 100% visual and structural parity across Saved Sentences Drawer
+ * (both mobile & desktop viewports) and Step 4 Review Player.
+ */
+const AudioPlayerComponent = {
+  render(options = {}) {
+    const {
+      containerId = 'review-player-bar',
+      idPrefix = 'player', // 'player' or 'saved'
+      badgeText = '01/01',
+      titleText = '',
+      variant = 'standard', // 'standard' (responsive) or 'mobile' (compact single row)
+      extraClasses = '',
+      isPlayAll = true,
+      speed = '1.0x',
+      style = ''
+    } = options;
+
+    const isSaved = idPrefix === 'saved';
+    const badgeId = isSaved ? 'saved-player-badge' : 'player-track-badge';
+    const titleId = isSaved ? 'saved-player-title' : 'player-track-title';
+    const waveBoxId = isSaved ? 'saved-wave-box' : '';
+    const prevBtnId = `btn-${idPrefix}-prev`;
+    const toggleBtnId = `btn-${idPrefix}-toggle`;
+    const nextBtnId = `btn-${idPrefix}-next`;
+    const playallBtnId = `btn-${idPrefix}-playall`;
+    const speedBtnId = `btn-${idPrefix}-speed`;
+    const curTimeId = isSaved ? 'saved-player-current-time' : 'player-current-time';
+    const progressTrackId = isSaved ? 'saved-player-progress-track' : 'player-progress-track';
+    const progressFillId = isSaved ? 'saved-player-progress-bar' : 'player-progress-fill';
+    const totalTimeId = isSaved ? 'saved-player-total-time' : 'player-total-time';
+
+    const variantClass = variant === 'mobile' ? 'player-variant-mobile' : '';
+    const classes = ['review-player-bar', variantClass, extraClasses].filter(Boolean).join(' ');
+    const safeTitle = (titleText || '').replace(/"/g, '&quot;');
+
+    return `
+      <div class="${classes}" id="${containerId}" ${style ? `style="${style}"` : ''}>
+        <div class="player-bar-top">
+          <!-- Left: Current Track Details -->
+          <div class="player-track-info">
+            <div class="sound-wave-box" ${waveBoxId ? `id="${waveBoxId}"` : ''} aria-hidden="true">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+            </div>
+            <div class="player-text-details">
+              ${isSaved ? `<div class="player-track-header-row"><span class="player-track-badge" id="${badgeId}">${badgeText}</span><span class="saved-player-status" id="saved-player-status" style="display:none;">READY</span></div>` : `<span class="player-track-badge" id="${badgeId}">${badgeText}</span>`}
+              <div class="player-track-title" id="${titleId}" title="${safeTitle}">
+                ${titleText || ''}
+              </div>
+            </div>
+          </div>
+
+          <!-- Center: Audio Playback Controls -->
+          <div class="player-controls-main">
+            <button type="button" class="btn-player-step" id="${prevBtnId}" title="이전 문장 (|◀)" aria-label="이전 문장">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+              </svg>
+            </button>
+
+            <button type="button" class="btn-player-toggle" id="${toggleBtnId}" title="재생 / 일시정지" aria-label="재생 / 일시정지">
+              <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+            </button>
+
+            <button type="button" class="btn-player-step" id="${nextBtnId}" title="다음 문장 (▶|)" aria-label="다음 문장">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Right: Play All, Loop & Speed Modes -->
+          <div class="player-controls-side">
+            <button type="button" class="btn-play-all-toggle ${isPlayAll ? 'active' : ''}" id="${playallBtnId}" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 재생">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+              <span class="playall-text">전체</span>
+            </button>
+
+            <button type="button" class="btn-speed-toggle" id="${speedBtnId}" title="재생 속도 조절" aria-label="재생 속도">
+              ${speed}
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrubber & Time Display -->
+        <div class="player-progress-row">
+          <span class="player-time-label" id="${curTimeId}">0:00</span>
+          <div class="player-progress-track" id="${progressTrackId}">
+            <div class="player-progress-fill" id="${progressFillId}"></div>
+          </div>
+          <span class="player-time-label" id="${totalTimeId}">0:00</span>
+        </div>
+      </div>
+    `;
+  }
+};
+
+if (typeof window !== 'undefined') {
+  window.AudioPlayerComponent = AudioPlayerComponent;
+}
+
 const App = {
   lessons: [
     {
@@ -581,74 +693,17 @@ const App = {
           </div>
 
           <!-- Sticky Audio Player Bar for Saved Sentences (Issue #13 & #17: Step 4 Review Style) -->
-          <div class="saved-player-bar review-player-bar" id="saved-player-bar" style="display: none;">
-            <div class="player-bar-top">
-              <!-- Left: Current Track Details & Wave Equalizer -->
-              <div class="player-track-info">
-                <div class="sound-wave-box" id="saved-wave-box" aria-hidden="true">
-                  <span class="wave-bar"></span>
-                  <span class="wave-bar"></span>
-                  <span class="wave-bar"></span>
-                  <span class="wave-bar"></span>
-                </div>
-                <div class="player-text-details">
-                  <div class="player-track-header-row">
-                    <span class="player-track-badge" id="saved-player-badge">01/01</span>
-                    <span class="saved-player-status" id="saved-player-status">READY</span>
-                  </div>
-                  <div class="player-track-title" id="saved-player-title" title="저장된 문장 연속 재생">저장된 문장 연속 재생</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Controls Row: Prev, Play/Pause, Next & Side Modes -->
-            <div class="player-controls-row">
-              <div class="player-controls-main">
-                <button type="button" class="btn-player-step" id="btn-saved-prev" title="이전 문장 (|◀)" aria-label="이전 문장">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                  </svg>
-                </button>
-
-                <button type="button" class="btn-player-toggle" id="btn-saved-toggle" title="재생 / 일시정지" aria-label="재생">
-                  <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                  <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                  </svg>
-                </button>
-
-                <button type="button" class="btn-player-step" id="btn-saved-next" title="다음 문장 (▶|)" aria-label="다음 문장">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                  </svg>
-                </button>
-              </div>
-
-              <div class="player-controls-side">
-                <button type="button" class="btn-play-all-toggle active" id="btn-saved-playall" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 연속 재생">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                  </svg>
-                  <span class="playall-text">전체</span>
-                </button>
-
-                <button type="button" class="btn-speed-toggle" id="btn-saved-speed" title="재생 속도 조절" aria-label="재생 속도">
-                  1.0x
-                </button>
-              </div>
-            </div>
-
-            <!-- Scrubber & Time Display Row (Step 4 Review Player Style) -->
-            <div class="player-progress-row">
-              <span class="player-time-label" id="saved-player-current-time">0:00</span>
-              <div class="player-progress-track" id="saved-player-progress-track" title="클릭하여 탐색">
-                <div class="player-progress-fill" id="saved-player-progress-bar" style="width: 0%;"></div>
-              </div>
-              <span class="player-time-label" id="saved-player-total-time">0:00</span>
-            </div>
-          </div>
+          ${AudioPlayerComponent.render({
+            containerId: 'saved-player-bar',
+            idPrefix: 'saved',
+            badgeText: '01/01',
+            titleText: '저장된 문장 연속 재생',
+            variant: 'mobile',
+            extraClasses: 'saved-player-bar',
+            style: 'display: none;',
+            isPlayAll: true,
+            speed: '1.0x'
+          })}
 
           <div class="drawer-body" id="saved-sentences-list">
             <!-- Rendered dynamically -->
@@ -1568,7 +1623,9 @@ const SavedAudioPlayer = {
 };
 
 App.savedPlayer = SavedAudioPlayer;
+App.AudioPlayerComponent = AudioPlayerComponent;
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = App;
+  module.exports.AudioPlayerComponent = AudioPlayerComponent;
 }

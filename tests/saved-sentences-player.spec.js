@@ -78,20 +78,27 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     const trackTitle = page.locator('#saved-player-title');
     await expect(trackTitle).toHaveText('I just happened to look.');
 
-    // Verify Step 4 review-player styling parity (Issue #17)
+    // Verify Step 4 review-player styling parity & mobile component variant (Issue #17)
     await expect(playerBar).toHaveClass(/review-player-bar/);
-    const waveBox = page.locator('#saved-wave-box');
-    await expect(waveBox).toBeVisible();
-    await expect(waveBox.locator('.wave-bar')).toHaveCount(4);
+    await expect(playerBar).toHaveClass(/player-variant-mobile/);
 
-    const currentTime = page.locator('#saved-player-current-time');
-    const totalTime = page.locator('#saved-player-total-time');
-    const progressTrack = page.locator('#saved-player-progress-track');
-    const progressBar = page.locator('#saved-player-progress-bar');
-    await expect(currentTime).toBeVisible();
-    await expect(totalTime).toBeVisible();
-    await expect(progressTrack).toHaveClass(/player-progress-track/);
-    await expect(progressBar).toHaveClass(/player-progress-fill/);
+    // Visible controls in single-row mobile layout:
+    const prevBtn = page.locator('#btn-saved-prev');
+    const toggleBtn = page.locator('#btn-saved-toggle');
+    const nextBtn = page.locator('#btn-saved-next');
+    const playallBtn = page.locator('#btn-saved-playall');
+
+    await expect(trackBadge).toBeVisible();
+    await expect(prevBtn).toBeVisible();
+    await expect(toggleBtn).toBeVisible();
+    await expect(nextBtn).toBeVisible();
+    await expect(playallBtn).toBeVisible();
+
+    // Hidden elements in mobile component (sound wave, long title, speed button, scrubber):
+    await expect(page.locator('#saved-wave-box')).toBeHidden();
+    await expect(page.locator('#saved-player-title')).toBeHidden();
+    await expect(page.locator('#btn-saved-speed')).toBeHidden();
+    await expect(page.locator('.saved-player-bar .player-progress-row')).toBeHidden();
 
     // Verify expression highlights (Step 4 Parity)
     const card1Highlight = page.locator('#saved-card-sent_test_1 .quiz-vocab-highlight');
@@ -109,7 +116,6 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     expect(btnBox.height).toBeLessThanOrEqual(28);
 
     // 1. Play track 1
-    const toggleBtn = page.locator('#btn-saved-toggle');
     await toggleBtn.click();
 
     // Player bar has .is-playing
@@ -118,45 +124,108 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await expect(card1).toHaveClass(/is-playing/);
 
     // 2. Next track button
-    const nextBtn = page.locator('#btn-saved-next');
     await nextBtn.click();
 
     await expect(trackBadge).toHaveText('02/03');
-    await expect(trackTitle).toHaveText('we have a decent view..');
     const card2 = page.locator('#saved-card-sent_test_2');
     await expect(card2).toHaveClass(/is-playing/);
     await expect(card1).not.toHaveClass(/is-playing/);
 
-    // 3. Speed button cycles
-    const speedBtn = page.locator('#btn-saved-speed');
-    await expect(speedBtn).toHaveText('1.0x');
-    await speedBtn.click();
-    await expect(speedBtn).toHaveText('1.25x');
+    // 3. Play All toggle button cycles active state
+    await expect(playallBtn).toHaveClass(/active/);
+    await playallBtn.click();
+    await expect(playallBtn).not.toHaveClass(/active/);
+    await playallBtn.click();
+    await expect(playallBtn).toHaveClass(/active/);
 
     // 4. Play specific card via inline card play button
     const card3PlayBtn = page.locator('#saved-card-sent_test_3 .btn-card-play');
     await card3PlayBtn.click();
 
     await expect(trackBadge).toHaveText('03/03');
-    await expect(trackTitle).toHaveText('And then go to the concert and spend the night.');
     const card3 = page.locator('#saved-card-sent_test_3');
     await expect(card3).toHaveClass(/is-playing/);
 
-    // 5. Test seeking on progress track
-    await progressTrack.click({ position: { x: 50, y: 3 } });
-
-    // 6. Test light mode theme compatibility (Issue #2 & Issue #17)
+    // 5. Test light mode theme compatibility (Issue #2 & Issue #17)
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     await expect(playerBar).toHaveClass(/is-playing/);
     await expect(card3).toHaveClass(/is-playing/);
 
-    // 7. Pause playback
+    // 6. Pause playback
     await toggleBtn.click();
     await expect(playerBar).not.toHaveClass(/is-playing/);
     await expect(card3).not.toHaveClass(/is-playing/);
 
     // No uncaught exceptions
     expect(pageErrors).toHaveLength(0);
+  });
+
+  test('Audio player UI on saved page is identical on mobile view and bigger screen (desktop) view, matching Step 4 mobile layout', async ({ page }) => {
+    // Seed saved sentences
+    await page.addInitScript(() => {
+      localStorage.setItem('rhyrhy_saved_sentences', JSON.stringify({
+        'lesson-01': [
+          { id: 'sent_test_1', en: 'What happened to your arm?', kr: '팔은 어쩌다가 다치셨어요?', audio: 'audio/sent-05.wav' },
+          { id: 'sent_test_2', en: 'We have a decent view of the stage.', kr: '무대가 꽤 잘 보이는 자리예요.', audio: 'audio/sent-04.wav' }
+        ]
+      }));
+    });
+
+    // 1. Check on Desktop View (1280px)
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/index.html');
+    await page.click('#btn-open-sentences');
+    await page.waitForSelector('#saved-sentences-drawer.open');
+
+    const desktopBar = page.locator('#saved-player-bar');
+    await expect(desktopBar).toBeVisible();
+    await expect(desktopBar).toHaveClass(/player-variant-mobile/);
+    await expect(desktopBar).toHaveClass(/review-player-bar/);
+
+    // Assert visible elements on desktop saved drawer
+    await expect(page.locator('#saved-player-badge')).toBeVisible();
+    await expect(page.locator('#btn-saved-prev')).toBeVisible();
+    await expect(page.locator('#btn-saved-toggle')).toBeVisible();
+    await expect(page.locator('#btn-saved-next')).toBeVisible();
+    await expect(page.locator('#btn-saved-playall')).toBeVisible();
+
+    // Assert hidden elements on desktop saved drawer
+    await expect(page.locator('#saved-wave-box')).toBeHidden();
+    await expect(page.locator('#saved-player-title')).toBeHidden();
+    await expect(page.locator('#btn-saved-speed')).toBeHidden();
+    await expect(page.locator('.saved-player-bar .player-progress-row')).toBeHidden();
+
+    // 2. Check on Mobile View (390px)
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForTimeout(200);
+
+    const mobileBar = page.locator('#saved-player-bar');
+    await expect(mobileBar).toBeVisible();
+    await expect(mobileBar).toHaveClass(/player-variant-mobile/);
+    await expect(mobileBar).toHaveClass(/review-player-bar/);
+
+    // Assert exact same visible elements on mobile saved drawer
+    await expect(page.locator('#saved-player-badge')).toBeVisible();
+    await expect(page.locator('#btn-saved-prev')).toBeVisible();
+    await expect(page.locator('#btn-saved-toggle')).toBeVisible();
+    await expect(page.locator('#btn-saved-next')).toBeVisible();
+    await expect(page.locator('#btn-saved-playall')).toBeVisible();
+
+    // Assert exact same hidden elements on mobile saved drawer
+    await expect(page.locator('#saved-wave-box')).toBeHidden();
+    await expect(page.locator('#saved-player-title')).toBeHidden();
+    await expect(page.locator('#btn-saved-speed')).toBeHidden();
+    await expect(page.locator('.saved-player-bar .player-progress-row')).toBeHidden();
+
+    // Capture visual artifact for user walkthrough
+    await page.screenshot({
+      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_mobile_view.png'
+    });
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.waitForTimeout(200);
+    await page.screenshot({
+      path: '/Users/jaemyun/.gemini/antigravity-ide/brain/c1ecb1ce-624f-4492-9271-d6e858f7b792/saved_player_desktop_view.png'
+    });
   });
 
   test('Check saved-sentence-card and play button styles on desktop and mobile', async ({ page }) => {
