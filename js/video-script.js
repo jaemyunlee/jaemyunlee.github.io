@@ -6,7 +6,7 @@
 class VideoScriptPlayer {
   constructor(options = {}) {
     this.lessonId = options.lessonId;
-    this.youtubeId = options.youtubeId || 'N5IqYrNUqmQ';
+    this.youtubeId = options.youtubeId || 'zMNQoGHQ4Oo';
     this.scriptData = options.scriptData || [];
     this.onVideoEnd = options.onVideoEnd || (() => { });
     this.onScriptComplete = options.onScriptComplete || (() => { });
@@ -27,7 +27,7 @@ class VideoScriptPlayer {
     this.simRate = 1.0;
     this.maxDuration = (this.scriptData.length > 0 && this.scriptData[this.scriptData.length - 1].end)
       ? this.scriptData[this.scriptData.length - 1].end
-      : 398.32;
+      : 403.32;
 
     this.scriptListContainer = document.getElementById('script-list-container');
     this.videoContainer = document.getElementById('youtube-player-container');
