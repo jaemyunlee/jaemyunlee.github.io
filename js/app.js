@@ -123,7 +123,7 @@ const App = {
       topic: 'Big Bang Concert',
       icon: '🎤',
       title: '미국에서 빅뱅 콘서트를 간다고?',
-      subtitle: '아침 일과부터 콘서트 티켓팅, 실생활 표현까지 원어민 대화로 마스터하기',
+      subtitle: '켈리가 빅뱅 콘서트를 가게 된 사연과 어떻게 빅뱅을 좋아하게 되었는지 들으면서 영어 표현을 배워봐요',
       duration: '6:43',
       vocabCount: 21,
       path: 'lessons/lesson-01/'
@@ -134,8 +134,8 @@ const App = {
       topic: "Uncle Wayne's Cabin",
       icon: '🏕️',
       title: '웨인 삼촌의 산골 오두막 이야기',
-      subtitle: '1963년부터 이어진 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 표현',
-      duration: '5:43',
+      subtitle: '1963년부터 이어져 온 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 영어 표현',
+      duration: '5:48',
       vocabCount: 19,
       path: 'lessons/lesson-02/'
     }

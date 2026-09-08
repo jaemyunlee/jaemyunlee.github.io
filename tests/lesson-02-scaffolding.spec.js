@@ -95,11 +95,11 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     await expect(videoSection).toBeVisible();
     await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
 
-    // Verify interactive script has all 103 lines
+    // Verify interactive script has all 102 lines
     const scriptCards = page.locator('.script-sentence-card');
     await expect(scriptCards.first()).toBeVisible({ timeout: 5000 });
     const scriptCount = await scriptCards.count();
-    expect(scriptCount).toBe(103);
+    expect(scriptCount).toBe(102);
 
     // Switch to Step 4 (영작하기)
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
@@ -116,7 +116,7 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     const lesson02Card = page.locator('#card-lesson-02');
     await expect(lesson02Card).toBeVisible({ timeout: 5000 });
     await expect(lesson02Card).toContainText('웨인 삼촌의 산골 오두막 이야기');
-    await expect(lesson02Card).toContainText('5:43');
+    await expect(lesson02Card).toContainText('5:48');
     await expect(lesson02Card).toContainText('19 퀴즈');
 
     // Check home page latest lessons
