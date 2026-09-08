@@ -422,4 +422,210 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     const topAfterCard1 = await drawerBody.evaluate(el => el.scrollTop);
     expect(topAfterCard1).toBe(0);
   });
+
+  test('Issue #37 Regression: Saved server audio with ./audio/ path resolves correctly on root index.html without 404 or TTS fallback', async ({ page }) => {
+    // Collect 404 responses
+    const notFoundRequests = [];
+    page.on('response', (res) => {
+      if (res.status() === 404 && res.url().includes('.wav')) {
+        notFoundRequests.push(res.url());
+      }
+    });
+
+    // Seed saved sentence using the legacy format stored in production: './audio/I%20just%20happened%20to%20look.wav'
+    await page.addInitScript(() => {
+      localStorage.setItem('rhyrhy_saved_sentences', JSON.stringify({
+        'lesson-01': [
+          {
+            id: 'legacy_saved_sent_1',
+            en: 'I just happened to look.',
+            kr: '우연히 보게 되었어요.',
+            audio: './audio/I%20just%20happened%20to%20look.wav'
+          },
+          {
+            id: 'legacy_saved_sent_2',
+            en: 'we have a decent view..',
+            kr: '전망이 꽤 괜찮아요.',
+            audio: 'audio/we have a decent view..wav'
+          }
+        ],
+        'lesson-02': [
+          {
+            id: 'legacy_saved_sent_3',
+            en: 'when they passed Gene and Patty had moved up here. to take care of the property.',
+            kr: '그들이 세상을 떠났을 때 진과 패티가 부동산을 관리하기 위해 이곳으로 이사 왔습니다.',
+            audio: 'when they passed Gene and Patty had moved up here. to take care of the property..wav'
+          }
+        ]
+      }));
+    });
+
+    // Spy on speech synthesis to ensure TTS fallback is NOT invoked when server audio exists
+    await page.addInitScript(() => {
+      window._ttsCalls = [];
+      if ('speechSynthesis' in window) {
+        const origSpeak = window.speechSynthesis.speak.bind(window.speechSynthesis);
+        window.speechSynthesis.speak = function(utterance) {
+          window._ttsCalls.push(utterance.text);
+          return origSpeak(utterance);
+        };
+      }
+    });
+
+    await page.goto('/index.html');
+
+    // Open drawer
+    await page.click('#btn-open-sentences');
+    const drawer = page.locator('#saved-sentences-drawer');
+    await expect(drawer).toHaveClass(/open/);
+
+    // Verify audio URL resolution in browser context
+    const resolvedUrls = await page.evaluate(() => {
+      const player = window.App.savedPlayer;
+      const base = window.App._getBasePath();
+      return player.playlist.map(item => player._resolveAudioUrl(item, base));
+    });
+
+    expect(resolvedUrls[0]).toBe('./lessons/lesson-01/audio/I%20just%20happened%20to%20look.wav');
+    expect(resolvedUrls[1]).toBe('./lessons/lesson-01/audio/we%20have%20a%20decent%20view..wav');
+    expect(resolvedUrls[2]).toContain('lessons/lesson-02/audio/');
+
+    // Click play on first sentence
+    await page.click('#btn-saved-toggle');
+
+    // Wait for audio element to start playing server file
+    await page.waitForFunction(() => {
+      const audio = document.getElementById('saved-audio-element');
+      return audio && audio.src && !audio.src.includes('undefined');
+    });
+
+    const audioSrc = await page.evaluate(() => {
+      const audio = document.getElementById('saved-audio-element');
+      return audio.src;
+    });
+
+    expect(audioSrc).toContain('/lessons/lesson-01/audio/I%20just%20happened%20to%20look.wav');
+    // Ensure it does not point to flawed root-relative /audio/ without lesson folder
+    expect(audioSrc).not.toMatch(/^https?:\/\/[^/]+\/audio\//);
+
+    // Ensure zero 404 audio requests
+    expect(notFoundRequests).toHaveLength(0);
+
+    // Ensure device TTS was NOT called for valid audio
+    const ttsCount = await page.evaluate(() => (window._ttsCalls || []).length);
+    expect(ttsCount).toBe(0);
+  });
+
+  test('Issue #37 Regression: Audio path resolves properly from subdirectories (lessons.html, lessons/lesson-01/)', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem('rhyrhy_saved_sentences', JSON.stringify({
+        'lesson-01': [
+          {
+            id: 'sent_sub_1',
+            en: 'I just happened to look.',
+            kr: '우연히 보게 되었어요.',
+            audio: './audio/I%20just%20happened%20to%20look.wav'
+          }
+        ]
+      }));
+    });
+
+    // 1. Check on lessons.html
+    await page.goto('/lessons.html');
+    const resolvedOnLessons = await page.evaluate(() => {
+      const item = window.App.savedPlayer.playlist[0];
+      return window.App.savedPlayer._resolveAudioUrl(item, window.App._getBasePath());
+    });
+    expect(resolvedOnLessons).toBe('./lessons/lesson-01/audio/I%20just%20happened%20to%20look.wav');
+
+    // 2. Check on /lessons/lesson-01/index.html
+    await page.goto('/lessons/lesson-01/index.html');
+    const resolvedOnLesson01 = await page.evaluate(() => {
+      const item = window.App.savedPlayer.playlist[0];
+      return window.App.savedPlayer._resolveAudioUrl(item, window.App._getBasePath());
+    });
+    expect(resolvedOnLesson01).toBe('../../lessons/lesson-01/audio/I%20just%20happened%20to%20look.wav');
+  });
+
+  test('Issue #37 Regression: Hardened TTS fallback works cleanly when audio file is truly missing', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem('rhyrhy_saved_sentences', JSON.stringify({
+        'lesson-01': [
+          {
+            id: 'sent_nonexistent_audio',
+            en: 'This sentence has a nonexistent audio file.',
+            kr: '이 문장은 오디오 파일이 존재하지 않습니다.',
+            audio: 'nonexistent-audio-file-xyz.wav'
+          }
+        ]
+      }));
+      window._ttsUtterances = [];
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.speak = function(u) {
+          window._ttsUtterances.push(u.text);
+          setTimeout(() => {
+            if (u.onstart) u.onstart();
+            setTimeout(() => {
+              if (u.onend) u.onend();
+            }, 100);
+          }, 10);
+        };
+      }
+    });
+
+    await page.goto('/index.html');
+    await page.click('#btn-open-sentences');
+
+    // Play track with missing audio
+    await page.click('#btn-saved-toggle');
+
+    // Verify TTS fallback was triggered safely
+    await page.waitForFunction(() => (window._ttsUtterances || []).length > 0, { timeout: 3000 });
+    const ttsCount = await page.evaluate(() => (window._ttsUtterances || []).length);
+    expect(ttsCount).toBe(1); // Guarded against double fallback
+
+    // Pausing resets fallback flag and cancels TTS
+    await page.evaluate(() => window.App.savedPlayer.pause());
+    const isPlayingAfterPause = await page.evaluate(() => window.App.savedPlayer.isPlaying);
+    expect(isPlayingAfterPause).toBe(false);
+  });
+
+  test('Issue #37 Regression: Saving sentence in ReviewPlayer saves clean audio filename', async ({ page }) => {
+    await page.goto('/lessons/lesson-01/index.html');
+
+    // Switch to Step 2 (ReviewPlayer)
+    const tab2 = page.locator('.step-tab-btn[data-step="2"]');
+    await tab2.click();
+
+    // Wait for review player container and bookmark button
+    const firstSaveBtn = page.locator('.btn-card-bookmark[data-bookmark-index="0"]');
+    await expect(firstSaveBtn).toBeVisible({ timeout: 5000 });
+    await firstSaveBtn.click();
+
+    // Inspect saved sentences in localStorage
+    const savedSentences = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem('rhyrhy_saved_sentences') || '{}');
+    });
+
+    expect(savedSentences['lesson-01']).toBeDefined();
+    expect(savedSentences['lesson-01'].length).toBeGreaterThanOrEqual(1);
+
+    const firstSaved = savedSentences['lesson-01'][0];
+    // Must NOT start with page-relative './audio/'
+    expect(firstSaved.audio).not.toMatch(/^\.\/audio\//);
+    expect(firstSaved.audio).toContain('.wav');
+
+    // Navigate to root index.html and verify the newly saved sentence plays server audio
+    await page.goto('/index.html');
+    await page.click('#btn-open-sentences');
+    await page.click('#btn-saved-toggle');
+
+    const audioSrc = await page.evaluate(() => {
+      const audio = document.getElementById('saved-audio-element');
+      return audio ? audio.src : '';
+    });
+
+    expect(audioSrc).toContain('lessons/lesson-01/audio/');
+    expect(audioSrc).not.toMatch(/^https?:\/\/[^/]+\/audio\//);
+  });
 });
