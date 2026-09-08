@@ -402,7 +402,18 @@ class YouTubeCommentManager {
       </div>
     `;
 
-    feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Smoothly scroll directly to show the completion & encouragement description
+    setTimeout(() => {
+      try {
+        const navHeight = 70;
+        const rect = feedback.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetY = rect.top + scrollTop - navHeight - 16;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+      } catch (_) {
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
   }
 
   async openYouTubeAndComplete(sentence = '') {

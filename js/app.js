@@ -197,6 +197,32 @@ const App = {
     // Clean up any stale leftover modal overlays from previous sessions
     const staleModal = document.getElementById('first-visit-storage-modal');
     if (staleModal) staleModal.remove();
+
+    // Mobile UX & Accessibility: Clear sticky focus on back navigation (pageshow / bfcache)
+    if (typeof window !== 'undefined' && !this._focusListenersBound) {
+      this._focusListenersBound = true;
+
+      window.addEventListener('pageshow', () => {
+        if (document.activeElement && typeof document.activeElement.blur === 'function') {
+          const tag = document.activeElement.tagName ? document.activeElement.tagName.toLowerCase() : '';
+          if (tag !== 'input' && tag !== 'textarea') {
+            document.activeElement.blur();
+          }
+        }
+      });
+
+      // Auto-blur buttons and interactive links after tap/click so mobile doesn't keep them selected
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('button, .btn, a.btn, [role="button"]');
+        if (btn && typeof btn.blur === 'function') {
+          setTimeout(() => {
+            try {
+              btn.blur();
+            } catch (_) {}
+          }, 150);
+        }
+      }, { passive: true });
+    }
   },
 
   _escapeHtml(str) {
