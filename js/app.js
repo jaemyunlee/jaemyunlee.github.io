@@ -124,7 +124,7 @@ const App = {
       icon: '🎤',
       title: '미국에서 빅뱅 콘서트를 간다고?',
       subtitle: '아침 일과부터 콘서트 티켓팅, 실생활 표현까지 원어민 대화로 마스터하기',
-      duration: '6:38',
+      duration: '6:43',
       vocabCount: 21,
       path: 'lessons/lesson-01/'
     }
