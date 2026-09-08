@@ -6,7 +6,7 @@ test.describe('Subtitle Display Controls & Light Mode Contrast (Issue #43)', () 
     await page.goto('/lessons/lesson-01/index.html');
   });
 
-  test('Lesson 01 & Lesson 02 have 4 subtitle buttons with SVGs and descriptive titles', async ({ page }) => {
+  test('Lesson 01 & Lesson 02 display "자막" title, text labels (Both, EN, KR) and off icon button', async ({ page }) => {
     for (const url of ['/lessons/lesson-01/index.html', '/lessons/lesson-02/index.html']) {
       await page.goto(url);
 
@@ -15,19 +15,33 @@ test.describe('Subtitle Display Controls & Light Mode Contrast (Issue #43)', () 
       await expect(step3Tab).toBeVisible({ timeout: 5000 });
       await step3Tab.click();
 
+      // Verify title displays "자막" instead of "Interactive Script"
+      const headerTitle = page.locator('.script-header-title');
+      await expect(headerTitle).toContainText('자막');
+      await expect(headerTitle).not.toContainText('Interactive Script');
+
       const toggleGroup = page.locator('.script-sub-toggle-group');
       await expect(toggleGroup).toBeVisible();
 
       const buttons = toggleGroup.locator('button.btn-toggle-sub');
       await expect(buttons).toHaveCount(4);
 
-      // Verify modes and SVGs
-      const expectedModes = ['both', 'en', 'kr', 'off'];
-      for (let i = 0; i < expectedModes.length; i++) {
-        const btn = buttons.nth(i);
-        await expect(btn).toHaveAttribute('data-subtitle-mode', expectedModes[i]);
-        await expect(btn.locator('svg.sub-icon')).toBeVisible();
-      }
+      // Verify modes and contents
+      const bothBtn = buttons.nth(0);
+      await expect(bothBtn).toHaveAttribute('data-subtitle-mode', 'both');
+      await expect(bothBtn).toHaveText('Both');
+
+      const enBtn = buttons.nth(1);
+      await expect(enBtn).toHaveAttribute('data-subtitle-mode', 'en');
+      await expect(enBtn).toHaveText('EN');
+
+      const krBtn = buttons.nth(2);
+      await expect(krBtn).toHaveAttribute('data-subtitle-mode', 'kr');
+      await expect(krBtn).toHaveText('KR');
+
+      const offBtn = buttons.nth(3);
+      await expect(offBtn).toHaveAttribute('data-subtitle-mode', 'off');
+      await expect(offBtn.locator('svg.sub-icon-off')).toBeVisible();
 
       // Verify default active is 'both'
       const activeBtn = toggleGroup.locator('button.btn-toggle-sub.active');

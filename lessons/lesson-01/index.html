@@ -126,82 +126,13 @@
                 <line x1="16" y1="13" x2="8" y2="13" />
                 <line x1="16" y1="17" x2="8" y2="17" />
               </svg>
-              <strong>Interactive Script</strong>
+              <strong>자막</strong>
             </div>
 
             <div class="script-sub-toggle-group" role="group" aria-label="Subtitle Language">
-              <button type="button" class="btn-toggle-sub active" data-subtitle-mode="both" title="한/영 자막 동시 보기 (Both Subtitles)" aria-label="한영 자막 동시 보기">
-                <svg class="sub-icon sub-icon-both" viewBox="0 0 20 14" width="20" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <clipPath id="both-flag-clip-l1"><rect width="20" height="14" rx="2"/></clipPath>
-                  </defs>
-                  <g clip-path="url(#both-flag-clip-l1)">
-                    <rect x="0" y="0" width="10" height="14" fill="#FFFFFF"/>
-                    <rect x="0" y="0" width="10" height="2" fill="#DC2626"/>
-                    <rect x="0" y="4" width="10" height="2" fill="#DC2626"/>
-                    <rect x="0" y="8" width="10" height="2" fill="#DC2626"/>
-                    <rect x="0" y="12" width="10" height="2" fill="#DC2626"/>
-                    <rect x="0" y="0" width="6" height="8" fill="#1D4ED8"/>
-                    <circle cx="2" cy="2.5" r="0.7" fill="#FFFFFF"/>
-                    <circle cx="4" cy="2.5" r="0.7" fill="#FFFFFF"/>
-                    <circle cx="3" cy="4.2" r="0.7" fill="#FFFFFF"/>
-                    <circle cx="2" cy="6" r="0.7" fill="#FFFFFF"/>
-                    <circle cx="4" cy="6" r="0.7" fill="#FFFFFF"/>
-                    <rect x="10" y="0" width="10" height="14" fill="#FFFFFF"/>
-                    <path d="M 15 4.2 A 2.8 2.8 0 0 1 15 9.8 A 1.4 1.4 0 0 1 15 7 A 1.4 1.4 0 0 0 15 4.2 Z" fill="#DC2626"/>
-                    <path d="M 15 4.2 A 1.4 1.4 0 0 1 15 7 A 1.4 1.4 0 0 0 15 9.8 A 2.8 2.8 0 0 1 15 4.2 Z" fill="#1D4ED8"/>
-                    <rect x="17.8" y="3.5" width="0.8" height="2.2" fill="#1E293B" transform="rotate(30 17.8 3.5)"/>
-                    <rect x="17.8" y="8.2" width="0.8" height="2.2" fill="#1E293B" transform="rotate(-30 17.8 8.2)"/>
-                    <line x1="10" y1="0" x2="10" y2="14" stroke="#94A3B8" stroke-width="0.75"/>
-                  </g>
-                  <rect x="0.5" y="0.5" width="19" height="13" rx="1.5" stroke="rgba(0,0,0,0.18)" stroke-width="1" fill="none"/>
-                </svg>
-              </button>
-              <button type="button" class="btn-toggle-sub" data-subtitle-mode="en" title="영어 자막만 보기 (English Only)" aria-label="영어 자막만 보기">
-                <svg class="sub-icon sub-icon-en" viewBox="0 0 20 14" width="20" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <clipPath id="us-flag-clip-l1"><rect width="20" height="14" rx="2"/></clipPath>
-                  </defs>
-                  <g clip-path="url(#us-flag-clip-l1)">
-                    <rect width="20" height="14" fill="#FFFFFF"/>
-                    <rect x="0" y="0" width="20" height="2" fill="#DC2626"/>
-                    <rect x="0" y="4" width="20" height="2" fill="#DC2626"/>
-                    <rect x="0" y="8" width="20" height="2" fill="#DC2626"/>
-                    <rect x="0" y="12" width="20" height="2" fill="#DC2626"/>
-                    <rect x="0" y="0" width="9" height="8" fill="#1D4ED8"/>
-                    <circle cx="2.2" cy="2.2" r="0.75" fill="#FFFFFF"/>
-                    <circle cx="4.5" cy="2.2" r="0.75" fill="#FFFFFF"/>
-                    <circle cx="6.8" cy="2.2" r="0.75" fill="#FFFFFF"/>
-                    <circle cx="3.3" cy="4" r="0.75" fill="#FFFFFF"/>
-                    <circle cx="5.6" cy="4" r="0.75" fill="#FFFFFF"/>
-                    <circle cx="2.2" cy="5.8" r="0.75" fill="#FFFFFF"/>
-                    <circle cx="4.5" cy="5.8" r="0.75" fill="#FFFFFF"/>
-                    <circle cx="6.8" cy="5.8" r="0.75" fill="#FFFFFF"/>
-                  </g>
-                  <rect x="0.5" y="0.5" width="19" height="13" rx="1.5" stroke="rgba(0,0,0,0.18)" stroke-width="1" fill="none"/>
-                </svg>
-              </button>
-              <button type="button" class="btn-toggle-sub" data-subtitle-mode="kr" title="한국어 자막만 보기 (Korean Only)" aria-label="한국어 자막만 보기">
-                <svg class="sub-icon sub-icon-kr" viewBox="0 0 20 14" width="20" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <clipPath id="kr-flag-clip-l1"><rect width="20" height="14" rx="2"/></clipPath>
-                  </defs>
-                  <g clip-path="url(#kr-flag-clip-l1)">
-                    <rect width="20" height="14" fill="#FFFFFF"/>
-                    <path d="M 10 3.8 A 3.2 3.2 0 0 1 10 10.2 A 1.6 1.6 0 0 1 10 7 A 1.6 1.6 0 0 0 10 3.8 Z" fill="#DC2626"/>
-                    <path d="M 10 3.8 A 1.6 1.6 0 0 1 10 7 A 1.6 1.6 0 0 0 10 10.2 A 3.2 3.2 0 0 1 10 3.8 Z" fill="#1D4ED8"/>
-                    <rect x="3" y="2" width="1" height="3" fill="#1E293B" transform="rotate(-35 3 2)"/>
-                    <rect x="4.4" y="2.9" width="1" height="3" fill="#1E293B" transform="rotate(-35 4.4 2.9)"/>
-                    <rect x="15" y="2.2" width="1" height="3" fill="#1E293B" transform="rotate(35 15 2.2)"/>
-                    <rect x="16.4" y="3.1" width="1" height="3" fill="#1E293B" transform="rotate(35 16.4 3.1)"/>
-                    <rect x="3" y="9.2" width="1" height="3" fill="#1E293B" transform="rotate(35 3 9.2)"/>
-                    <rect x="4.4" y="8.3" width="1" height="3" fill="#1E293B" transform="rotate(35 4.4 8.3)"/>
-                    <rect x="15" y="9.4" width="1" height="3" fill="#1E293B" transform="rotate(-35 15 9.4)"/>
-                    <rect x="16.4" y="8.5" width="1" height="3" fill="#1E293B" transform="rotate(-35 16.4 8.5)"/>
-                  </g>
-                  <rect x="0.5" y="0.5" width="19" height="13" rx="1.5" stroke="rgba(0,0,0,0.18)" stroke-width="1" fill="none"/>
-                </svg>
-              </button>
+              <button type="button" class="btn-toggle-sub active" data-subtitle-mode="both" title="한/영 자막 동시 보기 (Both Subtitles)" aria-label="한영 자막 동시 보기">Both</button>
+              <button type="button" class="btn-toggle-sub" data-subtitle-mode="en" title="영어 자막만 보기 (English Only)" aria-label="영어 자막만 보기">EN</button>
+              <button type="button" class="btn-toggle-sub" data-subtitle-mode="kr" title="한국어 자막만 보기 (Korean Only)" aria-label="한국어 자막만 보기">KR</button>
               <button type="button" class="btn-toggle-sub" data-subtitle-mode="off" title="자막 숨기기 / 리스닝 집중 모드 (Subtitles Off)" aria-label="자막 숨기기">
                 <svg class="sub-icon sub-icon-off" viewBox="0 0 20 14" width="20" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="1" y="1" width="18" height="12" rx="2.5" stroke="currentColor" stroke-width="1.3" fill="none"/>
