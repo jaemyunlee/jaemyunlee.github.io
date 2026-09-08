@@ -95,7 +95,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     await expect(tab4).toHaveClass(/active/);
   });
 
-  test('Step 4 writing submission marks lesson completed in Storage and displays completion feedback', async ({ page }) => {
+  test('Step 4: Copy button disabled message, activates on text, and clicking completes lesson and shows encouragement description', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
 
     // Switch to Step 4
@@ -109,31 +109,42 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     const youtubeBtn = page.locator('#btn-post-comment');
     const textarea = page.locator('#user-reflection-sentence');
 
-    // 1. Copy button is initially disabled; YouTube button is always active
+    // 1. Copy button is disabled by default and displays message telling user to write a sentence to activate it
     await expect(copyBtn).toBeDisabled();
+    await expect(copyBtn).toContainText('문장을 작성하면 활성화됩니다');
     await expect(youtubeBtn).toBeEnabled();
 
     // 2. Typing in textarea activates copy button
+    await textarea.fill('I just happened to practice English today and it was great!');
+    await expect(copyBtn).toBeEnabled();
+    await expect(copyBtn).toContainText('문장 클립보드에 복사');
+
+    // 3. Clearing textarea disables it again with the message
+    await textarea.fill('');
+    await expect(copyBtn).toBeDisabled();
+    await expect(copyBtn).toContainText('문장을 작성하면 활성화됩니다');
+
+    // Type again to proceed
     await textarea.fill('I just happened to practice English today and it was great!');
     await expect(copyBtn).toBeEnabled();
 
     // Mock clipboard API and window.open
     await page.evaluate(() => {
       window.__copiedText = '';
+      window.__openedUrls = [];
       navigator.clipboard.writeText = async (text) => {
         window.__copiedText = text;
       };
-      window.open = () => {};
+      window.open = (url) => {
+        window.__openedUrls.push(url);
+      };
     });
 
-    // 3. Click copy button -> copies sentence to clipboard
+    // 4. Clicking copy button -> updates lesson status to completed and displays encouragement description
     await copyBtn.click();
     await expect(copyBtn).toContainText('문장 복사 완료');
     const copiedText = await page.evaluate(() => window.__copiedText);
     expect(copiedText).toContain('I just happened to practice English today');
-
-    // 4. Click YouTube button (always active) -> completes lesson and renders feedback
-    await youtubeBtn.click();
 
     // Verify storage has lesson completed
     const isCompleted = await page.evaluate(() => {
@@ -141,32 +152,73 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     });
     expect(isCompleted).toBe(true);
 
-    // Verify completion feedback card is rendered
+    // Verify encouragement description is displayed
     const feedback = page.locator('#reflection-feedback');
     await expect(feedback).toBeVisible();
     await expect(feedback).toContainText('축하합니다! 오늘의 레슨을 모두 완주하셨습니다!');
+    await expect(feedback).toContainText('현서네 리얼 영어가 지속적으로 양질의 무료 서비스');
 
-    // Verify YouTube community post link and encouragement
+    // Verify YouTube community link
     const communityLink = feedback.locator('a[href="https://www.youtube.com/@happyfamily8/posts"]');
     await expect(communityLink).toBeVisible();
-    await expect(feedback).toContainText('유튜브 커뮤니티');
 
-    // Verify YouTube comment button and Next Lesson button
-    const ytCommentBtn = feedback.locator('#btn-goto-youtube-comment');
-    await expect(ytCommentBtn).toBeVisible();
-    await expect(ytCommentBtn).toHaveAttribute('href', /youtube\.com/);
-
+    // Verify Next Lesson button
     const nextLessonBtn = feedback.locator('#btn-goto-next-lesson');
     await expect(nextLessonBtn).toBeVisible();
     await expect(nextLessonBtn).toContainText('다음 레슨 공부하기');
-    await expect(nextLessonBtn).toHaveAttribute('href', /lessons/);
 
-    // Old step 4 review button should not exist
-    const oldStep4Btn = feedback.locator('#btn-goto-step4');
-    await expect(oldStep4Btn).toHaveCount(0);
+    // 5. Because copy button was already clicked, clicking YouTube link button takes them to the link immediately
+    await youtubeBtn.click();
+    const openedUrls = await page.evaluate(() => window.__openedUrls);
+    expect(openedUrls.length).toBe(1);
+    expect(openedUrls[0]).toContain('youtube.com/watch?v=');
+  });
 
-    // Button updates with completion indicator
-    await expect(youtubeBtn).toContainText('학습 완료');
+  test('Step 4: Clicking YouTube link button before copying displays encouragement description first, and subsequent click opens YouTube', async ({ page }) => {
+    await page.goto('/lessons/lesson-01/index.html');
+
+    // Switch to Step 4
+    const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    await tab4.click();
+
+    const copyBtn = page.locator('#btn-copy-sentence');
+    const youtubeBtn = page.locator('#btn-post-comment');
+
+    // Mock clipboard and window.open
+    await page.evaluate(() => {
+      window.__openedUrls = [];
+      window.open = (url) => {
+        window.__openedUrls.push(url);
+      };
+    });
+
+    // Ensure copy button is not clicked yet
+    await expect(copyBtn).toBeDisabled();
+
+    // 1. Click YouTube button when NOT copied yet:
+    // It should display the encouragement/completion description instead of opening immediately
+    await youtubeBtn.click();
+
+    let openedUrls = await page.evaluate(() => window.__openedUrls);
+    expect(openedUrls.length).toBe(0); // Not opened immediately
+
+    // Verify storage is completed
+    const isCompleted = await page.evaluate(() => {
+      return Storage.isLessonCompleted('lesson-01');
+    });
+    expect(isCompleted).toBe(true);
+
+    // Verify encouragement description is rendered
+    const feedback = page.locator('#reflection-feedback');
+    await expect(feedback).toBeVisible();
+    await expect(feedback).toContainText('축하합니다! 오늘의 레슨을 모두 완주하셨습니다!');
+    await expect(feedback).toContainText('유튜브 커뮤니티');
+
+    // 2. Click YouTube button again -> now takes them to the link immediately
+    await youtubeBtn.click();
+    openedUrls = await page.evaluate(() => window.__openedUrls);
+    expect(openedUrls.length).toBe(1);
+    expect(openedUrls[0]).toContain('youtube.com/watch?v=');
   });
 
   test('Completed lesson displays visual completion badge and checkmark in catalog and home page', async ({ page }) => {
