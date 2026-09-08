@@ -34,7 +34,7 @@ const STATIC_ASSETS = [
   './assets/img/family-light.jpg',
   './assets/img/family-studio.jpg',
   './assets/img/avatars/kelly.jpg',
-  './assets/img/avatars/wayne.jpg',
+  './assets/img/avatars/wayne.jpeg',
   './assets/lottie/celebration.json',
   './assets/vendor/lottie.min.js',
   './lessons.html',
