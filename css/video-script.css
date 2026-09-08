@@ -542,30 +542,87 @@
 }
 
 .script-sub-toggle-group {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  background-color: var(--bg-color);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-sm);
-  padding: 2px;
+  gap: 3px;
+  background-color: #E2E8F0;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .script-sub-toggle-group {
+  background-color: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .btn-toggle-sub {
-  height: 26px;
-  padding: 0 10px;
+  height: 28px;
+  min-width: 34px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
-  border: none;
-  border-radius: 4px;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
   color: var(--text-muted);
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
 }
 
-.btn-toggle-sub.active {
-  background-color: var(--surface-color-alt);
+.btn-toggle-sub:hover:not(.active) {
+  background-color: rgba(148, 163, 184, 0.2);
   color: var(--text-main);
+}
+
+.btn-toggle-sub .sub-icon {
+  display: block;
+  width: 20px;
+  height: 14px;
+  border-radius: 2px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn-toggle-sub:hover .sub-icon {
+  transform: scale(1.05);
+}
+
+.btn-toggle-sub .sub-icon-off {
+  color: var(--text-muted);
+}
+
+/* Active State: High Contrast in Light & Dark Mode */
+.btn-toggle-sub.active {
+  background-color: #FFFFFF;
+  color: #1E293B;
+  border-color: #4F46E5;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2), 0 1px 2px rgba(0, 0, 0, 0.06);
+  transform: translateY(-0.5px);
+}
+
+.btn-toggle-sub.active .sub-icon {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.btn-toggle-sub.active .sub-icon-off {
+  color: #4F46E5;
+}
+
+[data-theme="dark"] .btn-toggle-sub.active {
+  background-color: #334155;
+  color: #FFFFFF;
+  border-color: #818CF8;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+}
+
+[data-theme="dark"] .btn-toggle-sub.active .sub-icon-off {
+  color: #818CF8;
 }
 
 /* Script List & Cards */
@@ -770,6 +827,38 @@
 
 .script-list-container.mode-kr-only .sentence-en {
   display: none !important;
+}
+
+.script-list-container.mode-off .sentence-en,
+.script-list-container.mode-off .sentence-kr {
+  display: none !important;
+}
+
+.script-list-container.mode-off .script-card-body {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.script-list-container.mode-off .script-card-body::after {
+  content: '자막 숨김 모드 (Listening Mode)';
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-subtle);
+  letter-spacing: -0.01em;
+  opacity: 0.75;
+}
+
+.script-list-container.mode-off .script-sentence-card.active .script-card-body::after {
+  content: '🎧 리스닝 집중 재생 중...';
+  color: var(--primary);
+  font-weight: 600;
+  font-style: normal;
+  opacity: 1;
+}
+
+[data-theme="dark"] .script-list-container.mode-off .script-sentence-card.active .script-card-body::after {
+  color: var(--primary-light);
 }
 
 /* ==========================================================================

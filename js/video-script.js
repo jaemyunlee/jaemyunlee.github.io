@@ -42,6 +42,7 @@ class VideoScriptPlayer {
     this.renderScriptItems();
     this.initYouTubePlayer();
     this._bindControls();
+    this.setSubtitleMode(this.subtitleMode);
 
     // Global audio coordination: pause video when any other player starts
     window.addEventListener('app-audio-started', (e) => {
@@ -817,11 +818,13 @@ class VideoScriptPlayer {
     this.subtitleMode = mode;
     if (!this.scriptListContainer) return;
 
-    this.scriptListContainer.classList.remove('mode-both', 'mode-en-only', 'mode-kr-only');
+    this.scriptListContainer.classList.remove('mode-both', 'mode-en-only', 'mode-kr-only', 'mode-off');
     if (mode === 'en') {
       this.scriptListContainer.classList.add('mode-en-only');
     } else if (mode === 'kr') {
       this.scriptListContainer.classList.add('mode-kr-only');
+    } else if (mode === 'off') {
+      this.scriptListContainer.classList.add('mode-off');
     } else {
       this.scriptListContainer.classList.add('mode-both');
     }

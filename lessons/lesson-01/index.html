@@ -126,17 +126,25 @@
                 <line x1="16" y1="13" x2="8" y2="13" />
                 <line x1="16" y1="17" x2="8" y2="17" />
               </svg>
-              <strong>Interactive Script</strong>
+              <strong>자막</strong>
             </div>
 
             <div class="script-sub-toggle-group" role="group" aria-label="Subtitle Language">
-              <button type="button" class="btn-toggle-sub active" data-subtitle-mode="both">Both</button>
-              <button type="button" class="btn-toggle-sub" data-subtitle-mode="en">EN</button>
-              <button type="button" class="btn-toggle-sub" data-subtitle-mode="kr">KR</button>
+              <button type="button" class="btn-toggle-sub active" data-subtitle-mode="both" title="한/영 자막 동시 보기 (Both Subtitles)" aria-label="한영 자막 동시 보기">Both</button>
+              <button type="button" class="btn-toggle-sub" data-subtitle-mode="en" title="영어 자막만 보기 (English Only)" aria-label="영어 자막만 보기">EN</button>
+              <button type="button" class="btn-toggle-sub" data-subtitle-mode="kr" title="한국어 자막만 보기 (Korean Only)" aria-label="한국어 자막만 보기">KR</button>
+              <button type="button" class="btn-toggle-sub" data-subtitle-mode="off" title="자막 숨기기 / 리스닝 집중 모드 (Subtitles Off)" aria-label="자막 숨기기">
+                <svg class="sub-icon sub-icon-off" viewBox="0 0 20 14" width="20" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="1" y="1" width="18" height="12" rx="2.5" stroke="currentColor" stroke-width="1.3" fill="none"/>
+                  <line x1="4.5" y1="5.2" x2="15.5" y2="5.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                  <line x1="4.5" y1="8.8" x2="11.5" y2="8.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                  <line x1="2.5" y1="12" x2="17.5" y2="2" stroke="#EF4444" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </button>
             </div>
           </div>
 
-          <div class="script-list-container" id="script-list-container" role="feed" aria-label="Bilingual Script Lines">
+          <div class="script-list-container mode-both" id="script-list-container" role="feed" aria-label="Bilingual Script Lines">
             <!-- Rendered dynamically -->
           </div>
         </div>
