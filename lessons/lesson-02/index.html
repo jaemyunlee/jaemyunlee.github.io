@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Cache Control (Issue #3: Maximize Browser Caching) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 2: Uncle Wayne's Cabin & Dry Creek - RhyRhy English</title>
+  <link rel="manifest" href="../../manifest.webmanifest">
+  <meta name="theme-color" content="#4F46E5">
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="../../assets/icons/icon.svg">
+
+  <script>
+    (function(){try{var t=localStorage.getItem('rhyrhy_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/navigation.css">
+  <link rel="stylesheet" href="../../css/quiz.css">
+  <link rel="stylesheet" href="../../css/video-script.css">
+  <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/review-player.css">
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="main-nav" id="main-nav"></header>
+
+  <main class="app-container">
+    <!-- Lesson Header (Only Badges) -->
+    <section class="lesson-header-section" style="margin-bottom: 14px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span class="badge badge-primary">Lesson 02</span>
+        <span class="badge badge-emerald" id="lesson-status-badge">Step 1: Quiz</span>
+      </div>
+    </section>
+
+    <!-- Step Navigation Tabs (1, 2, 3, 4) -->
+    <nav class="lesson-step-tabs" id="lesson-step-tabs" aria-label="학습 단계 이동">
+      <button type="button" class="step-tab-btn active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">퀴즈</span>
+      </button>
+      <button type="button" class="step-tab-btn" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">핵심 문장</span>
+      </button>
+      <button type="button" class="step-tab-btn" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">전체 영상</span>
+      </button>
+      <button type="button" class="step-tab-btn" data-step="4">
+        <span class="step-num">4</span>
+        <span class="step-label">영작하기</span>
+      </button>
+    </nav>
+
+    <!-- Step 1: Pre-Video Quizzes Section -->
+    <section class="quiz-section-wrapper" id="quiz-section" aria-label="Step 1: Quizzes">
+      <div id="quiz-container">
+        <!-- Rendered dynamically by QuizEngine -->
+        <div style="text-align: center; padding: 40px;">
+          <p>퀴즈 데이터를 불러오는 중입니다...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2: Key Sentences & Audio Player Section -->
+    <section class="review-section-wrapper" id="review-section" aria-label="Step 2: Key Sentences and Audio Player"
+      style="display: none;">
+      <div id="review-player-container"></div>
+    </section>
+
+    <!-- Step 3: Video & Interactive Script Section -->
+    <section class="video-section" id="video-section" aria-label="Step 3: Video and Interactive Script"
+      style="display: none; margin-top: 24px;">
+
+      <div class="video-script-grid" id="video-script-grid">
+        <!-- Video Player Column (Top on mobile, Left on desktop) -->
+        <div class="video-player-column" id="video-player-col">
+          <div class="video-frame-wrapper">
+            <div id="youtube-player-container"></div>
+          </div>
+
+          <!-- Video Controls Toolbar -->
+          <div class="video-toolbar">
+            <button type="button" class="btn-ctrl" id="btn-play-pause-toggle" title="재생 / 일시정지">
+              <span id="play-pause-icon">▶ 재생</span>
+            </button>
+
+            <div class="video-speed-controls">
+              <span class="speed-label">Speed:</span>
+              <button type="button" class="btn-speed" data-speed="0.75">0.75x</button>
+              <button type="button" class="btn-speed active" data-speed="1.0">1.0x</button>
+              <button type="button" class="btn-speed" data-speed="1.25">1.25x</button>
+            </div>
+
+            <a href="https://www.youtube.com/@happyfamily8" target="_blank" rel="noopener noreferrer"
+              class="btn-yt-direct" id="btn-yt-direct" title="YouTube 새 창에서 직접 보기">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="#FF0000">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Script Panel (Bottom on mobile, Right on desktop) -->
+        <div class="script-panel-column" id="script-panel-main">
+          <div class="script-panel-header">
+            <div class="script-header-title">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+              <strong>Interactive Script</strong>
+            </div>
+
+            <div class="script-sub-toggle-group" role="group" aria-label="Subtitle Language">
+              <button type="button" class="btn-toggle-sub active" data-subtitle-mode="both">Both</button>
+              <button type="button" class="btn-toggle-sub" data-subtitle-mode="en">EN</button>
+              <button type="button" class="btn-toggle-sub" data-subtitle-mode="kr">KR</button>
+            </div>
+          </div>
+
+          <div class="script-list-container" id="script-list-container" role="feed" aria-label="Bilingual Script Lines">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4: Writing & Commenting Section -->
+    <section class="reflection-wrapper" id="reflection-section" aria-label="Step 4: Writing and Commenting" style="display: none;">
+      <div id="reflection-container"></div>
+    </section>
+  </main>
+
+  <div class="celebration-overlay" id="celebration-overlay" aria-hidden="true"></div>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Core Scripts -->
+  <script src="../../assets/vendor/lottie.min.js"></script>
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/analytics.js"></script>
+  <script src="../../js/markdown-quiz-parser.js"></script>
+  <script src="../../js/quiz-engine.js"></script>
+  <script src="../../js/video-script.js"></script>
+  <script src="../../js/celebration.js"></script>
+  <script src="../../js/youtube-comment.js?v=step4"></script>
+  <script src="../../js/review-player.js"></script>
+  <script src="../../js/pwa-manager.js"></script>
+  <script src="../../js/app.js"></script>
+
+  <script>
+    // Initialize Lesson 02
+    document.addEventListener('DOMContentLoaded', async () => {
+      const LESSON_ID = 'lesson-02';
+
+      // 1. Initialize Global App Shell (Navbar, Sentence Drawer, History Drawer, Offline detection)
+      App.init(LESSON_ID);
+
+      // 2. Initialize Managers
+      const celebrationManager = new CelebrationManager({
+        lottiePath: '../../assets/lottie/celebration.json'
+      });
+
+      const quizSection = document.getElementById('quiz-section');
+      const lessonHeader = document.querySelector('.lesson-header-section');
+      const videoSection = document.getElementById('video-section');
+      const reflectionSection = document.getElementById('reflection-section');
+      const reviewSection = document.getElementById('review-section');
+      const statusBadge = document.getElementById('lesson-status-badge');
+
+      // Pre-matched audio files for Lesson 02
+      const LESSON_02_AUDIO_FILES = [
+        "There was nothing here on the property..wav", // Q1
+        "we managed to use a headlight and a battery for lights..wav", // Q2
+        "we just used buckets or bottles for water until we had a spring built that was up on the hill..wav", // Q3
+        "we had water midway through summer and then we ran out..wav", // Q4
+        "we would all have inner tubes and air mattresses..wav", // Q5
+        "we would play in the creek all afternoon till we were like blue-lipped..wav", // Q6
+        "we could only get in the creek after we got our chores done in the morning..wav", // Q7
+        "its been a treat.wav", // Q8
+        "The creek itself is called Dry Creek not because it ran dry of water because when back in the 1800s or 1890s whenever....wav", // Q9
+        "our creek feeds a lake downstream..wav", // Q10
+        "Its known for fishing. they stock it like three times a year..wav", // Q11
+        "through the years it got added on to three times..wav", // Q12
+        "we had a water line break and it flooded the whole place. we had to strip it right down the inside..wav", // Q13
+        "we had to strip it all the way down to the studs so the building would dry out and wouldnt get moldy..wav", // Q14
+        "They had to build the house to make it level..wav", // Q15
+        "As they were getting up in age and didnt have to worry about falls anymore..wav", // Q16
+        "That was my moms memorial bell that we built and this was mining equipment that we found up in the hills..wav", // Q17
+        "Now Kelly get to enjoy it..wav" // Q18
+      ];
+
+      let metadata = {};
+      let scriptData = [];
+      let loadedQuizzes = [];
+      let videoPlayer = null;
+      let reviewPlayer = null;
+
+      try {
+        const metaRes = await fetch('./metadata.json');
+        if (metaRes.ok) metadata = await metaRes.json();
+      } catch (e) {
+        console.warn('Could not load metadata.json', e);
+      }
+
+      try {
+        const scriptRes = await fetch('./script.json');
+        if (scriptRes.ok) scriptData = await scriptRes.json();
+      } catch (e) {
+        console.warn('Could not load script.json', e);
+      }
+
+      // Initialize Analytics for Lesson 02
+      if (typeof Analytics !== 'undefined') {
+        Analytics.init();
+        Analytics.trackLessonView(LESSON_ID, metadata.title || "Lesson 2: Uncle Wayne's Cabin & Dry Creek");
+      }
+
+      const commentManager = new YouTubeCommentManager({
+        lessonId: LESSON_ID,
+        youtubeId: metadata.youtubeId || '',
+        lessonMetadata: metadata,
+        celebrationManager: celebrationManager,
+        container: '#reflection-container',
+        nextLessonUrl: (typeof App !== 'undefined' && App.getNextLessonUrl) ? App.getNextLessonUrl(LESSON_ID) : '/lessons.html',
+        onComplete: () => {
+          showStep(4, false);
+        }
+      });
+      commentManager.init();
+
+      // Unified Step Navigation (1, 2, 3, 4) with LocalStorage Memory
+      let currentActiveStep = 1;
+      const showStep = (stepNumber, scroll = true) => {
+        const step = Math.min(4, Math.max(1, stepNumber));
+        currentActiveStep = step;
+        Storage.setCurrentStep(LESSON_ID, step);
+
+        if (typeof Analytics !== 'undefined') {
+          Analytics.trackStepView(LESSON_ID, step);
+        }
+
+        const nudgeModal = document.getElementById('step4-nudge-modal') || document.getElementById('step3-nudge-modal');
+        if (nudgeModal) nudgeModal.style.display = 'none';
+
+        // Pause review audio if leaving step 2
+        if (step !== 2 && reviewPlayer) {
+          reviewPlayer.pause();
+        }
+
+        // Pause video player if leaving step 3
+        if (step !== 3 && videoPlayer) {
+          videoPlayer.pause();
+        }
+
+        // Manage Section Displays
+        if (quizSection) quizSection.style.display = (step === 1) ? 'block' : 'none';
+        if (reviewSection) reviewSection.style.display = (step === 2) ? 'block' : 'none';
+        if (videoSection) videoSection.style.display = (step === 3) ? 'block' : 'none';
+        if (reflectionSection) reflectionSection.style.display = (step === 4) ? 'block' : 'none';
+
+        // Update Step Tab Buttons
+        const tabBtns = document.querySelectorAll('.step-tab-btn');
+        tabBtns.forEach(btn => {
+          const s = parseInt(btn.dataset.step, 10);
+          btn.classList.toggle('active', s === step);
+        });
+
+        // Horizontally scroll tabs:
+        // Step 1 & 2: Show Step 1, Step 2, and Step 3 together (left: 0)
+        // Step 3 & 4: Scroll left to show Step 3 and Step 4 together without dragging
+        const tabsNav = document.getElementById('lesson-step-tabs');
+        if (tabsNav) {
+          const maxScroll = tabsNav.scrollWidth - tabsNav.clientWidth;
+          if (maxScroll > 0) {
+            const targetLeft = (step <= 2) ? 0 : maxScroll;
+            tabsNav.scrollTo({ left: targetLeft, behavior: scroll ? 'smooth' : 'auto' });
+          }
+        }
+
+        // Update Status Badge (Consistent green highlight across all steps)
+        if (statusBadge) {
+          statusBadge.className = 'badge badge-emerald';
+          if (step === 1) {
+            statusBadge.textContent = 'Step 1: 퀴즈';
+          } else if (step === 2) {
+            statusBadge.textContent = 'Step 2: 핵심 문장';
+          } else if (step === 3) {
+            statusBadge.textContent = 'Step 3: 전체 영상';
+          } else if (step === 4) {
+            statusBadge.textContent = 'Step 4: 영작하기';
+          }
+        }
+
+        // Lazy-init Review Player on Step 2 (핵심 문장)
+        if (step === 2 && loadedQuizzes.length > 0) {
+          if (!reviewPlayer) {
+            reviewPlayer = new ReviewPlayer({
+              container: '#review-player-container',
+              lessonId: LESSON_ID,
+              quizzes: loadedQuizzes,
+              audioBaseUrl: './audio/',
+              audioFiles: LESSON_02_AUDIO_FILES,
+              speakerName: metadata?.speaker?.name || 'Wayne',
+              speakerAvatar: metadata?.speaker?.avatar || '../../assets/img/avatars/wayne.jpg',
+              celebrationManager: celebrationManager,
+              onComplete: () => {
+                showStep(3, true);
+              }
+            });
+            reviewPlayer.init();
+            window.reviewPlayer = reviewPlayer;
+          }
+        }
+
+        // Lazy-init Video Player on Step 3 (전체 영상)
+        if (step === 3) {
+          if (!videoPlayer) {
+            videoPlayer = new VideoScriptPlayer({
+              lessonId: LESSON_ID,
+              youtubeId: metadata.youtubeId || '',
+              scriptData: scriptData,
+              onVideoEnd: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'video_end' });
+                }
+                showStep4Nudge();
+              },
+              onScriptComplete: () => {
+                if (typeof Analytics !== 'undefined') {
+                  Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'script_complete' });
+                }
+                showStep4Nudge();
+              }
+            });
+            videoPlayer.init();
+            window.videoPlayer = videoPlayer;
+          } else {
+            videoPlayer.onStepShow();
+          }
+        }
+
+        // Uniform Scroll to fit active contents section across all steps
+        if (scroll) {
+          try {
+            let targetSection = null;
+            if (step === 1) targetSection = quizSection;
+            else if (step === 2) targetSection = reviewSection;
+            else if (step === 3) targetSection = videoSection;
+            else if (step === 4) targetSection = document.getElementById('reflection-card') || reflectionSection;
+
+            if (targetSection) {
+              const navHeight = 70;
+              const y = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+              window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          } catch (_) {
+            window.scrollTo(0, 0);
+          }
+        }
+      };
+      window.showStep = showStep;
+
+      // Step Navigation Tabs Click Binding
+      document.querySelectorAll('.step-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const s = parseInt(btn.dataset.step, 10);
+          showStep(s, true);
+        });
+      });
+
+      // Swipe Left / Right to Navigate Steps on Touch Devices
+      const appMain = document.querySelector('main.app-container') || document.body;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      appMain.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        if (e.target.closest('input, textarea, select, button, iframe, .video-toolbar, .plyr, .audio-player-card, a')) {
+          touchStartX = 0;
+          return;
+        }
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive: true });
+
+      appMain.addEventListener('touchend', (e) => {
+        if (!touchStartX) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        const duration = Date.now() - touchStartTime;
+
+        if (Math.abs(diffX) >= 50 && Math.abs(diffX) > Math.abs(diffY) * 1.5 && duration <= 600) {
+          if (diffX < 0 && currentActiveStep < 4) {
+            showStep(currentActiveStep + 1, true);
+          } else if (diffX > 0 && currentActiveStep > 1) {
+            showStep(currentActiveStep - 1, true);
+          }
+        }
+        touchStartX = 0;
+      }, { passive: true });
+
+      // Pause video playback if user switches tabs or minimizes browser (audio continues in background)
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (videoPlayer) videoPlayer.pause();
+        }
+      });
+
+      // Global click delegation for Step 2 '핵심 문장 보러가기' button
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('#btn-goto-video') || e.target.closest('#btn-goto-sentences')) {
+          e.preventDefault();
+          showStep(2, true);
+        } else if (e.target.closest('#btn-goto-step3')) {
+          e.preventDefault();
+          showStep(3, true);
+        }
+      });
+
+      // Step 4 Nudge Popup Modal
+      const step4Modal = document.getElementById('step4-nudge-modal') || document.getElementById('step3-nudge-modal');
+      const btnModalGotoStep4 = document.getElementById('btn-modal-goto-step4') || document.getElementById('btn-modal-goto-step3');
+      const btnModalCloseNudge = document.getElementById('btn-modal-close-nudge');
+
+      const showStep4Nudge = () => {
+        if (step4Modal) {
+          step4Modal.style.display = 'flex';
+        }
+      };
+
+      if (btnModalGotoStep4) {
+        btnModalGotoStep4.addEventListener('click', () => {
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'modal_button' });
+          }
+          showStep(4, true);
+        });
+      }
+      if (btnModalCloseNudge) {
+        btnModalCloseNudge.addEventListener('click', () => {
+          if (step4Modal) step4Modal.style.display = 'none';
+        });
+      }
+
+      // Script list completion banner click
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('#btn-banner-goto-step4') || e.target.closest('#btn-banner-goto-step3')) {
+          if (typeof Analytics !== 'undefined') {
+            Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'banner_button' });
+          }
+          showStep(4, true);
+        }
+      });
+
+      // Load Quizzes from Markdown
+      try {
+        const quizzes = await MarkdownQuizParser.loadFromUrl('./quiz.md');
+        loadedQuizzes = quizzes;
+        commentManager.setQuizzes(quizzes);
+
+        // Resume previously active step from LocalStorage
+        const savedStep = Storage.getCurrentStep(LESSON_ID);
+        showStep(savedStep, false);
+
+        const quizEngine = new QuizEngine({
+          container: '#quiz-container',
+          lessonId: LESSON_ID,
+          quizzes: quizzes,
+          onComplete: (info) => {
+            if (typeof Analytics !== 'undefined') {
+              Analytics.trackStepComplete(LESSON_ID, 1, {
+                alreadyCompleted: !!info.alreadyCompleted,
+                totalQuizzes: (quizzes && quizzes.length) || 0
+              });
+            }
+            if (!info.alreadyCompleted && celebrationManager) {
+              celebrationManager._launchConfettiParticles();
+            }
+          },
+          onStartVideo: () => {
+            showStep(2, true);
+          }
+        });
+        quizEngine.init();
+      } catch (err) {
+        console.error('Failed to load quiz markdown:', err);
+        document.getElementById('quiz-container').innerHTML = `
+          <div class="quiz-feedback error">Failed to load quiz.md. Please check the file path.</div>
+        `;
+      }
+    });
+  </script>
+
+  <!-- Step 4 Nudge Popup Modal -->
+  <div class="nudge-modal-overlay" id="step4-nudge-modal" style="display: none;" role="dialog" aria-modal="true"
+    aria-labelledby="nudge-modal-title">
+    <div class="nudge-modal-card">
+      <div class="nudge-modal-icon">🎬</div>
+      <h3 class="nudge-modal-title" id="nudge-modal-title">전체 영상 & 대본 학습 완료!</h3>
+      <p class="nudge-modal-desc">
+        영상과 대본을 모두 집중해서 학습하셨습니다.<br>
+        이제 오늘 배운 핵심 어휘와 표현을 활용해 <strong>나만의 문장을 직접 영작</strong>하고, <strong>유튜브에 댓글</strong>을 남겨보세요!
+      </p>
+      <div class="nudge-modal-actions">
+        <button type="button" class="btn btn-primary btn-modal-step4" id="btn-modal-goto-step4">
+          <span>✍️ 문장 작성 & 댓글 남기기</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+        <button type="button" class="btn-modal-dismiss" id="btn-modal-close-nudge">
+          <span>대본 더 복습하기</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

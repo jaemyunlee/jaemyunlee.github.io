@@ -1,0 +1,18 @@
+- There was nothing here on the [property].
+- we [managed to] use a headlight and a battery for lights.
+- we just used buckets or bottles for water until we had [a spring] built that was up on the hill.
+- we had water [midway through] summer and then we ran out.
+- we would all have [inner tubes] and air mattresses.
+- we would play in the creek [all afternoon] till we were like blue-lipped.
+- we could only get in the creek after we got our [chores] done in the morning.
+- it's been  [a treat]!
+- The creek [itself] is called Dry Creek, not because it ran dry of water, because when back in the 1800s or 1890s, whenever it was, the gold rush was going on, they never found any gold in the creek, so they named it Dry Creek.
+- our creek [feeds] a lake downstream.
+- It's known for fishing. they [stock] it like three times a year.
+- [through the years] it got added on to three times.
+- we had a water line break and it flooded the whole place. we had to [strip] it right down the inside.
+- we had to strip it all the way down to the studs so the building would dry out and wouldn't get [moldy].
+- They had to build the house to make it [level].
+- [As] they were getting up in age and didn't have to worry about falls anymore.
+- That was my mom's memorial bell that we built and this was [mining] equipment that we found up in the hills.
+- Now Kelly [get to] enjoy it.
