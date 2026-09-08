@@ -33,7 +33,20 @@ class ReviewPlayer {
     this.render();
     this._bindControls();
 
+    // Global audio coordination: pause when any other player starts
+    window.addEventListener('app-audio-started', (e) => {
+      if (e.detail && e.detail.source !== 'review-player' && this.isPlaying) {
+        this.pause();
+      }
+    });
+
     window.addEventListener('saved-player-started', () => {
+      if (this.isPlaying) {
+        this.pause();
+      }
+    });
+
+    window.addEventListener('video-player-started', () => {
       if (this.isPlaying) {
         this.pause();
       }
@@ -403,9 +416,18 @@ class ReviewPlayer {
     if (index < 0 || index >= this.quizzes.length) return;
 
     this.stopAudio();
+
+    // Notify all players to pause immediately
+    window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'review-player' } }));
+    window.dispatchEvent(new CustomEvent('review-player-started'));
+
     if (typeof App !== 'undefined' && App.savedPlayer && App.savedPlayer.isPlaying) {
       App.savedPlayer.pause();
     }
+    if (typeof window !== 'undefined' && window.SavedAudioPlayer && window.SavedAudioPlayer.isPlaying) {
+      window.SavedAudioPlayer.pause();
+    }
+
     this.currentIndex = index;
     this.isPlaying = true;
 
@@ -414,23 +436,54 @@ class ReviewPlayer {
     const audioUrl = this._resolveAudioUrl(index);
 
     this._updatePlayerUI(index, cleanEn);
+    this._updateMediaSession(cleanEn, quiz);
 
     if (audioUrl) {
-      this.currentAudio = new Audio(audioUrl);
+      if (!this.audioElement) {
+        this.audioElement = document.createElement('audio');
+        this.audioElement.id = 'review-audio-element';
+        this.audioElement.preload = 'auto';
+        this.audioElement.style.display = 'none';
+        if (document.body) {
+          document.body.appendChild(this.audioElement);
+        }
+      }
+
+      this.currentAudio = this.audioElement;
+      this.currentAudio.src = audioUrl;
       this.currentAudio.playbackRate = this.playbackRate;
 
-      this.currentAudio.addEventListener('timeupdate', () => {
+      this.currentAudio.ontimeupdate = () => {
         this._updateProgress(this.currentAudio.currentTime, this.currentAudio.duration);
-      });
+      };
 
-      this.currentAudio.addEventListener('ended', () => {
+      this.currentAudio.onended = () => {
         this._onSentenceAudioEnded();
-      });
+      };
 
-      this.currentAudio.addEventListener('error', (e) => {
+      this.currentAudio.onerror = (e) => {
         console.warn('Audio file error, falling back to Web Speech Synthesis:', audioUrl, e);
         this._playWithSpeechSynthesis(cleanEn);
-      });
+      };
+
+      // Preload the next sentence in background to eliminate inter-track gap
+      if (this.quizzes.length > 1 && this.isPlayAll) {
+        const nextIdx = (index + 1) % this.quizzes.length;
+        const nextAudioUrl = this._resolveAudioUrl(nextIdx);
+        if (nextAudioUrl) {
+          if (!this.preloaderAudio) {
+            this.preloaderAudio = document.createElement('audio');
+            this.preloaderAudio.id = 'review-audio-preloader';
+            this.preloaderAudio.preload = 'auto';
+            this.preloaderAudio.style.display = 'none';
+            if (document.body) {
+              document.body.appendChild(this.preloaderAudio);
+            }
+          }
+          this.preloaderAudio.src = nextAudioUrl;
+          this.preloaderAudio.load();
+        }
+      }
 
       const playPromise = this.currentAudio.play();
       if (playPromise !== undefined) {
@@ -441,6 +494,35 @@ class ReviewPlayer {
       }
     } else {
       this._playWithSpeechSynthesis(cleanEn);
+    }
+  }
+
+  _updateMediaSession(cleanEn, quiz) {
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: cleanEn,
+          artist: this.speakerName || 'Kelly (RhyRhy English)',
+          album: `Lesson ${this.lessonId.replace(/^lesson-/, '')} Review`,
+          artwork: [
+            { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
+            { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png' }
+          ]
+        });
+        navigator.mediaSession.playbackState = 'playing';
+
+        navigator.mediaSession.setActionHandler('play', () => this.playSentence(this.currentIndex));
+        navigator.mediaSession.setActionHandler('pause', () => this.pause());
+        navigator.mediaSession.setActionHandler('previoustrack', () => this.prev());
+        navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+          if (details && details.seekTime !== undefined && this.currentAudio && this.currentAudio.duration) {
+            this.currentAudio.currentTime = details.seekTime;
+          }
+        });
+      } catch (err) {
+        console.warn('ReviewPlayer MediaSession error:', err);
+      }
     }
   }
 
@@ -517,6 +599,12 @@ class ReviewPlayer {
     this.isPlaying = false;
     this.stopAudio();
 
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.playbackState = 'paused';
+      } catch (_) { }
+    }
+
     const playerBar = this.container.querySelector('#review-player-bar');
     if (playerBar) playerBar.classList.remove('is-playing');
 
@@ -541,7 +629,6 @@ class ReviewPlayer {
         this.currentAudio.pause();
         this.currentAudio.currentTime = 0;
       } catch (_) { }
-      this.currentAudio = null;
     }
 
     if ('speechSynthesis' in window) {

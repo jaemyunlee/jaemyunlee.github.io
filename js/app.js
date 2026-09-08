@@ -1195,9 +1195,27 @@ const SavedAudioPlayer = {
     if (this._initialized) return;
     this._initialized = true;
 
-    // Single reusable Audio element for mobile background playback
-    this.audio = new Audio();
-    this.audio.preload = 'auto';
+    // Attach primary Audio element to DOM to preserve WebKit background audio session privilege
+    if (!this.audio) {
+      this.audio = document.createElement('audio');
+      this.audio.id = 'saved-audio-element';
+      this.audio.preload = 'auto';
+      this.audio.style.display = 'none';
+      if (document.body) {
+        document.body.appendChild(this.audio);
+      }
+    }
+
+    // Secondary preloader audio element to eliminate inter-track gap in background
+    if (!this.preloaderAudio) {
+      this.preloaderAudio = document.createElement('audio');
+      this.preloaderAudio.id = 'saved-audio-preloader';
+      this.preloaderAudio.preload = 'auto';
+      this.preloaderAudio.style.display = 'none';
+      if (document.body) {
+        document.body.appendChild(this.preloaderAudio);
+      }
+    }
 
     this._bindAudioEvents();
     this._bindUiEvents();
@@ -1205,6 +1223,25 @@ const SavedAudioPlayer = {
 
     window.addEventListener('saved-sentences-updated', () => {
       this.updatePlaylist();
+    });
+
+    // Global audio coordination: pause when any other player starts
+    window.addEventListener('app-audio-started', (e) => {
+      if (e.detail && e.detail.source !== 'saved-player' && this.isPlaying) {
+        this.pause();
+      }
+    });
+
+    window.addEventListener('review-player-started', () => {
+      if (this.isPlaying) {
+        this.pause();
+      }
+    });
+
+    window.addEventListener('video-player-started', () => {
+      if (this.isPlaying) {
+        this.pause();
+      }
     });
   },
 
@@ -1293,6 +1330,11 @@ const SavedAudioPlayer = {
         navigator.mediaSession.setActionHandler('pause', () => this.pause());
         navigator.mediaSession.setActionHandler('previoustrack', () => this.prev());
         navigator.mediaSession.setActionHandler('nexttrack', () => this.next());
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+          if (details && details.seekTime !== undefined && this.audio && this.audio.duration) {
+            this.audio.currentTime = details.seekTime;
+          }
+        });
       } catch (err) {
         console.warn('MediaSession handler error:', err);
       }
@@ -1473,7 +1515,8 @@ const SavedAudioPlayer = {
     const item = this.playlist[this.currentIndex];
     if (!item) return;
 
-    // Pause any other page players (e.g. Step 4 ReviewPlayer)
+    // Pause any other page players (e.g. Step 4 ReviewPlayer, Step 2 VideoPlayer)
+    window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'saved-player' } }));
     window.dispatchEvent(new CustomEvent('saved-player-started'));
 
     const base = this.app ? this.app._getBasePath() : './';
@@ -1503,6 +1546,17 @@ const SavedAudioPlayer = {
           console.warn('Audio play prevented or error:', err);
           this._fallbackTts();
         });
+      }
+
+      // Preload the next sentence in background to eliminate inter-track gap
+      if (this.playlist.length > 1 && this.isPlayAll) {
+        const nextIdx = (this.currentIndex + 1) % this.playlist.length;
+        const nextItem = this.playlist[nextIdx];
+        const nextUrl = this._resolveAudioUrl(nextItem, base);
+        if (nextUrl && this.preloaderAudio) {
+          this.preloaderAudio.src = nextUrl;
+          this.preloaderAudio.load();
+        }
       }
     } else {
       this._fallbackTts();
@@ -1566,6 +1620,8 @@ const SavedAudioPlayer = {
 
   resume() {
     if (this.playlist.length === 0) return;
+    window.dispatchEvent(new CustomEvent('app-audio-started', { detail: { source: 'saved-player' } }));
+    window.dispatchEvent(new CustomEvent('saved-player-started'));
     if (this.audio && this.audio.src && !this.audio.ended && this.audio.currentTime > 0) {
       this.audio.playbackRate = this.playbackRate;
       this.isPlaying = true;
@@ -1649,7 +1705,7 @@ const SavedAudioPlayer = {
         return item.audio;
       }
       const clean = item.audio.replace(/^audio\//, '');
-      return `${base}lessons/${item.lessonId || 'lesson-01'}/audio/${clean}`;
+      return encodeURI(`${base}lessons/${item.lessonId || 'lesson-01'}/audio/${clean}`);
     }
 
     // 2. Map lookup for Lesson 01
@@ -1670,7 +1726,14 @@ const SavedAudioPlayer = {
 App.savedPlayer = SavedAudioPlayer;
 App.AudioPlayerComponent = AudioPlayerComponent;
 
+if (typeof window !== 'undefined') {
+  window.App = App;
+  window.SavedAudioPlayer = SavedAudioPlayer;
+  window.AudioPlayerComponent = AudioPlayerComponent;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = App;
   module.exports.AudioPlayerComponent = AudioPlayerComponent;
+  module.exports.SavedAudioPlayer = SavedAudioPlayer;
 }

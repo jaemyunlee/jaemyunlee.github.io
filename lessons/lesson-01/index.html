@@ -333,6 +333,7 @@
               }
             });
             videoPlayer.init();
+            window.videoPlayer = videoPlayer;
           } else {
             videoPlayer.onStepShow();
           }
@@ -352,6 +353,7 @@
               celebrationManager: celebrationManager
             });
             reviewPlayer.init();
+            window.reviewPlayer = reviewPlayer;
           }
         }
 
@@ -376,6 +378,7 @@
           }
         }
       };
+      window.showStep = showStep;
 
       // Step Navigation Tabs Click Binding
       document.querySelectorAll('.step-tab-btn').forEach(btn => {
@@ -424,11 +427,10 @@
         touchStartX = 0;
       }, { passive: true });
 
-      // Pause playback if user switches tabs or minimizes browser
+      // Pause video playback if user switches tabs or minimizes browser (audio continues in background)
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
           if (videoPlayer) videoPlayer.pause();
-          if (reviewPlayer) reviewPlayer.pause();
         }
       });
 
