@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <!-- Cache Control (Issue #3: Maximize Browser Caching) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>🍿 오늘의 팝콘 한마디 - 현서네 리얼 영어</title>
+  <meta name="description" content="매일 팝콘처럼 톡 터지는 오늘의 실생활 영어 한마디! 원어민 발음 듣기, 빈칸 퀴즈 리콜, 단어장 저장까지.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#4F46E5">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="./assets/icons/icon.svg">
+
+  <script>
+    (function () { try { var t = localStorage.getItem('rhyrhy_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+  </script>
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/navigation.css">
+  <link rel="stylesheet" href="./css/modal.css">
+  <link rel="stylesheet" href="./css/daily-popcorn.css">
+
+  <style>
+    .daily-page-main {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px 64px;
+      box-sizing: border-box;
+    }
+
+    .daily-page-header {
+      text-align: center;
+      max-width: 540px;
+      margin-bottom: 24px;
+    }
+
+    .daily-page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(245, 158, 11, 0.15);
+      color: #D97706;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    [data-theme="dark"] .daily-page-badge {
+      color: #FBBF24;
+      background: rgba(245, 158, 11, 0.2);
+    }
+
+    .daily-page-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .daily-page-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    #daily-page-container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Unified Responsive App Navigation -->
+  <header class="main-nav" id="main-nav"></header>
+
+  <main class="daily-page-main">
+    <div class="daily-page-header">
+      <div class="daily-page-badge">
+        <span>🍿</span>
+        <span>Daily English Phrase</span>
+      </div>
+      <h1 class="daily-page-title">오늘의 팝콘 한마디</h1>
+      <p class="daily-page-desc">
+        매일 새로운 실생활 영어 표현을 학습해보세요.
+      </p>
+    </div>
+
+    <div id="daily-page-container">
+      <!-- Injected by DailyPopcornManager -->
+    </div>
+  </main>
+
+  <!-- Core Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/analytics.js"></script>
+  <script src="./js/daily-phrases-data.js"></script>
+  <script src="./js/popcorn-parser.js"></script>
+  <script src="./js/daily-popcorn.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      App.init('daily-phrase');
+      DailyPopcornManager.init();
+    });
+  </script>
+</body>
+
+</html>

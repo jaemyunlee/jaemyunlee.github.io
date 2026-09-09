@@ -245,7 +245,7 @@ function build() {
   console.log(`\n  🔑 Global Build Hash: ${globalBuildHash}`);
 
   // 4. Copy Static Assets, Lessons, and Config Directories
-  const dirsToCopy = ['assets', 'lessons', 'templates'];
+  const dirsToCopy = ['assets', 'lessons', 'templates', 'popcorn'];
   for (const dirName of dirsToCopy) {
     const src = path.join(ROOT_DIR, dirName);
     const dest = path.join(DIST_DIR, dirName);
@@ -267,7 +267,7 @@ function build() {
   }
 
   // Copy root HTML files
-  const rootHtmlFiles = ['index.html', 'lessons.html', 'quiz.html'];
+  const rootHtmlFiles = ['index.html', 'lessons.html', 'quiz.html', 'daily.html'];
   for (const htmlFile of rootHtmlFiles) {
     const src = path.join(ROOT_DIR, htmlFile);
     const dest = path.join(DIST_DIR, htmlFile);

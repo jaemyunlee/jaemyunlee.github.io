@@ -15,7 +15,11 @@ const Storage = {
     STUDY_TIME_PREFIX: 'rhyrhy_study_time_',
     ACTIVE_LESSON_PAGE: 'rhyrhy_active_lesson_page',
     IN_PROGRESS_PREFIX: 'rhyrhy_in_progress_',
-    THEME: 'rhyrhy_theme'
+    THEME: 'rhyrhy_theme',
+    DAILY_COMPLETED_DATE: 'rhyrhy_daily_completed_date',
+    POPCORN_KNOWN: 'rhyrhy_popcorn_known',
+    POPCORN_STUDIED: 'rhyrhy_popcorn_studied',
+    POPCORN_DAILY_STUDY: 'rhyrhy_popcorn_daily_study'
   },
 
   /**
@@ -344,14 +348,27 @@ const Storage = {
       }
 
       // Check for duplicates
-      const exists = all[lessonId].some(s => s.en.trim().toLowerCase() === sentence.en.trim().toLowerCase());
-      if (exists) return false;
+      const existingIdx = all[lessonId].findIndex(s => s.id === sentence.id || s.en.trim().toLowerCase() === sentence.en.trim().toLowerCase());
+      if (existingIdx !== -1) {
+        all[lessonId][existingIdx] = {
+          ...all[lessonId][existingIdx],
+          expression: sentence.expression || all[lessonId][existingIdx].expression || '',
+          speaker: sentence.speaker || all[lessonId][existingIdx].speaker || '',
+          avatar: sentence.avatar || all[lessonId][existingIdx].avatar || '',
+          audio: sentence.audio || all[lessonId][existingIdx].audio || ''
+        };
+        localStorage.setItem(this.KEYS.SAVED_SENTENCES, JSON.stringify(all));
+        return false;
+      }
 
       all[lessonId].push({
         id: sentence.id || 'sent_' + Date.now(),
         en: sentence.en,
         kr: sentence.kr,
         audio: sentence.audio || '',
+        expression: sentence.expression || '',
+        speaker: sentence.speaker || '',
+        avatar: sentence.avatar || '',
         timestamp: sentence.timestamp || 0,
         savedAt: new Date().toISOString()
       });
@@ -635,6 +652,247 @@ const Storage = {
       }
     } catch (_) { }
     return false;
+  },
+
+  /**
+   * Get the date string (YYYY-MM-DD) on which the daily phrase was last completed
+   * @returns {string|null}
+   */
+  getDailyPhraseCompletedDate() {
+    try {
+      return localStorage.getItem(this.KEYS.DAILY_COMPLETED_DATE) || null;
+    } catch (e) {
+      console.warn('LocalStorage error reading daily phrase completion date', e);
+      return null;
+    }
+  },
+
+  /**
+   * Check if today's daily phrase is already completed
+   * @param {Date} [nowDate] optional date to test with
+   * @returns {boolean}
+   */
+  isDailyPhraseCompletedToday(nowDate) {
+    const today = (nowDate || new Date()).toISOString().slice(0, 10);
+    return this.getDailyPhraseCompletedDate() === today;
+  },
+
+  /**
+   * Mark today's daily phrase as completed
+   * @param {string} [dateStr] optional date string YYYY-MM-DD
+   */
+  setDailyPhraseCompletedToday(dateStr) {
+    try {
+      const today = dateStr || new Date().toISOString().slice(0, 10);
+      localStorage.setItem(this.KEYS.DAILY_COMPLETED_DATE, today);
+    } catch (e) {
+      console.warn('LocalStorage error saving daily phrase completion date', e);
+    }
+  },
+
+  /**
+   * Reset daily phrase completion (useful for testing and admin resets)
+   */
+  resetDailyPhraseCompletion() {
+    try {
+      localStorage.removeItem(this.KEYS.DAILY_COMPLETED_DATE);
+    } catch (_) { }
+  },
+
+  /**
+   * Check if a popcorn lesson is permanently skipped as already known ("이미 알아요")
+   * @param {string} lessonId
+   * @returns {boolean}
+   */
+  isPopcornKnown(lessonId) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_KNOWN);
+      if (data) {
+        const obj = JSON.parse(data);
+        return Boolean(obj[lessonId]);
+      }
+    } catch (e) {
+      console.warn('LocalStorage error reading popcorn known status', e);
+    }
+    return false;
+  },
+
+  /**
+   * Mark a popcorn lesson as permanently known ("이미 알아요")
+   * @param {string} lessonId
+   * @param {boolean} [isKnown=true]
+   */
+  setPopcornKnown(lessonId, isKnown = true) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_KNOWN);
+      const obj = data ? JSON.parse(data) : {};
+      if (isKnown) {
+        obj[lessonId] = true;
+      } else {
+        delete obj[lessonId];
+      }
+      localStorage.setItem(this.KEYS.POPCORN_KNOWN, JSON.stringify(obj));
+    } catch (e) {
+      console.warn('LocalStorage error saving popcorn known status', e);
+    }
+  },
+
+  /**
+   * Check if a popcorn lesson was studied recently and is in cooldown (default 30 days / 1 month)
+   * @param {string} lessonId
+   * @param {number} [cooldownDays=30]
+   * @returns {boolean}
+   */
+  isPopcornInCooldown(lessonId, cooldownDays = 30) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_STUDIED);
+      if (data) {
+        const obj = JSON.parse(data);
+        const studiedTimestamp = obj[lessonId];
+        if (studiedTimestamp) {
+          const now = Date.now();
+          const cooldownMs = cooldownDays * 24 * 60 * 60 * 1000;
+          return (now - studiedTimestamp) < cooldownMs;
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage error checking popcorn cooldown', e);
+    }
+    return false;
+  },
+
+  /**
+   * Mark a popcorn lesson as studied with current timestamp
+   * @param {string} lessonId
+   * @param {number} [timestamp=Date.now()]
+   */
+  setPopcornStudied(lessonId, timestamp = Date.now()) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_STUDIED);
+      const obj = data ? JSON.parse(data) : {};
+      obj[lessonId] = timestamp;
+      localStorage.setItem(this.KEYS.POPCORN_STUDIED, JSON.stringify(obj));
+    } catch (e) {
+      console.warn('LocalStorage error setting popcorn studied status', e);
+    }
+  },
+
+  /**
+   * Get available popcorn lessons that are neither permanently known nor in 30-day cooldown
+   * @param {Array<object>} metadataList
+   * @param {number} [cooldownDays=30]
+   * @returns {Array<object>}
+   */
+  getAvailablePopcornLessons(metadataList, cooldownDays = 30) {
+    if (!Array.isArray(metadataList)) return [];
+    return metadataList.filter(item => {
+      if (!item || !item.id) return false;
+      if (this.isPopcornKnown(item.id)) return false;
+      if (this.isPopcornInCooldown(item.id, cooldownDays)) return false;
+      return true;
+    });
+  },
+
+  /**
+   * Get formatted local date string (YYYY-MM-DD)
+   * @param {Date} [nowDate]
+   * @returns {string}
+   */
+  getLocalDateString(nowDate) {
+    const d = nowDate || new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  },
+
+  /**
+   * Get count of popcorn lessons studied today
+   * @param {Date} [nowDate]
+   * @returns {number}
+   */
+  getPopcornDailyStudyCount(nowDate) {
+    try {
+      const today = this.getLocalDateString(nowDate);
+      const data = localStorage.getItem(this.KEYS.POPCORN_DAILY_STUDY);
+      if (data) {
+        const obj = JSON.parse(data);
+        if (obj && obj.date === today && typeof obj.count === 'number') {
+          return obj.count;
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage error reading popcorn daily study count', e);
+    }
+    return 0;
+  },
+
+  /**
+   * Increment today's popcorn study count by 1
+   * @param {Date} [nowDate]
+   * @returns {number} new count
+   */
+  incrementPopcornDailyStudyCount(nowDate) {
+    try {
+      const today = this.getLocalDateString(nowDate);
+      const current = this.getPopcornDailyStudyCount(nowDate);
+      const nextCount = current + 1;
+      localStorage.setItem(this.KEYS.POPCORN_DAILY_STUDY, JSON.stringify({
+        date: today,
+        count: nextCount
+      }));
+      return nextCount;
+    } catch (e) {
+      console.warn('LocalStorage error incrementing popcorn daily study count', e);
+      return 1;
+    }
+  },
+
+  /**
+   * Check if user has reached the maximum daily limit of popcorn quick lessons (default: 10)
+   * @param {number} [maxCount=10]
+   * @param {Date} [nowDate]
+   * @returns {boolean}
+   */
+  isPopcornDailyLimitReached(maxCount = 10, nowDate) {
+    return this.getPopcornDailyStudyCount(nowDate) >= maxCount;
+  },
+
+  /**
+   * Reset popcorn daily study count (useful for testing or daily reset)
+   */
+  resetPopcornDailyStudyCount() {
+    try {
+      localStorage.removeItem(this.KEYS.POPCORN_DAILY_STUDY);
+    } catch (_) { }
+  },
+
+  /**
+   * Reset all popcorn preferences, cooldowns, and daily limits (utility for tests and reset settings)
+   */
+  resetPopcornPreferences() {
+    try {
+      localStorage.removeItem(this.KEYS.POPCORN_KNOWN);
+      localStorage.removeItem(this.KEYS.POPCORN_STUDIED);
+      localStorage.removeItem(this.KEYS.POPCORN_DAILY_STUDY);
+    } catch (_) { }
+  },
+
+  /**
+   * Deterministically get today's phrase from the given list
+   * @param {Array} phrases
+   * @param {Date} [nowDate]
+   * @returns {object|null}
+   */
+  getTodayDailyPhrase(phrases, nowDate) {
+    const list = phrases || (typeof DAILY_PHRASES !== 'undefined' ? DAILY_PHRASES : []);
+    if (!list || list.length === 0) return null;
+
+    const d = nowDate || new Date();
+    // Deterministic day index calculation based on UTC day count
+    const daysSinceEpoch = Math.floor(d.getTime() / 86400000);
+    const index = Math.abs(daysSinceEpoch) % list.length;
+    return list[index];
   }
 };
 
