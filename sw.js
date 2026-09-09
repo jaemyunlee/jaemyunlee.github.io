@@ -3,7 +3,7 @@
  * Caches application shell, quizzes, scripts, audio files, and Lottie animations
  * so users can study offline.
  */
-const CACHE_NAME = 'rhyrhy-cache-v28';
+const CACHE_NAME = 'rhyrhy-cache-v29';
 
 const STATIC_ASSETS = [
   './',
@@ -35,6 +35,7 @@ const STATIC_ASSETS = [
   './js/pwa-manager.js',
   './js/app.js',
   './assets/icons/icon.svg',
+  './assets/img/popcorn-empty.jpg',
   './assets/img/family.jpeg',
   './assets/img/family-playful.jpg',
   './assets/img/family-light.jpg',

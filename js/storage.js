@@ -18,7 +18,8 @@ const Storage = {
     THEME: 'rhyrhy_theme',
     DAILY_COMPLETED_DATE: 'rhyrhy_daily_completed_date',
     POPCORN_KNOWN: 'rhyrhy_popcorn_known',
-    POPCORN_STUDIED: 'rhyrhy_popcorn_studied'
+    POPCORN_STUDIED: 'rhyrhy_popcorn_studied',
+    POPCORN_DAILY_STUDY: 'rhyrhy_popcorn_daily_study'
   },
 
   /**
@@ -793,12 +794,87 @@ const Storage = {
   },
 
   /**
-   * Reset all popcorn preferences and cooldowns (utility for tests and reset settings)
+   * Get formatted local date string (YYYY-MM-DD)
+   * @param {Date} [nowDate]
+   * @returns {string}
+   */
+  getLocalDateString(nowDate) {
+    const d = nowDate || new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  },
+
+  /**
+   * Get count of popcorn lessons studied today
+   * @param {Date} [nowDate]
+   * @returns {number}
+   */
+  getPopcornDailyStudyCount(nowDate) {
+    try {
+      const today = this.getLocalDateString(nowDate);
+      const data = localStorage.getItem(this.KEYS.POPCORN_DAILY_STUDY);
+      if (data) {
+        const obj = JSON.parse(data);
+        if (obj && obj.date === today && typeof obj.count === 'number') {
+          return obj.count;
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage error reading popcorn daily study count', e);
+    }
+    return 0;
+  },
+
+  /**
+   * Increment today's popcorn study count by 1
+   * @param {Date} [nowDate]
+   * @returns {number} new count
+   */
+  incrementPopcornDailyStudyCount(nowDate) {
+    try {
+      const today = this.getLocalDateString(nowDate);
+      const current = this.getPopcornDailyStudyCount(nowDate);
+      const nextCount = current + 1;
+      localStorage.setItem(this.KEYS.POPCORN_DAILY_STUDY, JSON.stringify({
+        date: today,
+        count: nextCount
+      }));
+      return nextCount;
+    } catch (e) {
+      console.warn('LocalStorage error incrementing popcorn daily study count', e);
+      return 1;
+    }
+  },
+
+  /**
+   * Check if user has reached the maximum daily limit of popcorn quick lessons (default: 10)
+   * @param {number} [maxCount=10]
+   * @param {Date} [nowDate]
+   * @returns {boolean}
+   */
+  isPopcornDailyLimitReached(maxCount = 10, nowDate) {
+    return this.getPopcornDailyStudyCount(nowDate) >= maxCount;
+  },
+
+  /**
+   * Reset popcorn daily study count (useful for testing or daily reset)
+   */
+  resetPopcornDailyStudyCount() {
+    try {
+      localStorage.removeItem(this.KEYS.POPCORN_DAILY_STUDY);
+    } catch (_) { }
+  },
+
+  /**
+   * Reset all popcorn preferences, cooldowns, and daily limits (utility for tests and reset settings)
    */
   resetPopcornPreferences() {
     try {
       localStorage.removeItem(this.KEYS.POPCORN_KNOWN);
       localStorage.removeItem(this.KEYS.POPCORN_STUDIED);
+      localStorage.removeItem(this.KEYS.POPCORN_DAILY_STUDY);
     } catch (_) { }
   },
 

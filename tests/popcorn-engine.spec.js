@@ -236,4 +236,204 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     const bannerLight = page.locator('.popcorn-expression-banner');
     await expect(bannerLight).toBeVisible();
   });
+
+  test('8. Clicking "다음 팝콘 표현 뽑기" button sets 30-day spaced repetition cooldown', async ({ page }) => {
+    await page.goto('/daily.html?id=popcorn-001');
+
+    // Proceed to Stage 2
+    await page.click('#btn-popcorn-learn');
+    await expect(page.locator('#popcorn-conversation-card')).toBeVisible();
+
+    // Verify initially not in cooldown
+    const initialCooldown = await page.evaluate(() => Storage.isPopcornInCooldown('popcorn-001', 30));
+    expect(initialCooldown).toBe(false);
+
+    // Click "다음 팝콘 표현 뽑기"
+    const nextBtn = page.locator('#btn-popcorn-next');
+    await expect(nextBtn).toBeVisible();
+    await nextBtn.click();
+
+    // Popcorn flyer animation element appears during the transition
+    const flyer = page.locator('.popcorn-nav-flyer');
+    await expect(flyer).toBeVisible({ timeout: 2000 });
+
+    // Cooldown must be recorded for 30 days
+    const isCooldownNow = await page.evaluate(() => Storage.isPopcornInCooldown('popcorn-001', 30));
+    expect(isCooldownNow).toBe(true);
+
+    // Simulated 31 days later: cooldown expires for spaced repetition
+    const after31Days = await page.evaluate(() => {
+      const studied = JSON.parse(localStorage.getItem('rhyrhy_popcorn_studied') || '{}');
+      const pastTimestamp = Date.now() - (31 * 24 * 60 * 60 * 1000);
+      studied['popcorn-001'] = pastTimestamp;
+      localStorage.setItem('rhyrhy_popcorn_studied', JSON.stringify(studied));
+      return Storage.isPopcornInCooldown('popcorn-001', 30);
+    });
+    expect(after31Days).toBe(false);
+  });
+
+  test('9. Daily study limit of 10 max: "몰라요" increments daily count, "이미 알아요" does not', async ({ page }) => {
+    await page.goto('/daily.html?id=popcorn-001');
+
+    // Initial count is 0
+    let count = await page.evaluate(() => Storage.getPopcornDailyStudyCount());
+    expect(count).toBe(0);
+
+    // Clicking "이미 알아요" does NOT increment daily count
+    await page.click('#btn-popcorn-known');
+    await page.waitForTimeout(300);
+
+    count = await page.evaluate(() => Storage.getPopcornDailyStudyCount());
+    expect(count).toBe(0);
+
+    // Reopen lesson and click "몰라요" -> DOES increment count
+    await page.goto('/daily.html?id=popcorn-001');
+    await page.click('#btn-popcorn-learn');
+    await page.waitForTimeout(300);
+
+    count = await page.evaluate(() => Storage.getPopcornDailyStudyCount());
+    expect(count).toBe(1);
+  });
+
+  test('10. Reaching 10 daily lessons shows empty popcorn bucket image and "내일 다시 팝콘이 준비될거에요"', async ({ page }) => {
+    await page.goto('/daily.html');
+
+    // Simulate 10 lessons completed for today
+    await page.evaluate(() => {
+      const today = Storage.getLocalDateString();
+      localStorage.setItem('rhyrhy_popcorn_daily_study', JSON.stringify({
+        date: today,
+        count: 10
+      }));
+    });
+
+    // Reload daily.html
+    await page.reload();
+
+    // Completion card must be visible
+    const completionCard = page.locator('#popcorn-completion-card');
+    await expect(completionCard).toBeVisible({ timeout: 5000 });
+
+    // Empty popcorn bucket image is displayed
+    const emptyImg = completionCard.locator('.popcorn-empty-img');
+    await expect(emptyImg).toBeVisible();
+    await expect(emptyImg).toHaveAttribute('src', /assets\/img\/popcorn-empty\.jpg/);
+
+    // Exact required message
+    const title = completionCard.locator('.completion-title');
+    await expect(title).toHaveText('내일 다시 팝콘이 준비될거에요');
+
+    // Badge indicates 10 / 10
+    const badge = completionCard.locator('.completion-badge');
+    await expect(badge).toContainText('10 / 10');
+
+    // Test in Light and Dark mode
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    await expect(title).toBeVisible();
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    await expect(title).toBeVisible();
+  });
+
+  test('11. Popcorn-002 ("make a [noun] of it") renders dialogue, avatars, audio, and target expression', async ({ page }) => {
+    await page.goto('/daily.html?id=popcorn-002');
+
+    // Stage 1 Knowledge Check
+    const checkCard = page.locator('#popcorn-check-card');
+    await expect(checkCard).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('.popcorn-expression-banner')).toContainText('make a [noun] of it');
+
+    // Proceed to Stage 2
+    await page.click('#btn-popcorn-learn');
+    const convCard = page.locator('#popcorn-conversation-card');
+    await expect(convCard).toBeVisible({ timeout: 5000 });
+
+    // Dialogue bubbles count
+    const bubbles = convCard.locator('.dialogue-bubble');
+    await expect(bubbles).toHaveCount(3);
+
+    // First speaker: Wayne
+    await expect(bubbles.first().locator('.speaker-name')).toHaveText('Wayne');
+    await expect(bubbles.first().locator('.dialogue-text-en')).toContainText('dentist appointment');
+
+    // Second speaker: Kelly with target expression
+    await expect(bubbles.nth(1).locator('.speaker-name')).toHaveText('Kelly');
+    await expect(bubbles.nth(1).locator('.popcorn-highlight')).toHaveText('make a day of it');
+
+    // Third speaker: Wayne
+    await expect(bubbles.nth(2).locator('.speaker-name')).toHaveText('Wayne');
+    await expect(bubbles.nth(2).locator('.dialogue-text-en')).toContainText('Smart move');
+
+    // Audio playback check: click Kelly's sentence card
+    await bubbles.nth(1).click();
+    await expect(bubbles.nth(1)).toHaveClass(/playing/);
+
+    // Reveal explanation check: contains general pattern and context
+    await page.click('#btn-popcorn-reveal');
+    const expCard = page.locator('#popcorn-explanation-card');
+    await expect(expCard).toBeVisible();
+    await expect(expCard).toContainText('make a [noun] of it');
+    await expect(expCard).toContainText('make a night of it');
+  });
+
+  test('12. Clicking "다음 팝콘 표현 뽑기" button scrolls viewport to top upon transitioning to next lesson', async ({ page }) => {
+    await page.goto('/daily.html?id=popcorn-001');
+
+    // Advance to Stage 2
+    await page.click('#btn-popcorn-learn');
+    await expect(page.locator('#popcorn-conversation-card')).toBeVisible();
+
+    // Scroll down to simulate user viewing conversation and actions at bottom
+    await page.evaluate(() => window.scrollTo(0, 400));
+    const scrolledY = await page.evaluate(() => window.scrollY);
+    expect(scrolledY).toBeGreaterThan(0);
+
+    // Click "다음 팝콘 표현 뽑기"
+    const nextBtn = page.locator('#btn-popcorn-next');
+    await nextBtn.click();
+
+    // Wait for transition to finish and stage 1 check card to display
+    const checkCard = page.locator('#popcorn-check-card');
+    await expect(checkCard).toBeVisible({ timeout: 5000 });
+
+    // Verify page is scrolled back to top
+    const finalScrollY = await page.evaluate(() => window.scrollY);
+    expect(finalScrollY).toBe(0);
+  });
+
+  test('13. Clicking navbar popcorn button while on daily.html loads a new random quick lesson and scrolls to top', async ({ page }) => {
+    // Clear storage so all lessons are available
+    await page.goto('/daily.html?id=popcorn-001');
+    await page.evaluate(() => {
+      localStorage.clear();
+    });
+    await page.goto('/daily.html?id=popcorn-001');
+
+    // Advance to Stage 2
+    await page.click('#btn-popcorn-learn');
+    await expect(page.locator('#popcorn-conversation-card')).toBeVisible();
+
+    // Scroll down
+    await page.evaluate(() => window.scrollTo(0, 350));
+    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+
+    // Click navbar popcorn button
+    const navPopcornBtn = page.locator('#btn-nav-popcorn');
+    await expect(navPopcornBtn).toBeVisible();
+    await navPopcornBtn.click();
+
+    // Verify flyer animation element appears
+    const flyer = page.locator('.popcorn-nav-flyer');
+    await expect(flyer).toBeVisible({ timeout: 2000 });
+
+    // Verify new Stage 1 check card appears and page is scrolled to top
+    const checkCard = page.locator('#popcorn-check-card');
+    await expect(checkCard).toBeVisible({ timeout: 5000 });
+    const finalScrollY = await page.evaluate(() => window.scrollY);
+    expect(finalScrollY).toBe(0);
+
+    // Since popcorn-001 was the active lesson and storage is fresh, it should pick the other lesson (popcorn-002: make a [noun] of it)
+    await expect(page.locator('.popcorn-expression-banner')).toContainText('make a [noun] of it');
+  });
 });
+
+

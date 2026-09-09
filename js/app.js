@@ -548,13 +548,20 @@ const App = {
         this.closeSavedSentencesDrawer();
         const destUrl = popcornBtn.getAttribute('href');
 
-        // If already on daily page, trigger center pop animation in place
+        // If already on daily page, trigger transition and display new random quick lesson
         if (this.currentLessonId === 'daily-phrase' || window.location.pathname.endsWith('daily.html') || window.location.pathname.endsWith('/daily')) {
           e.preventDefault();
           if (typeof DailyPopcornManager !== 'undefined' && typeof DailyPopcornManager.triggerPopcornTransition === 'function') {
-            DailyPopcornManager.triggerPopcornTransition(popcornBtn, null);
+            DailyPopcornManager.triggerPopcornTransition(popcornBtn, () => {
+              if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', window.location.pathname);
+              }
+              window.scrollTo({ top: 0, behavior: 'instant' });
+              const container = document.getElementById('daily-page-container');
+              const currentId = DailyPopcornManager.currentLesson ? DailyPopcornManager.currentLesson.id : null;
+              DailyPopcornManager.pickNextLesson(container, null, currentId);
+            });
           }
-          window.scrollTo({ top: 0, behavior: 'smooth' });
           return;
         }
 

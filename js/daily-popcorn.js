@@ -22,11 +22,13 @@ const DailyPopcornManager = {
   },
 
   /**
-   * Handle Popcorn Navbar Button click:
-   * Popcorn icon moves from navbar to screen center, grows bigger, pops with particles and sound,
-   * then navigates to dedicated daily.html page.
+   * Handle Popcorn Transition Animation (for navbar button or "다음 팝콘 표현 뽑기" button):
+   * Popcorn icon flies from button to screen center, grows bigger, pops with particles and sound,
+   * then navigates to destination URL or executes completion callback.
+   * @param {HTMLElement} btn
+   * @param {string|Function} [destOrCallback]
    */
-  triggerPopcornTransition(btn, destUrl) {
+  triggerPopcornTransition(btn, destOrCallback) {
     if (this._isTransitioning) return;
     this._isTransitioning = true;
 
@@ -69,8 +71,10 @@ const DailyPopcornManager = {
       flyer.remove();
       backdrop.remove();
       this._isTransitioning = false;
-      if (destUrl) {
-        window.location.href = destUrl;
+      if (typeof destOrCallback === 'function') {
+        destOrCallback();
+      } else if (typeof destOrCallback === 'string' && destOrCallback) {
+        window.location.href = destOrCallback;
       }
     }, 620);
   },
@@ -143,7 +147,7 @@ const DailyPopcornManager = {
     // 1. Fetch metadata.json
     try {
       const base = this._getBasePath();
-      const res = await fetch(`${base}popcorn/metadata.json`);
+      const res = await fetch(`${base}popcorn/metadata.json?t=${Date.now()}`, { cache: 'no-cache' });
       if (res.ok) {
         this.currentMetadata = await res.json();
       }
@@ -159,19 +163,26 @@ const DailyPopcornManager = {
    * Pick and load the next eligible popcorn lesson
    * @param {HTMLElement} [container]
    * @param {string} [specificId]
+   * @param {string} [excludeId]
    */
-  async pickNextLesson(container, specificId) {
+  async pickNextLesson(container, specificId, excludeId) {
     container = container || document.getElementById('daily-page-container');
     if (!container) return;
 
     this.stopAudio();
 
-    // Check URL param if not specifically provided
-    if (!specificId && typeof window !== 'undefined' && window.location.search) {
+    // Check URL param if not specifically provided and not explicitly picking a new/random lesson
+    if (!specificId && !excludeId && typeof window !== 'undefined' && window.location.search) {
       const params = new URLSearchParams(window.location.search);
       if (params.get('id')) {
         specificId = params.get('id');
       }
+    }
+
+    // 1. Check if daily study limit of 10 has been reached (unless overriding with ?id=...)
+    if (!specificId && Storage.isPopcornDailyLimitReached(10)) {
+      this._renderCompletionState(container, 'daily_limit');
+      return;
     }
 
     let candidate = null;
@@ -182,12 +193,22 @@ const DailyPopcornManager = {
 
     if (!candidate && this.currentMetadata.length > 0) {
       // Filter candidates using 30-day cooldown and permanent known skip
-      const available = Storage.getAvailablePopcornLessons(this.currentMetadata);
+      let available = Storage.getAvailablePopcornLessons(this.currentMetadata);
+
+      // If excludeId is provided (e.g., clicking navbar icon or next button to get a *new* lesson),
+      // avoid picking the exact same lesson if there are alternatives
+      if (excludeId && available.length > 1) {
+        const alternatives = available.filter(item => item.id !== excludeId);
+        if (alternatives.length > 0) {
+          available = alternatives;
+        }
+      }
+
       if (available.length > 0) {
         candidate = available[Math.floor(Math.random() * available.length)];
       } else {
         // All lessons are completed / in cooldown / known
-        this._renderCompletionState(container);
+        this._renderCompletionState(container, 'all_exhausted');
         return;
       }
     }
@@ -207,7 +228,7 @@ const DailyPopcornManager = {
     // Fetch and parse candidate Markdown file
     try {
       const base = this._getBasePath();
-      const mdRes = await fetch(`${base}popcorn/${candidate.file}`);
+      const mdRes = await fetch(`${base}popcorn/${candidate.file}?t=${Date.now()}`, { cache: 'no-cache' });
       if (!mdRes.ok) throw new Error(`HTTP ${mdRes.status}`);
       const mdText = await mdRes.text();
 
@@ -241,6 +262,10 @@ const DailyPopcornManager = {
     const lesson = this.currentLesson;
     if (!lesson || !container) return;
 
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
     container.innerHTML = `
       <div class="popcorn-check-card" id="popcorn-check-card">
         <div class="popcorn-check-content">
@@ -266,13 +291,21 @@ const DailyPopcornManager = {
         Storage.setPopcornKnown(lesson.id, true);
         this._playPopSound();
         this._showToast(`'${lesson.expression}' 표현을 마스터 목록에 보관했어요! 다시 표시되지 않습니다 👍`);
-        this.pickNextLesson(container);
+
+        // Clean query parameter when moving to next lesson
+        if (typeof window !== 'undefined' && window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        this.pickNextLesson(container, null, lesson.id);
       });
     }
 
     const learnBtn = document.getElementById('btn-popcorn-learn');
     if (learnBtn) {
       learnBtn.addEventListener('click', async () => {
+        // "몰라요" counts towards the 10 quick lessons daily limit
+        Storage.incrementPopcornDailyStudyCount();
         learnBtn.disabled = true;
         learnBtn.innerHTML = '<span>⏳ 대화 준비 중...</span>';
         await this.preloadLessonAudio(lesson);
@@ -287,6 +320,10 @@ const DailyPopcornManager = {
   renderStage2ConversationStudy(container) {
     const lesson = this.currentLesson;
     if (!lesson || !container) return;
+
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
 
     const isTargetSaved = this._isTargetSentenceSaved(lesson);
 
@@ -449,11 +486,33 @@ const DailyPopcornManager = {
       });
     }
 
-    // 5. Next expression button
+    // 5. Next expression button: Enforce 30-day spaced repetition cooldown & daily limit check with popcorn flying animation
     const nextBtn = document.getElementById('btn-popcorn-next');
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        this.pickNextLesson(container);
+        if (this._isTransitioning) return;
+
+        const currentId = lesson && lesson.id ? lesson.id : null;
+
+        // Enforce 30-day spaced repetition cooldown on the current lesson
+        if (currentId) {
+          Storage.setPopcornStudied(currentId);
+        }
+
+        // Clean query parameter when picking next lesson
+        if (typeof window !== 'undefined' && window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+
+        // Trigger delightful popcorn flying animation and then advance, scrolling to top
+        this.triggerPopcornTransition(nextBtn, () => {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          if (Storage.isPopcornDailyLimitReached(10)) {
+            this._renderCompletionState(container, 'daily_limit');
+          } else {
+            this.pickNextLesson(container, null, currentId);
+          }
+        });
       });
     }
   },
@@ -715,21 +774,35 @@ const DailyPopcornManager = {
   },
 
   /**
-   * Render completion state when all available lessons are completed or in cooldown
+   * Render completion state when daily limit (10) is reached or all lessons are known/in cooldown
+   * @param {HTMLElement} container
+   * @param {'daily_limit'|'all_exhausted'} [reason='daily_limit']
    */
-  _renderCompletionState(container) {
+  _renderCompletionState(container, reason = 'daily_limit') {
+    const base = this._getBasePath();
+    const count = Storage.getPopcornDailyStudyCount();
+    const isDailyLimit = reason === 'daily_limit' || count >= 10;
+
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    const badgeText = isDailyLimit ? `🍿 오늘 팝콘 완료 (${count} / 10)` : '✨ 모든 표현 마스터';
+    const descText = isDailyLimit
+      ? '오늘 준비된 10개의 팝콘 표현을 모두 맛있게 학습했어요! 🍿<br>새로운 팝콘 표현은 내일 다시 준비될거에요.'
+      : '현재 학습 가능한 모든 팝콘 표현을 마스터하셨어요!';
+
     container.innerHTML = `
       <div class="popcorn-completion-card" id="popcorn-completion-card">
-        <div class="completion-icon">🎉</div>
-        <h2 class="completion-title">모든 팝콘 표현을 마스터하셨습니다!</h2>
-        <p class="completion-desc">
-          현재 등록된 표현을 모두 학습하셨거나 이미 알고 계신 표현으로 등록되었습니다.<br>
-          한 달 동안 장기 기억을 위한 복습 쿨다운이 유지됩니다.
-        </p>
-        <div class="completion-actions">
-          <button type="button" class="btn-popcorn-action btn-popcorn-reset" id="btn-reset-popcorn-cooldown">
-            <span>🔄 복습하기 (쿨다운 초기화)</span>
-          </button>
+        <div class="popcorn-empty-illustration">
+          <img src="${base}assets/img/popcorn-empty.jpg" alt="빈 팝콘 상자" class="popcorn-empty-img" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='block';">
+          <div class="popcorn-empty-fallback" style="display: none;">🍿</div>
+        </div>
+
+        <div class="popcorn-completion-header">
+          <div class="popcorn-badge completion-badge">${badgeText}</div>
+          <h2 class="completion-title">내일 다시 팝콘이 준비될거에요</h2>
+          <p class="completion-desc">${descText}</p>
         </div>
       </div>
     `;
@@ -738,7 +811,7 @@ const DailyPopcornManager = {
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
         Storage.resetPopcornPreferences();
-        this._showToast('쿨다운이 초기화되었습니다! 🍿');
+        this._showToast('팝콘 쿨다운과 일일 제한이 초기화되었습니다! 🍿');
         this.pickNextLesson(container);
       });
     }

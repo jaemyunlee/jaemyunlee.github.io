@@ -15,7 +15,7 @@
 - **Kelly**: Yeah, definitely! [Just so you know], they only take cash, so we should hit an ATM on the way.
   - **Avatar**: kelly.jpg
   - **Audio**: audio/popcorn-001/02.wav
-  - **Korean**: 응, 당연하지! 참고로 말하자면 거기 현금만 받으니까 가는 길에 ATM 들러야 해.
+  - **Korean**: 네! 당연하죠! 참고로 말하자면 거기 현금만 받아서 가는 길에 ATM 들러야 해요.
 - **Wayne**: Oh, good to know!
   - **Avatar**: wayne.jpeg
   - **Audio**: audio/popcorn-001/03.wav
