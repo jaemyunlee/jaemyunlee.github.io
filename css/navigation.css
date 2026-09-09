@@ -807,6 +807,48 @@
   border-color: rgba(99, 102, 241, 0.3);
 }
 
+/* Saved Popcorn Speaker Badge & Highlight */
+.saved-speaker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.saved-speaker-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 1.5px solid var(--accent-amber, #F59E0B);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.saved-speaker-name {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #D97706;
+}
+
+[data-theme="dark"] .saved-speaker-name {
+  color: #FBBF24;
+}
+
+.saved-lesson-group[data-lesson="popcorn"] .quiz-vocab-highlight {
+  background: rgba(245, 158, 11, 0.22);
+  color: #B45309;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-weight: 800;
+}
+
+[data-theme="dark"] .saved-lesson-group[data-lesson="popcorn"] .quiz-vocab-highlight {
+  background: rgba(245, 158, 11, 0.32);
+  color: #FDE68A;
+  border-color: rgba(245, 158, 11, 0.55);
+}
+
 .btn-delete-sentence {
   display: inline-flex;
   align-items: center;

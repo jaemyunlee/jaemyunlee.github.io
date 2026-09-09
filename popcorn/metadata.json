@@ -5,12 +5,5 @@
     "expression": "just so you know",
     "file": "conversation/popcorn-001.md",
     "createdAt": "2026-09-09T10:00:00.000Z"
-  },
-  {
-    "id": "popcorn-002",
-    "type": "conversation",
-    "expression": "hit an ATM",
-    "file": "conversation/popcorn-002.md",
-    "createdAt": "2026-09-09T17:41:29.536Z"
   }
 ]

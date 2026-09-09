@@ -503,14 +503,46 @@ const DailyPopcornManager = {
     const audioUrl = this._resolveAudioPath(line);
 
     if (audioUrl) {
+      if (this.audioElement) {
+        try {
+          this.audioElement.pause();
+          this.audioElement.onended = null;
+          this.audioElement.onerror = null;
+        } catch (_) { }
+      }
+
       if (this._audioCache && this._audioCache[audioUrl]) {
         this.audioElement = this._audioCache[audioUrl];
       } else {
-        if (!this.audioElement) {
-          this.audioElement = new Audio();
-        }
-        this.audioElement.src = audioUrl;
+        this.audioElement = new Audio(audioUrl);
       }
+
+      let handled = false;
+      const finish = () => {
+        if (!handled) {
+          handled = true;
+          if (this.audioElement) {
+            this.audioElement.onended = null;
+            this.audioElement.onerror = null;
+          }
+          if (onEnded) onEnded();
+        }
+      };
+
+      const onError = (e) => {
+        if (!handled) {
+          handled = true;
+          console.warn('Popcorn audio playback failed or not found, falling back to TTS:', audioUrl, e);
+          if (this.audioElement) {
+            this.audioElement.onended = null;
+            this.audioElement.onerror = null;
+          }
+          this._speakTtsWithVoice(line.rawText, line.speaker, onEnded);
+        }
+      };
+
+      this.audioElement.onended = finish;
+      this.audioElement.onerror = onError;
       this.audioElement.currentTime = 0;
 
       const playPromise = this.audioElement.play();
@@ -585,6 +617,8 @@ const DailyPopcornManager = {
 
     if (this.audioElement) {
       try {
+        this.audioElement.onended = null;
+        this.audioElement.onerror = null;
         this.audioElement.pause();
         this.audioElement.currentTime = 0;
       } catch (_) { }
@@ -600,7 +634,7 @@ const DailyPopcornManager = {
     const bubble = document.getElementById(`dialogue-bubble-${index}`);
     if (bubble) {
       bubble.classList.add('playing');
-      bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      bubble.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   },
 
@@ -650,6 +684,10 @@ const DailyPopcornManager = {
         en: lesson.targetSentence.en,
         kr: lesson.targetSentence.kr,
         audio: lesson.targetSentence.audio,
+        expression: lesson.targetSentence.expression || lesson.expression,
+        speaker: lesson.targetSentence.speaker || '',
+        avatar: lesson.targetSentence.avatar || '',
+        lessonId: lesson.id,
         timestamp: 0
       });
       saveBtn.classList.add('saved');

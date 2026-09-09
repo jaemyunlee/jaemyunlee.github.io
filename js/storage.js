@@ -347,14 +347,27 @@ const Storage = {
       }
 
       // Check for duplicates
-      const exists = all[lessonId].some(s => s.en.trim().toLowerCase() === sentence.en.trim().toLowerCase());
-      if (exists) return false;
+      const existingIdx = all[lessonId].findIndex(s => s.id === sentence.id || s.en.trim().toLowerCase() === sentence.en.trim().toLowerCase());
+      if (existingIdx !== -1) {
+        all[lessonId][existingIdx] = {
+          ...all[lessonId][existingIdx],
+          expression: sentence.expression || all[lessonId][existingIdx].expression || '',
+          speaker: sentence.speaker || all[lessonId][existingIdx].speaker || '',
+          avatar: sentence.avatar || all[lessonId][existingIdx].avatar || '',
+          audio: sentence.audio || all[lessonId][existingIdx].audio || ''
+        };
+        localStorage.setItem(this.KEYS.SAVED_SENTENCES, JSON.stringify(all));
+        return false;
+      }
 
       all[lessonId].push({
         id: sentence.id || 'sent_' + Date.now(),
         en: sentence.en,
         kr: sentence.kr,
         audio: sentence.audio || '',
+        expression: sentence.expression || '',
+        speaker: sentence.speaker || '',
+        avatar: sentence.avatar || '',
         timestamp: sentence.timestamp || 0,
         savedAt: new Date().toISOString()
       });

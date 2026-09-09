@@ -123,8 +123,8 @@ const PopcornParser = {
 
     lesson.explanation = explanationLines.join('\n\n').trim();
 
-    // Identify target sentence for saving into centralized Saved Sentences Bank
-    const target = lesson.dialogue.find(d => d.hasExpression) || lesson.dialogue[0];
+    // Identify target sentence for saving into centralized Saved Sentences Bank (only sentence with expression)
+    const target = lesson.dialogue.find(d => d.hasExpression);
     if (target) {
       lesson.targetSentence = {
         id: (lesson.id ? lesson.id + '_target' : 'popcorn_' + Date.now()),
@@ -136,6 +136,8 @@ const PopcornParser = {
         expression: lesson.expression,
         timestamp: 0
       };
+    } else {
+      lesson.targetSentence = null;
     }
 
     return lesson;

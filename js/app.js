@@ -343,8 +343,8 @@ const App = {
 
     if (/\[[^\]]+\]/.test(english)) {
       return this._escapeHtml(english).replace(
-        /\[[^\]]+\]/,
-        `<mark class="quiz-vocab-highlight">${this._escapeHtml(expr)}</mark>`
+        /\[([^\]]+)\]/g,
+        `<mark class="quiz-vocab-highlight">$1</mark>`
       );
     }
 
@@ -995,7 +995,7 @@ const App = {
           const lesPath = (lesId === 'daily' || lesId === 'popcorn' || (typeof lesId === 'string' && lesId.startsWith('popcorn'))) ? `${base}daily.html` : (lesObj ? `${base}${lesObj.path}index.html` : `${base}lessons.html`);
 
           return `
-            <div class="saved-lesson-group">
+            <div class="saved-lesson-group" data-lesson="${lesId}">
               <h4 class="group-lesson-title">
                 <a href="${lesPath}" class="group-lesson-link" title="${title} 레슨 바로가기">
                   <span>${title}</span>
@@ -1025,6 +1025,12 @@ const App = {
                         </svg>
                       </button>
                       <div class="saved-card-text">
+                        ${item.speaker ? `
+                          <div class="saved-speaker-badge">
+                            ${item.avatar ? `<img src="${base}assets/img/avatars/${item.avatar}" alt="${this._escapeHtml(item.speaker)}" class="saved-speaker-avatar" onerror="this.style.display='none'">` : ''}
+                            <span class="saved-speaker-name">${this._escapeHtml(item.speaker)}</span>
+                          </div>
+                        ` : ''}
                         <p class="saved-en">${this.formatHighlightedSentence(item.en, item.expression)}</p>
                         <p class="saved-kr">${this._escapeHtml(item.kr)}</p>
                       </div>
