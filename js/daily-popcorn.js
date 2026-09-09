@@ -12,6 +12,7 @@ const DailyPopcornManager = {
   audioElement: null,
   isPlayingAll: false,
   _isTransitioning: false,
+  _audioCache: {},
 
   async init() {
     const isDailyPage = window.location.pathname.endsWith('/daily.html') || window.location.pathname.endsWith('/daily');
@@ -271,7 +272,10 @@ const DailyPopcornManager = {
 
     const learnBtn = document.getElementById('btn-popcorn-learn');
     if (learnBtn) {
-      learnBtn.addEventListener('click', () => {
+      learnBtn.addEventListener('click', async () => {
+        learnBtn.disabled = true;
+        learnBtn.innerHTML = '<span>⏳ 대화 준비 중...</span>';
+        await this.preloadLessonAudio(lesson);
         this.renderStage2ConversationStudy(container);
       });
     }
@@ -286,18 +290,32 @@ const DailyPopcornManager = {
 
     const isTargetSaved = this._isTargetSentenceSaved(lesson);
 
+    // Identify unique speakers to assign distinctive styles
+    const uniqueSpeakers = [];
+    (lesson.dialogue || []).forEach(line => {
+      const s = (line.speaker || '').trim();
+      if (s && !uniqueSpeakers.includes(s)) uniqueSpeakers.push(s);
+    });
+
     // Build dialogue list HTML
     const dialogueHtml = (lesson.dialogue || []).map((line, idx) => {
-      const isSpeakerA = /Person\s*A/i.test(line.speaker);
+      const speakerIdx = uniqueSpeakers.indexOf((line.speaker || '').trim());
+      const isSpeakerA = speakerIdx <= 0;
       const speakerClass = isSpeakerA ? 'speaker-a' : 'speaker-b';
-      const speakerShort = isSpeakerA ? 'A' : 'B';
+      const speakerShort = (line.speaker || 'A').trim().charAt(0).toUpperCase();
       const highlightClass = line.hasExpression ? 'has-target-expression' : '';
+      const avatarUrl = this._resolveAvatarPath(line.avatar || (isSpeakerA ? 'wayne.jpeg' : 'kelly.jpg'));
 
       return `
         <div class="dialogue-bubble ${speakerClass} ${highlightClass}" id="dialogue-bubble-${idx}" data-line-index="${idx}">
           <div class="dialogue-bubble-header">
             <div class="speaker-tag">
-              <span class="speaker-avatar">${speakerShort}</span>
+              ${avatarUrl ? `
+                <img src="${avatarUrl}" alt="${line.speaker}" class="speaker-avatar-img" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';">
+                <span class="speaker-avatar-fallback" style="display:none;">${speakerShort}</span>
+              ` : `
+                <span class="speaker-avatar">${speakerShort}</span>
+              `}
               <span class="speaker-name">${line.speaker}</span>
             </div>
             <button type="button" class="btn-line-audio" data-line-index="${idx}" title="이 문장 듣기" aria-label="이 문장 듣기">
@@ -318,19 +336,6 @@ const DailyPopcornManager = {
 
     container.innerHTML = `
       <div class="popcorn-conversation-card" id="popcorn-conversation-card">
-        <!-- Top Header -->
-        <div class="popcorn-card-header">
-          <div class="popcorn-badge">
-            <span>🍿</span>
-            <span>Popcorn English</span>
-          </div>
-          <h2 class="popcorn-lesson-title">${lesson.title}</h2>
-          <div class="popcorn-target-banner">
-            <span class="target-label">Target Expression:</span>
-            <strong class="target-word">${lesson.expression}</strong>
-          </div>
-        </div>
-
         <!-- Master Audio Bar -->
         <div class="popcorn-audio-bar">
           <button type="button" class="btn-popcorn-play-all" id="btn-popcorn-play-all" aria-label="대화 전체 듣기">
@@ -498,32 +503,15 @@ const DailyPopcornManager = {
     const audioUrl = this._resolveAudioPath(line);
 
     if (audioUrl) {
-      if (!this.audioElement) {
-        this.audioElement = new Audio();
+      if (this._audioCache && this._audioCache[audioUrl]) {
+        this.audioElement = this._audioCache[audioUrl];
+      } else {
+        if (!this.audioElement) {
+          this.audioElement = new Audio();
+        }
+        this.audioElement.src = audioUrl;
       }
-
-      let handled = false;
-      const finish = () => {
-        if (!handled) {
-          handled = true;
-          this.audioElement.removeEventListener('ended', finish);
-          this.audioElement.removeEventListener('error', onError);
-          if (onEnded) onEnded();
-        }
-      };
-
-      const onError = () => {
-        if (!handled) {
-          handled = true;
-          this.audioElement.removeEventListener('ended', finish);
-          this.audioElement.removeEventListener('error', onError);
-          this._speakTtsWithVoice(line.rawText, line.speaker, onEnded);
-        }
-      };
-
-      this.audioElement.addEventListener('ended', finish);
-      this.audioElement.addEventListener('error', onError);
-      this.audioElement.src = audioUrl;
+      this.audioElement.currentTime = 0;
 
       const playPromise = this.audioElement.play();
       if (playPromise !== undefined) {
@@ -721,16 +709,87 @@ const DailyPopcornManager = {
   },
 
   /**
+   * Preload all dialogue audio files for a lesson
+   */
+  async preloadLessonAudio(lesson) {
+    if (!lesson || !lesson.dialogue || lesson.dialogue.length === 0) return;
+    if (!this._audioCache) this._audioCache = {};
+
+    const loadPromises = lesson.dialogue.map(line => {
+      const audioUrl = this._resolveAudioPath(line);
+      if (!audioUrl) return Promise.resolve(null);
+
+      if (this._audioCache[audioUrl]) {
+        return Promise.resolve(this._audioCache[audioUrl]);
+      }
+
+      return new Promise(resolve => {
+        const audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = audioUrl;
+
+        let resolved = false;
+        const finish = () => {
+          if (!resolved) {
+            resolved = true;
+            this._audioCache[audioUrl] = audio;
+            resolve(audio);
+          }
+        };
+
+        audio.addEventListener('canplaythrough', finish, { once: true });
+        audio.addEventListener('loadeddata', finish, { once: true });
+        audio.addEventListener('error', () => {
+          if (!resolved) {
+            resolved = true;
+            resolve(null);
+          }
+        }, { once: true });
+
+        audio.load();
+        setTimeout(finish, 1200); // safety timeout
+      });
+    });
+
+    await Promise.all(loadPromises);
+  },
+
+  /**
    * Helper: Resolve relative audio path
    */
   _resolveAudioPath(item) {
     if (!item || !item.audio) return null;
     const base = this._getBasePath();
-    let p = item.audio;
-    if (p.startsWith('./')) {
-      p = p.substring(2);
+    let p = item.audio.trim();
+    if (p.startsWith('./')) p = p.substring(2);
+    if (p.startsWith('/')) p = p.substring(1);
+
+    if (p.startsWith('popcorn/')) {
+      return encodeURI(`${base}${p}`);
     }
-    return encodeURI(`${base}popcorn/${p}`);
+    if (p.startsWith('conversation/')) {
+      return encodeURI(`${base}popcorn/${p}`);
+    }
+    if (p.startsWith('audio/')) {
+      return encodeURI(`${base}popcorn/conversation/${p}`);
+    }
+    return encodeURI(`${base}popcorn/conversation/${p}`);
+  },
+
+  /**
+   * Helper: Resolve avatar image path
+   */
+  _resolveAvatarPath(avatar) {
+    if (!avatar) return null;
+    const base = this._getBasePath();
+    let p = avatar.trim();
+    if (p.startsWith('./')) p = p.substring(2);
+    if (p.startsWith('/')) p = p.substring(1);
+
+    if (p.startsWith('assets/')) {
+      return `${base}${p}`;
+    }
+    return `${base}assets/img/avatars/${p}`;
   },
 
   _getBasePath() {

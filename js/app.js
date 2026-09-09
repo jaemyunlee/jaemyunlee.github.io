@@ -2090,6 +2090,9 @@ const SavedAudioPlayer = {
       clean = clean.split('?')[0].split('#')[0].trim();
 
       if (clean) {
+        if (lesId === 'popcorn' || (typeof lesId === 'string' && lesId.startsWith('popcorn'))) {
+          return encodeURI(`${base}popcorn/conversation/audio/${clean}`);
+        }
         return encodeURI(`${base}lessons/${lesId}/audio/${clean}`);
       }
     }

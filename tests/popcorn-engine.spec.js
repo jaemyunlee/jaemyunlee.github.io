@@ -50,6 +50,10 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
 
     // Clean up temporary generated file from test
     fs.unlinkSync(generatedFilePath);
+    const generatedAudioDir = path.join(rootDir, 'popcorn', 'conversation', 'audio', newLesson.id);
+    if (fs.existsSync(generatedAudioDir)) {
+      fs.rmdirSync(generatedAudioDir);
+    }
     fs.writeFileSync(metadataPath, JSON.stringify(beforeMetadata, null, 2) + '\n', 'utf-8');
   });
 
@@ -108,9 +112,19 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     const convCard = page.locator('#popcorn-conversation-card');
     await expect(convCard).toBeVisible({ timeout: 3000 });
 
-    // Check dialogue bubbles for Person A and Person B
+    // Check dialogue bubbles for Wayne and Kelly
     const bubbles = page.locator('.dialogue-bubble');
     await expect(bubbles).toHaveCount(3);
+
+    // Check speaker avatar images and names
+    const avatars = page.locator('.speaker-avatar-img');
+    await expect(avatars).toHaveCount(3);
+    await expect(avatars.first()).toHaveAttribute('src', /assets\/img\/avatars\/wayne\.jpeg/);
+    await expect(avatars.nth(1)).toHaveAttribute('src', /assets\/img\/avatars\/kelly\.jpg/);
+
+    const speakerNames = page.locator('.speaker-name');
+    await expect(speakerNames.first()).toHaveText('Wayne');
+    await expect(speakerNames.nth(1)).toHaveText('Kelly');
 
     // Check target expression highlight
     const highlight = page.locator('.popcorn-highlight');
@@ -190,7 +204,7 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     });
     expect(savedList.length).toBe(1);
     expect(savedList[0].en).toContain('Just so you know');
-    expect(savedList[0].audio).toBe('audio/popcorn-001-b.mp3');
+    expect(savedList[0].audio).toBe('audio/popcorn-001/02.wav');
 
     // Open centralized Saved Sentences drawer from navbar
     const openDrawerBtn = page.locator('#btn-open-sentences');

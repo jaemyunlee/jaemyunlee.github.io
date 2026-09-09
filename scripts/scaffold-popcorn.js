@@ -21,8 +21,7 @@ function parseArgs() {
   const args = process.argv.slice(2);
   const options = {
     type: 'conversation',
-    expression: '',
-    title: ''
+    expression: ''
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -35,10 +34,6 @@ function parseArgs() {
       options.expression = args[++i].trim();
     } else if (arg.startsWith('--expression=')) {
       options.expression = arg.split('=')[1].trim();
-    } else if (arg === '--title' && args[i + 1]) {
-      options.title = args[++i].trim();
-    } else if (arg.startsWith('--title=')) {
-      options.title = arg.split('=')[1].trim();
     }
   }
 
@@ -122,18 +117,22 @@ function main() {
   const nextId = getNextId(metadata, typeDir);
 
   const expression = options.expression || 'sample expression';
-  const title = options.title || `${expression} (${options.type})`;
 
   let templateContent = fs.readFileSync(templatePath, 'utf-8');
   templateContent = templateContent
     .replace(/\{ID\}/g, nextId)
-    .replace(/\{EXPRESSION\}/g, expression)
-    .replace(/\{TITLE\}/g, title);
+    .replace(/\{EXPRESSION\}/g, expression);
 
   const newFileName = `${nextId}.md`;
   const newFilePath = path.join(typeDir, newFileName);
 
   fs.writeFileSync(newFilePath, templateContent, 'utf-8');
+
+  // Create dedicated audio folder for this lesson
+  const lessonAudioDir = path.join(typeDir, 'audio', nextId);
+  if (!fs.existsSync(lessonAudioDir)) {
+    fs.mkdirSync(lessonAudioDir, { recursive: true });
+  }
 
   // Update metadata.json
   const relativeFilePath = `${options.type}/${newFileName}`;

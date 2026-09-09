@@ -67,9 +67,9 @@ const PopcornParser = {
 
       // 2. Dialogue Section
       if (currentSection === 'dialogue') {
-        // Speaker line: "- **Person A**: Hello..." or "- **Person B**: ..."
+        // Speaker line: "- **Wayne**: Hello..." or "- **Kelly**: ..." or "- **Person A**: ..."
         const speakerMatch = trimmed.match(/^[-*]\s+\*{0,2}(Person\s+[A-Z]|Speaker\s+\d+|[A-Za-z0-9_\s]+)\*{0,2}\s*:\s*(.*)/i);
-        if (speakerMatch && !/^(Audio|Korean|Translation)$/i.test(speakerMatch[1])) {
+        if (speakerMatch && !/^(Audio|Korean|Translation|Avatar)$/i.test(speakerMatch[1])) {
           if (currentLine) {
             this._finalizeDialogueLine(currentLine, lesson.expression);
             lesson.dialogue.push(currentLine);
@@ -80,6 +80,7 @@ const PopcornParser = {
 
           currentLine = {
             speaker,
+            avatar: '',
             text: englishText,
             rawText: englishText.replace(/\[(.*?)\]/g, '$1'),
             audio: '',
@@ -89,9 +90,9 @@ const PopcornParser = {
           continue;
         }
 
-        // Nested attributes: "  - **Audio**: ..." or "  - **Korean**: ..."
+        // Nested attributes: "  - **Audio**: ..." or "  - **Korean**: ..." or "  - **Avatar**: ..."
         if (currentLine) {
-          const nestedMatch = trimmed.match(/^[-*]\s+\*{0,2}(Audio|Korean|Translation)\*{0,2}\s*:\s*(.*)/i);
+          const nestedMatch = trimmed.match(/^[-*]\s+\*{0,2}(Audio|Korean|Translation|Avatar)\*{0,2}\s*:\s*(.*)/i);
           if (nestedMatch) {
             const key = nestedMatch[1].toLowerCase();
             const val = nestedMatch[2].trim();
@@ -99,6 +100,8 @@ const PopcornParser = {
               currentLine.audio = val;
             } else if (key === 'korean' || key === 'translation') {
               currentLine.korean = val;
+            } else if (key === 'avatar') {
+              currentLine.avatar = val;
             }
           }
         }
@@ -128,6 +131,8 @@ const PopcornParser = {
         en: target.rawText,
         kr: target.korean,
         audio: target.audio,
+        avatar: target.avatar,
+        speaker: target.speaker,
         expression: lesson.expression,
         timestamp: 0
       };
@@ -141,6 +146,15 @@ const PopcornParser = {
    */
   _finalizeDialogueLine(line, targetExpression) {
     if (!line) return;
+
+    // Default avatar based on speaker name if not specified
+    if (!line.avatar) {
+      if (/wayne/i.test(line.speaker)) {
+        line.avatar = 'wayne.jpeg';
+      } else if (/kelly/i.test(line.speaker)) {
+        line.avatar = 'kelly.jpg';
+      }
+    }
 
     // Check for explicit bracket notation: e.g. [Just so you know]
     const bracketRegex = /\[(.*?)\]/;

@@ -3,20 +3,22 @@
 - **ID**: popcorn-001
 - **Type**: conversation
 - **Expression**: just so you know
-- **Title**: 피자 가게 가기 전 팁 (Just so you know)
 
 ## Expression Check
 - **Prompt**: 이 표현을 아시나요?
 
 ## Dialogue
-- **Person A**: Hey, are we still heading out to the new pizza place tonight?
-  - **Audio**: audio/popcorn-001-a.mp3
+- **Wayne**: Hey, are we still heading out to the new pizza place tonight?
+  - **Avatar**: wayne.jpeg
+  - **Audio**: audio/popcorn-001/01.wav
   - **Korean**: 오늘 밤에 새로 생긴 피자집 가기로 한 거 아직 유효해?
-- **Person B**: Yeah, definitely! [Just so you know], they only take cash, so we should hit an ATM on the way.
-  - **Audio**: audio/popcorn-001-b.mp3
+- **Kelly**: Yeah, definitely! [Just so you know], they only take cash, so we should hit an ATM on the way.
+  - **Avatar**: kelly.jpg
+  - **Audio**: audio/popcorn-001/02.wav
   - **Korean**: 응, 당연하지! 참고로 말하자면 거기 현금만 받으니까 가는 길에 ATM 들러야 해.
-- **Person A**: Oh, good to know!
-  - **Audio**: audio/popcorn-001-c.mp3
+- **Wayne**: Oh, good to know!
+  - **Avatar**: wayne.jpeg
+  - **Audio**: audio/popcorn-001/03.wav
   - **Korean**: 아, 미리 알려줘서 고마워!
 
 ## Explanation

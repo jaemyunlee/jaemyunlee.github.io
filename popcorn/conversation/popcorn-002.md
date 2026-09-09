@@ -3,20 +3,21 @@
 - **ID**: popcorn-002
 - **Type**: conversation
 - **Expression**: hit an ATM
-- **Title**: 가는 길에 ATM 들르기 (hit an ATM)
-
 ## Expression Check
 - **Prompt**: 이 표현을 아시나요?
 
 ## Dialogue
-- **Person A**: I don't have enough cash for the street market snacks.
-  - **Audio**: audio/popcorn-002-a.mp3
+- **Wayne**: I don't have enough cash for the street market snacks.
+  - **Avatar**: wayne.jpeg
+  - **Audio**: audio/popcorn-002/01.wav
   - **Korean**: 길거리 야시장 간식 사 먹을 현금이 부족해.
-- **Person B**: No worries, we can [hit an ATM] right around the corner.
-  - **Audio**: audio/popcorn-002-b.mp3
+- **Kelly**: No worries, we can [hit an ATM] right around the corner.
+  - **Avatar**: kelly.jpg
+  - **Audio**: audio/popcorn-002/02.wav
   - **Korean**: 걱정 마, 모퉁이 돌면 바로 있는 ATM에 들르면 돼.
-- **Person A**: Perfect! That saves us a lot of trouble.
-  - **Audio**: audio/popcorn-002-c.mp3
+- **Wayne**: Perfect! That saves us a lot of trouble.
+  - **Avatar**: wayne.jpeg
+  - **Audio**: audio/popcorn-002/03.wav
   - **Korean**: 완벽해! 수고를 크게 덜었네.
 
 ## Explanation

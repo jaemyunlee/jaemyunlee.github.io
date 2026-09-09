@@ -123,11 +123,12 @@ test.describe('Daily English Phrase Popcorn on Navbar & Dedicated Page (Issue #4
     const convCard = page.locator('#popcorn-conversation-card');
     await expect(convCard).toBeVisible({ timeout: 5000 });
 
-    // Verify target expression banner and highlight
-    const targetWord = convCard.locator('.target-word');
-    await expect(targetWord).toBeVisible();
+    // Verify target expression highlight and avatars
     const highlightedMarks = convCard.locator('.popcorn-highlight');
     await expect(highlightedMarks.first()).toBeVisible();
+
+    const avatarImg = convCard.locator('.speaker-avatar-img').first();
+    await expect(avatarImg).toBeVisible();
 
     // Verify dialogue bubbles
     const bubbles = convCard.locator('.dialogue-bubble');
