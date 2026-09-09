@@ -319,7 +319,11 @@ const DailyPopcornManager = {
               <span class="speaker-name">${line.speaker}</span>
             </div>
             <button type="button" class="btn-line-audio" data-line-index="${idx}" title="이 문장 듣기" aria-label="이 문장 듣기">
-              <span class="line-audio-icon">🔊</span>
+              <svg class="line-audio-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
             </button>
           </div>
 
@@ -399,7 +403,16 @@ const DailyPopcornManager = {
       });
     }
 
-    // 2. Line-level audio buttons
+    // 2. Line-level audio: click entire sentence card or audio button
+    container.querySelectorAll('.dialogue-bubble').forEach(bubble => {
+      bubble.addEventListener('click', () => {
+        const lineIdx = parseInt(bubble.getAttribute('data-line-index'), 10);
+        if (!isNaN(lineIdx) && lesson.dialogue[lineIdx]) {
+          this.playSingleLine(lesson.dialogue[lineIdx], lineIdx);
+        }
+      });
+    });
+
     container.querySelectorAll('.btn-line-audio').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();

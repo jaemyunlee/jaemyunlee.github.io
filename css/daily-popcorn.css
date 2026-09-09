@@ -836,15 +836,29 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: all 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.dialogue-bubble:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .dialogue-bubble.speaker-a {
   border-left: 4px solid var(--primary);
 }
 
+.dialogue-bubble.speaker-a:hover {
+  border-color: var(--primary);
+}
+
 .dialogue-bubble.speaker-b {
   border-left: 4px solid #F59E0B;
+}
+
+.dialogue-bubble.speaker-b:hover {
+  border-color: #F59E0B;
 }
 
 .dialogue-bubble.has-target-expression {
@@ -990,23 +1004,51 @@
 }
 
 .btn-line-audio {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-full);
-  background: transparent;
-  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  border: 1.5px solid var(--surface-border);
+  color: var(--text-muted);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+.line-audio-svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.dialogue-bubble:hover .btn-line-audio,
 .btn-line-audio:hover {
-  background: var(--surface-color);
+  transform: scale(1.08);
+}
+
+.dialogue-bubble.speaker-a:hover .btn-line-audio,
+.speaker-a .btn-line-audio:hover {
+  color: var(--primary);
   border-color: var(--primary);
-  transform: scale(1.1);
+  background: rgba(79, 70, 229, 0.1);
+}
+
+.dialogue-bubble.speaker-b:hover .btn-line-audio,
+.speaker-b .btn-line-audio:hover {
+  color: #D97706;
+  border-color: #F59E0B;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+[data-theme="dark"] .dialogue-bubble.speaker-b:hover .btn-line-audio,
+[data-theme="dark"] .speaker-b .btn-line-audio:hover {
+  color: #FBBF24;
+  border-color: #FBBF24;
 }
 
 .dialogue-text-en {
