@@ -15,7 +15,8 @@ const Storage = {
     STUDY_TIME_PREFIX: 'rhyrhy_study_time_',
     ACTIVE_LESSON_PAGE: 'rhyrhy_active_lesson_page',
     IN_PROGRESS_PREFIX: 'rhyrhy_in_progress_',
-    THEME: 'rhyrhy_theme'
+    THEME: 'rhyrhy_theme',
+    DAILY_COMPLETED_DATE: 'rhyrhy_daily_completed_date'
   },
 
   /**
@@ -635,6 +636,68 @@ const Storage = {
       }
     } catch (_) { }
     return false;
+  },
+
+  /**
+   * Get the date string (YYYY-MM-DD) on which the daily phrase was last completed
+   * @returns {string|null}
+   */
+  getDailyPhraseCompletedDate() {
+    try {
+      return localStorage.getItem(this.KEYS.DAILY_COMPLETED_DATE) || null;
+    } catch (e) {
+      console.warn('LocalStorage error reading daily phrase completion date', e);
+      return null;
+    }
+  },
+
+  /**
+   * Check if today's daily phrase is already completed
+   * @param {Date} [nowDate] optional date to test with
+   * @returns {boolean}
+   */
+  isDailyPhraseCompletedToday(nowDate) {
+    const today = (nowDate || new Date()).toISOString().slice(0, 10);
+    return this.getDailyPhraseCompletedDate() === today;
+  },
+
+  /**
+   * Mark today's daily phrase as completed
+   * @param {string} [dateStr] optional date string YYYY-MM-DD
+   */
+  setDailyPhraseCompletedToday(dateStr) {
+    try {
+      const today = dateStr || new Date().toISOString().slice(0, 10);
+      localStorage.setItem(this.KEYS.DAILY_COMPLETED_DATE, today);
+    } catch (e) {
+      console.warn('LocalStorage error saving daily phrase completion date', e);
+    }
+  },
+
+  /**
+   * Reset daily phrase completion (useful for testing and admin resets)
+   */
+  resetDailyPhraseCompletion() {
+    try {
+      localStorage.removeItem(this.KEYS.DAILY_COMPLETED_DATE);
+    } catch (_) { }
+  },
+
+  /**
+   * Deterministically get today's phrase from the given list
+   * @param {Array} phrases
+   * @param {Date} [nowDate]
+   * @returns {object|null}
+   */
+  getTodayDailyPhrase(phrases, nowDate) {
+    const list = phrases || (typeof DAILY_PHRASES !== 'undefined' ? DAILY_PHRASES : []);
+    if (!list || list.length === 0) return null;
+
+    const d = nowDate || new Date();
+    // Deterministic day index calculation based on UTC day count
+    const daysSinceEpoch = Math.floor(d.getTime() / 86400000);
+    const index = Math.abs(daysSinceEpoch) % list.length;
+    return list[index];
   }
 };
 

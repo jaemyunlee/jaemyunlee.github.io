@@ -267,7 +267,7 @@ function build() {
   }
 
   // Copy root HTML files
-  const rootHtmlFiles = ['index.html', 'lessons.html', 'quiz.html'];
+  const rootHtmlFiles = ['index.html', 'lessons.html', 'quiz.html', 'daily.html'];
   for (const htmlFile of rootHtmlFiles) {
     const src = path.join(ROOT_DIR, htmlFile);
     const dest = path.join(DIST_DIR, htmlFile);

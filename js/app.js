@@ -205,6 +205,11 @@ const App = {
     // Update hero call-to-action button if present on page
     this.updateHeroStartButton();
 
+    // Initialize Daily Popcorn Feature (Issue #44)
+    if (typeof DailyPopcornManager !== 'undefined') {
+      DailyPopcornManager.init();
+    }
+
     // Global delegation for lesson card clicks in catalog
     document.addEventListener('click', (e) => {
       const card = e.target.closest('.lesson-catalog-card');
@@ -527,6 +532,9 @@ const App = {
   },
 
   _getLessonTitle(lessonId) {
+    if (lessonId === 'daily') {
+      return '🍿 오늘의 한마디 (Daily Phrase)';
+    }
     const l = this.lessons.find(item => item.id === lessonId);
     return l ? l.title : lessonId;
   },
@@ -958,7 +966,7 @@ const App = {
           if (items.length === 0) return '';
           const title = this._getLessonTitle(lesId);
           const lesObj = this.lessons.find(l => l.id === lesId);
-          const lesPath = lesObj ? `${base}${lesObj.path}index.html` : `${base}lessons.html`;
+          const lesPath = (lesId === 'daily') ? `${base}daily.html` : (lesObj ? `${base}${lesObj.path}index.html` : `${base}lessons.html`);
 
           return `
             <div class="saved-lesson-group">

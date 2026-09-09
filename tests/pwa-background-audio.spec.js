@@ -175,6 +175,6 @@ test.describe('PWA Background Audio Playback on Screen Lock & Sleep (Issue #41)'
     const swContent = fs.readFileSync(swPath, 'utf8');
 
     expect(swContent).toContain("event.request.headers.has('range')");
-    expect(swContent).toContain("rhyrhy-cache-v26");
+    expect(swContent).toMatch(/rhyrhy-cache-v\d+/);
   });
 });

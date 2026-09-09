@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <!-- Cache Control (Issue #3: Maximize Browser Caching) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>🍿 오늘의 팝콘 한마디 - 현서네 리얼 영어</title>
+  <meta name="description" content="매일 팝콘처럼 톡 터지는 오늘의 실생활 영어 한마디! 원어민 발음 듣기, 빈칸 퀴즈 리콜, 단어장 저장까지.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#4F46E5">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="./assets/icons/icon.svg">
+
+  <script>
+    (function(){try{var t=localStorage.getItem('rhyrhy_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/navigation.css">
+  <link rel="stylesheet" href="./css/modal.css">
+  <link rel="stylesheet" href="./css/daily-popcorn.css">
+
+  <style>
+    .daily-page-main {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px 64px;
+      box-sizing: border-box;
+    }
+
+    .daily-page-header {
+      text-align: center;
+      max-width: 540px;
+      margin-bottom: 24px;
+    }
+
+    .daily-page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(245, 158, 11, 0.15);
+      color: #D97706;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    [data-theme="dark"] .daily-page-badge {
+      color: #FBBF24;
+      background: rgba(245, 158, 11, 0.2);
+    }
+
+    .daily-page-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .daily-page-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    #daily-page-container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Header Bar -->
+  <nav class="app-nav" aria-label="Main Navigation">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="./index.html" class="nav-brand" title="RhyRhy English Home">
+          <span class="brand-icon">🍿</span>
+          <span class="brand-text">RhyRhy English</span>
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <a href="./lessons.html" class="btn-nav-item" id="btn-nav-lessons" title="전체 레슨 목록">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+          <span class="nav-item-text">전체 레슨</span>
+        </a>
+
+        <button type="button" class="btn-nav-item btn-saved-sentences" id="btn-open-sentences" title="저장된 문장 보기">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span class="nav-item-text">단어장</span>
+          <span class="nav-badge" id="saved-count-badge" style="display: none;">0</span>
+        </button>
+
+        <button type="button" class="btn-theme-toggle" id="btn-toggle-theme" title="테마 변경 (다크/라이트)" aria-label="Toggle theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="daily-page-main">
+    <div class="daily-page-header">
+      <div class="daily-page-badge">
+        <span>🍿</span>
+        <span>Daily English Phrase</span>
+      </div>
+      <h1 class="daily-page-title">오늘의 팝콘 한마디</h1>
+      <p class="daily-page-desc">
+        매일 새로운 실생활 영어 표현을 가볍고 재미있게 학습해보세요.<br>
+        원어민 발음을 듣고 가려진 표현을 맞혀보세요!
+      </p>
+    </div>
+
+    <div id="daily-page-container">
+      <!-- Injected by DailyPopcornManager -->
+    </div>
+  </main>
+
+  <!-- Core Scripts -->
+  <script src="./js/storage.js"></script>
+  <script src="./js/analytics.js"></script>
+  <script src="./js/daily-phrases-data.js"></script>
+  <script src="./js/daily-popcorn.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      App.init();
+      DailyPopcornManager.init();
+    });
+  </script>
+</body>
+
+</html>
