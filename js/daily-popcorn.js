@@ -242,18 +242,9 @@ const DailyPopcornManager = {
 
     container.innerHTML = `
       <div class="popcorn-check-card" id="popcorn-check-card">
-        <div class="popcorn-check-header">
-          <div class="popcorn-badge">
-            <span>🍿</span>
-            <span>Popcorn English</span>
-          </div>
-          <span class="popcorn-id-label">${lesson.id ? lesson.id.toUpperCase() : ''}</span>
-        </div>
-
         <div class="popcorn-check-content">
           <span class="popcorn-check-prompt">${lesson.prompt || '이 표현을 아시나요?'}</span>
           <h2 class="popcorn-expression-banner">"${lesson.expression}"</h2>
-          <p class="popcorn-check-hint">${lesson.title || '대화를 듣고 실생활 활용 뉘앙스를 배워보세요'}</p>
         </div>
 
         <div class="popcorn-check-actions">

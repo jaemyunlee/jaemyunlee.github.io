@@ -141,7 +141,6 @@ function main() {
     id: nextId,
     type: options.type,
     expression: expression,
-    title: title,
     file: relativeFilePath,
     createdAt: new Date().toISOString()
   });
