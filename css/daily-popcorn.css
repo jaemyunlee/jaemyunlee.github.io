@@ -856,29 +856,66 @@
 }
 
 .dialogue-bubble.playing {
-  border-color: #4F46E5 !important;
-  background: #EEF2FF !important;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3), 0 8px 24px rgba(79, 70, 229, 0.16) !important;
   transform: translateY(-2px) scale(1.015);
   z-index: 2;
 }
 
-[data-theme="dark"] .dialogue-bubble.playing {
+/* Speaker A (Wayne / Purple): Indigo Playing Glow */
+.dialogue-bubble.speaker-a.playing {
+  border-color: #4F46E5 !important;
+  border-left-width: 5px !important;
+  background: #EEF2FF !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3), 0 8px 24px rgba(79, 70, 229, 0.16) !important;
+}
+
+[data-theme="dark"] .dialogue-bubble.speaker-a.playing {
   border-color: #818CF8 !important;
+  border-left-width: 5px !important;
   background: #1E1B4B !important;
   box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.4), 0 8px 28px rgba(99, 102, 241, 0.35) !important;
 }
 
-.dialogue-bubble.playing .speaker-avatar-img {
-  box-shadow: 0 0 0 2.5px #F59E0B;
+.dialogue-bubble.speaker-a.playing .speaker-avatar-img {
+  box-shadow: 0 0 0 2.5px #6366F1;
   transform: scale(1.08);
 }
 
-.dialogue-bubble.playing .btn-line-audio {
+.dialogue-bubble.speaker-a.playing .btn-line-audio {
   background: rgba(79, 70, 229, 0.16);
   border-color: var(--primary);
   color: var(--primary);
   transform: scale(1.15);
+}
+
+/* Speaker B (Kelly / Orange): Amber Playing Glow */
+.dialogue-bubble.speaker-b.playing {
+  border-color: #F59E0B !important;
+  border-left-width: 5px !important;
+  background: #FFFBEB !important;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.35), 0 8px 24px rgba(245, 158, 11, 0.18) !important;
+}
+
+[data-theme="dark"] .dialogue-bubble.speaker-b.playing {
+  border-color: #FBBF24 !important;
+  border-left-width: 5px !important;
+  background: #2D1A05 !important;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.4), 0 8px 28px rgba(245, 158, 11, 0.32) !important;
+}
+
+.dialogue-bubble.speaker-b.playing .speaker-avatar-img {
+  box-shadow: 0 0 0 2.5px #F59E0B;
+  transform: scale(1.08);
+}
+
+.dialogue-bubble.speaker-b.playing .btn-line-audio {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: #F59E0B;
+  color: #D97706;
+  transform: scale(1.15);
+}
+
+[data-theme="dark"] .dialogue-bubble.speaker-b.playing .btn-line-audio {
+  color: #FBBF24;
 }
 
 .dialogue-bubble-header {
