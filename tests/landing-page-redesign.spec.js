@@ -240,4 +240,34 @@ test.describe('Landing Page Redesign & 5-Step Learning Flow (Issue #39)', () => 
     await expect(heroBtnCompleted).toContainText('이어서 학습하기');
     await expect(heroBtnCompleted).toHaveAttribute('href', expect.stringContaining('lessons/lesson-02/index.html'));
   });
+
+  test('7. Popcorn Quick Lesson extra step is present below Step 5 explaining spaced repetition and fast recall', async ({ page }) => {
+    await page.goto('/index.html');
+
+    const extraStep = page.locator('#flow-popcorn-extra');
+    await expect(extraStep).toBeVisible();
+
+    // Verify badge and title
+    await expect(extraStep.locator('.flow-popcorn-extra-badge')).toContainText('팝콘 퀵 레슨');
+    await expect(extraStep.locator('.badge-pop-highlight')).toContainText('간격 반복');
+    await expect(extraStep.locator('.flow-popcorn-extra-title')).toContainText('아는 표현은 쿨하게 스킵');
+
+    // Verify 3 core feature points
+    const features = extraStep.locator('.popcorn-feature-item');
+    await expect(features).toHaveCount(3);
+    await expect(features.nth(0)).toContainText('초효율 스킵');
+    await expect(features.nth(1)).toContainText('실전 대화 맥락');
+    await expect(features.nth(2)).toContainText('간격 반복');
+
+    // Verify CTA button links to daily.html
+    const ctaBtn = extraStep.locator('#btn-flow-popcorn-start');
+    await expect(ctaBtn).toBeVisible();
+    await expect(ctaBtn).toHaveAttribute('href', './daily.html');
+
+    // Light and Dark theme verification
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    await expect(extraStep).toBeVisible();
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    await expect(extraStep).toBeVisible();
+  });
 });
