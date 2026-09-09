@@ -3,129 +3,66 @@
  */
 
 /* ==========================================================================
-   Floating Action Button (Popcorn FAB)
+   Navbar Popcorn Flying & Popping Animation (Issue #44)
    ========================================================================== */
 
-.floating-popcorn-btn {
+.popcorn-flyer-backdrop {
   position: fixed;
-  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
-  right: calc(28px + env(safe-area-inset-right, 0px));
-  z-index: 150;
-  width: 203px;
-  height: 203px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  border: 4px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 10px 36px rgba(245, 158, 11, 0.45), 0 4px 16px rgba(0, 0, 0, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  outline: none;
-  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, opacity 0.3s ease;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.floating-popcorn-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 14px 44px rgba(245, 158, 11, 0.58), 0 6px 20px rgba(0, 0, 0, 0.22);
-}
-
-.floating-popcorn-btn:active {
-  transform: scale(0.95);
-}
-
-/* Popping Click State */
-.floating-popcorn-btn.popping {
-  animation: popcorn-pop 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.3) forwards;
-}
-
-/* Vanish / Exit Animation when completed */
-.floating-popcorn-btn.vanish {
-  animation: popcorn-exit 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.popcorn-icon-inner {
-  font-size: 98px;
+.popcorn-flyer-backdrop.active {
+  opacity: 1;
+}
+
+.popcorn-nav-flyer {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  font-size: 24px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
-  transform-origin: center bottom;
-  animation: popcorn-idle 3s ease-in-out infinite;
+  transform: translate(-50%, -50%) scale(1);
+  will-change: transform, left, top, font-size;
+  filter: drop-shadow(0 4px 14px rgba(245, 158, 11, 0.45));
+  transition: left 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
+              top 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
+              font-size 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
+              transform 0.38s cubic-bezier(0.2, 0.8, 0.25, 1);
 }
 
-/* Mini Notification Badge on Popcorn Button */
-.popcorn-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #EF4444;
-  color: #FFFFFF;
-  font-size: 1.15rem;
-  font-weight: 800;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  border: 3px solid #FFFFFF;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.45);
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  animation: badge-pulse 2s infinite;
+.popcorn-nav-flyer.flying-to-center {
+  font-size: 110px;
+  transform: translate(-50%, -50%) scale(1.35) rotate(-6deg);
+  filter: drop-shadow(0 14px 40px rgba(245, 158, 11, 0.7));
 }
 
-/* Floating Idle Animation */
-@keyframes popcorn-idle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+.popcorn-nav-flyer.pop-burst {
+  animation: flyer-pop 0.26s cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards;
 }
 
-/* Popping Squash and Burst Animation */
-@keyframes popcorn-pop {
+@keyframes flyer-pop {
   0% {
-    transform: scale(1);
-  }
-  20% {
-    transform: scale(0.82) rotate(-8deg);
-  }
-  50% {
-    transform: scale(1.3) rotate(8deg);
-  }
-  75% {
-    transform: scale(1.1) rotate(-3deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
-}
-
-@keyframes popcorn-exit {
-  0% {
-    transform: scale(1);
+    font-size: 110px;
+    transform: translate(-50%, -50%) scale(1.35) rotate(-6deg);
     opacity: 1;
   }
   40% {
-    transform: scale(1.15);
-    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.9) rotate(8deg);
+    opacity: 1;
   }
   100% {
-    transform: scale(0);
+    transform: translate(-50%, -50%) scale(2.4) rotate(14deg);
     opacity: 0;
-  }
-}
-
-@keyframes badge-pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.08);
   }
 }
 
@@ -573,29 +510,15 @@
   }
 }
 
-/* Mobile Responsive (Floating Popcorn Button 2.5x: 145px) */
+/* Standalone Card in daily.html */
+.daily-phrase-card.standalone-card {
+  transform: none !important;
+  max-width: 520px;
+  width: 100%;
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  .floating-popcorn-btn {
-    width: 145px;
-    height: 145px;
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    right: calc(16px + env(safe-area-inset-right, 0px));
-    border-width: 3px;
-    box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4), 0 3px 10px rgba(0, 0, 0, 0.15);
-  }
-
-  .popcorn-icon-inner {
-    font-size: 70px;
-  }
-
-  .popcorn-badge {
-    top: 4px;
-    right: 4px;
-    font-size: 0.95rem;
-    padding: 4px 10px;
-    border-width: 2.5px;
-  }
-
   .popcorn-particle {
     font-size: 24px;
   }
@@ -623,3 +546,576 @@
     width: 100%;
   }
 }
+
+/* ==========================================================================
+   Stage 1: Popcorn Knowledge Check Card ("이 표현을 아시나요?")
+   ========================================================================== */
+
+.popcorn-check-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 520px;
+  padding: 32px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: card-appear 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.popcorn-check-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.popcorn-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #D97706;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+[data-theme="dark"] .popcorn-badge {
+  color: #FBBF24;
+}
+
+.popcorn-id-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-subtle);
+  letter-spacing: 0.05em;
+}
+
+.popcorn-check-content {
+  margin-bottom: 32px;
+}
+
+.popcorn-check-prompt {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(79, 70, 229, 0.08);
+}
+
+[data-theme="dark"] .popcorn-check-prompt {
+  color: #818CF8;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.popcorn-expression-banner {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
+}
+
+.popcorn-check-hint {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.popcorn-check-actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 12px;
+}
+
+.btn-popcorn-action {
+  height: 50px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.btn-popcorn-known {
+  background: var(--surface-color-alt);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.btn-popcorn-known:hover {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #10B981;
+  color: #059669;
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-popcorn-known:hover {
+  color: #34D399;
+}
+
+.btn-popcorn-learn {
+  background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+  border: none;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+}
+
+.btn-popcorn-learn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+/* ==========================================================================
+   Stage 2: Conversation Study Experience & Multi-Audio Playback
+   ========================================================================== */
+
+.popcorn-conversation-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 540px;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: card-appear 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.popcorn-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.popcorn-lesson-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.popcorn-target-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.popcorn-target-banner .target-word {
+  color: #D97706;
+  font-weight: 800;
+}
+
+[data-theme="dark"] .popcorn-target-banner .target-word {
+  color: #FBBF24;
+}
+
+/* Master Audio Bar */
+.popcorn-audio-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--surface-color-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.btn-popcorn-play-all {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: #FFFFFF;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.28);
+}
+
+.btn-popcorn-play-all:hover {
+  background: var(--primary-hover, #4338CA);
+  transform: translateY(-1px);
+}
+
+.btn-popcorn-play-all.playing {
+  background: #E11D48;
+}
+
+.popcorn-audio-equalizer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+}
+
+.popcorn-audio-equalizer span {
+  display: inline-block;
+  width: 3px;
+  height: 6px;
+  background: var(--primary-light);
+  border-radius: 2px;
+  transition: height 0.15s ease;
+}
+
+.popcorn-audio-equalizer.active span:nth-child(1) {
+  animation: eqWave 0.5s ease infinite alternate 0.1s;
+}
+.popcorn-audio-equalizer.active span:nth-child(2) {
+  animation: eqWave 0.6s ease infinite alternate 0.25s;
+}
+.popcorn-audio-equalizer.active span:nth-child(3) {
+  animation: eqWave 0.45s ease infinite alternate 0.05s;
+}
+.popcorn-audio-equalizer.active span:nth-child(4) {
+  animation: eqWave 0.7s ease infinite alternate 0.3s;
+}
+
+@keyframes eqWave {
+  0% { height: 4px; }
+  100% { height: 18px; }
+}
+
+/* Dialogue Bubble Container */
+.popcorn-dialogue-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dialogue-bubble {
+  background: var(--surface-color-alt);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.dialogue-bubble.speaker-a {
+  border-left: 4px solid var(--primary);
+}
+
+.dialogue-bubble.speaker-b {
+  border-left: 4px solid #F59E0B;
+}
+
+.dialogue-bubble.has-target-expression {
+  background: rgba(245, 158, 11, 0.04);
+}
+
+[data-theme="dark"] .dialogue-bubble.has-target-expression {
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.dialogue-bubble.playing {
+  border-color: #F59E0B;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+  transform: translateY(-2px);
+}
+
+.dialogue-bubble-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.speaker-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.speaker-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.speaker-a .speaker-avatar {
+  background: var(--primary);
+}
+
+.speaker-b .speaker-avatar {
+  background: #D97706;
+}
+
+.speaker-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.btn-line-audio {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+}
+
+.btn-line-audio:hover {
+  background: var(--surface-color);
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+.dialogue-text-en {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.popcorn-highlight {
+  background: rgba(245, 158, 11, 0.25);
+  color: inherit;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  border-bottom: 2px solid #F59E0B;
+}
+
+[data-theme="dark"] .popcorn-highlight {
+  background: rgba(245, 158, 11, 0.35);
+  border-bottom-color: #FBBF24;
+}
+
+.dialogue-text-kr {
+  display: none;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border-color);
+  padding-top: 6px;
+}
+
+/* Revealed Korean & Explanation */
+.popcorn-conversation-card.revealed .dialogue-text-kr {
+  display: block;
+  animation: slideDown 0.25s ease-out;
+}
+
+.popcorn-explanation-card {
+  display: none;
+  background: rgba(79, 70, 229, 0.06);
+  border: 1.5px solid rgba(79, 70, 229, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  gap: 8px;
+}
+
+[data-theme="dark"] .popcorn-explanation-card {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.popcorn-conversation-card.revealed .popcorn-explanation-card {
+  display: flex;
+  flex-direction: column;
+  animation: slideDown 0.3s ease-out;
+}
+
+.popcorn-explanation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+[data-theme="dark"] .popcorn-explanation-header {
+  color: #818CF8;
+}
+
+.popcorn-explanation-body {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  word-break: keep-all;
+}
+
+/* Action Controls Row */
+.popcorn-study-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-popcorn-reveal {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.btn-popcorn-reveal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+}
+
+.btn-popcorn-reveal.revealed {
+  background: var(--surface-color-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+}
+
+.btn-popcorn-save {
+  background: var(--surface-color-alt);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-color);
+}
+
+.btn-popcorn-save:hover {
+  background: rgba(79, 70, 229, 0.08);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-popcorn-save.saved {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #10B981;
+  color: #059669;
+}
+
+[data-theme="dark"] .btn-popcorn-save.saved {
+  color: #34D399;
+}
+
+.btn-popcorn-next {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  font-size: 0.88rem;
+  height: 40px;
+}
+
+.btn-popcorn-next:hover {
+  background: var(--surface-color-alt);
+  color: var(--text-main);
+}
+
+/* Completion Card */
+.popcorn-completion-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 40px 24px;
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.25);
+  animation: card-appear 0.3s ease-out;
+}
+
+.completion-icon {
+  font-size: 48px;
+}
+
+.completion-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.completion-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.btn-popcorn-reset {
+  background: var(--primary);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+}
+
+.btn-popcorn-reset:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 540px) {
+  .popcorn-check-card,
+  .popcorn-conversation-card {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .popcorn-expression-banner {
+    font-size: 1.65rem;
+  }
+
+  .popcorn-check-actions {
+    grid-template-columns: 1fr;
+  }
+}
+

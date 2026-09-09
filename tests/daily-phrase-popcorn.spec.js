@@ -1,154 +1,162 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe('Daily English Phrase Quiz via Floating Popcorn Button (Issue #44)', () => {
+test.describe('Daily English Phrase Popcorn on Navbar & Dedicated Page (Issue #44)', () => {
   test.beforeEach(async ({ page }) => {
-    // Clear completion date and saved sentences before each test
+    // Clear completion date, popcorn states, and saved sentences before each test
     await page.goto('/index.html');
     await page.evaluate(() => {
       localStorage.removeItem('rhyrhy_daily_completed_date');
       localStorage.removeItem('rhyrhy_saved_sentences');
+      localStorage.removeItem('rhyrhy_popcorn_known');
+      localStorage.removeItem('rhyrhy_popcorn_studied');
     });
     await page.reload();
   });
 
-  test('Floating Popcorn Button renders in bottom-right corner with icon and badge when uncompleted', async ({ page }) => {
-    for (const url of ['/index.html', '/lessons.html']) {
-      await page.goto(url);
+  test('Navbar Popcorn Button renders to the left of Lesson icon with text on desktop and icon-only on mobile', async ({ page }) => {
+    // 1. Desktop Viewport
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/index.html');
 
-      const fab = page.locator('#btn-daily-popcorn');
-      await expect(fab).toBeVisible({ timeout: 5000 });
+    const popcornBtn = page.locator('#btn-nav-popcorn');
+    const lessonsBtn = page.locator('#btn-nav-lessons');
+    await expect(popcornBtn).toBeVisible({ timeout: 5000 });
+    await expect(lessonsBtn).toBeVisible();
 
-      // Verify circular shape and icon
-      const icon = fab.locator('.popcorn-icon-inner');
-      await expect(icon).toHaveText('🍿');
+    // Verify button is to the left of lessons button
+    const popcornBox = await popcornBtn.boundingBox();
+    const lessonsBox = await lessonsBtn.boundingBox();
+    expect(popcornBox).not.toBeNull();
+    expect(lessonsBox).not.toBeNull();
+    expect(popcornBox.x).toBeLessThan(lessonsBox.x);
 
-      const badge = fab.locator('.popcorn-badge');
-      await expect(badge).toBeVisible();
+    // Desktop: Popcorn button shows icon and label text
+    const icon = popcornBtn.locator('.nav-popcorn-icon');
+    await expect(icon).toHaveText('🍿');
+    const label = popcornBtn.locator('.nav-btn-label');
+    await expect(label).toBeVisible();
+    await expect(label).toHaveText('Popcorn');
 
-      // Verify bottom-right positioning and desktop size (3.5x bigger: ~203px)
-      const box = await fab.boundingBox();
-      expect(box).not.toBeNull();
-      expect(Math.round(box.width)).toBeGreaterThanOrEqual(190);
-      expect(Math.round(box.width)).toBeLessThanOrEqual(215);
-      expect(Math.round(box.height)).toBeGreaterThanOrEqual(190);
-      expect(Math.round(box.height)).toBeLessThanOrEqual(215);
-    }
+    // Desktop: Lessons and Saved buttons show colorful icons and labels
+    const lessonsIcon = lessonsBtn.locator('.nav-lessons-icon');
+    await expect(lessonsIcon).toHaveText('📖');
+    const savedBtn = page.locator('#btn-open-sentences');
+    const savedIcon = savedBtn.locator('.nav-saved-icon');
+    await expect(savedIcon).toHaveText('🔖');
 
-    // Verify mobile responsive size (2.5x bigger: ~145px on screen <= 768px)
+    // Desktop: Brand displays "RhyRhy English"
+    const brandName = page.locator('.brand-name');
+    await expect(brandName).toBeVisible();
+    const brandEnglish = page.locator('.brand-english');
+    await expect(brandEnglish).toBeVisible();
+
+    // 2. Mobile Viewport (<= 768px)
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/index.html');
-    const fabMobile = page.locator('#btn-daily-popcorn');
-    await expect(fabMobile).toBeVisible();
-    const mobileBox = await fabMobile.boundingBox();
-    expect(mobileBox).not.toBeNull();
-    expect(Math.round(mobileBox.width)).toBeGreaterThanOrEqual(135);
-    expect(Math.round(mobileBox.width)).toBeLessThanOrEqual(155);
-    expect(Math.round(mobileBox.height)).toBeGreaterThanOrEqual(135);
-    expect(Math.round(mobileBox.height)).toBeLessThanOrEqual(155);
+    await page.reload();
+
+    const mobilePopcornBtn = page.locator('#btn-nav-popcorn');
+    await expect(mobilePopcornBtn).toBeVisible();
+
+    // Mobile: Text label is hidden; only colorful icons are shown
+    const mobileLabel = mobilePopcornBtn.locator('.nav-btn-label');
+    await expect(mobileLabel).not.toBeVisible();
+    await expect(mobilePopcornBtn.locator('.nav-popcorn-icon')).toBeVisible();
+    await expect(page.locator('#btn-nav-lessons .nav-lessons-icon')).toBeVisible();
+    await expect(page.locator('#btn-open-sentences .nav-saved-icon')).toBeVisible();
+
+    // Mobile: Brand shows only "RhyRhy"; "English" is hidden
+    const mobileBrandEnglish = page.locator('.brand-english');
+    await expect(mobileBrandEnglish).not.toBeVisible();
+
+    // Mobile: BETA tag is visible with small font styling
+    const betaTag = page.locator('.nav-beta-tag');
+    await expect(betaTag).toBeVisible();
+    const betaFontSize = await betaTag.evaluate(el => window.getComputedStyle(el).fontSize);
+    expect(parseFloat(betaFontSize)).toBeLessThanOrEqual(12);
   });
 
-  test('Clicking popcorn button triggers popping animation and opens Daily Phrase Modal', async ({ page }) => {
+  test('Clicking navbar popcorn button triggers flyer animation, pop burst, and navigates to dedicated daily.html page', async ({ page }) => {
     await page.goto('/index.html');
 
-    const fab = page.locator('#btn-daily-popcorn');
-    await expect(fab).toBeVisible({ timeout: 5000 });
+    const popcornBtn = page.locator('#btn-nav-popcorn');
+    await expect(popcornBtn).toBeVisible({ timeout: 5000 });
 
-    // Click the popcorn button
-    await fab.click();
+    // Click navbar popcorn button
+    await popcornBtn.click();
 
-    // Modal dialog should open
-    const modal = page.locator('#daily-phrase-modal');
-    await expect(modal).toBeVisible({ timeout: 3000 });
-    await expect(modal).toHaveClass(/open/);
+    // Flyer animation element appears in the DOM
+    const flyer = page.locator('.popcorn-nav-flyer');
+    await expect(flyer).toBeVisible({ timeout: 2000 });
 
-    // Verify modal header has popcorn tag and date
-    const tag = modal.locator('.daily-header-tag');
-    await expect(tag).toContainText('오늘의 한마디');
+    // Page smoothly navigates to /daily.html
+    await page.waitForURL('**/daily.html', { timeout: 5000 });
+    expect(page.url()).toContain('daily.html');
 
-    // Verify Korean translation and masked English sentence
-    const krText = modal.locator('.daily-kr-text');
-    await expect(krText).toBeVisible();
-    const krContent = await krText.textContent();
-    expect(krContent.trim().length).toBeGreaterThan(0);
+    // On daily.html, the popcorn check card is rendered in #daily-page-container
+    const checkCard = page.locator('#popcorn-check-card');
+    await expect(checkCard).toBeVisible({ timeout: 5000 });
+    await expect(checkCard.locator('.popcorn-check-prompt')).toContainText('이 표현을 아시나요?');
 
-    const maskEl = modal.locator('#daily-phrase-mask');
-    await expect(maskEl).toBeVisible();
-    await expect(maskEl).not.toHaveClass(/revealed/);
-
-    // Verify Audio button and action buttons
-    const playBtn = modal.locator('#btn-daily-play');
-    await expect(playBtn).toBeVisible();
-
-    const revealBtn = modal.locator('#btn-daily-reveal');
-    await expect(revealBtn).toBeVisible();
-    await expect(revealBtn).toContainText('정답 확인');
-
-    const saveBtn = modal.locator('#btn-daily-save');
-    await expect(saveBtn).toBeVisible();
-    await expect(saveBtn).toContainText('단어장에 저장');
+    // Popcorn button in navbar is active on daily.html
+    const navPopcornDaily = page.locator('#btn-nav-popcorn');
+    await expect(navPopcornDaily).toHaveClass(/active/);
   });
 
-  test('Audio playback button triggers playback state without error', async ({ page }) => {
-    await page.goto('/index.html');
+  test('Daily phrase card on daily.html supports audio playback, conversation study, and nuance explanation', async ({ page }) => {
+    await page.goto('/daily.html');
 
-    const fab = page.locator('#btn-daily-popcorn');
-    await fab.click();
+    // 1. Stage 1: Knowledge Check
+    const checkCard = page.locator('#popcorn-check-card');
+    await expect(checkCard).toBeVisible({ timeout: 5000 });
 
-    const modal = page.locator('#daily-phrase-modal');
-    await expect(modal).toBeVisible();
+    const expressionEl = checkCard.locator('.popcorn-expression-banner');
+    await expect(expressionEl).toBeVisible();
+    const expressionText = (await expressionEl.textContent()).trim();
+    expect(expressionText.length).toBeGreaterThan(0);
 
-    const playBtn = modal.locator('#btn-daily-play');
-    await expect(playBtn).toBeVisible();
+    // Proceed to Stage 2: Click "몰라요 (학습하기)"
+    const learnBtn = checkCard.locator('#btn-popcorn-learn');
+    await expect(learnBtn).toBeVisible();
+    await learnBtn.click();
 
-    // Trigger play
-    await playBtn.click();
+    // 2. Stage 2: Conversation Study
+    const convCard = page.locator('#popcorn-conversation-card');
+    await expect(convCard).toBeVisible({ timeout: 5000 });
+
+    // Verify target expression banner and highlight
+    const targetWord = convCard.locator('.target-word');
+    await expect(targetWord).toBeVisible();
+    const highlightedMarks = convCard.locator('.popcorn-highlight');
+    await expect(highlightedMarks.first()).toBeVisible();
+
+    // Verify dialogue bubbles
+    const bubbles = convCard.locator('.dialogue-bubble');
+    expect(await bubbles.count()).toBeGreaterThanOrEqual(2);
+
+    // Verify audio controls
+    const playAllBtn = convCard.locator('#btn-popcorn-play-all');
+    await expect(playAllBtn).toBeVisible();
+    await playAllBtn.click();
     await page.waitForTimeout(300);
 
-    // Play button reflects active playback
-    const playText = modal.locator('#daily-play-text');
-    await expect(playText).toHaveText(/(재생 중\.\.\.|발음 듣기)/);
-  });
+    // Verify reveal action
+    const expCard = convCard.locator('#popcorn-explanation-card');
+    const revealBtn = convCard.locator('#btn-popcorn-reveal');
+    await expect(revealBtn).toBeVisible();
 
-  test('Reveal action unmasks keywords, displays explanation, and sets completion date', async ({ page }) => {
-    await page.goto('/index.html');
-
-    const fab = page.locator('#btn-daily-popcorn');
-    await fab.click();
-
-    const modal = page.locator('#daily-phrase-modal');
-    const maskEl = modal.locator('#daily-phrase-mask');
-    const revealBtn = modal.locator('#btn-daily-reveal');
-    const expBox = modal.locator('#daily-explanation-box');
-
-    // Initially explanation is hidden and mask is unrevealed
-    await expect(expBox).not.toBeVisible();
-    await expect(maskEl).not.toHaveClass(/revealed/);
-
-    // Click reveal button
     await revealBtn.click();
 
-    // Mask becomes revealed and explanation appears
-    await expect(maskEl).toHaveClass(/revealed/);
-    await expect(expBox).toBeVisible();
-    await expect(revealBtn).toContainText('정답 확인 완료');
+    // Conversation card receives revealed class and explanation is visible
+    await expect(convCard).toHaveClass(/revealed/);
+    await expect(expCard).toBeVisible();
+    await expect(revealBtn).toContainText('해설 확인 완료');
 
-    // Check localStorage has today's date stored
-    const completedDate = await page.evaluate(() => localStorage.getItem('rhyrhy_daily_completed_date'));
-    const expectedToday = new Date().toISOString().slice(0, 10);
-    expect(completedDate).toBe(expectedToday);
-
-    // Close modal
-    const closeBtn = modal.locator('#btn-close-daily-modal');
-    await closeBtn.click();
-    await expect(modal).not.toHaveClass(/open/);
-
-    // The floating popcorn button should now be vanished / removed from the page for today
-    await page.waitForTimeout(500);
-    const fabAfter = page.locator('#btn-daily-popcorn');
-    await expect(fabAfter).toHaveCount(0);
+    // Cooldown is set in localStorage
+    const studiedList = await page.evaluate(() => JSON.parse(localStorage.getItem('rhyrhy_popcorn_studied') || '{}'));
+    expect(Object.keys(studiedList).length).toBeGreaterThan(0);
   });
 
-  test('Visibility & Reset Logic: Button stays hidden on same day, reappears next day with new phrase', async ({ page }) => {
+  test('Reset Logic: Completion date persists on same day, resets next day', async ({ page }) => {
     await page.goto('/index.html');
 
     // Simulate completion for today
@@ -157,44 +165,42 @@ test.describe('Daily English Phrase Quiz via Floating Popcorn Button (Issue #44)
       localStorage.setItem('rhyrhy_daily_completed_date', date);
     }, todayStr);
 
-    // Reload page on same day: FAB must NOT be displayed
-    await page.reload();
-    const fabSameDay = page.locator('#btn-daily-popcorn');
-    await expect(fabSameDay).toHaveCount(0);
+    const isCompletedToday = await page.evaluate(() => Storage.isDailyPhraseCompletedToday());
+    expect(isCompletedToday).toBe(true);
 
-    // Simulate next day (yesterday's completion date)
+    // Simulate next day (completion was yesterday)
     const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
     await page.evaluate((date) => {
       localStorage.setItem('rhyrhy_daily_completed_date', date);
     }, yesterday);
 
-    // Reload: FAB must reappear for the new day!
-    await page.reload();
-    const fabNextDay = page.locator('#btn-daily-popcorn');
-    await expect(fabNextDay).toBeVisible({ timeout: 5000 });
+    const isCompletedNewDay = await page.evaluate(() => Storage.isDailyPhraseCompletedToday());
+    expect(isCompletedNewDay).toBe(false);
   });
 
-  test('Save Phrase Action saves to user sentence bank and appears in drawer', async ({ page }) => {
-    await page.goto('/index.html');
+  test('Save Phrase Action on daily.html saves to user sentence bank and appears in drawer', async ({ page }) => {
+    await page.goto('/daily.html');
 
-    const fab = page.locator('#btn-daily-popcorn');
-    await fab.click();
+    // Advance to Stage 2
+    const checkCard = page.locator('#popcorn-check-card');
+    await expect(checkCard).toBeVisible({ timeout: 5000 });
+    await checkCard.locator('#btn-popcorn-learn').click();
 
-    const modal = page.locator('#daily-phrase-modal');
-    const saveBtn = modal.locator('#btn-daily-save');
+    const convCard = page.locator('#popcorn-conversation-card');
+    await expect(convCard).toBeVisible({ timeout: 5000 });
+
+    const saveBtn = convCard.locator('#btn-popcorn-save');
+    await expect(saveBtn).toBeVisible();
 
     // Click save phrase
     await saveBtn.click();
     await expect(saveBtn).toHaveClass(/saved/);
-    await expect(saveBtn).toContainText('단어장에 저장됨');
+    await expect(saveBtn).toContainText('저장됨');
 
-    // Verify stored in Storage
+    // Verify stored in Storage under 'popcorn' group
     const savedAll = await page.evaluate(() => JSON.parse(localStorage.getItem('rhyrhy_saved_sentences') || '{}'));
-    expect(savedAll['daily']).toBeDefined();
-    expect(savedAll['daily'].length).toBe(1);
-
-    // Close daily modal
-    await modal.locator('#btn-close-daily-modal').click();
+    expect(savedAll['popcorn']).toBeDefined();
+    expect(savedAll['popcorn'].length).toBe(1);
 
     // Open Saved Sentences Drawer from navbar
     const openDrawerBtn = page.locator('#btn-open-sentences');
@@ -203,10 +209,10 @@ test.describe('Daily English Phrase Quiz via Floating Popcorn Button (Issue #44)
     const drawer = page.locator('#saved-sentences-drawer');
     await expect(drawer).toHaveClass(/open/);
 
-    // Group for daily phrases is rendered
-    const dailyGroup = drawer.locator('.saved-lesson-group');
-    await expect(dailyGroup).toContainText('오늘의 한마디');
-    const groupLink = dailyGroup.locator('.group-lesson-link');
+    // Group for popcorn is rendered and links to daily.html
+    const popcornGroup = drawer.locator('.saved-lesson-group');
+    await expect(popcornGroup).toContainText('팝콘 영어');
+    const groupLink = popcornGroup.locator('.group-lesson-link');
     await expect(groupLink).toHaveAttribute('href', /daily\.html/);
 
     // Card exists inside drawer list
@@ -214,26 +220,10 @@ test.describe('Daily English Phrase Quiz via Floating Popcorn Button (Issue #44)
     await expect(savedCard).toBeVisible();
   });
 
-  test('Standalone daily.html page loads phrase card immediately', async ({ page }) => {
+  test('Theme & Contrast: Navbar and phrase card are styled properly in Light and Dark modes', async ({ page }) => {
     await page.goto('/daily.html');
 
-    const pageTitle = page.locator('.daily-page-title');
-    await expect(pageTitle).toContainText('오늘의 팝콘 한마디');
-
-    const card = page.locator('.daily-phrase-card');
-    await expect(card).toBeVisible({ timeout: 5000 });
-
-    const krText = card.locator('.daily-kr-text');
-    await expect(krText).toBeVisible();
-
-    const revealBtn = card.locator('#btn-daily-reveal');
-    await expect(revealBtn).toBeVisible();
-  });
-
-  test('Theme & Contrast: FAB and modal elements are styled properly in Light and Dark modes', async ({ page }) => {
-    await page.goto('/index.html');
-
-    // 1. Check Light Mode
+    // 1. Light Mode
     const themeBtn = page.locator('#btn-toggle-theme');
     const initialTheme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
     if (initialTheme !== 'light') {
@@ -241,19 +231,14 @@ test.describe('Daily English Phrase Quiz via Floating Popcorn Button (Issue #44)
     }
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 
-    const fab = page.locator('#btn-daily-popcorn');
-    await expect(fab).toBeVisible();
-    await fab.click();
+    const checkCard = page.locator('#popcorn-check-card');
+    await expect(checkCard).toBeVisible({ timeout: 5000 });
 
-    const modal = page.locator('#daily-phrase-modal');
-    await expect(modal).toBeVisible();
-
-    // Check light mode card background (#FFFFFF = rgb(255, 255, 255))
-    const card = modal.locator('.daily-phrase-card');
-    const cardBgLight = await card.evaluate(el => window.getComputedStyle(el).backgroundColor);
+    // Light mode card background (#FFFFFF = rgb(255, 255, 255))
+    const cardBgLight = await checkCard.evaluate(el => window.getComputedStyle(el).backgroundColor);
     expect(cardBgLight).toBe('rgb(255, 255, 255)');
 
-    // 2. Check Dark Mode
+    // 2. Dark Mode
     await page.evaluate(() => {
       if (window.Theme && typeof window.Theme.toggle === 'function') {
         window.Theme.toggle();
@@ -263,7 +248,7 @@ test.describe('Daily English Phrase Quiz via Floating Popcorn Button (Issue #44)
     });
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 
-    const cardBgDark = await card.evaluate(el => window.getComputedStyle(el).backgroundColor);
+    const cardBgDark = await checkCard.evaluate(el => window.getComputedStyle(el).backgroundColor);
     expect(cardBgDark).toBe('rgb(30, 41, 59)'); // #1E293B
   });
 });

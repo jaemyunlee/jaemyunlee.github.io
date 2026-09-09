@@ -378,6 +378,7 @@ const App = {
 
     const base = this._getBasePath();
     const historyUnlocked = Storage.isHistoryUnlocked();
+    const isDailyCompleted = typeof Storage !== 'undefined' && typeof Storage.isDailyPhraseCompletedToday === 'function' ? Storage.isDailyPhraseCompletedToday() : false;
 
     const currentLesson = this.lessons.find(l => l.id === this.currentLessonId);
 
@@ -467,26 +468,27 @@ const App = {
             </svg>
           </div>
           <div class="brand-text-wrap">
-            <span class="brand-name">RhyRhy <strong>English</strong></span>
+            <span class="brand-name">RhyRhy <strong class="brand-english">English</strong></span>
             <span class="nav-beta-tag">BETA</span>
           </div>
         </a>
 
         <div class="nav-right-actions">
+          <!-- Popcorn Daily Phrase on Nav Bar (Issue #44) -->
+          <a href="${base}daily.html" class="btn-nav-action btn-nav-popcorn ${this.currentLessonId === 'daily-phrase' ? 'active' : ''}" id="btn-nav-popcorn" title="오늘의 팝콘 영어 (Popcorn)" aria-label="Popcorn">
+            <span class="nav-popcorn-icon" id="nav-popcorn-icon">🍿</span>
+            <span class="nav-btn-label">Popcorn</span>
+          </a>
+
           <!-- Lessons on Nav Bar (moves to exclusive page showing all lessons with cards view) -->
-          <a href="${base}lessons.html" class="btn-nav-action ${this.currentLessonId === 'lessons-list' ? 'active' : ''}" id="btn-nav-lessons" title="전체 레슨 목록 (Lessons)" aria-label="Lessons">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-            </svg>
+          <a href="${base}lessons.html" class="btn-nav-action btn-nav-lessons ${this.currentLessonId === 'lessons-list' ? 'active' : ''}" id="btn-nav-lessons" title="전체 레슨 목록 (Lessons)" aria-label="Lessons">
+            <span class="nav-btn-icon nav-lessons-icon" id="nav-lessons-icon">📖</span>
             <span class="nav-btn-label">Lessons</span>
           </a>
 
           <!-- Saved Sentences Bank Button -->
-          <button type="button" class="btn-nav-action" id="btn-open-sentences" title="Open Saved Sentence Bank" aria-label="Open Saved Sentence Bank">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-            </svg>
+          <button type="button" class="btn-nav-action btn-nav-saved" id="btn-open-sentences" title="Open Saved Sentence Bank" aria-label="Open Saved Sentence Bank">
+            <span class="nav-btn-icon nav-saved-icon" id="nav-saved-icon">🔖</span>
             <span class="nav-btn-label">Saved</span>
             <span class="nav-badge" id="nav-saved-badge">0</span>
           </button>
@@ -532,14 +534,38 @@ const App = {
   },
 
   _getLessonTitle(lessonId) {
-    if (lessonId === 'daily') {
-      return '🍿 오늘의 한마디 (Daily Phrase)';
+    if (lessonId === 'daily' || lessonId === 'popcorn' || (typeof lessonId === 'string' && lessonId.startsWith('popcorn'))) {
+      return '🍿 팝콘 영어 (Popcorn English)';
     }
     const l = this.lessons.find(item => item.id === lessonId);
     return l ? l.title : lessonId;
   },
 
   _bindNavEvents() {
+    const popcornBtn = document.getElementById('btn-nav-popcorn');
+    if (popcornBtn) {
+      popcornBtn.addEventListener('click', (e) => {
+        this.closeSavedSentencesDrawer();
+        const destUrl = popcornBtn.getAttribute('href');
+
+        // If already on daily page, trigger center pop animation in place
+        if (this.currentLessonId === 'daily-phrase' || window.location.pathname.endsWith('daily.html') || window.location.pathname.endsWith('/daily')) {
+          e.preventDefault();
+          if (typeof DailyPopcornManager !== 'undefined' && typeof DailyPopcornManager.triggerPopcornTransition === 'function') {
+            DailyPopcornManager.triggerPopcornTransition(popcornBtn, null);
+          }
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+
+        // Popcorn icon moves to center, gets bigger, pops, then navigates to daily.html
+        if (typeof DailyPopcornManager !== 'undefined' && typeof DailyPopcornManager.triggerPopcornTransition === 'function') {
+          e.preventDefault();
+          DailyPopcornManager.triggerPopcornTransition(popcornBtn, destUrl);
+        }
+      });
+    }
+
     const lessonsBtn = document.getElementById('btn-nav-lessons');
     if (lessonsBtn) {
       lessonsBtn.addEventListener('click', (e) => {
@@ -966,7 +992,7 @@ const App = {
           if (items.length === 0) return '';
           const title = this._getLessonTitle(lesId);
           const lesObj = this.lessons.find(l => l.id === lesId);
-          const lesPath = (lesId === 'daily') ? `${base}daily.html` : (lesObj ? `${base}${lesObj.path}index.html` : `${base}lessons.html`);
+          const lesPath = (lesId === 'daily' || lesId === 'popcorn' || (typeof lesId === 'string' && lesId.startsWith('popcorn'))) ? `${base}daily.html` : (lesObj ? `${base}${lesObj.path}index.html` : `${base}lessons.html`);
 
           return `
             <div class="saved-lesson-group">

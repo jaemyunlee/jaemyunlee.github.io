@@ -16,7 +16,9 @@ const Storage = {
     ACTIVE_LESSON_PAGE: 'rhyrhy_active_lesson_page',
     IN_PROGRESS_PREFIX: 'rhyrhy_in_progress_',
     THEME: 'rhyrhy_theme',
-    DAILY_COMPLETED_DATE: 'rhyrhy_daily_completed_date'
+    DAILY_COMPLETED_DATE: 'rhyrhy_daily_completed_date',
+    POPCORN_KNOWN: 'rhyrhy_popcorn_known',
+    POPCORN_STUDIED: 'rhyrhy_popcorn_studied'
   },
 
   /**
@@ -680,6 +682,110 @@ const Storage = {
   resetDailyPhraseCompletion() {
     try {
       localStorage.removeItem(this.KEYS.DAILY_COMPLETED_DATE);
+    } catch (_) { }
+  },
+
+  /**
+   * Check if a popcorn lesson is permanently skipped as already known ("이미 알아요")
+   * @param {string} lessonId
+   * @returns {boolean}
+   */
+  isPopcornKnown(lessonId) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_KNOWN);
+      if (data) {
+        const obj = JSON.parse(data);
+        return Boolean(obj[lessonId]);
+      }
+    } catch (e) {
+      console.warn('LocalStorage error reading popcorn known status', e);
+    }
+    return false;
+  },
+
+  /**
+   * Mark a popcorn lesson as permanently known ("이미 알아요")
+   * @param {string} lessonId
+   * @param {boolean} [isKnown=true]
+   */
+  setPopcornKnown(lessonId, isKnown = true) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_KNOWN);
+      const obj = data ? JSON.parse(data) : {};
+      if (isKnown) {
+        obj[lessonId] = true;
+      } else {
+        delete obj[lessonId];
+      }
+      localStorage.setItem(this.KEYS.POPCORN_KNOWN, JSON.stringify(obj));
+    } catch (e) {
+      console.warn('LocalStorage error saving popcorn known status', e);
+    }
+  },
+
+  /**
+   * Check if a popcorn lesson was studied recently and is in cooldown (default 30 days / 1 month)
+   * @param {string} lessonId
+   * @param {number} [cooldownDays=30]
+   * @returns {boolean}
+   */
+  isPopcornInCooldown(lessonId, cooldownDays = 30) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_STUDIED);
+      if (data) {
+        const obj = JSON.parse(data);
+        const studiedTimestamp = obj[lessonId];
+        if (studiedTimestamp) {
+          const now = Date.now();
+          const cooldownMs = cooldownDays * 24 * 60 * 60 * 1000;
+          return (now - studiedTimestamp) < cooldownMs;
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage error checking popcorn cooldown', e);
+    }
+    return false;
+  },
+
+  /**
+   * Mark a popcorn lesson as studied with current timestamp
+   * @param {string} lessonId
+   * @param {number} [timestamp=Date.now()]
+   */
+  setPopcornStudied(lessonId, timestamp = Date.now()) {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_STUDIED);
+      const obj = data ? JSON.parse(data) : {};
+      obj[lessonId] = timestamp;
+      localStorage.setItem(this.KEYS.POPCORN_STUDIED, JSON.stringify(obj));
+    } catch (e) {
+      console.warn('LocalStorage error setting popcorn studied status', e);
+    }
+  },
+
+  /**
+   * Get available popcorn lessons that are neither permanently known nor in 30-day cooldown
+   * @param {Array<object>} metadataList
+   * @param {number} [cooldownDays=30]
+   * @returns {Array<object>}
+   */
+  getAvailablePopcornLessons(metadataList, cooldownDays = 30) {
+    if (!Array.isArray(metadataList)) return [];
+    return metadataList.filter(item => {
+      if (!item || !item.id) return false;
+      if (this.isPopcornKnown(item.id)) return false;
+      if (this.isPopcornInCooldown(item.id, cooldownDays)) return false;
+      return true;
+    });
+  },
+
+  /**
+   * Reset all popcorn preferences and cooldowns (utility for tests and reset settings)
+   */
+  resetPopcornPreferences() {
+    try {
+      localStorage.removeItem(this.KEYS.POPCORN_KNOWN);
+      localStorage.removeItem(this.KEYS.POPCORN_STUDIED);
     } catch (_) { }
   },
 
