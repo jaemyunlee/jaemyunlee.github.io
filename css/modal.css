@@ -415,6 +415,12 @@
   animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+[data-theme="light"] .first-visit-modal-overlay {
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .first-visit-modal-overlay.closing {
   animation: modalFadeOut 0.25s ease forwards;
 }
@@ -447,10 +453,49 @@
   overflow-y: auto;
   background: #181E2E;
   border: 1px solid rgba(99, 102, 241, 0.4);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-xl, 20px);
   padding: 30px 24px 24px;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.75), 0 0 40px rgba(79, 70, 229, 0.2);
   animation: modalScaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+[data-theme="light"] .first-visit-modal-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.18),
+              0 0 0 1px rgba(0, 0, 0, 0.04),
+              0 8px 24px -4px rgba(79, 70, 229, 0.08);
+}
+
+.first-visit-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.first-visit-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .first-visit-close-btn {
+  color: #64748B;
+}
+
+[data-theme="light"] .first-visit-close-btn:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: #0F172A;
 }
 
 @keyframes modalScaleUp {
@@ -483,6 +528,12 @@
   margin-bottom: 12px;
 }
 
+[data-theme="light"] .first-visit-icon-wrap {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(16, 185, 129, 0.12));
+  border-color: rgba(79, 70, 229, 0.25);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.1);
+}
+
 .first-visit-badge {
   display: inline-flex;
   align-items: center;
@@ -498,12 +549,22 @@
   margin-bottom: 8px;
 }
 
+[data-theme="light"] .first-visit-badge {
+  background: rgba(79, 70, 229, 0.08);
+  border-color: rgba(79, 70, 229, 0.22);
+  color: #4338CA;
+}
+
 .first-visit-title {
   font-size: 1.3rem;
   font-weight: 800;
   color: var(--text-main);
   line-height: 1.35;
   letter-spacing: -0.01em;
+}
+
+[data-theme="light"] .first-visit-title {
+  color: #0F172A;
 }
 
 .first-visit-points {
@@ -524,6 +585,12 @@
   text-align: left;
 }
 
+[data-theme="light"] .first-visit-point-card {
+  background: #F8FAFC;
+  border-color: rgba(226, 232, 240, 0.95);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
 .point-icon {
   font-size: 1.25rem;
   line-height: 1.2;
@@ -542,14 +609,26 @@
   margin-bottom: 3px;
 }
 
+[data-theme="light"] .first-visit-point-card .point-title {
+  color: #0F172A;
+}
+
 .point-desc {
   font-size: 0.83rem;
   line-height: 1.52;
   color: var(--text-muted);
 }
 
+[data-theme="light"] .first-visit-point-card .point-desc {
+  color: #475569;
+}
+
 .point-desc strong {
   color: var(--text-main);
+}
+
+[data-theme="light"] .first-visit-point-card .point-desc strong {
+  color: #0F172A;
 }
 
 .first-visit-point-card.warning {
@@ -561,6 +640,19 @@
   color: #FBBF24;
 }
 
+[data-theme="light"] .first-visit-point-card.warning {
+  border-color: rgba(217, 119, 6, 0.28);
+  background: rgba(245, 158, 11, 0.07);
+}
+
+[data-theme="light"] .first-visit-point-card.warning .point-title {
+  color: #92400E;
+}
+
+[data-theme="light"] .first-visit-point-card.warning .point-desc {
+  color: #451A03;
+}
+
 .first-visit-point-card.request {
   border-color: rgba(99, 102, 241, 0.35);
   background: rgba(99, 102, 241, 0.07);
@@ -568,6 +660,23 @@
 
 .first-visit-point-card.request .point-title {
   color: #818CF8;
+}
+
+[data-theme="light"] .first-visit-point-card.request {
+  border-color: rgba(79, 70, 229, 0.22);
+  background: rgba(79, 70, 229, 0.04);
+}
+
+[data-theme="light"] .first-visit-point-card.request .point-title {
+  color: #3730A3;
+}
+
+[data-theme="light"] .first-visit-point-card.request .point-desc {
+  color: #334155;
+}
+
+[data-theme="light"] .first-visit-point-card.request .point-desc strong {
+  color: #1E1B4B;
 }
 
 .first-visit-actions {
@@ -593,6 +702,14 @@
 .btn-dismiss-storage-notice:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 22px rgba(79, 70, 229, 0.6);
+}
+
+[data-theme="light"] .btn-dismiss-storage-notice {
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.22);
+}
+
+[data-theme="light"] .btn-dismiss-storage-notice:hover {
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.32);
 }
 
 .btn-request-sync {
@@ -650,6 +767,14 @@
   background: rgba(239, 68, 68, 0.16);
   border-color: rgba(220, 38, 38, 0.6);
   color: #991B1B;
+}
+
+[data-theme="light"] .btn-request-sync-button svg {
+  color: #DC2626 !important;
+}
+
+[data-theme="light"] .btn-request-sync-button:hover svg {
+  color: #991B1B !important;
 }
 
 @media (max-width: 640px) {

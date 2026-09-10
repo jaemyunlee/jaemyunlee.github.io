@@ -223,7 +223,7 @@ const App = {
     });
 
     // Clean up any stale leftover modal overlays from previous sessions
-    const staleModal = document.getElementById('first-visit-storage-modal');
+    const staleModal = document.getElementById('first-save-storage-modal') || document.getElementById('first-visit-storage-modal');
     if (staleModal) staleModal.remove();
 
     // Mobile UX & Accessibility: Clear sticky focus on back navigation (pageshow / bfcache)
@@ -1204,6 +1204,11 @@ const App = {
 
     overlay.innerHTML = `
       <div class="first-visit-modal-card">
+        <button type="button" class="first-visit-close-btn" id="btn-close-first-save" aria-label="팝업 닫기">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
         <div class="first-visit-header">
           <div class="first-visit-icon-wrap" aria-hidden="true">
             ⭐
@@ -1268,6 +1273,11 @@ const App = {
     const dismissBtn = overlay.querySelector('#btn-dismiss-first-save');
     if (dismissBtn) {
       dismissBtn.addEventListener('click', closeModal);
+    }
+
+    const closeBtn = overlay.querySelector('#btn-close-first-save');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
     }
 
     overlay.addEventListener('click', (e) => {
