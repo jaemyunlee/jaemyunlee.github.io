@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "popcorn": "node scripts/scaffold-popcorn.js",
+    "report:popcorn": "node scripts/popcorn-analytics-report.js",
     "build": "node scripts/build.js",
     "generate:og": "python3 scripts/generate-og-images.py",
     "serve": "node scripts/dev-server.js",

@@ -34,6 +34,7 @@ const DailyPopcornManager = {
 
     this._playPopSound();
 
+    const base = this._getBasePath();
     const iconEl = btn ? (btn.querySelector('.nav-popcorn-icon') || btn) : null;
     const rect = iconEl ? iconEl.getBoundingClientRect() : { left: window.innerWidth - 60, top: 20, width: 24, height: 24 };
     const startX = rect.left + rect.width / 2;
@@ -48,7 +49,7 @@ const DailyPopcornManager = {
 
     const flyer = document.createElement('div');
     flyer.className = 'popcorn-nav-flyer';
-    flyer.textContent = '🍿';
+    flyer.innerHTML = `<img src="${base}assets/img/popcorn/popcorn-box-hd.png" alt="Popcorn" class="popcorn-flyer-hd-img">`;
     flyer.style.left = `${startX}px`;
     flyer.style.top = `${startY}px`;
     document.body.appendChild(flyer);
@@ -80,16 +81,31 @@ const DailyPopcornManager = {
   },
 
   /**
-   * Spawn explosion particles outward from screen center
+   * Spawn explosion particles outward from screen center using realistic popcorn images (Issue #47)
    */
   _spawnCenterBurst(centerX, centerY) {
-    const particles = ['🍿', '✨', '⭐', '💛', '🍿', '🎉', '🍿', '✨'];
-    particles.forEach((emoji, i) => {
+    const base = this._getBasePath();
+    const kernelImages = [
+      `${base}assets/img/popcorn/popcorn-kernel-1.png`,
+      `${base}assets/img/popcorn/popcorn-kernel-2.png`,
+      `${base}assets/img/popcorn/popcorn-kernel-3.png`,
+      `${base}assets/img/popcorn/popcorn-kernel-1.png`,
+      `${base}assets/img/popcorn/popcorn-kernel-2.png`,
+      `${base}assets/img/popcorn/popcorn-kernel-3.png`,
+      `${base}assets/img/popcorn/popcorn-kernel-1.png`,
+      `${base}assets/img/popcorn/popcorn-kernel-2.png`
+    ];
+
+    kernelImages.forEach((imgSrc, i) => {
       const el = document.createElement('span');
       el.className = 'popcorn-particle';
-      el.textContent = emoji;
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      img.alt = 'Popcorn Particle';
+      img.className = 'popcorn-particle-img';
+      el.appendChild(img);
 
-      const angle = (i / particles.length) * (Math.PI * 2) + (Math.random() * 0.3 - 0.15);
+      const angle = (i / kernelImages.length) * (Math.PI * 2) + (Math.random() * 0.3 - 0.15);
       const distance = 90 + Math.random() * 95;
       const dx = `${Math.cos(angle) * distance}px`;
       const dy = `${Math.sin(angle) * distance - 25}px`;
@@ -274,8 +290,8 @@ const DailyPopcornManager = {
         </div>
 
         <div class="popcorn-check-actions">
-          <button type="button" class="btn-popcorn-action btn-popcorn-known" id="btn-popcorn-known" title="이 표현은 이미 알고 있어요 (다시 표시되지 않음)">
-            <span>👍 이미 알아요</span>
+          <button type="button" class="btn-popcorn-action btn-popcorn-known" id="btn-popcorn-known" title="이 표현을 알고 있어요 (2달 뒤 복습 / 2회 연속 마스터)">
+            <span>👍 알아요</span>
           </button>
           <button type="button" class="btn-popcorn-action btn-popcorn-learn" id="btn-popcorn-learn" title="이 표현을 학습할래요">
             <span>🚀 몰라요 (학습하기)</span>
@@ -284,13 +300,22 @@ const DailyPopcornManager = {
       </div>
     `;
 
-    // Bind Stage 1 buttons
+    // Bind Stage 1 buttons (Issue #47)
     const knownBtn = document.getElementById('btn-popcorn-known');
     if (knownBtn) {
       knownBtn.addEventListener('click', () => {
-        Storage.setPopcornKnown(lesson.id, true);
+        const res = Storage.recordPopcornKnow(lesson.id);
+        Storage.recordPopcornAction(lesson.id, lesson.expression, 'skip');
+        if (typeof Analytics !== 'undefined' && typeof Analytics.trackPopcornAction === 'function') {
+          Analytics.trackPopcornAction(lesson.id, lesson.expression, 'skip');
+        }
+
         this._playPopSound();
-        this._showToast(`'${lesson.expression}' 표현을 마스터 목록에 보관했어요! 다시 표시되지 않습니다 👍`);
+        if (res.isPermanent) {
+          this._showToast(`'${lesson.expression}' 표현을 마스터 목록에 보관했어요! 다시 표시되지 않습니다 👍`);
+        } else {
+          this._showToast(`'${lesson.expression}' 표현을 2달 뒤에 다시 복습할 수 있도록 예약했어요 👍`);
+        }
 
         // Clean query parameter when moving to next lesson
         if (typeof window !== 'undefined' && window.history && window.history.replaceState) {
@@ -304,6 +329,13 @@ const DailyPopcornManager = {
     const learnBtn = document.getElementById('btn-popcorn-learn');
     if (learnBtn) {
       learnBtn.addEventListener('click', async () => {
+        // Clicking "몰라요" resets streak if on second play (Issue #47)
+        Storage.recordPopcornLearn(lesson.id);
+        Storage.recordPopcornAction(lesson.id, lesson.expression, 'learn');
+        if (typeof Analytics !== 'undefined' && typeof Analytics.trackPopcornAction === 'function') {
+          Analytics.trackPopcornAction(lesson.id, lesson.expression, 'learn');
+        }
+
         // "몰라요" counts towards the 10 quick lessons daily limit
         Storage.incrementPopcornDailyStudyCount();
         learnBtn.disabled = true;
@@ -460,7 +492,7 @@ const DailyPopcornManager = {
       });
     });
 
-    // 3. Reveal button (reveals Korean translations and detailed explanation)
+    // 3. Reveal button (reveals Korean translations and detailed explanation - Issue #47: 14-day interval)
     const revealBtn = document.getElementById('btn-popcorn-reveal');
     if (revealBtn) {
       revealBtn.addEventListener('click', () => {
@@ -469,9 +501,9 @@ const DailyPopcornManager = {
         revealBtn.classList.add('revealed');
         revealBtn.innerHTML = '<span>✓ 해설 확인 완료</span>';
 
-        // Mark as studied (30-day cooldown)
+        // Mark as studied (14-day interval - Issue #47)
         if (lesson.id) {
-          Storage.setPopcornStudied(lesson.id);
+          Storage.recordPopcornStudied(lesson.id, 14);
         }
 
         this._playPopSound();
@@ -486,7 +518,7 @@ const DailyPopcornManager = {
       });
     }
 
-    // 5. Next expression button: Enforce 30-day spaced repetition cooldown & daily limit check with popcorn flying animation
+    // 5. Next expression button: Enforce 14-day spaced repetition interval & daily limit check with popcorn flying animation
     const nextBtn = document.getElementById('btn-popcorn-next');
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
@@ -494,9 +526,9 @@ const DailyPopcornManager = {
 
         const currentId = lesson && lesson.id ? lesson.id : null;
 
-        // Enforce 30-day spaced repetition cooldown on the current lesson
+        // Enforce 14-day spaced repetition interval on the current lesson (Issue #47)
         if (currentId) {
-          Storage.setPopcornStudied(currentId);
+          Storage.recordPopcornStudied(currentId, 14);
         }
 
         // Clean query parameter when picking next lesson
@@ -940,6 +972,19 @@ const DailyPopcornManager = {
       toast.classList.add('fade-out');
       setTimeout(() => toast.remove(), 300);
     }, 2500);
+  },
+
+  /**
+   * Generate Top 10 unfamiliar quick lessons report in browser console (Issue #47)
+   * @param {number} [limit=10]
+   */
+  generateUnfamiliarityReport(limit = 10) {
+    if (typeof Storage !== 'undefined' && typeof Storage.getTopUnfamiliarLessons === 'function') {
+      const rep = Storage.getTopUnfamiliarLessons(limit, this.currentMetadata);
+      console.table ? console.table(rep) : console.log(rep);
+      return rep;
+    }
+    return [];
   }
 };
 

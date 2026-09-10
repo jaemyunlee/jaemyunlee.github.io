@@ -108,11 +108,9 @@ const PopcornParser = {
         continue;
       }
 
-      // 3. Explanation Section
+      // 3. Explanation Section (Preserve line hierarchy and indentations for nested markdown lists)
       if (currentSection === 'explanation') {
-        if (trimmed) {
-          explanationLines.push(trimmed);
-        }
+        explanationLines.push(line);
       }
     }
 
@@ -121,7 +119,9 @@ const PopcornParser = {
       lesson.dialogue.push(currentLine);
     }
 
-    lesson.explanation = explanationLines.join('\n\n').trim();
+    const rawExplanation = explanationLines.join('\n').trim();
+    lesson.rawExplanation = rawExplanation;
+    lesson.explanation = this.renderMarkdown(rawExplanation);
 
     // Identify target sentence for saving into centralized Saved Sentences Bank (only sentence with expression)
     const target = lesson.dialogue.find(d => d.hasExpression);
@@ -141,6 +141,132 @@ const PopcornParser = {
     }
 
     return lesson;
+  },
+
+  /**
+   * Render markdown explanation text into semantic, accessible HTML blocks
+   * Supports:
+   * - Headings (###, ####)
+   * - Bold (**text**), Italic (*text* or _text_)
+   * - Inline code (`text`)
+   * - Nested bullet lists (- item, * item, indented sub-bullets)
+   * - Paragraphs
+   * @param {string} mdText
+   * @returns {string} HTML
+   */
+  renderMarkdown(mdText) {
+    if (!mdText || typeof mdText !== 'string') return '';
+
+    const lines = mdText.split(/\r?\n/);
+    const blocks = [];
+    let currentList = null;
+    let currentParagraph = [];
+
+    const flushParagraph = () => {
+      if (currentParagraph.length > 0) {
+        const pText = currentParagraph.join(' ').trim();
+        if (pText) {
+          blocks.push(`<p class="popcorn-exp-paragraph">${this._renderInline(pText)}</p>`);
+        }
+        currentParagraph = [];
+      }
+    };
+
+    const flushList = () => {
+      if (currentList && currentList.items.length > 0) {
+        let listHtml = '<ul class="popcorn-exp-list">';
+        currentList.items.forEach(item => {
+          listHtml += `<li class="popcorn-exp-item">${this._renderInline(item.text)}`;
+          if (item.subItems && item.subItems.length > 0) {
+            listHtml += '<ul class="popcorn-exp-sublist">';
+            item.subItems.forEach(sub => {
+              listHtml += `<li class="popcorn-exp-subitem">${this._renderInline(sub)}</li>`;
+            });
+            listHtml += '</ul>';
+          }
+          listHtml += '</li>';
+        });
+        listHtml += '</ul>';
+        blocks.push(listHtml);
+      }
+      currentList = null;
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      if (!trimmed) {
+        flushParagraph();
+        flushList();
+        continue;
+      }
+
+      // Headings (##, ### or ####)
+      const headingMatch = trimmed.match(/^(#{2,5})\s+(.*)/);
+      if (headingMatch) {
+        flushParagraph();
+        flushList();
+        const level = headingMatch[1].length;
+        blocks.push(`<h${level} class="popcorn-exp-heading popcorn-exp-h${level}">${this._renderInline(headingMatch[2].trim())}</h${level}>`);
+        continue;
+      }
+
+      // Check if it's a list item (- or *)
+      const listMatch = line.match(/^(\s*)([-*])\s+(.*)/);
+      if (listMatch) {
+        flushParagraph();
+        const indent = listMatch[1].length;
+        const itemContent = listMatch[3].trim();
+
+        if (indent >= 2 && currentList && currentList.items.length > 0) {
+          // Sub-item of last list item
+          const lastItem = currentList.items[currentList.items.length - 1];
+          lastItem.subItems = lastItem.subItems || [];
+          lastItem.subItems.push(itemContent);
+        } else {
+          // Top-level list item
+          if (!currentList) {
+            currentList = { items: [] };
+          }
+          currentList.items.push({ text: itemContent, subItems: [] });
+        }
+        continue;
+      }
+
+      // Regular paragraph line
+      flushList();
+      currentParagraph.push(trimmed);
+    }
+
+    flushParagraph();
+    flushList();
+
+    return blocks.join('\n');
+  },
+
+  /**
+   * Helper to render inline markdown styles
+   * @param {string} text
+   * @returns {string}
+   */
+  _renderInline(text) {
+    if (!text) return '';
+    let res = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    // Inline code: `code`
+    res = res.replace(/`([^`]+)`/g, '<code class="popcorn-exp-code">$1</code>');
+
+    // Bold: **text**
+    res = res.replace(/\*\*([^*]+)\*\*/g, '<strong class="popcorn-exp-bold">$1</strong>');
+
+    // Italic: *text* (avoiding match within bold)
+    res = res.replace(/(^|[^*])\*([^*]+)\*([^*]|$)/g, '$1<em class="popcorn-exp-em">$2</em>$3');
+
+    return res;
   },
 
   /**

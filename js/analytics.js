@@ -289,6 +289,35 @@ const Analytics = {
   },
 
   /**
+   * Track Popcorn quick lesson action ("알아요" vs "몰라요")
+   * Measures skip-to-learn ratio and unfamiliarity index
+   * @param {string} lessonId
+   * @param {string} expression
+   * @param {'skip'|'learn'} action
+   */
+  trackPopcornAction(lessonId, expression = '', action = 'learn') {
+    if (!lessonId) return;
+    const actionType = (action === 'skip') ? 'skip' : 'learn';
+    const actionKorean = (actionType === 'skip') ? '알아요' : '몰라요';
+
+    // 1. Custom GA4 popcorn_action event
+    this.trackEvent('popcorn_action', {
+      lesson_id: lessonId,
+      expression: expression || lessonId,
+      action: actionType,
+      action_korean: actionKorean
+    });
+
+    // 2. Standard GA4 select_content event
+    this.trackEvent('select_content', {
+      content_type: 'popcorn',
+      item_id: lessonId,
+      item_name: expression || lessonId,
+      action: actionType
+    });
+  },
+
+  /**
    * Start study session foreground timer
    * @private
    */
