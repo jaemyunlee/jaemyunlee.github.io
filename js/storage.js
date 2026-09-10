@@ -19,7 +19,9 @@ const Storage = {
     DAILY_COMPLETED_DATE: 'rhyrhy_daily_completed_date',
     POPCORN_KNOWN: 'rhyrhy_popcorn_known',
     POPCORN_STUDIED: 'rhyrhy_popcorn_studied',
-    POPCORN_DAILY_STUDY: 'rhyrhy_popcorn_daily_study'
+    POPCORN_DAILY_STUDY: 'rhyrhy_popcorn_daily_study',
+    POPCORN_SPACED_REP: 'rhyrhy_popcorn_spaced_rep',
+    POPCORN_STATS: 'rhyrhy_popcorn_stats'
   },
 
   /**
@@ -700,12 +702,117 @@ const Storage = {
   },
 
   /**
+   * Get compact Spaced Repetition data map for all Popcorn quick lessons (Issue #47)
+   * Scaling optimized: Compact dictionary storing { [id]: { s: streak, d: dueTimestamp, p: permanent(1|0) } }
+   * Consumes < 50KB for 1,000+ lessons with sub-millisecond retrieval.
+   * @returns {object}
+   */
+  getPopcornSpacedRep() {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_SPACED_REP);
+      if (data) return JSON.parse(data);
+    } catch (e) {
+      console.warn('LocalStorage error reading popcorn spaced rep', e);
+    }
+    return {};
+  },
+
+  /**
+   * Save compact Spaced Repetition data map
+   * @param {object} data
+   */
+  savePopcornSpacedRep(data) {
+    try {
+      localStorage.setItem(this.KEYS.POPCORN_SPACED_REP, JSON.stringify(data || {}));
+    } catch (e) {
+      console.warn('LocalStorage error saving popcorn spaced rep', e);
+    }
+  },
+
+  /**
+   * Handle "알아요" (Know/Skip) button action (Issue #47):
+   * - 1st click: reschedules the lesson to appear again after 2 months (60 days). Streak = 1.
+   * - 2nd consecutive click: permanently stops displaying that quick lesson (p: 1, streak = 2).
+   * @param {string} lessonId
+   * @returns {{ isPermanent: boolean, streak: number, due: number }}
+   */
+  recordPopcornKnow(lessonId) {
+    if (!lessonId) return { isPermanent: false, streak: 0, due: 0 };
+    const rep = this.getPopcornSpacedRep();
+    const entry = rep[lessonId] || { s: 0, d: 0, p: 0 };
+
+    if (entry.s >= 1) {
+      // Second consecutive "알아요" click -> Permanently stop displaying
+      entry.s = 2;
+      entry.p = 1;
+      entry.d = 0;
+      rep[lessonId] = entry;
+      this.savePopcornSpacedRep(rep);
+      this.setPopcornKnown(lessonId, true);
+      return { isPermanent: true, streak: 2, due: 0 };
+    } else {
+      // First "알아요" click -> Reschedule after 2 months (~60 days)
+      const twoMonthsMs = 60 * 24 * 60 * 60 * 1000;
+      const due = Date.now() + twoMonthsMs;
+      entry.s = 1;
+      entry.p = 0;
+      entry.d = due;
+      rep[lessonId] = entry;
+      this.savePopcornSpacedRep(rep);
+      return { isPermanent: false, streak: 1, due };
+    }
+  },
+
+  /**
+   * Handle "몰라요" (Don't know/Learn) button action (Issue #47):
+   * - Clicking "몰라요" on the second play resets the progress (streak = 0).
+   * @param {string} lessonId
+   * @returns {{ streak: number }}
+   */
+  recordPopcornLearn(lessonId) {
+    if (!lessonId) return { streak: 0 };
+    const rep = this.getPopcornSpacedRep();
+    const entry = rep[lessonId] || { s: 0, d: 0, p: 0 };
+    if (entry.s > 0) {
+      entry.s = 0;
+    }
+    entry.p = 0;
+    rep[lessonId] = entry;
+    this.savePopcornSpacedRep(rep);
+    return { streak: 0 };
+  },
+
+  /**
+   * Mark lesson as studied via "한국어 번역" or navigating to next lesson (Issue #47):
+   * Sets interval to 14 days (reduced from previous 30 days)
+   * @param {string} lessonId
+   * @param {number} [intervalDays=14]
+   * @param {number} [timestamp=Date.now()]
+   */
+  recordPopcornStudied(lessonId, intervalDays = 14, timestamp = Date.now()) {
+    if (!lessonId) return;
+    const rep = this.getPopcornSpacedRep();
+    const entry = rep[lessonId] || { s: 0, d: 0, p: 0 };
+    entry.s = 0; // Studied: reset skip streak
+    entry.d = timestamp + (intervalDays * 24 * 60 * 60 * 1000);
+    rep[lessonId] = entry;
+    this.savePopcornSpacedRep(rep);
+
+    // Sync legacy storage
+    this.setPopcornStudied(lessonId, timestamp);
+    return entry;
+  },
+
+  /**
    * Check if a popcorn lesson is permanently skipped as already known ("이미 알아요")
    * @param {string} lessonId
    * @returns {boolean}
    */
   isPopcornKnown(lessonId) {
     try {
+      const rep = this.getPopcornSpacedRep();
+      if (rep[lessonId] && rep[lessonId].p === 1) return true;
+
       const data = localStorage.getItem(this.KEYS.POPCORN_KNOWN);
       if (data) {
         const obj = JSON.parse(data);
@@ -724,6 +831,17 @@ const Storage = {
    */
   setPopcornKnown(lessonId, isKnown = true) {
     try {
+      const rep = this.getPopcornSpacedRep();
+      if (isKnown) {
+        rep[lessonId] = { s: 2, d: 0, p: 1 };
+      } else {
+        if (rep[lessonId]) {
+          rep[lessonId].p = 0;
+          rep[lessonId].s = 0;
+        }
+      }
+      this.savePopcornSpacedRep(rep);
+
       const data = localStorage.getItem(this.KEYS.POPCORN_KNOWN);
       const obj = data ? JSON.parse(data) : {};
       if (isKnown) {
@@ -738,13 +856,22 @@ const Storage = {
   },
 
   /**
-   * Check if a popcorn lesson was studied recently and is in cooldown (default 30 days / 1 month)
+   * Check if a popcorn lesson was studied or scheduled recently and is in cooldown
+   * Default interval for studied lessons is 14 days (Issue #47)
    * @param {string} lessonId
-   * @param {number} [cooldownDays=30]
+   * @param {number} [cooldownDays=14]
    * @returns {boolean}
    */
-  isPopcornInCooldown(lessonId, cooldownDays = 30) {
+  isPopcornInCooldown(lessonId, cooldownDays = 14) {
     try {
+      if (this.isPopcornKnown(lessonId)) return false;
+
+      const rep = this.getPopcornSpacedRep();
+      if (rep[lessonId] && typeof rep[lessonId].d === 'number' && rep[lessonId].d > 0) {
+        return Date.now() < rep[lessonId].d;
+      }
+
+      // Legacy fallback
       const data = localStorage.getItem(this.KEYS.POPCORN_STUDIED);
       if (data) {
         const obj = JSON.parse(data);
@@ -778,19 +905,111 @@ const Storage = {
   },
 
   /**
-   * Get available popcorn lessons that are neither permanently known nor in 30-day cooldown
+   * Get available popcorn lessons that are neither permanently known nor in cooldown
+   * Performance optimized: Loads spaced rep dictionary once for O(1) in-memory lookups
    * @param {Array<object>} metadataList
-   * @param {number} [cooldownDays=30]
+   * @param {number} [cooldownDays=14]
    * @returns {Array<object>}
    */
-  getAvailablePopcornLessons(metadataList, cooldownDays = 30) {
+  getAvailablePopcornLessons(metadataList, cooldownDays = 14) {
     if (!Array.isArray(metadataList)) return [];
+    const rep = this.getPopcornSpacedRep();
+    const now = Date.now();
+    const cooldownMs = cooldownDays * 24 * 60 * 60 * 1000;
+
     return metadataList.filter(item => {
       if (!item || !item.id) return false;
-      if (this.isPopcornKnown(item.id)) return false;
-      if (this.isPopcornInCooldown(item.id, cooldownDays)) return false;
+      const entry = rep[item.id];
+      if (entry) {
+        if (entry.p === 1) return false;
+        if (typeof entry.d === 'number' && entry.d > 0 && now < entry.d) return false;
+      }
+
+      // Check legacy if not present in rep
+      if (!entry) {
+        if (this.isPopcornKnown(item.id)) return false;
+        if (this.isPopcornInCooldown(item.id, cooldownDays)) return false;
+      }
       return true;
     });
+  },
+
+  /**
+   * Record action statistics for skip-to-learn ratio measurement (Issue #47)
+   * @param {string} lessonId
+   * @param {string} expression
+   * @param {'skip'|'learn'} action
+   */
+  recordPopcornAction(lessonId, expression = '', action = 'learn') {
+    if (!lessonId) return;
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_STATS);
+      const stats = data ? JSON.parse(data) : {};
+      stats[lessonId] = stats[lessonId] || { expression: expression || lessonId, skipCount: 0, learnCount: 0 };
+      if (action === 'skip') {
+        stats[lessonId].skipCount = (stats[lessonId].skipCount || 0) + 1;
+      } else {
+        stats[lessonId].learnCount = (stats[lessonId].learnCount || 0) + 1;
+      }
+      localStorage.setItem(this.KEYS.POPCORN_STATS, JSON.stringify(stats));
+    } catch (e) {
+      console.warn('LocalStorage error recording popcorn action stat', e);
+    }
+  },
+
+  /**
+   * Get all popcorn statistics
+   * @returns {object}
+   */
+  getPopcornStats() {
+    try {
+      const data = localStorage.getItem(this.KEYS.POPCORN_STATS);
+      if (data) return JSON.parse(data);
+    } catch (e) {
+      console.warn('LocalStorage error reading popcorn stats', e);
+    }
+    return {};
+  },
+
+  /**
+   * Get Top N quick lessons where users clicked "Learn" due to unfamiliarity (Issue #47)
+   * @param {number} [limit=10]
+   * @param {Array<object>} [metadataList]
+   * @returns {Array<object>}
+   */
+  getTopUnfamiliarLessons(limit = 10, metadataList = []) {
+    const stats = this.getPopcornStats();
+    const list = (metadataList && metadataList.length > 0) 
+      ? metadataList 
+      : Object.keys(stats).map(id => ({ id, expression: stats[id].expression }));
+    
+    const evaluated = list.map(item => {
+      const stat = stats[item.id] || {};
+      const skipCount = stat.skipCount || 0;
+      const learnCount = stat.learnCount || 0;
+      const total = skipCount + learnCount;
+      const skipToLearnRatio = learnCount > 0 ? Number((skipCount / learnCount).toFixed(2)) : (skipCount > 0 ? Infinity : 0);
+      const unfamiliarityRate = total > 0 ? Number(((learnCount / total) * 100).toFixed(1)) : 0;
+      return {
+        id: item.id,
+        expression: item.expression || stat.expression || item.id,
+        skipCount,
+        learnCount,
+        total,
+        skipToLearnRatio,
+        unfamiliarityRate
+      };
+    });
+
+    evaluated.sort((a, b) => {
+      if (b.learnCount !== a.learnCount) return b.learnCount - a.learnCount;
+      return b.unfamiliarityRate - a.unfamiliarityRate;
+    });
+
+    return evaluated.slice(0, limit).map((entry, idx) => ({
+      rank: idx + 1,
+      ...entry
+    }));
   },
 
   /**
@@ -875,6 +1094,8 @@ const Storage = {
       localStorage.removeItem(this.KEYS.POPCORN_KNOWN);
       localStorage.removeItem(this.KEYS.POPCORN_STUDIED);
       localStorage.removeItem(this.KEYS.POPCORN_DAILY_STUDY);
+      localStorage.removeItem(this.KEYS.POPCORN_SPACED_REP);
+      localStorage.removeItem(this.KEYS.POPCORN_STATS);
     } catch (_) { }
   },
 

@@ -78,25 +78,55 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     await expect(learnBtn).toBeVisible();
   });
 
-  test('3. Stage 1 "이미 알아요" marks lesson as known and permanently excludes it', async ({ page }) => {
+  test('3. Stage 1 "알아요": 1st click schedules 2 months, 2nd consecutive click permanently excludes it', async ({ page }) => {
     await page.goto('/daily.html?id=popcorn-001');
 
     const knownBtn = page.locator('#btn-popcorn-known');
     await expect(knownBtn).toBeVisible({ timeout: 5000 });
 
-    // Click "이미 알아요"
+    // 1st click: "알아요"
     await knownBtn.click();
 
-    // Verify localStorage has marked popcorn-001 as known
-    const isKnown = await page.evaluate(() => {
+    // Verify 1st click: scheduled for 2 months (~60 days), streak is 1, not permanently excluded yet
+    const state1 = await page.evaluate(() => {
+      const rep = Storage.getPopcornSpacedRep()['popcorn-001'];
+      return {
+        isKnown: Storage.isPopcornKnown('popcorn-001'),
+        inCooldown: Storage.isPopcornInCooldown('popcorn-001', 59),
+        streak: rep ? rep.s : 0
+      };
+    });
+    expect(state1.isKnown).toBe(false);
+    expect(state1.inCooldown).toBe(true);
+    expect(state1.streak).toBe(1);
+
+    // Toast notification for 2-month reschedule
+    const toast1 = page.locator('.save-toast-notification');
+    await expect(toast1).toBeVisible({ timeout: 2000 });
+    await expect(toast1).toContainText('2달 뒤에 다시 복습할 수 있도록 예약했어요');
+
+    // Simulate 61 days later: cooldown elapsed
+    await page.evaluate(() => {
+      const rep = Storage.getPopcornSpacedRep();
+      rep['popcorn-001'].d = Date.now() - 1000;
+      Storage.savePopcornSpacedRep(rep);
+    });
+
+    // 2nd play: open popcorn-001 again and click "알아요" for the 2nd consecutive time
+    await page.goto('/daily.html?id=popcorn-001');
+    const knownBtn2 = page.locator('#btn-popcorn-known');
+    await expect(knownBtn2).toBeVisible({ timeout: 5000 });
+    await knownBtn2.click();
+
+    // Verify 2nd consecutive click permanently excludes popcorn-001
+    const isKnown2 = await page.evaluate(() => {
       return Storage.isPopcornKnown('popcorn-001');
     });
-    expect(isKnown).toBe(true);
+    expect(isKnown2).toBe(true);
 
-    // Toast notification appears
-    const toast = page.locator('.save-toast-notification');
-    await expect(toast).toBeVisible({ timeout: 2000 });
-    await expect(toast).toContainText('마스터 목록에 보관했어요');
+    const toast2 = page.locator('.save-toast-notification');
+    await expect(toast2).toBeVisible({ timeout: 2000 });
+    await expect(toast2).toContainText('마스터 목록에 보관했어요');
   });
 
   test('4. Stage 1 "몰라요" advances to Stage 2 Conversation Study View with multi-audio & highlighted expression', async ({ page }) => {
@@ -147,7 +177,7 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     await expect(firstBubble).toHaveClass(/playing/);
   });
 
-  test('5. Reveal action unmasks Korean translation, displays explanation, and triggers 30-day cooldown', async ({ page }) => {
+  test('5. Reveal action unmasks Korean translation, displays explanation, and triggers 14-day interval', async ({ page }) => {
     await page.goto('/daily.html?id=popcorn-001');
 
     // Advance to study
@@ -173,11 +203,23 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     // Reveal button updates text
     await expect(revealBtn).toHaveText('✓ 해설 확인 완료');
 
-    // Verify 30-day cooldown is recorded in localStorage
+    // Verify 14-day interval is recorded in localStorage
     const inCooldown = await page.evaluate(() => {
-      return Storage.isPopcornInCooldown('popcorn-001', 30);
+      return Storage.isPopcornInCooldown('popcorn-001', 14);
     });
     expect(inCooldown).toBe(true);
+
+    // Simulated 15 days later: interval expired
+    const after15Days = await page.evaluate(() => {
+      const rep = Storage.getPopcornSpacedRep();
+      rep['popcorn-001'].d = Date.now() - (15 * 24 * 60 * 60 * 1000);
+      Storage.savePopcornSpacedRep(rep);
+      const studied = JSON.parse(localStorage.getItem('rhyrhy_popcorn_studied') || '{}');
+      studied['popcorn-001'] = Date.now() - (15 * 24 * 60 * 60 * 1000);
+      localStorage.setItem('rhyrhy_popcorn_studied', JSON.stringify(studied));
+      return Storage.isPopcornInCooldown('popcorn-001', 14);
+    });
+    expect(after15Days).toBe(false);
   });
 
   test('6. "문장 저장하기" saves target sentence with audio directly into centralized Saved page', async ({ page }) => {
@@ -237,7 +279,7 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     await expect(bannerLight).toBeVisible();
   });
 
-  test('8. Clicking "다음 팝콘 표현 뽑기" button sets 30-day spaced repetition cooldown', async ({ page }) => {
+  test('8. Clicking "다음 팝콘 표현 뽑기" button sets 14-day spaced repetition interval', async ({ page }) => {
     await page.goto('/daily.html?id=popcorn-001');
 
     // Proceed to Stage 2
@@ -245,7 +287,7 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     await expect(page.locator('#popcorn-conversation-card')).toBeVisible();
 
     // Verify initially not in cooldown
-    const initialCooldown = await page.evaluate(() => Storage.isPopcornInCooldown('popcorn-001', 30));
+    const initialCooldown = await page.evaluate(() => Storage.isPopcornInCooldown('popcorn-001', 14));
     expect(initialCooldown).toBe(false);
 
     // Click "다음 팝콘 표현 뽑기"
@@ -257,19 +299,21 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     const flyer = page.locator('.popcorn-nav-flyer');
     await expect(flyer).toBeVisible({ timeout: 2000 });
 
-    // Cooldown must be recorded for 30 days
-    const isCooldownNow = await page.evaluate(() => Storage.isPopcornInCooldown('popcorn-001', 30));
+    // Interval must be recorded for 14 days
+    const isCooldownNow = await page.evaluate(() => Storage.isPopcornInCooldown('popcorn-001', 14));
     expect(isCooldownNow).toBe(true);
 
-    // Simulated 31 days later: cooldown expires for spaced repetition
-    const after31Days = await page.evaluate(() => {
+    // Simulated 15 days later: interval expires for spaced repetition
+    const after15Days = await page.evaluate(() => {
+      const rep = Storage.getPopcornSpacedRep();
+      rep['popcorn-001'].d = Date.now() - (15 * 24 * 60 * 60 * 1000);
+      Storage.savePopcornSpacedRep(rep);
       const studied = JSON.parse(localStorage.getItem('rhyrhy_popcorn_studied') || '{}');
-      const pastTimestamp = Date.now() - (31 * 24 * 60 * 60 * 1000);
-      studied['popcorn-001'] = pastTimestamp;
+      studied['popcorn-001'] = Date.now() - (15 * 24 * 60 * 60 * 1000);
       localStorage.setItem('rhyrhy_popcorn_studied', JSON.stringify(studied));
-      return Storage.isPopcornInCooldown('popcorn-001', 30);
+      return Storage.isPopcornInCooldown('popcorn-001', 14);
     });
-    expect(after31Days).toBe(false);
+    expect(after15Days).toBe(false);
   });
 
   test('9. Daily study limit of 10 max: "몰라요" increments daily count, "이미 알아요" does not', async ({ page }) => {

@@ -3,7 +3,7 @@
  * Caches application shell, quizzes, scripts, audio files, and Lottie animations
  * so users can study offline.
  */
-const CACHE_NAME = 'rhyrhy-cache-v29';
+const CACHE_NAME = 'rhyrhy-cache-v30';
 
 const STATIC_ASSETS = [
   './',
@@ -36,6 +36,10 @@ const STATIC_ASSETS = [
   './js/app.js',
   './assets/icons/icon.svg',
   './assets/img/popcorn-empty.jpg',
+  './assets/img/popcorn/popcorn-box-hd.png',
+  './assets/img/popcorn/popcorn-kernel-1.png',
+  './assets/img/popcorn/popcorn-kernel-2.png',
+  './assets/img/popcorn/popcorn-kernel-3.png',
   './assets/img/family.jpeg',
   './assets/img/family-playful.jpg',
   './assets/img/family-light.jpg',

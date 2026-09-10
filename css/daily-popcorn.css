@@ -26,22 +26,31 @@
   position: fixed;
   z-index: 9999;
   pointer-events: none;
-  font-size: 24px;
-  line-height: 1;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translate(-50%, -50%) scale(1);
-  will-change: transform, left, top, font-size;
+  will-change: transform, left, top, width, height;
   filter: drop-shadow(0 4px 14px rgba(245, 158, 11, 0.45));
   transition: left 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
               top 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
-              font-size 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
+              width 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
+              height 0.38s cubic-bezier(0.2, 0.8, 0.25, 1),
               transform 0.38s cubic-bezier(0.2, 0.8, 0.25, 1);
 }
 
+.popcorn-nav-flyer .popcorn-flyer-hd-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .popcorn-nav-flyer.flying-to-center {
-  font-size: 110px;
+  width: 140px;
+  height: 140px;
   transform: translate(-50%, -50%) scale(1.35) rotate(-6deg);
   filter: drop-shadow(0 14px 40px rgba(245, 158, 11, 0.7));
 }
@@ -52,44 +61,58 @@
 
 @keyframes flyer-pop {
   0% {
-    font-size: 110px;
+    width: 140px;
+    height: 140px;
     transform: translate(-50%, -50%) scale(1.35) rotate(-6deg);
     opacity: 1;
   }
   40% {
-    transform: translate(-50%, -50%) scale(1.9) rotate(8deg);
+    width: 140px;
+    height: 140px;
+    transform: translate(-50%, -50%) scale(1.8) rotate(8deg);
     opacity: 1;
   }
   100% {
+    width: 140px;
+    height: 140px;
     transform: translate(-50%, -50%) scale(2.4) rotate(14deg);
     opacity: 0;
   }
 }
 
 /* ==========================================================================
-   Burst Particles (Popping Kernels)
+   Burst Particles (Realistic Popping Popcorn Pieces - Issue #47)
    ========================================================================== */
 
 .popcorn-particle {
   position: fixed;
   pointer-events: none;
   z-index: 10000;
-  font-size: 32px;
+  width: 36px;
+  height: 36px;
   user-select: none;
   animation: particle-burst 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.popcorn-particle .popcorn-particle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
 }
 
 @keyframes particle-burst {
   0% {
     opacity: 1;
-    transform: translate(0, 0) scale(0.6) rotate(0deg);
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
   }
   60% {
     opacity: 1;
   }
   100% {
     opacity: 0;
-    transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--rot));
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(var(--rot));
   }
 }
 
@@ -1121,10 +1144,87 @@
 }
 
 .popcorn-explanation-body {
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 0.93rem;
+  line-height: 1.65;
   color: var(--text-main);
   word-break: keep-all;
+}
+
+.popcorn-exp-paragraph {
+  margin: 0 0 10px 0;
+}
+
+.popcorn-exp-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.popcorn-exp-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 12px 0 6px 0;
+}
+
+.popcorn-exp-list {
+  margin: 6px 0 12px 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.popcorn-exp-item {
+  color: var(--text-main);
+  line-height: 1.55;
+}
+
+.popcorn-exp-sublist {
+  margin: 6px 0 4px 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style-type: circle;
+}
+
+.popcorn-exp-subitem {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .popcorn-exp-subitem {
+  color: #CBD5E1;
+}
+
+.popcorn-exp-bold {
+  font-weight: 700;
+  color: #4338CA;
+}
+
+[data-theme="dark"] .popcorn-exp-bold {
+  color: #A5B4FC;
+}
+
+.popcorn-exp-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgba(99, 102, 241, 0.12);
+  color: #4F46E5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+[data-theme="dark"] .popcorn-exp-code {
+  background: rgba(99, 102, 241, 0.2);
+  color: #C7D2FE;
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.popcorn-exp-em {
+  font-style: italic;
+  color: var(--text-muted);
 }
 
 /* Action Controls Row */
