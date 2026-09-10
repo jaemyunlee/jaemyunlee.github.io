@@ -166,6 +166,8 @@ const App = {
     return '/lessons.html';
   },
 
+  _isLessonTransitioning: false,
+
   init(currentLessonId = null) {
     this.currentLessonId = currentLessonId;
 
@@ -578,11 +580,18 @@ const App = {
       lessonsBtn.addEventListener('click', (e) => {
         // Close saved page drawer immediately if open on top of the page
         this.closeSavedSentencesDrawer();
+        const destUrl = lessonsBtn.getAttribute('href');
 
         if (this.currentLessonId === 'lessons-list') {
           e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          this.triggerLessonsTransition(lessonsBtn, () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+          return;
         }
+
+        e.preventDefault();
+        this.triggerLessonsTransition(lessonsBtn, destUrl);
       });
     }
 
@@ -614,6 +623,97 @@ const App = {
         }
       }
     });
+  },
+
+  /**
+   * Play gentle educational chime sound using Web Audio API (Issue #49)
+   */
+  _playLessonChime() {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+
+      const ctx = new AudioContextClass();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+
+      const now = ctx.currentTime;
+      [
+        { freq: 523.25, time: now, duration: 0.28, gain: 0.15 },
+        { freq: 659.25, time: now + 0.08, duration: 0.35, gain: 0.2 }
+      ].forEach(note => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(note.freq, note.time);
+        gain.gain.setValueAtTime(note.gain, note.time);
+        gain.gain.exponentialRampToValueAtTime(0.001, note.time + note.duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(note.time);
+        osc.stop(note.time + note.duration);
+      });
+    } catch (_) {}
+  },
+
+  /**
+   * Trigger the animated transition to Lessons catalog with high-res 3D book icon
+   * and "자투리 시간에 공부해요" caption (Issue #49)
+   */
+  triggerLessonsTransition(btn, destOrCallback) {
+    if (this._isLessonTransitioning) return;
+    this._isLessonTransitioning = true;
+
+    this._playLessonChime();
+
+    const base = this._getBasePath();
+    const iconEl = btn ? (btn.querySelector('#nav-lessons-icon') || btn.querySelector('.nav-btn-icon') || btn) : null;
+    const rect = iconEl ? iconEl.getBoundingClientRect() : { left: window.innerWidth - 100, top: 20, width: 24, height: 24 };
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
+
+    const targetX = window.innerWidth / 2;
+    const targetY = window.innerHeight / 2;
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'lesson-flyer-backdrop';
+    document.body.appendChild(backdrop);
+
+    const flyer = document.createElement('div');
+    flyer.className = 'lesson-nav-flyer';
+    flyer.innerHTML = `
+      <div class="lesson-flyer-icon-wrap">
+        <img src="${base}assets/img/lesson-book-hd.png" alt="Lessons" class="lesson-flyer-hd-img">
+      </div>
+      <div class="lesson-flyer-caption">자투리 시간에 공부해요</div>
+    `;
+    flyer.style.left = `${startX}px`;
+    flyer.style.top = `${startY}px`;
+    document.body.appendChild(flyer);
+
+    requestAnimationFrame(() => {
+      backdrop.classList.add('active');
+      flyer.classList.add('flying-to-center');
+      flyer.style.left = `${targetX}px`;
+      flyer.style.top = `${targetY}px`;
+    });
+
+    setTimeout(() => {
+      flyer.classList.add('fade-away');
+      backdrop.style.opacity = '0';
+    }, 440);
+
+    setTimeout(() => {
+      flyer.remove();
+      backdrop.remove();
+      this._isLessonTransitioning = false;
+      if (typeof destOrCallback === 'function') {
+        destOrCallback();
+      } else if (typeof destOrCallback === 'string' && destOrCallback) {
+        window.location.href = destOrCallback;
+      }
+    }, 660);
   },
 
   /**
