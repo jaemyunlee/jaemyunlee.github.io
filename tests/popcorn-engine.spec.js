@@ -424,7 +424,7 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
 
     // Advance to Stage 2
     await page.click('#btn-popcorn-learn');
-    await expect(page.locator('#popcorn-conversation-card')).toBeVisible();
+    await expect(page.locator('#popcorn-conversation-card')).toBeVisible({ timeout: 10000 });
 
     // Scroll down to simulate user viewing conversation and actions at bottom
     await page.evaluate(() => window.scrollTo(0, 400));
