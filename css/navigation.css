@@ -1782,3 +1782,110 @@
 .saved-player-bar .player-progress-row {
   display: none !important;
 }
+
+/* ==========================================================================
+   Navbar Lessons Transition Animation (Issue #49)
+   ========================================================================== */
+
+.lesson-flyer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .lesson-flyer-backdrop {
+  background: rgba(15, 23, 42, 0.38);
+}
+
+.lesson-flyer-backdrop.active {
+  opacity: 1;
+}
+
+.lesson-nav-flyer {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%) scale(0.35);
+  will-change: transform, left, top, opacity;
+  transition: left 0.4s cubic-bezier(0.2, 0.8, 0.25, 1),
+              top 0.4s cubic-bezier(0.2, 0.8, 0.25, 1),
+              transform 0.4s cubic-bezier(0.2, 0.8, 0.25, 1),
+              opacity 0.28s ease;
+}
+
+.lesson-nav-flyer .lesson-flyer-icon-wrap {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 14px rgba(99, 102, 241, 0.35));
+  transition: width 0.4s cubic-bezier(0.2, 0.8, 0.25, 1),
+              height 0.4s cubic-bezier(0.2, 0.8, 0.25, 1),
+              filter 0.4s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+.lesson-nav-flyer .lesson-flyer-hd-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.lesson-nav-flyer .lesson-flyer-caption {
+  margin-top: 14px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 8px 22px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
+              0 0 24px rgba(99, 102, 241, 0.35);
+  opacity: 0;
+  transform: translateY(12px) scale(0.9);
+  transition: opacity 0.32s ease 0.1s, transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  white-space: nowrap;
+}
+
+[data-theme="light"] .lesson-nav-flyer .lesson-flyer-caption {
+  color: #0F172A;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 12px 35px -6px rgba(15, 23, 42, 0.2),
+              0 0 20px rgba(79, 70, 229, 0.15);
+}
+
+.lesson-nav-flyer.flying-to-center {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.lesson-nav-flyer.flying-to-center .lesson-flyer-icon-wrap {
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(0 16px 45px rgba(99, 102, 241, 0.55));
+}
+
+.lesson-nav-flyer.flying-to-center .lesson-flyer-caption {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.lesson-nav-flyer.fade-away {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.15);
+}

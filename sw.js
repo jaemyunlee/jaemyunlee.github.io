@@ -40,6 +40,7 @@ const STATIC_ASSETS = [
   './assets/img/popcorn/popcorn-kernel-1.png',
   './assets/img/popcorn/popcorn-kernel-2.png',
   './assets/img/popcorn/popcorn-kernel-3.png',
+  './assets/img/lesson-book-hd.png',
   './assets/img/family.jpeg',
   './assets/img/family-playful.jpg',
   './assets/img/family-light.jpg',

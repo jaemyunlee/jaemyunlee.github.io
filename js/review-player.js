@@ -27,6 +27,36 @@ class ReviewPlayer {
     this.currentAudio = null;
     this.autoAdvanceTimer = null;
     this.progressInterval = null;
+    this._wakeLock = null;
+  }
+
+  async _requestWakeLock() {
+    if (typeof navigator !== 'undefined' && 'wakeLock' in navigator && typeof navigator.wakeLock.request === 'function') {
+      try {
+        if (!this._wakeLock && this.isPlaying) {
+          const lock = await navigator.wakeLock.request('screen');
+          if (!this.isPlaying) {
+            await lock.release();
+            return;
+          }
+          this._wakeLock = lock;
+          this._wakeLock.addEventListener('release', () => {
+            this._wakeLock = null;
+          });
+        }
+      } catch (_) {
+        this._wakeLock = null;
+      }
+    }
+  }
+
+  async _releaseWakeLock() {
+    if (this._wakeLock) {
+      try {
+        await this._wakeLock.release();
+      } catch (_) {}
+      this._wakeLock = null;
+    }
   }
 
   _ensureAudioSession() {
@@ -63,6 +93,13 @@ class ReviewPlayer {
     window.addEventListener('video-player-started', () => {
       if (this.isPlaying) {
         this.pause();
+      }
+    });
+
+    // Re-request wake lock when returning to tab during active playback
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && this.isPlaying) {
+        this._requestWakeLock();
       }
     });
   }
@@ -438,6 +475,7 @@ class ReviewPlayer {
 
     this.currentIndex = index;
     this.isPlaying = true;
+    this._requestWakeLock();
 
     const quiz = this.quizzes[index];
     const cleanEn = this._getCleanSentence(quiz.english, quiz.answer);
@@ -631,6 +669,7 @@ class ReviewPlayer {
   stopAudio() {
     clearTimeout(this.autoAdvanceTimer);
     clearInterval(this.progressInterval);
+    this._releaseWakeLock();
 
     if (this.currentAudio) {
       try {
