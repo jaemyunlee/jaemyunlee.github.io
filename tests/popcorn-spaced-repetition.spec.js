@@ -228,19 +228,25 @@ test.describe('Popcorn Quick Lesson Enhancements & Bug Fixes (Issue #47)', () =>
       const cs = window.getComputedStyle(el);
       return {
         justifyContent: cs.justifyContent,
-        paddingTop: cs.paddingTop
+        paddingTop: cs.paddingTop,
+        paddingLeft: cs.paddingLeft,
+        paddingRight: cs.paddingRight,
+        paddingBottom: cs.paddingBottom
       };
     });
 
-    // Must be top-anchored (flex-start) and top padding 16px matching standard lesson
+    // Must be top-anchored (flex-start) and padding 24px 12px 48px matching lesson page
     expect(styles.justifyContent).toBe('flex-start');
-    expect(styles.paddingTop).toBe('16px');
+    expect(styles.paddingTop).toBe('24px');
+    expect(styles.paddingLeft).toBe('12px');
+    expect(styles.paddingRight).toBe('12px');
+    expect(styles.paddingBottom).toBe('48px');
 
-    // Ensure header top position is within standard margin (< 90px from top of viewport including nav)
+    // Ensure header top position is within standard margin (< 110px from top of viewport including nav)
     const header = page.locator('.daily-page-header');
     const headerBox = await header.boundingBox();
     expect(headerBox).not.toBeNull();
-    expect(headerBox.y).toBeLessThanOrEqual(95);
+    expect(headerBox.y).toBeLessThanOrEqual(110);
   });
 
   test('6. Markdown Parsing Fix: Clicking "한국어 번역" cleanly renders parsed HTML without errors', async ({ page }) => {
