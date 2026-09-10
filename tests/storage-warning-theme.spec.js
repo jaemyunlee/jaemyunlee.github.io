@@ -52,12 +52,6 @@ test.describe('First Save Local Storage Warning Popup Theming (Issue #48)', () =
     const requestTitleColor = await requestTitle.evaluate((el) => window.getComputedStyle(el).color);
     expect(requestTitleColor).toBe('rgb(55, 48, 163)'); // #3730A3
 
-    // Wait for modal entrance animation (350ms) to complete
-    await page.waitForTimeout(450);
-
-    // Capture screenshot for walkthrough
-    await page.screenshot({ path: '/Users/jaemyun/.gemini/antigravity-ide/brain/fa432653-be2a-4f63-ad51-eae34b9fe00c/light_mode_storage_modal.png' });
-
     // Verify top-right close button is visible and has accessible label
     const closeBtn = page.locator('#btn-close-first-save');
     await expect(closeBtn).toBeVisible();
@@ -96,12 +90,6 @@ test.describe('First Save Local Storage Warning Popup Theming (Issue #48)', () =
     // In dark mode, card background must be dark #181E2E (rgb(24, 30, 46))
     const cardBg = await modalCard.evaluate((el) => window.getComputedStyle(el).backgroundColor);
     expect(cardBg).toBe('rgb(24, 30, 46)');
-
-    // Wait for modal entrance animation (350ms) to complete
-    await page.waitForTimeout(450);
-
-    // Capture screenshot for walkthrough
-    await page.screenshot({ path: '/Users/jaemyun/.gemini/antigravity-ide/brain/fa432653-be2a-4f63-ad51-eae34b9fe00c/dark_mode_storage_modal.png' });
 
     // Dismiss via main action button
     const dismissBtn = page.locator('#btn-dismiss-first-save');
