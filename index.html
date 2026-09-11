@@ -37,12 +37,30 @@
       } catch (e) { }
     })();
   </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2"></script>
+  <!-- Google tag (gtag.js) - only loaded in production -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    (function () {
+      var isLocal = Boolean(
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '0.0.0.0' ||
+        (window.location.hostname && window.location.hostname.indexOf('.local') !== -1) ||
+        window.location.protocol === 'file:'
+      );
+      if (isLocal) {
+        window['ga-disable-G-6Z1RWQ4CN2'] = true;
+      }
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
+      if (!isLocal) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+      }
+    })();
   </script>
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/navigation.css">

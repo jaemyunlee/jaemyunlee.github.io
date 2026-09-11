@@ -1,0 +1,25 @@
+- popcorn-001: { "expression": "just so you know", "type": "conversation" }
+- popcorn-002: { "expression": "make a [noun] of it", "type": "conversation" }
+- popcorn-003: { "expression": "at all costs", "type": "conversation" }
+- popcorn-004: { "expression": "break a sweat", "type": "conversation" }
+- popcorn-005: { "expression": "near and dear to my heart", "type": "conversation" }
+- popcorn-006: { "expression": "everyone starts somewhere", "type": "conversation" }
+- popcorn-007: { "expression": "I was so green", "type": "conversation" }
+- popcorn-008: { "expression": "keep a straight face", "type": "conversation" }
+- popcorn-009: { "expression": "good deed", "type": "conversation" }
+- popcorn-010: { "expression": "premise", "type": "conversation" }
+- popcorn-011: { "expression": "ballpark figure", "type": "conversation" }
+- popcorn-012: { "expression": "I just had a thought", "type": "conversation" }
+- popcorn-013: { "expression": "hit the spot", "type": "conversation" }
+- popcorn-014: { "expression": "don't quote me on", "type": "conversation" }
+- popcorn-015: { "expression": "I figured you'd say that", "type": "conversation" }
+- popcorn-016: { "expression": "It's in the bag", "type": "conversation" }
+- popcorn-017: { "expression": "That's rich coming from you", "type": "conversation" }
+- popcorn-018: { "expression": "hit it off", "type": "conversation" }
+- popcorn-019: { "expression": "cross my mind", "type": "conversation" }
+- popcorn-020: { "expression": "I am in a bind", "type": "conversation" }
+- popcorn-021: { "expression": "no strings attached", "type": "conversation" }
+- popcorn-022: { "expression": "come to think of it", "type": "conversation" }
+- popcorn-023: { "expression": "caught me off guard", "type": "conversation" }
+- popcorn-024: { "expression": "out of the woods", "type": "conversation" }
+- popcorn-025: { "expression": "torn between", "type": "conversation" }

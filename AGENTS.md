@@ -61,6 +61,13 @@ To guarantee that new deployments are delivered immediately to all users while m
   2. Register its files in `sw.js` `STATIC_ASSETS`.
   3. Ensure `scripts/build.js` processes its `index.html` references.
 
+### Character Persona & Korean Translation Protocol (Wayne & Kelly)
+- **Age & Relationship**: Wayne is older than Kelly (Wayne is Kelly's uncle / senior family figure; Kelly addresses him as "Uncle Wayne" or "Uncle").
+- **Honorific Speech Rule (존댓말 vs 반말)**:
+  - **Kelly -> Wayne**: Whenever translating dialogue to Korean, **Kelly MUST ALWAYS use 존댓말** (polite/honorific speech: `~해요`, `~했네요`, `~인가요?`, `삼촌` 등).
+  - **Wayne -> Kelly**: **Wayne speaks in 반말** (warm/friendly informal speech: `~해`, `~했어`, `~구나`, `~자`).
+  - This rule strictly applies to all Popcorn Quick Lessons (`popcorn/conversation/*.md`), regular lesson scripts (`script.json`), and translations across the app.
+
 ---
 
 ## 4. Build & Deployment Verification

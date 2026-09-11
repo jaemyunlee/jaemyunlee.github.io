@@ -14,6 +14,9 @@ const Analytics = {
   measurementId: null,
   initialized: false,
   isDebug: false,
+  isLocal: false,
+  lastTrackedEvent: null,
+  eventLog: [],
 
   // Session timer state for active foreground study tracking
   currentLessonId: null,
@@ -30,6 +33,24 @@ const Analytics = {
   },
 
   /**
+   * Helper: Check if running in a local, test, or development environment
+   * @returns {boolean}
+   */
+  isLocalEnvironment() {
+    if (typeof window === 'undefined') return true;
+    const hostname = (window.location && window.location.hostname) || '';
+    const protocol = (window.location && window.location.protocol) || '';
+    return Boolean(
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname === '0.0.0.0' ||
+      hostname.endsWith('.local') ||
+      protocol === 'file:' ||
+      (typeof window.DISABLE_GA !== 'undefined' && window.DISABLE_GA)
+    );
+  },
+
+  /**
    * Initialize GA4 gtag.js script and set up visibility observers
    * @param {string} [measurementId] Optional override for measurement ID
    */
@@ -37,14 +58,25 @@ const Analytics = {
     if (this.initialized) return;
 
     try {
-      this.measurementId = measurementId || window.GA_MEASUREMENT_ID || this.DEFAULT_MEASUREMENT_ID;
+      this.measurementId = measurementId || (typeof window !== 'undefined' && window.GA_MEASUREMENT_ID) || this.DEFAULT_MEASUREMENT_ID;
+      this.isLocal = this.isLocalEnvironment();
+      this.isDebug = this.isLocal || (typeof window !== 'undefined' && Boolean(window.DEBUG_ANALYTICS)) || (typeof window !== 'undefined' && window.location && window.location.search && window.location.search.includes('debug'));
 
-      const isLocalhost = Boolean(
-        window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.protocol === 'file:'
-      );
-      this.isDebug = isLocalhost || Boolean(window.DEBUG_ANALYTICS) || (typeof window !== 'undefined' && window.location.search && window.location.search.includes('debug'));
+      // In local or test environments, immediately disable Google Analytics measurement
+      if (this.isLocal && typeof window !== 'undefined') {
+        window[`ga-disable-${this.measurementId}`] = true;
+        window[`ga-disable-${this.DEFAULT_MEASUREMENT_ID}`] = true;
+      }
+
+      // Initialize gtag dataLayer & stub
+      if (typeof window !== 'undefined') {
+        window.dataLayer = window.dataLayer || [];
+        if (typeof window.gtag !== 'function') {
+          window.gtag = function () {
+            window.dataLayer.push(arguments);
+          };
+        }
+      }
 
       // Check support for VisibilityStateEntry performance API
       if (typeof performance !== 'undefined' && typeof performance.getEntriesByType === 'function') {
@@ -52,28 +84,25 @@ const Analytics = {
         this.visibilityStateHistorySupported = Array.isArray(entries);
       }
 
-      // Initialize gtag dataLayer
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      window.gtag = window.gtag || gtag;
+      // ONLY inject external gtag script and configure GA in non-local production environments
+      if (!this.isLocal && typeof document !== 'undefined') {
+        const scriptSrc = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(this.measurementId)}`;
+        const existingScript = document.querySelector(`script[src*="googletagmanager.com/gtag/js"]`);
+        if (!existingScript) {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = scriptSrc;
+          document.head.appendChild(script);
+        }
 
-      // Inject gtag.js script tag dynamically if not already present
-      const scriptSrc = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(this.measurementId)}`;
-      const existingScript = document.querySelector(`script[src*="googletagmanager.com/gtag/js"]`);
-      if (!existingScript) {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = scriptSrc;
-        document.head.appendChild(script);
+        if (typeof window.gtag === 'function') {
+          window.gtag('js', new Date());
+          window.gtag('config', this.measurementId, {
+            send_page_view: true,
+            debug_mode: this.isDebug
+          });
+        }
       }
-
-      window.gtag('js', new Date());
-      window.gtag('config', this.measurementId, {
-        send_page_view: true,
-        debug_mode: this.isDebug
-      });
 
       // Listen for tab visibility changes to pause/resume foreground dwell tracking
       this._bindVisibilityListeners();
@@ -81,7 +110,7 @@ const Analytics = {
       this.initialized = true;
 
       if (this.isDebug) {
-        console.debug(`%c[GA4 📊]%c Initialized with ID: ${this.measurementId} (Debug Mode: ${this.isDebug})`, 'color: #10B981; font-weight: bold;', 'color: inherit;');
+        console.debug(`%c[GA4 📊]%c Initialized with ID: ${this.measurementId} (Local: ${this.isLocal}, Debug: ${this.isDebug})`, 'color: #10B981; font-weight: bold;', 'color: inherit;');
       }
     } catch (err) {
       console.warn('[Analytics] Initialization error:', err);
@@ -119,7 +148,19 @@ const Analytics = {
         console.debug(`%c[GA4 📊 Event: ${eventName}]%c`, 'color: #3B82F6; font-weight: bold;', 'color: inherit;', payload);
       }
 
-      if (typeof window.gtag === 'function') {
+      this.lastTrackedEvent = { eventName, payload };
+      if (!this.eventLog) this.eventLog = [];
+      this.eventLog.push({ eventName, payload, timestamp: Date.now() });
+
+      // In local environments, record locally to dataLayer without sending network requests to Google servers
+      if (this.isLocal) {
+        if (typeof window !== 'undefined' && window.dataLayer && Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: eventName, ...payload });
+        }
+        return;
+      }
+
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
         window.gtag('event', eventName, payload);
       }
     } catch (err) {
@@ -318,6 +359,26 @@ const Analytics = {
   },
 
   /**
+   * Track when a user reaches the 10-lesson daily maximum study limit
+   * @param {number} studyCount
+   * @param {number} [maxThreshold=10]
+   * @param {string} [source='next_lesson']
+   */
+  trackPopcornDailyLimitReached(studyCount = 10, maxThreshold = 10, source = 'next_lesson') {
+    // 1. Custom GA4 event
+    this.trackEvent('popcorn_daily_limit_reached', {
+      study_count: studyCount,
+      max_threshold: maxThreshold,
+      source: source
+    });
+
+    // 2. Standard GA4 achievement / unlock event for standard reports
+    this.trackEvent('unlock_achievement', {
+      achievement_id: 'popcorn_daily_limit_10'
+    });
+  },
+
+  /**
    * Start study session foreground timer
    * @private
    */
@@ -407,4 +468,8 @@ const Analytics = {
 // Auto-register to window
 if (typeof window !== 'undefined') {
   window.Analytics = Analytics;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = Analytics;
 }

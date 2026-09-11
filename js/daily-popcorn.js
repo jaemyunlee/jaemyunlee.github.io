@@ -824,6 +824,30 @@ const DailyPopcornManager = {
       ? '오늘 준비된 10개의 팝콘 표현을 모두 맛있게 학습했어요! 🍿<br>새로운 팝콘 표현은 내일 다시 준비될거에요.'
       : '현재 학습 가능한 모든 팝콘 표현을 마스터하셨어요!';
 
+    // Track GA event when user reaches the 10-lesson daily limit
+    if (isDailyLimit) {
+      try {
+        const today = (typeof Storage !== 'undefined' && typeof Storage.getLocalDateString === 'function')
+          ? Storage.getLocalDateString()
+          : new Date().toISOString().split('T')[0];
+        const trackingKey = `rhyrhy_popcorn_limit_tracked_${today}`;
+        if (typeof sessionStorage !== 'undefined') {
+          if (!sessionStorage.getItem(trackingKey)) {
+            sessionStorage.setItem(trackingKey, '1');
+            if (typeof Analytics !== 'undefined' && typeof Analytics.trackPopcornDailyLimitReached === 'function') {
+              Analytics.trackPopcornDailyLimitReached(count, 10, reason);
+            }
+          }
+        } else if (typeof Analytics !== 'undefined' && typeof Analytics.trackPopcornDailyLimitReached === 'function') {
+          Analytics.trackPopcornDailyLimitReached(count, 10, reason);
+        }
+      } catch (err) {
+        if (typeof Analytics !== 'undefined' && typeof Analytics.trackPopcornDailyLimitReached === 'function') {
+          Analytics.trackPopcornDailyLimitReached(count, 10, reason);
+        }
+      }
+    }
+
     container.innerHTML = `
       <div class="popcorn-completion-card" id="popcorn-completion-card">
         <div class="popcorn-empty-illustration">
@@ -843,6 +867,14 @@ const DailyPopcornManager = {
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
         Storage.resetPopcornPreferences();
+        try {
+          const today = (typeof Storage !== 'undefined' && typeof Storage.getLocalDateString === 'function')
+            ? Storage.getLocalDateString()
+            : new Date().toISOString().split('T')[0];
+          if (typeof sessionStorage !== 'undefined') {
+            sessionStorage.removeItem(`rhyrhy_popcorn_limit_tracked_${today}`);
+          }
+        } catch (_) { }
         this._showToast('팝콘 쿨다운과 일일 제한이 초기화되었습니다! 🍿');
         this.pickNextLesson(container);
       });
