@@ -248,7 +248,7 @@ const App = {
           setTimeout(() => {
             try {
               btn.blur();
-            } catch (_) {}
+            } catch (_) { }
           }, 150);
         }
       }, { passive: true });
@@ -654,7 +654,7 @@ const App = {
         osc.start(note.time);
         osc.stop(note.time + note.duration);
       });
-    } catch (_) {}
+    } catch (_) { }
   },
 
   /**
@@ -800,7 +800,7 @@ const App = {
               <span class="footer-title">RhyRhy English</span>
               <span class="footer-badge">Beta</span>
             </div>
-            <p class="footer-tagline">현서네 리얼 영어 • 원어민 실전 대화로 배우는 3분 영어 챌린지</p>
+            <p class="footer-tagline">현서네 리얼 영어 • 원어민 실전 대화로 배우는 5분 영어 챌린지</p>
           </div>
           <div class="footer-license-box">
             <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="license noopener noreferrer" class="cc-license-badge" title="Creative Commons Attribution-NonCommercial 4.0 International License">
@@ -976,16 +976,16 @@ const App = {
 
           <!-- Sticky Audio Player Bar for Saved Sentences (Issue #13 & #17: Step 4 Review Style) -->
           ${AudioPlayerComponent.render({
-            containerId: 'saved-player-bar',
-            idPrefix: 'saved',
-            badgeText: '01/01',
-            titleText: '저장된 문장 연속 재생',
-            variant: 'mobile',
-            extraClasses: 'saved-player-bar',
-            style: 'display: none;',
-            isPlayAll: true,
-            speed: '1.0x'
-          })}
+        containerId: 'saved-player-bar',
+        idPrefix: 'saved',
+        badgeText: '01/01',
+        titleText: '저장된 문장 연속 재생',
+        variant: 'mobile',
+        extraClasses: 'saved-player-bar',
+        style: 'display: none;',
+        isPlayAll: true,
+        speed: '1.0x'
+      })}
 
           <div class="drawer-body" id="saved-sentences-list">
             <!-- Rendered dynamically -->
@@ -1113,8 +1113,8 @@ const App = {
               </h4>
               <div class="saved-sentences-sublist">
                 ${items.map(item => {
-                  const trackIdx = globalIndex++;
-                  return `
+            const trackIdx = globalIndex++;
+            return `
                     <div class="saved-sentence-card" id="saved-card-${item.id}" data-id="${item.id}" data-index="${trackIdx}">
                       <button 
                         type="button" 
@@ -1157,7 +1157,7 @@ const App = {
                       </button>
                     </div>
                   `;
-                }).join('')}
+          }).join('')}
               </div>
             </div>
           `;
@@ -1436,7 +1436,7 @@ const App = {
 
             // Proactively check for newer service worker on every load
             if (typeof reg.update === 'function') {
-              reg.update().catch(() => {});
+              reg.update().catch(() => { });
             }
 
             // When an updated SW activates and claims clients, refresh to load fresh code
@@ -1548,7 +1548,7 @@ const SavedAudioPlayer = {
     if (this._wakeLock) {
       try {
         await this._wakeLock.release();
-      } catch (_) {}
+      } catch (_) { }
       this._wakeLock = null;
     }
   },
@@ -1749,7 +1749,7 @@ const SavedAudioPlayer = {
             playbackRate: this.playbackRate,
             position: Math.min(this.audio.currentTime, this.audio.duration)
           });
-        } catch (_) {}
+        } catch (_) { }
       }
     }
   },
@@ -1758,7 +1758,7 @@ const SavedAudioPlayer = {
     if ('mediaSession' in navigator) {
       try {
         navigator.mediaSession.playbackState = state;
-      } catch (_) {}
+      } catch (_) { }
     }
   },
 
@@ -1944,7 +1944,7 @@ const SavedAudioPlayer = {
     if ('speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();
-      } catch (_) {}
+      } catch (_) { }
     }
     this._isFallbackActive = false;
 
@@ -2011,7 +2011,7 @@ const SavedAudioPlayer = {
     if (this.audio) {
       try {
         this.audio.pause();
-      } catch (_) {}
+      } catch (_) { }
     }
 
     const item = this.playlist[this.currentIndex];
@@ -2029,7 +2029,7 @@ const SavedAudioPlayer = {
     if ('speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();
-      } catch (_) {}
+      } catch (_) { }
       const u = new SpeechSynthesisUtterance(item.en);
       u.lang = 'en-US';
       u.rate = this.playbackRate * 0.92;
@@ -2085,7 +2085,7 @@ const SavedAudioPlayer = {
     if ('speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();
-      } catch (_) {}
+      } catch (_) { }
     }
     this.isPlaying = false;
     this._updateVisualState(false);
