@@ -12,5 +12,166 @@
     "expression": "make a [noun] of it",
     "file": "conversation/popcorn-002.md",
     "createdAt": "2026-09-09T12:25:00.000Z"
+  },
+  {
+    "id": "popcorn-003",
+    "type": "conversation",
+    "expression": "at all costs",
+    "file": "conversation/popcorn-003.md",
+    "createdAt": "2026-09-11T16:47:35.078Z"
+  },
+  {
+    "id": "popcorn-004",
+    "type": "conversation",
+    "expression": "break a sweat",
+    "file": "conversation/popcorn-004.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-005",
+    "type": "conversation",
+    "expression": "near and dear to my heart",
+    "file": "conversation/popcorn-005.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-006",
+    "type": "conversation",
+    "expression": "everyone starts somewhere",
+    "file": "conversation/popcorn-006.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-007",
+    "type": "conversation",
+    "expression": "I was so green",
+    "file": "conversation/popcorn-007.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-008",
+    "type": "conversation",
+    "expression": "keep a straight face",
+    "file": "conversation/popcorn-008.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-009",
+    "type": "conversation",
+    "expression": "good deed",
+    "file": "conversation/popcorn-009.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-010",
+    "type": "conversation",
+    "expression": "premise",
+    "file": "conversation/popcorn-010.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-011",
+    "type": "conversation",
+    "expression": "ballpark figure",
+    "file": "conversation/popcorn-011.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-012",
+    "type": "conversation",
+    "expression": "I just had a thought",
+    "file": "conversation/popcorn-012.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-013",
+    "type": "conversation",
+    "expression": "hit the spot",
+    "file": "conversation/popcorn-013.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-014",
+    "type": "conversation",
+    "expression": "don't quote me on",
+    "file": "conversation/popcorn-014.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-015",
+    "type": "conversation",
+    "expression": "I figured you'd say that",
+    "file": "conversation/popcorn-015.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-016",
+    "type": "conversation",
+    "expression": "It's in the bag",
+    "file": "conversation/popcorn-016.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-017",
+    "type": "conversation",
+    "expression": "That's rich coming from you",
+    "file": "conversation/popcorn-017.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-018",
+    "type": "conversation",
+    "expression": "hit it off",
+    "file": "conversation/popcorn-018.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-019",
+    "type": "conversation",
+    "expression": "cross my mind",
+    "file": "conversation/popcorn-019.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-020",
+    "type": "conversation",
+    "expression": "I am in a bind",
+    "file": "conversation/popcorn-020.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-021",
+    "type": "conversation",
+    "expression": "no strings attached",
+    "file": "conversation/popcorn-021.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-022",
+    "type": "conversation",
+    "expression": "come to think of it",
+    "file": "conversation/popcorn-022.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-023",
+    "type": "conversation",
+    "expression": "caught me off guard",
+    "file": "conversation/popcorn-023.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-024",
+    "type": "conversation",
+    "expression": "out of the woods",
+    "file": "conversation/popcorn-024.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
+  },
+  {
+    "id": "popcorn-025",
+    "type": "conversation",
+    "expression": "torn between",
+    "file": "conversation/popcorn-025.md",
+    "createdAt": "2026-09-11T16:47:35.079Z"
   }
 ]

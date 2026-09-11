@@ -475,8 +475,8 @@ test.describe('Bite-Sized Popcorn Conversation Lessons & Scaffolding Engine', ()
     const finalScrollY = await page.evaluate(() => window.scrollY);
     expect(finalScrollY).toBe(0);
 
-    // Since popcorn-001 was the active lesson and storage is fresh, it should pick the other lesson (popcorn-002: make a [noun] of it)
-    await expect(page.locator('.popcorn-expression-banner')).toContainText('make a [noun] of it');
+    // Since popcorn-001 was the active lesson, it should pick a different lesson from the library
+    await expect(page.locator('.popcorn-expression-banner')).not.toContainText('just so you know');
   });
 });
 
