@@ -101,7 +101,7 @@ test.describe('Landing Page Redesign & 5-Step Learning Flow (Issue #39)', () => 
     await page.goto('/index.html');
 
     const heroSubtitle = page.locator('.hero-subtitle');
-    await expect(heroSubtitle).toContainText('5단계 과학적 학습 루틴');
+    await expect(heroSubtitle).toContainText('5단계 학습 방법');
 
     const flowLink = page.locator('.btn-hero-flow-link');
     await expect(flowLink).toBeVisible();
