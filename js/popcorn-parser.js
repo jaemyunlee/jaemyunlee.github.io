@@ -134,6 +134,7 @@ const PopcornParser = {
         avatar: target.avatar,
         speaker: target.speaker,
         expression: lesson.expression,
+        matchedExpression: target.matchedExpression || lesson.expression,
         timestamp: 0
       };
     } else {
@@ -289,11 +290,14 @@ const PopcornParser = {
     const hasBrackets = bracketRegex.test(line.text);
 
     if (hasBrackets) {
+      const match = line.text.match(bracketRegex);
+      line.matchedExpression = match ? match[1] : '';
       line.hasExpression = true;
       line.formattedText = line.text.replace(/\[(.*?)\]/g, '<mark class="popcorn-highlight">$1</mark>');
       line.rawText = line.text.replace(/\[(.*?)\]/g, '$1');
     } else if (targetExpression && line.text.toLowerCase().includes(targetExpression.toLowerCase())) {
       line.hasExpression = true;
+      line.matchedExpression = targetExpression;
       const regex = new RegExp(`(${this._escapeRegExp(targetExpression)})`, 'gi');
       line.formattedText = line.text.replace(regex, '<mark class="popcorn-highlight">$1</mark>');
       line.rawText = line.text;

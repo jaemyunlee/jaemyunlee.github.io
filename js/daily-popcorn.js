@@ -790,13 +790,17 @@ const DailyPopcornManager = {
         audio: lesson.targetSentence.audio,
         expression: lesson.targetSentence.expression || lesson.expression,
         speaker: lesson.targetSentence.speaker || '',
-        avatar: lesson.targetSentence.avatar || '',
         lessonId: lesson.id,
         timestamp: 0
       });
       saveBtn.classList.add('saved');
       saveBtn.innerHTML = '<span>✓ Saved에 저장됨</span>';
       this._showToast('Saved에 저장되었습니다! 🔖');
+
+      // Check if user is saving a sentence for the very first time across the app
+      if (typeof App !== 'undefined' && typeof App.checkFirstSentenceSaveNotice === 'function') {
+        App.checkFirstSentenceSaveNotice();
+      }
     }
 
     // Refresh navbar counter badge

@@ -235,4 +235,104 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     expect(audioBtnCount).toBeGreaterThanOrEqual(2);
   });
 
+  test('8. Saving target sentence for the first time displays multi-device local storage notice popup', async ({ page }) => {
+    await page.goto('/daily.html?id=popcorn-001');
+
+    // Ensure completely clean storage state
+    await page.evaluate(() => {
+      window.localStorage.clear();
+      window.sessionStorage.clear();
+    });
+
+    await page.goto('/daily.html?id=popcorn-001');
+
+    // Advance through knowledge check to dialogue
+    const learnBtn = page.locator('#btn-popcorn-learn');
+    await expect(learnBtn).toBeVisible({ timeout: 5000 });
+    await learnBtn.click();
+
+    // Click save sentence button
+    const saveBtn = page.locator('#btn-popcorn-save');
+    await expect(saveBtn).toBeVisible({ timeout: 5000 });
+    await saveBtn.click();
+
+    // Expect save toast
+    await expect(page.locator('.save-toast-notification')).toBeVisible();
+
+    // Verify first-save storage notice popup appears
+    const modalOverlay = page.locator('#first-save-storage-modal');
+    await expect(modalOverlay).toBeVisible({ timeout: 5000 });
+
+    // Verify popup notifications regarding local storage vs multi-device persistence
+    const modalCard = page.locator('.first-visit-modal-card');
+    await expect(modalCard).toContainText('첫 번째 문장이 단어장에 저장되었습니다!');
+    await expect(modalCard).toContainText('현재 기기 브라우저 캐시에 안전하게 보관됩니다');
+    await expect(modalCard).toContainText('모든 기기 클라우드 동기화가 필요하신가요?');
+
+    // Dismiss modal via confirmation button
+    const dismissBtn = page.locator('#btn-dismiss-first-save');
+    await expect(dismissBtn).toBeVisible();
+    await dismissBtn.click();
+    await expect(modalOverlay).not.toBeAttached();
+
+    // Verify seen flag in localStorage
+    const noticeSeen = await page.evaluate(() => window.localStorage.getItem('rhyrhy_first_save_notice_seen'));
+    expect(noticeSeen).toBe('true');
+
+    // Navigate to another popcorn lesson and save: modal should NOT appear again
+    await page.goto('/daily.html?id=popcorn-002');
+    await page.click('#btn-popcorn-learn');
+    await page.click('#btn-popcorn-save');
+    await page.waitForTimeout(500);
+    await expect(page.locator('#first-save-storage-modal')).not.toBeAttached();
+  });
+
+  test('9. Saved sentences from Popcorn quick lessons display key expression highlighted in saved drawer', async ({ page }) => {
+    await page.goto('/daily.html?id=popcorn-002');
+
+    // Set up clean storage with notice seen so popup does not block
+    await page.evaluate(() => {
+      window.localStorage.clear();
+      window.localStorage.setItem('rhyrhy_first_save_notice_seen', 'true');
+    });
+
+    await page.goto('/daily.html?id=popcorn-002');
+
+    // Advance to dialogue and save target sentence (make a day of it)
+    await page.click('#btn-popcorn-learn');
+    const saveBtn = page.locator('#btn-popcorn-save');
+    await expect(saveBtn).toBeVisible({ timeout: 5000 });
+    await saveBtn.click();
+    await expect(saveBtn).toContainText('Saved에 저장됨');
+
+    // Open Saved Sentences Drawer from navbar
+    const savedNavBtn = page.locator('#btn-open-sentences');
+    await expect(savedNavBtn).toBeVisible();
+    await savedNavBtn.click();
+
+    // Verify drawer opens
+    const drawer = page.locator('#saved-sentences-drawer');
+    await expect(drawer).toHaveClass(/open/);
+
+    // Locate popcorn saved card in the drawer
+    const popcornGroup = page.locator('.saved-lesson-group[data-lesson="popcorn"]');
+    await expect(popcornGroup).toBeVisible();
+
+    const savedCard = popcornGroup.locator('.saved-sentence-card').first();
+    await expect(savedCard).toBeVisible();
+
+    // Verify key expression is highlighted inside .saved-en
+    const highlightedEl = savedCard.locator('.saved-en mark');
+    await expect(highlightedEl).toBeVisible();
+    await expect(highlightedEl).toHaveText(/make a day of it/i);
+    await expect(highlightedEl).toHaveClass(/popcorn-highlight/);
+
+    // Verify avatar image is removed to keep consistent with other saved cards
+    const avatarImg = savedCard.locator('.saved-speaker-avatar');
+    await expect(avatarImg).toHaveCount(0);
+    const anyImg = savedCard.locator('img');
+    await expect(anyImg).toHaveCount(0);
+  });
+
 });
+

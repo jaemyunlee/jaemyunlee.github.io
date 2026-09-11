@@ -323,7 +323,7 @@ const App = {
 
   formatHighlightedSentence(english, expression) {
     if (!english) return '';
-    let expr = (expression || '').trim();
+    let expr = (expression || '').trim().replace(/[.]+$/, '');
 
     // If expression not explicitly stored, detect known lesson expressions
     if (!expr) {
@@ -346,14 +346,28 @@ const App = {
     if (/\[[^\]]+\]/.test(english)) {
       return this._escapeHtml(english).replace(
         /\[([^\]]+)\]/g,
-        `<mark class="quiz-vocab-highlight">$1</mark>`
+        `<mark class="quiz-vocab-highlight popcorn-highlight">$1</mark>`
       );
     }
 
     if (expr) {
+      // 1. Direct case-insensitive match
       const escaped = expr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const regex = new RegExp(`(${escaped})`, 'gi');
-      return this._escapeHtml(english).replace(regex, `<mark class="quiz-vocab-highlight">$1</mark>`);
+      if (regex.test(english)) {
+        return this._escapeHtml(english).replace(regex, `<mark class="quiz-vocab-highlight popcorn-highlight">$1</mark>`);
+      }
+
+      // 2. Flexible placeholder match for patterns like "[noun]", "[verb]" (e.g. "make a [noun] of it")
+      if (/\[[^\]]+\]/.test(expr)) {
+        const pattern = expr
+          .replace(/[.*+?^${}()\\]/g, '\\$&')
+          .replace(/\[[^\]]+\]/g, '([\\w\\s-]+?)');
+        const flexRegex = new RegExp(`(${pattern})`, 'gi');
+        if (flexRegex.test(english)) {
+          return this._escapeHtml(english).replace(flexRegex, `<mark class="quiz-vocab-highlight popcorn-highlight">$1</mark>`);
+        }
+      }
     }
 
     return this._escapeHtml(english);
@@ -1134,7 +1148,6 @@ const App = {
                       <div class="saved-card-text">
                         ${item.speaker ? `
                           <div class="saved-speaker-badge">
-                            ${item.avatar ? `<img src="${base}assets/img/avatars/${item.avatar}" alt="${this._escapeHtml(item.speaker)}" class="saved-speaker-avatar" onerror="this.style.display='none'">` : ''}
                             <span class="saved-speaker-name">${this._escapeHtml(item.speaker)}</span>
                           </div>
                         ` : ''}
