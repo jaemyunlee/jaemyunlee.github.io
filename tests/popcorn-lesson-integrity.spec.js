@@ -327,11 +327,13 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     await expect(highlightedEl).toHaveText(/make a day of it/i);
     await expect(highlightedEl).toHaveClass(/popcorn-highlight/);
 
-    // Verify avatar image is removed to keep consistent with other saved cards
+    // Verify avatar image and speaker badge are removed to keep consistent with other saved cards
     const avatarImg = savedCard.locator('.saved-speaker-avatar');
     await expect(avatarImg).toHaveCount(0);
     const anyImg = savedCard.locator('img');
     await expect(anyImg).toHaveCount(0);
+    const speakerBadge = savedCard.locator('.saved-speaker-badge');
+    await expect(speakerBadge).toHaveCount(0);
   });
 
 });

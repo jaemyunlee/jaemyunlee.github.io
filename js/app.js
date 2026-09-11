@@ -1146,11 +1146,6 @@ const App = {
                         </svg>
                       </button>
                       <div class="saved-card-text">
-                        ${item.speaker ? `
-                          <div class="saved-speaker-badge">
-                            <span class="saved-speaker-name">${this._escapeHtml(item.speaker)}</span>
-                          </div>
-                        ` : ''}
                         <p class="saved-en">${this.formatHighlightedSentence(item.en, item.expression)}</p>
                         <p class="saved-kr">${this._escapeHtml(item.kr)}</p>
                       </div>
