@@ -122,6 +122,7 @@ const App = {
       shortTitle: 'Lesson 1',
       topic: 'Big Bang Concert',
       icon: '🎤',
+      createdAt: '2026-08-25',
       title: '미국에서 빅뱅 콘서트를 간다고?',
       subtitle: '켈리가 빅뱅 콘서트를 가게 된 사연과 어떻게 빅뱅을 좋아하게 되었는지 들으면서 영어 표현을 배워봐요',
       duration: '6:43',
@@ -133,13 +134,61 @@ const App = {
       shortTitle: 'Lesson 2',
       topic: "Uncle Wayne's Cabin",
       icon: '🏕️',
+      createdAt: '2026-09-05',
       title: '웨인 삼촌의 산골 오두막 이야기',
       subtitle: '1963년부터 이어져 온 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 영어 표현',
       duration: '5:48',
       vocabCount: 19,
       path: 'lessons/lesson-02/'
+    },
+    {
+      id: 'lesson-03',
+      shortTitle: 'Lesson 3',
+      topic: "Stories from Mom (Pati)",
+      icon: '💖',
+      speaker: 'Pati',
+      avatar: 'assets/img/avatars/pati.jpeg',
+      createdAt: '2026-09-13',
+      title: '패티 엄마가 들려주는 켈리의 어린 시절',
+      subtitle: '켈리의 고집쟁이 어린 시절과 절벽 하이킹, 따뜻한 가족 추억 속 생생한 일상 영어 표현',
+      duration: '3:18',
+      vocabCount: 13,
+      path: 'lessons/lesson-03/',
+      status: 'coming-soon',
+      scheduledDate: '2026-09-15',
+      scheduledDateText: '9월 15일 본영상 공개 예정'
     }
   ],
+
+  /**
+   * Checks if there is any new lesson since the user last visited.
+   * Compares App.lessons against Storage.getSeenLessons().
+   * @returns {boolean}
+   */
+  hasNewLessonForUser() {
+    if (!this.lessons || !this.lessons.length) return false;
+    if (typeof Storage === 'undefined' || typeof Storage.getSeenLessons !== 'function') return false;
+    const seenLessons = Storage.getSeenLessons();
+    if (!seenLessons) {
+      // First visit: lessons are new to this user
+      return true;
+    }
+    return this.lessons.some(les => !seenLessons.includes(les.id));
+  },
+
+  /**
+   * Mark all current lessons as seen by user in Storage and remove red badge
+   */
+  markLessonsAsSeen() {
+    if (!this.lessons || !this.lessons.length) return;
+    if (typeof Storage === 'undefined' || typeof Storage.markLessonsSeen !== 'function') return;
+    const allLessonIds = this.lessons.map(les => les.id);
+    Storage.markLessonsSeen(allLessonIds);
+    const badge = document.getElementById('nav-lessons-badge');
+    if (badge) {
+      badge.remove();
+    }
+  },
 
   getNextLesson(currentLessonId) {
     if (!this.lessons || !this.lessons.length) return null;
@@ -396,7 +445,10 @@ const App = {
     const historyUnlocked = Storage.isHistoryUnlocked();
     const isDailyCompleted = typeof Storage !== 'undefined' && typeof Storage.isDailyPhraseCompletedToday === 'function' ? Storage.isDailyPhraseCompletedToday() : false;
 
-    const currentLesson = this.lessons.find(l => l.id === this.currentLessonId);
+    const hasNewLesson = this.hasNewLessonForUser();
+    const newLessonBadgeHtml = hasNewLesson ? `
+      <span class="nav-badge nav-badge-red" id="nav-lessons-badge" aria-label="새로운 레슨">N</span>
+    ` : '';
 
     navContainer.innerHTML = `
       <div class="nav-inner">
@@ -500,13 +552,13 @@ const App = {
           <a href="${base}lessons.html" class="btn-nav-action btn-nav-lessons ${this.currentLessonId === 'lessons-list' ? 'active' : ''}" id="btn-nav-lessons" title="전체 레슨 목록 (Lessons)" aria-label="Lessons">
             <span class="nav-btn-icon nav-lessons-icon" id="nav-lessons-icon">📖</span>
             <span class="nav-btn-label">Lessons</span>
+            ${newLessonBadgeHtml}
           </a>
 
           <!-- Saved Sentences Bank Button -->
           <button type="button" class="btn-nav-action btn-nav-saved" id="btn-open-sentences" title="Open Saved Sentence Bank" aria-label="Open Saved Sentence Bank">
             <span class="nav-btn-icon nav-saved-icon" id="nav-saved-icon">🔖</span>
             <span class="nav-btn-label">Saved</span>
-            <span class="nav-badge" id="nav-saved-badge">0</span>
           </button>
 
           <!-- Dark / Light Theme Toggle Button -->
@@ -592,6 +644,9 @@ const App = {
     const lessonsBtn = document.getElementById('btn-nav-lessons');
     if (lessonsBtn) {
       lessonsBtn.addEventListener('click', (e) => {
+        // Dismiss new lesson badge and mark lessons seen
+        this.markLessonsAsSeen();
+
         // Close saved page drawer immediately if open on top of the page
         this.closeSavedSentencesDrawer();
         const destUrl = lessonsBtn.getAttribute('href');
@@ -863,15 +918,26 @@ const App = {
     }
 
     container.innerHTML = list.map(les => {
-      const lessonState = Storage.getLessonState(les.id); // 'completed' | 'in-progress' | 'not-started'
-      const isCompleted = lessonState === 'completed';
-      const inProgress = lessonState === 'in-progress';
+      const isComingSoon = les.status === 'coming-soon';
+      const lessonState = isComingSoon ? 'coming-soon' : Storage.getLessonState(les.id); // 'completed' | 'in-progress' | 'not-started' | 'coming-soon'
+      const isCompleted = !isComingSoon && lessonState === 'completed';
+      const inProgress = !isComingSoon && lessonState === 'in-progress';
 
       let statusBadgeHtml = `<span class="badge badge-not-started"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg> 시작 전</span>`;
       let actionBtnText = `<span>학습 시작하기</span>`;
       let actionBtnClass = `btn-primary`;
 
-      if (isCompleted) {
+      if (isComingSoon) {
+        const dateText = les.scheduledDateText || '9월 15일 본영상 공개 예정';
+        statusBadgeHtml = `<span class="badge badge-coming-soon"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> ${dateText}</span>`;
+        actionBtnClass = `btn-coming-soon`;
+        const actualState = Storage.getLessonState(les.id);
+        if (actualState === 'in-progress' || actualState === 'completed') {
+          actionBtnText = `<span>이어서 학습하기 ▶</span>`;
+        } else {
+          actionBtnText = `<span>학습 시작하기</span>`;
+        }
+      } else if (isCompleted) {
         statusBadgeHtml = `<span class="badge badge-completed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 학습 완료</span>`;
         actionBtnText = `<span>다시 복습하기 ✓</span>`;
         actionBtnClass = `btn-outline`;
@@ -882,7 +948,7 @@ const App = {
       }
 
       return `
-        <article class="lesson-catalog-card state-${lessonState} ${isCompleted ? 'completed' : ''} ${inProgress ? 'in-progress' : ''}" id="card-${les.id}">
+        <article class="lesson-catalog-card state-${lessonState} ${isCompleted ? 'completed' : ''} ${inProgress ? 'in-progress' : ''} ${isComingSoon ? 'coming-soon' : ''}" id="card-${les.id}">
           <div class="lesson-card-top">
             <div class="lesson-card-badges">
               <span class="badge badge-primary">${les.shortTitle}</span>
@@ -932,6 +998,8 @@ const App = {
    * Initializes sorting controls and card list on lessons.html
    */
   initLessonsListPage() {
+    this.markLessonsAsSeen();
+
     const sortKey = 'rhyrhy_lesson_sort';
     let currentSort = 'desc';
     try {
@@ -1511,6 +1579,23 @@ const LESSON_02_AUDIO_MAP = [
   { key: 'getting up in age', file: 'As they were getting up in age and didnt have to worry about falls anymore..wav' },
   { key: 'moms memorial bell', file: 'That was my moms memorial bell that we built and this was mining equipment that we found up in the hills..wav' },
   { key: 'kelly get to enjoy it', file: 'Now Kelly get to enjoy it..wav' }
+];
+
+// Known audio files for Lesson 03 (maps keyword to WAV audio filename in lessons/lesson-03/audio/)
+const LESSON_03_AUDIO_MAP = [
+  { key: 'strong-willed', file: 'Kelly is a very strong-willed person..wav' },
+  { key: 'picked her up', file: 'And one day I picked her up from school..wav' },
+  { key: 'kept on going', file: 'She was just arguing with me. And she just kept on going and going..wav' },
+  { key: 'push my buttons', file: 'you know how to push my buttons dont you.wav' },
+  { key: 'pull over', file: 'Ill pull over and youre going to get out of my car..wav' },
+  { key: 'ended up', file: 'I ended up leaving her in the car and taking her home..wav' },
+  { key: 'walk along', file: 'we would walk along the cliffs.wav' },
+  { key: 'leash on her', file: 'I would have to put like a leash on her.wav' },
+  { key: 'stubborn', file: 'because she was so stubborn and she wouldnt want to go by herself.wav' },
+  { key: 'diapers', file: 'She was still in diapers.wav' },
+  { key: 'two weeks at a time', file: 'wed go for two weeks at a time..wav' },
+  { key: 'going off to college', file: 'I think it was hard. I know when she was going off to college..wav' },
+  { key: 'son in law', file: 'and now I have two wonderful grandchildren and a wonderful son in law..wav' }
 ];
 
 const SavedAudioPlayer = {
@@ -2241,6 +2326,12 @@ const SavedAudioPlayer = {
       for (const mapItem of LESSON_02_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
           return encodeURI(`${base}lessons/lesson-02/audio/${mapItem.file}`);
+        }
+      }
+    } else if (lesId === 'lesson-03') {
+      for (const mapItem of LESSON_03_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-03/audio/${mapItem.file}`);
         }
       }
     }

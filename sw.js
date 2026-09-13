@@ -3,7 +3,7 @@
  * Caches application shell, quizzes, scripts, audio files, and Lottie animations
  * so users can study offline.
  */
-const CACHE_NAME = 'rhyrhy-cache-v30';
+const CACHE_NAME = 'rhyrhy-cache-v32';
 
 const STATIC_ASSETS = [
   './',
@@ -47,6 +47,7 @@ const STATIC_ASSETS = [
   './assets/img/family-studio.jpg',
   './assets/img/avatars/kelly.jpg',
   './assets/img/avatars/wayne.jpeg',
+  './assets/img/avatars/pati.jpeg',
   './assets/lottie/celebration.json',
   './assets/vendor/lottie.min.js',
   './lessons.html',
@@ -57,7 +58,11 @@ const STATIC_ASSETS = [
   './lessons/lesson-02/index.html',
   './lessons/lesson-02/metadata.json',
   './lessons/lesson-02/quiz.md',
-  './lessons/lesson-02/script.json'
+  './lessons/lesson-02/script.json',
+  './lessons/lesson-03/index.html',
+  './lessons/lesson-03/metadata.json',
+  './lessons/lesson-03/quiz.md',
+  './lessons/lesson-03/script.json'
 ];
 
 self.addEventListener('install', (event) => {

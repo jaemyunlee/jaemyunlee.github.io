@@ -66,10 +66,9 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
 
     await page.goto('/index.html');
 
-    // Verify badge shows count 3
+    // Verify nav-saved-badge is removed from saved button
     const badge = page.locator('#nav-saved-badge');
-    await expect(badge).toBeVisible();
-    await expect(badge).toHaveText('3');
+    await expect(badge).toHaveCount(0);
 
     // Open drawer
     const openBtn = page.locator('#btn-open-sentences');
