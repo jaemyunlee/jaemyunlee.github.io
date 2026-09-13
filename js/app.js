@@ -149,7 +149,7 @@ const App = {
       speaker: 'Pati',
       avatar: 'assets/img/avatars/pati.jpeg',
       createdAt: '2026-09-13',
-      title: '패티 엄마가 들려주는 켈리의 어린 시절',
+      title: '장모님이 기억하는 켈리의 어린 시절',
       subtitle: '켈리의 고집쟁이 어린 시절과 절벽 하이킹, 따뜻한 가족 추억 속 생생한 일상 영어 표현',
       duration: '3:18',
       vocabCount: 13,
