@@ -167,7 +167,7 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     await page.goto('/lessons.html');
     const lesson03Card = page.locator('#card-lesson-03');
     await expect(lesson03Card).toBeVisible({ timeout: 5000 });
-    await expect(lesson03Card).toContainText('패티 엄마가 들려주는 켈리의 어린 시절');
+    await expect(lesson03Card).toContainText('장모님이 기억하는 켈리의 어린 시절');
     await expect(lesson03Card).toContainText('3:18');
     await expect(lesson03Card).toContainText('13 퀴즈');
 
@@ -195,7 +195,7 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     await page.goto('/index.html');
     const homeLesson03 = page.locator('#card-lesson-03');
     await expect(homeLesson03).toBeVisible({ timeout: 5000 });
-    await expect(homeLesson03).toContainText('패티 엄마가 들려주는 켈리의 어린 시절');
+    await expect(homeLesson03).toContainText('장모님이 기억하는 켈리의 어린 시절');
     await expect(homeLesson03).toHaveClass(/coming-soon/);
     await expect(homeLesson03.locator('.badge-coming-soon')).toContainText('9월 15일 본영상 공개 예정');
     const homeActionBtn = homeLesson03.locator('.lesson-card-btn');

@@ -56,7 +56,7 @@ class ReviewPlayer {
     if (this._wakeLock) {
       try {
         await this._wakeLock.release();
-      } catch (_) {}
+      } catch (_) { }
       this._wakeLock = null;
     }
   }
@@ -195,14 +195,14 @@ class ReviewPlayer {
       <div class="review-player-section">
         <!-- Top Sticky Music Player Bar (Unified AudioPlayerComponent) -->
         ${((typeof AudioPlayerComponent !== 'undefined' ? AudioPlayerComponent : (typeof window !== 'undefined' ? window.AudioPlayerComponent : null))?.render({
-          containerId: 'review-player-bar',
-          idPrefix: 'player',
-          badgeText: `01/${this.quizzes.length.toString().padStart(2, '0')}`,
-          titleText: firstSentence,
-          variant: 'standard',
-          isPlayAll: true,
-          speed: '1.0x'
-        })) || `
+      containerId: 'review-player-bar',
+      idPrefix: 'player',
+      badgeText: `01/${this.quizzes.length.toString().padStart(2, '0')}`,
+      titleText: firstSentence,
+      variant: 'standard',
+      isPlayAll: true,
+      speed: '1.0x'
+    })) || `
         <div class="review-player-bar" id="review-player-bar">
           <div class="player-bar-top">
             <div class="player-track-info">
@@ -307,7 +307,7 @@ class ReviewPlayer {
         <div class="step-completion-card" id="step2-complete-card">
           <div class="step-complete-badge">${this.isComingSoon ? '🎉 사전 공개 학습 완료!' : '✨ 2단계 핵심 문장 완료!'}</div>
           <h4 class="step-complete-title">${this.isComingSoon ? '사전 공개 콘텐츠를 모두 마스터하셨습니다!' : '핵심 문장을 모두 귀로 익히셨습니다!'}</h4>
-          <p class="step-complete-desc">${this.isComingSoon ? `패티 엄마의 생생한 목소리로 핵심 문장 13개를 모두 귀로 익히셨습니다.<br><strong>전체 영상 및 영작하기(Step 3 & 4)</strong>는 <strong>${this._escapeHtml(this.scheduledDateText)}</strong>에 정식 오픈됩니다!` : '이제 전체 영상에서 이 표현들이 실제 대화 맥락 속에서 어떻게 쓰이는지 확인해보세요.'}</p>
+          <p class="step-complete-desc">${this.isComingSoon ? `장모님의 생생한 목소리로 핵심 문장 13개를 모두 귀로 익히셨습니다.<br><strong>전체 영상 및 영작하기(Step 3 & 4)</strong>는 <strong>${this._escapeHtml(this.scheduledDateText)}</strong>에 정식 오픈됩니다!` : '이제 전체 영상에서 이 표현들이 실제 대화 맥락 속에서 어떻게 쓰이는지 확인해보세요.'}</p>
           <div class="step-complete-actions">
             ${this.isComingSoon ? `
             <a href="../../lessons.html" class="btn btn-primary" style="text-decoration: none;">
@@ -826,7 +826,7 @@ class ReviewPlayer {
       }
       try {
         cleanAudio = decodeURIComponent(cleanAudio).trim();
-      } catch (_) {}
+      } catch (_) { }
 
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
