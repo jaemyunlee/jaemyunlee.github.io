@@ -397,6 +397,47 @@ button:disabled {
   border-color: rgba(100, 116, 139, 0.25);
 }
 
+.btn-coming-soon,
+a.btn-coming-soon,
+.btn-coming-soon:visited,
+a.btn-coming-soon:visited {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1.5px solid rgba(245, 158, 11, 0.45);
+  color: #FBBF24 !important;
+  font-weight: 700;
+}
+
+.btn-coming-soon:hover:not(:disabled),
+.btn-coming-soon:focus:not(:disabled),
+a.btn-coming-soon:hover,
+a.btn-coming-soon:focus {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: #F59E0B;
+  color: #FEF3C7 !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .btn-coming-soon,
+[data-theme="light"] a.btn-coming-soon,
+[data-theme="light"] .btn-coming-soon:visited,
+[data-theme="light"] a.btn-coming-soon:visited {
+  background: rgba(217, 119, 6, 0.1);
+  border: 1.5px solid rgba(217, 119, 6, 0.35);
+  color: #B45309 !important;
+}
+
+[data-theme="light"] .btn-coming-soon:hover:not(:disabled),
+[data-theme="light"] .btn-coming-soon:focus:not(:disabled),
+[data-theme="light"] a.btn-coming-soon:hover,
+[data-theme="light"] a.btn-coming-soon:focus {
+  background: rgba(217, 119, 6, 0.18);
+  border-color: #D97706;
+  color: #78350F !important;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+  transform: translateY(-1px);
+}
+
 .badge-in-progress {
   background: rgba(99, 102, 241, 0.2);
   color: #818CF8;
@@ -410,6 +451,21 @@ button:disabled {
   background: rgba(79, 70, 229, 0.12);
   color: #4338CA;
   border-color: rgba(79, 70, 229, 0.35);
+}
+
+.badge-coming-soon {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+[data-theme="light"] .badge-coming-soon {
+  background: rgba(217, 119, 6, 0.12);
+  color: #B45309;
+  border-color: rgba(217, 119, 6, 0.35);
 }
 
 /* Shake and Fade Keyframes */

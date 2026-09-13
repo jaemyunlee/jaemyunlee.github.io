@@ -1,0 +1,13 @@
+- Kelly is a very [strong-willed] person.
+- And one day I [picked her up] from school.
+- She was just arguing with me. And she just [kept on going] and going.
+- you know how to [push my buttons], don't you?
+- I'll [pull over] and you're going to get out of my car.
+- I [ended up] leaving her in the car and taking her home.
+- we would [walk along] the cliffs
+- I would have to put like a [leash] on her
+- because she was so [stubborn] and she wouldn't want to go by herself
+- She was still in [diapers]
+- we'd go for two weeks [at a time].
+- I think it was hard. I know when she was [going off] to college.
+- and now I have two wonderful grandchildren and a wonderful [son in law].

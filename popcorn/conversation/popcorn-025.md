@@ -8,7 +8,7 @@
 - **Prompt**: 이 표현을 아시나요?
 
 ## Dialogue
-- **Kelly**: I got a job offer with a higher salary, but I really love my current team. I'm completely [torn between] them.
+- **Kelly**: I got a job offer with a higher salary, but I really love my current team. I'm completely [torn between] the two.
   - **Avatar**: kelly.jpg
   - **Audio**: audio/popcorn-025/01_Kelly_I got a job offer with a higher salary but I really love my current team. Im completely torn betw....wav
   - **Korean**: 연봉이 더 높은 곳에서 이직 제안을 받았는데, 지금 우리 팀도 너무 좋거든요. 둘 사이에서 마음이 정말 갈팡질팡해요.

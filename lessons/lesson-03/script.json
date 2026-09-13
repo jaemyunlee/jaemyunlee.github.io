@@ -1,0 +1,387 @@
+[
+  {
+    "id": "s1",
+    "start": 5.09,
+    "end": 9.02,
+    "en": "Kelly is a very strongwilled person.",
+    "kr": "켈리는 고집이 아주 세고 자기주관이 뚜렷한 아이였어요."
+  },
+  {
+    "id": "s2",
+    "start": 9.02,
+    "end": 11.32,
+    "en": "And if she didn't want to do something,",
+    "kr": "자기가 하기 싫은 게 있으면,"
+  },
+  {
+    "id": "s3",
+    "start": 11.32,
+    "end": 13.06,
+    "en": "she didn't do it.",
+    "kr": "절대로 안 했죠."
+  },
+  {
+    "id": "s4",
+    "start": 13.06,
+    "end": 16.74,
+    "en": "And one day I picked her up from school.",
+    "kr": "어느 날 학교에서 켈리를 차로 데리러 갔을 때였어요."
+  },
+  {
+    "id": "s5",
+    "start": 16.74,
+    "end": 19.97,
+    "en": "She was just arguing with me.",
+    "kr": "차 안에서 저한테 막 말대꾸하며 따지더라고요."
+  },
+  {
+    "id": "s6",
+    "start": 19.97,
+    "end": 23.35,
+    "en": "And she just kept on going and going.",
+    "kr": "그러고는 끝도 없이 계속 따지는 거예요."
+  },
+  {
+    "id": "s7",
+    "start": 23.35,
+    "end": 25.89,
+    "en": "And then I said,",
+    "kr": "그래서 제가 말했죠,"
+  },
+  {
+    "id": "s8",
+    "start": 25.89,
+    "end": 28.52,
+    "en": "you know how to push my buttons, don't you?",
+    "kr": "'너 엄마 속 뒤집어놓는 법을 아주 잘 아는구나, 그렇지?'"
+  },
+  {
+    "id": "s9",
+    "start": 28.52,
+    "end": 29.66,
+    "en": "And she said,",
+    "kr": "그랬더니 켈리가 이러더군요,"
+  },
+  {
+    "id": "s10",
+    "start": 29.66,
+    "end": 33.89,
+    "en": "mom, you show me a button and I'll push it.",
+    "kr": "'엄마, 버튼이 어디 있는지 보여줘 봐요, 제가 눌러버리게요!'"
+  },
+  {
+    "id": "s11",
+    "start": 33.89,
+    "end": 35.47,
+    "en": "And then I said,",
+    "kr": "그래서 제가 그랬죠,"
+  },
+  {
+    "id": "s12",
+    "start": 35.47,
+    "end": 39.42,
+    "en": "I'll pull over and you're going to get out of my car.",
+    "kr": "'너 자꾸 그러면 차 길가에 세우고 당장 내리게 할 거야.'"
+  },
+  {
+    "id": "s13",
+    "start": 39.42,
+    "end": 40.96,
+    "en": "And she said, I can't do that.",
+    "kr": "그랬더니 '난 못 내려' 이러는 거예요."
+  },
+  {
+    "id": "s14",
+    "start": 40.96,
+    "end": 41.81,
+    "en": "And I said, why?",
+    "kr": "그래서 제가 '왜?' 했더니,"
+  },
+  {
+    "id": "s15",
+    "start": 41.81,
+    "end": 43.07,
+    "en": "And she said,",
+    "kr": "켈리가 말하길,"
+  },
+  {
+    "id": "s16",
+    "start": 43.07,
+    "end": 44.59,
+    "en": "because you have to take me home.",
+    "kr": "'엄마가 날 집에 데려다줘야 하니까.'"
+  },
+  {
+    "id": "s17",
+    "start": 44.59,
+    "end": 48.86,
+    "en": "And I said, I'll put, I'm going to let you get out and you can walk home.",
+    "kr": "제가 '그냥 차에서 내려서 집까지 걸어오게 할 거야'라고 했죠."
+  },
+  {
+    "id": "s18",
+    "start": 48.86,
+    "end": 49.51,
+    "en": "And she said,",
+    "kr": "그랬더니 켈리가,"
+  },
+  {
+    "id": "s19",
+    "start": 49.51,
+    "end": 52.26,
+    "en": "and if you do that, I'm going to call the police.",
+    "kr": "'엄마가 그러면 나 경찰에 신고할 거야' 하더라고요."
+  },
+  {
+    "id": "s20",
+    "start": 52.26,
+    "end": 54.31,
+    "en": "So, anyways, that's how it ended.",
+    "kr": "어쨌든, 그렇게 끝났어요."
+  },
+  {
+    "id": "s21",
+    "start": 54.31,
+    "end": 57.42,
+    "en": "I ended up leaving her in the car and taking her home.",
+    "kr": "결국 차에 그대로 태운 채 집으로 데리고 왔죠."
+  },
+  {
+    "id": "s22",
+    "start": 57.42,
+    "end": 61.09,
+    "en": "But she always argued with me about everything.",
+    "kr": "하지만 켈리는 매사에 저한테 늘 말대꾸하고 따졌답니다."
+  },
+  {
+    "id": "s23",
+    "start": 64.19,
+    "end": 66.66,
+    "en": "When we would go to the coast",
+    "kr": "우리가 바닷가(해안)에 갈 때면"
+  },
+  {
+    "id": "s24",
+    "start": 66.66,
+    "end": 68.87,
+    "en": "and we would walk along the cliffs,",
+    "kr": "절벽 길을 따라 산책하곤 했는데요,"
+  },
+  {
+    "id": "s25",
+    "start": 68.87,
+    "end": 72.32,
+    "en": "I would have to put like a leash on her",
+    "kr": "켈리한테 미아 방지 끈(하네스) 같은 걸 채워야만 했어요."
+  },
+  {
+    "id": "s26",
+    "start": 72.32,
+    "end": 76.7,
+    "en": "because she was so stubborn and she wouldn't want to go by herself,",
+    "kr": "고집이 워낙 세서 자기 혼자 가겠다는 건 아니었지만,"
+  },
+  {
+    "id": "s27",
+    "start": 76.7,
+    "end": 79.76,
+    "en": "but she would just take off and go.",
+    "kr": "갑자기 앞뒤 안 가리고 막 튀어나가 버렸거든요."
+  },
+  {
+    "id": "s28",
+    "start": 79.76,
+    "end": 83.81,
+    "en": "So I always had to keep her in.",
+    "kr": "그래서 항상 곁에 붙잡아 둬야 했죠."
+  },
+  {
+    "id": "s29",
+    "start": 83.81,
+    "end": 87.69,
+    "en": "So everybody said I was mean because I put a leash on her.",
+    "kr": "아이한테 끈을 맸다고 다들 저보고 못됐다고 하더라고요."
+  },
+  {
+    "id": "s30",
+    "start": 87.69,
+    "end": 92.13,
+    "en": "I think we started going camping with Kelly when she was one.",
+    "kr": "켈리가 한 살 때부터 같이 캠핑을 다니기 시작했던 것 같아요."
+  },
+  {
+    "id": "s31",
+    "start": 92.13,
+    "end": 94.33,
+    "en": "She was still in diapers",
+    "kr": "그땐 아직 기저귀를 차고 있었는데,"
+  },
+  {
+    "id": "s32",
+    "start": 94.33,
+    "end": 96.83,
+    "en": "and we took her everywhere",
+    "kr": "어디든 데리고 다녔죠."
+  },
+  {
+    "id": "s33",
+    "start": 96.83,
+    "end": 99.55,
+    "en": "and we'd go for two weeks at a time.",
+    "kr": "한 번 가면 2주씩 머물곤 했어요."
+  },
+  {
+    "id": "s34",
+    "start": 99.55,
+    "end": 103.0,
+    "en": "And we have a backpack that we would put her in.",
+    "kr": "아이를 태울 수 있는 아기 배낭이 있었거든요."
+  },
+  {
+    "id": "s35",
+    "start": 103.0,
+    "end": 106.63,
+    "en": "And so we were, went hiking all the time",
+    "kr": "그래서 늘 하이킹(산행)을 다녔고,"
+  },
+  {
+    "id": "s36",
+    "start": 106.63,
+    "end": 112.99,
+    "en": "and on binky bottle patrol. whoever was behind her.",
+    "kr": "뒤따라 걷는 사람은 쪽쪽이랑 젖병 챙기는 순찰조였죠."
+  },
+  {
+    "id": "s37",
+    "start": 112.99,
+    "end": 116.12,
+    "en": "So because she always had her binky and her bottle with her.",
+    "kr": "켈리가 항상 쪽쪽이랑 젖병을 달고 살았거든요."
+  },
+  {
+    "id": "s38",
+    "start": 116.12,
+    "end": 125.79,
+    "en": "So if she would lose it, oh, and her blankie. So somebody would always have to rescue them.",
+    "kr": "떨어뜨리기라도 하면—아, 애착 이불도요! 뒤에서 누군가 얼른 주워 담아야 했죠."
+  },
+  {
+    "id": "s39",
+    "start": 125.79,
+    "end": 127.96,
+    "en": "Well, I remember Christmas.",
+    "kr": "그리고 크리스마스도 기억나네요."
+  },
+  {
+    "id": "s40",
+    "start": 127.96,
+    "end": 134.18,
+    "en": "I remember one of her Christmas that the neighbor was dressed up as Santa Claus.",
+    "kr": "어느 크리스마스에는 이웃집 아저씨가 산타클로스 분장을 했었어요."
+  },
+  {
+    "id": "s41",
+    "start": 134.18,
+    "end": 138.43,
+    "en": "And when she went to bed, we had him come over.",
+    "kr": "켈리가 잠들었을 때 그분을 집으로 오시게 했죠."
+  },
+  {
+    "id": "s42",
+    "start": 138.43,
+    "end": 141.34,
+    "en": "And  kissed her on the cheek in bed,",
+    "kr": "침대에 누워있는 켈리 뺨에 뽀뽀를 해주고,"
+  },
+  {
+    "id": "s43",
+    "start": 141.34,
+    "end": 147.65,
+    "en": "and then we took pictures of Santa Claus putting presents under the tree for her.",
+    "kr": "산타클로스가 트리 밑에 선물을 두고 가는 사진을 찍어뒀어요."
+  },
+  {
+    "id": "s44",
+    "start": 147.65,
+    "end": 150.53,
+    "en": "So then when she was really excited,",
+    "kr": "켈리가 얼마나 신나 했는지 몰라요."
+  },
+  {
+    "id": "s45",
+    "start": 150.53,
+    "end": 154.94,
+    "en": "of course she put out the milk and the cookies for him, and they were gone.",
+    "kr": "산타를 위해 우유와 쿠키를 놓아뒀는데, 다 사라졌으니까요."
+  },
+  {
+    "id": "s46",
+    "start": 154.94,
+    "end": 157.34,
+    "en": "So she was happy that Santa came.",
+    "kr": "산타가 진짜 다녀갔다고 정말 기뻐했죠."
+  },
+  {
+    "id": "s47",
+    "start": 157.34,
+    "end": 158.43,
+    "en": "So, yeah.",
+    "kr": "네, 그런 추억이 있네요."
+  },
+  {
+    "id": "s48",
+    "start": 163.2,
+    "end": 169.79,
+    "en": "I think it was hard. I know when she was going off to college.",
+    "kr": "켈리가 대학에 진학해 떠났을 때는 참 마음이 힘들었어요."
+  },
+  {
+    "id": "s49",
+    "start": 169.79,
+    "end": 174.4,
+    "en": "Having her be gone like that for the first time.",
+    "kr": "품 안의 자식을 처음으로 그렇게 멀리 떠나보내는 게요."
+  },
+  {
+    "id": "s50",
+    "start": 174.4,
+    "end": 177.38,
+    "en": "And then she didn't come home.",
+    "kr": "그러고는 집으로 다시 안 돌아오더라고요."
+  },
+  {
+    "id": "s51",
+    "start": 177.38,
+    "end": 181.31,
+    "en": "She went on to Europe for a while after college,",
+    "kr": "대학을 마친 뒤 한동안 유럽으로 떠났고,"
+  },
+  {
+    "id": "s52",
+    "start": 181.31,
+    "end": 184.38,
+    "en": "and then she met you.",
+    "kr": "그러다 사위를 만났죠."
+  },
+  {
+    "id": "s53",
+    "start": 184.38,
+    "end": 189.41,
+    "en": "This interview ends by, you're here, you brought my daughter back home,",
+    "kr": "이번 인터뷰의 마무리는, 자네가 여기 있고 우리 딸을 다시 집으로 데려와 줬고,"
+  },
+  {
+    "id": "s54",
+    "start": 189.41,
+    "end": 195.1,
+    "en": "and now I have two wonderful grandchildren and a wonderful son in law.",
+    "kr": "지금은 사랑스러운 두 손주와 멋진 사위를 두게 되었다는 이야기네요."
+  },
+  {
+    "id": "s55",
+    "start": 195.1,
+    "end": 198.37,
+    "en": "So, it makes me happy.",
+    "kr": "그래서 참 행복하답니다."
+  }
+]

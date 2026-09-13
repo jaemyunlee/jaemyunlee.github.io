@@ -21,7 +21,8 @@ const Storage = {
     POPCORN_STUDIED: 'rhyrhy_popcorn_studied',
     POPCORN_DAILY_STUDY: 'rhyrhy_popcorn_daily_study',
     POPCORN_SPACED_REP: 'rhyrhy_popcorn_spaced_rep',
-    POPCORN_STATS: 'rhyrhy_popcorn_stats'
+    POPCORN_STATS: 'rhyrhy_popcorn_stats',
+    SEEN_LESSONS: 'rhyrhy_seen_lessons'
   },
 
   /**
@@ -1114,6 +1115,32 @@ const Storage = {
     const daysSinceEpoch = Math.floor(d.getTime() / 86400000);
     const index = Math.abs(daysSinceEpoch) % list.length;
     return list[index];
+  },
+
+  /**
+   * Get list of seen lesson IDs
+   * @returns {string[]|null}
+   */
+  getSeenLessons() {
+    try {
+      const data = localStorage.getItem(this.KEYS.SEEN_LESSONS);
+      if (data) return JSON.parse(data);
+    } catch (e) {
+      console.warn('LocalStorage error reading seen lessons', e);
+    }
+    return null;
+  },
+
+  /**
+   * Mark all provided lesson IDs as seen
+   * @param {string[]} lessonIds
+   */
+  markLessonsSeen(lessonIds) {
+    try {
+      localStorage.setItem(this.KEYS.SEEN_LESSONS, JSON.stringify(lessonIds || []));
+    } catch (e) {
+      console.warn('LocalStorage error saving seen lessons', e);
+    }
   }
 };
 

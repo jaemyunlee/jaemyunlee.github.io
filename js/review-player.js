@@ -17,6 +17,8 @@ class ReviewPlayer {
     this.onComplete = options.onComplete || null;
     this.speakerName = options.speakerName || 'Kelly';
     this.speakerAvatar = options.speakerAvatar || '../../assets/img/avatars/kelly.jpg';
+    this.isComingSoon = options.isComingSoon || false;
+    this.scheduledDateText = options.scheduledDateText || '9월 15일';
 
     this.currentIndex = 0;
     this.isPlaying = false;
@@ -303,16 +305,22 @@ class ReviewPlayer {
 
         <!-- Step 2 Completion & Next Step Card -->
         <div class="step-completion-card" id="step2-complete-card">
-          <div class="step-complete-badge">✨ 2단계 핵심 문장 완료!</div>
-          <h4 class="step-complete-title">핵심 문장을 모두 귀로 익히셨습니다!</h4>
-          <p class="step-complete-desc">이제 전체 영상에서 이 표현들이 실제 대화 맥락 속에서 어떻게 쓰이는지 확인해보세요.</p>
+          <div class="step-complete-badge">${this.isComingSoon ? '🎉 사전 공개 학습 완료!' : '✨ 2단계 핵심 문장 완료!'}</div>
+          <h4 class="step-complete-title">${this.isComingSoon ? '사전 공개 콘텐츠를 모두 마스터하셨습니다!' : '핵심 문장을 모두 귀로 익히셨습니다!'}</h4>
+          <p class="step-complete-desc">${this.isComingSoon ? `패티 엄마의 생생한 목소리로 핵심 문장 13개를 모두 귀로 익히셨습니다.<br><strong>전체 영상 및 영작하기(Step 3 & 4)</strong>는 <strong>${this._escapeHtml(this.scheduledDateText)}</strong>에 정식 오픈됩니다!` : '이제 전체 영상에서 이 표현들이 실제 대화 맥락 속에서 어떻게 쓰이는지 확인해보세요.'}</p>
           <div class="step-complete-actions">
+            ${this.isComingSoon ? `
+            <a href="../../lessons.html" class="btn btn-primary" style="text-decoration: none;">
+              <span>📚 다른 레슨 목록 보러가기</span>
+            </a>
+            ` : `
             <button type="button" class="btn-goto-step3" id="btn-goto-step3" title="Step 3: 전체 영상 및 대본 학습으로 이동">
               <span>🎬 다음 단계: 전체 영상 보러가기</span>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9 18 15 12 9 6"/>
               </svg>
             </button>
+            `}
           </div>
         </div>
       </div>

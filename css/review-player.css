@@ -61,9 +61,30 @@
   }
 }
 
-.step-tab-btn:hover {
+.step-tab-btn:hover:not(:disabled):not(.deactivated) {
   color: var(--text-main);
   background-color: var(--surface-color-alt);
+}
+
+.step-tab-btn.deactivated,
+.step-tab-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(0.6);
+}
+
+.step-tab-btn.deactivated:hover,
+.step-tab-btn:disabled:hover {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.step-lock-icon {
+  font-size: 0.76rem;
+  opacity: 0.75;
+  margin-left: 2px;
+  line-height: 1;
 }
 
 .step-tab-btn.active {
