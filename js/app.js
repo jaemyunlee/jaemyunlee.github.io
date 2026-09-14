@@ -157,6 +157,23 @@ const App = {
       status: 'coming-soon',
       scheduledDate: '2026-09-15',
       scheduledDateText: '9월 15일 본영상 공개 예정'
+    },
+    {
+      id: 'lesson-04',
+      shortTitle: 'Lesson 4',
+      topic: "BigBang Concert in Oakland",
+      icon: '🎤',
+      speaker: 'Kelly',
+      avatar: 'assets/img/avatars/kelly.jpg',
+      createdAt: '2026-09-14',
+      title: '오클랜드 빅뱅 콘서트 직관기',
+      subtitle: '태양과 대성의 유쾌한 무대 매너, 야외 경기장 하늘석과 굿즈 이야기 속 생생한 일상 영어 표현',
+      duration: '5:05',
+      vocabCount: 15,
+      path: 'lessons/lesson-04/',
+      status: 'coming-soon',
+      scheduledDate: '2026-09-20',
+      scheduledDateText: '9월 20일 본영상 공개 예정'
     }
   ],
 
@@ -1598,6 +1615,25 @@ const LESSON_03_AUDIO_MAP = [
   { key: 'son in law', file: 'and now I have two wonderful grandchildren and a wonderful son in law..wav' }
 ];
 
+// Known audio files for Lesson 04 (maps keyword to WAV audio filename in lessons/lesson-04/audio/)
+const LESSON_04_AUDIO_MAP = [
+  { key: 'stood out', file: 'I felt like Amy kind of stood out because she was wearing a white dress..wav' },
+  { key: 'fit', file: 'and like other clothes that didnt quite fit..wav' },
+  { key: 'quite a few', file: 'There werent that many blonde girls you know in the crowd but there are still quite a few..wav' },
+  { key: 'merch sections', file: 'There were very short lines for different merch sections selling just the light sticks in certain spots of the stadium..wav' },
+  { key: 'odd time', file: 'If they went at like a very odd time.wav' },
+  { key: 'nosebleed seats', file: 'We were definitely in the nosebleed seats..wav' },
+  { key: 'open air stadium', file: 'Its an open air stadium..wav' },
+  { key: 'scripted setup', file: 'It did not feel like a super serious scripted setup..wav' },
+  { key: 'up to us', file: 'It was up to us to make it hot so he didnt catch a cold..wav' },
+  { key: 'played that up', file: 'So he just kind of really played that up to see whether or not he was going to take his shirt off..wav' },
+  { key: 'appearance', file: 'Daesung definitely made jokes about his appearance especially features of his face..wav' },
+  { key: 'turns out', file: 'but it turns out it was a brand name that said d squared..wav' },
+  { key: 'came across', file: 'Maybe in English the way they were saying it came across more silly..wav' },
+  { key: 'turned into', file: 'They were making mistakes and it turned into something humorous..wav' },
+  { key: 'felt random', file: 'but it just felt Oakland felt random to me..wav' }
+];
+
 const SavedAudioPlayer = {
   app: null,
   audio: null,
@@ -2332,6 +2368,12 @@ const SavedAudioPlayer = {
       for (const mapItem of LESSON_03_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
           return encodeURI(`${base}lessons/lesson-03/audio/${mapItem.file}`);
+        }
+      }
+    } else if (lesId === 'lesson-04') {
+      for (const mapItem of LESSON_04_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-04/audio/${mapItem.file}`);
         }
       }
     }
