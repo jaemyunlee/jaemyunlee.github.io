@@ -45,6 +45,7 @@ const CONCISE_DEFINITIONS = {
   'open air stadium': '야외 경기장, 지붕 없는 스타디움',
   'scripted setup': '대본대로 짜인 연출, 각본 설정',
   'up to us': '우리에게 달린, 우리가 할 몫인',
+  'up to': '우리에게 달린, 우리가 할 몫인',
   'played that up': '분위기를 띄우다, 능청스럽게 장난치다',
   'appearance': '외모, 생김새',
   'turns out': '알고 보니 ~이다, 드러나다',

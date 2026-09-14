@@ -1691,6 +1691,7 @@ const LESSON_04_AUDIO_MAP = [
   { key: 'nosebleed seats', file: 'We were definitely in the nosebleed seats..wav' },
   { key: 'open air stadium', file: 'Its an open air stadium..wav' },
   { key: 'scripted setup', file: 'It did not feel like a super serious scripted setup..wav' },
+  { key: 'up to', file: 'It was up to us to make it hot so he didnt catch a cold..wav' },
   { key: 'up to us', file: 'It was up to us to make it hot so he didnt catch a cold..wav' },
   { key: 'played that up', file: 'So he just kind of really played that up to see whether or not he was going to take his shirt off..wav' },
   { key: 'appearance', file: 'Daesung definitely made jokes about his appearance especially features of his face..wav' },

@@ -97,7 +97,7 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
 
     // Check Q9 is fill-in-the-blank
     expect(quizDistribution.sampleQ9.type).toBe('fill-in-the-blank');
-    expect(quizDistribution.sampleQ9.answer).toBe('up to us');
+    expect(quizDistribution.sampleQ9.answer).toBe('up to');
 
     // Check Q11 is listening
     expect(quizDistribution.sampleQ11.type).toBe('listening');

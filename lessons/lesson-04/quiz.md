@@ -67,8 +67,8 @@
 ## Quiz 9
 - **Type**: fill-in-the-blank
 - **Audio**: audio/It was up to us to make it hot so he didnt catch a cold..wav
-- **English**: It was [up to us] to make it hot so he didn't catch a cold.
-- **Answer**: up to us
+- **English**: It was [up to] us to make it hot so he didn't catch a cold.
+- **Answer**: up to
 - **Korean**: 태양 씨가 감기 안 걸리게 뜨겁게 만드는 건 온전히 우리 관객들의 몫이었죠.
 - **Explanation**: "be up to someone"은 "~에게 달려 있다, ~의 책임/몫이다"라는 필수 관용구입니다. "It was up to us"는 '우리 손에 달려 있었다, 우리가 할 일이었다'라는 뜻입니다.
 
