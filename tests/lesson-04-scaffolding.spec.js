@@ -251,4 +251,38 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     await expect(cardBtnLight).toBeVisible();
   });
 
+  test('lesson-04-key-expressions.srt is generated with accurate timing, key expressions, and Korean definitions', async () => {
+    const fs = require('fs');
+    const path = require('path');
+    const srtPath = path.resolve(__dirname, '../lessons/lesson-04/lesson-04-key-expressions.srt');
+    expect(fs.existsSync(srtPath)).toBe(true);
+
+    const content = fs.readFileSync(srtPath, 'utf8');
+    // Verify standing out with timing 00:00:27,560 --> 00:00:32,250
+    expect(content).toContain('00:00:27,560 --> 00:00:32,250');
+    expect(content).toContain('standing out');
+
+    // Verify key expressions from quiz
+    expect(content).toContain('stood out');
+    expect(content).toContain('fit');
+    expect(content).toContain('quite a few');
+    expect(content).toContain('merch sections');
+    expect(content).toContain('odd time');
+    expect(content).toContain('nosebleed seats');
+    expect(content).toContain('open air stadium');
+    expect(content).toContain('scripted setup');
+    expect(content).toContain('up to us');
+    expect(content).toContain('played that up');
+    expect(content).toContain('appearance');
+    expect(content).toContain('turns out');
+    expect(content).toContain('came across');
+    expect(content).toContain('turned into');
+    expect(content).toContain('felt random');
+
+    // Verify Korean definitions
+    expect(content).toContain('유독 눈에 띄다, 두드러지다');
+    expect(content).toContain('하늘석, 맨 꼭대기 좌석');
+    expect(content).toContain('알고 보니 ~이다, 드러나다');
+  });
+
 });

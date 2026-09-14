@@ -7,6 +7,7 @@
     "popcorn": "node scripts/scaffold-popcorn.js",
     "report:popcorn": "node scripts/popcorn-analytics-report.js",
     "build": "node scripts/build.js",
+    "generate:key-srt": "node scripts/generate_key_expressions_srt.js",
     "generate:og": "python3 scripts/generate-og-images.py",
     "serve": "node scripts/dev-server.js",
     "preview": "python3 -m http.server 8855 -d dist",

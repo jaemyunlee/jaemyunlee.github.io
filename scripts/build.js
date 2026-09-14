@@ -272,6 +272,22 @@ function build() {
   const globalBuildHash = getContentHash(allHashes.sort().join(''));
   console.log(`\n  🔑 Global Build Hash: ${globalBuildHash}`);
 
+  // 3b. Generate key-expressions SRT files for all available lessons
+  try {
+    const { generateLessonKeyExpressionsSrt } = require('./generate_key_expressions_srt.js');
+    const lessonsSrcDir = path.join(ROOT_DIR, 'lessons');
+    if (fs.existsSync(lessonsSrcDir)) {
+      const lessonEntries = fs.readdirSync(lessonsSrcDir, { withFileTypes: true });
+      for (const entry of lessonEntries) {
+        if (entry.isDirectory() && entry.name.startsWith('lesson-')) {
+          generateLessonKeyExpressionsSrt(entry.name);
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('  ⚠️ Key expressions SRT generation skipped:', err.message);
+  }
+
   // 4. Copy Static Assets, Lessons, and Config Directories
   const dirsToCopy = ['assets', 'lessons', 'templates', 'popcorn'];
   for (const dirName of dirsToCopy) {
