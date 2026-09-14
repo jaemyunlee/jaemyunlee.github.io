@@ -61,9 +61,19 @@
   }
 }
 
-.step-tab-btn:hover:not(:disabled):not(.deactivated) {
+.step-tab-btn:hover:not(:disabled):not(.deactivated):not(.active),
+.step-tab-btn:focus-visible:not(:disabled):not(.deactivated):not(.active) {
   color: var(--text-main);
   background-color: var(--surface-color-alt);
+}
+
+.step-tab-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.step-tab-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .step-tab-btn.deactivated,
@@ -87,11 +97,14 @@
   line-height: 1;
 }
 
-.step-tab-btn.active {
-  background: var(--primary);
+.step-tab-btn.active,
+.step-tab-btn.active:hover,
+.step-tab-btn.active:focus,
+.step-tab-btn.active:active {
+  background: var(--primary) !important;
   color: #FFFFFF !important;
-  border-color: var(--primary-light);
-  box-shadow: 0 2px 10px var(--primary-glow);
+  border-color: var(--primary-light) !important;
+  box-shadow: 0 2px 10px var(--primary-glow) !important;
 }
 
 .step-tab-btn .step-num {
@@ -104,11 +117,61 @@
   background: rgba(255, 255, 255, 0.15);
   font-size: 0.78rem;
   font-weight: 800;
+  transition: all 0.2s ease;
 }
 
-.step-tab-btn.active .step-num {
-  background: #FFFFFF;
-  color: var(--primary);
+.step-tab-btn.active .step-num,
+.step-tab-btn.active:hover .step-num,
+.step-tab-btn.active:focus .step-num,
+.step-tab-btn.active:active .step-num {
+  background: #FFFFFF !important;
+  color: var(--primary) !important;
+}
+
+/* Light mode explicit step navigation tabs styling */
+[data-theme="light"] .lesson-step-tabs {
+  background-color: var(--surface-color);
+  border-color: var(--surface-border);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="light"] .step-tab-btn:not(.active) {
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .step-tab-btn:not(.active) .step-num {
+  background: rgba(15, 23, 42, 0.08);
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .step-tab-btn:hover:not(:disabled):not(.deactivated):not(.active),
+[data-theme="light"] .step-tab-btn:focus-visible:not(:disabled):not(.deactivated):not(.active) {
+  color: var(--text-main);
+  background-color: var(--surface-color-alt);
+}
+
+[data-theme="light"] .step-tab-btn:hover:not(:disabled):not(.deactivated):not(.active) .step-num,
+[data-theme="light"] .step-tab-btn:focus-visible:not(:disabled):not(.deactivated):not(.active) .step-num {
+  background: rgba(15, 23, 42, 0.14);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .step-tab-btn.active,
+[data-theme="light"] .step-tab-btn.active:hover,
+[data-theme="light"] .step-tab-btn.active:focus,
+[data-theme="light"] .step-tab-btn.active:active {
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  border-color: var(--primary-light) !important;
+  box-shadow: 0 2px 12px var(--primary-glow) !important;
+}
+
+[data-theme="light"] .step-tab-btn.active .step-num,
+[data-theme="light"] .step-tab-btn.active:hover .step-num,
+[data-theme="light"] .step-tab-btn.active:focus .step-num,
+[data-theme="light"] .step-tab-btn.active:active .step-num {
+  background: #FFFFFF !important;
+  color: var(--primary) !important;
 }
 
 /* ==========================================================================
