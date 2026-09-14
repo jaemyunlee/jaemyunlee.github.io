@@ -25,9 +25,9 @@
 - **Explanation**: "quite a few"는 생각보다 "꽤 많은, 상당수"를 뜻하는 빈출 수량 표현입니다. 셀 수 있는 명사와 함께 쓰이며, '적지 않은 수'를 긍정적으로 나타냅니다.
 
 ## Quiz 4
-- **Type**: fill-in-the-blank
+- **Type**: multiple-choice
 - **Audio**: audio/There were very short lines for different merch sections selling just the light sticks in certain spots of the stadium..wav
-- **English**: There were very short lines for different [merch sections] selling just the light sticks in certain spots of the stadium.
+- **English**: There were very short lines for different [merch sections, food courts, ticket booths, parking zones] selling just the light sticks in certain spots of the stadium.
 - **Answer**: merch sections
 - **Korean**: 경기장 특정 구역마다 응원봉만 따로 파는 굿즈 코너들은 줄이 엄청 짧았어요.
 - **Explanation**: "merch"는 상품을 뜻하는 "merchandise"의 일상 구어 줄임말이며, "merch sections"는 콘서트장이나 행사장에서 공식 기념품을 파는 "굿즈 판매 구역/코너"를 뜻합니다.
@@ -49,9 +49,9 @@
 - **Explanation**: "nosebleed seats"는 경기장이나 대형 공연장에서 코피가 날 만큼 높은 고도라는 뜻에서 유래한 "하늘석, 맨 꼭대기 좌석"을 뜻하는 매우 생생한 미국 구어 표현입니다.
 
 ## Quiz 7
-- **Type**: fill-in-the-blank
+- **Type**: multiple-choice
 - **Audio**: audio/Its an open air stadium..wav
-- **English**: It's an [open air stadium].
+- **English**: It's an [open air stadium, indoor arena, underground bunker, private studio].
 - **Answer**: open air stadium
 - **Korean**: 야외 경기장이라서 지붕이 뚫려 있어요.
 - **Explanation**: "open air stadium"은 돔이나 천장이 덮여 있지 않은 "야외 경기장/스타디움"을 뜻합니다.

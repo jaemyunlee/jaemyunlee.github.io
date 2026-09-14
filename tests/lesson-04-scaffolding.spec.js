@@ -70,26 +70,28 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     });
 
     expect(quizDistribution.total).toBe(15);
-    expect(quizDistribution.counts['multiple-choice']).toBe(10); // ~66.7%
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(3);  // ~20.0%
+    expect(quizDistribution.counts['multiple-choice']).toBe(12); // 80.0%
+    expect(quizDistribution.counts['fill-in-the-blank']).toBe(1);  // ~6.7%
     expect(quizDistribution.counts['listening']).toBe(2);          // ~13.3%
 
     // Check sample multiple choice
     expect(quizDistribution.sampleQ1.answer).toBe('stood out');
     expect(quizDistribution.sampleQ1.options).toContain('stood out');
 
-    // Check Q4 is fill-in-the-blank
-    expect(quizDistribution.sampleQ4.type).toBe('fill-in-the-blank');
+    // Check Q4 is multiple-choice
+    expect(quizDistribution.sampleQ4.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ4.answer).toBe('merch sections');
+    expect(quizDistribution.sampleQ4.options).toContain('merch sections');
 
     // Check Q6 is multiple-choice
     expect(quizDistribution.sampleQ6.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ6.answer).toBe('nosebleed seats');
     expect(quizDistribution.sampleQ6.options).toContain('nosebleed seats');
 
-    // Check Q7 is fill-in-the-blank
-    expect(quizDistribution.sampleQ7.type).toBe('fill-in-the-blank');
+    // Check Q7 is multiple-choice
+    expect(quizDistribution.sampleQ7.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ7.answer).toBe('open air stadium');
+    expect(quizDistribution.sampleQ7.options).toContain('open air stadium');
 
     // Check Q11 is listening
     expect(quizDistribution.sampleQ11.type).toBe('listening');
