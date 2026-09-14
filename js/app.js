@@ -171,35 +171,52 @@ const App = {
       duration: '5:05',
       vocabCount: 15,
       path: 'lessons/lesson-04/',
-      status: 'coming-soon',
+      status: 'hidden',
       scheduledDate: '2026-09-20',
       scheduledDateText: '9월 20일 본영상 공개 예정'
     }
   ],
 
   /**
+   * Returns list of visible lessons for catalog and badge counting.
+   * If Storage.shouldShowHiddenLessons() is enabled (e.g. dev/testing flag),
+   * includes hidden lessons; otherwise filters them out.
+   * @returns {Array}
+   */
+  getVisibleLessons() {
+    if (!this.lessons || !this.lessons.length) return [];
+    const showHidden = (typeof Storage !== 'undefined' && typeof Storage.shouldShowHiddenLessons === 'function')
+      ? Storage.shouldShowHiddenLessons()
+      : false;
+    if (showHidden) return [...this.lessons];
+    return this.lessons.filter(les => les.status !== 'hidden');
+  },
+
+  /**
    * Checks if there is any new lesson since the user last visited.
-   * Compares App.lessons against Storage.getSeenLessons().
+   * Compares visible lessons against Storage.getSeenLessons().
    * @returns {boolean}
    */
   hasNewLessonForUser() {
-    if (!this.lessons || !this.lessons.length) return false;
+    const visible = this.getVisibleLessons();
+    if (!visible || !visible.length) return false;
     if (typeof Storage === 'undefined' || typeof Storage.getSeenLessons !== 'function') return false;
     const seenLessons = Storage.getSeenLessons();
     if (!seenLessons) {
       // First visit: lessons are new to this user
       return true;
     }
-    return this.lessons.some(les => !seenLessons.includes(les.id));
+    return visible.some(les => !seenLessons.includes(les.id));
   },
 
   /**
-   * Mark all current lessons as seen by user in Storage and remove red badge
+   * Mark all current visible lessons as seen by user in Storage and remove red badge
    */
   markLessonsAsSeen() {
-    if (!this.lessons || !this.lessons.length) return;
+    const visible = this.getVisibleLessons();
+    if (!visible || !visible.length) return;
     if (typeof Storage === 'undefined' || typeof Storage.markLessonsSeen !== 'function') return;
-    const allLessonIds = this.lessons.map(les => les.id);
+    const allLessonIds = visible.map(les => les.id);
     Storage.markLessonsSeen(allLessonIds);
     const badge = document.getElementById('nav-lessons-badge');
     if (badge) {
@@ -208,16 +225,17 @@ const App = {
   },
 
   getNextLesson(currentLessonId) {
-    if (!this.lessons || !this.lessons.length) return null;
-    const index = this.lessons.findIndex(l => l.id === currentLessonId);
-    if (index !== -1 && index + 1 < this.lessons.length) {
-      return this.lessons[index + 1];
+    const visible = this.getVisibleLessons();
+    if (!visible || !visible.length) return null;
+    const index = visible.findIndex(l => l.id === currentLessonId);
+    if (index !== -1 && index + 1 < visible.length) {
+      return visible[index + 1];
     }
     const match = (currentLessonId || '').match(/lesson-(\d+)/);
     if (match) {
       const nextNum = parseInt(match[1], 10) + 1;
       const nextId = `lesson-${String(nextNum).padStart(2, '0')}`;
-      const found = this.lessons.find(l => l.id === nextId);
+      const found = visible.find(l => l.id === nextId);
       if (found) return found;
     }
     return null;
@@ -923,7 +941,7 @@ const App = {
       return match ? parseInt(match[1], 10) : 0;
     };
 
-    let list = [...this.lessons];
+    let list = [...this.getVisibleLessons()];
     if (sort === 'asc') {
       list.sort((a, b) => getLessonNum(a.id) - getLessonNum(b.id));
     } else {
@@ -935,16 +953,26 @@ const App = {
     }
 
     container.innerHTML = list.map(les => {
+      const isHidden = les.status === 'hidden';
       const isComingSoon = les.status === 'coming-soon';
-      const lessonState = isComingSoon ? 'coming-soon' : Storage.getLessonState(les.id); // 'completed' | 'in-progress' | 'not-started' | 'coming-soon'
-      const isCompleted = !isComingSoon && lessonState === 'completed';
-      const inProgress = !isComingSoon && lessonState === 'in-progress';
+      const lessonState = isHidden ? 'hidden' : (isComingSoon ? 'coming-soon' : Storage.getLessonState(les.id)); // 'completed' | 'in-progress' | 'not-started' | 'coming-soon' | 'hidden'
+      const isCompleted = !isComingSoon && !isHidden && lessonState === 'completed';
+      const inProgress = !isComingSoon && !isHidden && lessonState === 'in-progress';
 
       let statusBadgeHtml = `<span class="badge badge-not-started"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg> 시작 전</span>`;
       let actionBtnText = `<span>학습 시작하기</span>`;
       let actionBtnClass = `btn-primary`;
 
-      if (isComingSoon) {
+      if (isHidden) {
+        statusBadgeHtml = `<span class="badge badge-hidden" style="background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.35);"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 비공개 (테스트)</span>`;
+        actionBtnClass = `btn-primary`;
+        const actualState = Storage.getLessonState(les.id);
+        if (actualState === 'in-progress' || actualState === 'completed') {
+          actionBtnText = `<span>이어서 테스트하기 ▶</span>`;
+        } else {
+          actionBtnText = `<span>테스트 학습하기 ▶</span>`;
+        }
+      } else if (isComingSoon) {
         const dateText = les.scheduledDateText || '9월 15일 본영상 공개 예정';
         statusBadgeHtml = `<span class="badge badge-coming-soon"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> ${dateText}</span>`;
         actionBtnClass = `btn-coming-soon`;
@@ -965,7 +993,7 @@ const App = {
       }
 
       return `
-        <article class="lesson-catalog-card state-${lessonState} ${isCompleted ? 'completed' : ''} ${inProgress ? 'in-progress' : ''} ${isComingSoon ? 'coming-soon' : ''}" id="card-${les.id}">
+        <article class="lesson-catalog-card state-${lessonState} ${isCompleted ? 'completed' : ''} ${inProgress ? 'in-progress' : ''} ${isComingSoon ? 'coming-soon' : ''} ${isHidden ? 'hidden-status' : ''}" id="card-${les.id}">
           <div class="lesson-card-top">
             <div class="lesson-card-badges">
               <span class="badge badge-primary">${les.shortTitle}</span>
@@ -1025,7 +1053,7 @@ const App = {
 
     const countEl = document.getElementById('total-lessons-count');
     if (countEl) {
-      countEl.textContent = this.lessons.length;
+      countEl.textContent = this.getVisibleLessons().length;
     }
 
     const sortButtons = document.querySelectorAll('.btn-sort-pill');
@@ -1547,6 +1575,44 @@ const App = {
           });
       });
     }
+  },
+
+  /**
+   * Developer testing mode: enable hidden lessons & ignore popcorn limit
+   */
+  enableDevTesting() {
+    if (typeof Storage !== 'undefined') {
+      if (typeof Storage.setShowHiddenLessons === 'function') Storage.setShowHiddenLessons(true);
+      if (typeof Storage.setIgnorePopcornLimit === 'function') Storage.setIgnorePopcornLimit(true);
+    }
+    console.log('%c[RhyRhy English Dev Mode] Enabled! 🔓', 'color: #10b981; font-weight: bold; font-size: 14px;');
+    console.log(' - Hidden lessons: VISIBLE (with [비공개 (테스트)] badge)');
+    console.log(' - Popcorn limit: BYPASS (unlimited daily lessons)');
+    // Re-render catalog if present on current page
+    if (document.getElementById('lessons-cards-container')) {
+      this.renderLessonsCatalog('#lessons-cards-container');
+      const countEl = document.getElementById('total-lessons-count');
+      if (countEl) countEl.textContent = this.getVisibleLessons().length;
+    }
+    return true;
+  },
+
+  /**
+   * Developer testing mode: disable hidden lessons & restore popcorn limit
+   */
+  disableDevTesting() {
+    if (typeof Storage !== 'undefined') {
+      if (typeof Storage.setShowHiddenLessons === 'function') Storage.setShowHiddenLessons(false);
+      if (typeof Storage.setIgnorePopcornLimit === 'function') Storage.setIgnorePopcornLimit(false);
+    }
+    console.log('%c[RhyRhy English Dev Mode] Disabled. 🔒', 'color: #ef4444; font-weight: bold; font-size: 14px;');
+    // Re-render catalog if present on current page
+    if (document.getElementById('lessons-cards-container')) {
+      this.renderLessonsCatalog('#lessons-cards-container');
+      const countEl = document.getElementById('total-lessons-count');
+      if (countEl) countEl.textContent = this.getVisibleLessons().length;
+    }
+    return false;
   }
 };
 

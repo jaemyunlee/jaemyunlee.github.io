@@ -22,7 +22,9 @@ const Storage = {
     POPCORN_DAILY_STUDY: 'rhyrhy_popcorn_daily_study',
     POPCORN_SPACED_REP: 'rhyrhy_popcorn_spaced_rep',
     POPCORN_STATS: 'rhyrhy_popcorn_stats',
-    SEEN_LESSONS: 'rhyrhy_seen_lessons'
+    SEEN_LESSONS: 'rhyrhy_seen_lessons',
+    SHOW_HIDDEN_LESSONS: 'rhyrhy_show_hidden_lessons',
+    IGNORE_POPCORN_LIMIT: 'rhyrhy_ignore_popcorn_limit'
   },
 
   /**
@@ -1075,6 +1077,9 @@ const Storage = {
    * @returns {boolean}
    */
   isPopcornDailyLimitReached(maxCount = 10, nowDate) {
+    if (this.shouldIgnorePopcornLimit()) {
+      return false;
+    }
     return this.getPopcornDailyStudyCount(nowDate) >= maxCount;
   },
 
@@ -1097,6 +1102,70 @@ const Storage = {
       localStorage.removeItem(this.KEYS.POPCORN_DAILY_STUDY);
       localStorage.removeItem(this.KEYS.POPCORN_SPACED_REP);
       localStorage.removeItem(this.KEYS.POPCORN_STATS);
+    } catch (_) { }
+  },
+
+  /**
+   * Check whether hidden status lessons should be displayed (for dev/testing)
+   * Checks ?show_hidden=true/1 or localStorage 'rhyrhy_show_hidden_lessons'
+   * @returns {boolean}
+   */
+  shouldShowHiddenLessons() {
+    try {
+      if (typeof window !== 'undefined' && window.location && window.location.search) {
+        const params = new URLSearchParams(window.location.search);
+        const val = params.get('show_hidden');
+        if (val === 'true' || val === '1') return true;
+      }
+      return localStorage.getItem(this.KEYS.SHOW_HIDDEN_LESSONS) === 'true';
+    } catch (_) {
+      return false;
+    }
+  },
+
+  /**
+   * Set flag to show or hide hidden status lessons
+   * @param {boolean} enable
+   */
+  setShowHiddenLessons(enable) {
+    try {
+      if (enable) {
+        localStorage.setItem(this.KEYS.SHOW_HIDDEN_LESSONS, 'true');
+      } else {
+        localStorage.removeItem(this.KEYS.SHOW_HIDDEN_LESSONS);
+      }
+    } catch (_) { }
+  },
+
+  /**
+   * Check whether popcorn daily limit should be bypassed (for dev/testing)
+   * Checks ?ignore_popcorn_limit=true/1 or localStorage 'rhyrhy_ignore_popcorn_limit'
+   * @returns {boolean}
+   */
+  shouldIgnorePopcornLimit() {
+    try {
+      if (typeof window !== 'undefined' && window.location && window.location.search) {
+        const params = new URLSearchParams(window.location.search);
+        const val = params.get('ignore_popcorn_limit');
+        if (val === 'true' || val === '1') return true;
+      }
+      return localStorage.getItem(this.KEYS.IGNORE_POPCORN_LIMIT) === 'true';
+    } catch (_) {
+      return false;
+    }
+  },
+
+  /**
+   * Set flag to ignore popcorn daily limit
+   * @param {boolean} ignore
+   */
+  setIgnorePopcornLimit(ignore) {
+    try {
+      if (ignore) {
+        localStorage.setItem(this.KEYS.IGNORE_POPCORN_LIMIT, 'true');
+      } else {
+        localStorage.removeItem(this.KEYS.IGNORE_POPCORN_LIMIT);
+      }
     } catch (_) { }
   },
 

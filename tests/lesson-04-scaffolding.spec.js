@@ -169,45 +169,34 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     await expect(page.locator('#reflection-section')).toBeHidden();
   });
 
-  test('Catalog (lessons.html) and Homepage (index.html) display Lesson 04 card with Coming Soon status', async ({ page }) => {
-    // Check lessons catalog
+  test('Catalog (lessons.html) and Homepage (index.html) hide Lesson 04 by default and show it when hidden flag is enabled', async ({ page }) => {
+    // 1. By default: Lesson 04 is hidden from catalog
     await page.goto('/lessons.html');
+    await page.evaluate(() => {
+      localStorage.removeItem('rhyrhy_show_hidden_lessons');
+    });
+    await page.reload();
+    await expect(page.locator('#card-lesson-04')).toHaveCount(0);
+
+    // 2. By default: Lesson 04 is hidden from homepage
+    await page.goto('/index.html');
+    await expect(page.locator('#lessons-cards-container #card-lesson-04')).toHaveCount(0);
+
+    // 3. When show_hidden is enabled, Lesson 04 appears in catalog with badge-hidden
+    await page.goto('/lessons.html?show_hidden=true');
     const lesson04Card = page.locator('#card-lesson-04');
     await expect(lesson04Card).toBeVisible({ timeout: 5000 });
     await expect(lesson04Card).toContainText('오클랜드 빅뱅 콘서트 직관기');
     await expect(lesson04Card).toContainText('5:05');
     await expect(lesson04Card).toContainText('15 퀴즈');
 
-    // Verify coming-soon class, badge, and button
-    await expect(lesson04Card).toHaveClass(/coming-soon/);
-    const comingSoonBadge = lesson04Card.locator('.badge-coming-soon');
-    await expect(comingSoonBadge).toBeVisible();
-    await expect(comingSoonBadge).toContainText('9월 20일 본영상 공개 예정');
+    // Verify hidden-status class, badge, and button
+    await expect(lesson04Card).toHaveClass(/hidden-status/);
+    const hiddenBadge = lesson04Card.locator('.badge-hidden');
+    await expect(hiddenBadge).toBeVisible();
+    await expect(hiddenBadge).toContainText('비공개 (테스트)');
     const actionBtn = lesson04Card.locator('.lesson-card-btn');
-    await expect(actionBtn).toHaveClass(/btn-coming-soon/);
-    await expect(actionBtn).toContainText('학습 시작하기');
-
-    // Check in-progress state displays "이어서 학습하기"
-    await page.evaluate(() => {
-      localStorage.setItem('rhyrhy_step_lesson-04', '2');
-    });
-    await page.reload();
-    const actionBtnInProgress = page.locator('#card-lesson-04 .lesson-card-btn');
-    await expect(actionBtnInProgress).toContainText('이어서 학습하기');
-    await page.evaluate(() => {
-      localStorage.removeItem('rhyrhy_step_lesson-04');
-    });
-
-    // Check home page latest lessons
-    await page.goto('/index.html');
-    const homeLesson04 = page.locator('#card-lesson-04');
-    await expect(homeLesson04).toBeVisible({ timeout: 5000 });
-    await expect(homeLesson04).toContainText('오클랜드 빅뱅 콘서트 직관기');
-    await expect(homeLesson04).toHaveClass(/coming-soon/);
-    await expect(homeLesson04.locator('.badge-coming-soon')).toContainText('9월 20일 본영상 공개 예정');
-    const homeActionBtn = homeLesson04.locator('.lesson-card-btn');
-    await expect(homeActionBtn).toHaveClass(/btn-coming-soon/);
-    await expect(homeActionBtn).toContainText('학습 시작하기');
+    await expect(actionBtn).toContainText('테스트 학습하기');
   });
 
   test('SavedAudioPlayer resolves audio URLs for Lesson 04', async ({ page }) => {
@@ -242,13 +231,11 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const badgeLight = page.locator('#lesson-coming-soon-badge');
     await expect(badgeLight).toBeVisible();
 
-    // Check catalog light mode
-    await page.goto('/lessons.html');
+    // Check catalog light mode with show_hidden enabled
+    await page.goto('/lessons.html?show_hidden=true');
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
-    const cardBadgeLight = page.locator('#card-lesson-04 .badge-coming-soon');
+    const cardBadgeLight = page.locator('#card-lesson-04 .badge-hidden');
     await expect(cardBadgeLight).toBeVisible();
-    const cardBtnLight = page.locator('#card-lesson-04 .btn-coming-soon');
-    await expect(cardBtnLight).toBeVisible();
   });
 
   test('lesson-04-key-expressions.srt is generated with accurate timing, key expressions, and Korean definitions', async () => {
