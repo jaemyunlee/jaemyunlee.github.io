@@ -62,17 +62,19 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
         sampleQ4: quizzes[3],
         sampleQ6: quizzes[5],
         sampleQ7: quizzes[6],
+        sampleQ9: quizzes[8],
         sampleQ11: quizzes[10],
         sampleQ12: quizzes[11],
+        sampleQ13: quizzes[12],
         sampleQ14: quizzes[13],
         sampleQ15: quizzes[14]
       };
     });
 
     expect(quizDistribution.total).toBe(15);
-    expect(quizDistribution.counts['multiple-choice']).toBe(12); // 80.0%
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(1);  // ~6.7%
-    expect(quizDistribution.counts['listening']).toBe(2);          // ~13.3%
+    expect(quizDistribution.counts['multiple-choice']).toBe(9);   // 60.0%
+    expect(quizDistribution.counts['fill-in-the-blank']).toBe(4); // ~26.7%
+    expect(quizDistribution.counts['listening']).toBe(2);         // ~13.3%
 
     // Check sample multiple choice
     expect(quizDistribution.sampleQ1.answer).toBe('stood out');
@@ -93,14 +95,21 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     expect(quizDistribution.sampleQ7.answer).toBe('open air stadium');
     expect(quizDistribution.sampleQ7.options).toContain('open air stadium');
 
+    // Check Q9 is fill-in-the-blank
+    expect(quizDistribution.sampleQ9.type).toBe('fill-in-the-blank');
+    expect(quizDistribution.sampleQ9.answer).toBe('up to us');
+
     // Check Q11 is listening
     expect(quizDistribution.sampleQ11.type).toBe('listening');
     expect(quizDistribution.sampleQ11.answer).toBe('appearance');
 
-    // Check Q12 is multiple-choice
-    expect(quizDistribution.sampleQ12.type).toBe('multiple-choice');
+    // Check Q12 is fill-in-the-blank
+    expect(quizDistribution.sampleQ12.type).toBe('fill-in-the-blank');
     expect(quizDistribution.sampleQ12.answer).toBe('turns out');
-    expect(quizDistribution.sampleQ12.options).toContain('turns out');
+
+    // Check Q13 is fill-in-the-blank
+    expect(quizDistribution.sampleQ13.type).toBe('fill-in-the-blank');
+    expect(quizDistribution.sampleQ13.answer).toBe('came across');
 
     // Check Q14 is fill-in-the-blank
     expect(quizDistribution.sampleQ14.type).toBe('fill-in-the-blank');

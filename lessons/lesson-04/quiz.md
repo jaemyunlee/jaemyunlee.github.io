@@ -65,9 +65,9 @@
 - **Explanation**: "scripted setup"은 미리 각본이나 대본을 짜놓고 연출한 "대본에 따른 설정/기획"을 의미합니다. 즉흥적이지 않고 인위적으로 계획된 구성을 뜻할 때 씁니다.
 
 ## Quiz 9
-- **Type**: multiple-choice
+- **Type**: fill-in-the-blank
 - **Audio**: audio/It was up to us to make it hot so he didnt catch a cold..wav
-- **English**: It was [up to us, out of hand, down to earth, next to none] to make it hot so he didn't catch a cold.
+- **English**: It was [up to us] to make it hot so he didn't catch a cold.
 - **Answer**: up to us
 - **Korean**: 태양 씨가 감기 안 걸리게 뜨겁게 만드는 건 온전히 우리 관객들의 몫이었죠.
 - **Explanation**: "be up to someone"은 "~에게 달려 있다, ~의 책임/몫이다"라는 필수 관용구입니다. "It was up to us"는 '우리 손에 달려 있었다, 우리가 할 일이었다'라는 뜻입니다.
@@ -89,17 +89,17 @@
 - **Explanation**: "appearance"는 사람의 "외모, 겉모습, 생김새"를 뜻하는 필수 명사입니다. "make jokes about one's appearance"는 '외모로 농담하다'라는 자연스러운 연어(collocation)입니다.
 
 ## Quiz 12
-- **Type**: multiple-choice
+- **Type**: fill-in-the-blank
 - **Audio**: audio/but it turns out it was a brand name that said d squared..wav
-- **English**: But it [turns out, shuts down, burns out, falls apart] it was a brand name that said d squared.
+- **English**: But it [turns out] it was a brand name that said d squared.
 - **Answer**: turns out
 - **Korean**: 그런데 알고 보니 '디스퀘어드(Dsquared)'라는 브랜드 이름이었던 거예요.
 - **Explanation**: "it turns out (that) ~"은 몰랐던 사실이 밝혀지거나 "알고 보니 ~이다, 드러나다"라는 뜻으로 일상 대화에서 매일 쓰이는 핵심 표현입니다.
 
 ## Quiz 13
-- **Type**: multiple-choice
+- **Type**: fill-in-the-blank
 - **Audio**: audio/Maybe in English the way they were saying it came across more silly..wav
-- **English**: Maybe in English, the way they were saying it [came across, came between, fell behind, ran through] more silly.
+- **English**: Maybe in English, the way they were saying it [came across] more silly.
 - **Answer**: came across
 - **Korean**: 아마 영어로 말하다 보니 그 표현 방식이 더 엉뚱하고 재미있게 다가온 것 같아요.
 - **Explanation**: "come across (as) ~"는 다른 사람들에게 어떤 느낌이나 인상으로 "다가오다, 전달되다, 비치다"라는 매우 세련된 원어민 구동사입니다.
