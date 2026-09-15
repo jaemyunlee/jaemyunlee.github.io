@@ -1310,6 +1310,30 @@
   }
 }
 
+.breakdown-section-header {
+  margin: 22px 0 10px;
+}
+
+.breakdown-section-header:first-of-type {
+  margin-top: 6px;
+}
+
+.breakdown-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 4px;
+}
+
+.breakdown-section-subtitle {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
 .breakdown-card {
   background: var(--surface-color-alt);
   border: 1px solid var(--surface-border);

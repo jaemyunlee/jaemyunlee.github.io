@@ -1,0 +1,155 @@
+{
+  "lessonId": "lesson-02",
+  "title": "심화 학습: Deep Dive",
+  "tag": "Grammar & Nuance",
+  "icon": "🥜",
+  "question": "어릴 적 추억을 이야기할 때, 왜 used to와 would를 섞어 쓸까?",
+  "questionEn": "Mastering the nuances of 'would', 'used to', and 'get to' when reminiscing",
+  "sections": [
+    {
+      "id": "section-1",
+      "num": 1,
+      "title": "1. would play vs. played",
+      "subtitle": "추억의 반복 습관 vs. 단순 과거 사실",
+      "scene": {
+        "timestamp": "01:46",
+        "title": "Scene 1: 개울가 물놀이 회상",
+        "lines": [
+          {
+            "speaker": "Wayne",
+            "en": "And we would, as kids, we would all have inner tubes and air mattresses,",
+            "kr": "어릴 때 우리 모두 튜브와 에어매트를 하나씩 가지고,"
+          },
+          {
+            "speaker": "Wayne",
+            "en": "and we would play in the creek all afternoon till we were like blue-lipped.",
+            "kr": "입술이 새파랗게 질릴 때까지 오후 내내 개울에서 물놀이를 하곤 했어요."
+          }
+        ],
+        "explanation": "어릴 적 형제들과 튜브를 타고 입술이 파래질 때까지 오후 내내 개울에서 물놀이를 즐겼던 따뜻한 추억을 회상하는 장면입니다."
+      },
+      "comparison": [
+        {
+          "pattern": "would + 동사원형 (would play)",
+          "badge": "향수 어린 회상",
+          "badgeColor": "emerald",
+          "coreMeaning": "\"그 시절엔 종종 놀곤 했지...\" (따뜻한 추억의 반복 습관)",
+          "explanation": "어린 시절이나 과거의 따뜻하고 행복했던 일과나 습관을 감성적으로 회상(nostalgic storytelling)할 때 씁니다. 듣는 사람에게 당시의 정겨운 분위기를 생생하게 전달합니다.",
+          "example": "We would play in the creek all afternoon till we were blue-lipped."
+        },
+        {
+          "pattern": "played (단순 과거)",
+          "badge": "단순 사실 서술",
+          "badgeColor": "slate",
+          "coreMeaning": "\"과거에 개울에서 놀았다\" (객관적 팩트 전달)",
+          "explanation": "이야기 속의 감정이나 그리움, 따뜻한 뉘앙스 없이, 단순히 시간 순서대로 일어난 과거 사건이나 팩트를 무미건조하게 전달할 때 씁니다.",
+          "example": "We played in the creek all afternoon."
+        }
+      ]
+    },
+    {
+      "id": "section-2",
+      "num": 2,
+      "title": "2. would vs. used to",
+      "subtitle": "반복된 행동 vs. 과거의 상태와 현재의 단절",
+      "scene": {
+        "timestamp": "01:43",
+        "title": "Scene 2: 예전의 보(작은 댐)",
+        "lines": [
+          {
+            "speaker": "Wayne",
+            "en": "We used to have a dam under the creek.",
+            "kr": "예전에는 개울 아래쪽에 보(작은 댐)가 있었어요."
+          }
+        ],
+        "explanation": "과거에는 개울가에 작은 보가 있어서 물놀이를 할 수 있었지만, 지금은 세월이 흘러 더 이상 존재하지 않는다는 상태의 변화를 전하는 장면입니다."
+      },
+      "comparison": [
+        {
+          "pattern": "used to + 동사원형",
+          "badge": "현재와의 단절 / 상태 동사 가능",
+          "badgeColor": "emerald",
+          "coreMeaning": "\"예전엔 이랬는데, 지금은 아니야\" (과거와 현재의 명확한 단절)",
+          "explanation": "과거의 한때 지속되었거나 반복되었지만, <strong>지금은 더 이상 그렇지 않음</strong>을 강조할 때 씁니다. 특히 have, live, be 같은 <strong>상태(state) 동사</strong>와 자연스럽게 결합할 수 있습니다.",
+          "example": "We used to have a dam under the creek. (예전엔 보가 있었지만 지금은 없음 - 상태 동사 have)"
+        },
+        {
+          "pattern": "would + 동사원형",
+          "badge": "오직 행동(Action)에만",
+          "badgeColor": "primary",
+          "coreMeaning": "\"종종 그러곤 했지\" (현재 단절보다 추억 회상에 집중)",
+          "explanation": "would는 상태 동사(have, live, be)에는 쓸 수 없고, <strong>반복된 구체적인 행동(action)</strong>에만 씁니다. 또한 현재와 완전히 단절되었는지 여부보다는 추억 그 자체를 회상하는 데 초점을 맞춥니다.",
+          "example": "We would have a dam (X - 상태 동사 have에는 would 사용 불가)"
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "num": 3,
+      "title": "3. get to vs. can",
+      "subtitle": "소중한 기회/축복 vs. 단순 물리적 능력/허가",
+      "scene": {
+        "timestamp": "05:25",
+        "title": "Scene 3: 세대를 이어 누리는 삶의 터전",
+        "lines": [
+          {
+            "speaker": "Wayne",
+            "en": "You know, this is the area that we have and grew up on.",
+            "kr": "이곳이 바로 우리가 자라난 삶의 터전이고,"
+          },
+          {
+            "speaker": "Wayne",
+            "en": "And now Jaemyun and Kelly get to enjoy it and the kids too.",
+            "kr": "이제는 재면이와 켈리, 그리고 아이들도 함께 이곳을 누릴 수 있게 되었죠."
+          }
+        ],
+        "explanation": "웨인 삼촌 세대가 자라난 소중한 터전을 이제 다음 세대가 이어받아 즐길 수 있게 된 것에 대해 깊은 감사와 축복의 마음을 표현하는 감동적인 장면입니다."
+      },
+      "comparison": [
+        {
+          "pattern": "get to + 동사원형",
+          "badge": "소중한 기회 / 축복",
+          "badgeColor": "emerald",
+          "coreMeaning": "\"~하는 행운과 특별한 기회를 누리다\"",
+          "explanation": "어떤 일을 할 수 있게 된 것이 당연한 권리나 단순 능력이 아니라, <strong>누군가에게 주어진 특별한 선물이나 축복, 감사한 기회(privilege / blessing)</strong>라고 느낄 때 씁니다.",
+          "example": "Now Jaemyun and Kelly get to enjoy it and the kids too."
+        },
+        {
+          "pattern": "can / could + 동사원형",
+          "badge": "단순 능력 / 허가",
+          "badgeColor": "slate",
+          "coreMeaning": "\"신체적·물리적으로 ~할 수 있다\"",
+          "explanation": "감정적 감사나 축복의 뉘앙스 없이, 단순히 신체적 능력(ability)이나 상황적 허가(permission)가 갖추어져 있음을 뜻합니다.",
+          "example": "Now they can enjoy it. (이제 그들은 즐길 수 있다 - 감정 없는 단순 가능 서술)"
+        }
+      ]
+    }
+  ],
+  "takeaway": "옛 추억을 감성적으로 회상할 땐 단순 과거(played)보다 <strong>would play</strong>로 따뜻한 분위기를 살리고, 과거의 상태(have, live)나 지금은 달라진 상황을 말할 땐 <strong>used to</strong>를, 나에게 주어진 감사한 기회와 행운을 표현할 땐 can 대신 <strong>get to</strong>를 써보세요!",
+  "examples": [
+    {
+      "id": "ex-01",
+      "pattern": "used to & would",
+      "en": "I used to live near the beach, and every summer my brother and I would wake up at sunrise to go surfing.",
+      "kr": "예전에 해변 근처에 살았었는데, 매년 여름이면 남동생이랑 일출 때 일어나서 서핑하러 가곤 했지.",
+      "situation": "과거의 주거 환경(상태: used to)과 당시의 아련한 추억(반복 행동: would)을 함께 회상할 때",
+      "highlight": "used to live ... would wake up"
+    },
+    {
+      "id": "ex-02",
+      "pattern": "would vs. 단순과거",
+      "en": "Whenever it rained, my grandma would bake warm chocolate cookies and read us stories by the fireplace.",
+      "kr": "비가 올 때마다 할머니께선 따뜻한 초콜릿 쿠키를 구워주시고 벽난로 옆에서 동화책을 읽어주시곤 했어요.",
+      "situation": "어린 시절 가족과 함께했던 따스한 기억을 향수 어린 톤(nostalgic tone)으로 전할 때",
+      "highlight": "would bake ... and read"
+    },
+    {
+      "id": "ex-03",
+      "pattern": "get to vs. can",
+      "en": "I'm so grateful that I get to work with such inspiring mentors and learn from them every single day.",
+      "kr": "매일 이렇게 훌륭한 멘토들과 함께 일하며 배울 수 있는 특별한 기회를 누리게 되어 정말 감사해요.",
+      "situation": "당연한 능력이 아니라, 나에게 주어진 소중한 기회와 환경에 대한 진심 어린 감사를 표현할 때",
+      "highlight": "get to work ... and learn"
+    }
+  ]
+}

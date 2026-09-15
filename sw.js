@@ -60,6 +60,7 @@ const STATIC_ASSETS = [
   './lessons/lesson-02/metadata.json',
   './lessons/lesson-02/quiz.md',
   './lessons/lesson-02/script.json',
+  './lessons/lesson-02/deep-dive.json',
   './lessons/lesson-03/index.html',
   './lessons/lesson-03/metadata.json',
   './lessons/lesson-03/quiz.md',

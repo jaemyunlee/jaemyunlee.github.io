@@ -143,7 +143,7 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(bottomCard).toContainText('전체 영상');
   });
 
-  test('Lessons without Deep Dive (e.g. Lesson 01, 02, 03) continue to flow seamlessly without Peanut tab', async ({ page }) => {
+  test('Lessons without Deep Dive (e.g. Lesson 01, 03) continue to flow seamlessly without Peanut tab', async ({ page }) => {
     // Check Lesson 01
     await page.goto('/lessons/lesson-01/index.html');
     await expect(page.locator('#step-tab-deep-dive')).toHaveCount(0);
@@ -162,6 +162,131 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await page.locator('.step-tab-btn[data-step="2"]').click();
     const nextBtn03 = page.locator('#step2-complete-card #btn-goto-step3');
     await expect(nextBtn03).toContainText('전체 영상 보러가기');
+  });
+
+  test.describe('Lesson 02 Deep Dive (심화 학습) - 3 Separate Sections (Issue #74)', () => {
+
+    test('Lesson 02 displays the Peanut tab between Step 2 and Step 3', async ({ page }) => {
+      await page.goto('/lessons/lesson-02/index.html');
+
+      const tabs = page.locator('#lesson-step-tabs .step-tab-btn');
+      await expect(tabs).toHaveCount(5);
+
+      const deepDiveTab = page.locator('#step-tab-deep-dive');
+      await expect(deepDiveTab).toBeVisible();
+      await expect(deepDiveTab).toHaveAttribute('data-step', 'deep-dive');
+      await expect(deepDiveTab.locator('.step-icon')).toHaveText('🥜');
+      await expect(deepDiveTab.locator('.step-label')).toHaveText('심화 학습');
+    });
+
+    test('Clicking Deep Dive tab opens the section and updates the status badge', async ({ page }) => {
+      await page.goto('/lessons/lesson-02/index.html');
+
+      const deepDiveTab = page.locator('#step-tab-deep-dive');
+      const deepDiveSection = page.locator('#deep-dive-section');
+      const statusBadge = page.locator('#lesson-status-badge');
+
+      await expect(deepDiveSection).toBeHidden();
+      await deepDiveTab.click();
+
+      await expect(deepDiveTab).toHaveClass(/active/);
+      await expect(deepDiveSection).toBeVisible();
+      await expect(statusBadge).toHaveText('🥜 심화 학습');
+
+      // Other sections should be hidden
+      await expect(page.locator('#quiz-section')).toBeHidden();
+      await expect(page.locator('#review-section')).toBeHidden();
+      await expect(page.locator('#video-section')).toBeHidden();
+    });
+
+    test('Renders 3 separate sections each with its own scene box and comparison grid', async ({ page }) => {
+      await page.goto('/lessons/lesson-02/index.html');
+      await page.locator('#step-tab-deep-dive').click();
+
+      const section = page.locator('#deep-dive-section');
+
+      // Header prompt
+      await expect(section.locator('.badge-peanut')).toContainText('심화 학습 · Deep Dive');
+      await expect(section.locator('.deep-dive-heading')).toContainText('어릴 적 추억을 이야기할 때, 왜 used to와 would를 섞어 쓸까?');
+
+      // 3 separate section headers and scene boxes
+      const sectionHeaders = section.locator('.breakdown-section-header');
+      await expect(sectionHeaders).toHaveCount(3);
+
+      const sceneBoxes = section.locator('.deep-dive-scene-box');
+      await expect(sceneBoxes).toHaveCount(3);
+
+      const breakdownGrids = section.locator('.deep-dive-breakdown-grid');
+      await expect(breakdownGrids).toHaveCount(3);
+
+      // Section 1: would play vs played
+      await expect(sectionHeaders.nth(0)).toContainText('1. would play vs. played');
+      await expect(sceneBoxes.nth(0).locator('.deep-dive-scene-meta')).toContainText('Scene 1: 개울가 물놀이 회상');
+      await expect(sceneBoxes.nth(0).locator('.deep-dive-time-badge')).toContainText('⏱ 01:46');
+      await expect(sceneBoxes.nth(0).locator('.deep-dive-dialogue')).toContainText('inner tubes and air mattresses');
+      await expect(sceneBoxes.nth(0).locator('.deep-dive-dialogue')).toContainText('till we were like blue-lipped');
+      await expect(breakdownGrids.nth(0).locator('.breakdown-card').nth(0)).toContainText('would + 동사원형');
+      await expect(breakdownGrids.nth(0).locator('.breakdown-card').nth(0)).toContainText('향수 어린 회상');
+      await expect(breakdownGrids.nth(0).locator('.breakdown-card').nth(1)).toContainText('played (단순 과거)');
+      await expect(breakdownGrids.nth(0).locator('.breakdown-card').nth(1)).toContainText('단순 사실 서술');
+
+      // Section 2: would vs used to
+      await expect(sectionHeaders.nth(1)).toContainText('2. would vs. used to');
+      await expect(sceneBoxes.nth(1).locator('.deep-dive-scene-meta')).toContainText('Scene 2: 예전의 보(작은 댐)');
+      await expect(sceneBoxes.nth(1).locator('.deep-dive-time-badge')).toContainText('⏱ 01:43');
+      await expect(sceneBoxes.nth(1).locator('.deep-dive-dialogue')).toContainText('We used to have a dam under the creek.');
+      await expect(breakdownGrids.nth(1).locator('.breakdown-card').nth(0)).toContainText('used to + 동사원형');
+      await expect(breakdownGrids.nth(1).locator('.breakdown-card').nth(0)).toContainText('현재와의 단절');
+      await expect(breakdownGrids.nth(1).locator('.breakdown-card').nth(1)).toContainText('would + 동사원형');
+      await expect(breakdownGrids.nth(1).locator('.breakdown-card').nth(1)).toContainText('행동(Action)에만');
+
+      // Section 3: get to vs can
+      await expect(sectionHeaders.nth(2)).toContainText('3. get to vs. can');
+      await expect(sceneBoxes.nth(2).locator('.deep-dive-scene-meta')).toContainText('Scene 3: 세대를 이어 누리는 삶의 터전');
+      await expect(sceneBoxes.nth(2).locator('.deep-dive-time-badge')).toContainText('⏱ 05:25');
+      await expect(sceneBoxes.nth(2).locator('.deep-dive-dialogue')).toContainText('Jaemyun and Kelly get to enjoy it');
+      await expect(breakdownGrids.nth(2).locator('.breakdown-card').nth(0)).toContainText('get to + 동사원형');
+      await expect(breakdownGrids.nth(2).locator('.breakdown-card').nth(0)).toContainText('소중한 기회 / 축복');
+      await expect(breakdownGrids.nth(2).locator('.breakdown-card').nth(1)).toContainText('can / could');
+      await expect(breakdownGrids.nth(2).locator('.breakdown-card').nth(1)).toContainText('단순 능력 / 허가');
+
+      // Takeaway & 3 Examples
+      await expect(section.locator('.deep-dive-takeaway')).toContainText('핵심 꿀팁 정리');
+      const examples = section.locator('.deep-dive-example-card');
+      await expect(examples).toHaveCount(3);
+    });
+
+    test('In published Lesson 02, Deep Dive bottom card directs directly to Step 3 and is enabled', async ({ page }) => {
+      await page.goto('/lessons/lesson-02/index.html');
+      await page.locator('#step-tab-deep-dive').click();
+
+      const nextBtn = page.locator('#btn-deep-dive-next');
+      await expect(nextBtn).toBeVisible();
+      await expect(nextBtn).toContainText('전체 영상 보러가기');
+      await expect(nextBtn).toBeEnabled();
+      await expect(nextBtn).not.toHaveClass(/deactivated/);
+
+      // Click button and verify it navigates to Step 3
+      await nextBtn.click();
+      await expect(page.locator('#video-section')).toBeVisible();
+      await expect(page.locator('.step-tab-btn[data-step="3"]')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
+    });
+
+    test('LocalStorage restores deep-dive step state on reload in Lesson 02', async ({ page }) => {
+      await page.goto('/lessons/lesson-02/index.html');
+      await page.locator('#step-tab-deep-dive').click();
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+
+      const stored = await page.evaluate(() => localStorage.getItem('rhyrhy_step_lesson-02'));
+      expect(stored).toBe('deep-dive');
+
+      await page.reload();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+      await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
+    });
+
   });
 
   test('Deep Dive maintains high contrast in both Dark and Light modes', async ({ page }) => {
