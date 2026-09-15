@@ -68,9 +68,56 @@ To guarantee that new deployments are delivered immediately to all users while m
   - **Wayne -> Kelly**: **Wayne speaks in 반말** (warm/friendly informal speech: `~해`, `~했어`, `~구나`, `~자`).
   - This rule strictly applies to all Popcorn Quick Lessons (`popcorn/conversation/*.md`), regular lesson scripts (`script.json`), and translations across the app.
 
+### Lesson Status Lifecycle & Static Enumerations (`js/lesson-status.js`)
+
+All AI coding agents and contributors **MUST** refer to and use the centralized static enums defined in [`js/lesson-status.js`](js/lesson-status.js) rather than hardcoded string literals:
+
+1. **`LessonPublicationStatus`** (Catalog & Metadata publication lifecycle):
+   - **`PUBLISHED: 'published'`**: Live lesson accessible to all learners. All 4 steps (Quiz, Key Sentences, Full Video, Writing) are unlocked. If `status` is omitted in `metadata.json`, it defaults to published.
+   - **`COMING_SOON: 'coming-soon'`**: Pre-release teaser prior to full video publication. Steps 1 & 2 (Quiz, Key Sentences) are active; Steps 3 & 4 (Video, Writing) are locked. Displays a scheduled release date badge (e.g. `9월 18일 본영상 공개 예정`).
+   - **`HIDDEN: 'hidden'`**: Internal draft/testing lesson. Excluded from catalog and homepage by default; does not trigger the red navbar "NEW" badge. Accessible via direct URL or developer bypass flag (`?show_hidden=true` or `App.enableDevTesting()`), displaying a `[비공개 (테스트)]` badge.
+
+2. **`LessonProgressState`** (Learner progress tracked in `localStorage` via `Storage.getLessonState()`):
+   - **`NOT_STARTED: 'not-started'`**: The learner has not interacted with the lesson yet.
+   - **`IN_PROGRESS: 'in-progress'`**: The learner has answered quiz questions or accessed Steps 1–3, but has not completed Step 4.
+   - **`COMPLETED: 'completed'`**: The learner has completed all 4 steps (triggered on Step 4).
+
+3. **`LessonStep`** (The 4 sequential interactive steps):
+   - `QUIZ: 1` (Step 1: Interactive Cloze Quiz)
+   - `KEY_SENTENCES: 2` (Step 2: Key Sentences & Native Pronunciation Audio)
+   - `FULL_VIDEO: 3` (Step 3: Full YouTube Video & Synchronized Script)
+   - `WRITING: 4` (Step 4: Writing Practice & YouTube Encouragement)
+
+**Code Usage**: Always import and use `LessonPublicationStatus`, `LessonProgressState`, or `LessonStatusHelper` in code. E.g.:
+```javascript
+if (LessonStatusHelper.isComingSoon(metadata.status)) { ... }
+```
+
 ---
 
-## 4. Build & Deployment Verification
+## 4. LocalStorage Architecture & Strict Backward Compatibility Protocol
+
+> [!CAUTION]
+> **ZERO BREAKING CHANGES TO LOCALSTORAGE**: RhyRhy English operates **WITHOUT a backend server or database**. All user study progress, completed quizzes, interactive step progress, saved sentence bank items, study streaks, and history reside **EXCLUSIVELY in the learner's browser `localStorage`**. Any breaking change, key deletion/renaming, schema mutation without migration, or data loss directly wipes out real users' accumulated learning achievements.
+
+To ensure user data safety and permanent continuity:
+
+### A. Centralized Access via `js/storage.js`
+- **Never call `localStorage` directly in UI components or pages**: All persistence reads, writes, deletions, and inspections **MUST** route through [`js/storage.js`](js/storage.js) (`Storage.*`).
+- **Standardized Key Registry**: Every key must be declared in [`Storage.KEYS`](js/storage.js). Never introduce hardcoded string keys scattered across application code.
+
+### B. Strict Backward Compatibility & Non-Destructive Migrations
+- **Permanent Key Stability**: Never rename or delete established keys (e.g., `rhyrhy_progress_*`, `rhyrhy_completed_*`, `rhyrhy_step_*`, `rhyrhy_saved_sentences`, `rhyrhy_history`, `rhyrhy_popcorn_*`, `rhyrhy_theme`, `rhyrhy_seen_lessons`).
+- **Graceful Schema Evolution**:
+  - When extending stored objects with new properties, always support legacy records. Never assume newly added properties exist on previously stored items.
+  - Provide fallback defaults when reading: e.g., `const item = JSON.parse(...) || {}; const value = item.newField ?? legacyDefault;`.
+  - Perform lazy, non-destructive migrations: if updating schema versions, upgrade transparently on read without wiping previous state.
+- **Never Clear Storage in Application Code**: Calling `localStorage.clear()` is **strictly prohibited** in runtime production application code (it is only permitted in isolated automated test environments).
+- **Hardened Error Handling**: Every `localStorage` read and write must be safely wrapped in defensive `try ... catch` blocks to gracefully handle Safari Private Browsing mode, storage quota exceeded errors (`QuotaExceededError`), and malformed JSON without crashing the application.
+
+---
+
+## 5. Build & Deployment Verification
 
 - **Zero External Dependencies**: The build script [`scripts/build.js`](scripts/build.js) uses native Node.js (`fs`, `path`, `crypto`) with zero npm packages. Keep it zero-dependency.
 - **Verification Commands**:
@@ -81,7 +128,7 @@ To guarantee that new deployments are delivered immediately to all users while m
 
 ---
 
-## 5. Quiz Sharing & Open Graph (OG) Image Protocol (Issue #6)
+## 6. Quiz Sharing & Open Graph (OG) Image Protocol (Issue #6)
 
 To maximize viral curiosity and organic engagement across social sharing platforms (KakaoTalk, Twitter/X, Instagram, SMS):
 
@@ -102,7 +149,7 @@ To maximize viral curiosity and organic engagement across social sharing platfor
 
 ---
 
-## 6. GitHub Issue Workflow: One-by-One, Feature Branches & Pull Requests
+## 7. GitHub Issue Workflow: One-by-One, Feature Branches & Pull Requests
 
 > [!IMPORTANT]
 > **MANDATORY WORKFLOW**: All GitHub issues must be handled strictly **one by one**. Always create a **new branch** for each issue, verify changes thoroughly, push, and submit a **Pull Request (PR)**.

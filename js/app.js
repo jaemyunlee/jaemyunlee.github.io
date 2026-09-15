@@ -127,7 +127,8 @@ const App = {
       subtitle: '켈리가 빅뱅 콘서트를 가게 된 사연과 어떻게 빅뱅을 좋아하게 되었는지 들으면서 영어 표현을 배워봐요',
       duration: '6:43',
       vocabCount: 21,
-      path: 'lessons/lesson-01/'
+      path: 'lessons/lesson-01/',
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     },
     {
       id: 'lesson-02',
@@ -139,7 +140,8 @@ const App = {
       subtitle: '1963년부터 이어져 온 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 영어 표현',
       duration: '5:48',
       vocabCount: 19,
-      path: 'lessons/lesson-02/'
+      path: 'lessons/lesson-02/',
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     },
     {
       id: 'lesson-03',
@@ -154,9 +156,7 @@ const App = {
       duration: '3:18',
       vocabCount: 13,
       path: 'lessons/lesson-03/',
-      status: 'coming-soon',
-      scheduledDate: '2026-09-15',
-      scheduledDateText: '9월 15일 본영상 공개 예정'
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     },
     {
       id: 'lesson-04',
@@ -171,9 +171,9 @@ const App = {
       duration: '5:05',
       vocabCount: 15,
       path: 'lessons/lesson-04/',
-      status: 'hidden',
-      scheduledDate: '2026-09-20',
-      scheduledDateText: '9월 20일 본영상 공개 예정'
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
+      scheduledDate: '2026-09-18',
+      scheduledDateText: '9월 18일 본영상 공개 예정'
     }
   ],
 
@@ -189,7 +189,8 @@ const App = {
       ? Storage.shouldShowHiddenLessons()
       : false;
     if (showHidden) return [...this.lessons];
-    return this.lessons.filter(les => les.status !== 'hidden');
+    const hiddenStatus = (typeof LessonPublicationStatus !== 'undefined') ? LessonPublicationStatus.HIDDEN : 'hidden';
+    return this.lessons.filter(les => les.status !== hiddenStatus);
   },
 
   /**
@@ -953,8 +954,12 @@ const App = {
     }
 
     container.innerHTML = list.map(les => {
-      const isHidden = les.status === 'hidden';
-      const isComingSoon = les.status === 'coming-soon';
+      const isHidden = (typeof LessonStatusHelper !== 'undefined')
+        ? LessonStatusHelper.isHidden(les.status)
+        : (les.status === 'hidden');
+      const isComingSoon = (typeof LessonStatusHelper !== 'undefined')
+        ? LessonStatusHelper.isComingSoon(les.status)
+        : (les.status === 'coming-soon');
       const lessonState = isHidden ? 'hidden' : (isComingSoon ? 'coming-soon' : Storage.getLessonState(les.id)); // 'completed' | 'in-progress' | 'not-started' | 'coming-soon' | 'hidden'
       const isCompleted = !isComingSoon && !isHidden && lessonState === 'completed';
       const inProgress = !isComingSoon && !isHidden && lessonState === 'in-progress';
@@ -973,7 +978,7 @@ const App = {
           actionBtnText = `<span>테스트 학습하기 ▶</span>`;
         }
       } else if (isComingSoon) {
-        const dateText = les.scheduledDateText || '9월 15일 본영상 공개 예정';
+        const dateText = les.scheduledDateText || '본영상 공개 예정';
         statusBadgeHtml = `<span class="badge badge-coming-soon"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> ${dateText}</span>`;
         actionBtnClass = `btn-coming-soon`;
         const actualState = Storage.getLessonState(les.id);

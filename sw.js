@@ -20,6 +20,7 @@ const STATIC_ASSETS = [
   './css/daily-popcorn.css',
   './css/review-player.css',
   './css/modal.css',
+  './js/lesson-status.js',
   './js/storage.js',
   './js/analytics.js',
   './js/markdown-quiz-parser.js',

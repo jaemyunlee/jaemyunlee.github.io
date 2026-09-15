@@ -2,7 +2,7 @@
 - and like other clothes that didn't quite [fit].
 - There weren't that many blonde girls you know in the crowd, but there are still [quite a few].
 - There were very short lines for different [merch sections] selling just the light sticks in certain spots of the stadium.
-- If they went at like a very [odd time],
+- If they went at like a very [odd time].
 - We were definitely in the [nosebleed seats].
 - It's an [open air stadium].
 - It did not feel like a super serious, [scripted setup].

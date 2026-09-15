@@ -2,7 +2,43 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
 
-  test('Hidden status default: Lesson 04 is omitted from catalog and index, count is 3', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
+    // Inject a hidden test draft lesson into App.lessons so hidden status behavior can always be verified
+    await page.addInitScript(() => {
+      const injectDraft = (app) => {
+        if (app && Array.isArray(app.lessons)) {
+          if (!app.lessons.find(l => l.id === 'lesson-draft')) {
+            app.lessons.push({
+              id: 'lesson-draft',
+              shortTitle: 'Draft',
+              topic: 'Internal Draft',
+              icon: '🧪',
+              createdAt: '2026-09-15',
+              title: '테스트 비공개 레슨',
+              subtitle: '내부 개발 테스트용 비공개 레슨',
+              duration: '3:00',
+              vocabCount: 10,
+              path: 'lessons/lesson-04/',
+              status: 'hidden'
+            });
+          }
+        }
+      };
+
+      let realApp = window.App;
+      if (realApp) injectDraft(realApp);
+      Object.defineProperty(window, 'App', {
+        configurable: true,
+        get() { return realApp; },
+        set(val) {
+          realApp = val;
+          injectDraft(realApp);
+        }
+      });
+    });
+  });
+
+  test('Hidden status default: Hidden lesson is omitted from catalog and index, count is 4', async ({ page }) => {
     // Clear storage to test clean state
     await page.goto('http://localhost:8855/lessons.html');
     await page.evaluate(() => {
@@ -12,24 +48,24 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await page.reload();
 
     // 1. Check lessons.html catalog
-    const card04 = page.locator('#card-lesson-04');
-    await expect(card04).toHaveCount(0);
+    const cardDraft = page.locator('#card-lesson-draft');
+    await expect(cardDraft).toHaveCount(0);
 
     const countEl = page.locator('#total-lessons-count');
-    await expect(countEl).toHaveText('3');
+    await expect(countEl).toHaveText('4');
 
     // 2. Check index.html latest lessons grid
     await page.goto('http://localhost:8855/index.html');
-    const indexCard04 = page.locator('#lessons-cards-container #card-lesson-04');
-    await expect(indexCard04).toHaveCount(0);
+    const indexCardDraft = page.locator('#lessons-cards-container #card-lesson-draft');
+    await expect(indexCardDraft).toHaveCount(0);
   });
 
   test('Navbar red N badge: Hidden lesson does not trigger new lesson indicator', async ({ page }) => {
     await page.goto('http://localhost:8855/index.html');
     await page.evaluate(() => {
       localStorage.removeItem('rhyrhy_show_hidden_lessons');
-      // Mark lessons 1, 2, 3 as seen
-      localStorage.setItem('rhyrhy_seen_lessons', JSON.stringify(['lesson-01', 'lesson-02', 'lesson-03']));
+      // Mark lessons 1, 2, 3, 4 as seen
+      localStorage.setItem('rhyrhy_seen_lessons', JSON.stringify(['lesson-01', 'lesson-02', 'lesson-03', 'lesson-04']));
     });
     await page.reload();
 
@@ -37,7 +73,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await expect(badge).toHaveCount(0);
   });
 
-  test('Direct URL access works cleanly for hidden lesson', async ({ page }) => {
+  test('Direct URL access works cleanly for lesson player', async ({ page }) => {
     await page.goto('http://localhost:8855/lessons/lesson-04/index.html');
 
     // Header badge and elements load properly
@@ -52,30 +88,30 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await expect(quizContainer).toBeVisible();
   });
 
-  test('Hidden status bypass via localStorage: Lesson 04 appears with [비공개 (테스트)] badge', async ({ page }) => {
+  test('Hidden status bypass via localStorage: Hidden lesson appears with [비공개 (테스트)] badge', async ({ page }) => {
     await page.goto('http://localhost:8855/lessons.html');
     await page.evaluate(() => {
       localStorage.setItem('rhyrhy_show_hidden_lessons', 'true');
     });
     await page.reload();
 
-    const card04 = page.locator('#card-lesson-04');
-    await expect(card04).toBeVisible();
+    const cardDraft = page.locator('#card-lesson-draft');
+    await expect(cardDraft).toBeVisible();
 
-    const hiddenBadge = card04.locator('.badge-hidden');
+    const hiddenBadge = cardDraft.locator('.badge-hidden');
     await expect(hiddenBadge).toBeVisible();
     await expect(hiddenBadge).toContainText('비공개 (테스트)');
 
     const countEl = page.locator('#total-lessons-count');
-    await expect(countEl).toHaveText('4');
+    await expect(countEl).toHaveText('5');
   });
 
   test('Hidden status bypass via query parameter ?show_hidden=true', async ({ page }) => {
     await page.goto('http://localhost:8855/lessons.html?show_hidden=true');
 
-    const card04 = page.locator('#card-lesson-04');
-    await expect(card04).toBeVisible();
-    await expect(card04.locator('.badge-hidden')).toBeVisible();
+    const cardDraft = page.locator('#card-lesson-draft');
+    await expect(cardDraft).toBeVisible();
+    await expect(cardDraft.locator('.badge-hidden')).toBeVisible();
   });
 
   test('App.enableDevTesting() and App.disableDevTesting() dynamically toggle hidden lessons and count', async ({ page }) => {
@@ -86,21 +122,21 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     });
     await page.reload();
 
-    // Default: card 04 not visible
-    await expect(page.locator('#card-lesson-04')).toHaveCount(0);
-    await expect(page.locator('#total-lessons-count')).toHaveText('3');
+    // Default: cardDraft not visible
+    await expect(page.locator('#card-lesson-draft')).toHaveCount(0);
+    await expect(page.locator('#total-lessons-count')).toHaveText('4');
 
     // Turn ON dev mode dynamically
     await page.evaluate(() => window.App.enableDevTesting());
 
-    await expect(page.locator('#card-lesson-04')).toBeVisible();
-    await expect(page.locator('#total-lessons-count')).toHaveText('4');
+    await expect(page.locator('#card-lesson-draft')).toBeVisible();
+    await expect(page.locator('#total-lessons-count')).toHaveText('5');
 
     // Turn OFF dev mode dynamically
     await page.evaluate(() => window.App.disableDevTesting());
 
-    await expect(page.locator('#card-lesson-04')).toHaveCount(0);
-    await expect(page.locator('#total-lessons-count')).toHaveText('3');
+    await expect(page.locator('#card-lesson-draft')).toHaveCount(0);
+    await expect(page.locator('#total-lessons-count')).toHaveText('4');
   });
 
   test('Popcorn daily limit bypass via localStorage (rhyrhy_ignore_popcorn_limit)', async ({ page }) => {
@@ -152,7 +188,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
   test('Badge hidden contrast in dark and light modes', async ({ page }) => {
     await page.goto('http://localhost:8855/lessons.html?show_hidden=true');
 
-    const badge = page.locator('#card-lesson-04 .badge-hidden');
+    const badge = page.locator('#card-lesson-draft .badge-hidden');
     await expect(badge).toBeVisible();
 
     // Dark mode

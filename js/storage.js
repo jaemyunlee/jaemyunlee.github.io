@@ -597,13 +597,16 @@ const Storage = {
    * @returns {'completed' | 'in-progress' | 'not-started'}
    */
   getLessonState(lessonId) {
+    const states = (typeof LessonProgressState !== 'undefined')
+      ? LessonProgressState
+      : { COMPLETED: 'completed', IN_PROGRESS: 'in-progress', NOT_STARTED: 'not-started' };
     if (this.isLessonCompleted(lessonId)) {
-      return 'completed';
+      return states.COMPLETED;
     }
     if (this.isLessonInProgress(lessonId)) {
-      return 'in-progress';
+      return states.IN_PROGRESS;
     }
-    return 'not-started';
+    return states.NOT_STARTED;
   },
 
   /**

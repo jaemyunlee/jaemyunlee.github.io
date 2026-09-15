@@ -68,7 +68,7 @@
             <line x1="8" y1="2" x2="8" y2="6" />
             <line x1="3" y1="10" x2="21" y2="10" />
           </svg>
-          9월 20일 본영상 공개 예정
+          9월 18일 본영상 공개 예정
         </span>
         <span class="badge badge-emerald" id="lesson-status-badge">Step 1: Quiz</span>
       </div>
@@ -79,7 +79,7 @@
       <div class="coming-soon-banner-icon" aria-hidden="true">📅</div>
       <div class="coming-soon-banner-text">
         <div class="coming-soon-banner-title">
-          9월 20일 본영상 정식 오픈 예정
+          9월 18일 본영상 정식 오픈 예정
           <span class="coming-soon-badge-pill">사전 공개</span>
         </div>
         <div class="coming-soon-banner-desc">
@@ -99,13 +99,13 @@
         <span class="step-label">핵심 문장</span>
       </button>
       <button type="button" class="step-tab-btn deactivated" data-step="3" id="step-tab-3" disabled aria-disabled="true"
-        title="9월 20일 본영상 공개 예정">
+        title="9월 18일 본영상 공개 예정">
         <span class="step-num">3</span>
         <span class="step-label">전체 영상</span>
         <span class="step-lock-icon" aria-hidden="true">🔒</span>
       </button>
       <button type="button" class="step-tab-btn deactivated" data-step="4" id="step-tab-4" disabled aria-disabled="true"
-        title="9월 20일 본영상 공개 예정">
+        title="9월 18일 본영상 공개 예정">
         <span class="step-num">4</span>
         <span class="step-label">영작하기</span>
         <span class="step-lock-icon" aria-hidden="true">🔒</span>
@@ -220,6 +220,7 @@
 
   <!-- Core Scripts -->
   <script src="../../assets/vendor/lottie.min.js"></script>
+  <script src="../../js/lesson-status.js"></script>
   <script src="../../js/storage.js"></script>
   <script src="../../js/analytics.js"></script>
   <script src="../../js/markdown-quiz-parser.js"></script>
@@ -281,7 +282,7 @@
         const metaRes = await fetch('./metadata.json');
         if (metaRes.ok) {
           metadata = await metaRes.json();
-          isComingSoon = metadata.status === 'coming-soon';
+          isComingSoon = (typeof LessonStatusHelper !== 'undefined') ? LessonStatusHelper.isComingSoon(metadata.status) : (metadata.status === 'coming-soon');
           if (!isComingSoon) {
             const stepTab3 = document.getElementById('step-tab-3');
             const stepTab4 = document.getElementById('step-tab-4');
@@ -405,7 +406,7 @@
               speakerName: metadata?.speaker?.name || 'Kelly',
               speakerAvatar: metadata?.speaker?.avatar || '../../assets/img/avatars/kelly.jpg',
               isComingSoon: isComingSoon,
-              scheduledDateText: metadata?.scheduledDateText || '9월 20일',
+              scheduledDateText: metadata?.scheduledDateText || '9월 18일',
               celebrationManager: celebrationManager,
               onComplete: () => {
                 if (isComingSoon) {
