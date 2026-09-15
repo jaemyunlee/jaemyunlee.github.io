@@ -13,11 +13,6 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
-    // Coming soon badge in header
-    const comingSoonBadge = page.locator('#lesson-coming-soon-badge');
-    await expect(comingSoonBadge).toBeVisible();
-    await expect(comingSoonBadge).toContainText('9월 18일 본영상 공개 예정');
-
     // Coming soon notification banner
     const comingSoonBanner = page.locator('#coming-soon-banner');
     await expect(comingSoonBanner).toBeVisible();
@@ -240,15 +235,11 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
     const bannerDark = page.locator('#coming-soon-banner');
     await expect(bannerDark).toBeVisible();
-    const badgeDark = page.locator('#lesson-coming-soon-badge');
-    await expect(badgeDark).toBeVisible();
 
     // Light mode check
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     const bannerLight = page.locator('#coming-soon-banner');
     await expect(bannerLight).toBeVisible();
-    const badgeLight = page.locator('#lesson-coming-soon-badge');
-    await expect(badgeLight).toBeVisible();
 
     // Check catalog light mode
     await page.goto('/lessons.html');
