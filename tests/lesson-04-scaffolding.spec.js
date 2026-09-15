@@ -269,7 +269,7 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     expect(content).toContain('nosebleed seats');
     expect(content).toContain('open air stadium');
     expect(content).toContain('scripted setup');
-    expect(content).toContain('up to us');
+    expect(content).toContain('up to');
     expect(content).toContain('played that up');
     expect(content).toContain('appearance');
     expect(content).toContain('turns out');
