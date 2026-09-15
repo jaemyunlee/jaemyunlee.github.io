@@ -220,6 +220,17 @@ const DailyPopcornManager = {
         }
       }
 
+      if (available.length === 0 && typeof Storage !== 'undefined' && typeof Storage.shouldIgnorePopcornLimit === 'function' && Storage.shouldIgnorePopcornLimit() && this.currentMetadata.length > 0) {
+        // In testing / ignore limit mode, reuse all metadata lessons so tester can test continuously
+        available = this.currentMetadata;
+        if (excludeId && available.length > 1) {
+          const alternatives = available.filter(item => item.id !== excludeId);
+          if (alternatives.length > 0) {
+            available = alternatives;
+          }
+        }
+      }
+
       if (available.length > 0) {
         candidate = available[Math.floor(Math.random() * available.length)];
       } else {

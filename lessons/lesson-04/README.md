@@ -1,0 +1,15 @@
+- I felt like Amy kind of [stood out] because she was wearing a white dress.
+- and like other clothes that didn't quite [fit].
+- There weren't that many blonde girls you know in the crowd, but there are still [quite a few].
+- There were very short lines for different [merch sections] selling just the light sticks in certain spots of the stadium.
+- If they went at like a very [odd time],
+- We were definitely in the [nosebleed seats].
+- It's an [open air stadium].
+- It did not feel like a super serious, [scripted setup].
+- It was [up to us] to make it hot so he didn't catch a cold.
+- So he just kind of really [played that up] to see whether or not he was going to take his shirt off.
+- Daesung definitely made jokes about his [appearance], especially features of his face.
+- but it [turns out] it was a brand name that said d squared.
+- Maybe in English, the way they were saying it [came across] more silly.
+- They were making mistakes and it [turned into] something humorous.
+- but it just felt Oakland [felt random] to me.

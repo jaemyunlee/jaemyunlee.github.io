@@ -1,6 +1,6 @@
 ﻿1
 00:00:05,090 --> 00:00:09,020
-Kelly is a very strongwilled person.
+Kelly is a very strong-willed person.
 
 2
 00:00:09,020 --> 00:00:11,320

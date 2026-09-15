@@ -78,7 +78,22 @@ const CURATED_HEADLINES = {
   'lesson-03-10': '"아직 기저귀를 차고 있는 시절" 영어 표현은?',
   'lesson-03-11': '"한 번 갈 때 2주씩 머물다" 한 번에를 뜻하는 표현은?',
   'lesson-03-12': '"대학 진학으로 집을 떠나다" 원어민 구동사는?',
-  'lesson-03-13': '"사위(딸의 남편)"를 영어 가족 호칭으로 뭐라고 부를까요?'
+  'lesson-03-13': '"사위(딸의 남편)"를 영어 가족 호칭으로 뭐라고 부를까요?',
+  'lesson-04-1': '"군중 속에서 유독 눈에 띄다"를 영어로?',
+  'lesson-04-2': '"분위기에 어울리다, 딱 맞다" 일상 필수 동사는?',
+  'lesson-04-3': '"생각보다 꽤 많은 수"를 뜻하는 영어 표현은?',
+  'lesson-04-4': '"콘서트 굿즈 판매 구역/코너" 영어로 뭐라고 할까요?',
+  'lesson-04-5': '"남들이 안 찾는 애매한 시간대" 영어 표현은?',
+  'lesson-04-6': '"하늘석(맨 꼭대기 좌석)"을 영어로 뭐라고 부를까요?',
+  'lesson-04-7': '"지붕이 없는 야외 경기장" 영어 표현은?',
+  'lesson-04-8': '"대본대로 짜인 연출/설정" 영어로?',
+  'lesson-04-9': '"그건 온전히 우리에게 달려 있다" 필수 관용구는?',
+  'lesson-04-10': '"능청스럽게 분위기를 띄우며 장난치다" 원어민 구동사는?',
+  'lesson-04-11': '"사람의 겉모습, 외모"를 뜻하는 핵심 영어 단어는?',
+  'lesson-04-12': '"알고 보니 ~인 것으로 드러나다" 매일 쓰는 영어 표현은?',
+  'lesson-04-13': '"어떤 인상이나 느낌으로 다가오다" 세련된 원어민 구동사는?',
+  'lesson-04-14': '"다른 무언가로 변하다, 바뀌다" 영어로?',
+  'lesson-04-15': '"뜬금없고 생뚱맞게 느껴지다" 원어민 일상 표현은?'
 };
 
 function escapeAttr(str) {
@@ -256,6 +271,22 @@ function build() {
   // Global Build Hash derived from all asset hashes
   const globalBuildHash = getContentHash(allHashes.sort().join(''));
   console.log(`\n  🔑 Global Build Hash: ${globalBuildHash}`);
+
+  // 3b. Generate key-expressions SRT files for all available lessons
+  try {
+    const { generateLessonKeyExpressionsSrt } = require('./generate_key_expressions_srt.js');
+    const lessonsSrcDir = path.join(ROOT_DIR, 'lessons');
+    if (fs.existsSync(lessonsSrcDir)) {
+      const lessonEntries = fs.readdirSync(lessonsSrcDir, { withFileTypes: true });
+      for (const entry of lessonEntries) {
+        if (entry.isDirectory() && entry.name.startsWith('lesson-')) {
+          generateLessonKeyExpressionsSrt(entry.name);
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('  ⚠️ Key expressions SRT generation skipped:', err.message);
+  }
 
   // 4. Copy Static Assets, Lessons, and Config Directories
   const dirsToCopy = ['assets', 'lessons', 'templates', 'popcorn'];
