@@ -1,52 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" data-theme="dark">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>어릴 적 추억을 이야기할 때, 왜 used to와 would를 섞어 쓸까? - 현서네 리얼 영어 심화 학습</title>
+  <meta name="description" content="would play vs. played, would vs. used to, get to vs. can 뉘앙스 완벽 비교! 영어 공부하는 다른 사람에게도 알려주세요.">
+
   <!-- Cache Control (Issue #3: Maximize Browser Caching) -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Lesson 2: Uncle Wayne's Cabin & Dry Creek - RhyRhy English</title>
+
+  <!-- Open Graph & Social Sharing -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[현서네 리얼 영어] 어릴 적 추억을 이야기할 때, 왜 used to와 would를 섞어 쓸까? - 심화 학습">
+  <meta property="og:description" content="would play vs. played, would vs. used to, get to vs. can 뉘앙스 완벽 비교! 영어 공부하는 다른 사람에게도 알려주세요.">
+  <meta property="og:url" content="https://rhyrhyenglish.site/lessons/lesson-02/deep-dive.html">
+  <meta property="og:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-02-q6.png">
+  <meta property="og:site_name" content="현서네 리얼 영어">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="[현서네 리얼 영어] 어릴 적 추억을 이야기할 때, 왜 used to와 would를 섞어 쓸까? - 심화 학습">
+  <meta name="twitter:description" content="would play vs. played, would vs. used to, get to vs. can 뉘앙스 완벽 비교! 영어 공부하는 다른 사람에게도 알려주세요.">
+  <meta name="twitter:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-02-q6.png">
+
+  <link rel="canonical" href="https://rhyrhyenglish.site/lessons/lesson-02/deep-dive.html">
+
+  <!-- PWA & Mobile Icons -->
   <link rel="manifest" href="../../manifest.webmanifest">
   <meta name="theme-color" content="#4F46E5">
-  <link rel="icon" type="image/svg+xml" href="../../assets/icons/icon.svg">
-  <link rel="apple-touch-icon" href="../../assets/icons/icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="../../assets/icons/icon-192.png">
 
-  <script>
-    (function(){try{var t=localStorage.getItem('rhyrhy_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-  </script>
-  <!-- Google tag (gtag.js) - only loaded in production -->
+  <!-- Preload Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Anti-FOUC Script -->
   <script>
     (function () {
-      var isLocal = Boolean(
-        window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.hostname === '0.0.0.0' ||
-        (window.location.hostname && window.location.hostname.indexOf('.local') !== -1) ||
-        window.location.protocol === 'file:'
-      );
-      if (isLocal) {
-        window['ga-disable-G-6Z1RWQ4CN2'] = true;
-      }
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      window.gtag = gtag;
-      if (!isLocal) {
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2';
-        document.head.appendChild(s);
-        gtag('js', new Date());
-      }
+      const savedTheme = localStorage.getItem('rhyrhy_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
     })();
   </script>
+
+  <!-- Core Styles -->
   <link rel="stylesheet" href="../../css/main.css">
-  <link rel="stylesheet" href="../../css/navigation.css">
   <link rel="stylesheet" href="../../css/quiz.css">
   <link rel="stylesheet" href="../../css/video-script.css">
-  <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/reflection.css">
   <link rel="stylesheet" href="../../css/review-player.css">
 </head>
 
@@ -60,13 +66,13 @@
     <section class="lesson-header-section" style="margin-bottom: 14px;">
       <div style="display: flex; align-items: center; gap: 10px;">
         <span class="badge badge-primary">Lesson 02</span>
-        <span class="badge badge-emerald" id="lesson-status-badge">Step 1: Quiz</span>
+        <span class="badge badge-emerald" id="lesson-status-badge">🥜 심화 학습</span>
       </div>
     </section>
 
-    <!-- Step Navigation Tabs (1, 2, 3, 4) -->
+    <!-- Step Navigation Tabs (1, 2, deep-dive, 3, 4) -->
     <nav class="lesson-step-tabs" id="lesson-step-tabs" aria-label="학습 단계 이동">
-      <button type="button" class="step-tab-btn active" data-step="1">
+      <button type="button" class="step-tab-btn" data-step="1">
         <span class="step-num">1</span>
         <span class="step-label">퀴즈</span>
       </button>
@@ -74,7 +80,7 @@
         <span class="step-num">2</span>
         <span class="step-label">핵심 문장</span>
       </button>
-      <button type="button" class="step-tab-btn" data-step="deep-dive" id="step-tab-deep-dive" title="심화 학습: 추억을 회상하는 3가지 표현 (would, used to, get to)">
+      <button type="button" class="step-tab-btn active" data-step="deep-dive" id="step-tab-deep-dive" title="심화 학습: 추억을 회상하는 3가지 표현 (would, used to, get to)">
         <span class="step-icon" aria-hidden="true">🥜</span>
         <span class="step-label">심화 학습</span>
       </button>
@@ -89,7 +95,7 @@
     </nav>
 
     <!-- Step 1: Pre-Video Quizzes Section -->
-    <section class="quiz-section-wrapper" id="quiz-section" aria-label="Step 1: Quizzes">
+    <section class="quiz-section-wrapper" id="quiz-section" aria-label="Step 1: Quizzes" style="display: none;">
       <div id="quiz-container">
         <!-- Rendered dynamically by QuizEngine -->
         <div style="text-align: center; padding: 40px;">
@@ -104,8 +110,8 @@
       <div id="review-player-container"></div>
     </section>
 
-    <!-- Deep Dive: 심화 학습 Section -->
-    <section class="deep-dive-section-wrapper" id="deep-dive-section" aria-label="심화 학습: Deep Dive" style="display: none;">
+    <!-- Deep Dive: 심화 학습 Section (Default Active) -->
+    <section class="deep-dive-section-wrapper" id="deep-dive-section" aria-label="심화 학습: Deep Dive">
       <div class="deep-dive-card">
         <!-- Header / Question Prompt -->
         <header class="deep-dive-header">
@@ -512,7 +518,7 @@
   <script src="../../js/app.js"></script>
 
   <script>
-    // Initialize Lesson 02
+    // Initialize Lesson 02 - Deep Dive Dedicated Page
     document.addEventListener('DOMContentLoaded', async () => {
       const LESSON_ID = 'lesson-02';
 
@@ -534,25 +540,25 @@
 
       // Pre-matched audio files for Lesson 02
       const LESSON_02_AUDIO_FILES = [
-        "There was nothing here on the property..wav", // Q1
-        "we managed to use a headlight and a battery for lights..wav", // Q2
-        "we just used buckets or bottles for water until we had a spring built that was up on the hill..wav", // Q3
-        "we had water midway through summer and then we ran out..wav", // Q4
-        "when they passed Gene and Patty had moved up here. to take care of the property..wav", // Q5
-        "we would all have inner tubes and air mattresses..wav", // Q6
-        "we would play in the creek all afternoon till we were like blue-lipped..wav", // Q7
-        "we could only get in the creek after we got our chores done in the morning..wav", // Q8
-        "its been a treat.wav", // Q9
-        "The creek itself is called Dry Creek not because it ran dry of water because when back in the 1800s or 1890s whenever....wav", // Q10
-        "our creek feeds a lake downstream..wav", // Q11
-        "Its known for fishing. they stock it like three times a year..wav", // Q12
-        "through the years it got added on to three times..wav", // Q13
-        "we had a water line break and it flooded the whole place. we had to strip it right down the inside..wav", // Q14
-        "we had to strip it all the way down to the studs so the building would dry out and wouldnt get moldy..wav", // Q15
-        "They had to build the house to make it level..wav", // Q16
-        "As they were getting up in age and didnt have to worry about falls anymore..wav", // Q17
-        "That was my moms memorial bell that we built and this was mining equipment that we found up in the hills..wav", // Q18
-        "Now Kelly get to enjoy it..wav" // Q19
+        "There was nothing here on the property..wav",
+        "we managed to use a headlight and a battery for lights..wav",
+        "we just used buckets or bottles for water until we had a spring built that was up on the hill..wav",
+        "we had water midway through summer and then we ran out..wav",
+        "when they passed Gene and Patty had moved up here. to take care of the property..wav",
+        "we would all have inner tubes and air mattresses..wav",
+        "we would play in the creek all afternoon till we were like blue-lipped..wav",
+        "we could only get in the creek after we got our chores done in the morning..wav",
+        "its been a treat.wav",
+        "The creek itself is called Dry Creek not because it ran dry of water because when back in the 1800s or 1890s whenever....wav",
+        "our creek feeds a lake downstream..wav",
+        "Its known for fishing. they stock it like three times a year..wav",
+        "through the years it got added on to three times..wav",
+        "we had a water line break and it flooded the whole place. we had to strip it right down the inside..wav",
+        "we had to strip it all the way down to the studs so the building would dry out and wouldnt get moldy..wav",
+        "They had to build the house to make it level..wav",
+        "As they were getting up in age and didnt have to worry about falls anymore..wav",
+        "That was my moms memorial bell that we built and this was mining equipment that we found up in the hills..wav",
+        "Now Kelly get to enjoy it..wav"
       ];
 
       let metadata = {};
@@ -595,7 +601,7 @@
       commentManager.init();
 
       // Unified Step Navigation (1, 2, 'deep-dive', 3, 4) with LocalStorage Memory
-      let currentActiveStep = 1;
+      let currentActiveStep = 'deep-dive';
       const showStep = (stepNumber, scroll = true) => {
         let step = (stepNumber === 'deep-dive') ? 'deep-dive' : Math.min(4, Math.max(1, parseInt(stepNumber, 10) || 1));
         currentActiveStep = step;
@@ -642,7 +648,7 @@
           }
         }
 
-        // Update Status Badge (Consistent green highlight across all steps)
+        // Update Status Badge
         if (statusBadge) {
           statusBadge.className = 'badge badge-emerald';
           if (step === 1) {
@@ -658,7 +664,7 @@
           }
         }
 
-        // Lazy-init Review Player on Step 2 (핵심 문장)
+        // Lazy-init Review Player on Step 2
         if (step === 2 && loadedQuizzes.length > 0) {
           if (!reviewPlayer) {
             reviewPlayer = new ReviewPlayer({
@@ -680,7 +686,7 @@
           }
         }
 
-        // Lazy-init Video Player on Step 3 (전체 영상)
+        // Lazy-init Video Player on Step 3
         if (step === 3) {
           if (!videoPlayer) {
             videoPlayer = new VideoScriptPlayer({
@@ -707,7 +713,7 @@
           }
         }
 
-        // Uniform Scroll to fit active contents section across all steps
+        // Scroll to active content
         if (scroll) {
           try {
             let targetSection = null;
@@ -730,59 +736,6 @@
         }
       };
       window.showStep = showStep;
-
-      // Step Navigation Tabs Click Binding
-      document.querySelectorAll('.step-tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const raw = btn.dataset.step;
-          const s = (raw === 'deep-dive') ? 'deep-dive' : parseInt(raw, 10);
-          showStep(s, true);
-        });
-      });
-
-      // Swipe Left / Right to Navigate Steps on Touch Devices
-      const appMain = document.querySelector('main.app-container') || document.body;
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let touchStartTime = 0;
-
-      appMain.addEventListener('touchstart', (e) => {
-        if (e.touches.length !== 1) return;
-        if (e.target.closest('input, textarea, select, button, iframe, .video-toolbar, .plyr, .audio-player-card, a')) {
-          touchStartX = 0;
-          return;
-        }
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
-      }, { passive: true });
-
-      appMain.addEventListener('touchend', (e) => {
-        if (!touchStartX) return;
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-        const diffX = touchEndX - touchStartX;
-        const diffY = touchEndY - touchStartY;
-        const duration = Date.now() - touchStartTime;
-
-        const stepsSeq = [1, 2, 'deep-dive', 3, 4];
-        const currentIndex = stepsSeq.indexOf(currentActiveStep);
-        if (Math.abs(diffX) >= 50 && Math.abs(diffX) > Math.abs(diffY) * 1.5 && duration <= 600) {
-          if (diffX < 0 && currentIndex < stepsSeq.length - 1) {
-            showStep(stepsSeq[currentIndex + 1], true);
-          } else if (diffX > 0 && currentIndex > 0) {
-            showStep(stepsSeq[currentIndex - 1], true);
-          }
-        }
-        touchStartX = 0;
-      }, { passive: true });
-
-      // Pause video playback if user switches tabs or minimizes browser (audio continues in background)
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          if (videoPlayer) videoPlayer.pause();
-        }
-      });
 
       // Deep Dive Share handler
       const shareDeepDive = () => {
@@ -864,6 +817,52 @@
         }
       };
 
+      // Step Navigation Tabs Click Binding
+      document.querySelectorAll('.step-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const raw = btn.dataset.step;
+          const s = (raw === 'deep-dive') ? 'deep-dive' : parseInt(raw, 10);
+          showStep(s, true);
+        });
+      });
+
+      // Swipe Navigation
+      const appMain = document.querySelector('main.app-container') || document.body;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      appMain.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        if (e.target.closest('input, textarea, select, button, iframe, .video-toolbar, .plyr, .audio-player-card, a')) {
+          touchStartX = 0;
+          return;
+        }
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive: true });
+
+      appMain.addEventListener('touchend', (e) => {
+        if (!touchStartX) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        const duration = Date.now() - touchStartTime;
+
+        const stepsSeq = [1, 2, 'deep-dive', 3, 4];
+        const currentIndex = stepsSeq.indexOf(currentActiveStep);
+        if (Math.abs(diffX) >= 50 && Math.abs(diffX) > Math.abs(diffY) * 1.5 && duration <= 600) {
+          if (diffX < 0 && currentIndex < stepsSeq.length - 1) {
+            showStep(stepsSeq[currentIndex + 1], true);
+          } else if (diffX > 0 && currentIndex > 0) {
+            showStep(stepsSeq[currentIndex - 1], true);
+          }
+        }
+        touchStartX = 0;
+      }, { passive: true });
+
       // Global click delegation
       document.addEventListener('click', (e) => {
         if (e.target.closest('#btn-goto-video') || e.target.closest('#btn-goto-sentences')) {
@@ -881,55 +880,14 @@
         }
       });
 
-      // Step 4 Nudge Popup Modal
-      const step4Modal = document.getElementById('step4-nudge-modal') || document.getElementById('step3-nudge-modal');
-      const btnModalGotoStep4 = document.getElementById('btn-modal-goto-step4') || document.getElementById('btn-modal-goto-step3');
-      const btnModalCloseNudge = document.getElementById('btn-modal-close-nudge');
-
-      const showStep4Nudge = () => {
-        if (step4Modal) {
-          step4Modal.style.display = 'flex';
-        }
-      };
-
-      if (btnModalGotoStep4) {
-        btnModalGotoStep4.addEventListener('click', () => {
-          if (typeof Analytics !== 'undefined') {
-            Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'modal_button' });
-          }
-          showStep(4, true);
-        });
-      }
-      if (btnModalCloseNudge) {
-        btnModalCloseNudge.addEventListener('click', () => {
-          if (step4Modal) step4Modal.style.display = 'none';
-        });
-      }
-
-      // Script list completion banner click
-      document.addEventListener('click', (e) => {
-        if (e.target.closest('#btn-banner-goto-step4') || e.target.closest('#btn-banner-goto-step3')) {
-          if (typeof Analytics !== 'undefined') {
-            Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'banner_button' });
-          }
-          showStep(4, true);
-        }
-      });
-
       // Load Quizzes from Markdown
       try {
         const quizzes = await MarkdownQuizParser.loadFromUrl('./quiz.md');
         loadedQuizzes = quizzes;
         commentManager.setQuizzes(quizzes);
 
-        // Resume active step: URL query param (?step=deep-dive), hash (#deep-dive), or LocalStorage
-        const urlParams = new URLSearchParams(window.location.search);
-        const paramStep = urlParams.get('step');
-        const hashStep = window.location.hash ? window.location.hash.replace('#', '') : null;
-        const initialStep = (paramStep === 'deep-dive' || hashStep === 'deep-dive')
-          ? 'deep-dive'
-          : (paramStep ? parseInt(paramStep, 10) : (hashStep ? parseInt(hashStep, 10) : Storage.getCurrentStep(LESSON_ID)));
-        showStep(initialStep, false);
+        // Dedicated page starts directly on 'deep-dive'
+        showStep('deep-dive', false);
 
         const quizEngine = new QuizEngine({
           container: '#quiz-container',
@@ -953,37 +911,9 @@
         quizEngine.init();
       } catch (err) {
         console.error('Failed to load quiz markdown:', err);
-        document.getElementById('quiz-container').innerHTML = `
-          <div class="quiz-feedback error">Failed to load quiz.md. Please check the file path.</div>
-        `;
       }
     });
   </script>
-
-  <!-- Step 4 Nudge Popup Modal -->
-  <div class="nudge-modal-overlay" id="step4-nudge-modal" style="display: none;" role="dialog" aria-modal="true"
-    aria-labelledby="nudge-modal-title">
-    <div class="nudge-modal-card">
-      <div class="nudge-modal-icon">🎬</div>
-      <h3 class="nudge-modal-title" id="nudge-modal-title">전체 영상 & 대본 학습 완료!</h3>
-      <p class="nudge-modal-desc">
-        영상과 대본을 모두 집중해서 학습하셨습니다.<br>
-        이제 오늘 배운 핵심 어휘와 표현을 활용해 <strong>나만의 문장을 직접 영작</strong>하고, <strong>유튜브에 댓글</strong>을 남겨보세요!
-      </p>
-      <div class="nudge-modal-actions">
-        <button type="button" class="btn btn-primary btn-modal-step4" id="btn-modal-goto-step4">
-          <span>✍️ 문장 작성 & 댓글 남기기</span>
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </button>
-        <button type="button" class="btn-modal-dismiss" id="btn-modal-close-nudge">
-          <span>대본 더 복습하기</span>
-        </button>
-      </div>
-    </div>
-  </div>
 </body>
 
 </html>

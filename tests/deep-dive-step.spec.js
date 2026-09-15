@@ -287,6 +287,97 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
       await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
     });
 
+    test('Deep Dive displays share button in header and share nudge card with copy: 영어 공부하는 다른 사람에게도 알려주세요', async ({ page, context }) => {
+      await context.grantPermissions(['clipboard-read', 'clipboard-write']).catch(() => {});
+      await page.goto('/lessons/lesson-02/index.html');
+      await page.locator('#step-tab-deep-dive').click();
+
+      const headerShareBtn = page.locator('#btn-deep-dive-share');
+      await expect(headerShareBtn).toBeVisible();
+      await expect(headerShareBtn).toContainText('공유하기');
+
+      const nudgeCard = page.locator('.deep-dive-share-nudge');
+      await expect(nudgeCard).toBeVisible();
+      await expect(nudgeCard).toContainText('영어 공부하는 다른 사람에게도 알려주세요');
+
+      const nudgeShareBtn = page.locator('#btn-deep-dive-share-nudge');
+      await expect(nudgeShareBtn).toBeVisible();
+      await expect(nudgeShareBtn).toContainText('심화 학습 공유하기');
+
+      // Click share button and verify feedback
+      await nudgeShareBtn.click();
+      await expect(nudgeShareBtn).toContainText('복사됨! ✓');
+      const toast = page.locator('.save-toast-notification');
+      await expect(toast).toContainText('영어 공부하는 다른 사람에게도 알려주세요');
+    });
+
+  });
+
+  test.describe('Dedicated Deep Dive Shareable Pages & Direct URL Routing', () => {
+
+    test('Lesson 02 dedicated page (/lessons/lesson-02/deep-dive.html) loads directly on Deep Dive step and allows proceeding to other steps', async ({ page }) => {
+      await page.goto('/lessons/lesson-02/deep-dive.html');
+
+      // Lands directly on deep-dive step
+      const deepDiveSection = page.locator('#deep-dive-section');
+      await expect(deepDiveSection).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
+
+      // Share nudge is present
+      const nudge = page.locator('.deep-dive-share-nudge');
+      await expect(nudge).toBeVisible();
+      await expect(nudge).toContainText('영어 공부하는 다른 사람에게도 알려주세요');
+
+      // User can proceed to Step 3 via bottom card
+      const nextBtn = page.locator('#btn-deep-dive-next');
+      await expect(nextBtn).toBeVisible();
+      await nextBtn.click();
+
+      await expect(page.locator('#video-section')).toBeVisible();
+      await expect(page.locator('.step-tab-btn[data-step="3"]')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
+
+      // User can switch back to Step 1
+      await page.locator('.step-tab-btn[data-step="1"]').click();
+      await expect(page.locator('#quiz-section')).toBeVisible();
+    });
+
+    test('Lesson 04 dedicated page (/lessons/lesson-04/deep-dive.html) loads directly on Deep Dive step with share buttons', async ({ page }) => {
+      await page.goto('/lessons/lesson-04/deep-dive.html');
+
+      const deepDiveSection = page.locator('#deep-dive-section');
+      await expect(deepDiveSection).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
+
+      const headerShareBtn = page.locator('#btn-deep-dive-share');
+      await expect(headerShareBtn).toBeVisible();
+
+      const nudge = page.locator('.deep-dive-share-nudge');
+      await expect(nudge).toBeVisible();
+      await expect(nudge).toContainText('영어 공부하는 다른 사람에게도 알려주세요');
+    });
+
+    test('URL parameter ?step=deep-dive opens lesson on Deep Dive step directly', async ({ page }) => {
+      // Test Lesson 02
+      await page.goto('/lessons/lesson-02/index.html?step=deep-dive');
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
+
+      // Test Lesson 04
+      await page.goto('/lessons/lesson-04/index.html?step=deep-dive');
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+    });
+
+    test('URL hash #deep-dive opens lesson on Deep Dive step directly', async ({ page }) => {
+      await page.goto('/lessons/lesson-02/index.html#deep-dive');
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+    });
+
   });
 
   test('Deep Dive maintains high contrast in both Dark and Light modes', async ({ page }) => {
@@ -299,6 +390,8 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(cardDark).toBeVisible();
     const headingDark = page.locator('.deep-dive-heading');
     await expect(headingDark).toBeVisible();
+    const nudgeBtnDark = page.locator('#btn-deep-dive-share-nudge');
+    await expect(nudgeBtnDark).toBeVisible();
 
     // Light Mode
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
@@ -308,6 +401,20 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(headingLight).toBeVisible();
     const peanutBadge = page.locator('.badge-peanut');
     await expect(peanutBadge).toBeVisible();
+    const nudgeBtnLight = page.locator('#btn-deep-dive-share-nudge');
+    await expect(nudgeBtnLight).toBeVisible();
+
+    // Check light mode styles on share nudge button
+    const nudgeBtnColor = await nudgeBtnLight.evaluate((el) => {
+      const style = window.getComputedStyle(el);
+      return {
+        color: style.color,
+        background: style.backgroundImage || style.backgroundColor
+      };
+    });
+    // White text (#FFFFFF) on indigo gradient background
+    expect(nudgeBtnColor.color).toBe('rgb(255, 255, 255)');
+    expect(nudgeBtnColor.background).toContain('gradient');
   });
 
   test('LocalStorage restores deep-dive step state on page reload', async ({ page }) => {
