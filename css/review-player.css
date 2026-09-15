@@ -1220,6 +1220,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   margin-bottom: 12px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -1229,6 +1230,7 @@
 .deep-dive-time-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   background: rgba(245, 158, 11, 0.15);
   color: #F59E0B;
@@ -1236,6 +1238,8 @@
   border-radius: 4px;
   font-size: 0.78rem;
   font-weight: 700;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 [data-theme="light"] .deep-dive-time-badge {
@@ -1326,11 +1330,30 @@
   background: rgba(217, 119, 6, 0.04);
 }
 
+.breakdown-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
 .breakdown-pattern {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 1.06rem;
   font-weight: 700;
   color: var(--text-main);
+  min-width: 0;
+  word-break: break-word;
+}
+
+.breakdown-tense-badge {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  font-size: 0.74rem;
+  padding: 3px 8px;
+  line-height: 1.2;
 }
 
 .breakdown-meaning {
@@ -1438,4 +1461,43 @@
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 16px;
+}
+
+/* Mobile Responsive Optimization for Deep Dive */
+@media (max-width: 480px) {
+  .deep-dive-scene-box {
+    padding: 16px 14px;
+  }
+
+  .breakdown-card {
+    padding: 16px 14px;
+  }
+
+  .breakdown-pattern {
+    font-size: 0.94rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .deep-dive-scene-box {
+    padding: 14px 12px;
+  }
+
+  .breakdown-card {
+    padding: 14px 12px;
+  }
+
+  .breakdown-pattern {
+    font-size: 0.86rem;
+  }
+
+  .breakdown-tense-badge {
+    font-size: 0.70rem;
+    padding: 2px 6px;
+  }
+
+  .deep-dive-time-badge {
+    font-size: 0.72rem;
+    padding: 2px 6px;
+  }
 }
