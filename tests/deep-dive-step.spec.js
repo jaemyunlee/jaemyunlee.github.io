@@ -566,4 +566,26 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     expect(Math.abs(scrollStateDeepDive.deepDiveTop - 70)).toBeLessThan(10);
   });
 
+  test('On bigger screens (desktop), Deep Dive page has the same width as other step sections', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/lessons/lesson-02/index.html');
+
+    // Step 1: Quiz section width
+    const quizBox = await page.locator('#quiz-section').boundingBox();
+
+    // Step 2: Review section width
+    await page.locator('.step-tab-btn[data-step="2"]').click();
+    const reviewBox = await page.locator('#review-section').boundingBox();
+
+    // Deep Dive section width
+    await page.locator('#step-tab-deep-dive').click();
+    const deepDiveBox = await page.locator('#deep-dive-section').boundingBox();
+
+    // Deep dive width should match quiz and review section widths
+    expect(deepDiveBox.width).toBeGreaterThan(1000);
+    expect(Math.abs(deepDiveBox.width - quizBox.width)).toBeLessThan(2);
+    expect(Math.abs(deepDiveBox.width - reviewBox.width)).toBeLessThan(2);
+  });
+
 });
+
