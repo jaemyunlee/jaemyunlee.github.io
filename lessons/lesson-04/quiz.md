@@ -35,9 +35,9 @@
 ## Quiz 5
 - **Type**: multiple-choice
 - **Audio**: audio/If they went at like a very odd time.wav
-- **English**: If they went at like a very [odd time, rush hour, free shift, peak season], maybe they were first in line.
+- **English**: If they went at like a very [odd time, rush hour, free shift, peak season].
 - **Answer**: odd time
-- **Korean**: 그 사람들이 아주 애매한 시간대에 갔다면 맨 처음으로 줄을 섰을 수도 있죠.
+- **Korean**: 그 사람들이 아주 애매한 시간대에 갔다면요.
 - **Explanation**: "odd time"은 남들이 잘 찾지 않거나 일반적이지 않은 "애매한 시간대, 특이한 시간"을 의미합니다.
 
 ## Quiz 6

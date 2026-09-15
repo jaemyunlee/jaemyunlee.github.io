@@ -13,18 +13,7 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
-    // Coming soon badge in header
-    const comingSoonBadge = page.locator('#lesson-coming-soon-badge');
-    await expect(comingSoonBadge).toBeVisible();
-    await expect(comingSoonBadge).toContainText('9월 15일 본영상 공개 예정');
-
-    // Coming soon notification banner
-    const comingSoonBanner = page.locator('#coming-soon-banner');
-    await expect(comingSoonBanner).toBeVisible();
-    await expect(comingSoonBanner).toContainText('9월 15일 본영상 정식 오픈 예정');
-    await expect(comingSoonBanner).toContainText('사전 공개');
-
-    // Step navigation tabs: Step 1 and 2 active, Step 3 and 4 deactivated in coming-soon mode
+    // Step navigation tabs: all 4 steps active and enabled in published mode
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
@@ -34,13 +23,13 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     await expect(tab2).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
-    await expect(tab3).toHaveClass(/deactivated/);
-    await expect(tab4).toHaveClass(/deactivated/);
-    await expect(tab3).toBeDisabled();
-    await expect(tab4).toBeDisabled();
+    await expect(tab3).toBeEnabled();
+    await expect(tab4).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
+    await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
+    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
   });
 
   test('Lesson 03 loads all 13 quizzes with multiple-choice, fill-in-the-blank, and listening', async ({ page }) => {
@@ -102,7 +91,7 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     expect(quizDistribution.sampleQ13.answer).toBe('son in law');
   });
 
-  test('Coming-soon status displays Step 1 and Step 2 with Pati avatar, and hides Step 3 and Step 4', async ({ page }) => {
+  test('Published status displays all 4 steps with Pati avatar, full video, and writing unlocked', async ({ page }) => {
     await page.goto('/lessons/lesson-03/index.html');
 
     // Step 1 is active initially
@@ -132,37 +121,32 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     const avatarAlt = await avatarImg.getAttribute('alt');
     expect(avatarAlt).toBe('Pati');
 
-    // Verify completion card shows pre-release completion info and scheduled date
+    // Verify completion card shows full video transition button
     const completeCard = page.locator('#step2-complete-card');
-    await expect(completeCard).toContainText('사전 공개 학습 완료');
-    await expect(completeCard).toContainText('9월 15일');
+    await expect(completeCard).toContainText('2단계 핵심 문장 완료');
+    const gotoStep3Btn = completeCard.locator('#btn-goto-step3');
+    await expect(gotoStep3Btn).toBeVisible();
 
-    // Verify Step 3 and Step 4 tabs are visible but deactivated and disabled
+    // Verify Step 3 and Step 4 tabs are enabled and unlocked
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
-    await expect(tab3).toHaveClass(/deactivated/);
-    await expect(tab4).toHaveClass(/deactivated/);
-    await expect(tab3).toBeDisabled();
-    await expect(tab4).toBeDisabled();
+    await expect(tab3).toBeEnabled();
+    await expect(tab4).toBeEnabled();
 
-    // Verify clicking deactivated Step 3 tab does not navigate
-    await tab3.click({ force: true });
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 2: 핵심 문장');
-    await expect(page.locator('#video-section')).toBeHidden();
+    // Navigate to Step 3
+    await tab3.click();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
+    await expect(page.locator('#video-section')).toBeVisible();
 
-    // Verify calling showStep(3) or showStep(4) is prevented/clamped to 2
-    await page.evaluate(() => window.showStep(3));
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 2: 핵심 문장');
-    await expect(page.locator('#video-section')).toBeHidden();
-
-    await page.evaluate(() => window.showStep(4));
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 2: 핵심 문장');
-    await expect(page.locator('#reflection-section')).toBeHidden();
+    // Navigate to Step 4
+    await tab4.click();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 영작하기');
+    await expect(page.locator('#reflection-section')).toBeVisible();
   });
 
-  test('Catalog (lessons.html) and Homepage (index.html) display Lesson 03 card with Coming Soon status', async ({ page }) => {
+  test('Catalog (lessons.html) and Homepage (index.html) display Lesson 03 card with Published status', async ({ page }) => {
     // Check lessons catalog
     await page.goto('/lessons.html');
     const lesson03Card = page.locator('#card-lesson-03');
@@ -171,13 +155,12 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     await expect(lesson03Card).toContainText('3:18');
     await expect(lesson03Card).toContainText('13 퀴즈');
 
-    // Verify coming-soon class, badge, and button
-    await expect(lesson03Card).toHaveClass(/coming-soon/);
-    const comingSoonBadge = lesson03Card.locator('.badge-coming-soon');
-    await expect(comingSoonBadge).toBeVisible();
-    await expect(comingSoonBadge).toContainText('9월 15일 본영상 공개 예정');
+    // Verify published (not coming-soon)
+    await expect(lesson03Card).not.toHaveClass(/coming-soon/);
+    const notStartedBadge = lesson03Card.locator('.badge-not-started');
+    await expect(notStartedBadge).toBeVisible();
     const actionBtn = lesson03Card.locator('.lesson-card-btn');
-    await expect(actionBtn).toHaveClass(/btn-coming-soon/);
+    await expect(actionBtn).toHaveClass(/btn-primary/);
     await expect(actionBtn).toContainText('학습 시작하기');
 
     // Check in-progress state displays "이어서 학습하기"
@@ -196,10 +179,9 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     const homeLesson03 = page.locator('#card-lesson-03');
     await expect(homeLesson03).toBeVisible({ timeout: 5000 });
     await expect(homeLesson03).toContainText('장모님이 기억하는 켈리의 어린 시절');
-    await expect(homeLesson03).toHaveClass(/coming-soon/);
-    await expect(homeLesson03.locator('.badge-coming-soon')).toContainText('9월 15일 본영상 공개 예정');
+    await expect(homeLesson03).not.toHaveClass(/coming-soon/);
     const homeActionBtn = homeLesson03.locator('.lesson-card-btn');
-    await expect(homeActionBtn).toHaveClass(/btn-coming-soon/);
+    await expect(homeActionBtn).toHaveClass(/btn-primary/);
     await expect(homeActionBtn).toContainText('학습 시작하기');
   });
 
@@ -218,29 +200,29 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     expect(audioUrl).toContain('lessons/lesson-03/audio/Kelly%20is%20a%20very%20strong-willed%20person..wav');
   });
 
-  test('Coming Soon elements maintain high contrast in both Dark and Light modes', async ({ page }) => {
+  test('Header and tabs maintain high contrast in both Dark and Light modes', async ({ page }) => {
     await page.goto('/lessons/lesson-03/index.html');
 
     // Dark mode check (default)
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
-    const bannerDark = page.locator('#coming-soon-banner');
-    await expect(bannerDark).toBeVisible();
-    const badgeDark = page.locator('#lesson-coming-soon-badge');
-    await expect(badgeDark).toBeVisible();
+    const statusBadgeDark = page.locator('#lesson-status-badge');
+    await expect(statusBadgeDark).toBeVisible();
 
     // Light mode check
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
-    const bannerLight = page.locator('#coming-soon-banner');
-    await expect(bannerLight).toBeVisible();
-    const badgeLight = page.locator('#lesson-coming-soon-badge');
-    await expect(badgeLight).toBeVisible();
+    const statusBadgeLight = page.locator('#lesson-status-badge');
+    await expect(statusBadgeLight).toBeVisible();
 
-    // Check catalog light mode
+    // Check catalog light mode with clean storage
     await page.goto('/lessons.html');
-    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
-    const cardBadgeLight = page.locator('#card-lesson-03 .badge-coming-soon');
+    await page.evaluate(() => {
+      localStorage.clear();
+      document.documentElement.setAttribute('data-theme', 'light');
+    });
+    await page.reload();
+    const cardBadgeLight = page.locator('#card-lesson-03 .badge-not-started');
     await expect(cardBadgeLight).toBeVisible();
-    const cardBtnLight = page.locator('#card-lesson-03 .btn-coming-soon');
+    const cardBtnLight = page.locator('#card-lesson-03 .btn-primary');
     await expect(cardBtnLight).toBeVisible();
   });
 
@@ -298,13 +280,13 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     expect(Math.abs(box03.width - box01.width)).toBeLessThanOrEqual(2);
     expect(box03.width).toBeGreaterThan(600);
 
-    // Step 1, 2, 3, and 4 buttons are all visible, with 3 and 4 deactivated
+    // Step 1, 2, 3, and 4 buttons are all visible and enabled
     await expect(page.locator('.step-tab-btn[data-step="1"]')).toBeVisible();
     await expect(page.locator('.step-tab-btn[data-step="2"]')).toBeVisible();
     await expect(page.locator('.step-tab-btn[data-step="3"]')).toBeVisible();
     await expect(page.locator('.step-tab-btn[data-step="4"]')).toBeVisible();
-    await expect(page.locator('.step-tab-btn[data-step="3"]')).toBeDisabled();
-    await expect(page.locator('.step-tab-btn[data-step="4"]')).toBeDisabled();
+    await expect(page.locator('.step-tab-btn[data-step="3"]')).toBeEnabled();
+    await expect(page.locator('.step-tab-btn[data-step="4"]')).toBeEnabled();
   });
 
 });
