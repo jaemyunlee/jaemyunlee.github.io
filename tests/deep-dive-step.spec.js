@@ -318,6 +318,9 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     test('Lesson 02 dedicated page (/lessons/lesson-02/deep-dive.html) loads directly on Deep Dive step and allows proceeding to other steps', async ({ page }) => {
       await page.goto('/lessons/lesson-02/deep-dive.html');
 
+      // Seamlessly redirects to index.html?step=deep-dive
+      await expect(page).toHaveURL(/.*\/lessons\/lesson-02\/index\.html\?step=deep-dive/);
+
       // Lands directly on deep-dive step
       const deepDiveSection = page.locator('#deep-dive-section');
       await expect(deepDiveSection).toBeVisible();
@@ -345,6 +348,9 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
 
     test('Lesson 04 dedicated page (/lessons/lesson-04/deep-dive.html) loads directly on Deep Dive step with share buttons', async ({ page }) => {
       await page.goto('/lessons/lesson-04/deep-dive.html');
+
+      // Seamlessly redirects to index.html?step=deep-dive
+      await expect(page).toHaveURL(/.*\/lessons\/lesson-04\/index\.html\?step=deep-dive/);
 
       const deepDiveSection = page.locator('#deep-dive-section');
       await expect(deepDiveSection).toBeVisible();
