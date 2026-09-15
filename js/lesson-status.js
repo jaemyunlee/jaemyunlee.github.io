@@ -22,6 +22,7 @@ const LessonProgressState = Object.freeze({
 const LessonStep = Object.freeze({
   QUIZ: 1,
   KEY_SENTENCES: 2,
+  DEEP_DIVE: 'deep-dive',
   FULL_VIDEO: 3,
   WRITING: 4
 });

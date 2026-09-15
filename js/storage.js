@@ -69,6 +69,7 @@ const Storage = {
     try {
       const step = localStorage.getItem('rhyrhy_step_' + lessonId);
       if (step) {
+        if (step === 'deep-dive') return 'deep-dive';
         const num = parseInt(step, 10);
         if (num >= 1 && num <= 4) return num;
       }

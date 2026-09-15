@@ -28,9 +28,10 @@ test.describe('Lesson Status & State Static Enums (js/lesson-status.js)', () => 
     expect(Object.isFrozen(LessonProgressState)).toBe(true);
   });
 
-  test('LessonStep contains the 4 sequential interactive steps', () => {
+  test('LessonStep contains the sequential interactive steps and optional deep-dive', () => {
     expect(LessonStep.QUIZ).toBe(1);
     expect(LessonStep.KEY_SENTENCES).toBe(2);
+    expect(LessonStep.DEEP_DIVE).toBe('deep-dive');
     expect(LessonStep.FULL_VIDEO).toBe(3);
     expect(LessonStep.WRITING).toBe(4);
 
