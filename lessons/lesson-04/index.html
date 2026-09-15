@@ -177,9 +177,9 @@
           <div class="deep-dive-breakdown-grid">
             <!-- Present Tense Card -->
             <div class="breakdown-card highlight">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div class="breakdown-card-header">
                 <span class="breakdown-pattern">It turns out (that) ...</span>
-                <span class="badge badge-emerald" style="font-size: 0.74rem;">현재형</span>
+                <span class="badge badge-emerald breakdown-tense-badge">현재형</span>
               </div>
               <div class="breakdown-meaning">"알고 보니 ~더라구!" (현재의 반전 발견)</div>
               <p class="breakdown-desc">
@@ -189,9 +189,9 @@
 
             <!-- Past Tense Card -->
             <div class="breakdown-card">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div class="breakdown-card-header">
                 <span class="breakdown-pattern">It turned out (that) ...</span>
-                <span class="badge" style="background: rgba(148, 163, 184, 0.2); color: var(--text-muted); font-size: 0.74rem;">과거형</span>
+                <span class="badge badge-past breakdown-tense-badge">과거형</span>
               </div>
               <div class="breakdown-meaning">"결과적으로 ~인 것으로 밝혀졌었다"</div>
               <p class="breakdown-desc">
@@ -562,9 +562,26 @@
           }
         }
 
-        // Smooth scroll to top of lesson section
-        if (scroll && lessonHeader) {
-          lessonHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Uniform Scroll to fit active contents section across all steps
+        if (scroll) {
+          try {
+            let targetSection = null;
+            if (step === 1) targetSection = quizSection;
+            else if (step === 2) targetSection = reviewSection;
+            else if (step === 'deep-dive') targetSection = deepDiveSection;
+            else if (step === 3) targetSection = videoSection;
+            else if (step === 4) targetSection = document.getElementById('reflection-card') || reflectionSection;
+
+            if (targetSection) {
+              const navHeight = 70;
+              const y = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+              window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          } catch (_) {
+            window.scrollTo(0, 0);
+          }
         }
       };
 

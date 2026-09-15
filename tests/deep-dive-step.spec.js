@@ -205,4 +205,127 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
   });
 
+  test('Badges (time badge, 현재형, 과거형) never wrap into multi-line strings on mobile screens', async ({ page }) => {
+    // Set small mobile viewport (e.g., Galaxy S8 / narrow Android 360px width)
+    await page.setViewportSize({ width: 360, height: 740 });
+    await page.goto('/lessons/lesson-04/index.html');
+
+    // Simulate larger mobile font scaling by applying a larger base font-size
+    await page.evaluate(() => {
+      document.documentElement.style.fontSize = '20px';
+    });
+
+    await page.locator('#step-tab-deep-dive').click();
+    await expect(page.locator('#deep-dive-section')).toBeVisible();
+
+    const timeBadge = page.locator('.deep-dive-time-badge');
+    const presentBadge = page.locator('.breakdown-card.highlight .breakdown-tense-badge');
+    const pastBadge = page.locator('.breakdown-card .badge-past.breakdown-tense-badge');
+
+    await expect(timeBadge).toBeVisible();
+    await expect(presentBadge).toBeVisible();
+    await expect(pastBadge).toBeVisible();
+
+    // Inspect CSS computed styles and bounding box heights
+    const badgeChecks = await page.evaluate(() => {
+      const time = document.querySelector('.deep-dive-time-badge');
+      const present = document.querySelector('.breakdown-card.highlight .breakdown-tense-badge');
+      const past = document.querySelector('.breakdown-card .badge-past.breakdown-tense-badge');
+
+      const getTimeStyle = window.getComputedStyle(time);
+      const getPresentStyle = window.getComputedStyle(present);
+      const getPastStyle = window.getComputedStyle(past);
+
+      return {
+        time: {
+          text: time.textContent.trim(),
+          whiteSpace: getTimeStyle.whiteSpace,
+          flexShrink: getTimeStyle.flexShrink,
+          height: time.getBoundingClientRect().height,
+          lineHeight: parseFloat(getTimeStyle.lineHeight) || 20
+        },
+        present: {
+          text: present.textContent.trim(),
+          whiteSpace: getPresentStyle.whiteSpace,
+          flexShrink: getPresentStyle.flexShrink,
+          height: present.getBoundingClientRect().height,
+          lineHeight: parseFloat(getPresentStyle.lineHeight) || 20
+        },
+        past: {
+          text: past.textContent.trim(),
+          whiteSpace: getPastStyle.whiteSpace,
+          flexShrink: getPastStyle.flexShrink,
+          height: past.getBoundingClientRect().height,
+          lineHeight: parseFloat(getPastStyle.lineHeight) || 20
+        }
+      };
+    });
+
+    // Verify time badge
+    expect(badgeChecks.time.text).toBe('⏱ 03:17');
+    expect(badgeChecks.time.whiteSpace).toBe('nowrap');
+    expect(badgeChecks.time.flexShrink).toBe('0');
+    // Height should reflect a single line of text with padding (not wrapped to 2+ lines)
+    expect(badgeChecks.time.height).toBeLessThan(badgeChecks.time.lineHeight * 2);
+
+    // Verify present tense badge ('현재형')
+    expect(badgeChecks.present.text).toBe('현재형');
+    expect(badgeChecks.present.whiteSpace).toBe('nowrap');
+    expect(badgeChecks.present.flexShrink).toBe('0');
+    expect(badgeChecks.present.height).toBeLessThan(badgeChecks.present.lineHeight * 2);
+
+    // Verify past tense badge ('과거형')
+    expect(badgeChecks.past.text).toBe('과거형');
+    expect(badgeChecks.past.whiteSpace).toBe('nowrap');
+    expect(badgeChecks.past.flexShrink).toBe('0');
+    expect(badgeChecks.past.height).toBeLessThan(badgeChecks.past.lineHeight * 2);
+  });
+
+  test('Clicking step menu in coming-soon status scrolls active section to top past coming-soon-banner', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/lessons/lesson-04/index.html');
+
+    // Confirm coming-soon-banner is visible
+    const banner = page.locator('#coming-soon-banner');
+    await expect(banner).toBeVisible();
+
+    // Click Step 2 tab
+    await page.locator('.step-tab-btn[data-step="2"]').click();
+    await expect(page.locator('#review-section')).toBeVisible();
+
+    // Wait for smooth scroll to finish
+    await page.waitForTimeout(600);
+
+    // Check that window.scrollY scrolled past top, placing reviewSection at ~70px under nav
+    const scrollStateStep2 = await page.evaluate(() => {
+      const reviewSection = document.getElementById('review-section');
+      const rect = reviewSection.getBoundingClientRect();
+      return {
+        scrollY: window.pageYOffset || window.scrollY,
+        reviewSectionTop: rect.top
+      };
+    });
+
+    expect(scrollStateStep2.scrollY).toBeGreaterThan(0);
+    // reviewSectionTop should be positioned right below navHeight (approx 70px)
+    expect(Math.abs(scrollStateStep2.reviewSectionTop - 70)).toBeLessThan(10);
+
+    // Click Deep Dive tab
+    await page.locator('#step-tab-deep-dive').click();
+    await expect(page.locator('#deep-dive-section')).toBeVisible();
+    await page.waitForTimeout(600);
+
+    const scrollStateDeepDive = await page.evaluate(() => {
+      const deepDive = document.getElementById('deep-dive-section');
+      const rect = deepDive.getBoundingClientRect();
+      return {
+        scrollY: window.pageYOffset || window.scrollY,
+        deepDiveTop: rect.top
+      };
+    });
+
+    expect(scrollStateDeepDive.scrollY).toBeGreaterThan(0);
+    expect(Math.abs(scrollStateDeepDive.deepDiveTop - 70)).toBeLessThan(10);
+  });
+
 });
