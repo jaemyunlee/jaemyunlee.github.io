@@ -19,6 +19,7 @@ class ReviewPlayer {
     this.speakerAvatar = options.speakerAvatar || '../../assets/img/avatars/kelly.jpg';
     this.isComingSoon = options.isComingSoon || false;
     this.scheduledDateText = options.scheduledDateText || '9월 15일';
+    this.hasDeepDive = options.hasDeepDive || false;
 
     this.currentIndex = 0;
     this.isPlaying = false;
@@ -309,7 +310,14 @@ class ReviewPlayer {
           <h4 class="step-complete-title">${this.isComingSoon ? '사전 공개 콘텐츠를 모두 마스터하셨습니다!' : '핵심 문장을 모두 귀로 익히셨습니다!'}</h4>
           <p class="step-complete-desc">${this.isComingSoon ? `${this.speakerName ? `${this._escapeHtml(this.speakerName)}의 생생한 목소리로 ` : ''}핵심 문장 ${this.quizzes.length}개를 모두 귀로 익히셨습니다.<br><strong>전체 영상 및 영작하기(Step 3 & 4)</strong>는 <strong>${this._escapeHtml(this.scheduledDateText)}</strong>에 정식 오픈됩니다!` : '이제 전체 영상에서 이 표현들이 실제 대화 맥락 속에서 어떻게 쓰이는지 확인해보세요.'}</p>
           <div class="step-complete-actions">
-            ${this.isComingSoon ? `
+            ${this.hasDeepDive ? `
+            <button type="button" class="btn btn-primary btn-goto-deep-dive" id="btn-goto-deep-dive" title="심화 학습으로 이동">
+              <span>🥜 다음 단계: 심화 학습 보러가기</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+            ` : this.isComingSoon ? `
             <a href="../../lessons.html" class="btn btn-primary" style="text-decoration: none;">
               <span>📚 다른 레슨 목록 보러가기</span>
             </a>
@@ -331,17 +339,18 @@ class ReviewPlayer {
   }
 
   _bindControls() {
-    // Step 2 Next Step Button (Advance to Step 3: Interactive Video)
-    const gotoStep3Btn = this.container.querySelector('#btn-goto-step3');
-    if (gotoStep3Btn) {
-      gotoStep3Btn.addEventListener('click', () => {
+    // Step 2 Next Step Button (Advance to Deep Dive or Step 3)
+    const gotoNextBtn = this.container.querySelector('#btn-goto-deep-dive') || this.container.querySelector('#btn-goto-step3');
+    if (gotoNextBtn) {
+      gotoNextBtn.addEventListener('click', () => {
+        this.stopAudio();
         if (typeof this.onComplete === 'function') {
           this.onComplete();
         } else if (typeof window !== 'undefined' && typeof window.showStep === 'function') {
-          window.showStep(3, true);
+          window.showStep(this.hasDeepDive ? 'deep-dive' : 3, true);
         } else {
-          const step3Tab = document.querySelector('.step-tab-btn[data-step="3"]');
-          if (step3Tab) step3Tab.click();
+          const nextTab = document.querySelector(this.hasDeepDive ? '.step-tab-btn[data-step="deep-dive"]' : '.step-tab-btn[data-step="3"]');
+          if (nextTab) nextTab.click();
         }
       });
     }

@@ -1,0 +1,71 @@
+{
+  "lessonId": "lesson-04",
+  "title": "심화 학습: Deep Dive",
+  "tag": "Grammar & Nuance",
+  "icon": "🥜",
+  "question": "왜 과거에 일어난 일인데, turns out은 현재형일까?",
+  "questionEn": "Why is 'turns out' in the present tense even though it describes a past event?",
+  "videoContext": {
+    "title": "🎬 영상 속 실제 대화 상황",
+    "scene": "빅뱅 오클랜드 콘서트에서 대성의 무대를 보며 나눈 대화",
+    "timestamp": "03:17",
+    "lines": [
+      {
+        "speaker": "Kelly",
+        "en": "So we were wondering if he had like a girl's name written on the belt buckle.",
+        "kr": "그래서 벨트 버클에 어떤 여자 이름이라도 적혀 있는 건가 궁금해했거든요."
+      },
+      {
+        "speaker": "Kelly",
+        "en": "But it turns out it was a brand name that said Dsquared.",
+        "kr": "그런데 알고 보니 '디스퀘어드(Dsquared)'라는 브랜드 이름이었던 거예요."
+      }
+    ],
+    "explanation": "과거 콘서트장에서 대성의 벨트 버클 글씨를 보며 '혹시 여자 이름인가?' 의아해했던 에피소드를 회상하며 이야기하는 장면입니다. 전체적인 이야기는 과거의 경험이지만, 켈리는 여기서 <strong>'turned out'</strong>이 아닌 현재형 <strong>'turns out'</strong>을 사용했습니다."
+  },
+  "nuanceBreakdown": {
+    "title": "💡 시제 뉘앙스 완벽 비교",
+    "items": [
+      {
+        "pattern": "It turns out (that) ...",
+        "tense": "현재형",
+        "badge": "생생한 구어체 / 현재의 반전 발견",
+        "badgeColor": "emerald",
+        "coreMeaning": "알고 보니 ~더라구! (지금 청자에게 전하는 새로운 사실)",
+        "explanation": "과거의 사건이라 하더라도, 화자가 대화하는 <strong>지금 이 순간(in the moment)</strong> 청자에게 <em>'알고 보니 이렇지 뭐야!'</em>라며 새롭게 발견한 흥미로운 사실이나 반전을 생생하게 밝혀줄 때 현재형을 씁니다. 문법적인 시제 일치보다 <strong>'현재 밝혀진 사실 그 자체'</strong>를 강조하는 자연스러운 원어민 구어체 표현입니다."
+      },
+      {
+        "pattern": "It turned out (that) ...",
+        "tense": "과거형",
+        "badge": "객관적 사실 / 담담한 서술",
+        "badgeColor": "slate",
+        "coreMeaning": "결과적으로 ~인 것으로 드러났다 / 밝혀졌었다",
+        "explanation": "과거의 특정 시점에 이미 확인되고 완결된 사실을 담담하고 객관적인 하나의 사건으로 서술할 때 주로 씁니다. 스토리텔링의 생동감보다는 시간 순서에 따른 객관적 전달에 초점이 맞춰집니다."
+      }
+    ],
+    "takeaway": "과거의 썰을 풀더라도 상대방에게 <strong>'알고 보니 이렇더라구!'</strong> 하고 놀라운 사실을 생생하게 전달하고 싶다면 <strong>It turns out</strong>을 써보세요!"
+  },
+  "examples": [
+    {
+      "id": "ex-01",
+      "en": "I thought the restaurant was closed, but it turns out they're open till midnight!",
+      "kr": "그 식당 문 닫은 줄 알았는데, 알고 보니까 자정까지 하더라고!",
+      "situation": "방금 알게 된 새로운 영업시간 정보를 상대에게 전달할 때",
+      "highlight": "it turns out they're open"
+    },
+    {
+      "id": "ex-02",
+      "en": "We were worried about the flight delay, but it turns out the weather cleared up quickly.",
+      "kr": "비행기 지연될까 봐 걱정했는데, 알고 보니 날씨가 금방 갰더라고.",
+      "situation": "과거의 걱정이 반전되어 해결된 사실을 설명할 때",
+      "highlight": "it turns out the weather cleared up"
+    },
+    {
+      "id": "ex-03",
+      "en": "I spent hours looking for my keys, and it turns out they were in my backpack the whole time.",
+      "kr": "몇 시간 동안 차 키를 찾아 헤맸는데, 알고 보니 내내 가방 안에 있었지 뭐야!",
+      "situation": "허탈하고도 재미있는 반전을 상대방에게 털어놓을 때",
+      "highlight": "it turns out they were in my backpack"
+    }
+  ]
+}
