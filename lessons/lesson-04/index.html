@@ -127,9 +127,21 @@
       <div class="deep-dive-card">
         <!-- Header / Question Prompt -->
         <header class="deep-dive-header">
-          <div class="badge-peanut">
-            <span aria-hidden="true">🥜</span>
-            <span>심화 학습 · Deep Dive</span>
+          <div class="deep-dive-header-top">
+            <div class="badge-peanut">
+              <span aria-hidden="true">🥜</span>
+              <span>심화 학습 · Deep Dive</span>
+            </div>
+            <button type="button" class="btn-deep-dive-share" id="btn-deep-dive-share" title="심화 학습 공유하기" aria-label="심화 학습 공유하기">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+              </svg>
+              <span>공유하기</span>
+            </button>
           </div>
           <h2 class="deep-dive-heading">왜 과거에 일어난 일인데, turns out은 현재형일까?</h2>
           <p class="deep-dive-subheading">Why is 'turns out' in the present tense even though it describes a past event?</p>
@@ -236,6 +248,27 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Share Nudge Card (영어 공부하는 다른 사람에게도 알려주세요!) -->
+        <div class="deep-dive-share-nudge">
+          <div class="share-nudge-body">
+            <span class="share-nudge-icon" aria-hidden="true">💌</span>
+            <div class="share-nudge-text">
+              <div class="share-nudge-headline">영어 공부하는 다른 사람에게도 알려주세요!</div>
+              <div class="share-nudge-sub">과거 일인데 현재형으로 쓰는 it turns out의 원어민 뉘앙스, 친구나 스터디원과 함께 나눠보세요.</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-share-nudge" id="btn-deep-dive-share-nudge" title="심화 학습 링크 공유하기">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+            <span>심화 학습 공유하기</span>
+          </button>
         </div>
 
         <!-- 4. Next Step Navigation Card -->
@@ -606,7 +639,87 @@
         }
       });
 
-      // Global click delegation for Step 2 '핵심 문장 보러가기' button
+      // Deep Dive Share handler
+      const shareDeepDive = () => {
+        const origin = window.location.origin || 'https://rhyrhyenglish.site';
+        const shareUrl = `${origin}/lessons/${LESSON_ID}/deep-dive.html`;
+        const title = '[현서네 리얼 영어] 심화 학습: 왜 과거에 일어난 일인데, turns out은 현재형일까?';
+        const text = '영어 공부하는 다른 사람에게도 알려주세요!';
+
+        if (typeof Analytics !== 'undefined' && typeof Analytics.trackEvent === 'function') {
+          Analytics.trackEvent('deep_dive_share', { lesson_id: LESSON_ID });
+        }
+
+        const shareBtns = document.querySelectorAll('#btn-deep-dive-share, #btn-deep-dive-share-nudge');
+        const setFeedback = () => {
+          shareBtns.forEach(btn => {
+            btn.classList.add('copied');
+            const span = btn.querySelector('span');
+            if (span && !span.dataset.orig) span.dataset.orig = span.textContent;
+            if (span) span.textContent = '복사됨! ✓';
+            setTimeout(() => {
+              btn.classList.remove('copied');
+              if (span && span.dataset.orig) span.textContent = span.dataset.orig;
+            }, 1800);
+          });
+        };
+
+        const copyFallback = () => {
+          let copied = false;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareUrl).then(() => {
+              setFeedback();
+              if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+                App.showToast('📋 링크가 복사되었습니다! 영어 공부하는 다른 사람에게도 알려주세요.', 'success');
+              }
+            }).catch(() => fallbackTextarea());
+          } else {
+            fallbackTextarea();
+          }
+
+          function fallbackTextarea() {
+            try {
+              const ta = document.createElement('textarea');
+              ta.value = shareUrl;
+              ta.style.position = 'fixed';
+              ta.style.left = '-999999px';
+              document.body.appendChild(ta);
+              ta.focus();
+              ta.select();
+              copied = document.execCommand('copy');
+              ta.remove();
+            } catch (_) {}
+            if (copied) {
+              setFeedback();
+              if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+                App.showToast('📋 링크가 복사되었습니다! 영어 공부하는 다른 사람에게도 알려주세요.', 'success');
+              }
+            } else {
+              prompt('심화 학습 공유 링크를 복사하세요:', shareUrl);
+            }
+          }
+        };
+
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+        if (isMobile && navigator.share) {
+          navigator.share({
+            title,
+            text,
+            url: shareUrl
+          }).then(() => {
+            setFeedback();
+          }).catch((err) => {
+            if (err && (err.name === 'AbortError' || err.name === 'NotAllowedError')) {
+              return;
+            }
+            copyFallback();
+          });
+        } else {
+          copyFallback();
+        }
+      };
+
+      // Global click delegation
       document.addEventListener('click', (e) => {
         if (e.target.closest('#btn-goto-video') || e.target.closest('#btn-goto-sentences')) {
           e.preventDefault();
@@ -619,6 +732,9 @@
           if (!isComingSoon) {
             showStep(3, true);
           }
+        } else if (e.target.closest('#btn-deep-dive-share') || e.target.closest('#btn-deep-dive-share-nudge')) {
+          e.preventDefault();
+          shareDeepDive();
         }
       });
 
@@ -685,12 +801,17 @@
         loadedQuizzes = quizzes;
         commentManager.setQuizzes(quizzes);
 
-        // Resume previously active step from LocalStorage
-        let savedStep = Storage.getCurrentStep(LESSON_ID);
-        if (isComingSoon && savedStep !== 'deep-dive' && savedStep > 2) {
-          savedStep = 2;
+        // Resume active step: URL query param (?step=deep-dive), hash (#deep-dive), or LocalStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramStep = urlParams.get('step');
+        const hashStep = window.location.hash ? window.location.hash.replace('#', '') : null;
+        let initialStep = (paramStep === 'deep-dive' || hashStep === 'deep-dive')
+          ? 'deep-dive'
+          : (paramStep ? parseInt(paramStep, 10) : (hashStep ? parseInt(hashStep, 10) : Storage.getCurrentStep(LESSON_ID)));
+        if (isComingSoon && initialStep !== 'deep-dive' && initialStep > 2) {
+          initialStep = 2;
         }
-        showStep(savedStep || 1, false);
+        showStep(initialStep || 1, false);
 
         const quizEngine = new QuizEngine({
           container: '#quiz-container',
