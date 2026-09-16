@@ -1100,3 +1100,59 @@
     padding: 13px 18px;
   }
 }
+
+/* ==========================================================================
+   Desktop / Bigger Screen Typography Enhancement (Step 4: Writing Practice)
+   Optimized for senior readability and larger monitors (>= 769px)
+   ========================================================================== */
+@media (min-width: 769px) {
+  .reflection-title {
+    font-size: 1.5rem;
+  }
+
+  .reflection-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .vocab-picks-badge {
+    font-size: 0.95rem;
+  }
+
+  .vocab-picks-hint {
+    font-size: 0.88rem;
+  }
+
+  .vocab-pick-chip {
+    font-size: 0.98rem;
+    padding: 8px 16px;
+  }
+
+  .chip-meaning {
+    font-size: 0.88rem;
+  }
+
+  .encouragement-title {
+    font-size: 1.08rem;
+  }
+
+  .encouragement-text {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .reflection-label {
+    font-size: 1.05rem;
+  }
+
+  .reflection-textarea {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    padding: 16px 18px;
+  }
+
+  .reflection-feedback {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+}
