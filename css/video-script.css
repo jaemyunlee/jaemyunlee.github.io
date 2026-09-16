@@ -935,3 +935,32 @@
     line-height: 1.45;
   }
 }
+
+/* ==========================================================================
+   Desktop / Bigger Screen Typography Enhancement (Step 3: Video Script)
+   Optimized for senior readability and larger monitors (>= 769px)
+   ========================================================================== */
+@media (min-width: 769px) {
+  .script-card-body .sentence-en {
+    font-size: 1.18rem;
+    line-height: 1.5;
+  }
+
+  .script-card-body .sentence-kr {
+    font-size: 1.02rem;
+    line-height: 1.5;
+  }
+
+  .video-summary-meta h3 {
+    font-size: 1.25rem;
+  }
+
+  .video-summary-meta p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .script-header-title {
+    font-size: 1.1rem;
+  }
+}

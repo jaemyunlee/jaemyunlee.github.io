@@ -1048,3 +1048,55 @@
     min-width: 10px;
   }
 }
+
+/* ==========================================================================
+   Desktop / Bigger Screen Typography Enhancement (Step 1: Quizzes)
+   Optimized for senior readability and larger monitors (>= 769px)
+   ========================================================================== */
+@media (min-width: 769px) {
+  .quiz-korean-sentence {
+    font-size: 1.55rem;
+    line-height: 1.45;
+  }
+
+  .sentence-builder-box {
+    font-size: 1.38rem;
+    line-height: 2.1;
+    padding: 20px 24px;
+  }
+
+  .quiz-input {
+    font-size: 1.25rem;
+    min-width: 150px;
+    height: 48px;
+  }
+
+  .choice-text {
+    font-size: 1.16rem;
+  }
+
+  .choice-kr-hint {
+    font-size: 0.96rem;
+  }
+
+  .quiz-choice-btn {
+    padding: 16px 20px;
+  }
+
+  .quiz-instruction {
+    font-size: 1.15rem;
+  }
+
+  .quiz-correct-sentence {
+    font-size: 1.25rem;
+  }
+
+  .explanation-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .audio-cloze-hint-text {
+    font-size: 1.05rem;
+  }
+}

@@ -1683,3 +1683,125 @@
     padding: 2px 6px;
   }
 }
+
+/* ==========================================================================
+   Desktop / Bigger Screen Typography Enhancement (Step 2: Key Sentences & Deep Dive)
+   Optimized for senior readability and larger monitors (>= 769px)
+   ========================================================================== */
+@media (min-width: 769px) {
+  /* Navigation Tabs */
+  .step-tab-btn {
+    font-size: 0.95rem;
+    padding: 9px 18px;
+    gap: 8px;
+  }
+
+  /* Step 2: Key Sentences */
+  .sentence-en-text {
+    font-size: 1.28rem;
+    line-height: 1.55;
+  }
+
+  .sentence-kr-text {
+    font-size: 1.06rem;
+    line-height: 1.55;
+  }
+
+  .sentence-explanation-text {
+    font-size: 0.96rem;
+    line-height: 1.55;
+    padding: 8px 12px;
+  }
+
+  .sentence-speaker-name {
+    font-size: 0.92rem;
+  }
+
+  /* Deep Dive: 심화 학습 */
+  .deep-dive-heading {
+    font-size: 1.75rem;
+    line-height: 1.4;
+  }
+
+  .deep-dive-subheading {
+    font-size: 1.08rem;
+  }
+
+  .deep-dive-block-title {
+    font-size: 1.25rem;
+  }
+
+  .dialogue-en {
+    font-size: 1.15rem;
+    line-height: 1.55;
+  }
+
+  .dialogue-kr {
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .deep-dive-scene-desc {
+    font-size: 1.04rem;
+    line-height: 1.65;
+  }
+
+  .breakdown-expr {
+    font-size: 1.25rem;
+  }
+
+  .breakdown-core-kr {
+    font-size: 1.15rem;
+  }
+
+  .breakdown-desc {
+    font-size: 1.02rem;
+    line-height: 1.65;
+  }
+
+  .breakdown-example {
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  .deep-dive-takeaway {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    padding: 20px 24px;
+  }
+
+  .takeaway-rule-title {
+    font-size: 1.15rem;
+  }
+
+  .takeaway-rule-desc {
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  .example-en {
+    font-size: 1.15rem;
+  }
+
+  .example-kr {
+    font-size: 1.02rem;
+  }
+
+  .example-desc {
+    font-size: 0.95rem;
+  }
+
+  .share-nudge-headline {
+    font-size: 1.08rem;
+  }
+
+  .share-nudge-sub {
+    font-size: 0.94rem;
+  }
+
+  .btn-share-nudge,
+  #btn-deep-dive-share-nudge {
+    font-size: 0.95rem;
+    padding: 10px 22px;
+  }
+}
