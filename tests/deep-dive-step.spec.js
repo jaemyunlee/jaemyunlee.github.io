@@ -365,6 +365,33 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
       await expect(nudge).toContainText('영어 공부하는 다른 사람에게도 알려주세요');
     });
 
+    test('Dedicated Deep Dive pages have authentic Open Graph tags and custom Deep Dive OG images (not quiz OG)', async () => {
+      const fs = require('fs');
+      const path = require('path');
+
+      // 1. Verify Lesson 02 Deep Dive HTML OG tags
+      const l02Html = fs.readFileSync(path.join(__dirname, '../lessons/lesson-02/deep-dive.html'), 'utf-8');
+      expect(l02Html).toContain('property="og:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-02-deep-dive.png"');
+      expect(l02Html).toContain('name="twitter:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-02-deep-dive.png"');
+      expect(l02Html).toContain('used to와 would를 섞어 쓸까?');
+      expect(l02Html).not.toContain('lesson-02-q6.png');
+
+      // 2. Verify Lesson 04 Deep Dive HTML OG tags
+      const l04Html = fs.readFileSync(path.join(__dirname, '../lessons/lesson-04/deep-dive.html'), 'utf-8');
+      expect(l04Html).toContain('property="og:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-04-deep-dive.png"');
+      expect(l04Html).toContain('name="twitter:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-04-deep-dive.png"');
+      expect(l04Html).toContain('turns out은 현재형일까?');
+      expect(l04Html).not.toContain('lesson-04-q1.png');
+
+      // 3. Verify actual OG image files exist on disk
+      const l02ImgPath = path.join(__dirname, '../assets/img/og/lesson-02-deep-dive.png');
+      const l04ImgPath = path.join(__dirname, '../assets/img/og/lesson-04-deep-dive.png');
+      expect(fs.existsSync(l02ImgPath)).toBe(true);
+      expect(fs.statSync(l02ImgPath).size).toBeGreaterThan(10000);
+      expect(fs.existsSync(l04ImgPath)).toBe(true);
+      expect(fs.statSync(l04ImgPath).size).toBeGreaterThan(10000);
+    });
+
     test('URL parameter ?step=deep-dive opens lesson on Deep Dive step directly', async ({ page }) => {
       // Test Lesson 02
       await page.goto('/lessons/lesson-02/index.html?step=deep-dive');

@@ -88,6 +88,32 @@ CURATED_HEADLINES = {
     ('lesson-04', 15): ('"뜬금없고 생뚱맞게 느껴지다"', '원어민 일상 표현은?')
 }
 
+# Curated Deep Dive Open Graph Configurations
+DEEP_DIVE_CONFIGS = {
+    'lesson-02': {
+        'lesson_num': '02',
+        'line1': '"어릴 적 추억을 이야기할 때,"',
+        'line2': '왜 used to와 would를 섞어 쓸까?',
+        'items': [
+            'would play vs. played (향수 어린 회상 vs 단순 과거 팩트)',
+            'would vs. used to (구체적 행동 vs 과거 상태/단절)',
+            'get to vs. can (소중한 기회/축복 vs 단순 가능/허가)'
+        ],
+        'subtitle': '원어민 실생활 대화 클립 & 뉘앙스 비교 해설'
+    },
+    'lesson-04': {
+        'lesson_num': '04',
+        'line1': '"과거에 일어난 일인데,"',
+        'line2': '왜 turns out은 현재형일까?',
+        'items': [
+            'turns out (현재형: 지금 알게 된 사실의 실시간 공유)',
+            'turned out (과거형: 과거 이야기 속 종결된 사실 서술)',
+            '"It turns out it was a brand name that said Dsquared."'
+        ],
+        'subtitle': '실제 대화 클립으로 익히는 원어민 시제 뉘앙스'
+    }
+}
+
 def get_fonts():
     font_paths = [
         '/System/Library/Fonts/AppleSDGothicNeo.ttc',
@@ -283,6 +309,73 @@ def generate_og_image(lesson_id, quiz, fonts):
     img.save(output_path, 'PNG', optimize=True)
     return filename
 
+def generate_deep_dive_og_image(lesson_id, config, fonts):
+    w, h = 1200, 630
+    img = Image.new('RGB', (w, h), color='#0F172A')
+    draw = ImageDraw.Draw(img)
+
+    # 1. Subtle Gradient Background
+    for y in range(h):
+        r = int(15 + (y / h) * 16)
+        g = int(23 + (y / h) * 12)
+        b = int(42 + (y / h) * 44)
+        draw.line([(0, y), (w, y)], fill=(r, g, b))
+
+    # 2. Ambient Colorful Glow Spheres (Indigo, Amber, Rose Pink)
+    glow = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    gdraw = ImageDraw.Draw(glow)
+    gdraw.ellipse([800, -80, 1260, 380], fill=(244, 63, 94, 60))
+    gdraw.ellipse([-80, 280, 380, 740], fill=(245, 158, 11, 45))
+    gdraw.ellipse([420, 380, 880, 840], fill=(99, 102, 241, 40))
+    glow = glow.filter(ImageFilter.GaussianBlur(50))
+    img.paste(Image.composite(glow, Image.new('RGBA', (w, h), (0, 0, 0, 0)), glow), (0, 0), glow)
+
+    # 3. Main Glassmorphic Card Frame
+    draw.rounded_rectangle([50, 40, 1150, 590], radius=28, fill=(30, 41, 59, 235), outline=(244, 63, 94, 110), width=2)
+
+    # 4. Top Badges
+    # Brand Pill
+    draw.rounded_rectangle([90, 75, 310, 118], radius=21, fill=(79, 70, 229, 70), outline=(99, 102, 241, 160), width=1)
+    draw.text((115, 84), '★ 현서네 리얼 영어', font=fonts['sub'], fill=(224, 231, 255))
+
+    # Deep Dive Badge
+    lesson_num_str = config['lesson_num']
+    badge_text = f'LESSON {lesson_num_str} • 심화 학습'
+    bbox = draw.textbbox((0, 0), badge_text, font=fonts['sub'])
+    text_w = bbox[2] - bbox[0]
+    badge_x2 = 1110
+    badge_x1 = badge_x2 - text_w - 46
+    draw.rounded_rectangle([badge_x1, 75, badge_x2, 118], radius=21, fill=(245, 158, 11, 230))
+    draw.text((badge_x1 + 23, 84), badge_text, font=fonts['sub'], fill=(15, 23, 42))
+
+    # 5. Headline
+    draw.text((90, 160), config['line1'], font=fonts['title'], fill=(251, 191, 36))
+    draw.text((90, 225), config['line2'], font=fonts['title'], fill=(248, 250, 252))
+
+    # 6. Teaser Box (showing comparison points)
+    draw.rounded_rectangle([90, 310, 1110, 440], radius=18, fill=(15, 23, 42, 235), outline=(245, 158, 11, 100), width=2)
+
+    items = config['items']
+    y_starts = [330, 365, 400] if len(items) == 3 else [345, 385]
+    colors = [(129, 140, 248), (52, 211, 153), (251, 191, 36)]
+
+    for idx, item in enumerate(items):
+        y_pos = y_starts[idx]
+        prefix = f'{idx + 1}. ' if len(items) == 3 else '● '
+        draw.text((120, y_pos), f'{prefix}{item}', font=fonts['sub'], fill=colors[idx % len(colors)])
+
+    # 7. Bottom Bar & Action Callout
+    draw.text((95, 492), f'● 100% 무료 학습 • {config["subtitle"]}', font=fonts['sub'], fill=(148, 163, 184))
+
+    # CTA Button (Rose-pink gradient style matching our nudge button)
+    draw.rounded_rectangle([850, 474, 1110, 529], radius=28, fill=(244, 63, 94, 255))
+    draw.text((885, 488), '심화 학습 보기 ▶', font=fonts['btn'], fill=(255, 255, 255))
+
+    filename = f'{lesson_id}-deep-dive.png'
+    output_path = os.path.join(OG_DIR, filename)
+    img.save(output_path, 'PNG', optimize=True)
+    return filename
+
 def main():
     print('🎨 Generating Pre-Rendered Open Graph Images for all quizzes...')
     fonts = get_fonts()
@@ -300,7 +393,14 @@ def main():
             total += 1
             print(f'  🖼️  Generated: assets/img/og/{fname}')
 
-    print(f'✨ Finished generating {total} unique Open Graph images!\n')
+    # Generate Deep Dive OG Images
+    print('\n🥜 Generating Pre-Rendered Open Graph Images for Deep Dive steps...')
+    for lesson_id, config in DEEP_DIVE_CONFIGS.items():
+        fname = generate_deep_dive_og_image(lesson_id, config, fonts)
+        total += 1
+        print(f'  🥜 Generated: assets/img/og/{fname}')
+
+    print(f'\n✨ Finished generating {total} unique Open Graph images!\n')
 
 if __name__ == '__main__':
     main()
