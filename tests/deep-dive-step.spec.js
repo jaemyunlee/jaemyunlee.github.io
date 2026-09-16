@@ -587,5 +587,58 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     expect(Math.abs(deepDiveBox.width - reviewBox.width)).toBeLessThan(2);
   });
 
+  test('Font size is scaled up for elderly readability on bigger screens (desktop), but remains unchanged on mobile', async ({ page }) => {
+    // 1. Check Desktop (1280px)
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/lessons/lesson-02/index.html');
+
+    // Step 1: Quiz Korean Sentence
+    const desktopQuizFontSize = await page.locator('.quiz-korean-sentence').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    // Should be at least 24px (~1.5rem+)
+    expect(desktopQuizFontSize).toBeGreaterThanOrEqual(24);
+
+    // Step 2: Key Sentence English
+    await page.locator('.step-tab-btn[data-step="2"]').click();
+    const desktopReviewFontSize = await page.locator('.sentence-en-text').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    // Should be at least 20px (~1.28rem)
+    expect(desktopReviewFontSize).toBeGreaterThanOrEqual(20);
+
+    // Deep Dive: Dialogue English
+    await page.locator('#step-tab-deep-dive').click();
+    const desktopDeepDiveFontSize = await page.locator('.dialogue-en').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    // Should be at least 18px (~1.15rem)
+    expect(desktopDeepDiveFontSize).toBeGreaterThanOrEqual(18);
+
+    // Step 3: Script Sentence English
+    await page.locator('.step-tab-btn[data-step="3"]').click();
+    const desktopScriptFontSize = await page.locator('.script-card-body .sentence-en').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    // Should be at least 18px (~1.18rem)
+    expect(desktopScriptFontSize).toBeGreaterThanOrEqual(18);
+
+    // Step 4: Reflection Title
+    await page.locator('.step-tab-btn[data-step="4"]').click();
+    const desktopReflectionFontSize = await page.locator('.reflection-title').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    // Should be at least 23px (~1.5rem)
+    expect(desktopReflectionFontSize).toBeGreaterThanOrEqual(23);
+
+    // 2. Check Mobile (375px) - Font sizes should NOT receive the desktop boost
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/lessons/lesson-02/index.html');
+
+    // Mobile Step 1 font size must be smaller than desktop
+    const mobileQuizFontSize = await page.locator('.quiz-korean-sentence').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    expect(mobileQuizFontSize).toBeLessThan(desktopQuizFontSize);
+
+    // Mobile Step 2 font size must be smaller than desktop
+    await page.locator('.step-tab-btn[data-step="2"]').click();
+    const mobileReviewFontSize = await page.locator('.sentence-en-text').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    expect(mobileReviewFontSize).toBeLessThan(desktopReviewFontSize);
+
+    // Mobile Deep Dive font size must be smaller than desktop
+    await page.locator('#step-tab-deep-dive').click();
+    const mobileDeepDiveFontSize = await page.locator('.dialogue-en').first().evaluate(el => parseFloat(window.getComputedStyle(el).fontSize));
+    expect(mobileDeepDiveFontSize).toBeLessThan(desktopDeepDiveFontSize);
+  });
+
 });
 
