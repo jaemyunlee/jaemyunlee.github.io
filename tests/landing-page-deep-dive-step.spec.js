@@ -5,23 +5,23 @@ test.describe('Landing Page Deep Dive Step Description & "get to" Nuance (Issue 
     await page.goto('/index.html');
   });
 
-  test('1. Deep Dive section (#flow-deepdive-extra) is rendered directly in learning flow below popcorn extra', async ({ page }) => {
+  test('1. Deep Dive section (#flow-deepdive-extra) is rendered in learning flow above popcorn extra', async ({ page }) => {
     const learningFlow = page.locator('#learning-flow');
     await expect(learningFlow).toBeVisible();
-
-    const popcornExtra = page.locator('#flow-popcorn-extra');
-    await expect(popcornExtra).toBeVisible();
 
     const deepdiveExtra = page.locator('#flow-deepdive-extra');
     await expect(deepdiveExtra).toBeVisible();
 
-    // Verify DOM order: deepdiveExtra directly follows popcornExtra
-    const isDirectSiblingOrFollows = await page.evaluate(() => {
-      const popcorn = document.getElementById('flow-popcorn-extra');
+    const popcornExtra = page.locator('#flow-popcorn-extra');
+    await expect(popcornExtra).toBeVisible();
+
+    // Verify DOM order: deepdiveExtra precedes popcornExtra
+    const isDeepdiveBeforePopcorn = await page.evaluate(() => {
       const deepdive = document.getElementById('flow-deepdive-extra');
-      return popcorn.compareDocumentPosition(deepdive) & Node.DOCUMENT_POSITION_FOLLOWING;
+      const popcorn = document.getElementById('flow-popcorn-extra');
+      return deepdive.compareDocumentPosition(popcorn) & Node.DOCUMENT_POSITION_FOLLOWING;
     });
-    expect(isDirectSiblingOrFollows).toBeTruthy();
+    expect(isDeepdiveBeforePopcorn).toBeTruthy();
   });
 
   test('2. Deep Dive badges, title, and lead copy are properly displayed', async ({ page }) => {
@@ -30,12 +30,12 @@ test.describe('Landing Page Deep Dive Step Description & "get to" Nuance (Issue 
     // Badges
     await expect(deepdiveExtra.locator('.badge-deep-step')).toHaveText('OPTIONAL STEP');
     await expect(deepdiveExtra.locator('.badge-deep-pill')).toContainText('🥜 뉘앙스 딥다이브 (Deep Dive)');
-    await expect(deepdiveExtra.locator('.badge-deep-highlight')).toContainText('💡 맥락 & 원어민 어감 완전 정복');
+    await expect(deepdiveExtra.locator('.badge-deep-highlight')).toContainText('💡 맥락 & 원어민 어감 정복');
 
     // Title & Lead
     const title = deepdiveExtra.locator('.flow-deepdive-extra-title');
     await expect(title).toBeVisible();
-    await expect(title).toContainText('진짜 감정선과 어감');
+    await expect(title).toContainText('감정선과 어감');
 
     const lead = deepdiveExtra.locator('.flow-deepdive-extra-lead');
     await expect(lead).toBeVisible();
@@ -75,15 +75,14 @@ test.describe('Landing Page Deep Dive Step Description & "get to" Nuance (Issue 
     await expect(canItem.locator('.deepdive-compare-desc')).toContainText('신체적·물리적으로 가능한 상태');
   });
 
-  test('4. Features grid lists the 3 core benefits of Deep Dive', async ({ page }) => {
+  test('4. Features grid lists the 2 core benefits of Deep Dive', async ({ page }) => {
     const features = page.locator('#flow-deepdive-extra .deepdive-feature-item');
-    await expect(features).toHaveCount(3);
+    await expect(features).toHaveCount(2);
 
     const featureTitles = await features.locator('strong').allTextContents();
     expect(featureTitles).toEqual([
       '정밀한 뉘앙스 비교',
-      '영상 속 실제 발화 맥락',
-      '실전 스피킹 적용 연습'
+      '영상 속 실제 발화 맥락'
     ]);
   });
 
