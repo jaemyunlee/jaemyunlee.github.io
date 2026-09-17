@@ -126,7 +126,7 @@ const App = {
       title: '미국에서 빅뱅 콘서트를 간다고?',
       subtitle: '켈리가 빅뱅 콘서트를 가게 된 사연과 어떻게 빅뱅을 좋아하게 되었는지 들으면서 영어 표현을 배워봐요',
       duration: '6:43',
-      vocabCount: 21,
+      vocabCount: 26,
       path: 'lessons/lesson-01/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     },

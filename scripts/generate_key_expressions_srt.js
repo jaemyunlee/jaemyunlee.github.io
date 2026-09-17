@@ -19,6 +19,14 @@ const LESSONS_DIR = path.join(ROOT_DIR, 'lessons');
 
 // Concise definition overrides for key expressions to ensure crystal-clear subtitle definitions
 const CONCISE_DEFINITIONS = {
+  // Lesson 01
+  'trying to': '~하려고 애쓰다, 노력하다',
+  'try to': '~하려고 애쓰다, 노력하다',
+  'all the way': '끝까지, 내내, 쭉',
+  'at once': '한꺼번에, 동시에',
+  'in advance': '미리, 사전에',
+  'ahead of time': '미리, 시간 여유를 두고',
+
   // Lesson 03
   'strong-willed': '의지가 강한, 자기주관이 뚜렷한',
   'picked her up': '차로 데리러 가다, 태우러 가다',

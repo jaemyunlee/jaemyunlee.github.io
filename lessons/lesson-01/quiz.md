@@ -138,3 +138,39 @@
 - **English**: But they finally just put us in to one of the handicap seats which [ended up] having an amazing view.
 - **Korean**: 하지만 결국 장애인석 중 하나로 안내해 주셨는데, 결과적으로 뷰가 엄청나게 좋았어요.
 - **Explanation**: "end up (동명사/-ing)"는 "결국 ~하게 되다 / 결국 ~한 결과가 되다"라는 핵심 구동사입니다.
+
+## Quiz 22
+- **Type**: multiple-choice
+- **English**: So [trying to, planning to, refusing to, forgetting to] find someone to go, you know,
+- **Answer**: trying to
+- **Korean**: 그래서 같이 갈 사람을 찾아봤죠.
+- **Explanation**: "try to (동사원형)"는 "~하려고 노력하다, 애쓰다, 시도하다"라는 뜻으로 일상에서 무언가를 하려고 할 때 가장 자연스럽게 쓰는 핵심 표현입니다.
+
+## Quiz 23
+- **Type**: multiple-choice
+- **English**: And then we're going to drive [all the way, halfway, by the way, on the way] down together with her family.
+- **Answer**: all the way
+- **Korean**: 사촌네 가족이랑 다 같이 차를 타고 쭉 내려갈 거예요.
+- **Explanation**: "all the way"는 먼 거리나 목적지까지 "끝까지, 내내, 쭉" 이동하거나 거칠 때 사용하는 생생한 표현입니다.
+
+## Quiz 24
+- **Type**: multiple-choice
+- **English**: All the tickets now, it's like everyone buys them [at once, for once, at least, once upon] and then sells them, resells it.
+- **Answer**: at once
+- **Korean**: 요즘은 사람들이 티켓을 한꺼번에 다 사재기한 다음에 다시 팔더라고요, 리셀을 하는 거죠.
+- **Explanation**: "at once"는 "동시에, 한꺼번에, 일제히"라는 뜻으로, 여러 동작이나 상황이 한 순간에 몰려서 일어날 때 자주 쓰입니다.
+
+## Quiz 25
+- **Type**: multiple-choice
+- **English**: We should have called [in advance, by accident, on purpose, in person] to say that, but we didn't.
+- **Answer**: in advance
+- **Korean**: 미리 전화해서 상황을 말했어야 했는데, 그러질 않았어요.
+- **Explanation**: "in advance"는 어떤 일이나 상황이 일어나기 전에 "미리, 사전에"라는 뜻으로 예약이나 연락 시 필수적으로 쓰이는 표현입니다.
+
+## Quiz 26
+- **Type**: multiple-choice
+- **English**: I should have called [ahead of time, out of time, behind time, in time]!
+- **Answer**: ahead of time
+- **Korean**: 미리 전화를 했어야 했는데!
+- **Explanation**: "ahead of time"은 "in advance"와 마찬가지로 약속이나 일정에 앞서 "미리, 사전에, 시간 여유를 두고"라는 뜻의 매우 친숙한 구어체 표현입니다.
+
