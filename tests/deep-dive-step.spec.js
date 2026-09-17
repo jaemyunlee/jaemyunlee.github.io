@@ -143,14 +143,7 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(bottomCard).toContainText('전체 영상');
   });
 
-  test('Lessons without Deep Dive (e.g. Lesson 01, 03) continue to flow seamlessly without Peanut tab', async ({ page }) => {
-    // Check Lesson 01
-    await page.goto('/lessons/lesson-01/index.html');
-    await expect(page.locator('#step-tab-deep-dive')).toHaveCount(0);
-    await expect(page.locator('#deep-dive-section')).toHaveCount(0);
-    const tabs01 = page.locator('#lesson-step-tabs .step-tab-btn');
-    await expect(tabs01).toHaveCount(4);
-
+  test('Lessons without Deep Dive (e.g. Lesson 03) continue to flow seamlessly without Peanut tab', async ({ page }) => {
     // Check Lesson 03
     await page.goto('/lessons/lesson-03/index.html');
     await expect(page.locator('#step-tab-deep-dive')).toHaveCount(0);
@@ -162,6 +155,124 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await page.locator('.step-tab-btn[data-step="2"]').click();
     const nextBtn03 = page.locator('#step2-complete-card #btn-goto-step3');
     await expect(nextBtn03).toContainText('전체 영상 보러가기');
+  });
+
+  test.describe('Lesson 01 Deep Dive (심화 학습) - Nuance of Emphatic Do (Issue #77)', () => {
+
+    test('Lesson 01 displays the Peanut tab between Step 2 and Step 3', async ({ page }) => {
+      await page.goto('/lessons/lesson-01/index.html');
+
+      const tabs = page.locator('#lesson-step-tabs .step-tab-btn');
+      await expect(tabs).toHaveCount(5);
+
+      const deepDiveTab = page.locator('#step-tab-deep-dive');
+      await expect(deepDiveTab).toBeVisible();
+      await expect(deepDiveTab).toHaveAttribute('data-step', 'deep-dive');
+      await expect(deepDiveTab.locator('.step-icon')).toHaveText('🥜');
+      await expect(deepDiveTab.locator('.step-label')).toHaveText('심화 학습');
+    });
+
+    test('Clicking Deep Dive tab opens the section and updates the status badge in Lesson 01', async ({ page }) => {
+      await page.goto('/lessons/lesson-01/index.html');
+
+      const deepDiveTab = page.locator('#step-tab-deep-dive');
+      const deepDiveSection = page.locator('#deep-dive-section');
+      const statusBadge = page.locator('#lesson-status-badge');
+
+      await deepDiveTab.click();
+
+      await expect(deepDiveTab).toHaveClass(/active/);
+      await expect(deepDiveSection).toBeVisible();
+      await expect(statusBadge).toHaveText('🥜 심화 학습');
+
+      // Verify header heading
+      const heading = deepDiveSection.locator('.deep-dive-heading');
+      await expect(heading).toContainText('좋아한다고 말할 때, 왜 그냥 like 대신 I do like라고 할까?');
+    });
+
+    test('Lesson 01 renders 3 separate sections each with its own scene box and comparison grid', async ({ page }) => {
+      await page.goto('/lessons/lesson-01/index.html');
+      await page.locator('#step-tab-deep-dive').click();
+
+      const section = page.locator('#deep-dive-section');
+
+      // Section 1: I do like vs. I like
+      const sec1Title = section.locator('.deep-dive-block-title', { hasText: '1. I do like vs. I like' });
+      await expect(sec1Title).toBeVisible();
+      await expect(section.locator('.deep-dive-scene-meta', { hasText: 'Scene 1: 빅뱅의 신곡에 대한 솔직한 마음' })).toBeVisible();
+      await expect(section.locator('.deep-dive-time-badge', { hasText: '⏱ 05:51' })).toBeVisible();
+      await expect(section.locator('.breakdown-pattern', { hasText: 'do + 동사원형 (I do like)' })).toBeVisible();
+      await expect(section.locator('.breakdown-tense-badge', { hasText: '진심 어린 강조 / 확신' })).toBeVisible();
+
+      // Section 2: I do have ... but vs. I have ... but
+      const sec2Title = section.locator('.deep-dive-block-title', { hasText: '2. I do have ... but vs. I have ... but' });
+      await expect(sec2Title).toBeVisible();
+      await expect(section.locator('.deep-dive-scene-meta', { hasText: 'Scene 2: 콘서트에 같이 갈 친구를 찾으며' })).toBeVisible();
+      await expect(section.locator('.deep-dive-time-badge', { hasText: '⏱ 01:09' })).toBeVisible();
+      await expect(section.locator('.breakdown-pattern', { hasText: 'do have ... but (양보의 do)' })).toBeVisible();
+      await expect(section.locator('.breakdown-tense-badge', { hasText: '부분 인정과 반전 (양보)' })).toBeVisible();
+
+      // Section 3: I do wish vs. I wish
+      const sec3Title = section.locator('.deep-dive-block-title', { hasText: '3. I do wish vs. I wish' });
+      await expect(sec3Title).toBeVisible();
+      await expect(section.locator('.deep-dive-scene-meta', { hasText: 'Scene 3: 가족들과 다 같이 못 가는 진한 아쉬움' })).toBeVisible();
+      await expect(section.locator('.deep-dive-time-badge', { hasText: '⏱ 06:31' })).toBeVisible();
+      await expect(section.locator('.breakdown-pattern', { hasText: 'do wish (감정 증폭)' })).toBeVisible();
+      await expect(section.locator('.breakdown-tense-badge', { hasText: '간절한 바람 / 아쉬움 극대화' })).toBeVisible();
+
+      // Takeaway and examples
+      await expect(section.locator('.deep-dive-takeaway')).toBeVisible();
+      await expect(section.locator('.deep-dive-example-card')).toHaveCount(3);
+    });
+
+    test('In published Lesson 01, Deep Dive bottom card directs directly to Step 3 and is enabled', async ({ page }) => {
+      await page.goto('/lessons/lesson-01/index.html');
+      await page.locator('#step-tab-deep-dive').click();
+
+      const nextBtn = page.locator('#btn-deep-dive-next');
+      await expect(nextBtn).toBeVisible();
+      await expect(nextBtn).toBeEnabled();
+
+      await nextBtn.click();
+      await expect(page.locator('#video-section')).toBeVisible();
+      await expect(page.locator('.step-tab-btn[data-step="3"]')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
+    });
+
+    test('LocalStorage restores deep-dive step state on reload in Lesson 01', async ({ page }) => {
+      await page.goto('/lessons/lesson-01/index.html');
+
+      await page.evaluate(() => {
+        localStorage.setItem('rhyrhy_step_lesson-01', 'deep-dive');
+      });
+
+      await page.reload();
+
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
+    });
+
+    test('Lesson 01 Deep Dive displays share button in header and share nudge card with copy: 영어 공부하는 다른 사람에게도 알려주세요', async ({ page, context }) => {
+      await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+      await page.goto('/lessons/lesson-01/index.html');
+      await page.locator('#step-tab-deep-dive').click();
+
+      const headerShareBtn = page.locator('#btn-deep-dive-share');
+      await expect(headerShareBtn).toBeVisible();
+
+      const nudge = page.locator('.deep-dive-share-nudge');
+      await expect(nudge).toBeVisible();
+      await expect(nudge.locator('.share-nudge-headline')).toContainText('영어 공부하는 다른 사람에게도 알려주세요!');
+
+      const nudgeBtn = page.locator('#btn-deep-dive-share-nudge');
+      await expect(nudgeBtn).toBeVisible();
+      await nudgeBtn.click();
+
+      const toast = page.locator('.save-toast-notification');
+      await expect(toast).toContainText('영어 공부하는 다른 사람에게도 알려주세요');
+    });
+
   });
 
   test.describe('Lesson 02 Deep Dive (심화 학습) - 3 Separate Sections (Issue #74)', () => {
@@ -315,6 +426,37 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
 
   test.describe('Dedicated Deep Dive Shareable Pages & Direct URL Routing', () => {
 
+    test('Lesson 01 dedicated page (/lessons/lesson-01/deep-dive.html) loads directly on Deep Dive step and allows proceeding to other steps', async ({ page }) => {
+      await page.goto('/lessons/lesson-01/deep-dive.html');
+
+      // Seamlessly redirects to index.html?step=deep-dive
+      await expect(page).toHaveURL(/.*\/lessons\/lesson-01\/index\.html\?step=deep-dive/);
+
+      // Lands directly on deep-dive step
+      const deepDiveSection = page.locator('#deep-dive-section');
+      await expect(deepDiveSection).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
+
+      // Share nudge is present
+      const nudge = page.locator('.deep-dive-share-nudge');
+      await expect(nudge).toBeVisible();
+      await expect(nudge).toContainText('영어 공부하는 다른 사람에게도 알려주세요');
+
+      // User can proceed to Step 3 via bottom card
+      const nextBtn = page.locator('#btn-deep-dive-next');
+      await expect(nextBtn).toBeVisible();
+      await nextBtn.click();
+
+      await expect(page.locator('#video-section')).toBeVisible();
+      await expect(page.locator('.step-tab-btn[data-step="3"]')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
+
+      // User can switch back to Step 1
+      await page.locator('.step-tab-btn[data-step="1"]').click();
+      await expect(page.locator('#quiz-section')).toBeVisible();
+    });
+
     test('Lesson 02 dedicated page (/lessons/lesson-02/deep-dive.html) loads directly on Deep Dive step and allows proceeding to other steps', async ({ page }) => {
       await page.goto('/lessons/lesson-02/deep-dive.html');
 
@@ -369,23 +511,33 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
       const fs = require('fs');
       const path = require('path');
 
-      // 1. Verify Lesson 02 Deep Dive HTML OG tags
+      // 1. Verify Lesson 01 Deep Dive HTML OG tags
+      const l01Html = fs.readFileSync(path.join(__dirname, '../lessons/lesson-01/deep-dive.html'), 'utf-8');
+      expect(l01Html).toContain('property="og:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-01-deep-dive.png"');
+      expect(l01Html).toContain('name="twitter:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-01-deep-dive.png"');
+      expect(l01Html).toContain('I do like라고 할까?');
+      expect(l01Html).not.toContain('lesson-01-q1.png');
+
+      // 2. Verify Lesson 02 Deep Dive HTML OG tags
       const l02Html = fs.readFileSync(path.join(__dirname, '../lessons/lesson-02/deep-dive.html'), 'utf-8');
       expect(l02Html).toContain('property="og:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-02-deep-dive.png"');
       expect(l02Html).toContain('name="twitter:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-02-deep-dive.png"');
       expect(l02Html).toContain('used to와 would를 섞어 쓸까?');
       expect(l02Html).not.toContain('lesson-02-q6.png');
 
-      // 2. Verify Lesson 04 Deep Dive HTML OG tags
+      // 3. Verify Lesson 04 Deep Dive HTML OG tags
       const l04Html = fs.readFileSync(path.join(__dirname, '../lessons/lesson-04/deep-dive.html'), 'utf-8');
       expect(l04Html).toContain('property="og:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-04-deep-dive.png"');
       expect(l04Html).toContain('name="twitter:image" content="https://rhyrhyenglish.site/assets/img/og/lesson-04-deep-dive.png"');
       expect(l04Html).toContain('turns out은 현재형일까?');
       expect(l04Html).not.toContain('lesson-04-q1.png');
 
-      // 3. Verify actual OG image files exist on disk
+      // 4. Verify actual OG image files exist on disk
+      const l01ImgPath = path.join(__dirname, '../assets/img/og/lesson-01-deep-dive.png');
       const l02ImgPath = path.join(__dirname, '../assets/img/og/lesson-02-deep-dive.png');
       const l04ImgPath = path.join(__dirname, '../assets/img/og/lesson-04-deep-dive.png');
+      expect(fs.existsSync(l01ImgPath)).toBe(true);
+      expect(fs.statSync(l01ImgPath).size).toBeGreaterThan(10000);
       expect(fs.existsSync(l02ImgPath)).toBe(true);
       expect(fs.statSync(l02ImgPath).size).toBeGreaterThan(10000);
       expect(fs.existsSync(l04ImgPath)).toBe(true);
@@ -393,6 +545,12 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     });
 
     test('URL parameter ?step=deep-dive opens lesson on Deep Dive step directly', async ({ page }) => {
+      // Test Lesson 01
+      await page.goto('/lessons/lesson-01/index.html?step=deep-dive');
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+      await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
+
       // Test Lesson 02
       await page.goto('/lessons/lesson-02/index.html?step=deep-dive');
       await expect(page.locator('#deep-dive-section')).toBeVisible();
@@ -406,6 +564,10 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     });
 
     test('URL hash #deep-dive opens lesson on Deep Dive step directly', async ({ page }) => {
+      await page.goto('/lessons/lesson-01/index.html#deep-dive');
+      await expect(page.locator('#deep-dive-section')).toBeVisible();
+      await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);
+
       await page.goto('/lessons/lesson-02/index.html#deep-dive');
       await expect(page.locator('#deep-dive-section')).toBeVisible();
       await expect(page.locator('#step-tab-deep-dive')).toHaveClass(/active/);

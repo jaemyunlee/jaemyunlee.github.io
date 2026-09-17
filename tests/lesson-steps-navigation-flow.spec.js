@@ -21,7 +21,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
   });
 
   test('Step 2 displays Key Sentences review player and guides user to Step 3 (Interactive Video)', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-03/index.html');
 
     // Switch to Step 2
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');

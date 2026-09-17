@@ -90,6 +90,17 @@ CURATED_HEADLINES = {
 
 # Curated Deep Dive Open Graph Configurations
 DEEP_DIVE_CONFIGS = {
+    'lesson-01': {
+        'lesson_num': '01',
+        'line1': '"좋아한다고 말할 때,"',
+        'line2': '왜 그냥 like 대신 I do like라고 할까?',
+        'items': [
+            'I do like it vs. I like it (진심 어린 강조 & 앞선 의구심 해소)',
+            'I do have ... but (부분 인정과 반전의 양보)',
+            'I do wish we could (간절한 바람과 진한 아쉬움 증폭)'
+        ],
+        'subtitle': '강조의 조동사 do로 표현하는 원어민의 진심 뉘앙스'
+    },
     'lesson-02': {
         'lesson_num': '02',
         'line1': '"어릴 적 추억을 이야기할 때,"',
