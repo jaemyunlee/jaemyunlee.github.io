@@ -354,6 +354,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0 !important;
 }
 
 .btn-play-all-toggle {
@@ -371,6 +372,12 @@
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.btn-play-all-toggle .playall-text {
+  white-space: nowrap !important;
 }
 
 .btn-play-all-toggle:hover {
@@ -812,6 +819,7 @@
     display: flex;
     align-items: center;
     gap: 0;
+    flex-shrink: 0 !important;
   }
 
   .btn-speed-toggle {
@@ -820,11 +828,26 @@
 
   .btn-play-all-toggle {
     height: 36px;
-    padding: 0 14px;
+    padding: 0 12px;
     font-size: 0.85rem;
     font-weight: 700;
-    gap: 6px;
+    gap: 5px;
     border-radius: var(--radius-full);
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  .btn-play-all-toggle .playall-text {
+    white-space: nowrap !important;
+  }
+
+  @media (max-width: 400px) {
+    .btn-play-all-toggle {
+      height: 34px;
+      padding: 0 10px;
+      font-size: 0.8rem;
+      gap: 4px;
+    }
   }
 
   /* Hide progress scrubber on mobile */
