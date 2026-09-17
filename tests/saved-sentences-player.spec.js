@@ -627,4 +627,80 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     expect(audioSrc).toContain('lessons/lesson-01/audio/');
     expect(audioSrc).not.toMatch(/^https?:\/\/[^/]+\/audio\//);
   });
+
+  test('Mobile: on smaller screen viewports (320px, 360px, 375px), 전체 button (#btn-saved-playall) does not wrap into multi-line text', async ({ page }) => {
+    // Seed saved sentence (matching user scenario with Popcorn sentence)
+    await page.addInitScript(() => {
+      localStorage.setItem('rhyrhy_saved_sentences', JSON.stringify({
+        'popcorn': [
+          {
+            id: 'popcorn-sent-035',
+            en: 'The authors honesty really compels you to reflect on life.',
+            kr: '작가의 진솔함이 삶을 깊이 되돌아보게 마음을 이끌더구나.',
+            expression: 'compel',
+            audio: 'popcorn/conversation/audio/popcorn-035/01_Pati_I just finished reading that biography you lent me. The authors honesty really you to reflect on life.wav'
+          }
+        ]
+      }));
+    });
+
+    const smallViewports = [
+      { width: 320, height: 568, name: 'iPhone SE (1st gen / 320px)' },
+      { width: 360, height: 740, name: 'Galaxy S8 / Android (360px)' },
+      { width: 375, height: 667, name: 'iPhone SE / 8 (375px)' }
+    ];
+
+    for (const vp of smallViewports) {
+      await page.setViewportSize({ width: vp.width, height: vp.height });
+      await page.goto('/index.html');
+
+      // Open drawer
+      await page.click('#btn-open-sentences');
+      await page.waitForSelector('#saved-sentences-drawer.open');
+
+      const playallBtn = page.locator('#btn-saved-playall');
+      await expect(playallBtn).toBeVisible();
+
+      const textEl = playallBtn.locator('.playall-text');
+      await expect(textEl).toBeVisible();
+      await expect(textEl).toHaveText('전체');
+
+      // Check computed styles and dimensions
+      const computed = await page.evaluate(() => {
+        const btn = document.querySelector('#btn-saved-playall');
+        const txt = btn.querySelector('.playall-text');
+        const csBtn = window.getComputedStyle(btn);
+        const csTxt = window.getComputedStyle(txt);
+        const btnRect = btn.getBoundingClientRect();
+        const txtRect = txt.getBoundingClientRect();
+
+        return {
+          btnWhiteSpace: csBtn.whiteSpace,
+          txtWhiteSpace: csTxt.whiteSpace,
+          btnFlexShrink: csBtn.flexShrink,
+          btnHeight: btnRect.height,
+          btnWidth: btnRect.width,
+          txtHeight: txtRect.height,
+          txtWidth: txtRect.width,
+          isSingleLineText: txtRect.height <= 22
+        };
+      });
+
+      expect(computed.btnWhiteSpace, `Button must have white-space: nowrap on ${vp.name}`).toBe('nowrap');
+      expect(computed.txtWhiteSpace, `Text must have white-space: nowrap on ${vp.name}`).toBe('nowrap');
+      expect(computed.btnHeight, `Button height should be single-line on ${vp.name}`).toBeLessThanOrEqual(38);
+      expect(computed.isSingleLineText, `Text '전체' must be on a single line on ${vp.name}, but measured height was ${computed.txtHeight}px`).toBe(true);
+
+      // Verify in Light Mode as well
+      await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+      const lightComputed = await page.evaluate(() => {
+        const txt = document.querySelector('#btn-saved-playall .playall-text');
+        return {
+          txtHeight: txt.getBoundingClientRect().height,
+          isSingleLine: txt.getBoundingClientRect().height <= 22
+        };
+      });
+      expect(lightComputed.isSingleLine, `Text must remain on a single line in light mode on ${vp.name}`).toBe(true);
+    }
+  });
 });

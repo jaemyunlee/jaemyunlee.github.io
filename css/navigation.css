@@ -1650,6 +1650,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0 !important;
 }
 
 .btn-play-all-toggle {
@@ -1667,6 +1668,12 @@
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.btn-play-all-toggle .playall-text {
+  white-space: nowrap !important;
 }
 
 .btn-play-all-toggle:hover {
@@ -1872,6 +1879,7 @@
   display: flex;
   align-items: center;
   gap: 0;
+  flex-shrink: 0 !important;
 }
 
 .saved-sentences-drawer .review-player-bar .btn-speed-toggle,
@@ -1886,11 +1894,79 @@
 .player-variant-mobile .btn-play-all-toggle,
 .saved-player-bar .btn-play-all-toggle {
   height: 36px;
-  padding: 0 14px;
+  padding: 0 12px;
   font-size: 0.85rem;
   font-weight: 700;
-  gap: 6px;
+  gap: 5px;
   border-radius: var(--radius-full);
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.saved-sentences-drawer .review-player-bar .btn-play-all-toggle .playall-text,
+.saved-sentences-drawer .saved-player-bar .btn-play-all-toggle .playall-text,
+.player-variant-mobile .btn-play-all-toggle .playall-text,
+.saved-player-bar .btn-play-all-toggle .playall-text {
+  white-space: nowrap !important;
+}
+
+/* Compact mobile screen optimization (e.g. iPhone SE / <= 400px width) */
+@media (max-width: 400px) {
+  .saved-sentences-drawer .review-player-bar,
+  .saved-sentences-drawer .saved-player-bar,
+  .player-variant-mobile,
+  .saved-player-bar {
+    padding: 8px 10px;
+    margin: 12px 10px 0 10px;
+  }
+
+  .saved-sentences-drawer .review-player-bar .player-bar-top,
+  .saved-sentences-drawer .saved-player-bar .player-bar-top,
+  .player-variant-mobile .player-bar-top,
+  .saved-player-bar .player-bar-top {
+    gap: 6px;
+  }
+
+  .saved-sentences-drawer .review-player-bar .player-track-badge,
+  .saved-sentences-drawer .saved-player-bar .player-track-badge,
+  .player-variant-mobile .player-track-badge,
+  .saved-player-bar .player-track-badge {
+    padding: 3px 6px;
+    font-size: 0.78rem;
+  }
+
+  .saved-sentences-drawer .review-player-bar .player-controls-main,
+  .saved-sentences-drawer .saved-player-bar .player-controls-main,
+  .player-variant-mobile .player-controls-main,
+  .saved-player-bar .player-controls-main {
+    gap: 6px;
+  }
+
+  .saved-sentences-drawer .review-player-bar .btn-player-step,
+  .saved-sentences-drawer .saved-player-bar .btn-player-step,
+  .player-variant-mobile .btn-player-step,
+  .saved-player-bar .btn-player-step {
+    width: 34px;
+    height: 34px;
+  }
+
+  .saved-sentences-drawer .review-player-bar .btn-player-toggle,
+  .saved-sentences-drawer .saved-player-bar .btn-player-toggle,
+  .player-variant-mobile .btn-player-toggle,
+  .saved-player-bar .btn-player-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .saved-sentences-drawer .review-player-bar .btn-play-all-toggle,
+  .saved-sentences-drawer .saved-player-bar .btn-play-all-toggle,
+  .player-variant-mobile .btn-play-all-toggle,
+  .saved-player-bar .btn-play-all-toggle {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+    gap: 4px;
+  }
 }
 
 /* Hide progress scrubber on mobile component */
