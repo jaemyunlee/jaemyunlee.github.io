@@ -572,7 +572,12 @@
         "because I have a lot of assignments due Sunday.wav", // Q18
         "it was when the new song came out.wav", // Q19
         "So I thought it was pretty unlikely that I would get to go and find someone..wav", // Q20
-        "but they finally just put us in to one of the handicap seats which ended up having an amazing view.wav" // Q21
+        "but they finally just put us in to one of the handicap seats which ended up having an amazing view.wav", // Q21
+        "So trying to find someone to go you know.wav", // Q22
+        "And then were going to drive all the way down together with her family..wav", // Q23
+        "All the tickets now its like everyone buys them at once and then sells them resells it..wav", // Q24
+        "we should have called in advance to say that but we didnt..wav", // Q25
+        "i should have called ahead of time..wav" // Q26
       ];
 
       let metadata = {};
@@ -991,6 +996,7 @@
           }
         });
         quizEngine.init();
+        window.quizEngine = quizEngine;
       } catch (err) {
         console.error('Failed to load quiz markdown:', err);
         document.getElementById('quiz-container').innerHTML = `
