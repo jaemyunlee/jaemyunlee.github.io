@@ -225,7 +225,7 @@ def parse_popcorn_markdown(file_path):
     }
 
 
-def generate_audio_for_lesson(lesson_info, model, preprocessed_refs):
+def generate_audio_for_lesson(lesson_info, model, preprocessed_refs, force=False):
     """
     Generates audio files for each dialogue line in a popcorn lesson.
     """
@@ -261,7 +261,7 @@ def generate_audio_for_lesson(lesson_info, model, preprocessed_refs):
         output_path = os.path.join(output_dir, filename)
 
         # Skip if file already exists and is non-empty
-        if os.path.exists(output_path) and os.path.getsize(output_path) > 1000:
+        if not force and os.path.exists(output_path) and os.path.getsize(output_path) > 1000:
             print(f"  [{idx}/{len(lesson_info['lines'])}] ⏭️ Already exists: {filename}")
             generated_files.append((filename, output_path))
             continue
@@ -297,6 +297,7 @@ def main():
     parser.add_argument("--id", help="Lesson ID to process (e.g. popcorn-026 or 26)")
     parser.add_argument("--range", nargs=2, type=int, metavar=("START", "END"), help="Range of lesson numbers to process (e.g. 26 40)")
     parser.add_argument("--all", action="store_true", help="Process all available conversation markdown files")
+    parser.add_argument("--force", action="store_true", help="Force regeneration even if audio file already exists")
     args = parser.parse_args()
 
     # Collect target files
@@ -360,7 +361,7 @@ def main():
             if not lesson_info:
                 print(f"Warning: Failed to parse '{tf}', skipping.")
                 continue
-            generate_audio_for_lesson(lesson_info, model, preprocessed_refs)
+            generate_audio_for_lesson(lesson_info, model, preprocessed_refs, force=args.force)
 
         print("\n🎉 All requested popcorn conversation audios have been generated successfully!")
 
