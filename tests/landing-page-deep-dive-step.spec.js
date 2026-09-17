@@ -5,23 +5,23 @@ test.describe('Landing Page Deep Dive Step Description & "get to" Nuance (Issue 
     await page.goto('/index.html');
   });
 
-  test('1. Deep Dive section (#flow-deepdive-extra) is rendered directly in learning flow below popcorn extra', async ({ page }) => {
+  test('1. Deep Dive section (#flow-deepdive-extra) is rendered in learning flow above popcorn extra', async ({ page }) => {
     const learningFlow = page.locator('#learning-flow');
     await expect(learningFlow).toBeVisible();
-
-    const popcornExtra = page.locator('#flow-popcorn-extra');
-    await expect(popcornExtra).toBeVisible();
 
     const deepdiveExtra = page.locator('#flow-deepdive-extra');
     await expect(deepdiveExtra).toBeVisible();
 
-    // Verify DOM order: deepdiveExtra directly follows popcornExtra
-    const isDirectSiblingOrFollows = await page.evaluate(() => {
-      const popcorn = document.getElementById('flow-popcorn-extra');
+    const popcornExtra = page.locator('#flow-popcorn-extra');
+    await expect(popcornExtra).toBeVisible();
+
+    // Verify DOM order: deepdiveExtra precedes popcornExtra
+    const isDeepdiveBeforePopcorn = await page.evaluate(() => {
       const deepdive = document.getElementById('flow-deepdive-extra');
-      return popcorn.compareDocumentPosition(deepdive) & Node.DOCUMENT_POSITION_FOLLOWING;
+      const popcorn = document.getElementById('flow-popcorn-extra');
+      return deepdive.compareDocumentPosition(popcorn) & Node.DOCUMENT_POSITION_FOLLOWING;
     });
-    expect(isDirectSiblingOrFollows).toBeTruthy();
+    expect(isDeepdiveBeforePopcorn).toBeTruthy();
   });
 
   test('2. Deep Dive badges, title, and lead copy are properly displayed', async ({ page }) => {
