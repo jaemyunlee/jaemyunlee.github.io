@@ -102,7 +102,139 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     expect(totalAudioChecked).toBeGreaterThanOrEqual(75); // At least 25 lessons * ~3 lines
   });
 
-  test('4. Character persona honorific protocol (Wayne & Kelly) is respected across Korean translations', () => {
+  test('4. Every dialogue audio file across ALL Popcorn Quick Lessons loads, decodes, and plays successfully in the browser', async ({ page, request }) => {
+    const metadata = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
+    const allAudioItems = [];
+
+    metadata.forEach((item) => {
+      const lessonPath = path.join(ROOT_DIR, 'popcorn', item.file);
+      const rawMarkdown = fs.readFileSync(lessonPath, 'utf-8');
+      const parsed = PopcornParser.parse(rawMarkdown);
+
+      parsed.dialogue.forEach((line, lineIdx) => {
+        const audioUrl = `/popcorn/conversation/${line.audio}`;
+        allAudioItems.push({
+          lessonId: item.id,
+          expression: item.expression,
+          lineIdx: lineIdx + 1,
+          speaker: line.speaker,
+          audioRelPath: line.audio,
+          audioUrl: audioUrl
+        });
+      });
+    });
+
+    expect(allAudioItems.length).toBeGreaterThanOrEqual(100);
+
+    // 1. Verify HTTP 200 and valid audio content-type for every audio file
+    for (const item of allAudioItems) {
+      const resp = await request.get(item.audioUrl);
+      expect(resp.status(), `Audio HTTP request failed for ${item.audioUrl} (Lesson ${item.lessonId}, line ${item.lineIdx})`).toBe(200);
+      const ctype = resp.headers()['content-type'] || '';
+      expect(ctype, `Invalid audio content-type for ${item.audioUrl}: ${ctype}`).toMatch(/audio\/(wav|mpeg|x-wav|octet-stream)/);
+      const body = await resp.body();
+      expect(body.length, `Audio response body is empty for ${item.audioUrl}`).toBeGreaterThan(1000);
+    }
+
+    // 2. In browser context, verify HTMLAudioElement loads, decodes duration > 0, and can play without error
+    await page.goto('/daily.html');
+
+    const browserPlaybackResults = await page.evaluate(async (items) => {
+      const results = [];
+      const CHUNK_SIZE = 10;
+
+      for (let i = 0; i < items.length; i += CHUNK_SIZE) {
+        const chunk = items.slice(i, i + CHUNK_SIZE);
+        const chunkResults = await Promise.all(chunk.map((item) => {
+          return new Promise((resolve) => {
+            const audio = new Audio(item.audioUrl);
+            audio.preload = 'auto';
+            let resolved = false;
+
+            const cleanup = () => {
+              audio.oncanplaythrough = null;
+              audio.onloadeddata = null;
+              audio.onerror = null;
+              try { audio.pause(); } catch (_) {}
+            };
+
+            const timer = setTimeout(() => {
+              if (!resolved) {
+                resolved = true;
+                cleanup();
+                resolve({
+                  ...item,
+                  passed: false,
+                  error: 'Audio playback timeout (5s exceeded)'
+                });
+              }
+            }, 5000);
+
+            const handleReadyToPlay = async () => {
+              if (!resolved) {
+                resolved = true;
+                clearTimeout(timer);
+                try {
+                  const playPromise = audio.play();
+                  if (playPromise !== undefined) {
+                    await playPromise;
+                  }
+                  const dur = audio.duration;
+                  cleanup();
+                  resolve({
+                    ...item,
+                    passed: dur > 0 && isFinite(dur),
+                    duration: dur,
+                    error: dur > 0 ? null : 'Duration is zero or invalid'
+                  });
+                } catch (playErr) {
+                  cleanup();
+                  // In automated browser without user gesture, play() may throw NotAllowedError, but duration > 0 confirms valid audio stream
+                  const dur = audio.duration;
+                  resolve({
+                    ...item,
+                    passed: dur > 0 && isFinite(dur),
+                    duration: dur,
+                    error: dur > 0 ? null : `Playback error: ${playErr.message}`
+                  });
+                }
+              }
+            };
+
+            audio.oncanplaythrough = handleReadyToPlay;
+            audio.onloadeddata = handleReadyToPlay;
+
+            audio.onerror = () => {
+              if (!resolved) {
+                resolved = true;
+                clearTimeout(timer);
+                const code = audio.error ? audio.error.code : 'unknown';
+                cleanup();
+                resolve({
+                  ...item,
+                  passed: false,
+                  error: `HTMLAudioElement error code: ${code}`
+                });
+              }
+            };
+
+            audio.load();
+          });
+        }));
+        results.push(...chunkResults);
+      }
+      return results;
+    }, allAudioItems);
+
+    const failed = browserPlaybackResults.filter(r => !r.passed);
+    if (failed.length > 0) {
+      console.error('Failed audio playback items:', failed);
+    }
+    expect(failed.length, `Found ${failed.length} audio files that failed to play in browser: ${JSON.stringify(failed, null, 2)}`).toBe(0);
+    expect(browserPlaybackResults.length).toBe(allAudioItems.length);
+  });
+
+  test('5. Character persona honorific protocol (Wayne & Kelly) is respected across Korean translations', () => {
     const metadata = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
 
     metadata.forEach((item) => {
@@ -135,7 +267,7 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     });
   });
 
-  test('5. Local Environment GA Suppression: Zero network requests to Google Analytics or Tag Manager', async ({ page }) => {
+  test('6. Local Environment GA Suppression: Zero network requests to Google Analytics or Tag Manager', async ({ page }) => {
     const externalGaRequests = [];
 
     page.on('request', req => {
@@ -168,7 +300,7 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     expect(gaState.analyticsLocal).toBe(true);
   });
 
-  test('6. Google Analytics tracks popcorn_daily_limit_reached when 10 lessons limit is hit', async ({ page }) => {
+  test('7. Google Analytics tracks popcorn_daily_limit_reached when 10 lessons limit is hit', async ({ page }) => {
     await page.goto('/daily.html');
 
     // Reset popcorn storage
@@ -211,7 +343,7 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     expect(trackedEvent.limitEvents[0].max_threshold).toBe(10);
   });
 
-  test('7. Browser UI correctly renders dialogue, expression highlights, and audio buttons for lessons', async ({ page }) => {
+  test('8. Browser UI correctly renders dialogue, expression highlights, and audio buttons for lessons', async ({ page }) => {
     // Test lesson 005 (near and dear to my heart)
     await page.goto('/daily.html?id=popcorn-005');
 
@@ -235,7 +367,7 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     expect(audioBtnCount).toBeGreaterThanOrEqual(2);
   });
 
-  test('8. Saving target sentence for the first time displays multi-device local storage notice popup', async ({ page }) => {
+  test('9. Saving target sentence for the first time displays multi-device local storage notice popup', async ({ page }) => {
     await page.goto('/daily.html?id=popcorn-001');
 
     // Ensure completely clean storage state
@@ -287,7 +419,7 @@ test.describe('Popcorn Quick Lesson Integrity, GA Daily Limit & Local Suppressio
     await expect(page.locator('#first-save-storage-modal')).not.toBeAttached();
   });
 
-  test('9. Saved sentences from Popcorn quick lessons display key expression highlighted in saved drawer', async ({ page }) => {
+  test('10. Saved sentences from Popcorn quick lessons display key expression highlighted in saved drawer', async ({ page }) => {
     await page.goto('/daily.html?id=popcorn-002');
 
     // Set up clean storage with notice seen so popup does not block

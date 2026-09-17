@@ -282,6 +282,8 @@ const PopcornParser = {
         line.avatar = 'wayne.jpeg';
       } else if (/kelly/i.test(line.speaker)) {
         line.avatar = 'kelly.jpg';
+      } else if (/pati/i.test(line.speaker)) {
+        line.avatar = 'pati.jpeg';
       }
     }
 
