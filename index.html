@@ -883,6 +883,354 @@
       transform: translateX(4px);
     }
 
+    /* Extra Step: Deep Dive Nuance Mastery in Learning Flow */
+    .flow-deepdive-extra {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(46, 16, 101, 0.75) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 26px 30px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), 0 0 24px rgba(168, 85, 247, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .flow-deepdive-extra {
+      background: linear-gradient(135deg, #FFFFFF 0%, #FAF5FF 100%);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      box-shadow: 0 10px 30px rgba(168, 85, 247, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .flow-deepdive-extra::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .flow-deepdive-extra-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .flow-deepdive-extra-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .badge-deep-step {
+      font-size: 0.72rem;
+      font-weight: 800;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: 1px;
+      color: #D8B4FE;
+      background: rgba(168, 85, 247, 0.18);
+      border: 1px solid rgba(168, 85, 247, 0.45);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    [data-theme="light"] .badge-deep-step {
+      color: #6B21A8;
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+
+    .badge-deep-pill {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #D8B4FE;
+      background: rgba(168, 85, 247, 0.14);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    [data-theme="light"] .badge-deep-pill {
+      color: #7E22CE;
+      background: #F3E8FF;
+      border-color: rgba(168, 85, 247, 0.35);
+    }
+
+    .badge-deep-highlight {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #E9D5FF;
+      background: rgba(192, 132, 252, 0.16);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    [data-theme="light"] .badge-deep-highlight {
+      color: #581C87;
+      background: #FAF5FF;
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .flow-deepdive-extra-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+      line-height: 1.4;
+    }
+
+    [data-theme="light"] .flow-deepdive-extra-title {
+      color: #0F172A;
+    }
+
+    .text-gradient-deepdive {
+      background: linear-gradient(135deg, #A855F7 0%, #EC4899 50%, #6366F1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .flow-deepdive-extra-lead {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin: 0 0 16px;
+      line-height: 1.5;
+    }
+
+    [data-theme="light"] .flow-deepdive-extra-lead {
+      color: #475569;
+    }
+
+    /* Illustrative Nuance Example Card */
+    .deepdive-example-card {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+
+    [data-theme="light"] .deepdive-example-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(168, 85, 247, 0.3);
+      box-shadow: 0 2px 8px rgba(168, 85, 247, 0.06);
+    }
+
+    .deepdive-quote-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .deepdive-quote-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #C084FC;
+      background: rgba(168, 85, 247, 0.15);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    [data-theme="light"] .deepdive-quote-badge {
+      color: #7E22CE;
+      background: #F3E8FF;
+    }
+
+    .deepdive-quote-scene {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    [data-theme="light"] .deepdive-quote-scene {
+      color: #64748B;
+    }
+
+    .deepdive-quote-en {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      line-height: 1.45;
+    }
+
+    [data-theme="light"] .deepdive-quote-en {
+      color: #0F172A;
+    }
+
+    .deepdive-quote-en mark {
+      background: rgba(168, 85, 247, 0.28);
+      color: #F3E8FF;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 800;
+      border-bottom: 2px solid #A855F7;
+    }
+
+    [data-theme="light"] .deepdive-quote-en mark {
+      background: #F3E8FF;
+      color: #6B21A8;
+      border-bottom-color: #9333EA;
+    }
+
+    .deepdive-quote-ko {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    [data-theme="light"] .deepdive-quote-ko {
+      color: #475569;
+    }
+
+    .deepdive-compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .deepdive-compare-item {
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .deepdive-compare-item.item-highlight {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+    }
+
+    [data-theme="light"] .deepdive-compare-item.item-highlight {
+      background: #FAF5FF;
+      border-color: rgba(168, 85, 247, 0.35);
+    }
+
+    .deepdive-compare-item.item-contrast {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="light"] .deepdive-compare-item.item-contrast {
+      background: #F8FAFC;
+      border-color: #E2E8F0;
+    }
+
+    .deepdive-compare-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 800;
+      font-size: 0.76rem;
+      margin-bottom: 4px;
+    }
+
+    .item-highlight .deepdive-compare-tag {
+      color: #D8B4FE;
+    }
+
+    [data-theme="light"] .item-highlight .deepdive-compare-tag {
+      color: #7E22CE;
+    }
+
+    .item-contrast .deepdive-compare-tag {
+      color: var(--text-muted);
+    }
+
+    [data-theme="light"] .item-contrast .deepdive-compare-tag {
+      color: #64748B;
+    }
+
+    .deepdive-compare-desc {
+      color: var(--text-muted);
+      word-break: keep-all;
+    }
+
+    [data-theme="light"] .deepdive-compare-desc {
+      color: #334155;
+    }
+
+    .deepdive-compare-desc strong {
+      color: var(--text-main);
+    }
+
+    [data-theme="light"] .deepdive-compare-desc strong {
+      color: #0F172A;
+    }
+
+    .flow-deepdive-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .deepdive-feature-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    [data-theme="light"] .deepdive-feature-item {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(226, 232, 240, 0.85);
+    }
+
+    .flow-deepdive-extra-cta {
+      flex-shrink: 0;
+    }
+
+    .btn-flow-deepdive-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%);
+      color: #FFFFFF !important;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 14px 22px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(168, 85, 247, 0.35);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .btn-flow-deepdive-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(168, 85, 247, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .btn-flow-deepdive-action:hover .cta-arrow {
+      transform: translateX(4px);
+    }
+
     @media (max-width: 900px) {
       .flow-popcorn-extra {
         flex-direction: column;
@@ -901,6 +1249,32 @@
       }
 
       .btn-flow-popcorn-action {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .flow-deepdive-extra {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 22px 20px;
+        gap: 20px;
+      }
+
+      .deepdive-compare-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .flow-deepdive-features-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .flow-deepdive-extra-cta {
+        text-align: center;
+      }
+
+      .btn-flow-deepdive-action {
         width: 100%;
         justify-content: center;
       }
@@ -1259,6 +1633,81 @@
         <div class="flow-popcorn-extra-cta">
           <a href="./daily.html" class="btn-flow-popcorn-action" id="btn-flow-popcorn-start" title="오늘의 팝콘 표현 학습하기">
             <span>🍿 오늘의 팝콘 표현 뽑기</span>
+            <span class="cta-arrow" aria-hidden="true">➔</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Optional Deep Dive: Contextual Nuance Mastery -->
+      <div class="flow-deepdive-extra" id="flow-deepdive-extra">
+        <div class="flow-deepdive-extra-content">
+          <div class="flow-deepdive-extra-badge">
+            <span class="badge-deep-step">OPTIONAL STEP</span>
+            <span class="badge-deep-pill">🥜 뉘앙스 딥다이브 (Deep Dive)</span>
+            <span class="badge-deep-highlight">💡 맥락 &amp; 원어민 어감 완전 정복</span>
+          </div>
+          <h3 class="flow-deepdive-extra-title">
+            단어 번역을 넘어 원어민의 <span class="text-gradient-deepdive">진짜 감정선과 어감</span>을 완벽 체화!
+          </h3>
+          <p class="flow-deepdive-extra-lead">
+            같은 단어라도 상황에 따라 담긴 감정의 온도가 다릅니다. 사전적 정의만으로는 알 수 없는 <strong>원어민의 진짜 뉘앙스 차이</strong>를 생생한 대화 속 예시로 깊이 있게 마스터합니다.
+          </p>
+
+          <!-- Illustrative Nuance Example Card: "get to" -->
+          <div class="deepdive-example-card">
+            <div class="deepdive-quote-header">
+              <span class="deepdive-quote-badge">💡 Lesson 02 대표 예시</span>
+              <span class="deepdive-quote-scene">Scene 3 (Wayne's Cabin)</span>
+            </div>
+            <div class="deepdive-quote-en">
+              "And now Jaemyun and Kelly <mark>get to</mark> enjoy it and the kids too."
+            </div>
+            <div class="deepdive-quote-ko">
+              이제는 재면이와 켈리, 그리고 아이들도 함께 이곳을 누릴 수 있게 되었죠.
+            </div>
+            <div class="deepdive-compare-grid">
+              <div class="deepdive-compare-item item-highlight">
+                <div class="deepdive-compare-tag">🎁 get to + 동사원형</div>
+                <div class="deepdive-compare-desc">
+                  <strong>소중한 기회 / 축복 (Privilege):</strong> 당연한 권리나 단순 능력이 아니라, <em>"나에게 주어진 특별한 행운이자 감사한 기회를 누리다"</em>라는 따뜻하고 벅찬 감정선.
+                </div>
+              </div>
+              <div class="deepdive-compare-item item-contrast">
+                <div class="deepdive-compare-tag">⚡ can / could + 동사원형</div>
+                <div class="deepdive-compare-desc">
+                  <strong>단순 능력 / 허가 (Ability):</strong> 감정이나 감사의 뉘앙스 없이 신체적·물리적으로 가능한 상태만 무미건조하게 전달 (<em>"They can enjoy it"</em> = 그냥 즐길 수 있다).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-deepdive-features-grid">
+            <div class="deepdive-feature-item">
+              <div class="feature-icon">🔍</div>
+              <div class="feature-text">
+                <strong>정밀한 뉘앙스 비교</strong>
+                <span>사전상 유사해 보이는 표현 간의 미묘한 어감과 문화적 맥락 차이를 명쾌하게 정리합니다.</span>
+              </div>
+            </div>
+            <div class="deepdive-feature-item">
+              <div class="feature-icon">🎬</div>
+              <div class="feature-text">
+                <strong>영상 속 실제 발화 맥락</strong>
+                <span>대화 흐름 속에서 화자가 왜 이 표현을 선택했는지 자연스럽게 이해할 수 있습니다.</span>
+              </div>
+            </div>
+            <div class="deepdive-feature-item">
+              <div class="feature-icon">🗣️</div>
+              <div class="feature-text">
+                <strong>실전 스피킹 적용 연습</strong>
+                <span>단순 이해에 그치지 않고, 나의 일상 스피킹에서 바로 감정을 실어 말할 수 있도록 훈련합니다.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-deepdive-extra-cta">
+          <a href="./lessons/lesson-02/deep-dive.html" class="btn-flow-deepdive-action" id="btn-flow-deepdive-start" title="Lesson 02 딥다이브 학습하기">
+            <span>🥜 심화 학습 체험하기</span>
             <span class="cta-arrow" aria-hidden="true">➔</span>
           </a>
         </div>
