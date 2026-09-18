@@ -682,4 +682,19 @@
     font-size: 1rem;
     padding: 14px 20px;
   }
+
+  .word-reset-btn {
+    font-size: 0.78rem;
+    padding: 5px 10px;
+    gap: 4px;
+    white-space: nowrap;
+    word-break: keep-all;
+    flex-shrink: 0;
+    min-width: max-content;
+  }
+
+  .word-reset-btn span {
+    white-space: nowrap;
+    word-break: keep-all;
+  }
 }

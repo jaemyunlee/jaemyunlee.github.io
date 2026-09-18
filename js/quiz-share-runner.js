@@ -161,7 +161,7 @@
         bodyHtml = `
           <div class="word-bank-wrapper">
             <div class="word-bank-header">
-              <span class="word-bank-title">🔤 단어들을 올바른 순서로 끌어다 놓거나 탭하세요</span>
+              <span class="word-bank-title">🔤 단어들을 빈칸으로 끌어다 놓거나 탭하여 순서대로 맞추세요</span>
               <button type="button" class="word-reset-btn" id="word-reset-btn" title="모든 단어 초기화">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
@@ -255,9 +255,20 @@
     formatSentenceForDisplay(q) {
       if (!q.english) return '';
       if (q.type === 'drag-and-drop') {
+        const tokens = q.tokens || (q.options && q.options.length > 0 ? q.options : (q.answer ? q.answer.split(/\s+/) : []));
+        const slotsHtml = tokens.map((_, idx) => `
+          <div 
+            class="word-slot" 
+            data-slot-index="${idx}" 
+            id="share-slot-${idx}" 
+            role="region" 
+            aria-label="빈칸 ${idx + 1}"
+          ></div>
+        `).join('');
+
         return q.english.replace(/\[(.*?)\]/, `
-          <div class="word-drop-zone" id="word-drop-zone" role="region" aria-label="단어 배치 영역">
-            <span class="word-drop-placeholder" id="word-drop-placeholder">단어를 끌어다 놓거나 탭하여 순서대로 완성하세요</span>
+          <div class="word-slots-container word-drop-zone" id="word-drop-zone" role="group" aria-label="단어 빈칸 영역" data-slot-count="${tokens.length}">
+            ${slotsHtml}
           </div>
         `);
       }
@@ -286,108 +297,189 @@
         const resetBtn = document.getElementById('word-reset-btn');
         const submitBtn = document.getElementById('standalone-submit-btn');
 
-        const updatePlaceholder = () => {
-          if (!dropZone) return;
-          const placeholder = dropZone.querySelector('#word-drop-placeholder');
-          const chips = dropZone.querySelectorAll('.drag-word-chip');
-          if (placeholder) placeholder.style.display = chips.length === 0 ? '' : 'none';
+        if (!dropZone || !bankGrid) return;
+
+        const slots = Array.from(dropZone.querySelectorAll('.word-slot'));
+
+        const placeChipInSlot = (chip, targetSlot) => {
+          if (!chip || !targetSlot) return;
+          const sourceSlot = chip.closest('.word-slot');
+          const existingChip = targetSlot.querySelector('.drag-word-chip');
+
+          if (existingChip && existingChip !== chip) {
+            if (sourceSlot && sourceSlot !== targetSlot) {
+              sourceSlot.appendChild(existingChip);
+              sourceSlot.classList.add('filled');
+              existingChip.classList.add('placed');
+            } else {
+              existingChip.classList.remove('placed');
+              bankGrid.appendChild(existingChip);
+            }
+          }
+
+          targetSlot.appendChild(chip);
+          chip.classList.add('placed');
+          targetSlot.classList.add('filled');
+          targetSlot.classList.remove('error', 'shake');
+
+          if (sourceSlot && sourceSlot !== targetSlot && !sourceSlot.querySelector('.drag-word-chip')) {
+            sourceSlot.classList.remove('filled');
+          }
         };
 
-        if (resetBtn && dropZone && bankGrid) {
+        const toggleChip = (chip) => {
+          if (this.answered || chip.disabled) return;
+          const currentSlot = chip.closest('.word-slot');
+          if (currentSlot) {
+            chip.classList.remove('placed');
+            bankGrid.appendChild(chip);
+            currentSlot.classList.remove('filled', 'error', 'shake');
+          } else {
+            const emptySlot = dropZone.querySelector('.word-slot:not(.filled)');
+            if (emptySlot) {
+              placeChipInSlot(chip, emptySlot);
+            } else {
+              dropZone.classList.add('shake');
+              setTimeout(() => dropZone.classList.remove('shake'), 400);
+            }
+          }
+        };
+
+        if (resetBtn) {
           resetBtn.addEventListener('click', () => {
             if (this.answered) return;
-            const chips = Array.from(dropZone.querySelectorAll('.drag-word-chip'));
-            chips.forEach(chip => {
-              chip.classList.remove('placed');
-              bankGrid.appendChild(chip);
+            slots.forEach(slot => {
+              const chip = slot.querySelector('.drag-word-chip');
+              if (chip) {
+                chip.classList.remove('placed');
+                bankGrid.appendChild(chip);
+              }
+              slot.classList.remove('filled', 'correct', 'error', 'shake', 'drag-over');
             });
-            updatePlaceholder();
+            dropZone.classList.remove('correct', 'error', 'shake');
           });
         }
 
+        let activeDraggedChip = null;
+
+        // Bind slots
+        slots.forEach(slot => {
+          slot.addEventListener('dragover', (e) => {
+            if (this.answered) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            slot.classList.add('drag-over');
+          });
+
+          slot.addEventListener('dragleave', (e) => {
+            if (!slot.contains(e.relatedTarget)) {
+              slot.classList.remove('drag-over');
+            }
+          });
+
+          slot.addEventListener('drop', (e) => {
+            if (this.answered) return;
+            e.preventDefault();
+            e.stopPropagation();
+            slot.classList.remove('drag-over');
+            const id = e.dataTransfer ? e.dataTransfer.getData('text/plain') : null;
+            const chip = (id ? document.getElementById(id) : null) || activeDraggedChip || document.querySelector('.drag-word-chip.dragging');
+            if (chip) placeChipInSlot(chip, slot);
+          });
+
+          slot.addEventListener('click', (e) => {
+            if (this.answered) return;
+            const chip = slot.querySelector('.drag-word-chip');
+            if (chip && e.target === slot) {
+              toggleChip(chip);
+            }
+          });
+        });
+
+        // Bind chips
         const chips = document.querySelectorAll('.drag-word-chip');
         chips.forEach(chip => {
           chip.addEventListener('dragstart', (e) => {
             if (this.answered) return;
+            activeDraggedChip = chip;
             chip.classList.add('dragging');
-            e.dataTransfer.setData('text/plain', chip.id);
-            e.dataTransfer.effectAllowed = 'move';
+            if (e.dataTransfer) {
+              e.dataTransfer.setData('text/plain', chip.id);
+              e.dataTransfer.effectAllowed = 'move';
+            }
           });
 
           chip.addEventListener('dragend', () => {
             chip.classList.remove('dragging');
-            if (dropZone) dropZone.classList.remove('drag-over');
-            if (bankGrid) bankGrid.classList.remove('drag-over');
-            updatePlaceholder();
+            activeDraggedChip = null;
+            dropZone.classList.remove('drag-over');
+            slots.forEach(s => s.classList.remove('drag-over'));
+            bankGrid.classList.remove('drag-over');
           });
 
           chip.addEventListener('click', (e) => {
-            if (this.answered) return;
             e.preventDefault();
-            if (dropZone && dropZone.contains(chip)) {
-              chip.classList.remove('placed');
-              bankGrid.appendChild(chip);
-            } else if (dropZone) {
-              chip.classList.add('placed');
-              dropZone.appendChild(chip);
-            }
-            updatePlaceholder();
+            e.stopPropagation();
+            toggleChip(chip);
           });
         });
 
-        if (dropZone) {
-          dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            dropZone.classList.add('drag-over');
-          });
-          dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('drag-over');
-          });
-          dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('drag-over');
-            const id = e.dataTransfer.getData('text/plain');
-            const chip = document.getElementById(id);
-            if (chip) {
-              chip.classList.add('placed');
-              dropZone.appendChild(chip);
-            }
-            updatePlaceholder();
-          });
-        }
+        // Dropzone container drop
+        dropZone.addEventListener('dragover', (e) => {
+          if (this.answered) return;
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+        });
 
-        if (bankGrid) {
-          bankGrid.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            bankGrid.classList.add('drag-over');
-          });
-          bankGrid.addEventListener('dragleave', () => {
-            bankGrid.classList.remove('drag-over');
-          });
-          bankGrid.addEventListener('drop', (e) => {
-            e.preventDefault();
-            bankGrid.classList.remove('drag-over');
-            const id = e.dataTransfer.getData('text/plain');
-            const chip = document.getElementById(id);
-            if (chip) {
-              chip.classList.remove('placed');
-              bankGrid.appendChild(chip);
-            }
-            updatePlaceholder();
-          });
-        }
+        dropZone.addEventListener('drop', (e) => {
+          if (this.answered) return;
+          e.preventDefault();
+          const id = e.dataTransfer ? e.dataTransfer.getData('text/plain') : null;
+          const chip = (id ? document.getElementById(id) : null) || activeDraggedChip || document.querySelector('.drag-word-chip.dragging');
+          if (!chip) return;
+          const targetSlot = e.target.closest('.word-slot') || dropZone.querySelector('.word-slot:not(.filled)') || slots[slots.length - 1];
+          if (targetSlot) placeChipInSlot(chip, targetSlot);
+        });
 
-        if (submitBtn && dropZone) {
+        // Bank Grid drop
+        bankGrid.addEventListener('dragover', (e) => {
+          if (this.answered) return;
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          bankGrid.classList.add('drag-over');
+        });
+
+        bankGrid.addEventListener('dragleave', () => {
+          bankGrid.classList.remove('drag-over');
+        });
+
+        bankGrid.addEventListener('drop', (e) => {
+          if (this.answered) return;
+          e.preventDefault();
+          bankGrid.classList.remove('drag-over');
+          const id = e.dataTransfer ? e.dataTransfer.getData('text/plain') : null;
+          const chip = (id ? document.getElementById(id) : null) || activeDraggedChip || document.querySelector('.drag-word-chip.dragging');
+          if (chip) {
+            const sourceSlot = chip.closest('.word-slot');
+            chip.classList.remove('placed');
+            bankGrid.appendChild(chip);
+            if (sourceSlot) sourceSlot.classList.remove('filled');
+          }
+        });
+
+        // Submit
+        if (submitBtn) {
           submitBtn.addEventListener('click', () => {
             if (this.answered) return;
-            const placed = Array.from(dropZone.querySelectorAll('.drag-word-chip'));
-            if (placed.length === 0) {
-              dropZone.classList.add('shake');
-              setTimeout(() => dropZone.classList.remove('shake'), 500);
+            const emptySlots = slots.filter(s => !s.querySelector('.drag-word-chip'));
+            if (emptySlots.length > 0) {
+              emptySlots.forEach(s => {
+                s.classList.add('error', 'shake');
+                setTimeout(() => s.classList.remove('shake'), 400);
+              });
               return;
             }
+            const placed = slots.map(s => s.querySelector('.drag-word-chip')).filter(Boolean);
             const val = placed.map(c => c.dataset.word).join(' ');
             this.handleAnswer(val);
           });

@@ -208,6 +208,17 @@ class QuizEngine {
       q._shuffledTokens = shuffled;
     }
 
+    const targetTokens = q.tokens || (q.options && q.options.length > 0 ? q.options : (q.answer ? q.answer.split(/\s+/) : []));
+    const slotsHtml = targetTokens.map((tok, idx) => `
+      <div 
+        class="word-slot" 
+        data-slot-index="${idx}" 
+        id="word-slot-${idx}" 
+        role="region" 
+        aria-label="빈칸 ${idx + 1}"
+      ></div>
+    `).join('');
+
     const bankHtml = q._shuffledTokens.map((tok, idx) => `
       <button 
         type="button" 
@@ -226,15 +237,15 @@ class QuizEngine {
     return `
       <div class="sentence-builder-box">
         <span class="sentence-text">${this._escapeHtml(beforeText)}</span>
-        <div class="word-drop-zone" id="word-drop-zone" role="region" aria-label="단어 배치 영역">
-          <span class="word-drop-placeholder" id="word-drop-placeholder">단어를 끌어다 놓거나 탭하여 순서대로 완성하세요</span>
+        <div class="word-slots-container word-drop-zone" id="word-drop-zone" role="group" aria-label="단어 빈칸 영역" data-slot-count="${targetTokens.length}">
+          ${slotsHtml}
         </div>
         <span class="sentence-text">${this._escapeHtml(afterText)}</span>
       </div>
 
       <div class="word-bank-wrapper">
         <div class="word-bank-header">
-          <span class="word-bank-title">🔤 단어들을 올바른 순서로 끌어다 놓거나 탭하세요</span>
+          <span class="word-bank-title">🔤 단어들을 빈칸으로 끌어다 놓거나 탭하여 순서대로 맞추세요</span>
           <button type="button" class="word-reset-btn" id="word-reset-btn" title="모든 단어 초기화">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
@@ -432,37 +443,83 @@ class QuizEngine {
     const resetBtn = this.container.querySelector('#word-reset-btn');
     if (!dropZone || !bankGrid) return;
 
-    // Reset button
+    const slots = Array.from(dropZone.querySelectorAll('.word-slot'));
+
+    // Reset button: return all placed chips to bank and reset slots
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
-        const chips = Array.from(dropZone.querySelectorAll('.drag-word-chip'));
-        chips.forEach(chip => {
-          chip.classList.remove('placed');
-          bankGrid.appendChild(chip);
+        slots.forEach(slot => {
+          const chip = slot.querySelector('.drag-word-chip');
+          if (chip) {
+            chip.classList.remove('placed');
+            bankGrid.appendChild(chip);
+          }
+          slot.classList.remove('filled', 'correct', 'error', 'shake', 'drag-over');
         });
-        this._updateDropZonePlaceholder(dropZone);
+        dropZone.classList.remove('correct', 'error', 'shake');
       });
     }
 
-    // Chips events (HTML5 Drag, Touch, Tap)
+    let activeDraggedChip = null;
+
+    // Bind slot drag & drop events to each individual blank slot
+    slots.forEach(slot => {
+      slot.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        slot.classList.add('drag-over');
+      });
+
+      slot.addEventListener('dragleave', (e) => {
+        if (!slot.contains(e.relatedTarget)) {
+          slot.classList.remove('drag-over');
+        }
+      });
+
+      slot.addEventListener('drop', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        slot.classList.remove('drag-over');
+        const id = e.dataTransfer ? e.dataTransfer.getData('text/plain') : null;
+        const chip = (id ? document.getElementById(id) : null) || activeDraggedChip || this.container.querySelector('.drag-word-chip.dragging');
+        if (chip) {
+          this._placeChipInSlot(chip, slot, bankGrid, dropZone);
+        }
+      });
+
+      // Tapping on a filled slot returns its chip to the bank
+      slot.addEventListener('click', (e) => {
+        const chip = slot.querySelector('.drag-word-chip');
+        if (chip && e.target === slot) {
+          this._toggleChipLocation(chip, dropZone, bankGrid);
+        }
+      });
+    });
+
+    // Chips events (HTML5 Drag, Touch Drag, Tap)
     const chips = this.container.querySelectorAll('.drag-word-chip');
     chips.forEach(chip => {
       chip.addEventListener('dragstart', (e) => {
+        activeDraggedChip = chip;
         chip.classList.add('dragging');
-        e.dataTransfer.setData('text/plain', chip.id);
-        e.dataTransfer.effectAllowed = 'move';
+        if (e.dataTransfer) {
+          e.dataTransfer.setData('text/plain', chip.id);
+          e.dataTransfer.effectAllowed = 'move';
+        }
       });
 
       chip.addEventListener('dragend', () => {
         chip.classList.remove('dragging');
+        activeDraggedChip = null;
         dropZone.classList.remove('drag-over');
+        slots.forEach(s => s.classList.remove('drag-over'));
         bankGrid.classList.remove('drag-over');
-        this._updateDropZonePlaceholder(dropZone);
       });
 
-      // Tap to place / return
+      // Tap to place into next empty slot, or return to bank if placed
       chip.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         this._toggleChipLocation(chip, dropZone, bankGrid);
       });
 
@@ -500,10 +557,10 @@ class QuizEngine {
           touchGhost.style.top = `${curY}px`;
 
           const elemBelow = document.elementFromPoint(curX, curY);
-          const overDrop = elemBelow && (elemBelow.closest('#word-drop-zone') || elemBelow === dropZone);
+          const slotBelow = elemBelow && elemBelow.closest('.word-slot');
           const overBank = elemBelow && (elemBelow.closest('#word-bank-grid') || elemBelow === bankGrid);
 
-          dropZone.classList.toggle('drag-over', !!overDrop);
+          slots.forEach(s => s.classList.toggle('drag-over', s === slotBelow));
           bankGrid.classList.toggle('drag-over', !!overBank);
         }
       }, { passive: false });
@@ -515,67 +572,42 @@ class QuizEngine {
             touchGhost.parentNode.removeChild(touchGhost);
             touchGhost = null;
           }
-          dropZone.classList.remove('drag-over');
+          slots.forEach(s => s.classList.remove('drag-over'));
           bankGrid.classList.remove('drag-over');
 
           const touch = e.changedTouches[0];
           const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-          const targetDrop = elemBelow && (elemBelow.closest('#word-drop-zone') || elemBelow === dropZone);
+          const targetSlot = elemBelow && elemBelow.closest('.word-slot');
           const targetBank = elemBelow && (elemBelow.closest('#word-bank-grid') || elemBelow === bankGrid);
 
-          if (targetDrop) {
-            const afterElement = this._getDragAfterElement(dropZone, touch.clientX);
-            if (!afterElement) {
-              dropZone.appendChild(chip);
-            } else {
-              dropZone.insertBefore(chip, afterElement);
-            }
-            chip.classList.add('placed');
+          if (targetSlot) {
+            this._placeChipInSlot(chip, targetSlot, bankGrid, dropZone);
           } else if (targetBank) {
+            const sourceSlot = chip.closest('.word-slot');
             chip.classList.remove('placed');
             bankGrid.appendChild(chip);
+            if (sourceSlot) sourceSlot.classList.remove('filled');
           }
-          this._updateDropZonePlaceholder(dropZone);
         }
         isTouchDragging = false;
       });
     });
 
-    // Dropzone Drag Events
+    // Dropzone container Drag Events (fall back to first empty slot or last slot)
     dropZone.addEventListener('dragover', (e) => {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
-      dropZone.classList.add('drag-over');
-      const afterElement = this._getDragAfterElement(dropZone, e.clientX);
-      const draggingChip = this.container.querySelector('.drag-word-chip.dragging');
-      if (draggingChip) {
-        if (!afterElement) {
-          dropZone.appendChild(draggingChip);
-        } else {
-          dropZone.insertBefore(draggingChip, afterElement);
-        }
-      }
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-      dropZone.classList.remove('drag-over');
     });
 
     dropZone.addEventListener('drop', (e) => {
       e.preventDefault();
-      dropZone.classList.remove('drag-over');
-      const id = e.dataTransfer.getData('text/plain');
-      const chip = document.getElementById(id);
-      if (chip) {
-        chip.classList.add('placed');
-        const afterElement = this._getDragAfterElement(dropZone, e.clientX);
-        if (!afterElement) {
-          dropZone.appendChild(chip);
-        } else {
-          dropZone.insertBefore(chip, afterElement);
-        }
+      const id = e.dataTransfer ? e.dataTransfer.getData('text/plain') : null;
+      const chip = (id ? document.getElementById(id) : null) || activeDraggedChip || this.container.querySelector('.drag-word-chip.dragging');
+      if (!chip) return;
+      const targetSlot = e.target.closest('.word-slot') || dropZone.querySelector('.word-slot:not(.filled)') || slots[slots.length - 1];
+      if (targetSlot) {
+        this._placeChipInSlot(chip, targetSlot, bankGrid, dropZone);
       }
-      this._updateDropZonePlaceholder(dropZone);
     });
 
     // Word Bank Drag Events
@@ -592,34 +624,63 @@ class QuizEngine {
     bankGrid.addEventListener('drop', (e) => {
       e.preventDefault();
       bankGrid.classList.remove('drag-over');
-      const id = e.dataTransfer.getData('text/plain');
-      const chip = document.getElementById(id);
+      const id = e.dataTransfer ? e.dataTransfer.getData('text/plain') : null;
+      const chip = (id ? document.getElementById(id) : null) || activeDraggedChip || this.container.querySelector('.drag-word-chip.dragging');
       if (chip) {
+        const sourceSlot = chip.closest('.word-slot');
         chip.classList.remove('placed');
         bankGrid.appendChild(chip);
+        if (sourceSlot) sourceSlot.classList.remove('filled');
       }
-      this._updateDropZonePlaceholder(dropZone);
     });
+  }
+
+  _placeChipInSlot(chip, targetSlot, bankGrid, dropZone) {
+    if (!chip || !targetSlot) return;
+    const sourceSlot = chip.closest('.word-slot');
+    const existingChip = targetSlot.querySelector('.drag-word-chip');
+
+    if (existingChip && existingChip !== chip) {
+      if (sourceSlot && sourceSlot !== targetSlot) {
+        // Swap chips between slots
+        sourceSlot.appendChild(existingChip);
+        sourceSlot.classList.add('filled');
+        existingChip.classList.add('placed');
+      } else {
+        // Move existing chip back to bank
+        existingChip.classList.remove('placed');
+        bankGrid.appendChild(existingChip);
+      }
+    }
+
+    targetSlot.appendChild(chip);
+    chip.classList.add('placed');
+    targetSlot.classList.add('filled');
+    targetSlot.classList.remove('error', 'shake');
+
+    if (sourceSlot && sourceSlot !== targetSlot && !sourceSlot.querySelector('.drag-word-chip')) {
+      sourceSlot.classList.remove('filled');
+    }
   }
 
   _toggleChipLocation(chip, dropZone, bankGrid) {
     if (chip.disabled) return;
-    if (dropZone.contains(chip)) {
+    const currentSlot = chip.closest('.word-slot');
+    if (currentSlot) {
+      // Remove from slot and return to bank
       chip.classList.remove('placed');
       bankGrid.appendChild(chip);
+      currentSlot.classList.remove('filled', 'error', 'shake');
     } else {
-      chip.classList.add('placed');
-      dropZone.appendChild(chip);
-    }
-    this._updateDropZonePlaceholder(dropZone);
-  }
-
-  _updateDropZonePlaceholder(dropZone) {
-    if (!dropZone) return;
-    const placeholder = dropZone.querySelector('#word-drop-placeholder');
-    const chips = dropZone.querySelectorAll('.drag-word-chip');
-    if (placeholder) {
-      placeholder.style.display = chips.length === 0 ? '' : 'none';
+      // Place into first empty slot
+      const emptySlot = dropZone.querySelector('.word-slot:not(.filled)');
+      if (emptySlot) {
+        this._placeChipInSlot(chip, emptySlot, bankGrid, dropZone);
+      } else {
+        // All slots full, briefly shake dropZone
+        dropZone.classList.add('shake');
+        setTimeout(() => dropZone.classList.remove('shake'), 400);
+      }
     }
   }
 
@@ -799,16 +860,20 @@ class QuizEngine {
       const feedbackBox = this.container.querySelector('#quiz-feedback');
       if (!dropZone) return;
 
-      const placedChips = Array.from(dropZone.querySelectorAll('.drag-word-chip'));
-      if (placedChips.length === 0) {
-        dropZone.classList.add('shake');
-        setTimeout(() => dropZone.classList.remove('shake'), 500);
+      const slots = Array.from(dropZone.querySelectorAll('.word-slot'));
+      const emptySlots = slots.filter(s => !s.querySelector('.drag-word-chip'));
+
+      if (emptySlots.length > 0) {
+        emptySlots.forEach(s => {
+          s.classList.add('error', 'shake');
+          setTimeout(() => s.classList.remove('shake'), 400);
+        });
         if (feedbackBox) {
           feedbackBox.className = 'quiz-feedback error';
           feedbackBox.innerHTML = `
             <div class="feedback-inner">
               <div class="feedback-status-line">
-                <span>단어를 먼저 올바른 순서로 끌어다 놓거나 탭해주세요!</span>
+                <span>모든 빈칸에 단어를 채워주세요!</span>
               </div>
             </div>
           `;
@@ -816,10 +881,12 @@ class QuizEngine {
         return;
       }
 
+      const placedChips = slots.map(s => s.querySelector('.drag-word-chip')).filter(Boolean);
       const userSentence = placedChips.map(c => c.dataset.word).join(' ');
       const isCorrect = MarkdownQuizParser.checkAnswer(userSentence, q.answer);
 
       if (isCorrect) {
+        slots.forEach(s => s.classList.add('correct'));
         dropZone.classList.add('correct');
         placedChips.forEach(c => {
           c.setAttribute('draggable', 'false');
@@ -830,7 +897,10 @@ class QuizEngine {
         this._showNextStep(q, passedFirstAttempt, false);
       } else {
         this.questionFailed = true;
-        dropZone.classList.add('shake', 'error');
+        slots.forEach(s => {
+          s.classList.add('error', 'shake');
+          setTimeout(() => s.classList.remove('shake'), 400);
+        });
         if (feedbackBox) {
           feedbackBox.className = 'quiz-feedback error';
           feedbackBox.innerHTML = `
@@ -841,9 +911,6 @@ class QuizEngine {
             </div>
           `;
         }
-        setTimeout(() => {
-          dropZone.classList.remove('shake');
-        }, 500);
       }
       return;
     }
@@ -874,7 +941,7 @@ class QuizEngine {
       feedbackBox.innerHTML = `
         <div class="feedback-inner">
           <div class="feedback-status-line">
-            <span>아쉽네요, 다시 한 번 도전해보세요! (첫 시도 실패로 채점됩니다. 도움이 필요하면 💡 힌트를 눌러보세요)</span>
+            <span>아쉽네요, 다시 시도해보세요! (첫 시도 실패로 채점됩니다. 도움이 필요하면 💡 힌트를 눌러보세요)</span>
           </div>
         </div>
       `;
@@ -889,22 +956,22 @@ class QuizEngine {
       const dropZone = this.container.querySelector('#word-drop-zone');
       const bankGrid = this.container.querySelector('#word-bank-grid');
       if (dropZone && bankGrid) {
+        const slots = Array.from(dropZone.querySelectorAll('.word-slot'));
         const allChips = Array.from(this.container.querySelectorAll('.drag-word-chip'));
         const chipMap = new Map();
         allChips.forEach(c => chipMap.set(c.dataset.word, c));
 
         const tokens = q.tokens || (q.answer ? q.answer.split(/\s+/) : []);
-        tokens.forEach(tok => {
-          const chip = chipMap.get(tok) || allChips.find(c => c.dataset.word.toLowerCase() === tok.toLowerCase() && !dropZone.contains(c));
-          if (chip) {
-            dropZone.appendChild(chip);
+        tokens.forEach((tok, idx) => {
+          const targetSlot = slots[idx];
+          const chip = chipMap.get(tok) || allChips.find(c => c.dataset.word.toLowerCase() === tok.toLowerCase());
+          if (targetSlot && chip) {
+            targetSlot.appendChild(chip);
             chip.classList.add('placed');
-            chip.setAttribute('draggable', 'false');
-            chip.disabled = true;
+            targetSlot.classList.add('filled', 'correct');
           }
         });
         dropZone.classList.add('correct');
-        this._updateDropZonePlaceholder(dropZone);
       }
 
       this.questionFailed = true;
