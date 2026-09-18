@@ -114,7 +114,7 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(page.locator('#lesson-status-badge')).toHaveText('🥜 심화 학습');
   });
 
-  test('Deep Dive bottom card displays "오픈 예정" and is deactivated in coming-soon status', async ({ page }) => {
+  test('In Lesson 04, Deep Dive bottom card directs directly to Step 3 and is enabled in published status', async ({ page }) => {
     await page.goto('/lessons/lesson-04/index.html');
     await page.locator('#step-tab-deep-dive').click();
 
@@ -131,16 +131,21 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(nextBtn).toHaveClass(/btn-primary/);
     await expect(nextBtn).toHaveClass(/btn-goto-step3/);
 
-    // In coming-soon status: displays "오픈 예정" and is deactivated / disabled
-    await expect(nextBtn).toContainText('오픈 예정');
-    await expect(nextBtn).toBeDisabled();
-    await expect(nextBtn).toHaveClass(/deactivated/);
+    // In published status: displays "전체 영상 보기" and is enabled
+    await expect(nextBtn).toContainText('전체 영상 보기');
+    await expect(nextBtn).toBeEnabled();
+    await expect(nextBtn).not.toHaveClass(/deactivated/);
     await expect(page.locator('#btn-deep-dive-back')).toHaveCount(0);
 
     // Verify nudge text encouraging observation in Step 3 full context
     await expect(bottomCard).toContainText('Step 3 전체 대화 맥락 속에서 확인하기');
     await expect(bottomCard).toContainText('it turns out');
     await expect(bottomCard).toContainText('전체 영상');
+
+    // Clicking nextBtn navigates directly to Step 3
+    await nextBtn.click();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
+    await expect(page.locator('#video-section')).toBeVisible();
   });
 
   test('Lessons without Deep Dive (e.g. Lesson 03) continue to flow seamlessly without Peanut tab', async ({ page }) => {
@@ -708,13 +713,13 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     expect(badgeChecks.past.height).toBeLessThan(badgeChecks.past.lineHeight * 2);
   });
 
-  test('Clicking step menu in coming-soon status scrolls active section to top past coming-soon-banner', async ({ page }) => {
+  test('Clicking step menu in Lesson 04 scrolls active section to top', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('/lessons/lesson-04/index.html');
 
-    // Confirm coming-soon-banner is visible
+    // Confirm coming-soon-banner is hidden when published
     const banner = page.locator('#coming-soon-banner');
-    await expect(banner).toBeVisible();
+    await expect(banner).toBeHidden();
 
     // Click Step 2 tab
     await page.locator('.step-tab-btn[data-step="2"]').click();

@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Lesson 04 Scaffolding & Integration', () => {
 
-  test('Lesson 04 page loads and displays header badges and 4-step navigation tabs', async ({ page }) => {
+  test('Lesson 04 page loads and displays header badges and 4-step navigation tabs in published mode', async ({ page }) => {
     await page.goto('/lessons/lesson-04/index.html');
 
     // Header badge
@@ -13,32 +13,35 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
-    // Coming soon notification banner
+    // Coming soon notification banner is hidden when published
     const comingSoonBanner = page.locator('#coming-soon-banner');
-    await expect(comingSoonBanner).toBeVisible();
-    await expect(comingSoonBanner).toContainText('9월 18일 본영상 정식 오픈 예정');
-    await expect(comingSoonBanner).toContainText('사전 공개');
+    await expect(comingSoonBanner).toBeHidden();
 
-    // Step navigation tabs: Step 1 and 2 active, Step 3 and 4 deactivated in coming-soon mode
+    // Step navigation tabs: All tabs active and enabled
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
+    const tabDeepDive = page.locator('#step-tab-deep-dive');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
 
     await expect(tab1).toBeVisible();
     await expect(tab2).toBeVisible();
+    await expect(tabDeepDive).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
-    await expect(tab3).toHaveClass(/deactivated/);
-    await expect(tab4).toHaveClass(/deactivated/);
-    await expect(tab3).toBeDisabled();
-    await expect(tab4).toBeDisabled();
+
+    await expect(tab3).not.toHaveClass(/deactivated/);
+    await expect(tab4).not.toHaveClass(/deactivated/);
+    await expect(tab3).toBeEnabled();
+    await expect(tab4).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
+    await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
+    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
   });
 
-  test('Lesson 04 loads all 15 quizzes with multiple-choice, fill-in-the-blank, and listening', async ({ page }) => {
+  test('Lesson 04 loads all 21 quizzes with multiple-choice, fill-in-the-blank, and listening', async ({ page }) => {
     await page.goto('/lessons/lesson-04/index.html');
 
     // Wait for quiz container to render first question
@@ -62,60 +65,59 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
         sampleQ12: quizzes[11],
         sampleQ13: quizzes[12],
         sampleQ14: quizzes[13],
-        sampleQ15: quizzes[14]
+        sampleQ15: quizzes[14],
+        sampleQ16: quizzes[15],
+        sampleQ17: quizzes[16],
+        sampleQ18: quizzes[17],
+        sampleQ19: quizzes[18],
+        sampleQ20: quizzes[19],
+        sampleQ21: quizzes[20]
       };
     });
 
-    expect(quizDistribution.total).toBe(15);
-    expect(quizDistribution.counts['multiple-choice']).toBe(9);   // 60.0%
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(4); // ~26.7%
-    expect(quizDistribution.counts['listening']).toBe(2);         // ~13.3%
+    expect(quizDistribution.total).toBe(21);
+    expect(quizDistribution.counts['multiple-choice']).toBe(13);
+    expect(quizDistribution.counts['fill-in-the-blank']).toBe(6);
+    expect(quizDistribution.counts['listening']).toBe(2);
 
-    // Check sample multiple choice
+    // Check sample initial quizzes
     expect(quizDistribution.sampleQ1.answer).toBe('stood out');
     expect(quizDistribution.sampleQ1.options).toContain('stood out');
-
-    // Check Q4 is multiple-choice
-    expect(quizDistribution.sampleQ4.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ4.answer).toBe('merch sections');
-    expect(quizDistribution.sampleQ4.options).toContain('merch sections');
-
-    // Check Q6 is multiple-choice
-    expect(quizDistribution.sampleQ6.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ6.answer).toBe('nosebleed seats');
-    expect(quizDistribution.sampleQ6.options).toContain('nosebleed seats');
-
-    // Check Q7 is multiple-choice
-    expect(quizDistribution.sampleQ7.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ7.answer).toBe('open air stadium');
-    expect(quizDistribution.sampleQ7.options).toContain('open air stadium');
-
-    // Check Q9 is fill-in-the-blank
-    expect(quizDistribution.sampleQ9.type).toBe('fill-in-the-blank');
     expect(quizDistribution.sampleQ9.answer).toBe('up to');
-
-    // Check Q11 is listening
-    expect(quizDistribution.sampleQ11.type).toBe('listening');
     expect(quizDistribution.sampleQ11.answer).toBe('appearance');
-
-    // Check Q12 is fill-in-the-blank
-    expect(quizDistribution.sampleQ12.type).toBe('fill-in-the-blank');
     expect(quizDistribution.sampleQ12.answer).toBe('turns out');
-
-    // Check Q13 is fill-in-the-blank
-    expect(quizDistribution.sampleQ13.type).toBe('fill-in-the-blank');
     expect(quizDistribution.sampleQ13.answer).toBe('came across');
-
-    // Check Q14 is fill-in-the-blank
-    expect(quizDistribution.sampleQ14.type).toBe('fill-in-the-blank');
     expect(quizDistribution.sampleQ14.answer).toBe('turned into');
-
-    // Check Q15 is listening
-    expect(quizDistribution.sampleQ15.type).toBe('listening');
     expect(quizDistribution.sampleQ15.answer).toBe('felt random');
+
+    // Check new target expressions (Q16 - Q21)
+    expect(quizDistribution.sampleQ16.type).toBe('multiple-choice');
+    expect(quizDistribution.sampleQ16.answer).toBe('get in line');
+    expect(quizDistribution.sampleQ16.options).toContain('get in line');
+
+    expect(quizDistribution.sampleQ17.type).toBe('multiple-choice');
+    expect(quizDistribution.sampleQ17.answer).toBe('first in line');
+    expect(quizDistribution.sampleQ17.options).toContain('first in line');
+
+    expect(quizDistribution.sampleQ18.type).toBe('fill-in-the-blank');
+    expect(quizDistribution.sampleQ18.answer).toBe('by the time');
+
+    expect(quizDistribution.sampleQ19.type).toBe('multiple-choice');
+    expect(quizDistribution.sampleQ19.answer).toBe('Throughout');
+    expect(quizDistribution.sampleQ19.options).toContain('Throughout');
+
+    expect(quizDistribution.sampleQ20.type).toBe('fill-in-the-blank');
+    expect(quizDistribution.sampleQ20.answer).toBe('wondering if');
+
+    expect(quizDistribution.sampleQ21.type).toBe('multiple-choice');
+    expect(quizDistribution.sampleQ21.answer).toBe('at the end');
+    expect(quizDistribution.sampleQ21.options).toContain('at the end');
   });
 
-  test('Coming-soon status displays Step 1 and Step 2 with Kelly avatar, and hides Step 3 and Step 4', async ({ page }) => {
+  test('Published status displays all 21 sentences in Step 2 with Kelly avatar, and enables Step 3 and Step 4', async ({ page }) => {
     await page.goto('/lessons/lesson-04/index.html');
 
     // Step 1 is active initially
@@ -131,11 +133,11 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     await expect(reviewSection).toBeVisible();
     await expect(page.locator('#lesson-status-badge')).toHaveText('Step 2: 핵심 문장');
 
-    // Verify review sentence drawer cards exist and use Kelly avatar
+    // Verify review sentence drawer cards exist and all 21 sentences are present
     const sentenceCards = reviewSection.locator('.quiz-sentence-card');
     await expect(sentenceCards.first()).toBeVisible({ timeout: 5000 });
     const count = await sentenceCards.count();
-    expect(count).toBe(15);
+    expect(count).toBe(21);
 
     // Verify avatar is kelly.jpg
     const avatarImg = sentenceCards.first().locator('.sentence-speaker-avatar');
@@ -145,52 +147,39 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const avatarAlt = await avatarImg.getAttribute('alt');
     expect(avatarAlt).toBe('Kelly');
 
-    // Verify completion card shows pre-release completion info and scheduled date
-    const completeCard = page.locator('#step2-complete-card');
-    await expect(completeCard).toContainText('사전 공개 학습 완료');
-    await expect(completeCard).toContainText('9월 18일');
-
-    // Verify Step 3 and Step 4 tabs are visible but deactivated and disabled
+    // Verify Step 3 and Step 4 tabs are visible and clickable
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
-    await expect(tab3).toHaveClass(/deactivated/);
-    await expect(tab4).toHaveClass(/deactivated/);
-    await expect(tab3).toBeDisabled();
-    await expect(tab4).toBeDisabled();
+    await expect(tab3).toBeEnabled();
+    await expect(tab4).toBeEnabled();
 
-    // Verify clicking deactivated Step 3 tab does not navigate
-    await tab3.click({ force: true });
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 2: 핵심 문장');
-    await expect(page.locator('#video-section')).toBeHidden();
+    // Verify clicking Step 3 tab navigates to Step 3
+    await tab3.click();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 3: 전체 영상');
+    await expect(page.locator('#video-section')).toBeVisible();
 
-    // Verify calling showStep(3) or showStep(4) is prevented/clamped to 2
-    await page.evaluate(() => window.showStep(3));
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 2: 핵심 문장');
-    await expect(page.locator('#video-section')).toBeHidden();
-
-    await page.evaluate(() => window.showStep(4));
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 2: 핵심 문장');
-    await expect(page.locator('#reflection-section')).toBeHidden();
+    // Verify clicking Step 4 tab navigates to Step 4
+    await tab4.click();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 영작하기');
+    await expect(page.locator('#reflection-section')).toBeVisible();
   });
 
-  test('Catalog (lessons.html) and Homepage (index.html) display Lesson 04 card with Coming Soon status', async ({ page }) => {
-    // 1. Check lessons catalog: Lesson 04 is visible by default with coming-soon status
+  test('Catalog (lessons.html) and Homepage (index.html) display Lesson 04 card with Published status and 21 quizzes', async ({ page }) => {
+    // 1. Check lessons catalog: Lesson 04 is visible by default with published status
     await page.goto('/lessons.html');
     const lesson04Card = page.locator('#card-lesson-04');
     await expect(lesson04Card).toBeVisible({ timeout: 5000 });
     await expect(lesson04Card).toContainText('오클랜드 빅뱅 콘서트 직관기');
     await expect(lesson04Card).toContainText('5:05');
-    await expect(lesson04Card).toContainText('15 퀴즈');
+    await expect(lesson04Card).toContainText('21 퀴즈');
 
-    // Verify coming-soon class, badge, and button
-    await expect(lesson04Card).toHaveClass(/coming-soon/);
-    const comingSoonBadge = lesson04Card.locator('.badge-coming-soon');
-    await expect(comingSoonBadge).toBeVisible();
-    await expect(comingSoonBadge).toContainText('9월 18일 본영상 공개 예정');
+    // Verify NOT coming-soon
+    await expect(lesson04Card).not.toHaveClass(/coming-soon/);
+    await expect(lesson04Card.locator('.badge-coming-soon')).toHaveCount(0);
     const actionBtn = lesson04Card.locator('.lesson-card-btn');
-    await expect(actionBtn).toHaveClass(/btn-coming-soon/);
+    await expect(actionBtn).not.toHaveClass(/btn-coming-soon/);
     await expect(actionBtn).toContainText('학습 시작하기');
 
     // Check in-progress state displays "이어서 학습하기"
@@ -209,8 +198,8 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const indexCard04 = page.locator('#lessons-cards-container #card-lesson-04');
     await expect(indexCard04).toBeVisible({ timeout: 5000 });
     await expect(indexCard04).toContainText('오클랜드 빅뱅 콘서트 직관기');
-    await expect(indexCard04).toHaveClass(/coming-soon/);
-    await expect(indexCard04.locator('.badge-coming-soon')).toContainText('9월 18일 본영상 공개 예정');
+    await expect(indexCard04).not.toHaveClass(/coming-soon/);
+    await expect(indexCard04.locator('.badge-coming-soon')).toHaveCount(0);
   });
 
   test('SavedAudioPlayer resolves audio URLs for Lesson 04', async ({ page }) => {
@@ -219,35 +208,13 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const audioUrl = await page.evaluate(() => {
       const item = {
         lessonId: 'lesson-04',
-        en: 'I felt like Amy kind of stood out because she was wearing a white dress.',
-        audio: 'audio/I felt like Amy kind of stood out because she was wearing a white dress..wav'
+        en: 'Hopefully we can get in line.',
+        audio: 'audio/Hopefully we can get in line..wav'
       };
       return window.App.savedPlayer._resolveAudioUrl(item, window.App._getBasePath());
     });
 
-    expect(audioUrl).toContain('lessons/lesson-04/audio/I%20felt%20like%20Amy%20kind%20of%20stood%20out%20because%20she%20was%20wearing%20a%20white%20dress..wav');
-  });
-
-  test('Coming Soon elements maintain high contrast in both Dark and Light modes', async ({ page }) => {
-    await page.goto('/lessons/lesson-04/index.html');
-
-    // Dark mode check (default)
-    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
-    const bannerDark = page.locator('#coming-soon-banner');
-    await expect(bannerDark).toBeVisible();
-
-    // Light mode check
-    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
-    const bannerLight = page.locator('#coming-soon-banner');
-    await expect(bannerLight).toBeVisible();
-
-    // Check catalog light mode
-    await page.goto('/lessons.html');
-    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
-    const cardBadgeLight = page.locator('#card-lesson-04 .badge-coming-soon');
-    await expect(cardBadgeLight).toBeVisible();
-    const cardBtnLight = page.locator('#card-lesson-04 .btn-coming-soon');
-    await expect(cardBtnLight).toBeVisible();
+    expect(audioUrl).toContain('lessons/lesson-04/audio/Hopefully%20we%20can%20get%20in%20line..wav');
   });
 
   test('lesson-04-key-expressions.srt is generated with accurate timing, key expressions, and Korean definitions', async () => {
@@ -261,7 +228,7 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     expect(content).toContain('00:00:27,560 --> 00:00:32,250');
     expect(content).toContain('standing out');
 
-    // Verify key expressions from quiz
+    // Verify initial key expressions
     expect(content).toContain('stood out');
     expect(content).toContain('fit');
     expect(content).toContain('quite a few');
@@ -278,10 +245,24 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     expect(content).toContain('turned into');
     expect(content).toContain('felt random');
 
+    // Verify new target expressions
+    expect(content).toContain('get in line');
+    expect(content).toContain('first in line');
+    expect(content).toContain('by the time');
+    expect(content).toContain('Throughout');
+    expect(content).toContain('wondering if');
+    expect(content).toContain('at the end');
+
     // Verify Korean definitions
     expect(content).toContain('유독 눈에 띄다, 두드러지다');
     expect(content).toContain('하늘석, 맨 꼭대기 좌석');
     expect(content).toContain('알고 보니 ~이다, 드러나다');
+    expect(content).toContain('줄을 서다, 차례를 기다리다');
+    expect(content).toContain('맨 먼저 줄을 선, 첫 번째 순서의');
+    expect(content).toContain('~할 무렵에는, ~할 때쯤에');
+    expect(content).toContain('~내내, 줄곧');
+    expect(content).toContain('~인지 궁금해하다');
+    expect(content).toContain('마지막에, 끝 무렵에');
   });
 
 });

@@ -2,7 +2,7 @@
 - and like other clothes that didn't quite [fit].
 - There weren't that many blonde girls you know in the crowd, but there are still [quite a few].
 - There were very short lines for different [merch sections] selling just the light sticks in certain spots of the stadium.
-- If they went at like a very [odd time].
+- If they went at like a very [odd time]
 - We were definitely in the [nosebleed seats].
 - It's an [open air stadium].
 - It did not feel like a super serious, [scripted setup].
@@ -13,3 +13,9 @@
 - Maybe in English, the way they were saying it [came across] more silly.
 - They were making mistakes and it [turned into] something humorous.
 - but it just felt Oakland [felt random] to me.
+- Hopefully we can [get in line].
+- Maybe they were [first in line].
+- So definitely [by the time] the sun was going down.
+- [Throughout] the entire concert, it was really funny.
+- So we were [wondering if] he had like a girl's name written on the belt buckle.
+- So it was a little unorganized [at the end].

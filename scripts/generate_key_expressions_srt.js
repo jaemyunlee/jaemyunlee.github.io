@@ -59,7 +59,13 @@ const CONCISE_DEFINITIONS = {
   'turns out': '알고 보니 ~이다, 드러나다',
   'came across': '~한 느낌으로 다가오다, 전달되다',
   'turned into': '~로 변하다, 바뀌다',
-  'felt random': '뜬금없게 느껴지다, 생뚱맞다'
+  'felt random': '뜬금없게 느껴지다, 생뚱맞다',
+  'get in line': '줄을 서다, 차례를 기다리다',
+  'first in line': '맨 먼저 줄을 선, 첫 번째 순서의',
+  'by the time': '~할 무렵에는, ~할 때쯤에',
+  'throughout': '~내내, 줄곧',
+  'wondering if': '~인지 궁금해하다',
+  'at the end': '마지막에, 끝 무렵에'
 };
 
 function parseSrt(srtContent) {

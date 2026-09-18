@@ -169,11 +169,9 @@ const App = {
       title: '오클랜드 빅뱅 콘서트 직관기',
       subtitle: '태양과 대성의 유쾌한 무대 매너, 야외 경기장 하늘석과 굿즈 이야기 속 생생한 일상 영어 표현',
       duration: '5:05',
-      vocabCount: 15,
+      vocabCount: 21,
       path: 'lessons/lesson-04/',
-      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
-      scheduledDate: '2026-09-18',
-      scheduledDateText: '9월 18일 본영상 공개 예정'
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     }
   ],
 
@@ -1703,7 +1701,13 @@ const LESSON_04_AUDIO_MAP = [
   { key: 'turns out', file: 'but it turns out it was a brand name that said d squared..wav' },
   { key: 'came across', file: 'Maybe in English the way they were saying it came across more silly..wav' },
   { key: 'turned into', file: 'They were making mistakes and it turned into something humorous..wav' },
-  { key: 'felt random', file: 'but it just felt Oakland felt random to me..wav' }
+  { key: 'felt random', file: 'but it just felt Oakland felt random to me..wav' },
+  { key: 'get in line', file: 'Hopefully we can get in line..wav' },
+  { key: 'first in line', file: 'Maybe they were first in line..wav' },
+  { key: 'by the time', file: 'So definitely by the time the sun was going down..wav' },
+  { key: 'throughout', file: 'Throughout the entire concert it was really funny..wav' },
+  { key: 'wondering if', file: 'So we were wondering if he had like a girls name written on the belt buckle..wav' },
+  { key: 'at the end', file: 'So it was a little unorganized at the end..wav' }
 ];
 
 const SavedAudioPlayer = {
@@ -2235,6 +2239,7 @@ const SavedAudioPlayer = {
       u.lang = 'en-US';
       u.rate = this.playbackRate * 0.92;
       u.onstart = () => {
+        if (!this._isFallbackActive) return;
         this.isPlaying = true;
         this._updateVisualState(true);
         if (status) {
@@ -2244,13 +2249,17 @@ const SavedAudioPlayer = {
         this._setMediaSessionPlaybackState('playing');
       };
       u.onend = () => {
+        if (!this._isFallbackActive) return;
         this._isFallbackActive = false;
         this._onTrackEnded();
       };
       u.onerror = (err) => {
+        if (!this._isFallbackActive) return;
         console.warn('TTS speech synthesis error:', err);
         this._isFallbackActive = false;
-        setTimeout(() => this._onTrackEnded(), 1200);
+        setTimeout(() => {
+          if (this.isPlaying) this._onTrackEnded();
+        }, 1200);
       };
       window.speechSynthesis.speak(u);
     } else {

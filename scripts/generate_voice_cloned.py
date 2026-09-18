@@ -199,6 +199,7 @@ def main():
     parser.add_argument("--cfg-weight", type=float, default=None, help="Fixed cfg_weight (overrides auto settings)")
     parser.add_argument("--temperature", type=float, default=None, help="Fixed temperature (overrides auto settings)")
     parser.add_argument("--interactive", action="store_true", help="Run in interactive prompt mode")
+    parser.add_argument("--force", action="store_true", help="Force re-generation of existing files")
     args = parser.parse_args()
 
     print("--- 🎙️ Zero-Shot Commercial-Friendly Voice Cloner ---")
@@ -282,7 +283,13 @@ def main():
                 existing_names.add(filename)
                 
                 output_path = os.path.join(output_dir, filename)
-                
+
+                if not args.force and os.path.exists(output_path) and os.path.getsize(output_path) > 1000:
+                    print(f"\n[{i}/{len(parsed_items)}] ⏭️ Already exists: {filename}")
+                    meta_file.write(f"{filename}|{text}\n")
+                    meta_file.flush()
+                    continue
+
                 # Calculate automatic parameters per sentence if not fixed
                 settings = compute_sentence_settings(text)
                 exaggeration = args.exaggeration if args.exaggeration is not None else settings['exaggeration']
