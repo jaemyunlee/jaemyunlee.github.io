@@ -697,4 +697,45 @@
     white-space: nowrap;
     word-break: keep-all;
   }
+
+  .standalone-cloze-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sentence-before {
+    order: 1;
+  }
+
+  .sentence-drag-preview {
+    display: inline !important;
+    order: 2;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: var(--primary-light);
+    font-weight: 700;
+    margin: 0 4px;
+    letter-spacing: 0.5px;
+  }
+
+  [data-theme="light"] .sentence-drag-preview {
+    color: var(--primary);
+  }
+
+  .sentence-after {
+    order: 3;
+  }
+
+  .word-slots-container.word-drop-zone {
+    order: 10;
+    width: 100%;
+    margin-top: 14px;
+    padding: 10px 6px 4px;
+    border-top: 1px dashed var(--surface-border);
+    background-color: transparent;
+    gap: 6px;
+  }
 }

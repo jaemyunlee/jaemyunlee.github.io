@@ -414,6 +414,37 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     expect(skipBox.x + skipBox.width).toBeLessThanOrEqual(checkBox.x + 5);
   });
 
+  test('Drag-and-drop on mobile: string displayed above with same font/design and word-drop-zone interacts below; desktop keeps inline', async ({ page }) => {
+    // 1. Mobile viewport
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/quiz/lesson-02/q21.html');
+
+    const preview = page.locator('#sentence-drag-preview');
+    const dropZone = page.locator('#word-drop-zone');
+    const beforeText = page.locator('.sentence-before');
+
+    // On mobile, string preview is visible and displays blank placeholder string
+    await expect(preview).toBeVisible();
+    await expect(preview).toContainText('＿＿＿＿');
+
+    // word-drop-zone is positioned below the sentence text on mobile
+    const beforeBox = await beforeText.boundingBox();
+    const dropBox = await dropZone.boundingBox();
+    expect(dropBox.y).toBeGreaterThan(beforeBox.y + beforeBox.height - 5);
+
+    // Tapping a word chip updates the string preview above
+    await page.locator('#word-bank-grid .drag-word-chip[data-word="that\'s"]').click();
+    await expect(preview).toContainText("that's");
+
+    // 2. Desktop viewport
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await page.goto('/quiz/lesson-02/q21.html');
+
+    // On desktop, string preview is hidden and word-drop-zone is inline
+    await expect(page.locator('#sentence-drag-preview')).toBeHidden();
+    await expect(page.locator('#word-drop-zone')).toBeVisible();
+  });
+
 });
 
 

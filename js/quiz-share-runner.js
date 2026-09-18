@@ -266,11 +266,18 @@
           ></div>
         `).join('');
 
-        return q.english.replace(/\[(.*?)\]/, `
+        const parts = q.english.split(/\[.*?\]/);
+        const beforeText = parts[0] || '';
+        const afterText = parts[1] || '';
+
+        return `
+          <span class="sentence-text sentence-before">${this.escapeHtml(beforeText)}</span>
+          <span class="sentence-text sentence-drag-preview" id="sentence-drag-preview" aria-live="polite">[ ＿＿＿＿ ]</span>
           <div class="word-slots-container word-drop-zone" id="word-drop-zone" role="group" aria-label="단어 빈칸 영역" data-slot-count="${tokens.length}">
             ${slotsHtml}
           </div>
-        `);
+          <span class="sentence-text sentence-after">${this.escapeHtml(afterText)}</span>
+        `;
       }
       // Replace [options or word] with an attractive placeholder slot
       const replaced = q.english.replace(/\[(.*?)\]/, '<span class="standalone-blank-slot" id="cloze-slot">[ ? ]</span>');
@@ -301,6 +308,25 @@
 
         const slots = Array.from(dropZone.querySelectorAll('.word-slot'));
 
+        const updateSentenceDragPreview = () => {
+          const previewEl = document.getElementById('sentence-drag-preview');
+          if (!previewEl) return;
+          const placedWords = [];
+          slots.forEach(slot => {
+            const chip = slot.querySelector('.drag-word-chip');
+            if (chip && chip.dataset.word) {
+              placedWords.push(chip.dataset.word);
+            }
+          });
+          if (placedWords.length === 0) {
+            previewEl.textContent = '[ ＿＿＿＿ ]';
+          } else {
+            previewEl.textContent = `[ ${placedWords.join(' ')} ]`;
+          }
+        };
+
+        updateSentenceDragPreview();
+
         const placeChipInSlot = (chip, targetSlot) => {
           if (!chip || !targetSlot) return;
           const sourceSlot = chip.closest('.word-slot');
@@ -325,6 +351,8 @@
           if (sourceSlot && sourceSlot !== targetSlot && !sourceSlot.querySelector('.drag-word-chip')) {
             sourceSlot.classList.remove('filled');
           }
+
+          updateSentenceDragPreview();
         };
 
         const toggleChip = (chip) => {
@@ -334,6 +362,7 @@
             chip.classList.remove('placed');
             bankGrid.appendChild(chip);
             currentSlot.classList.remove('filled', 'error', 'shake');
+            updateSentenceDragPreview();
           } else {
             const emptySlot = dropZone.querySelector('.word-slot:not(.filled)');
             if (emptySlot) {
@@ -357,6 +386,7 @@
               slot.classList.remove('filled', 'correct', 'error', 'shake', 'drag-over');
             });
             dropZone.classList.remove('correct', 'error', 'shake');
+            updateSentenceDragPreview();
           });
         }
 

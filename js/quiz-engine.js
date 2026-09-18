@@ -236,11 +236,12 @@ class QuizEngine {
 
     return `
       <div class="sentence-builder-box">
-        <span class="sentence-text">${this._escapeHtml(beforeText)}</span>
+        <span class="sentence-text sentence-before">${this._escapeHtml(beforeText)}</span>
+        <span class="sentence-text sentence-drag-preview" id="sentence-drag-preview" aria-live="polite">[ ＿＿＿＿ ]</span>
         <div class="word-slots-container word-drop-zone" id="word-drop-zone" role="group" aria-label="단어 빈칸 영역" data-slot-count="${targetTokens.length}">
           ${slotsHtml}
         </div>
-        <span class="sentence-text">${this._escapeHtml(afterText)}</span>
+        <span class="sentence-text sentence-after">${this._escapeHtml(afterText)}</span>
       </div>
 
       <div class="word-bank-wrapper">
@@ -443,6 +444,8 @@ class QuizEngine {
     const resetBtn = this.container.querySelector('#word-reset-btn');
     if (!dropZone || !bankGrid) return;
 
+    this._updateSentenceDragPreview(dropZone);
+
     const slots = Array.from(dropZone.querySelectorAll('.word-slot'));
 
     // Reset button: return all placed chips to bank and reset slots
@@ -457,6 +460,7 @@ class QuizEngine {
           slot.classList.remove('filled', 'correct', 'error', 'shake', 'drag-over');
         });
         dropZone.classList.remove('correct', 'error', 'shake');
+        this._updateSentenceDragPreview(dropZone);
       });
     }
 
@@ -661,6 +665,8 @@ class QuizEngine {
     if (sourceSlot && sourceSlot !== targetSlot && !sourceSlot.querySelector('.drag-word-chip')) {
       sourceSlot.classList.remove('filled');
     }
+
+    this._updateSentenceDragPreview(dropZone);
   }
 
   _toggleChipLocation(chip, dropZone, bankGrid) {
@@ -671,6 +677,7 @@ class QuizEngine {
       chip.classList.remove('placed');
       bankGrid.appendChild(chip);
       currentSlot.classList.remove('filled', 'error', 'shake');
+      this._updateSentenceDragPreview(dropZone);
     } else {
       // Place into first empty slot
       const emptySlot = dropZone.querySelector('.word-slot:not(.filled)');
@@ -681,6 +688,25 @@ class QuizEngine {
         dropZone.classList.add('shake');
         setTimeout(() => dropZone.classList.remove('shake'), 400);
       }
+    }
+  }
+
+  _updateSentenceDragPreview(dropZone) {
+    if (!dropZone) return;
+    const previewEl = this.container.querySelector('#sentence-drag-preview');
+    if (!previewEl) return;
+    const slots = Array.from(dropZone.querySelectorAll('.word-slot'));
+    const placedWords = [];
+    slots.forEach(slot => {
+      const chip = slot.querySelector('.drag-word-chip');
+      if (chip && chip.dataset.word) {
+        placedWords.push(chip.dataset.word);
+      }
+    });
+    if (placedWords.length === 0) {
+      previewEl.textContent = '[ ＿＿＿＿ ]';
+    } else {
+      previewEl.textContent = `[ ${placedWords.join(' ')} ]`;
     }
   }
 
@@ -972,6 +998,7 @@ class QuizEngine {
           }
         });
         dropZone.classList.add('correct');
+        this._updateSentenceDragPreview(dropZone);
       }
 
       this.questionFailed = true;
