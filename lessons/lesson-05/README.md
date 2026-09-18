@@ -1,0 +1,21 @@
+- [My brain is mush]. Go away. I need to study!
+- and had [minors] in German business and nonprofit administration.
+- None of it [had to do with] education.
+- Now that I'm trying to [get into] the Teaching Credential Program,
+- they looked at my [transcript] from University of Oregon
+- and just unfortunately not enough of my class is transferred to be like to [suit their requirements] to get into the credential program.
+- And each test has multiple subjects that it [covers].
+- I'm also taking [prerequisite] classes.
+- I was lucky enough to get two classes [waived] based on my experience teaching in Korea.
+- um so those were able to [cover] two of my classes but i still have to take two more
+- and then i will have to take classes [as well] for the year before i can then get certified,
+- You kind of pick and choose what you think are the most likely to [come up] on the test,
+- So [multiple choice]. That was pretty much how I thought it was going to be.
+- And I have, when I took practice tests, [I did well in].
+- But always when it comes to the actual test, the pressure of that test, I feel like I [secondguess] myself a lot.
+- I felt like three of them were kind of what I was expecting, and I think I did [decently].
+- I don't know if I'll get, like, the highest score is [out of the three].
+- and that one... I was really having to just kind of... [come up] with something
+- Working in Korea. definitely [opened my eyes] to how much I like to work with kids and teach.
+- I don't have this [indepth] answer of why I want to teach like it
+- like it is something I kind of [fell into] and found that I just actually really enjoyed it.

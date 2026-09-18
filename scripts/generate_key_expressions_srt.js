@@ -70,7 +70,34 @@ const CONCISE_DEFINITIONS = {
   'by the time': '~할 무렵에는, ~할 때쯤에',
   'throughout': '~내내, 줄곧',
   'wondering if': '~인지 궁금해하다',
-  'at the end': '마지막에, 끝 무렵에'
+  'at the end': '마지막에, 끝 무렵에',
+
+  // Lesson 05
+  'my brain is mush': '머리가 멍하다, 생각이 안 돌아가다',
+  'minors': '부전공 (대학 부전공 이수)',
+  'had to do with': '~와 관련이 있다, 상관이 있다',
+  'have to do with': '~와 관련이 있다, 상관이 있다',
+  'get into': '(학교·프로그램에) 들어가다, 입학하다',
+  'transcript': '성적 증명서, 학업 이수 기록',
+  'suit their requirements': '요구 조건/자격 요건에 부합하다',
+  'covers': '(과목·주제를) 다루다, 포함하다',
+  'cover': '(과목·주제를) 다루다, 대체 인정받다',
+  'prerequisite': '선수 과목, 필수 선행 요건',
+  'waived': '(수업·요건 등이) 면제된',
+  'as well': '또한, 마찬가지로, 역시',
+  'come up': '(시험 등에) 문제로 나오다, 언급되다',
+  'multiple choice': '객관식 (선택형 문제)',
+  'I did well in': '성적을 잘 내다, 시험을 잘 치르다',
+  'second guess': '자신의 결정을 뒤늦게 의심하다, 재고하다',
+  'secondguess': '자신의 결정을 뒤늦게 의심하다, 재고하다',
+  'decently': '나름 괜찮게, 꽤 준수하게',
+  'out of the three': '3점 만점 중에서, 셋 중에서',
+  'come up with': '(아이디어·답변 등을) 생각해내다, 짜내다',
+  'opened my eyes': '새로운 사실에 눈을 뜨게 하다, 깨닫게 하다',
+  'in-depth': '심도 있는, 상세하고 깊이 있는',
+  'indepth': '심도 있는, 상세하고 깊이 있는',
+  'fell into': '우연히 시작하다, 어쩌다 발을 들이다',
+  'fall into': '우연히 시작하다, 어쩌다 발을 들이다'
 };
 
 function parseSrt(srtContent) {

@@ -172,6 +172,21 @@ const App = {
       vocabCount: 21,
       path: 'lessons/lesson-04/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
+    },
+    {
+      id: 'lesson-05',
+      shortTitle: 'Lesson 5',
+      topic: "Kelly's Teaching Credential Journey",
+      icon: '🎓',
+      speaker: 'Kelly',
+      avatar: 'assets/img/avatars/kelly.jpg',
+      createdAt: '2026-09-18',
+      title: '켈리의 교사 자격증 도전기',
+      subtitle: '캘리포니아 교사 자격증(CSET) 준비와 선수 과목, 가르치는 일에 눈뜨게 된 여정의 생생한 일상 영어',
+      duration: '5:12',
+      vocabCount: 21,
+      path: 'lessons/lesson-05/',
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon')
     }
   ],
 
@@ -1712,6 +1727,37 @@ const LESSON_04_AUDIO_MAP = [
   { key: 'at the end', file: 'So it was a little unorganized at the end..wav' }
 ];
 
+// Known audio files for Lesson 05 (maps keyword to WAV audio filename in lessons/lesson-05/audio/)
+const LESSON_05_AUDIO_MAP = [
+  { key: 'my brain is mush', file: 'My brain is mush. Go away. I need to study.wav' },
+  { key: 'minors', file: 'and had minors in German business and nonprofit administration..wav' },
+  { key: 'had to do with', file: 'None of it had to do with education..wav' },
+  { key: 'have to do with', file: 'None of it had to do with education..wav' },
+  { key: 'get into', file: 'Now that Im trying to get into the Teaching Credential Program.wav' },
+  { key: 'transcript', file: 'they looked at my transcript from University of Oregon.wav' },
+  { key: 'suit their requirements', file: 'and just unfortunately not enough of my class is transferred to be like to suit their requirements to get into the cr....wav' },
+  { key: 'covers', file: 'And each test has multiple subjects that it covers..wav' },
+  { key: 'cover', file: 'um so those were able to cover two of my classes but i still have to take two more.wav' },
+  { key: 'prerequisite', file: 'Im also taking prerequisite classes..wav' },
+  { key: 'waived', file: 'I was lucky enough to get two classes waived based on my experience teaching in Korea..wav' },
+  { key: 'as well', file: 'and then i will have to take classes as well for the year before i can then get certified.wav' },
+  { key: 'come up on the test', file: 'You kind of pick and choose what you think are the most likely to come up on the test.wav' },
+  { key: 'come up', file: 'You kind of pick and choose what you think are the most likely to come up on the test.wav' },
+  { key: 'multiple choice', file: 'So multiple choice. That was pretty much how I thought it was going to be..wav' },
+  { key: 'did well in', file: 'And I have when I took practice tests I did well in..wav' },
+  { key: 'secondguess', file: 'But always when it comes to the actual test the pressure of that test I feel like I secondguess myself a lot..wav' },
+  { key: 'second guess', file: 'But always when it comes to the actual test the pressure of that test I feel like I secondguess myself a lot..wav' },
+  { key: 'decently', file: 'I felt like three of them were kind of what I was expecting and I think I did decently..wav' },
+  { key: 'out of the three', file: 'I dont know if Ill get like the highest score is out of the three..wav' },
+  { key: 'come up with something', file: 'and that one... I was really having to just kind of... come up with something.wav' },
+  { key: 'opened my eyes', file: 'Working in Korea. definitely opened my eyes to how much I like to work with kids and teach..wav' },
+  { key: 'open my eyes', file: 'Working in Korea. definitely opened my eyes to how much I like to work with kids and teach..wav' },
+  { key: 'indepth', file: 'I dont have this indepth answer of why I want to teach like it.wav' },
+  { key: 'in-depth', file: 'I dont have this indepth answer of why I want to teach like it.wav' },
+  { key: 'fell into', file: 'like it is something I kind of fell into and found that I just actually really enjoyed it..wav' },
+  { key: 'fall into', file: 'like it is something I kind of fell into and found that I just actually really enjoyed it..wav' }
+];
+
 const SavedAudioPlayer = {
   app: null,
   audio: null,
@@ -2457,6 +2503,12 @@ const SavedAudioPlayer = {
       for (const mapItem of LESSON_04_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
           return encodeURI(`${base}lessons/lesson-04/audio/${mapItem.file}`);
+        }
+      }
+    } else if (lesId === 'lesson-05') {
+      for (const mapItem of LESSON_05_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-05/audio/${mapItem.file}`);
         }
       }
     }
