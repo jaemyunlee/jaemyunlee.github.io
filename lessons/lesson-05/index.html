@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Cache Control (Issue #3: Maximize Browser Caching) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 5: Kelly's Teaching Credential Journey - RhyRhy English</title>
+  <link rel="manifest" href="../../manifest.webmanifest">
+  <meta name="theme-color" content="#4F46E5">
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="../../assets/icons/icon.svg">
+
+  <script>
+    (function () { try { var t = localStorage.getItem('rhyrhy_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();
+  </script>
+  <!-- Google tag (gtag.js) - only loaded in production -->
+  <script>
+    (function () {
+      var isLocal = Boolean(
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '0.0.0.0' ||
+        (window.location.hostname && window.location.hostname.indexOf('.local') !== -1) ||
+        window.location.protocol === 'file:'
+      );
+      if (isLocal) {
+        window['ga-disable-G-6Z1RWQ4CN2'] = true;
+      }
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
+      if (!isLocal) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6Z1RWQ4CN2';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/navigation.css">
+  <link rel="stylesheet" href="../../css/quiz.css">
+  <link rel="stylesheet" href="../../css/video-script.css">
+  <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/review-player.css">
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="main-nav" id="main-nav"></header>
+
+  <main class="app-container">
+    <!-- Lesson Header (Only Badges) -->
+    <section class="lesson-header-section" style="margin-bottom: 14px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span class="badge badge-primary">Lesson 05</span>
+        <span class="badge badge-emerald" id="lesson-status-badge">Step 1: Quiz</span>
+      </div>
+    </section>
+
+    <!-- Coming Soon Notification Banner -->
+    <div class="coming-soon-banner" id="coming-soon-banner" role="status">
+      <div class="coming-soon-banner-icon" aria-hidden="true">📅</div>
+      <div class="coming-soon-banner-text">
+        <div class="coming-soon-banner-title">
+          본영상 공개 예정
+          <span class="coming-soon-badge-pill">사전 공개</span>
+        </div>
+        <div class="coming-soon-banner-desc">
+          현재 사전 공개(Pre-release) 기간입니다. 켈리의 생생한 목소리 오디오와 21개의 퀴즈를 미리 학습해보세요!
+        </div>
+      </div>
+    </div>
+
+    <!-- Step Navigation Tabs (1, 2 active, 3 and 4 deactivated in coming-soon mode) -->
+    <nav class="lesson-step-tabs" id="lesson-step-tabs" aria-label="학습 단계 이동">
+      <button type="button" class="step-tab-btn active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">퀴즈</span>
+      </button>
+      <button type="button" class="step-tab-btn" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">핵심 문장</span>
+      </button>
+      <button type="button" class="step-tab-btn deactivated" data-step="3" id="step-tab-3" disabled aria-disabled="true"
+        title="본영상 공개 예정">
+        <span class="step-num">3</span>
+        <span class="step-label">전체 영상</span>
+        <span class="step-lock-icon" aria-hidden="true">🔒</span>
+      </button>
+      <button type="button" class="step-tab-btn deactivated" data-step="4" id="step-tab-4" disabled aria-disabled="true"
+        title="본영상 공개 예정">
+        <span class="step-num">4</span>
+        <span class="step-label">영작하기</span>
+        <span class="step-lock-icon" aria-hidden="true">🔒</span>
+      </button>
+    </nav>
+
+    <!-- Step 1: Pre-Video Quizzes Section -->
+    <section class="quiz-section-wrapper" id="quiz-section" aria-label="Step 1: Quizzes">
+      <div id="quiz-container">
+        <!-- Rendered dynamically by QuizEngine -->
+        <div style="text-align: center; padding: 40px;">
+          <p>퀴즈 데이터를 불러오는 중입니다...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2: Key Sentences & Audio Player Section -->
+    <section class="review-section-wrapper" id="review-section" aria-label="Step 2: Key Sentences and Audio Player"
+      style="display: none;">
+      <div id="review-player-container"></div>
+    </section>
+
+    <!-- Step 3: Video & Interactive Script Section (Locked in coming-soon mode) -->
+    <section class="video-section" id="video-section" aria-label="Step 3: Video and Interactive Script"
+      style="display: none; margin-top: 24px;">
+      <div class="coming-soon-step-placeholder">
+        <div class="coming-soon-placeholder-icon">🔒</div>
+        <h3 class="coming-soon-placeholder-title">Step 3: 전체 유튜브 영상 &amp; 실시간 자막</h3>
+        <p class="coming-soon-placeholder-desc">본 영상 편집 및 자막 싱크 작업이 진행 중입니다.<br>사전 공개된 <strong>Step 1 퀴즈</strong>와 <strong>Step 2 핵심 문장</strong>을 먼저 마스터해보세요!</p>
+      </div>
+    </section>
+
+    <!-- Step 4: Reflection, Writing Practice & YouTube Encouragement (Locked in coming-soon mode) -->
+    <section class="reflection-section" id="reflection-section" aria-label="Step 4: Reflection and Writing Practice"
+      style="display: none; margin-top: 36px; padding-bottom: 60px;">
+      <div id="reflection-container"></div>
+      <div class="coming-soon-step-placeholder">
+        <div class="coming-soon-placeholder-icon">🔒</div>
+        <h3 class="coming-soon-placeholder-title">Step 4: 영작 연습 및 챌린지</h3>
+        <p class="coming-soon-placeholder-desc">본 영상 공개와 함께 오픈될 예정입니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="celebration-overlay" id="celebration-overlay" aria-hidden="true"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Core Scripts -->
+  <script src="../../assets/vendor/lottie.min.js"></script>
+  <script src="../../js/lesson-status.js"></script>
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/analytics.js"></script>
+  <script src="../../js/markdown-quiz-parser.js"></script>
+  <script src="../../js/quiz-engine.js"></script>
+  <script src="../../js/video-script.js"></script>
+  <script src="../../js/celebration.js"></script>
+  <script src="../../js/youtube-comment.js"></script>
+  <script src="../../js/review-player.js"></script>
+  <script src="../../js/pwa-manager.js"></script>
+  <script src="../../js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const LESSON_ID = 'lesson-05';
+
+      // Initialize App shell (theme, navbar, offline toast)
+      App.init(LESSON_ID);
+
+      // Initialize Celebration Manager
+      const celebrationManager = new CelebrationManager({
+        lottiePath: '../../assets/lottie/celebration.json'
+      });
+      window.celebrationManager = celebrationManager;
+
+      // Initialize Comment Manager for Reflection Step
+      const commentManager = new YouTubeCommentManager({
+        lessonId: LESSON_ID,
+        youtubeId: '',
+        container: '#reflection-container'
+      });
+      commentManager.init();
+
+      // UI Elements
+      const quizSection = document.getElementById('quiz-section');
+      const reviewSection = document.getElementById('review-section');
+      const videoSection = document.getElementById('video-section');
+      const reflectionSection = document.getElementById('reflection-section');
+      const comingSoonBanner = document.getElementById('coming-soon-banner');
+      const statusBadge = document.getElementById('lesson-status-badge');
+
+      // Pre-matched audio files for Lesson 05
+      const LESSON_05_AUDIO_FILES = [
+        "My brain is mush. Go away. I need to study.wav", // Q1
+        "and had minors in German business and nonprofit administration..wav", // Q2
+        "None of it had to do with education..wav", // Q3
+        "Now that Im trying to get into the Teaching Credential Program.wav", // Q4
+        "they looked at my transcript from University of Oregon.wav", // Q5
+        "and just unfortunately not enough of my class is transferred to be like to suit their requirements to get into the cr....wav", // Q6
+        "And each test has multiple subjects that it covers..wav", // Q7
+        "Im also taking prerequisite classes..wav", // Q8
+        "I was lucky enough to get two classes waived based on my experience teaching in Korea..wav", // Q9
+        "um so those were able to cover two of my classes but i still have to take two more.wav", // Q10
+        "and then i will have to take classes as well for the year before i can then get certified.wav", // Q11
+        "You kind of pick and choose what you think are the most likely to come up on the test.wav", // Q12
+        "So multiple choice. That was pretty much how I thought it was going to be..wav", // Q13
+        "And I have when I took practice tests I did well in..wav", // Q14
+        "But always when it comes to the actual test the pressure of that test I feel like I secondguess myself a lot..wav", // Q15
+        "I felt like three of them were kind of what I was expecting and I think I did decently..wav", // Q16
+        "I dont know if Ill get like the highest score is out of the three..wav", // Q17
+        "and that one... I was really having to just kind of... come up with something.wav", // Q18
+        "Working in Korea. definitely opened my eyes to how much I like to work with kids and teach..wav", // Q19
+        "I dont have this indepth answer of why I want to teach like it.wav", // Q20
+        "like it is something I kind of fell into and found that I just actually really enjoyed it..wav" // Q21
+      ];
+
+      let metadata = {};
+      let scriptData = [];
+      let loadedQuizzes = [];
+      let videoPlayer = null;
+      let reviewPlayer = null;
+
+      let isComingSoon = true;
+
+      // Load Metadata & Script
+      try {
+        const metaRes = await fetch('./metadata.json');
+        if (metaRes.ok) {
+          metadata = await metaRes.json();
+          commentManager.youtubeUrl = metadata.youtubeUrl || '';
+          if (typeof LessonStatusHelper !== 'undefined') {
+            isComingSoon = LessonStatusHelper.isComingSoon(metadata.status);
+          } else {
+            isComingSoon = (metadata.status === 'coming-soon');
+          }
+        }
+      } catch (err) {
+        console.warn('Metadata fetch error:', err);
+      }
+
+      try {
+        const scriptRes = await fetch('./script.json');
+        if (scriptRes.ok) scriptData = await scriptRes.json();
+      } catch (err) {
+        console.warn('Script fetch error:', err);
+      }
+
+      // Configure Coming Soon State
+      if (comingSoonBanner) {
+        comingSoonBanner.style.display = isComingSoon ? 'flex' : 'none';
+      }
+
+      const stepTab3 = document.getElementById('step-tab-3');
+      const stepTab4 = document.getElementById('step-tab-4');
+      if (isComingSoon) {
+        if (stepTab3) {
+          stepTab3.classList.add('deactivated');
+          stepTab3.setAttribute('disabled', 'true');
+          stepTab3.setAttribute('aria-disabled', 'true');
+          stepTab3.setAttribute('title', metadata.scheduledDateText || '본영상 공개 예정');
+        }
+        if (stepTab4) {
+          stepTab4.classList.add('deactivated');
+          stepTab4.setAttribute('disabled', 'true');
+          stepTab4.setAttribute('aria-disabled', 'true');
+          stepTab4.setAttribute('title', metadata.scheduledDateText || '본영상 공개 예정');
+        }
+      }
+
+      // Step Navigation Manager
+      let currentActiveStep = 1;
+      const showStep = (step, scroll = false) => {
+        // Enforce Coming-Soon guard
+        if (isComingSoon && step > 2) {
+          step = 2;
+        }
+
+        currentActiveStep = step;
+
+        // Save current step to Storage
+        Storage.setCurrentStep(LESSON_ID, step);
+
+        // Update Tab Active State
+        document.querySelectorAll('.step-tab-btn').forEach(btn => {
+          const btnStep = parseInt(btn.dataset.step, 10);
+          btn.classList.toggle('active', btnStep === step);
+        });
+
+        // Hide all sections
+        if (quizSection) quizSection.style.display = 'none';
+        if (reviewSection) reviewSection.style.display = 'none';
+        if (videoSection) videoSection.style.display = 'none';
+        if (reflectionSection) reflectionSection.style.display = 'none';
+
+        // Update status badge
+        if (statusBadge) {
+          if (step === 1) statusBadge.textContent = 'Step 1: Quiz';
+          else if (step === 2) statusBadge.textContent = 'Step 2: Key Sentences';
+          else if (step === 3) statusBadge.textContent = 'Step 3: Full Video';
+          else if (step === 4) statusBadge.textContent = 'Step 4: Writing';
+        }
+
+        // Show selected section
+        if (step === 1 && quizSection) {
+          quizSection.style.display = 'block';
+        } else if (step === 2 && reviewSection) {
+          reviewSection.style.display = 'block';
+
+          // Lazy-init Review Player on Step 2
+          if (!reviewPlayer && loadedQuizzes.length > 0) {
+            reviewPlayer = new ReviewPlayer({
+              container: '#review-player-container',
+              lessonId: LESSON_ID,
+              quizzes: loadedQuizzes,
+              audioBaseUrl: './audio/',
+              audioFiles: LESSON_05_AUDIO_FILES,
+              speakerName: metadata?.speaker?.name || 'Kelly',
+              speakerAvatar: metadata?.speaker?.avatar || '../../assets/img/avatars/kelly.jpg',
+              isComingSoon: isComingSoon,
+              scheduledDateText: metadata?.scheduledDateText || '본영상 공개 예정',
+              celebrationManager: celebrationManager,
+              onComplete: () => {
+                if (isComingSoon) {
+                  if (celebrationManager) {
+                    celebrationManager._launchConfettiParticles();
+                  }
+                } else {
+                  showStep(3, true);
+                }
+              }
+            });
+            reviewPlayer.init();
+            window.reviewPlayer = reviewPlayer;
+          }
+        } else if (step === 3 && videoSection) {
+          videoSection.style.display = 'block';
+          if (!isComingSoon) {
+            if (!videoPlayer) {
+              videoPlayer = new VideoScriptPlayer({
+                lessonId: LESSON_ID,
+                youtubeId: metadata.youtubeId || '',
+                scriptData: scriptData,
+                onVideoEnd: () => {
+                  if (typeof Analytics !== 'undefined') {
+                    Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'video_end' });
+                  }
+                  showStep(4, true);
+                },
+                onScriptComplete: () => {
+                  if (typeof Analytics !== 'undefined') {
+                    Analytics.trackStepComplete(LESSON_ID, 3, { trigger: 'script_complete' });
+                  }
+                  showStep(4, true);
+                }
+              });
+              videoPlayer.init();
+              window.videoPlayer = videoPlayer;
+            } else {
+              videoPlayer.onStepShow();
+            }
+          }
+        } else if (step === 4 && reflectionSection) {
+          reflectionSection.style.display = 'block';
+        }
+
+        // Uniform Scroll to fit active contents section across all steps
+        if (scroll) {
+          try {
+            let targetSection = null;
+            if (step === 1) targetSection = quizSection;
+            else if (step === 2) targetSection = reviewSection;
+            else if (step === 3) targetSection = videoSection;
+            else if (step === 4) targetSection = reflectionSection;
+
+            if (targetSection) {
+              const navHeight = 70;
+              const y = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+              window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          } catch (_) {
+            window.scrollTo(0, 0);
+          }
+        }
+      };
+      window.showStep = showStep;
+
+      // Step Navigation Tabs Click Binding
+      document.querySelectorAll('.step-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled || btn.classList.contains('deactivated')) return;
+          const s = parseInt(btn.dataset.step, 10);
+          showStep(s, true);
+        });
+      });
+
+      // Swipe Left / Right to Navigate Steps on Touch Devices
+      const appMain = document.querySelector('main.app-container') || document.body;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      appMain.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        if (e.target.closest('input, textarea, select, button, iframe, .video-toolbar, .plyr, .audio-player-card, a')) {
+          touchStartX = 0;
+          return;
+        }
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive: true });
+
+      appMain.addEventListener('touchend', (e) => {
+        if (!touchStartX) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        const duration = Date.now() - touchStartTime;
+
+        if (Math.abs(diffX) >= 50 && Math.abs(diffX) > Math.abs(diffY) * 1.5 && duration <= 600) {
+          const maxStep = isComingSoon ? 2 : 4;
+          if (diffX < 0 && currentActiveStep < maxStep) {
+            showStep(currentActiveStep + 1, true);
+          } else if (diffX > 0 && currentActiveStep > 1) {
+            showStep(currentActiveStep - 1, true);
+          }
+        }
+        touchStartX = 0;
+      }, { passive: true });
+
+      // Global click delegation for Step 2 '핵심 문장 보러가기' button
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('#btn-goto-video') || e.target.closest('#btn-goto-sentences')) {
+          e.preventDefault();
+          showStep(2, true);
+        } else if (e.target.closest('#btn-goto-step3')) {
+          e.preventDefault();
+          if (!isComingSoon) {
+            showStep(3, true);
+          }
+        }
+      });
+
+      // Load Quizzes from Markdown
+      try {
+        const quizzes = await MarkdownQuizParser.loadFromUrl('./quiz.md');
+        loadedQuizzes = quizzes;
+        commentManager.setQuizzes(quizzes);
+
+        // Resume active step: URL query param (?step=), hash (#), or LocalStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramStep = urlParams.get('step');
+        const hashStep = window.location.hash ? window.location.hash.replace('#', '') : null;
+        let initialStep = paramStep ? parseInt(paramStep, 10) : (hashStep ? parseInt(hashStep, 10) : Storage.getCurrentStep(LESSON_ID));
+        if (isComingSoon && initialStep > 2) {
+          initialStep = 2;
+        }
+        showStep(initialStep || 1, false);
+
+        const quizEngine = new QuizEngine({
+          container: '#quiz-container',
+          lessonId: LESSON_ID,
+          quizzes: quizzes,
+          onComplete: (info) => {
+            if (typeof Analytics !== 'undefined') {
+              Analytics.trackStepComplete(LESSON_ID, 1, {
+                alreadyCompleted: !!info.alreadyCompleted,
+                totalQuizzes: (quizzes && quizzes.length) || 0
+              });
+            }
+            if (!info.alreadyCompleted && celebrationManager) {
+              celebrationManager._launchConfettiParticles();
+            }
+          },
+          onStartVideo: () => {
+            showStep(2, true);
+          }
+        });
+        quizEngine.init();
+      } catch (err) {
+        console.error('Failed to load quiz markdown:', err);
+        document.getElementById('quiz-container').innerHTML = `
+          <div class="quiz-feedback error">Failed to load quiz.md. Please check the file path.</div>
+        `;
+      }
+    });
+  </script>
+</body>
+
+</html>
