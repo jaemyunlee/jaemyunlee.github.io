@@ -411,6 +411,195 @@
   text-align: center;
 }
 
+/* ==========================================================================
+   Drag-and-Drop / Word Reorder Quiz Styles
+   ========================================================================== */
+.word-drop-zone {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  min-width: 220px;
+  padding: 6px 14px;
+  background-color: var(--surface-color);
+  border: 2px dashed var(--primary);
+  border-radius: var(--radius-md);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  vertical-align: middle;
+}
+
+.word-drop-zone.drag-over {
+  border-color: var(--primary-light);
+  background-color: rgba(99, 102, 241, 0.12);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+  transform: scale(1.01);
+}
+
+.word-drop-zone.correct {
+  border-style: solid;
+  border-color: var(--accent-emerald);
+  background-color: rgba(16, 185, 129, 0.12);
+  box-shadow: 0 0 0 4px var(--accent-emerald-glow);
+}
+
+.word-drop-zone.error {
+  border-style: solid;
+  border-color: var(--accent-rose);
+  background-color: rgba(244, 63, 94, 0.1);
+  box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.25);
+}
+
+.word-drop-zone.shake {
+  animation: shakeAnim 0.4s ease;
+}
+
+.word-drop-placeholder {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  pointer-events: none;
+  user-select: none;
+  padding: 4px 8px;
+}
+
+.word-bank-wrapper {
+  margin-top: 18px;
+  margin-bottom: 22px;
+}
+
+.word-bank-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+
+.word-bank-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.word-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.word-reset-btn:hover {
+  color: var(--text-main);
+  border-color: var(--primary-light);
+  background-color: rgba(99, 102, 241, 0.08);
+}
+
+.word-bank-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 14px 16px;
+  background-color: var(--bg-color);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.word-bank-grid.drag-over {
+  border-color: var(--accent-amber);
+  background-color: rgba(245, 158, 11, 0.06);
+}
+
+.drag-word-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  background-color: var(--surface-color);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.drag-word-chip:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--primary-light);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.drag-word-chip:active:not(:disabled) {
+  cursor: grabbing;
+  transform: scale(0.97);
+}
+
+.drag-word-chip .drag-handle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.drag-word-chip.dragging {
+  opacity: 0.35;
+  transform: scale(0.94);
+}
+
+.drag-word-chip.placed {
+  border-color: var(--primary);
+  background-color: rgba(99, 102, 241, 0.15);
+  color: #A5B4FC;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="light"] .drag-word-chip.placed {
+  color: #4338CA;
+  background-color: #EEF2FF;
+  border-color: #6366F1;
+}
+
+.drag-touch-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%) scale(1.08);
+  opacity: 0.92;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  background-color: var(--surface-color);
+  border: 2px solid var(--primary-light);
+  border-radius: var(--radius-full);
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* Hints & Feedback */
 .quiz-hint-box {
   background: rgba(245, 158, 11, 0.08);

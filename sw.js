@@ -3,7 +3,7 @@
  * Caches application shell, quizzes, scripts, audio files, and Lottie animations
  * so users can study offline.
  */
-const CACHE_NAME = 'rhyrhy-cache-v38';
+const CACHE_NAME = 'rhyrhy-cache-v39';
 
 const STATIC_ASSETS = [
   './',
@@ -65,6 +65,7 @@ const STATIC_ASSETS = [
   './lessons/lesson-02/quiz.md',
   './lessons/lesson-02/script.json',
   './lessons/lesson-02/deep-dive.json',
+  './lessons/lesson-02/lesson-02-key-expressions.srt',
   './lessons/lesson-03/index.html',
   './lessons/lesson-03/metadata.json',
   './lessons/lesson-03/quiz.md',

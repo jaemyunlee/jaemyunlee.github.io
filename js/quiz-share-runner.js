@@ -111,7 +111,7 @@
       // Render type badge & meta
       const typeLabel = q.type === 'multiple-choice'
         ? '객관식 퀴즈'
-        : (q.type === 'listening' ? '리스닝 퀴즈' : '빈칸 채우기');
+        : (q.type === 'listening' ? '리스닝 퀴즈' : (q.type === 'drag-and-drop' ? '단어 배열 퀴즈' : '빈칸 채우기'));
 
       // Prepare sentence cloze
       const clozeHtml = this.formatSentenceForDisplay(q);
@@ -133,6 +133,49 @@
         bodyHtml = `
           <div class="standalone-choices-grid" id="standalone-choices-grid">
             ${optionsHtml}
+          </div>
+        `;
+      } else if (q.type === 'drag-and-drop') {
+        if (!q._shuffledTokens) {
+          let tokens = [...(q.tokens || (q.options && q.options.length > 0 ? q.options : (q.answer ? q.answer.split(/\s+/) : [])))];
+          let shuffled = this.shuffleArray(tokens);
+          if (tokens.length > 1 && shuffled.join(' ') === tokens.join(' ')) {
+            shuffled = [shuffled[shuffled.length - 1], ...shuffled.slice(0, shuffled.length - 1)];
+          }
+          q._shuffledTokens = shuffled;
+        }
+
+        const chipsHtml = q._shuffledTokens.map((tok, idx) => `
+          <button 
+            type="button" 
+            class="drag-word-chip" 
+            draggable="true" 
+            data-word="${this.escapeHtml(tok)}" 
+            id="share-chip-${idx}"
+          >
+            <span class="drag-handle" aria-hidden="true">⠿</span>
+            <span class="chip-text">${this.escapeHtml(tok)}</span>
+          </button>
+        `).join('');
+
+        bodyHtml = `
+          <div class="word-bank-wrapper">
+            <div class="word-bank-header">
+              <span class="word-bank-title">🔤 단어들을 올바른 순서로 끌어다 놓거나 탭하세요</span>
+              <button type="button" class="word-reset-btn" id="word-reset-btn" title="모든 단어 초기화">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+                <span>초기화</span>
+              </button>
+            </div>
+            <div class="word-bank-grid" id="word-bank-grid" role="group" aria-label="단어 보관함">
+              ${chipsHtml}
+            </div>
+          </div>
+          <div style="text-align: center; margin-top: 16px;">
+            <button type="button" id="standalone-submit-btn" class="standalone-submit-btn">정답 확인</button>
           </div>
         `;
       } else {
@@ -211,6 +254,13 @@
 
     formatSentenceForDisplay(q) {
       if (!q.english) return '';
+      if (q.type === 'drag-and-drop') {
+        return q.english.replace(/\[(.*?)\]/, `
+          <div class="word-drop-zone" id="word-drop-zone" role="region" aria-label="단어 배치 영역">
+            <span class="word-drop-placeholder" id="word-drop-placeholder">단어를 끌어다 놓거나 탭하여 순서대로 완성하세요</span>
+          </div>
+        `);
+      }
       // Replace [options or word] with an attractive placeholder slot
       const replaced = q.english.replace(/\[(.*?)\]/, '<span class="standalone-blank-slot" id="cloze-slot">[ ? ]</span>');
       return replaced;
@@ -229,10 +279,125 @@
         });
       }
 
+      // Drag and Drop Word Reorder
+      if (this.quizData && this.quizData.type === 'drag-and-drop') {
+        const dropZone = document.getElementById('word-drop-zone');
+        const bankGrid = document.getElementById('word-bank-grid');
+        const resetBtn = document.getElementById('word-reset-btn');
+        const submitBtn = document.getElementById('standalone-submit-btn');
+
+        const updatePlaceholder = () => {
+          if (!dropZone) return;
+          const placeholder = dropZone.querySelector('#word-drop-placeholder');
+          const chips = dropZone.querySelectorAll('.drag-word-chip');
+          if (placeholder) placeholder.style.display = chips.length === 0 ? '' : 'none';
+        };
+
+        if (resetBtn && dropZone && bankGrid) {
+          resetBtn.addEventListener('click', () => {
+            if (this.answered) return;
+            const chips = Array.from(dropZone.querySelectorAll('.drag-word-chip'));
+            chips.forEach(chip => {
+              chip.classList.remove('placed');
+              bankGrid.appendChild(chip);
+            });
+            updatePlaceholder();
+          });
+        }
+
+        const chips = document.querySelectorAll('.drag-word-chip');
+        chips.forEach(chip => {
+          chip.addEventListener('dragstart', (e) => {
+            if (this.answered) return;
+            chip.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', chip.id);
+            e.dataTransfer.effectAllowed = 'move';
+          });
+
+          chip.addEventListener('dragend', () => {
+            chip.classList.remove('dragging');
+            if (dropZone) dropZone.classList.remove('drag-over');
+            if (bankGrid) bankGrid.classList.remove('drag-over');
+            updatePlaceholder();
+          });
+
+          chip.addEventListener('click', (e) => {
+            if (this.answered) return;
+            e.preventDefault();
+            if (dropZone && dropZone.contains(chip)) {
+              chip.classList.remove('placed');
+              bankGrid.appendChild(chip);
+            } else if (dropZone) {
+              chip.classList.add('placed');
+              dropZone.appendChild(chip);
+            }
+            updatePlaceholder();
+          });
+        });
+
+        if (dropZone) {
+          dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            dropZone.classList.add('drag-over');
+          });
+          dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drag-over');
+          });
+          dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            const id = e.dataTransfer.getData('text/plain');
+            const chip = document.getElementById(id);
+            if (chip) {
+              chip.classList.add('placed');
+              dropZone.appendChild(chip);
+            }
+            updatePlaceholder();
+          });
+        }
+
+        if (bankGrid) {
+          bankGrid.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            bankGrid.classList.add('drag-over');
+          });
+          bankGrid.addEventListener('dragleave', () => {
+            bankGrid.classList.remove('drag-over');
+          });
+          bankGrid.addEventListener('drop', (e) => {
+            e.preventDefault();
+            bankGrid.classList.remove('drag-over');
+            const id = e.dataTransfer.getData('text/plain');
+            const chip = document.getElementById(id);
+            if (chip) {
+              chip.classList.remove('placed');
+              bankGrid.appendChild(chip);
+            }
+            updatePlaceholder();
+          });
+        }
+
+        if (submitBtn && dropZone) {
+          submitBtn.addEventListener('click', () => {
+            if (this.answered) return;
+            const placed = Array.from(dropZone.querySelectorAll('.drag-word-chip'));
+            if (placed.length === 0) {
+              dropZone.classList.add('shake');
+              setTimeout(() => dropZone.classList.remove('shake'), 500);
+              return;
+            }
+            const val = placed.map(c => c.dataset.word).join(' ');
+            this.handleAnswer(val);
+          });
+        }
+      }
+
       // Fill-in Submit
       const submitBtn = document.getElementById('standalone-submit-btn');
       const textInput = document.getElementById('standalone-input');
-      if (submitBtn && textInput) {
+      if (submitBtn && textInput && (!this.quizData || this.quizData.type !== 'drag-and-drop')) {
         const onCheck = () => {
           if (this.answered) return;
           const val = textInput.value.trim();

@@ -71,6 +71,8 @@ const CURATED_HEADLINES = {
   'lesson-02-17': '"나이가 들어감에 따라" 점진적 변화를 나타내는 접속사는?',
   'lesson-02-18': '"산 위의 광산(채굴) 장비" 광업/채굴은 영어로?',
   'lesson-02-19': '"마음껏 누리고 즐길 수 있게 되었어요" ~할 수 있게 되다는?',
+  'lesson-02-20': '"예전에 산 위의 폐광산을 탐험하곤 했어요" 예전에 ~하곤 했다는?',
+  'lesson-02-21': '"제가 준비한 이야기는 여기까지예요" 원어민처럼 깔끔하게 끝맺는 표현은?',
   'lesson-03-1': '"자기주관이 뚜렷하다, 고집 세다"를 영어로?',
   'lesson-03-2': '"학교에 차로 데리러 가다" 일상 필수 표현은?',
   'lesson-03-3': '"멈추지 않고 끝도 없이 계속하다" 영어로 뭐라고 할까요?',
@@ -136,7 +138,12 @@ function parseQuizMarkdown(content) {
     let options = [];
     const bracketM = english.match(/\[(.*?)\]/);
     if (bracketM) {
-      if (typeStr.includes('multiple') || typeStr.includes('choice')) {
+      if (typeStr.includes('drag') || typeStr.includes('drop') || typeStr.includes('order')) {
+        options = bracketM[1].includes(',')
+          ? bracketM[1].split(',').map(s => s.trim()).filter(Boolean)
+          : bracketM[1].split(/\s+/).map(s => s.trim()).filter(Boolean);
+        if (!answer) answer = options.join(' ');
+      } else if (typeStr.includes('multiple') || typeStr.includes('choice')) {
         options = bracketM[1].split(',').map(s => s.trim()).filter(Boolean);
         if (!answer && options.length > 0) answer = options[0];
       } else {
@@ -144,13 +151,18 @@ function parseQuizMarkdown(content) {
       }
     }
 
+    const isDrag = typeStr.includes('drag') || typeStr.includes('drop') || typeStr.includes('order');
+    const isMultiple = typeStr.includes('multiple') || typeStr.includes('choice');
+    const isListening = typeStr.includes('listen');
+
     return {
       num: i + 1,
-      type: typeStr.includes('multiple') || typeStr.includes('choice') ? 'multiple-choice' : (typeStr.includes('listen') ? 'listening' : 'fill-in-the-blank'),
+      type: isDrag ? 'drag-and-drop' : (isMultiple ? 'multiple-choice' : (isListening ? 'listening' : 'fill-in-the-blank')),
       english,
       korean,
       answer,
       options,
+      ...(isDrag ? { tokens: options } : {}),
       explanation,
       audio
     };

@@ -552,7 +552,9 @@
         "They had to build the house to make it level..wav", // Q16
         "As they were getting up in age and didnt have to worry about falls anymore..wav", // Q17
         "That was my moms memorial bell that we built and this was mining equipment that we found up in the hills..wav", // Q18
-        "Now Kelly get to enjoy it..wav" // Q19
+        "Now Kelly get to enjoy it..wav", // Q19
+        "We used to go exploring up there some of the old mines and everything..wav", // Q20
+        "Anyway thats all I got..wav" // Q21
       ];
 
       let metadata = {};
@@ -951,6 +953,7 @@
           }
         });
         quizEngine.init();
+        window.quizEngine = quizEngine;
       } catch (err) {
         console.error('Failed to load quiz markdown:', err);
         document.getElementById('quiz-container').innerHTML = `
