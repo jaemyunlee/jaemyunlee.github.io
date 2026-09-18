@@ -139,7 +139,7 @@ const App = {
       title: '웨인 삼촌의 산골 오두막 이야기',
       subtitle: '1963년부터 이어져 온 숲속 캐빈과 드라이 크릭의 역사, 자연 속 삶의 생생한 영어 표현',
       duration: '5:48',
-      vocabCount: 19,
+      vocabCount: 21,
       path: 'lessons/lesson-02/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     },
@@ -1664,7 +1664,9 @@ const LESSON_02_AUDIO_MAP = [
   { key: 'build the house to make it level', file: 'They had to build the house to make it level..wav' },
   { key: 'getting up in age', file: 'As they were getting up in age and didnt have to worry about falls anymore..wav' },
   { key: 'moms memorial bell', file: 'That was my moms memorial bell that we built and this was mining equipment that we found up in the hills..wav' },
-  { key: 'kelly get to enjoy it', file: 'Now Kelly get to enjoy it..wav' }
+  { key: 'kelly get to enjoy it', file: 'Now Kelly get to enjoy it..wav' },
+  { key: 'used to go exploring', file: 'We used to go exploring up there some of the old mines and everything..wav' },
+  { key: 'thats all i got', file: 'Anyway thats all I got..wav' }
 ];
 
 // Known audio files for Lesson 03 (maps keyword to WAV audio filename in lessons/lesson-03/audio/)

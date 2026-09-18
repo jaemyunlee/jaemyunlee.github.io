@@ -17,3 +17,5 @@
 - [As] they were getting up in age and didn't have to worry about falls anymore.
 - That was my mom's memorial bell that we built and this was [mining] equipment that we found up in the hills.
 - Now Kelly [get to] enjoy it.
+- We [used to] go exploring up there, some of the old mines and everything.
+- Anyway, [that's all I got].

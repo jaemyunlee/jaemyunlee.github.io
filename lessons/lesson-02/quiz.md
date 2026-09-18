@@ -152,3 +152,19 @@
 - **Korean**: 이제 켈리가 이곳을 마음껏 누리고 즐길 수 있게 되었죠.
 - **Explanation**: "get to (동사원형)"는 "~할 기회를 얻다, ~할 수 있게 되다"라는 의미로 원어민들이 매일 사용하는 핵심 표현입니다.
 
+## Quiz 20
+- **Type**: fill-in-the-blank
+- **Audio**: audio/We used to go exploring up there some of the old mines and everything..wav
+- **English**: We [used to] go exploring up there, some of the old mines and everything.
+- **Answer**: used to
+- **Korean**: 예전에 저 산 위의 옛 폐광산 같은 곳들을 탐험하곤 했어요.
+- **Explanation**: "used to (동사원형)"는 과거에 한동안 지속되었던 행동이나 습관을 나타내며, "예전에 (자주/한동안) ~하곤 했다"라는 뜻의 필수 핵심 표현입니다. 지금은 더 이상 하지 않는 과거의 일이나 추억을 회상할 때 자주 씁니다.
+
+## Quiz 21
+- **Type**: drag-and-drop
+- **Audio**: audio/Anyway thats all I got..wav
+- **English**: Anyway, [that's, all, I, got].
+- **Answer**: that's all I got
+- **Korean**: 어쨌든, 제가 들려드릴 이야기는 여기까지예요.
+- **Explanation**: "That's all I got."은 발표나 이야기, 설명 등을 마치면서 "내가 준비한/가진 이야기는 이게 전부야(여기까지야)"라고 자연스럽고 친근하게 매듭지을 때 원어민들이 즐겨 쓰는 생생한 구어 표현입니다.
+

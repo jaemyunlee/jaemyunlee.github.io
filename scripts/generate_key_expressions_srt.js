@@ -27,6 +27,11 @@ const CONCISE_DEFINITIONS = {
   'in advance': '미리, 사전에',
   'ahead of time': '미리, 시간 여유를 두고',
 
+  // Lesson 02
+  'used to': '예전에 ~하곤 했다 (지금은 아님)',
+  "that's all I got": '제가 준비한 이야기는 여기까지예요',
+  'thats all I got': '제가 준비한 이야기는 여기까지예요',
+
   // Lesson 03
   'strong-willed': '의지가 강한, 자기주관이 뚜렷한',
   'picked her up': '차로 데리러 가다, 태우러 가다',

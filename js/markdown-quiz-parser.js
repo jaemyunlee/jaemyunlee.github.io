@@ -86,6 +86,7 @@ const MarkdownQuizParser = {
 
   _normalizeType(typeStr) {
     const t = typeStr.toLowerCase().replace(/[^a-z]/g, '');
+    if (t.includes('drag') || t.includes('drop') || t.includes('order')) return 'drag-and-drop';
     if (t.includes('multiple') || t.includes('choice')) return 'multiple-choice';
     if (t.includes('listen')) return 'listening';
     return 'fill-in-the-blank';
@@ -98,7 +99,21 @@ const MarkdownQuizParser = {
     if (bracketMatch) {
       const inside = bracketMatch[1].trim();
 
-      if (quiz.type === 'multiple-choice') {
+      if (quiz.type === 'drag-and-drop') {
+        // Words can be comma-separated: [that's, all, I, got] or space-separated: [that's all I got]
+        let tokens = [];
+        if (inside.includes(',')) {
+          tokens = inside.split(',').map(s => s.trim()).filter(Boolean);
+        } else {
+          tokens = inside.split(/\s+/).map(s => s.trim()).filter(Boolean);
+        }
+        quiz.tokens = tokens;
+        quiz.options = tokens;
+        if (!quiz.answer) {
+          quiz.answer = tokens.join(' ');
+        }
+        quiz.sentenceTemplate = quiz.english.replace(/\[(.*?)\]/, '_____');
+      } else if (quiz.type === 'multiple-choice') {
         // Options may be comma-separated: [cats, dogs, trees, water]
         const rawOptions = inside.split(',').map(s => s.trim()).filter(Boolean);
         quiz.options = rawOptions;
@@ -122,6 +137,8 @@ const MarkdownQuizParser = {
       quiz.hint = this.generateFillInHint(quiz.answer);
     } else if (quiz.type === 'listening') {
       quiz.hint = this.generateListeningHint(quiz.answer);
+    } else if (quiz.type === 'drag-and-drop') {
+      quiz.hint = (quiz.tokens && quiz.tokens.length > 0) ? `첫 단어 힌트: "${quiz.tokens[0]}"` : '';
     }
   },
 
