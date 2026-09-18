@@ -119,3 +119,52 @@
 - **Answer**: felt random
 - **Korean**: 그래도 저한테는 오클랜드라는 장소 자체가 참 뜬금없고 뜻밖으로 느껴졌어요.
 - **Explanation**: "feel random"은 맥락에 맞지 않거나 예상치 못해 "뜬금없게 느껴지다, 생뚱맞다, 뜻밖이다"라는 뜻으로 원어민들이 자주 쓰는 일상적인 표현입니다.
+
+## Quiz 16
+- **Type**: multiple-choice
+- **Audio**: audio/Hopefully we can get in line..wav
+- **English**: Hopefully we can [get in line, cut in line, step outside, head back].
+- **Answer**: get in line
+- **Korean**: '줄이라도 설 수 있으면 좋겠다' 싶었죠.
+- **Explanation**: "get in line"은 차례를 기다리기 위해 "줄을 서다"라는 뜻의 가장 흔하고 자연스러운 일상 표현입니다.
+
+## Quiz 17
+- **Type**: multiple-choice
+- **Audio**: audio/Maybe they were first in line..wav
+- **English**: Maybe they were [first in line, out of line, last to leave, second best].
+- **Answer**: first in line
+- **Korean**: 어쩌면 제일 첫 번째로 줄을 섰던 건지도 몰라요.
+- **Explanation**: "first in line"은 대기열에서 "맨 앞줄에 선, 가장 먼저 줄을 선" 사람이나 순서를 뜻합니다.
+
+## Quiz 18
+- **Type**: fill-in-the-blank
+- **Audio**: audio/So definitely by the time the sun was going down..wav
+- **English**: So definitely [by the time] the sun was going down.
+- **Answer**: by the time
+- **Korean**: 해가 질 무렵이 되니까 확실히 (분위기가 달라졌죠).
+- **Explanation**: "by the time ~"은 "~할 때쯤에는, ~할 무렵에는"이라는 뜻으로, 특정 시점이나 동작이 완료되는 기준 시간을 나타내는 필수 접속사구입니다.
+
+## Quiz 19
+- **Type**: multiple-choice
+- **Audio**: audio/Throughout the entire concert it was really funny..wav
+- **English**: [Throughout, Without, Except for, Ahead of] the entire concert, it was really funny.
+- **Answer**: Throughout
+- **Korean**: 콘서트 내내 정말 너무 재미있고 웃겼어요.
+- **Explanation**: "throughout"은 시간의 "처음부터 끝까지 내내, 줄곧" 또는 공간의 "구석구석 전체에"를 뜻하는 필수 전치사입니다.
+
+## Quiz 20
+- **Type**: fill-in-the-blank
+- **Audio**: audio/So we were wondering if he had like a girls name written on the belt buckle..wav
+- **English**: So we were [wondering if] he had like a girl's name written on the belt buckle.
+- **Answer**: wondering if
+- **Korean**: 그래서 벨트 버클에 어떤 여자 이름이라도 적혀 있는 건가 궁금해했거든요.
+- **Explanation**: "wonder if ~"는 "~인지 아닌지 궁금하다, ~일까 생각하다"라는 뜻으로 일상 회화에서 호기심이나 궁금증을 나타낼 때 매일 쓰이는 핵심 패턴입니다.
+
+## Quiz 21
+- **Type**: multiple-choice
+- **Audio**: audio/So it was a little unorganized at the end..wav
+- **English**: So it was a little unorganized [at the end, at first, in general, on purpose].
+- **Answer**: at the end
+- **Korean**: 그래서 마지막엔 조금 정리되지 않은 분위기였지만요.
+- **Explanation**: "at the end"는 공연, 영화, 사건 등의 "마지막에, 끝 무렵에"를 뜻하는 일상 필수 전치사구입니다.
+

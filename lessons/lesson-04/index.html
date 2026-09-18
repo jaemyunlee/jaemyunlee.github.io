@@ -428,7 +428,13 @@
         "but it turns out it was a brand name that said d squared..wav", // Q12
         "Maybe in English the way they were saying it came across more silly..wav", // Q13
         "They were making mistakes and it turned into something humorous..wav", // Q14
-        "but it just felt Oakland felt random to me..wav" // Q15
+        "but it just felt Oakland felt random to me..wav", // Q15
+        "Hopefully we can get in line..wav", // Q16
+        "Maybe they were first in line..wav", // Q17
+        "So definitely by the time the sun was going down..wav", // Q18
+        "Throughout the entire concert it was really funny..wav", // Q19
+        "So we were wondering if he had like a girls name written on the belt buckle..wav", // Q20
+        "So it was a little unorganized at the end..wav" // Q21
       ];
 
       let metadata = {};
@@ -444,6 +450,8 @@
           metadata = await metaRes.json();
           isComingSoon = (typeof LessonStatusHelper !== 'undefined') ? LessonStatusHelper.isComingSoon(metadata.status) : (metadata.status === 'coming-soon');
           if (!isComingSoon) {
+            const banner = document.getElementById('coming-soon-banner');
+            if (banner) banner.style.display = 'none';
             const stepTab3 = document.getElementById('step-tab-3');
             const stepTab4 = document.getElementById('step-tab-4');
             [stepTab3, stepTab4].forEach(tab => {
