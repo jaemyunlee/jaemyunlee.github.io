@@ -11,7 +11,6 @@
 - and then i will have to take classes [as well] for the year before i can then get certified,
 - You kind of pick and choose what you think are the most likely to [come up] on the test,
 - So [multiple choice]. That was pretty much how I thought it was going to be.
-- And I have, when I took practice tests, [I did well in].
 - But always when it comes to the actual test, the pressure of that test, I feel like I [secondguess] myself a lot.
 - I felt like three of them were kind of what I was expecting, and I think I did [decently].
 - I don't know if I'll get, like, the highest score is [out of the three].

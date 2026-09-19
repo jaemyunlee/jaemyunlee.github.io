@@ -184,7 +184,7 @@ const App = {
       title: '켈리의 교사 자격증 도전기',
       subtitle: '캘리포니아 교사 자격증(CSET) 준비와 선수 과목, 가르치는 일에 눈뜨게 된 여정의 생생한 일상 영어',
       duration: '5:12',
-      vocabCount: 21,
+      vocabCount: 20,
       path: 'lessons/lesson-05/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon')
     }
@@ -1744,7 +1744,6 @@ const LESSON_05_AUDIO_MAP = [
   { key: 'come up on the test', file: 'You kind of pick and choose what you think are the most likely to come up on the test.wav' },
   { key: 'come up', file: 'You kind of pick and choose what you think are the most likely to come up on the test.wav' },
   { key: 'multiple choice', file: 'So multiple choice. That was pretty much how I thought it was going to be..wav' },
-  { key: 'did well in', file: 'And I have when I took practice tests I did well in..wav' },
   { key: 'secondguess', file: 'But always when it comes to the actual test the pressure of that test I feel like I secondguess myself a lot..wav' },
   { key: 'second guess', file: 'But always when it comes to the actual test the pressure of that test I feel like I secondguess myself a lot..wav' },
   { key: 'decently', file: 'I felt like three of them were kind of what I was expecting and I think I did decently..wav' },
