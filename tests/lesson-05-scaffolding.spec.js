@@ -62,11 +62,11 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
       };
     });
 
-    expect(quizDistribution.total).toBe(21);
+    expect(quizDistribution.total).toBe(20);
     expect(quizDistribution.counts['drag-and-drop']).toBe(1);
     expect(quizDistribution.counts['multiple-choice']).toBe(11);
     expect(quizDistribution.counts['fill-in-the-blank']).toBe(4);
-    expect(quizDistribution.counts['listening']).toBe(5);
+    expect(quizDistribution.counts['listening']).toBe(4);
 
     const q = quizDistribution.quizzes;
 
@@ -124,37 +124,33 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     expect(q[12].type).toBe('multiple-choice');
     expect(q[12].answer).toBe('multiple choice');
 
-    // Q14: listening > I did well in
-    expect(q[13].type).toBe('listening');
-    expect(q[13].answer).toBe('I did well in');
+    // Q14: multiple-choice > second guess
+    expect(q[13].type).toBe('multiple-choice');
+    expect(q[13].answer).toBe('second guess');
 
-    // Q15: multiple-choice > second guess
+    // Q15: multiple-choice > decently
     expect(q[14].type).toBe('multiple-choice');
-    expect(q[14].answer).toBe('second guess');
+    expect(q[14].answer).toBe('decently');
 
-    // Q16: multiple-choice > decently
-    expect(q[15].type).toBe('multiple-choice');
-    expect(q[15].answer).toBe('decently');
+    // Q16: listening > out of the three
+    expect(q[15].type).toBe('listening');
+    expect(q[15].answer).toBe('out of the three');
 
-    // Q17: listening > out of the three
-    expect(q[16].type).toBe('listening');
-    expect(q[16].answer).toBe('out of the three');
+    // Q17: fill-in-the-blank > come up
+    expect(q[16].type).toBe('fill-in-the-blank');
+    expect(q[16].answer).toBe('come up');
 
-    // Q18: fill-in-the-blank > come up
-    expect(q[17].type).toBe('fill-in-the-blank');
-    expect(q[17].answer).toBe('come up');
+    // Q18: multiple-choice > open my eyes
+    expect(q[17].type).toBe('multiple-choice');
+    expect(q[17].answer).toBe('opened my eyes');
 
-    // Q19: multiple-choice > open my eyes
-    expect(q[18].type).toBe('multiple-choice');
-    expect(q[18].answer).toBe('opened my eyes');
+    // Q19: fill-in-the-blank > in-depth
+    expect(q[18].type).toBe('fill-in-the-blank');
+    expect(q[18].answer).toBe('in-depth');
 
-    // Q20: fill-in-the-blank > in-depth
+    // Q20: fill-in-the-blank > fall into
     expect(q[19].type).toBe('fill-in-the-blank');
-    expect(q[19].answer).toBe('in-depth');
-
-    // Q21: fill-in-the-blank > fall into
-    expect(q[20].type).toBe('fill-in-the-blank');
-    expect(q[20].answer).toBe('fell into');
+    expect(q[19].answer).toBe('fell into');
   });
 
   test('Quiz 1 renders as drag-and-drop and allows chip interaction', async ({ page }) => {
@@ -189,7 +185,7 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     await expect(feedback).toHaveClass(/success/);
   });
 
-  test('Step 2 Key Sentences & Audio Player initializes with Kelly avatar and all 21 items', async ({ page }) => {
+  test('Step 2 Key Sentences & Audio Player initializes with Kelly avatar and all 20 items', async ({ page }) => {
     await page.goto('/lessons/lesson-05/index.html');
 
     // Navigate to Step 2
@@ -209,7 +205,7 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
 
     // Sentence cards count
     const sentenceCards = reviewSection.locator('.quiz-sentence-card');
-    await expect(sentenceCards).toHaveCount(21);
+    await expect(sentenceCards).toHaveCount(20);
 
     // First card contains "My brain is mush"
     const firstCard = sentenceCards.first();
@@ -232,18 +228,18 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     await expect(homeLesson05Card).toHaveClass(/coming-soon/);
   });
 
-  test('Standalone quiz sharing pages exist for Lesson 05 (q1 to q21)', async ({ page }) => {
+  test('Standalone quiz sharing pages exist for Lesson 05 (q1 to q20)', async ({ page }) => {
     // Test q1
     await page.goto('/quiz/lesson-05/q1.html');
     await expect(page).toHaveTitle(/머리가 멍해서 생각이 안 돌아가요|RhyRhy English/);
     const quizCard = page.locator('.quiz-standalone-card');
     await expect(quizCard).toBeVisible();
 
-    // Test q21
-    await page.goto('/quiz/lesson-05/q21.html');
+    // Test q20
+    await page.goto('/quiz/lesson-05/q20.html');
     await expect(page).toHaveTitle(/우연히 시작하다, 어쩌다 발을 들이다|RhyRhy English/);
-    const quizCard21 = page.locator('.quiz-standalone-card');
-    await expect(quizCard21).toBeVisible();
+    const quizCard20 = page.locator('.quiz-standalone-card');
+    await expect(quizCard20).toBeVisible();
   });
 
 });

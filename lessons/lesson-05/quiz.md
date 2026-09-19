@@ -105,14 +105,6 @@
 - **Explanation**: "multiple choice"는 여러 보기 중 하나를 고르는 "객관식 (문제/시험)"을 뜻합니다.
 
 ## Quiz 14
-- **Type**: listening
-- **Audio**: audio/And I have when I took practice tests I did well in..wav
-- **English**: And I have, when I took practice tests, [I did well in].
-- **Answer**: I did well in
-- **Korean**: 그리고 연습 시험을 봤을 때는 시험을 꽤 잘 치렀었어요.
-- **Explanation**: "do well in ~"은 시험이나 분야에서 "성적을 잘 내다, 잘하다"라는 표현으로, 과거형 "did well in"으로 쓰였습니다.
-
-## Quiz 15
 - **Type**: multiple-choice
 - **Audio**: audio/But always when it comes to the actual test the pressure of that test I feel like I secondguess myself a lot..wav
 - **English**: But always when it comes to the actual test, the pressure of that test, I feel like I [second guess, show off, step up, speak for] myself a lot.
@@ -120,7 +112,7 @@
 - **Korean**: 하지만 늘 실제 시험을 볼 때는, 그 시험의 압박감 때문에 제 결정을 많이 의심(재고)하게 되는 것 같아요.
 - **Explanation**: "second-guess" (또는 "second guess")는 이미 내린 결정이나 고른 정답을 "뒤늦게 의심하다, 재고하다"라는 뜻의 아주 유용한 표현입니다 ("second-guess myself": 내가 쓴 답을 계속 의심하다).
 
-## Quiz 16
+## Quiz 15
 - **Type**: multiple-choice
 - **Audio**: audio/I felt like three of them were kind of what I was expecting and I think I did decently..wav
 - **English**: I felt like three of them were kind of what I was expecting, and I think I did [decently, poorly, barely, terribly].
@@ -128,7 +120,7 @@
 - **Korean**: 그중 3개는 대략 예상했던 내용이어서, 나름 괜찮게(준수하게) 본 것 같아요.
 - **Explanation**: "decently"는 완벽하지는 않더라도 "남부럽지 않게, 꽤 괜찮게, 준수하게" 해냈음을 뜻하는 부사입니다 ("do decently": 꽤 잘 해내다).
 
-## Quiz 17
+## Quiz 16
 - **Type**: listening
 - **Audio**: audio/I dont know if Ill get like the highest score is out of the three..wav
 - **English**: I don't know if I'll get, like, the highest score is [out of the three].
@@ -136,7 +128,7 @@
 - **Korean**: 3점 만점 중에서 최고점을 받을 수 있을지는 잘 모르겠어요.
 - **Explanation**: "out of ~"는 전체 범위 중에서 "~중에서"를 뜻하며, "out of the three"는 "3개 중에서 / 3점 중에서"라는 의미입니다.
 
-## Quiz 18
+## Quiz 17
 - **Type**: fill-in-the-blank
 - **Audio**: audio/and that one... I was really having to just kind of... come up with something.wav
 - **English**: and that one... I was really having to just kind of... [come up] with something
@@ -144,7 +136,7 @@
 - **Korean**: 그리고 그 문제는... 정말이지 어떻게든 무언가를 생각해내야(지어내야)만 했어요.
 - **Explanation**: "come up with ~"는 (아이디어, 대답, 해결책 등을) "생각해내다, 짜내다, 마련하다"라는 뜻의 핵심 구동사입니다.
 
-## Quiz 19
+## Quiz 18
 - **Type**: multiple-choice
 - **Audio**: audio/Working in Korea. definitely opened my eyes to how much I like to work with kids and teach..wav
 - **English**: Working in Korea. definitely [opened my eyes, closed my ears, turned my back, kept my head] to how much I like to work with kids and teach.
@@ -152,7 +144,7 @@
 - **Korean**: 한국에서의 근무 경험은 제가 아이들과 함께하고 가르치는 일을 얼마나 좋아하는지 확실하게 눈을 뜨게(새로운 사실을 깨닫게) 해주었어요.
 - **Explanation**: "open one's eyes to ~"는 "~에 대해 새로운 깨달음을 주다, 눈을 뜨게 하다"라는 생생한 관용 표현입니다.
 
-## Quiz 20
+## Quiz 19
 - **Type**: fill-in-the-blank
 - **Audio**: audio/I dont have this indepth answer of why I want to teach like it.wav
 - **English**: I don't have this [in-depth] answer of why I want to teach like it
@@ -160,7 +152,7 @@
 - **Korean**: 왜 가르치고 싶은지에 대해 거창하거나 심도 있는(깊이 있는) 대답이 있는 건 아니에요.
 - **Explanation**: "in-depth" (또는 "indepth")는 "심도 있는, 상세하고 깊이 있는"을 뜻하는 형용사입니다.
 
-## Quiz 21
+## Quiz 20
 - **Type**: fill-in-the-blank
 - **Audio**: audio/like it is something I kind of fell into and found that I just actually really enjoyed it..wav
 - **English**: like it is something I kind of [fell into] and found that I just actually really enjoyed it.
