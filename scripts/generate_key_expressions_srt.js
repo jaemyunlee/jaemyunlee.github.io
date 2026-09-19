@@ -87,7 +87,6 @@ const CONCISE_DEFINITIONS = {
   'as well': '또한, 마찬가지로, 역시',
   'come up': '(시험 등에) 문제로 나오다, 언급되다',
   'multiple choice': '객관식 (선택형 문제)',
-  'I did well in': '성적을 잘 내다, 시험을 잘 치르다',
   'second guess': '자신의 결정을 뒤늦게 의심하다, 재고하다',
   'secondguess': '자신의 결정을 뒤늦게 의심하다, 재고하다',
   'decently': '나름 괜찮게, 꽤 준수하게',
