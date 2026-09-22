@@ -186,7 +186,7 @@ const App = {
       duration: '5:12',
       vocabCount: 20,
       path: 'lessons/lesson-05/',
-      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon')
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     }
   ],
 
@@ -1748,6 +1748,7 @@ const LESSON_05_AUDIO_MAP = [
   { key: 'second guess', file: 'But always when it comes to the actual test the pressure of that test I feel like I secondguess myself a lot..wav' },
   { key: 'decently', file: 'I felt like three of them were kind of what I was expecting and I think I did decently..wav' },
   { key: 'out of the three', file: 'I dont know if Ill get like the highest score is out of the three..wav' },
+  { key: 'come up with', file: 'and that one... I was really having to just kind of... come up with something.wav' },
   { key: 'come up with something', file: 'and that one... I was really having to just kind of... come up with something.wav' },
   { key: 'opened my eyes', file: 'Working in Korea. definitely opened my eyes to how much I like to work with kids and teach..wav' },
   { key: 'open my eyes', file: 'Working in Korea. definitely opened my eyes to how much I like to work with kids and teach..wav' },

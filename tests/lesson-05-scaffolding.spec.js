@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Lesson 05 Scaffolding & Integration', () => {
 
-  test('Lesson 05 page loads and displays header badges and navigation tabs in coming-soon mode', async ({ page }) => {
+  test('Lesson 05 page loads and displays header badges and navigation tabs in published mode', async ({ page }) => {
     await page.goto('/lessons/lesson-05/index.html');
 
     // Header badge
@@ -13,13 +13,11 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: Quiz');
 
-    // Coming soon notification banner is visible
+    // Coming soon notification banner is hidden
     const comingSoonBanner = page.locator('#coming-soon-banner');
-    await expect(comingSoonBanner).toBeVisible();
-    await expect(comingSoonBanner).toContainText('본영상 공개 예정');
-    await expect(comingSoonBanner).toContainText('사전 공개');
+    await expect(comingSoonBanner).toBeHidden();
 
-    // Step navigation tabs: Steps 1 & 2 active, Steps 3 & 4 deactivated
+    // Step navigation tabs: Steps 1, 2, 3, 4 all active and enabled
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
@@ -32,15 +30,27 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
 
     await expect(tab1).not.toHaveClass(/deactivated/);
     await expect(tab2).not.toHaveClass(/deactivated/);
-    await expect(tab3).toHaveClass(/deactivated/);
-    await expect(tab4).toHaveClass(/deactivated/);
-    await expect(tab3).toBeDisabled();
-    await expect(tab4).toBeDisabled();
+    await expect(tab3).not.toHaveClass(/deactivated/);
+    await expect(tab4).not.toHaveClass(/deactivated/);
+    await expect(tab3).toBeEnabled();
+    await expect(tab4).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
     await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
     await expect(tab4.locator('.step-label')).toHaveText('영작하기');
+
+    // Clicking Step 3 activates Video & Script section
+    await tab3.click();
+    const videoSection = page.locator('#video-section');
+    await expect(videoSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 3: Full Video');
+
+    // Clicking Step 4 activates Reflection section
+    await tab4.click();
+    const reflectionSection = page.locator('#reflection-section');
+    await expect(reflectionSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 4: Writing');
   });
 
   test('Lesson 05 loads all 21 quizzes with drag-and-drop, multiple-choice, fill-in-the-blank, and listening', async ({ page }) => {
@@ -136,9 +146,9 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     expect(q[15].type).toBe('listening');
     expect(q[15].answer).toBe('out of the three');
 
-    // Q17: fill-in-the-blank > come up
+    // Q17: fill-in-the-blank > come up with
     expect(q[16].type).toBe('fill-in-the-blank');
-    expect(q[16].answer).toBe('come up');
+    expect(q[16].answer).toBe('come up with');
 
     // Q18: multiple-choice > open my eyes
     expect(q[17].type).toBe('multiple-choice');
@@ -210,22 +220,35 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     // First card contains "My brain is mush"
     const firstCard = sentenceCards.first();
     await expect(firstCard).toContainText('My brain is mush');
+
+    // 17th card (index 16) highlights "come up with"
+    const card17 = sentenceCards.nth(16);
+    await expect(card17).toBeVisible();
+    const highlight17 = card17.locator('.quiz-vocab-highlight');
+    await expect(highlight17).toHaveText('come up with');
+    await expect(card17.locator('.sentence-keyword-badge')).toContainText('come up with');
+    await expect(card17.locator('.sentence-en-text')).toContainText('come up with something');
+    await expect(card17.locator('.sentence-en-text')).not.toContainText('with with');
   });
 
-  test('Lessons catalog and Home page display Lesson 05 with coming-soon badge', async ({ page }) => {
+  test('Lessons catalog and Home page display Lesson 05 as published (no coming-soon badge)', async ({ page }) => {
     // 1. Lessons catalog page
     await page.goto('/lessons.html');
     const lesson05Card = page.locator('#card-lesson-05');
     await expect(lesson05Card).toBeVisible({ timeout: 5000 });
-    await expect(lesson05Card).toHaveClass(/coming-soon/);
-    await expect(lesson05Card.locator('.badge-coming-soon')).toBeVisible();
-    await expect(lesson05Card.locator('.badge-coming-soon')).toContainText('본영상 공개 예정');
+    await expect(lesson05Card).not.toHaveClass(/coming-soon/);
+    await expect(lesson05Card.locator('.badge-coming-soon')).toHaveCount(0);
+
+    // Verify action button shows start learning
+    const actionBtn = page.locator('#card-lesson-05 .lesson-card-btn');
+    await expect(actionBtn).toContainText('학습 시작하기');
 
     // 2. Home page
     await page.goto('/index.html');
     const homeLesson05Card = page.locator('#card-lesson-05');
     await expect(homeLesson05Card).toBeVisible({ timeout: 5000 });
-    await expect(homeLesson05Card).toHaveClass(/coming-soon/);
+    await expect(homeLesson05Card).not.toHaveClass(/coming-soon/);
+    await expect(homeLesson05Card.locator('.badge-coming-soon')).toHaveCount(0);
   });
 
   test('Standalone quiz sharing pages exist for Lesson 05 (q1 to q20)', async ({ page }) => {

@@ -14,7 +14,7 @@
 - But always when it comes to the actual test, the pressure of that test, I feel like I [secondguess] myself a lot.
 - I felt like three of them were kind of what I was expecting, and I think I did [decently].
 - I don't know if I'll get, like, the highest score is [out of the three].
-- and that one... I was really having to just kind of... [come up] with something
+- and that one... I was really having to just kind of... [come up with] something
 - Working in Korea. definitely [opened my eyes] to how much I like to work with kids and teach.
 - I don't have this [indepth] answer of why I want to teach like it
 - like it is something I kind of [fell into] and found that I just actually really enjoyed it.
