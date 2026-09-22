@@ -146,9 +146,9 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     expect(q[15].type).toBe('listening');
     expect(q[15].answer).toBe('out of the three');
 
-    // Q17: fill-in-the-blank > come up
+    // Q17: fill-in-the-blank > come up with
     expect(q[16].type).toBe('fill-in-the-blank');
-    expect(q[16].answer).toBe('come up');
+    expect(q[16].answer).toBe('come up with');
 
     // Q18: multiple-choice > open my eyes
     expect(q[17].type).toBe('multiple-choice');
@@ -220,6 +220,15 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     // First card contains "My brain is mush"
     const firstCard = sentenceCards.first();
     await expect(firstCard).toContainText('My brain is mush');
+
+    // 17th card (index 16) highlights "come up with"
+    const card17 = sentenceCards.nth(16);
+    await expect(card17).toBeVisible();
+    const highlight17 = card17.locator('.quiz-vocab-highlight');
+    await expect(highlight17).toHaveText('come up with');
+    await expect(card17.locator('.sentence-keyword-badge')).toContainText('come up with');
+    await expect(card17.locator('.sentence-en-text')).toContainText('come up with something');
+    await expect(card17.locator('.sentence-en-text')).not.toContainText('with with');
   });
 
   test('Lessons catalog and Home page display Lesson 05 as published (no coming-soon badge)', async ({ page }) => {

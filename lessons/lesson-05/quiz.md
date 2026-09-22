@@ -131,8 +131,8 @@
 ## Quiz 17
 - **Type**: fill-in-the-blank
 - **Audio**: audio/and that one... I was really having to just kind of... come up with something.wav
-- **English**: and that one... I was really having to just kind of... [come up] with something
-- **Answer**: come up
+- **English**: and that one... I was really having to just kind of... [come up with] something
+- **Answer**: come up with
 - **Korean**: 그리고 그 문제는... 정말이지 어떻게든 무언가를 생각해내야(지어내야)만 했어요.
 - **Explanation**: "come up with ~"는 (아이디어, 대답, 해결책 등을) "생각해내다, 짜내다, 마련하다"라는 뜻의 핵심 구동사입니다.
 
