@@ -186,7 +186,7 @@ const App = {
       duration: '5:12',
       vocabCount: 20,
       path: 'lessons/lesson-05/',
-      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon')
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     }
   ],
 
