@@ -199,7 +199,7 @@ const App = {
       title: '장인어른과 장모님과의 첫 만남부터 숲속 캐빈 라이프까지',
       subtitle: '요세미티 국립공원에서 시작된 첫 만남과 결혼, 장인어른과의 사천요리 일화, 야생동물 출몰 캐빈 라이프',
       duration: '7:11',
-      vocabCount: 24,
+      vocabCount: 23,
       path: 'lessons/lesson-06/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
       scheduledDateText: '9월 28일 본영상 공개 예정'
@@ -1780,7 +1780,6 @@ const LESSON_06_AUDIO_MAP = [
   { key: 'hang around', file: 'Her roommate said if I was going to hang around I had to start paying rent or get out of the house..wav' },
   { key: 'practical', file: 'Practical thats me practical..wav' },
   { key: 'went out to dinner', file: 'We all went out to dinner one night..wav' },
-  { key: 'looped', file: 'He liked his alcohol so he was always pretty well looped..wav' },
   { key: 'pushing the peppers aside', file: 'I was pushing the peppers aside..wav' },
   { key: 'pushing', file: 'I was pushing the peppers aside..wav' },
   { key: 'show off', file: 'He was gonna show off I guess and he grabbed one and bit into it.wav' },

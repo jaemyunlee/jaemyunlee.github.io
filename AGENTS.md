@@ -67,10 +67,12 @@ To guarantee that new deployments are delivered immediately to all users while m
   - `quiz.md`: Multi-step interactive quiz parsed by `js/markdown-quiz-parser.js`.
   - `script.json`: Synchronized bilingual script and sentences.
   - `audio/`: Native speaker pronunciation WAV/MP3 files.
+  - `youtube-description.txt`: Ready-to-copy YouTube description with clickable chapter timeline and key expressions.
 - When creating a new lesson:
   1. Register the lesson in `lessons.html` and `index.html` (Latest Lessons section).
   2. Register its files in `sw.js` `STATIC_ASSETS`.
   3. Ensure `scripts/build.js` processes its `index.html` references.
+  4. Generate key expressions SRT & YouTube description via `npm run generate:key-srt` (or `npm run generate:yt-desc` / `npm run build`).
 
 ### Character Personas & Korean Family Relationship Translation Protocol
 

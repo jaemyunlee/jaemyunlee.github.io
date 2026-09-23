@@ -66,9 +66,9 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
       };
     });
 
-    expect(quizDistribution.total).toBe(24);
+    expect(quizDistribution.total).toBe(23);
     expect(quizDistribution.counts['fill-in-the-blank']).toBe(7);
-    expect(quizDistribution.counts['multiple-choice']).toBe(9);
+    expect(quizDistribution.counts['multiple-choice']).toBe(8);
     expect(quizDistribution.counts['drag-and-drop']).toBe(5);
     expect(quizDistribution.counts['listening']).toBe(3);
 
@@ -92,92 +92,88 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     expect(q[3].answer).toBe('went out to dinner');
     expect(q[3].tokens).toEqual(['went', 'out', 'to', 'dinner']);
 
-    // Q5: multiple-choice > looped
-    expect(q[4].type).toBe('multiple-choice');
-    expect(q[4].answer).toBe('looped');
+    // Q5: fill-in-the-blank > pushing ... aside (multi-blank)
+    expect(q[4].type).toBe('fill-in-the-blank');
+    expect(q[4].blanks).toEqual(['pushing', 'aside']);
 
-    // Q6: fill-in-the-blank > pushing ... aside (multi-blank)
+    // Q6: fill-in-the-blank > show off
     expect(q[5].type).toBe('fill-in-the-blank');
-    expect(q[5].blanks).toEqual(['pushing', 'aside']);
+    expect(q[5].answer).toBe('show off');
 
-    // Q7: fill-in-the-blank > show off
+    // Q7: fill-in-the-blank > being around (show enjoyed, fill being and around)
     expect(q[6].type).toBe('fill-in-the-blank');
-    expect(q[6].answer).toBe('show off');
+    expect(q[6].answer).toBe('being around');
 
-    // Q8: fill-in-the-blank > being around (show enjoyed, fill being and around)
-    expect(q[7].type).toBe('fill-in-the-blank');
-    expect(q[7].answer).toBe('being around');
+    // Q8: multiple-choice > taken to the bar
+    expect(q[7].type).toBe('multiple-choice');
+    expect(q[7].answer).toBe('taken to the bar');
 
-    // Q9: multiple-choice > taken to the bar
-    expect(q[8].type).toBe('multiple-choice');
-    expect(q[8].answer).toBe('taken to the bar');
+    // Q9: listening > one of the times (changed to listening)
+    expect(q[8].type).toBe('listening');
+    expect(q[8].answer).toBe('one of the times');
 
-    // Q10: listening > one of the times (changed to listening)
-    expect(q[9].type).toBe('listening');
-    expect(q[9].answer).toBe('one of the times');
+    // Q10: drag-and-drop > early in the relationship
+    expect(q[9].type).toBe('drag-and-drop');
+    expect(q[9].answer).toBe('early in the relationship');
+    expect(q[9].tokens).toEqual(['early', 'in', 'the', 'relationship']);
 
-    // Q11: drag-and-drop > early in the relationship
-    expect(q[10].type).toBe('drag-and-drop');
-    expect(q[10].answer).toBe('early in the relationship');
-    expect(q[10].tokens).toEqual(['early', 'in', 'the', 'relationship']);
+    // Q11: fill-in-the-blank > all, the, way, from, to (5 separate blanks, show Martinez and Lafayette)
+    expect(q[10].type).toBe('fill-in-the-blank');
+    expect(q[10].blanks).toEqual(['all', 'the', 'way', 'from', 'to']);
 
-    // Q12: fill-in-the-blank > all, the, way, from, to (5 separate blanks, show Martinez and Lafayette)
-    expect(q[11].type).toBe('fill-in-the-blank');
-    expect(q[11].blanks).toEqual(['all', 'the', 'way', 'from', 'to']);
+    // Q12: multiple-choice > went around a corner
+    expect(q[11].type).toBe('multiple-choice');
+    expect(q[11].answer).toBe('went around a corner');
 
-    // Q13: multiple-choice > went around a corner
-    expect(q[12].type).toBe('multiple-choice');
-    expect(q[12].answer).toBe('went around a corner');
+    // Q13: drag-and-drop > the time of year
+    expect(q[12].type).toBe('drag-and-drop');
+    expect(q[12].answer).toBe('the time of year');
+    expect(q[12].tokens).toEqual(['the', 'time', 'of', 'year']);
 
-    // Q14: drag-and-drop > the time of year
+    // Q14: drag-and-drop > take a nap
     expect(q[13].type).toBe('drag-and-drop');
-    expect(q[13].answer).toBe('the time of year');
-    expect(q[13].tokens).toEqual(['the', 'time', 'of', 'year']);
+    expect(q[13].answer).toBe('Take a nap');
+    expect(q[13].tokens).toEqual(['Take', 'a', 'nap']);
 
-    // Q15: drag-and-drop > take a nap
-    expect(q[14].type).toBe('drag-and-drop');
-    expect(q[14].answer).toBe('Take a nap');
-    expect(q[14].tokens).toEqual(['Take', 'a', 'nap']);
+    // Q15: fill-in-the-blank > dull moment
+    expect(q[14].type).toBe('fill-in-the-blank');
+    expect(q[14].answer).toBe('dull moment');
 
-    // Q16: fill-in-the-blank > dull moment
-    expect(q[15].type).toBe('fill-in-the-blank');
-    expect(q[15].answer).toBe('dull moment');
+    // Q16: multiple-choice > backing out
+    expect(q[15].type).toBe('multiple-choice');
+    expect(q[15].answer).toBe('backing out');
 
-    // Q17: multiple-choice > backing out
-    expect(q[16].type).toBe('multiple-choice');
-    expect(q[16].answer).toBe('backing out');
+    // Q17: drag-and-drop > it's a pain
+    expect(q[16].type).toBe('drag-and-drop');
+    expect(q[16].answer).toBe("It's a pain");
+    expect(q[16].tokens).toEqual(["It's", 'a', 'pain']);
 
-    // Q18: drag-and-drop > it's a pain
-    expect(q[17].type).toBe('drag-and-drop');
-    expect(q[17].answer).toBe("It's a pain");
-    expect(q[17].tokens).toEqual(["It's", 'a', 'pain']);
+    // Q18: listening > way back
+    expect(q[17].type).toBe('listening');
+    expect(q[17].answer).toBe('Way back');
 
-    // Q19: listening > way back
+    // Q19: listening > it was surprising that
     expect(q[18].type).toBe('listening');
-    expect(q[18].answer).toBe('Way back');
+    expect(q[18].answer).toBe('It was surprising that');
 
-    // Q20: listening > it was surprising that
-    expect(q[19].type).toBe('listening');
-    expect(q[19].answer).toBe('It was surprising that');
+    // Q20: multiple-choice > disturbed
+    expect(q[19].type).toBe('multiple-choice');
+    expect(q[19].answer).toBe('disturbed');
 
-    // Q21: multiple-choice > disturbed
+    // Q21: multiple-choice > sightings
     expect(q[20].type).toBe('multiple-choice');
-    expect(q[20].answer).toBe('disturbed');
+    expect(q[20].answer).toBe('sightings');
 
-    // Q22: multiple-choice > sightings
+    // Q22: multiple-choice > got to (display you've, fill got to only, multiple choice)
     expect(q[21].type).toBe('multiple-choice');
-    expect(q[21].answer).toBe('sightings');
+    expect(q[21].answer).toBe('got to');
 
-    // Q23: multiple-choice > got to (display you've, fill got to only, multiple choice)
-    expect(q[22].type).toBe('multiple-choice');
-    expect(q[22].answer).toBe('got to');
-
-    // Q24: fill-in-the-blank > figuring out
-    expect(q[23].type).toBe('fill-in-the-blank');
-    expect(q[23].answer).toBe('figuring out');
+    // Q23: fill-in-the-blank > figuring out
+    expect(q[22].type).toBe('fill-in-the-blank');
+    expect(q[22].answer).toBe('figuring out');
   });
 
-  test('Step 2 Key Sentences Review Player initializes with Gene speaker info and 24 items', async ({ page }) => {
+  test('Step 2 Key Sentences Review Player initializes with Gene speaker info and 23 items', async ({ page }) => {
     await page.goto('/lessons/lesson-06/index.html');
 
     // Click Step 2 tab
@@ -195,29 +191,29 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(speakerName).toContainText('Gene');
 
     const sentenceCards = reviewSection.locator('.quiz-sentence-card');
-    await expect(sentenceCards).toHaveCount(24);
+    await expect(sentenceCards).toHaveCount(23);
 
-    // Sentence 06 (index 5): Verify clean highlighting without residual brackets
-    const card6Text = reviewSection.locator('#quiz-card-5 .sentence-en-text');
-    await expect(card6Text).toContainText('I was pushing the peppers aside.');
-    const card6Marks = card6Text.locator('mark.quiz-vocab-highlight');
-    await expect(card6Marks).toHaveCount(2);
-    await expect(card6Marks.nth(0)).toHaveText('pushing');
-    await expect(card6Marks.nth(1)).toHaveText('aside');
-    const card6Raw = await card6Text.innerHTML();
-    expect(card6Raw).not.toContain('[');
-    expect(card6Raw).not.toContain(']');
-    expect(card6Raw).not.toContain('pushing, aside');
+    // Sentence 05 (index 4): Verify clean highlighting without residual brackets
+    const card5Text = reviewSection.locator('#quiz-card-4 .sentence-en-text');
+    await expect(card5Text).toContainText('I was pushing the peppers aside.');
+    const card5Marks = card5Text.locator('mark.quiz-vocab-highlight');
+    await expect(card5Marks).toHaveCount(2);
+    await expect(card5Marks.nth(0)).toHaveText('pushing');
+    await expect(card5Marks.nth(1)).toHaveText('aside');
+    const card5Raw = await card5Text.innerHTML();
+    expect(card5Raw).not.toContain('[');
+    expect(card5Raw).not.toContain(']');
+    expect(card5Raw).not.toContain('pushing, aside');
 
-    // Sentence 12 (index 11): Verify multi-blank highlighting without residual brackets
-    const card12Text = reviewSection.locator('#quiz-card-11 .sentence-en-text');
-    await expect(card12Text).toContainText('We carried it all the way from Martinez to Lafayette.');
-    const card12Marks = card12Text.locator('mark.quiz-vocab-highlight');
-    expect(await card12Marks.count()).toBeGreaterThanOrEqual(2);
-    const card12Raw = await card12Text.innerHTML();
-    expect(card12Raw).not.toContain('[');
-    expect(card12Raw).not.toContain(']');
-    expect(card12Raw).not.toContain('all, the, way');
+    // Sentence 11 (index 10): Verify multi-blank highlighting without residual brackets
+    const card11Text = reviewSection.locator('#quiz-card-10 .sentence-en-text');
+    await expect(card11Text).toContainText('We carried it all the way from Martinez to Lafayette.');
+    const card11Marks = card11Text.locator('mark.quiz-vocab-highlight');
+    expect(await card11Marks.count()).toBeGreaterThanOrEqual(2);
+    const card11Raw = await card11Text.innerHTML();
+    expect(card11Raw).not.toContain('[');
+    expect(card11Raw).not.toContain(']');
+    expect(card11Raw).not.toContain('all, the, way');
   });
 
   test('Step 2 Key Sentences Review Player displays btn-speed-toggle, icon-only btn-player-playall, and hides sentence-keyword-badge on mobile view', async ({ page }) => {
@@ -278,7 +274,7 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     expect(lesson06Data).toBeDefined();
     expect(lesson06Data.id).toBe('lesson-06');
     expect(lesson06Data.speaker).toBe('Gene');
-    expect(lesson06Data.vocabCount).toBe(24);
+    expect(lesson06Data.vocabCount).toBe(23);
     expect(lesson06Data.status).toBe('coming-soon');
     expect(lesson06Data.avatar).toContain('gene.jpeg');
   });
@@ -291,7 +287,7 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
       return {
         endedUp: player._resolveAudioUrl({ text: 'we ended up dating', lessonId: 'lesson-06' }, '/'),
         hangAround: player._resolveAudioUrl({ text: 'hang around', lessonId: 'lesson-06' }, '/'),
-        looped: player._resolveAudioUrl({ text: 'well looped', lessonId: 'lesson-06' }, '/'),
+        showOff: player._resolveAudioUrl({ text: 'show off', lessonId: 'lesson-06' }, '/'),
         backingOut: player._resolveAudioUrl({ text: 'backing out', lessonId: 'lesson-06' }, '/'),
         figuringOut: player._resolveAudioUrl({ text: 'figuring out', lessonId: 'lesson-06' }, '/')
       };
@@ -299,7 +295,7 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
 
     expect(urls.endedUp).toContain('We%20ended%20up%20going%20out');
     expect(urls.hangAround).toContain('hang%20around');
-    expect(urls.looped).toContain('looped');
+    expect(urls.showOff).toContain('show%20off');
     expect(urls.backingOut).toContain('backing%20out');
     expect(urls.figuringOut).toContain('figuring%20out');
   });
@@ -324,15 +320,15 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     expect(scriptInfo.last.kr).toContain('굴삭기');
   });
 
-  test('Multi-blank interactive quiz (Q6) operates smoothly in Step 1 lesson player', async ({ page }) => {
+  test('Multi-blank interactive quiz (Q5) operates smoothly in Step 1 lesson player', async ({ page }) => {
     await page.goto('/lessons/lesson-06/index.html');
 
     // Wait for quiz engine to be ready
-    await page.waitForFunction(() => window.quizEngine && window.quizEngine.quizzes && window.quizEngine.quizzes.length === 24);
+    await page.waitForFunction(() => window.quizEngine && window.quizEngine.quizzes && window.quizEngine.quizzes.length === 23);
 
-    // Jump directly to Q6 (0-indexed: 5)
+    // Jump directly to Q5 (0-indexed: 4)
     await page.evaluate(() => {
-      window.quizEngine.currentIndex = 5;
+      window.quizEngine.currentIndex = 4;
       window.quizEngine.renderCurrentQuestion();
     });
 
@@ -360,8 +356,8 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(feedback).toContainText('정답입니다');
   });
 
-  test('Standalone share quiz Q6 supports multi-blank inputs and opens referral modal', async ({ page }) => {
-    await page.goto('/quiz/lesson-06/q6.html');
+  test('Standalone share quiz Q5 supports multi-blank inputs and opens referral modal', async ({ page }) => {
+    await page.goto('/quiz/lesson-06/q5.html');
 
     // Wait for quiz share runner to render
     const multiInputs = page.locator('.standalone-multi-input');
@@ -389,8 +385,8 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(actionBtn).toHaveAttribute('href', '/lessons/lesson-06/index.html');
   });
 
-  test('Standalone share quiz Q23 renders as multiple choice with got to', async ({ page }) => {
-    await page.goto('/quiz/lesson-06/q23.html');
+  test('Standalone share quiz Q22 renders as multiple choice with got to', async ({ page }) => {
+    await page.goto('/quiz/lesson-06/q22.html');
 
     // Options exist and include 'got to'
     const optionBtns = page.locator('.standalone-choice-btn');
@@ -409,15 +405,15 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(modal.locator('#btn-full-lesson')).toHaveAttribute('href', '/lessons/lesson-06/index.html');
   });
 
-  test('Quiz 12 renders 5 separate blank boxes and Enter key moves to next blank box', async ({ page }) => {
+  test('Quiz 11 renders 5 separate blank boxes and Enter key moves to next blank box', async ({ page }) => {
     await page.goto('/lessons/lesson-06/index.html');
 
     // Wait for quiz engine to be ready
-    await page.waitForFunction(() => window.quizEngine && window.quizEngine.quizzes && window.quizEngine.quizzes.length === 24);
+    await page.waitForFunction(() => window.quizEngine && window.quizEngine.quizzes && window.quizEngine.quizzes.length === 23);
 
-    // Jump directly to Q12 (0-indexed: 11)
+    // Jump directly to Q11 (0-indexed: 10)
     await page.evaluate(() => {
-      window.quizEngine.currentIndex = 11;
+      window.quizEngine.currentIndex = 10;
       window.quizEngine.renderCurrentQuestion();
     });
 
@@ -467,8 +463,8 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(feedback).toContainText('정답입니다');
   });
 
-  test('Standalone share quiz Q12 renders 5 separate boxes and Enter key moves to next box', async ({ page }) => {
-    await page.goto('/quiz/lesson-06/q12.html');
+  test('Standalone share quiz Q11 renders 5 separate boxes and Enter key moves to next box', async ({ page }) => {
+    await page.goto('/quiz/lesson-06/q11.html');
 
     // Wait for quiz share runner to render 5 inputs
     const multiInputs = page.locator('.standalone-multi-input');
