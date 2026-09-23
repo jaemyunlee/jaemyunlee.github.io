@@ -131,8 +131,61 @@ class QuizEngine {
   }
 
   _renderFillInTheBlank(q) {
-    // Replace the slot with an interactive input
+    const bracketMatches = [...q.english.matchAll(/\[(.*?)\]/g)].map(m => m[1].trim());
     const parts = q.english.split(/\[.*?\]/);
+
+    const bracketWordsList = bracketMatches.map(b => {
+      if (b.includes(',')) return [b];
+      return b.split(/\s+/).filter(Boolean);
+    });
+    const totalWords = bracketWordsList.reduce((acc, words) => acc + words.length, 0);
+    const isMultiBlank = totalWords > 1;
+
+    if (isMultiBlank) {
+      let builderHtml = '';
+      let inputIndex = 0;
+      for (let i = 0; i < parts.length; i++) {
+        if (parts[i]) {
+          builderHtml += `<span class="sentence-text">${this._escapeHtml(parts[i])}</span>`;
+        }
+        if (i < bracketWordsList.length) {
+          const words = bracketWordsList[i];
+          const inputsHtml = words.map(w => {
+            const idx = inputIndex++;
+            const targetLen = w.length;
+            const style = targetLen <= 3
+              ? 'style="min-width:52px;max-width:75px;text-align:center;"'
+              : (targetLen <= 6 ? 'style="min-width:74px;max-width:115px;text-align:center;"' : 'style="min-width:105px;max-width:160px;"');
+            return `
+              <span class="blank-input-wrapper">
+                <input 
+                  type="text" 
+                  id="${idx === 0 ? 'quiz-blank-input' : `quiz-blank-input-${idx}`}" 
+                  class="quiz-input quiz-multi-input" 
+                  data-blank-index="${idx}"
+                  autocomplete="off" 
+                  autocorrect="off" 
+                  autocapitalize="none" 
+                  spellcheck="false" 
+                  aria-label="Missing word ${idx + 1}"
+                  enterkeyhint="${idx < totalWords - 1 ? 'next' : 'done'}"
+                  ${style}
+                />
+              </span>
+            `;
+          }).join(' ');
+          builderHtml += inputsHtml;
+        }
+      }
+
+      return `
+        <div class="sentence-builder-box">
+          ${builderHtml}
+        </div>
+        <div class="quiz-hint-box" id="quiz-hint-box" style="display: none;"></div>
+      `;
+    }
+
     const beforeText = parts[0] || '';
     const afterText = parts[1] || '';
 
@@ -144,11 +197,11 @@ class QuizEngine {
             type="text" 
             id="quiz-blank-input" 
             class="quiz-input" 
+            data-blank-index="0"
             autocomplete="off" 
             autocorrect="off" 
             autocapitalize="none" 
             spellcheck="false" 
-            placeholder="정답을 입력하세요..."
             aria-label="Missing word"
           />
         </span>
@@ -341,33 +394,69 @@ class QuizEngine {
   _bindEvents(q, currentNum) {
     const qNum = typeof currentNum === 'number' ? currentNum : (typeof q._origIndex === 'number' ? q._origIndex + 1 : this.currentIndex + 1);
     const input = this.container.querySelector('#quiz-blank-input');
+    const allInputs = Array.from(this.container.querySelectorAll('.quiz-input'));
     const hintBtn = this.container.querySelector('#btn-hint');
     const skipBtn = this.container.querySelector('#btn-skip');
     const checkBtn = this.container.querySelector('#btn-check');
     const hintBox = this.container.querySelector('#quiz-hint-box');
     const feedbackBox = this.container.querySelector('#quiz-feedback');
 
-    // Focus input on load for desktop/tablet convenience without forcing viewport scroll
-    if (input && window.innerWidth > 640) {
+    // Focus first input on load for desktop/tablet convenience without forcing viewport scroll
+    const firstInput = allInputs[0] || input;
+    if (firstInput && window.innerWidth > 640) {
       setTimeout(() => {
         try {
-          input.focus({ preventScroll: true });
+          firstInput.focus({ preventScroll: true });
         } catch (_) { }
       }, 150);
     }
 
-    // Fill-in & Listening: Enter key submission
-    if (input) {
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.keyCode === 13) {
-          e.preventDefault();
-          e.stopPropagation();
-          input.blur();
-          // Defer checking slightly so the virtual keyboard dismissal and Enter event cycle finish completely
-          setTimeout(() => {
-            this._handleCheck(q);
-          }, 80);
-        }
+    // Fill-in & Listening: Enter / Space key navigation & auto-distribution
+    if (allInputs.length > 0) {
+      allInputs.forEach((inp, idx) => {
+        inp.addEventListener('input', () => {
+          inp.classList.remove('error');
+          // If multiple boxes and user typed/pasted text with spaces
+          if (allInputs.length > 1 && inp.value.includes(' ')) {
+            const words = inp.value.trim().split(/\s+/).filter(Boolean);
+            if (words.length > 1) {
+              words.forEach((w, wIdx) => {
+                const targetIdx = idx + wIdx;
+                if (targetIdx < allInputs.length) {
+                  allInputs[targetIdx].value = w;
+                  allInputs[targetIdx].classList.remove('error');
+                }
+              });
+              const nextIdx = Math.min(idx + words.length, allInputs.length - 1);
+              allInputs[nextIdx].focus();
+            }
+          }
+        });
+        inp.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.keyCode === 32) {
+            if (allInputs.length > 1 && idx < allInputs.length - 1 && inp.value.trim().length > 0) {
+              e.preventDefault();
+              allInputs[idx + 1].focus();
+              return;
+            }
+          }
+          if (e.key === 'Backspace' && allInputs.length > 1 && idx > 0 && !inp.value) {
+            allInputs[idx - 1].focus();
+          }
+          if (e.key === 'Enter' || e.keyCode === 13) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (allInputs.length > 1 && idx < allInputs.length - 1) {
+              allInputs[idx + 1].focus();
+              return;
+            }
+            inp.blur();
+            // Defer checking slightly so the virtual keyboard dismissal and Enter event cycle finish completely
+            setTimeout(() => {
+              this._handleCheck(q);
+            }, 80);
+          }
+        });
       });
     }
 
@@ -375,7 +464,7 @@ class QuizEngine {
     if (checkBtn) {
       checkBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        if (input) input.blur();
+        allInputs.forEach(inp => inp.blur());
         this._handleCheck(q);
       });
     }
@@ -912,7 +1001,11 @@ class QuizEngine {
       const isCorrect = MarkdownQuizParser.checkAnswer(userSentence, q.answer);
 
       if (isCorrect) {
-        slots.forEach(s => s.classList.add('correct'));
+        slots.forEach(s => {
+          s.classList.remove('error', 'shake');
+          s.classList.add('correct');
+        });
+        dropZone.classList.remove('error', 'shake');
         dropZone.classList.add('correct');
         placedChips.forEach(c => {
           c.setAttribute('draggable', 'false');
@@ -941,10 +1034,79 @@ class QuizEngine {
       return;
     }
 
-    const input = this.container.querySelector('#quiz-blank-input');
+    const allInputs = Array.from(this.container.querySelectorAll('.quiz-input'));
     const feedbackBox = this.container.querySelector('#quiz-feedback');
-    if (!input) return;
+    if (allInputs.length === 0) return;
 
+    const bracketMatches = [...q.english.matchAll(/\[(.*?)\]/g)].map(m => m[1].trim());
+    const expectedAnswers = (q.blanks && q.blanks.length === allInputs.length)
+      ? q.blanks
+      : bracketMatches.flatMap(b => (b.includes(',') ? [b] : b.split(/\s+/).filter(Boolean)));
+
+    if (allInputs.length > 1) {
+      // Auto-distribute if first input contains multiple words separated by space
+      if (allInputs[0].value.trim().includes(' ')) {
+        const words = allInputs[0].value.trim().split(/\s+/).filter(Boolean);
+        if (words.length > 1) {
+          words.forEach((w, idx) => {
+            if (idx < allInputs.length) {
+              allInputs[idx].value = w;
+            }
+          });
+        }
+      }
+
+      // Multi-blank handling
+      let hasEmpty = false;
+      allInputs.forEach(inp => {
+        if (!inp.value.trim()) {
+          inp.classList.add('shake');
+          setTimeout(() => inp.classList.remove('shake'), 500);
+          hasEmpty = true;
+        }
+      });
+      if (hasEmpty) return;
+
+      let allCorrect = true;
+      allInputs.forEach((inp, idx) => {
+        const expected = expectedAnswers[idx] || '';
+        const isMatch = MarkdownQuizParser.checkAnswer(inp.value.trim(), expected);
+        if (isMatch) {
+          inp.classList.remove('error', 'shake');
+          inp.classList.add('correct');
+        } else {
+          inp.classList.remove('correct');
+          inp.classList.add('shake', 'error');
+          setTimeout(() => inp.classList.remove('shake'), 500);
+          allCorrect = false;
+        }
+      });
+
+      if (allCorrect) {
+        allInputs.forEach(inp => {
+          inp.classList.remove('error', 'shake');
+          inp.classList.add('correct');
+          inp.disabled = true;
+        });
+        const passedFirstAttempt = !this.questionFailed;
+        this._recordResult(q, passedFirstAttempt);
+        this._showNextStep(q, passedFirstAttempt, false);
+      } else {
+        this.questionFailed = true;
+        feedbackBox.className = 'quiz-feedback error';
+        feedbackBox.innerHTML = `
+          <div class="feedback-inner">
+            <div class="feedback-status-line">
+              <span>아쉽네요, 빈칸을 다시 확인해보세요! (첫 시도 실패로 채점됩니다. 도움이 필요하면 💡 힌트를 눌러보세요)</span>
+            </div>
+          </div>
+        `;
+      }
+      return;
+    }
+
+    // Single blank handling
+    const input = allInputs[0];
     const val = input.value.trim();
     if (!val) {
       input.classList.add('shake');
@@ -955,6 +1117,7 @@ class QuizEngine {
     const isCorrect = MarkdownQuizParser.checkAnswer(val, q.answer);
 
     if (isCorrect) {
+      input.classList.remove('error', 'shake');
       input.classList.add('correct');
       input.disabled = true;
       const passedFirstAttempt = !this.questionFailed;
@@ -962,6 +1125,7 @@ class QuizEngine {
       this._showNextStep(q, passedFirstAttempt, false);
     } else {
       this.questionFailed = true;
+      input.classList.remove('correct');
       input.classList.add('shake', 'error');
       feedbackBox.className = 'quiz-feedback error';
       feedbackBox.innerHTML = `
@@ -1007,7 +1171,24 @@ class QuizEngine {
       return;
     }
 
-    const input = this.container.querySelector('#quiz-blank-input');
+    const allInputs = Array.from(this.container.querySelectorAll('.quiz-input'));
+    if (allInputs.length > 1) {
+      const bracketMatches = [...q.english.matchAll(/\[(.*?)\]/g)].map(m => m[1].trim());
+      const expectedAnswers = (q.blanks && q.blanks.length === allInputs.length)
+        ? q.blanks
+        : bracketMatches.flatMap(b => (b.includes(',') ? [b] : b.split(/\s+/).filter(Boolean)));
+      allInputs.forEach((inp, idx) => {
+        inp.value = expectedAnswers[idx] || '';
+        inp.classList.add('correct');
+        inp.disabled = true;
+      });
+      this.questionFailed = true;
+      this._recordResult(q, false);
+      this._showNextStep(q, false, true);
+      return;
+    }
+
+    const input = allInputs[0] || this.container.querySelector('#quiz-blank-input');
     if (input) {
       input.value = q.answer;
       input.classList.add('correct');
@@ -1068,19 +1249,18 @@ class QuizEngine {
 
     // 1. Render comprehensive feedback with answer and explanation
     if (feedbackBox) {
-      feedbackBox.className = `quiz-feedback ${isCorrect ? 'success' : 'skip-info'}`;
+      const isSuccess = !isSkipped;
+      feedbackBox.className = `quiz-feedback ${isSuccess ? 'success' : 'skip-info'}`;
       let statusText = '정답입니다! 🎉';
       if (isSkipped) {
         statusText = '정답을 확인하세요 💡 (건너뜀)';
-      } else if (!isCorrect) {
-        statusText = '정답을 맞혔습니다! (첫 시도 실패로 기록됨)';
       }
 
       feedbackBox.innerHTML = `
         <div class="feedback-inner">
           <div class="feedback-status-line">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
-              ${isCorrect ? '<polyline points="20 6 9 17 4 12"/>' : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>'}
+              ${isSuccess ? '<polyline points="20 6 9 17 4 12"/>' : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>'}
             </svg>
             <span>${statusText}</span>
             <span style="margin-left: auto; font-size: 0.9rem; font-weight: 600; opacity: 0.95;">정답: <strong>${this._escapeHtml(q.answer)}</strong></span>
@@ -1378,13 +1558,23 @@ class QuizEngine {
       const firstWord = tokens[0] || '';
       return `<span class="hint-letters">첫 번째 단어는 <strong>"${this._escapeHtml(firstWord)}"</strong> 입니다.</span>`;
     }
+
+    const isListening = q.type === 'listening';
+    if (q.blanks && q.blanks.length > 1) {
+      const subHints = q.blanks.map(b => this._renderAnswerHintString(b, isListening));
+      return `<div class="hint-words-container" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;justify-content:center;">${subHints.join('<span class="hint-separator" style="font-size:1.2rem;font-weight:700;color:var(--primary-light);margin:0 4px;">/</span>')}</div>`;
+    }
+
     const answer = (q.answer || '').trim();
     if (!answer) {
       return `<span class="hint-letters">${this._escapeHtml(q.hint || '')}</span>`;
     }
 
+    return this._renderAnswerHintString(answer, isListening);
+  }
+
+  _renderAnswerHintString(answer, isListening) {
     const words = answer.split(/\s+/);
-    const isListening = q.type === 'listening';
 
     const wordsHtml = words.map(word => {
       const match = word.match(/^(.*?)([.,!?;:]*)$/);

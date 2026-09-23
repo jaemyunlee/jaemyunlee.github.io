@@ -179,12 +179,35 @@
           </div>
         `;
       } else {
-        bodyHtml = `
-          <div class="standalone-input-row">
-            <input type="text" id="standalone-input" class="standalone-text-input" placeholder="정답을 입력하세요..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
-            <button type="button" id="standalone-submit-btn" class="standalone-submit-btn">정답 확인</button>
-          </div>
-        `;
+        const bracketMatches = [...(q.english || '').matchAll(/\[(.*?)\]/g)].map(m => m[1].trim());
+        const wordBlanks = (q.type !== 'listening')
+          ? ((q.blanks && q.blanks.length > 0) ? q.blanks : bracketMatches.flatMap(b => (b.includes(',') ? [b] : b.split(/\s+/).filter(Boolean))))
+          : bracketMatches;
+
+        if (wordBlanks.length > 1) {
+          const inputsHtml = wordBlanks.map((b, idx) => {
+            const targetLen = b.length;
+            const style = targetLen <= 3 
+              ? 'min-width:52px;max-width:75px;text-align:center;' 
+              : (targetLen <= 6 ? 'min-width:74px;max-width:115px;text-align:center;' : 'min-width:105px;max-width:160px;');
+            return `
+              <input type="text" id="${idx === 0 ? 'standalone-input' : `standalone-input-${idx}`}" class="standalone-text-input standalone-multi-input" data-index="${idx}" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="${idx < wordBlanks.length - 1 ? 'next' : 'done'}" style="${style}" />
+            `;
+          }).join('');
+          bodyHtml = `
+            <div class="standalone-input-row multi-input-row" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center;">
+              ${inputsHtml}
+              <button type="button" id="standalone-submit-btn" class="standalone-submit-btn">정답 확인</button>
+            </div>
+          `;
+        } else {
+          bodyHtml = `
+            <div class="standalone-input-row">
+              <input type="text" id="standalone-input" class="standalone-text-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+              <button type="button" id="standalone-submit-btn" class="standalone-submit-btn">정답 확인</button>
+            </div>
+          `;
+        }
       }
 
       // Audio section if audio file or listening
@@ -279,8 +302,25 @@
           <span class="sentence-text sentence-after">${this.escapeHtml(afterText)}</span>
         `;
       }
-      // Replace [options or word] with an attractive placeholder slot
-      const replaced = q.english.replace(/\[(.*?)\]/, '<span class="standalone-blank-slot" id="cloze-slot">[ ? ]</span>');
+      // Replace [options or word] with attractive placeholder slot(s)
+      let blankIdx = 0;
+      const replaced = q.english.replace(/\[(.*?)\]/g, (match, inside) => {
+        if (q.type === 'fill-in-the-blank') {
+          const words = inside.trim().split(/\s+/).filter(Boolean);
+          if (words.length > 1) {
+            return words.map(() => {
+              const idStr = blankIdx === 0 ? 'id="cloze-slot"' : `id="cloze-slot-${blankIdx}"`;
+              const span = `<span class="standalone-blank-slot cloze-slot" ${idStr} data-blank-index="${blankIdx}">[ ? ]</span>`;
+              blankIdx++;
+              return span;
+            }).join(' ');
+          }
+        }
+        const idStr = blankIdx === 0 ? 'id="cloze-slot"' : `id="cloze-slot-${blankIdx}"`;
+        const span = `<span class="standalone-blank-slot cloze-slot" ${idStr} data-blank-index="${blankIdx}">[ ? ]</span>`;
+        blankIdx++;
+        return span;
+      });
       return replaced;
     }
 
@@ -519,7 +559,62 @@
       // Fill-in Submit
       const submitBtn = document.getElementById('standalone-submit-btn');
       const textInput = document.getElementById('standalone-input');
-      if (submitBtn && textInput && (!this.quizData || this.quizData.type !== 'drag-and-drop')) {
+      const multiInputs = Array.from(document.querySelectorAll('.standalone-multi-input'));
+
+      if (submitBtn && multiInputs.length > 1) {
+        const onCheckMulti = () => {
+          if (this.answered) return;
+          let hasEmpty = false;
+          multiInputs.forEach(inp => {
+            if (!inp.value.trim()) {
+              inp.focus();
+              hasEmpty = true;
+            }
+          });
+          if (hasEmpty) return;
+          const userVals = multiInputs.map(inp => inp.value.trim());
+          this.handleMultiAnswer(userVals);
+        };
+        submitBtn.addEventListener('click', onCheckMulti);
+        multiInputs.forEach((inp, idx) => {
+          inp.addEventListener('input', () => {
+            if (multiInputs.length > 1 && inp.value.includes(' ')) {
+              const words = inp.value.trim().split(/\s+/).filter(Boolean);
+              if (words.length > 1) {
+                words.forEach((w, wIdx) => {
+                  const targetIdx = idx + wIdx;
+                  if (targetIdx < multiInputs.length) {
+                    multiInputs[targetIdx].value = w;
+                  }
+                });
+                const nextIdx = Math.min(idx + words.length, multiInputs.length - 1);
+                multiInputs[nextIdx].focus();
+              }
+            }
+          });
+          inp.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.keyCode === 32) {
+              if (idx < multiInputs.length - 1 && inp.value.trim().length > 0) {
+                e.preventDefault();
+                multiInputs[idx + 1].focus();
+                return;
+              }
+            }
+            if (e.key === 'Backspace' && idx > 0 && !inp.value) {
+              multiInputs[idx - 1].focus();
+            }
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              e.stopPropagation();
+              if (idx < multiInputs.length - 1) {
+                multiInputs[idx + 1].focus();
+              } else {
+                onCheckMulti();
+              }
+            }
+          });
+        });
+      } else if (submitBtn && textInput && (!this.quizData || this.quizData.type !== 'drag-and-drop')) {
         const onCheck = () => {
           if (this.answered) return;
           const val = textInput.value.trim();
@@ -610,6 +705,55 @@
         .trim();
     }
 
+    handleMultiAnswer(userVals) {
+      if (this.answered || !this.quizData) return;
+      this.answered = true;
+
+      const q = this.quizData;
+      const bracketMatches = [...(q.english || '').matchAll(/\[(.*?)\]/g)].map(m => m[1].trim());
+      const expectedAnswers = (q.blanks && q.blanks.length > 0)
+        ? q.blanks
+        : bracketMatches.flatMap(b => (b.includes(',') ? [b] : b.split(/\s+/).filter(Boolean)));
+
+      let isCorrect = true;
+      userVals.forEach((uVal, idx) => {
+        const exp = expectedAnswers[idx] || '';
+        if (this.normalizeText(uVal) !== this.normalizeText(exp)) {
+          isCorrect = false;
+        }
+      });
+
+      // Update slots
+      expectedAnswers.forEach((ans, idx) => {
+        const slot = document.getElementById(idx === 0 ? 'cloze-slot' : `cloze-slot-${idx}`);
+        if (slot) {
+          slot.textContent = ans;
+          slot.style.color = isCorrect ? 'var(--accent-emerald)' : 'var(--accent-rose)';
+          slot.style.borderBottomColor = isCorrect ? 'var(--accent-emerald)' : 'var(--accent-rose)';
+        }
+      });
+
+      // Disable inputs
+      document.querySelectorAll('.standalone-multi-input').forEach(inp => inp.disabled = true);
+      const submitBtn = document.getElementById('standalone-submit-btn');
+      if (submitBtn) submitBtn.disabled = true;
+
+      this.playAudio();
+
+      if (typeof Analytics !== 'undefined') {
+        Analytics.trackEvent('quiz_answer', {
+          lesson_id: this.lessonId,
+          question_num: this.qNum,
+          correct: isCorrect,
+          answer: userVals.join(', ')
+        });
+      }
+
+      setTimeout(() => {
+        this.openReferralModal(isCorrect);
+      }, 550);
+    }
+
     handleAnswer(userAns, clickedBtn = null) {
       if (this.answered || !this.quizData) return;
       this.answered = true;
@@ -626,22 +770,23 @@
         slot.style.borderBottomColor = isCorrect ? 'var(--accent-emerald)' : 'var(--accent-rose)';
       }
 
+      // Button styles
       if (clickedBtn) {
-        if (isCorrect) {
-          clickedBtn.classList.add('correct');
-        } else {
-          clickedBtn.classList.add('incorrect');
-          // Highlight correct one
-          const grid = document.getElementById('standalone-choices-grid');
-          if (grid) {
-            grid.querySelectorAll('.standalone-choice-btn').forEach(btn => {
-              if (this.normalizeText(btn.getAttribute('data-answer')) === this.normalizeText(correctAns)) {
-                btn.classList.add('correct');
-              }
-            });
-          }
-        }
+        clickedBtn.classList.add(isCorrect ? 'correct' : 'incorrect');
       }
+
+      // Disable inputs / options
+      document.querySelectorAll('.standalone-choice-btn').forEach(btn => btn.disabled = true);
+      const textInput = document.getElementById('standalone-input');
+      if (textInput) textInput.disabled = true;
+      const submitBtn = document.getElementById('standalone-submit-btn');
+      if (submitBtn) submitBtn.disabled = true;
+
+      // Word bank chips
+      document.querySelectorAll('.drag-word-chip').forEach(chip => {
+        chip.disabled = true;
+        chip.setAttribute('draggable', 'false');
+      });
 
       // Play audio on answer
       this.playAudio();
@@ -665,12 +810,11 @@
       if (!modal || !this.quizData) return;
 
       const q = this.quizData;
-      const correctAns = q.answer || (q.options && q.options[0]) || '';
 
-      // Full sentence with highlight
-      let fullSentenceHtml = q.english.replace(
-        /\[(.*?)\]/,
-        `<mark>${this.escapeHtml(correctAns)}</mark>`
+      // Full sentence with highlight for all blanks
+      let fullSentenceHtml = (q.english || '').replace(
+        /\[(.*?)\]/g,
+        (match, p1) => `<mark>${this.escapeHtml(p1.trim())}</mark>`
       );
 
       // Result Badge & Subtext

@@ -105,10 +105,10 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await expect(nextBtn).toBeVisible();
     await expect(playallBtn).toBeVisible();
 
-    // Hidden elements in mobile component (sound wave, long title, speed button, scrubber):
+    await expect(page.locator('#btn-saved-speed')).toBeVisible();
+    // Hidden elements in mobile component (sound wave, long title, scrubber):
     await expect(page.locator('#saved-wave-box')).toBeHidden();
     await expect(page.locator('#saved-player-title')).toBeHidden();
-    await expect(page.locator('#btn-saved-speed')).toBeHidden();
     await expect(page.locator('.saved-player-bar .player-progress-row')).toBeHidden();
 
     // Verify expression highlights (Step 4 Parity)
@@ -200,10 +200,11 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await expect(page.locator('#btn-saved-next')).toBeVisible();
     await expect(page.locator('#btn-saved-playall')).toBeVisible();
 
+    await expect(page.locator('#btn-saved-speed')).toBeVisible();
+
     // Assert hidden elements on desktop saved drawer
     await expect(page.locator('#saved-wave-box')).toBeHidden();
     await expect(page.locator('#saved-player-title')).toBeHidden();
-    await expect(page.locator('#btn-saved-speed')).toBeHidden();
     await expect(page.locator('.saved-player-bar .player-progress-row')).toBeHidden();
 
     // 2. Check on Mobile View (390px)
@@ -221,11 +222,11 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
     await expect(page.locator('#btn-saved-toggle')).toBeVisible();
     await expect(page.locator('#btn-saved-next')).toBeVisible();
     await expect(page.locator('#btn-saved-playall')).toBeVisible();
+    await expect(page.locator('#btn-saved-speed')).toBeVisible();
 
     // Assert exact same hidden elements on mobile saved drawer
     await expect(page.locator('#saved-wave-box')).toBeHidden();
     await expect(page.locator('#saved-player-title')).toBeHidden();
-    await expect(page.locator('#btn-saved-speed')).toBeHidden();
     await expect(page.locator('.saved-player-bar .player-progress-row')).toBeHidden();
 
     // Capture visual artifact for user walkthrough

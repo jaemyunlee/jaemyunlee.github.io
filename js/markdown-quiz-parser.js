@@ -93,11 +93,32 @@ const MarkdownQuizParser = {
   },
 
   _finalizeQuiz(quiz) {
-    // Extract bracketed content [content] from the English sentence
-    const bracketMatch = quiz.english.match(/\[(.*?)\]/);
+    // For fill-in-the-blank quizzes, decompose words from brackets into individual blanks without mutating english
+    if (quiz.type === 'fill-in-the-blank') {
+      const allBracketMatches = [...quiz.english.matchAll(/\[(.*?)\]/g)].map(m => m[1].trim());
+      quiz.blanks = allBracketMatches.flatMap(b => {
+        if (b.includes(',')) return [b];
+        return b.split(/\s+/).filter(Boolean);
+      });
+      if (!quiz.answer) {
+        quiz.answer = quiz.blanks.join(' ');
+      }
+      quiz.sentenceTemplate = quiz.english.replace(/\[(.*?)\]/g, '_____');
 
-    if (bracketMatch) {
-      const inside = bracketMatch[1].trim();
+      if (quiz.blanks && quiz.blanks.length > 1) {
+        quiz.hints = quiz.blanks.map(b => this.generateFillInHint(b));
+        quiz.hint = quiz.hints.join('   /   ');
+      } else {
+        quiz.hint = this.generateFillInHint(quiz.answer);
+      }
+      return;
+    }
+
+    // Extract bracketed content [content] from the English sentence
+    const allBracketMatches = [...quiz.english.matchAll(/\[(.*?)\]/g)];
+
+    if (allBracketMatches.length > 0) {
+      const inside = allBracketMatches[0][1].trim();
 
       if (quiz.type === 'drag-and-drop') {
         // Words can be comma-separated: [that's, all, I, got] or space-separated: [that's all I got]
@@ -124,18 +145,27 @@ const MarkdownQuizParser = {
         // Sentence template with a slot placeholder
         quiz.sentenceTemplate = quiz.english.replace(/\[(.*?)\]/, '_____');
       } else {
-        // Fill-in-the-blank or Listening: inside is the correct answer
-        quiz.answer = inside;
-        quiz.sentenceTemplate = quiz.english.replace(/\[(.*?)\]/, '_____');
+        // Listening
+        if (allBracketMatches.length > 1) {
+          quiz.blanks = allBracketMatches.map(m => m[1].trim());
+          if (!quiz.answer) {
+            quiz.answer = quiz.blanks.join(', ');
+          }
+          quiz.sentenceTemplate = quiz.english.replace(/\[(.*?)\]/g, '_____');
+        } else {
+          quiz.blanks = [inside];
+          if (!quiz.answer) {
+            quiz.answer = inside;
+          }
+          quiz.sentenceTemplate = quiz.english.replace(/\[(.*?)\]/, '_____');
+        }
       }
     } else if (!quiz.sentenceTemplate) {
       quiz.sentenceTemplate = quiz.english;
     }
 
     // Prepare hints based on quiz type
-    if (quiz.type === 'fill-in-the-blank') {
-      quiz.hint = this.generateFillInHint(quiz.answer);
-    } else if (quiz.type === 'listening') {
+    if (quiz.type === 'listening') {
       quiz.hint = this.generateListeningHint(quiz.answer);
     } else if (quiz.type === 'drag-and-drop') {
       quiz.hint = (quiz.tokens && quiz.tokens.length > 0) ? `첫 단어 힌트: "${quiz.tokens[0]}"` : '';

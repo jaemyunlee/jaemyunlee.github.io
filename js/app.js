@@ -87,7 +87,7 @@ const AudioPlayerComponent = {
           <div class="player-controls-side">
             <button type="button" class="btn-play-all-toggle ${isPlayAll ? 'active' : ''}" id="${playallBtnId}" title="전체 연속 재생 켜짐 (클릭 시 끄기)" aria-label="전체 재생">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>
               </svg>
               <span class="playall-text">전체</span>
             </button>
@@ -187,6 +187,22 @@ const App = {
       vocabCount: 20,
       path: 'lessons/lesson-05/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
+    },
+    {
+      id: 'lesson-06',
+      shortTitle: 'Lesson 6',
+      topic: "Gene's Cabin Life & Meeting Patty",
+      icon: '🌲',
+      speaker: 'Gene',
+      avatar: 'assets/img/avatars/gene.jpeg',
+      createdAt: '2026-09-22',
+      title: '장인어른과 장모님과의 첫 만남부터 숲속 캐빈 라이프까지',
+      subtitle: '요세미티 국립공원에서 시작된 첫 만남과 결혼, 장인어른과의 사천요리 일화, 야생동물 출몰 캐빈 라이프',
+      duration: '7:11',
+      vocabCount: 24,
+      path: 'lessons/lesson-06/',
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
+      scheduledDateText: '9월 28일 본영상 공개 예정'
     }
   ],
 
@@ -298,8 +314,8 @@ const App = {
     if (this.currentLessonId === 'lessons-list') {
       this.initLessonsListPage();
     } else {
-      // Landing page: show 5 latest lessons from latest on top
-      this.renderLessonsCatalog('#lessons-cards-container', { sort: 'desc', limit: 5 });
+      // Landing page: show latest lessons from latest on top (up to 6)
+      this.renderLessonsCatalog('#lessons-cards-container', { sort: 'desc', limit: 6 });
     }
 
     // Update hero call-to-action button if present on page
@@ -1758,6 +1774,41 @@ const LESSON_05_AUDIO_MAP = [
   { key: 'fall into', file: 'like it is something I kind of fell into and found that I just actually really enjoyed it..wav' }
 ];
 
+// Known audio files for Lesson 06 (maps keyword to WAV audio filename in lessons/lesson-06/audio/)
+const LESSON_06_AUDIO_MAP = [
+  { key: 'ended up', file: 'We ended up going out and started dating and that..wav' },
+  { key: 'hang around', file: 'Her roommate said if I was going to hang around I had to start paying rent or get out of the house..wav' },
+  { key: 'practical', file: 'Practical thats me practical..wav' },
+  { key: 'went out to dinner', file: 'We all went out to dinner one night..wav' },
+  { key: 'looped', file: 'He liked his alcohol so he was always pretty well looped..wav' },
+  { key: 'pushing the peppers aside', file: 'I was pushing the peppers aside..wav' },
+  { key: 'pushing', file: 'I was pushing the peppers aside..wav' },
+  { key: 'show off', file: 'He was gonna show off I guess and he grabbed one and bit into it.wav' },
+  { key: 'being around', file: 'I always enjoyed being around him..wav' },
+  { key: 'enjoyed being around', file: 'I always enjoyed being around him..wav' },
+  { key: 'taken to the bar', file: 'Me and Wayne Hunter and Don and everybody got taken to the bar with him..wav' },
+  { key: 'one of the times', file: 'I dont know if it was the first time or not but one of the times in Lafayette when they still had the house there..wav' },
+  { key: 'early in the relationship', file: 'It was pretty early in the relationship.wav' },
+  { key: 'all the way from martinez to lafayette', file: 'We carried it all the way from Martinez to Lafayette.wav' },
+  { key: 'all the way from', file: 'We carried it all the way from Martinez to Lafayette.wav' },
+  { key: 'went around a corner', file: 'I went around a corner and all the filling came out of the pie.wav' },
+  { key: 'the time of year', file: 'Well it depends on the time of year..wav' },
+  { key: 'take a nap', file: 'Take a nap or read a book..wav' },
+  { key: 'dull moment', file: 'So its theres never a dull moment. Theres always something to do..wav' },
+  { key: 'backing out', file: 'Were going to have another guy come up and put new screws in the roof in the middle roof because theyre backing out.wav' },
+  { key: "it's a pain", file: 'Its a pain so theyre gonna replace them all..wav' },
+  { key: 'its a pain', file: 'Its a pain so theyre gonna replace them all..wav' },
+  { key: 'way back', file: 'Way back we had a porcupine right by the Waynes house..wav' },
+  { key: 'it was surprising that', file: 'It was surprising that the last time it was a mama bear and a fairly old cub..wav' },
+  { key: 'disturbed', file: 'I dont know what forced her to move during the heat of the day but something disturbed her.wav' },
+  { key: 'sightings', file: 'Theres been a lot of sightings in and around now..wav' },
+  { key: 'got to', file: 'Youve got to learn how to put it into freeze protection.wav' },
+  { key: "you've got to", file: 'Youve got to learn how to put it into freeze protection.wav' },
+  { key: 'youve got to', file: 'Youve got to learn how to put it into freeze protection.wav' },
+  { key: 'have got to', file: 'Youve got to learn how to put it into freeze protection.wav' },
+  { key: 'figuring out', file: 'Spend some time figuring out how to put things all the way.wav' }
+];
+
 const SavedAudioPlayer = {
   app: null,
   audio: null,
@@ -2478,9 +2529,10 @@ const SavedAudioPlayer = {
       }
     }
 
-    // 2. Map lookup for Lesson 01 and Lesson 02
+    // 2. Map lookup for Lessons
     const lesId = item.lessonId || 'lesson-01';
-    const cleanText = (item.en || '').toLowerCase().replace(/['".,!?;:\-]/g, '').trim();
+    const cleanText = (item.en || item.text || item.english || '').toLowerCase().replace(/['".,!?;:\-]/g, '').trim();
+    if (!cleanText) return null;
     if (lesId === 'lesson-01') {
       for (const mapItem of LESSON_01_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
@@ -2509,6 +2561,12 @@ const SavedAudioPlayer = {
       for (const mapItem of LESSON_05_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
           return encodeURI(`${base}lessons/lesson-05/audio/${mapItem.file}`);
+        }
+      }
+    } else if (lesId === 'lesson-06') {
+      for (const mapItem of LESSON_06_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-06/audio/${mapItem.file}`);
         }
       }
     }

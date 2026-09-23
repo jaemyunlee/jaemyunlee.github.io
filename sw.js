@@ -3,7 +3,7 @@
  * Caches application shell, quizzes, scripts, audio files, and Lottie animations
  * so users can study offline.
  */
-const CACHE_NAME = 'rhyrhy-cache-v41';
+const CACHE_NAME = 'rhyrhy-cache-v44';
 
 const STATIC_ASSETS = [
   './',
@@ -36,6 +36,8 @@ const STATIC_ASSETS = [
   './js/pwa-manager.js',
   './js/app.js',
   './assets/icons/icon.svg',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
   './assets/img/popcorn-empty.jpg',
   './assets/img/popcorn/popcorn-box-hd.png',
   './assets/img/popcorn/popcorn-kernel-1.png',
@@ -49,6 +51,7 @@ const STATIC_ASSETS = [
   './assets/img/avatars/kelly.jpg',
   './assets/img/avatars/wayne.jpeg',
   './assets/img/avatars/pati.jpeg',
+  './assets/img/avatars/gene.jpeg',
   './assets/lottie/celebration.json',
   './assets/vendor/lottie.min.js',
   './lessons.html',
@@ -82,7 +85,12 @@ const STATIC_ASSETS = [
   './lessons/lesson-05/metadata.json',
   './lessons/lesson-05/quiz.md',
   './lessons/lesson-05/script.json',
-  './lessons/lesson-05/lesson-05-key-expressions.srt'
+  './lessons/lesson-05/lesson-05-key-expressions.srt',
+  './lessons/lesson-06/index.html',
+  './lessons/lesson-06/metadata.json',
+  './lessons/lesson-06/quiz.md',
+  './lessons/lesson-06/script.json',
+  './lessons/lesson-06/lesson-06-key-expressions.srt'
 ];
 
 self.addEventListener('install', (event) => {

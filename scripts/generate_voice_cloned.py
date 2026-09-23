@@ -62,11 +62,26 @@ def preprocess_reference_audio(audio_path):
     Loads and normalizes the reference audio to ensure it is:
     - Single channel (mono)
     - float32 dtype (prevents PyTorch float vs double/float64 mismatch)
+    - Extracted from video containers (.mov, .mp4, etc.) via ffmpeg if needed
     - Saved as a clean WAV file
     """
     print(f"Preprocessing reference audio '{audio_path}'...")
+    temp_extracted = None
     try:
-        waveform, sr = torchaudio.load(audio_path)
+        ext = os.path.splitext(audio_path)[1].lower()
+        load_path = audio_path
+        if ext in ['.mov', '.mp4', '.m4v', '.mkv', '.webm', '.avi']:
+            print(f"  Extracting audio from video container '{ext}' via ffmpeg...")
+            temp_extracted = f"temp_video_audio_{uuid.uuid4().hex[:8]}.wav"
+            import subprocess
+            subprocess.run([
+                'ffmpeg', '-y', '-i', audio_path,
+                '-vn', '-ac', '1', '-ar', '44100',
+                temp_extracted
+            ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            load_path = temp_extracted
+
+        waveform, sr = torchaudio.load(load_path)
         
         # 1. Convert to float32
         waveform = waveform.to(torch.float32)
@@ -85,6 +100,12 @@ def preprocess_reference_audio(audio_path):
         print(f"Warning: Failed to normalize reference audio: {e}")
         print("Using original reference audio file directly.")
         return audio_path
+    finally:
+        if temp_extracted and os.path.exists(temp_extracted):
+            try:
+                os.remove(temp_extracted)
+            except Exception:
+                pass
 
 
 def parse_markdown_sentences(file_path):

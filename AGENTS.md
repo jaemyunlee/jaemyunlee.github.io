@@ -2,7 +2,18 @@
 
 This repository powers **RhyRhy English** (현서네 리얼 영어), a modern, mobile-first progressive web application (PWA) for interactive English learning.
 
-All AI coding agents and contributors working in this codebase **MUST** strictly adhere to the following architectural, caching, design, and deployment guidelines.
+All AI coding agents and contributors working in this codebase **MUST** strictly adhere to the following architectural, caching, design, deployment, and translation guidelines.
+
+> [!IMPORTANT]
+> **PERMANENT CONTEXT: FAMILY RELATIONSHIP & KOREAN TRANSLATION PROTOCOL**
+>
+> All AI coding agents **MUST ALWAYS** keep this family relationship in context:
+> - **Gene is Kelly's dad and my (Jaemyun's) father-in-law** (장인어른 / 켈리 아빠 진; *NEVER* "진 삼촌").
+> - **Pati is Kelly's mom and my (Jaemyun's) mother-in-law** (장모님 / 켈리 엄마 패티).
+> - **Wayne is Kelly's uncle** (웨인 삼촌 / Gene's younger brother).
+> - **Kelly is my (Jaemyun's) wife** (켈리 / Gene & Pati's daughter).
+>
+> **When you translate content, you MUST ALWAYS consider this family relationship** (honorific speech / 존댓말 vs 반말, proper titles, and familial dynamics across scripts, subtitles, descriptions, quizzes, and UI copies). See [Section 3: Family Relationship Translation Protocol](#character-personas--korean-family-relationship-translation-protocol) for detailed rules.
 
 ---
 
@@ -61,12 +72,52 @@ To guarantee that new deployments are delivered immediately to all users while m
   2. Register its files in `sw.js` `STATIC_ASSETS`.
   3. Ensure `scripts/build.js` processes its `index.html` references.
 
-### Character Persona & Korean Translation Protocol (Wayne & Kelly)
-- **Age & Relationship**: Wayne is older than Kelly (Wayne is Kelly's uncle / senior family figure; Kelly addresses him as "Uncle Wayne" or "Uncle").
-- **Honorific Speech Rule (존댓말 vs 반말)**:
-  - **Kelly -> Wayne**: Whenever translating dialogue to Korean, **Kelly MUST ALWAYS use 존댓말** (polite/honorific speech: `~해요`, `~했네요`, `~인가요?`, `삼촌` 등).
-  - **Wayne -> Kelly**: **Wayne speaks in 반말** (warm/friendly informal speech: `~해`, `~했어`, `~구나`, `~자`).
-  - This rule strictly applies to all Popcorn Quick Lessons (`popcorn/conversation/*.md`), regular lesson scripts (`script.json`), and translations across the app.
+### Character Personas & Korean Family Relationship Translation Protocol
+
+All AI coding agents and contributors **MUST ALWAYS keep this family relationship context in mind** across all lesson translations, dialog scripts, lesson titles, subtitles, explanations, and Popcorn Quick Lessons:
+
+#### 1. Core Family Tree & Relationships
+- **Gene (진)**:
+  - **Kelly's dad** (켈리의 아버지/아빠)
+  - **Jaemyun's father-in-law** (재면의 장인어른/아버님)
+  - **Pati's husband** (패티의 남편)
+  - **Wayne's older brother** (웨인의 형)
+  - *CRITICAL*: **NEVER refer to Gene as "진 삼촌" (Uncle Gene)**. Gene is the father figure (아버님 / 켈리 아빠), whereas Wayne is the uncle (삼촌).
+- **Pati (패티 / Patty)**:
+  - **Kelly's mom** (켈리의 어머니/엄마)
+  - **Jaemyun's mother-in-law** (재면의 장모님/어머님)
+  - **Gene's wife** (진의 아내)
+  - **Wayne's sister-in-law** (웨인의 형수)
+- **Wayne (웨인)**:
+  - **Kelly's uncle** (켈리의 삼촌 / 웨인 삼촌)
+  - **Gene's younger brother** (진의 남동생)
+  - **Jaemyun's uncle-in-law** (재면의 처삼촌 / 친근한 웨인 삼촌)
+- **Kelly (켈리)**:
+  - **Gene & Pati's daughter** (진과 패티의 딸)
+  - **Wayne's niece** (웨인의 조카)
+  - **Jaemyun's wife** (재면의 아내)
+- **Jaemyun (재면)**:
+  - **Kelly's husband** (켈리의 남편)
+  - **Gene & Pati's son-in-law** (진과 패티의 사위)
+  - **Wayne's nephew-in-law** (웨인의 조카사위)
+
+#### 2. Honorific Speech & Translation Guidelines (존댓말 vs 반말)
+- **Between Kelly & Wayne**:
+  - **Kelly -> Wayne**: **Kelly MUST ALWAYS use 존댓말** (polite/honorific speech: `~해요`, `~했네요`, `~인가요?`, `삼촌`, `웨인 삼촌`).
+  - **Wayne -> Kelly**: **Wayne speaks in 반말** (warm/friendly informal speech: `~해`, `~했어`, `~구나`, `~자`, `켈리야`).
+- **Between Kelly & Gene/Pati**:
+  - **Kelly -> Gene / Pati**: 딸이 부모님에게 쓰는 다정한 존댓말 (`아빠/엄마, ~해요`, `~했나요?`).
+  - **Gene / Pati -> Kelly**: 부모가 딸에게 쓰는 자연스러운 반말 (`~해`, `~했어`, `~란다`).
+- **Between Jaemyun & Gene/Pati**:
+  - **Jaemyun -> Gene / Pati**: 사위가 장인·장모님에게 드리는 깍듯하고 정중한 존댓말 (`장인어른`, `장모님`, `아버님`, `어머님`, `~하셨어요`, `~인가요?`).
+  - **Gene / Pati -> Jaemyun**: 장인·장모가 사위에게 쓰는 따뜻하고 다정한 어투/반말 (`재면이`, `재면 씨`, `~하게`, `~해`).
+- **Between Gene & Wayne**:
+  - **Gene -> Wayne**: 형이 남동생에게 말하므로 반말 (`웨인`, `내 동생`, `~해라`).
+  - **Wayne -> Gene**: 동생이 형에게 말하므로 친근한 어투 (`형`, `Gene`).
+- **Lesson Titles, Descriptions & UI References**:
+  - Refer to Gene as **"진 아버님"** or **"켈리 아빠 진(Gene)"** (NEVER "진 삼촌").
+  - Refer to Wayne as **"웨인 삼촌"** or **"웨인"**.
+  - Refer to Pati as **"패티 어머님"** or **"켈리 엄마 패티(Pati)"**.
 
 ### Lesson Status Lifecycle & Static Enumerations (`js/lesson-status.js`)
 
