@@ -122,10 +122,10 @@ function generateLessonKeyExpressionsSrt(lessonId) {
     const cleanEn = q.english.replace(/\[.*?\]/, target);
     const normCleanEn = normalize(cleanEn);
 
-    // 1. First priority: Exact sentence match with SRT blocks (must have meaningful length/word count)
+    // 1. First priority: Exact sentence match with SRT blocks that contain the target expression
     let matchedBlock = srtBlocks.find(b => {
       const normB = normalize(b.text);
-      if (normB.length >= 12 && normB.split(' ').length >= 3) {
+      if (normB.includes(normTarget)) {
         if (normCleanEn.includes(normB) || normB.includes(normCleanEn)) {
           return true;
         }
@@ -133,7 +133,7 @@ function generateLessonKeyExpressionsSrt(lessonId) {
       return false;
     });
 
-    // 2. Second priority: Block contains the target expression
+    // 2. Second priority: Any block containing the target expression
     if (!matchedBlock) {
       // Find candidate blocks containing the expression
       const candidates = srtBlocks.filter(b => {
@@ -155,6 +155,19 @@ function generateLessonKeyExpressionsSrt(lessonId) {
           }
         }
       }
+    }
+
+    // 3. Third priority: Exact sentence match with SRT blocks (if target expression phrasing differed slightly)
+    if (!matchedBlock) {
+      matchedBlock = srtBlocks.find(b => {
+        const normB = normalize(b.text);
+        if (normB.length >= 12 && normB.split(' ').length >= 3) {
+          if (normCleanEn.includes(normB) || normB.includes(normCleanEn)) {
+            return true;
+          }
+        }
+        return false;
+      });
     }
 
     // 3. Third priority: Fuzzy word overlap
