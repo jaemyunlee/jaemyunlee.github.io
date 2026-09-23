@@ -2,7 +2,6 @@
 - Her roommate said if I was going to [hang around], I had to start paying rent or get out of the house.
 - [Practical], that's me, practical.
 - We all [went out to dinner] one night.
-- He liked his alcohol, so he was always pretty well [looped].
 - I was [pushing] the peppers [aside].
 - He was gonna [show off] I guess and he grabbed one and bit into it
 - I always enjoyed [being around] him.
