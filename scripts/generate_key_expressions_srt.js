@@ -96,7 +96,42 @@ const CONCISE_DEFINITIONS = {
   'in-depth': '심도 있는, 상세하고 깊이 있는',
   'indepth': '심도 있는, 상세하고 깊이 있는',
   'fell into': '우연히 시작하다, 어쩌다 발을 들이다',
-  'fall into': '우연히 시작하다, 어쩌다 발을 들이다'
+  'fall into': '우연히 시작하다, 어쩌다 발을 들이다',
+
+  // Lesson 06
+  'ended up': '결국 ~하게 되다',
+  'hang around': '어슬렁거리다, 서성거리다',
+  'practical': '실용적인, 현실적인',
+  'went out to dinner': '저녁 외식을 하러 가다',
+  'looped': '술에 취한, 알딸딸한',
+  'pushing the peppers aside': '고추를 한쪽으로 치워두다',
+  'pushing, aside': '고추를 한쪽으로 쓱 치워두다',
+  'pushing': '옆으로 밀어두다, 치우다',
+  'show off': '과시하다, 뽐내다, 허세 부리다',
+  'being around': '~와 함께 어울리는 시간을 좋아하다',
+  'enjoyed being around': '~와 함께 어울리는 시간을 좋아하다',
+  'taken to the bar': '술집에 데려가 지다',
+  'one of the times': '그 여러 번 중 한 번',
+  'early in the relationship': '연애 초기에',
+  'all the way from, to': 'A에서 B까지 줄곧 내내',
+  'all the way from': '줄곧, 내내 끝까지',
+  'all the way from martinez to lafayette': '마티네즈에서 라피엣까지 줄곧 내내',
+  'went around a corner': '코너(모퉁이)를 돌다',
+  'the time of year': '연중 시기, 계절',
+  'take a nap': '낮잠을 자다',
+  'dull moment': '지루할 틈, 심심한 순간',
+  'backing out': '(나사가) 헐거워져 삐져나오다',
+  "it's a pain": '성가신 일, 골칫거리',
+  'its a pain': '성가신 일, 골칫거리',
+  'way back': '아주 먼 옛날에, 훨씬 전에',
+  'it was surprising that': '~라는 점이 놀라웠다',
+  'disturbed': '방해받은, 심기가 불편해진',
+  'sightings': '(야생동물 등의) 목격, 출몰',
+  'got to': '~해야만 한다',
+  "you've got to": '~해야만 한다',
+  'youve got to': '~해야만 한다',
+  'have got to': '~해야만 한다',
+  'figuring out': '방법을 알아내다, 파악하다'
 };
 
 function parseSrt(srtContent) {

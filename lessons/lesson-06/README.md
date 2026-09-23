@@ -1,0 +1,24 @@
+- We [ended up] going out and started dating and that.
+- Her roommate said if I was going to [hang around], I had to start paying rent or get out of the house.
+- [Practical], that's me, practical.
+- We all [went out to dinner] one night.
+- He liked his alcohol, so he was always pretty well [looped].
+- I was [pushing] the peppers [aside].
+- He was gonna [show off] I guess and he grabbed one and bit into it
+- I always enjoyed [being around] him.
+- Me and Wayne Hunter and Don and everybody got [taken to the bar] with him.
+- I don't know if it was the first time or not, but [one of the times] in Lafayette when they still had the house there.
+- It was pretty [early in the relationship]
+- We carried it [all] [the] [way] [from] Martinez [to] Lafayette
+- I [went around a corner] and all the filling came out of the pie
+- Well, it depends on [the time of year].
+- [Take a nap] or read a book.
+- So it's, there's never a [dull moment]. There's always something to do.
+- We're going to have another guy come up and put new screws in the roof, in the middle roof, because they're [backing out]
+- [It's a pain] so they're gonna replace them all.
+- [Way back] we had a porcupine right by the Wayne's house.
+- [It was surprising that] the last time it was a mama bear and a fairly old cub.
+- I don't know what forced her to move during the heat of the day but something [disturbed] her
+- There's been a lot of [sightings] in and around now.
+- You've [got to] learn how to put it into freeze protection
+- Spend some time [figuring out] how to put things all the way

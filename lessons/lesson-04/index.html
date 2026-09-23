@@ -464,6 +464,26 @@
                 if (lock) lock.remove();
               }
             });
+          } else {
+            const banner = document.getElementById('coming-soon-banner');
+            if (banner) banner.style.display = 'flex';
+            const stepTab3 = document.getElementById('step-tab-3');
+            const stepTab4 = document.getElementById('step-tab-4');
+            [stepTab3, stepTab4].forEach(tab => {
+              if (tab) {
+                tab.classList.add('deactivated');
+                tab.setAttribute('disabled', 'true');
+                tab.setAttribute('aria-disabled', 'true');
+                tab.setAttribute('title', metadata.scheduledDateText ? `${metadata.scheduledDateText} 본영상 공개 예정` : '본영상 공개 예정');
+                if (!tab.querySelector('.step-lock-icon')) {
+                  const lockSpan = document.createElement('span');
+                  lockSpan.className = 'step-lock-icon';
+                  lockSpan.setAttribute('aria-hidden', 'true');
+                  lockSpan.textContent = '🔒';
+                  tab.appendChild(lockSpan);
+                }
+              }
+            });
           }
         }
       } catch (e) {

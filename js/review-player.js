@@ -129,29 +129,51 @@ class ReviewPlayer {
 
   _getCleanSentence(english, answer) {
     if (!english) return '';
-    if (/\[[^\]]+\]/.test(english)) {
-      return english.replace(/\[[^\]]+\]/, answer || '').replace(/\s+/g, ' ').trim();
+    const brackets = [...english.matchAll(/\[([^\]]+)\]/g)].map(m => m[1]);
+    if (brackets.length === 0) {
+      return english.replace(/\s+/g, ' ').trim();
     }
-    return english.replace(/\s+/g, ' ').trim();
+    // If any bracket contains commas (e.g. multiple choice or drag-and-drop options)
+    if (brackets.some(b => b.includes(','))) {
+      return english.replace(/\[[^\]]+\]/g, answer || '').replace(/\s+/g, ' ').trim();
+    }
+    // Individual word/phrasal blanks: unwrap [word] -> word
+    return english.replace(/\[([^\]]+)\]/g, '$1').replace(/\s+/g, ' ').trim();
   }
 
   _formatHighlightedSentence(english, answer) {
     if (!english) return '';
     const cleanAnswer = (answer || '').trim();
+    const brackets = [...english.matchAll(/\[([^\]]+)\]/g)].map(m => m[1]);
 
-    if (/\[[^\]]+\]/.test(english)) {
+    if (brackets.length === 0) {
+      if (cleanAnswer) {
+        const regex = new RegExp(`(${this._escapeRegex(cleanAnswer)})`, 'gi');
+        return this._escapeHtml(english).replace(regex, `<mark class="quiz-vocab-highlight">$1</mark>`);
+      }
+      return this._escapeHtml(english);
+    }
+
+    // Case 1: Bracket contains commas (multiple-choice options or drag-drop token list)
+    if (brackets.some(b => b.includes(','))) {
       return this._escapeHtml(english).replace(
-        /\[[^\]]+\]/,
+        /\[[^\]]+\]/g,
         `<mark class="quiz-vocab-highlight">${this._escapeHtml(cleanAnswer)}</mark>`
       );
     }
 
-    if (cleanAnswer) {
-      const regex = new RegExp(`(${this._escapeRegex(cleanAnswer)})`, 'gi');
-      return this._escapeHtml(english).replace(regex, `<mark class="quiz-vocab-highlight">$1</mark>`);
-    }
-
-    return this._escapeHtml(english);
+    // Case 2: Brackets directly enclose target word(s) in the sentence (e.g. [pushing] ... [aside], [all] [the] [way])
+    let escaped = this._escapeHtml(english);
+    let highlighted = escaped.replace(
+      /\[([^\]]+)\]/g,
+      '<mark class="quiz-vocab-highlight">$1</mark>'
+    );
+    // Merge adjacent marks for seamless highlight across consecutive words
+    highlighted = highlighted.replace(
+      /<\/mark>(\s*)<mark class="quiz-vocab-highlight">/g,
+      '$1'
+    );
+    return highlighted;
   }
 
   _resolveAudioUrl(index) {
@@ -221,7 +243,7 @@ class ReviewPlayer {
               <button type="button" class="btn-player-step" id="btn-player-next" title="다음 문장 (▶|)"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
             </div>
             <div class="player-controls-side">
-              <button type="button" class="btn-play-all-toggle active" id="btn-player-playall" title="전체 재생 켜짐 (클릭 시 끄기)"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><span class="playall-text">전체</span></button>
+              <button type="button" class="btn-play-all-toggle active" id="btn-player-playall" aria-label="전체 반복 재생 토글" title="전체 반복 재생 켜짐 (클릭 시 끄기)"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg><span class="playall-text">전체</span></button>
               <button type="button" class="btn-speed-toggle" id="btn-player-speed" title="재생 속도 조절">1.0x</button>
             </div>
           </div>
@@ -390,7 +412,7 @@ class ReviewPlayer {
         this.isPlayAll = !this.isPlayAll;
         this._updatePlayAllButtonUI();
         if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
-          App.showToast(this.isPlayAll ? '전체 재생 켜짐' : '전체 재생 꺼짐');
+          App.showToast(this.isPlayAll ? '전체 반복 재생 켜짐' : '전체 반복 재생 꺼짐');
         }
       });
     }
@@ -403,7 +425,7 @@ class ReviewPlayer {
         else if (this.playbackRate === 1.2) this.playbackRate = 0.8;
         else this.playbackRate = 1.0;
 
-        speedBtn.textContent = `${this.playbackRate}x`;
+        speedBtn.textContent = `${this.playbackRate.toFixed(1)}x`;
         if (this.currentAudio) {
           this.currentAudio.playbackRate = this.playbackRate;
         }
@@ -467,10 +489,10 @@ class ReviewPlayer {
 
     if (this.isPlayAll) {
       playAllBtn.classList.add('active');
-      playAllBtn.title = '전체 재생 켜짐 (클릭 시 끄기)';
+      playAllBtn.title = '전체 반복 재생 켜짐 (클릭 시 끄기)';
     } else {
       playAllBtn.classList.remove('active');
-      playAllBtn.title = '전체 재생 꺼짐 (클릭 시 켜기)';
+      playAllBtn.title = '전체 반복 재생 꺼짐 (클릭 시 켜기)';
     }
   }
 
@@ -564,16 +586,30 @@ class ReviewPlayer {
     }
   }
 
+  _getBasePath() {
+    if (typeof window !== 'undefined' && window.location) {
+      const pathname = window.location.pathname || '';
+      if (pathname.includes('/quiz/') && /\/quiz\/[^/]+\/[^/]+\//.test(pathname)) {
+        return '../../../';
+      }
+      if (pathname.includes('/quiz/') || pathname.includes('/lessons/')) {
+        return '../../';
+      }
+    }
+    return './';
+  }
+
   _updateMediaSession(cleanEn, quiz) {
     if ('mediaSession' in navigator) {
       try {
+        const base = this._getBasePath();
         navigator.mediaSession.metadata = new MediaMetadata({
           title: cleanEn,
           artist: this.speakerName || 'Kelly (RhyRhy English)',
           album: `Lesson ${this.lessonId.replace(/^lesson-/, '')} Review`,
           artwork: [
-            { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
-            { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png' }
+            { src: `${base}assets/icons/icon-192.png`, sizes: '192x192', type: 'image/png' },
+            { src: `${base}assets/icons/icon-512.png`, sizes: '512x512', type: 'image/png' }
           ]
         });
         navigator.mediaSession.playbackState = 'playing';

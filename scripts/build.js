@@ -126,7 +126,31 @@ const CURATED_HEADLINES = {
   'lesson-05-17': '"어떻게든 무언가를 생각해내다/지어내다" 핵심 구동사는?',
   'lesson-05-18': '"새로운 사실에 눈을 뜨게 하다, 깨닫게 하다" 영어 관용구는?',
   'lesson-05-19': '"심도 있고 깊이 있는 대답"을 뜻하는 형용사는?',
-  'lesson-05-20': '"우연히 시작하다, 어쩌다 발을 들이다" 원어민 구동사는?'
+  'lesson-05-20': '"우연히 시작하다, 어쩌다 발을 들이다" 원어민 구동사는?',
+  'lesson-06-1': '"우리는 결국 사귀게 되었죠" 결국 ~하게 되다는?',
+  'lesson-06-2': '"여기서 계속 어슬렁거리다"를 뜻하는 일상 구동사는?',
+  'lesson-06-3': '"실용주의자, 현실적인 사람"을 뜻하는 영어 단어는?',
+  'lesson-06-4': '"다 같이 저녁 외식을 하러 가다" 영어로 뭐라고 할까요?',
+  'lesson-06-5': '"술에 거나하게 취한, 알딸딸한" 미국식 구어 표현은?',
+  'lesson-06-6': '"먹기 싫은 고추를 한쪽으로 쓱 치워두다" 영어로?',
+  'lesson-06-7': '"다른 사람들 앞에서 잘난 척/허세 부리다" 영어로는?',
+  'lesson-06-8': '"그 사람과 함께 어울리는 시간을 좋아하다" 영어로?',
+  'lesson-06-9': '"모두 술집으로 데려가 지다" 수동태 영어 표현은?',
+  'lesson-06-10': '"그 여러 번의 만남 중 어느 한 번"을 회상할 때 쓰는 표현은?',
+  'lesson-06-11': '"연애를 시작한 지 얼마 안 된 연애 초기" 영어로는?',
+  'lesson-06-12': '"마티네즈에서 라피엣까지 줄곧 내내" 강조 표현은?',
+  'lesson-06-13': '"차를 몰고 코너(모퉁이)를 돌다" 영어로 뭐라고 할까요?',
+  'lesson-06-14': '"계절, 연중 어느 시기인지"를 뜻하는 표현은?',
+  'lesson-06-15': '"낮잠을 자거나 책을 읽다" 낮잠을 자다는 영어로?',
+  'lesson-06-16': '"한순간도 지루할 틈이 없다" 유명한 영어 관용구는?',
+  'lesson-06-17': '"나사가 헐거워져 삐져나오다" 건축/수리 구어 표현은?',
+  'lesson-06-18': '"참 성가신 일, 골칫거리야" 원어민들이 매일 쓰는 표현은?',
+  'lesson-06-19': '"아주 먼 옛날에, 훨씬 전에" 과거를 회상할 때 쓰는 말은?',
+  'lesson-06-20': '"~라는 사실이 참 놀라웠어요" 영어 패턴은?',
+  'lesson-06-21': '"평온함을 방해하다, 심기를 건드리다" 영어 단어는?',
+  'lesson-06-22': '"야생동물의 목격 사례, 출몰"을 뜻하는 단어는?',
+  'lesson-06-23': '"동파 방지 모드로 꼭 설정해야 해" ~해야 한다는?',
+  'lesson-06-24': '"어떻게 정리하고 잠그는지 방법을 알아내다" 구동사는?'
 };
 
 function escapeAttr(str) {
@@ -149,31 +173,46 @@ function parseQuizMarkdown(content) {
     const audioM = block.match(/-\s*\*\*Audio\*\*:\s*([^\n]+)/i);
 
     const typeStr = typeM ? typeM[1].trim().toLowerCase() : 'multiple-choice';
-    const english = enM ? enM[1].trim() : '';
+    let english = enM ? enM[1].trim() : '';
     const korean = koM ? koM[1].trim() : '';
     let answer = ansM ? ansM[1].trim() : '';
     const explanation = expM ? expM[1].trim() : '';
     const audio = audioM ? audioM[1].trim() : '';
 
-    let options = [];
-    const bracketM = english.match(/\[(.*?)\]/);
-    if (bracketM) {
-      if (typeStr.includes('drag') || typeStr.includes('drop') || typeStr.includes('order')) {
-        options = bracketM[1].includes(',')
-          ? bracketM[1].split(',').map(s => s.trim()).filter(Boolean)
-          : bracketM[1].split(/\s+/).map(s => s.trim()).filter(Boolean);
-        if (!answer) answer = options.join(' ');
-      } else if (typeStr.includes('multiple') || typeStr.includes('choice')) {
-        options = bracketM[1].split(',').map(s => s.trim()).filter(Boolean);
-        if (!answer && options.length > 0) answer = options[0];
-      } else {
-        if (!answer) answer = bracketM[1].trim();
-      }
-    }
-
     const isDrag = typeStr.includes('drag') || typeStr.includes('drop') || typeStr.includes('order');
     const isMultiple = typeStr.includes('multiple') || typeStr.includes('choice');
     const isListening = typeStr.includes('listen');
+
+    let options = [];
+    const allBracketMatches = [...english.matchAll(/\[(.*?)\]/g)].map(m => m[1].trim());
+    const bracketM = allBracketMatches.length > 0 ? allBracketMatches[0] : null;
+    let blanks = undefined;
+    if (allBracketMatches.length > 0) {
+      if (isDrag) {
+        options = bracketM.includes(',')
+          ? bracketM.split(',').map(s => s.trim()).filter(Boolean)
+          : bracketM.split(/\s+/).map(s => s.trim()).filter(Boolean);
+        if (!answer) answer = options.join(' ');
+      } else if (isMultiple) {
+        options = bracketM.split(',').map(s => s.trim()).filter(Boolean);
+        if (!answer && options.length > 0) answer = options[0];
+      } else {
+        if (!isListening) {
+          blanks = allBracketMatches.flatMap(b => {
+            if (b.includes(',')) return [b];
+            return b.split(/\s+/).filter(Boolean);
+          });
+          if (!answer) answer = blanks.join(' ');
+        } else {
+          if (allBracketMatches.length > 1) {
+            blanks = allBracketMatches;
+            if (!answer) answer = allBracketMatches.join(', ');
+          } else {
+            if (!answer) answer = bracketM;
+          }
+        }
+      }
+    }
 
     return {
       num: i + 1,
@@ -183,6 +222,7 @@ function parseQuizMarkdown(content) {
       answer,
       options,
       ...(isDrag ? { tokens: options } : {}),
+      ...(blanks ? { blanks } : {}),
       explanation,
       audio
     };
