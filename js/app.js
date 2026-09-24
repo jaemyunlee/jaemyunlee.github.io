@@ -203,6 +203,22 @@ const App = {
       path: 'lessons/lesson-06/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
       scheduledDateText: '9월 28일 본영상 공개 예정'
+    },
+    {
+      id: 'lesson-07',
+      shortTitle: 'Lesson 7',
+      topic: "Costco Kimchi & Kelly's Kimchi Jjigae",
+      icon: '🍲',
+      speaker: 'Kelly',
+      avatar: 'assets/img/avatars/kelly.jpg',
+      createdAt: '2026-09-24',
+      title: '코스트코 김치 에피소드와 켈리의 인생 김치찌개 이야기',
+      subtitle: '미국 코스트코의 배추 질문 일화부터 한국 직장 시절 단골 식당의 추억, 남편 요리에 대한 10점 만점 리뷰',
+      duration: '5:56',
+      vocabCount: 21,
+      path: 'lessons/lesson-07/',
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
+      scheduledDateText: '10월 5일 본영상 공개 예정'
     }
   ],
 
@@ -314,8 +330,8 @@ const App = {
     if (this.currentLessonId === 'lessons-list') {
       this.initLessonsListPage();
     } else {
-      // Landing page: show latest lessons from latest on top (up to 6)
-      this.renderLessonsCatalog('#lessons-cards-container', { sort: 'desc', limit: 6 });
+      // Landing page: show latest lessons from latest on top (up to 8)
+      this.renderLessonsCatalog('#lessons-cards-container', { sort: 'desc', limit: 8 });
     }
 
     // Update hero call-to-action button if present on page
@@ -1808,6 +1824,36 @@ const LESSON_06_AUDIO_MAP = [
   { key: 'figuring out', file: 'Spend some time figuring out how to put things all the way.wav' }
 ];
 
+// Known audio files for Lesson 07 (maps keyword to WAV audio filename in lessons/lesson-07/audio/)
+const LESSON_07_AUDIO_MAP = [
+  { key: 'stop me in', file: 'I had another guy randomly stop me in the grocery store to ask what people use Napa cabbages for.wav' },
+  { key: 'standpoint', file: 'I knew at least from a Korean standpoint what it gets used for..wav' },
+  { key: 'fermented', file: 'Id say its fermented cabbage. Korean fermented cabbage..wav' },
+  { key: 'used to', file: 'and we used to go there all the time..wav' },
+  { key: 'every other week', file: 'Like we probably as a group would go there once a week every other week or so.wav' },
+  { key: 'there were ever times where', file: 'but if there were ever times where I really wanted it and no one could go with me I went by myself.wav' },
+  { key: 'got stared at', file: 'I mean all of us as a group of foreigners kind of got stared at..wav' },
+  { key: 'at least', file: 'So yeah so I had my meal paid for. They bought it at least two times I think..wav' },
+  { key: 'encouraged', file: 'But I feel like I kind of encouraged it by giving you a 10 out of 10 on that one soup you made..wav' },
+  { key: 'encourage', file: 'But I feel like I kind of encouraged it by giving you a 10 out of 10 on that one soup you made..wav' },
+  { key: 'lived up to', file: 'And unfortunately some of them have been good but none of them have quite lived up to that one you made..wav' },
+  { key: 'have lived up to', file: 'And unfortunately some of them have been good but none of them have quite lived up to that one you made..wav' },
+  { key: 'was introduced to', file: 'I was introduced to the Kimchi Jjigae restaurant by my coworkers..wav' },
+  { key: 'introduced to', file: 'I was introduced to the Kimchi Jjigae restaurant by my coworkers..wav' },
+  { key: "can't say", file: 'And I cant say like really why it was so good but I just know that I really liked it.wav' },
+  { key: 'cant say', file: 'And I cant say like really why it was so good but I just know that I really liked it.wav' },
+  { key: 'supposed to', file: 'I dont know that just always made it to me that that is what Kimchi Jjigae is supposed to taste like..wav' },
+  { key: 'taste the same', file: 'So everything else just didnt taste the same..wav' },
+  { key: 'technically', file: 'But I dont even know technically was it really that good of one I mean probably not..wav' },
+  { key: 'based it off of', file: 'And thats what I always based it off of..wav' },
+  { key: 'as good as', file: 'Its still not as good as that very first one that you made two months ago..wav' },
+  { key: 'turn out', file: 'The problem is you dont follow a recipe so every time you never know how its going to turn out.wav' },
+  { key: 'whereas', file: 'Whereas I feel like that one didnt have that oiliness to it..wav' },
+  { key: 'oilier to', file: 'Something about these ones feel oilier to me.wav' },
+  { key: 'oilier', file: 'Something about these ones feel oilier to me.wav' },
+  { key: 'break from', file: 'Lets take a two month break from Kimchi Jjigae and then you cook it again..wav' }
+];
+
 const SavedAudioPlayer = {
   app: null,
   audio: null,
@@ -2566,6 +2612,12 @@ const SavedAudioPlayer = {
       for (const mapItem of LESSON_06_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
           return encodeURI(`${base}lessons/lesson-06/audio/${mapItem.file}`);
+        }
+      }
+    } else if (lesId === 'lesson-07') {
+      for (const mapItem of LESSON_07_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-07/audio/${mapItem.file}`);
         }
       }
     }

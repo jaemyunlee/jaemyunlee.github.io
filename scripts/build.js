@@ -149,7 +149,28 @@ const CURATED_HEADLINES = {
   'lesson-06-20': '"평온함을 방해하다, 심기를 건드리다" 영어 단어는?',
   'lesson-06-21': '"야생동물의 목격 사례, 출몰"을 뜻하는 단어는?',
   'lesson-06-22': '"동파 방지 모드로 꼭 설정해야 해" ~해야 한다는?',
-  'lesson-06-23': '"어떻게 정리하고 잠그는지 방법을 알아내다" 구동사는?'
+  'lesson-06-23': '"어떻게 정리하고 잠그는지 방법을 알아내다" 구동사는?',
+  'lesson-07-1': '"가던 나를 불쑥 불러세우다" 원어민 필수 구동사는?',
+  'lesson-07-2': '"한국인의 관점/입장에서" 관점을 뜻하는 영어 명사는?',
+  'lesson-07-3': '"발효된 배추 (김치)" 발효된을 뜻하는 영어 단어는?',
+  'lesson-07-4': '"거기에 늘 가곤 했어요" 과거의 습관을 나타낼 때는?',
+  'lesson-07-5': '"격주로, 2주에 한 번꼴로" 일상 회화 표현은?',
+  'lesson-07-6': '"혹시라도 ~했던 적이 있었다면" 과거를 회상하는 패턴은?',
+  'lesson-07-7': '"사람들이 빤히 쳐다보다, 시선 집중을 받다" 영어로는?',
+  'lesson-07-8': '"적어도 두 번은 사줬어요" 적어도는 영어로?',
+  'lesson-07-9': '"내가 그렇게 하도록 부추긴 것 같아요" 영어 동사는?',
+  'lesson-07-10': '"그 맛과 기대에 전혀 미치지 못하다" 핵심 숙어는?',
+  'lesson-07-11': '"동료의 소개로 식당을 처음 알게 되다" 수동 표현은?',
+  'lesson-07-12': '"딱 잘라 말할 수는 없지만" 원어민 회화 패턴은?',
+  'lesson-07-13': '"원래 나야 하는 바로 그 맛" 핵심 조동사 표현은?',
+  'lesson-07-14': '"예전의 그 맛이 나지 않다" 맛을 비교할 때 쓰는 말은?',
+  'lesson-07-15': '"엄밀히 따지면, 사실상" 자주 쓰는 원어민 부사는?',
+  'lesson-07-16': '"그 맛을 바탕(기준)으로 삼다" 필수 구동사는?',
+  'lesson-07-17': '"맨 처음 것만큼 맛있지는 않다" 동등 비교 표현은?',
+  'lesson-07-18': '"결과가 어떻게 나올지/완성될지" 핵심 구동사는?',
+  'lesson-07-19': '"반면에 그것에는 기름진 느낌이 없었죠" 대조 접속사는?',
+  'lesson-07-20': '"왠지 나한테 더 기름지게 느껴지다" 비교급 표현은?',
+  'lesson-07-21': '"김치찌개는 두 달 동안 잠시 쉬자" 휴식기를 갖다는?'
 };
 
 function escapeAttr(str) {
@@ -437,7 +458,8 @@ function build() {
           .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${ogUrl}">`)
           .replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapeAttr(ogTitle)}">`)
           .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapeAttr(ogDesc)}">`)
-          .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${ogImg}">`);
+          .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${ogImg}">`)
+          .replace(/href="\/lessons\/lesson-01\/index\.html"/g, `href="/lessons/${lessonId}/index.html"`);
 
         // Embed quiz data for zero-latency instant rendering
         const quizDataJson = JSON.stringify({ lessonId, num: q.num, ...q });

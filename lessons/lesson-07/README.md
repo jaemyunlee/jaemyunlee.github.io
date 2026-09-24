@@ -1,0 +1,21 @@
+- I had another guy randomly [stop me in] the grocery store to ask what people use Napa cabbages for,
+- I knew at least, from a Korean [standpoint], what it gets used for.
+- I'd say it's [fermented] cabbage. Korean fermented cabbage.
+- and we [used to] go there all the time.
+- Like, we probably as a group would go there once a week, [every other week] or so,
+- but if [there were ever times where] I really wanted it, and no one could go with me, I went by myself,
+- I mean, all of us as a group of foreigners kind of [got stared at].
+- So yeah, so I had my meal paid for. They bought it [at least] two times, I think.
+- But I feel like I kind of [encouraged] it by giving you a 10 out of 10 on that one soup you made.
+- And unfortunately, some of them have been good, but none of them [have lived up to] that one you made.
+- I [was introduced to] the Kimchi Jjigae restaurant by my coworkers.
+- And I [can't say] like really why it was so good, but I just know that I really liked it,
+- I don't know, that just always made it to me that that is what Kimchi Jjigae is [supposed to] taste like.
+- So everything else just didn't [taste the same].
+- But I don't even know, [technically], was it really that good of one? I mean, probably not.
+- And that's what I always [based it off of].
+- It's still not [as good as] that very first one, that you made two months ago.
+- The problem is you don't follow a recipe, so every time you never know how it's going to [turn out],
+- [Whereas] I feel like that one didn't have that oiliness to it.
+- Something about these ones feel [oilier to] me,
+- Let's take a two month [break from] Kimchi Jjigae and then you cook it again.
