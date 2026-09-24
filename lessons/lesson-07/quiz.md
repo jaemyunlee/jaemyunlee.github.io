@@ -69,7 +69,7 @@
 - **Audio**: audio/But I feel like I kind of encouraged it by giving you a 10 out of 10 on that one soup you made..wav
 - **English**: But I feel like I kind of [encouraged, prevented, postponed, dismissed] it by giving you a 10 out of 10 on that one soup you made.
 - **Answer**: encouraged
-- **Korean**: 하지만 오빠가 만들었던 그 찌개에 10점 만점을 주면서, 내가 오빠를 그렇게 부추긴(계속 끓이도록 북돋운) 것 같기도 해요.
+- **Korean**: 하지만 재면 씨가 만드셨던 그 찌개에 제가 10점 만점을 드리면서, 제가 재면 씨를 그렇게 부추긴(계속 끓이시도록 북돋운) 것 같기도 해요.
 - **Explanation**: "encourage"는 어떤 행동을 하도록 "부추기다, 용기를 북돋우다, 권장하다"라는 뜻입니다 (과거형: encouraged).
 
 ## Quiz 10
@@ -77,7 +77,7 @@
 - **Audio**: audio/And unfortunately some of them have been good but none of them have quite lived up to that one you made..wav
 - **English**: And unfortunately, some of them have been good, but none of them [have] quite [lived up to] that one you made.
 - **Answer**: have lived up to
-- **Korean**: 안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 오빠가 만들었던 그 찌개의 기대치(수준)에는 전혀 부응하지(미치지) 못했어요.
+- **Korean**: 안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 재면 씨가 만드셨던 그 찌개의 기대치(수준)에는 전혀 부응하지(미치지) 못했어요.
 - **Explanation**: "live up to ~"는 기대, 기준, 명성에 "부응하다, 미치다"라는 뜻의 핵심 숙어입니다. 현재완료형 부정문으로 "none of them have lived up to ~"는 그 어떤 것도 이전의 기대치에 부응하지 못했다는 뜻입니다.
 
 ## Quiz 11
@@ -133,7 +133,7 @@
 - **Audio**: audio/Its still not as good as that very first one that you made two months ago..wav
 - **English**: It's still not [as good as] that very first one, that you made two months ago.
 - **Answer**: as good as
-- **Korean**: 두 달 전에 오빠가 만들어줬던 그 맨 처음 것만큼 맛있지는(좋지는) 여전히 않아요.
+- **Korean**: 두 달 전에 재면 씨가 만들어주셨던 그 맨 처음 것만큼 맛있지는(좋지는) 여전히 않아요.
 - **Explanation**: "as ~ as ..."는 "...만큼 ~한"을 나타내는 동등 비교 구문입니다. "not as good as"는 "...만큼 좋지는(맛있지는) 않다"라는 뜻으로, 한국어의 "~만큼 맛있지는 않다"를 보고 바로 "as good as"를 영작하거나 퀴즈로 풀 수 있습니다.
 
 ## Quiz 18
@@ -141,7 +141,7 @@
 - **Audio**: audio/The problem is you dont follow a recipe so every time you never know how its going to turn out.wav
 - **English**: The problem is you don't follow a recipe, so every time you never know how it's going to [turn out],
 - **Answer**: turn out
-- **Korean**: 문제는 오빠가 레시피를 안 따르니까, 매번 결과가 어떻게 나올지(어떻게 완성될지) 모른다는 거예요.
+- **Korean**: 문제는 재면 씨가 레시피를 안 따르시니까, 매번 결과가 어떻게 나올지(어떻게 완성될지) 모른다는 거예요.
 - **Explanation**: "turn out"은 어떤 일이나 요리 과정 끝에 "결과가 나오다, 완성되어 나오다, 판가름 나다"라는 뜻의 핵심 구동사입니다. 한국어의 "결과가 어떻게 나올지"를 보고 바로 "how it's going to turn out"을 연상할 수 있습니다.
 
 ## Quiz 19
@@ -157,7 +157,7 @@
 - **Audio**: audio/Something about these ones feel oilier to me.wav
 - **English**: Something about these ones feel [oilier to, sweeter to, saltier to, spicier to] me,
 - **Answer**: oilier to
-- **Korean**: 이번 것들은 왠지 모르게 나한테 더 기름지게(느끼하게) 느껴져요.
+- **Korean**: 이번 것들은 왠지 모르게 저한테 더 기름지게(느끼하게) 느껴져요.
 - **Explanation**: "feel oilier to someone"은 "누군가에게 더 기름지게(느끼하게) 느껴지다"라는 표현입니다 (oily의 비교급: oilier).
 
 ## Quiz 21
@@ -165,5 +165,5 @@
 - **Audio**: audio/Lets take a two month break from Kimchi Jjigae and then you cook it again..wav
 - **English**: Let's take a two month [break, from] Kimchi Jjigae and then you cook it again.
 - **Answer**: break from
-- **Korean**: 우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고(쉬고), 그러고 나서 오빠가 다시 끓여줘요.
+- **Korean**: 우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고(쉬고), 그러고 나서 재면 씨가 다시 끓여주세요.
 - **Explanation**: "take a break from ~"은 바쁜 일상이나 특정 음식, 활동 등을 "잠시 쉬다, 휴식기를 갖다"라는 실생활 유용한 표현입니다. 한국어의 "~로부터 휴식기를 갖다/쉬다"에서 바로 "break from"을 떠올릴 수 있습니다.
