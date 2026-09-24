@@ -51,18 +51,18 @@
 ## Quiz 7
 - **Type**: fill-in-the-blank
 - **Audio**: audio/I always enjoyed being around him..wav
-- **English**: I always enjoyed [being around] him.
-- **Answer**: being around
-- **Korean**: 저는 늘 장인어른 곁에 함께 어울려 있는 것(being around him)을 참 좋아했어요.
-- **Explanation**: "enjoy being around someone"은 상대방의 "곁에 함께 어울려 머무는 것(being around)" 자체를 좋아한다는 따뜻한 표현입니다. "곁에 함께 어울려 있는 것"에서 "being around"를 떠올릴 수 있습니다.
+- **English**: I always [enjoyed being around] him.
+- **Answer**: enjoyed being around
+- **Korean**: 저는 늘 장인어른 곁에 함께 어울려 있는 것을 참 좋아했어요(enjoyed being around him).
+- **Explanation**: "enjoy being around someone"은 상대방의 곁에 함께 어울려 머무는 시간 자체를 좋아한다는 뜻입니다. "곁에 함께 어울려 있는 것을 좋아했어요"를 보고 "enjoyed being around"를 빈칸에 채울 수 있습니다.
 
 ## Quiz 8
 - **Type**: multiple-choice
 - **Audio**: audio/Me and Wayne Hunter and Don and everybody got taken to the bar with him..wav
-- **English**: Me and Wayne Hunter and Don and everybody got [taken to the bar, kicked out, lost downtown, invited to church] with him.
-- **Answer**: taken to the bar
+- **English**: Me and Wayne Hunter and Don and everybody [got taken to the bar, got kicked out, got lost downtown, got invited to church] with him.
+- **Answer**: got taken to the bar
 - **Korean**: 저랑 웨인, 헌터, 돈, 그리고 모두가 장인어른에게 이끌려 술집으로 함께 데려가(끌려가)졌죠(got taken to the bar).
-- **Explanation**: "get taken to ~"는 능동적으로 간 것이 아니라 상대방에게 이끌려 "~로 데려가 지다/끌려가다"라는 수동 표현입니다. "술집으로 데려가 졌다"라는 의미에서 "taken to the bar"를 고를 수 있습니다.
+- **Explanation**: "get taken to ~"는 직접 능동적으로 간 것이 아니라 상대방에게 이끌려 "~로 데려가 지다/끌려가다"라는 뜻의 get + p.p. 구어체 수동태 표현입니다. "술집으로 데려가 졌다"라는 수동의 뉘앙스를 담아 "got taken to the bar"를 고를 수 있습니다.
 
 ## Quiz 9
 - **Type**: listening
@@ -171,10 +171,10 @@
 ## Quiz 22
 - **Type**: multiple-choice
 - **Audio**: audio/Youve got to learn how to put it into freeze protection.wav
-- **English**: You've [got to, had to, want to, used to] learn how to put it into freeze protection
-- **Answer**: got to
-- **Korean**: 동파 방지(freeze protection) 모드로 설정하는 법을 반드시 배워야만 해요(You've got to).
-- **Explanation**: "have got to + 동사원형"은 구어체에서 의무나 강한 필요를 나타내어 "반드시 ~해야만 한다"(= must, have to)라는 뜻의 필수 표현입니다. "반드시 ~해야만 한다"에서 "got to"를 고를 수 있습니다.
+- **English**: You [have got to, had to, want to, used to] learn how to put it into freeze protection
+- **Answer**: have got to
+- **Korean**: 동파 방지(freeze protection) 모드로 설정하는 법을 반드시 배워야만 해요(have got to).
+- **Explanation**: "have got to + 동사원형"은 구어체에서 의무나 강한 필요를 나타내어 "반드시 ~해야만 한다"(= must, have to)라는 뜻의 필수 표현입니다. "반드시 ~해야만 한다"에서 "have got to"를 고를 수 있습니다.
 
 ## Quiz 23
 - **Type**: fill-in-the-blank

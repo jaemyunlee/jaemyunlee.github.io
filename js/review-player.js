@@ -577,6 +577,10 @@ class ReviewPlayer {
       const playPromise = this.currentAudio.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
+          if (err && (err.name === 'AbortError' || err.name === 'NotAllowedError')) {
+            // Intentionally aborted/interrupted by a newer play request or pause; do NOT fall back or skip
+            return;
+          }
           console.warn('Audio playback prevented or failed, using speech synthesis:', err);
           this._playWithSpeechSynthesis(cleanEn);
         });
@@ -658,8 +662,11 @@ class ReviewPlayer {
       this._onSentenceAudioEnded();
     };
 
-    utterance.onerror = () => {
+    utterance.onerror = (e) => {
       clearInterval(this.progressInterval);
+      if (e && (e.error === 'interrupted' || e.error === 'canceled')) {
+        return;
+      }
       this._onSentenceAudioEnded();
     };
 

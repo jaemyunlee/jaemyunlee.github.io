@@ -30,13 +30,13 @@ show off
 
 7
 00:02:34,980 --> 00:02:37,320
-being around
+enjoyed being around
 ~와 함께 어울리는 시간을 좋아하다
 
 8
 00:02:54,630 --> 00:03:03,140
-taken to the bar
-술집에 데려가 지다
+got taken to the bar
+~로 데려가 지다/끌려가다
 
 9
 00:03:18,780 --> 00:03:25,310
@@ -105,7 +105,7 @@ sightings
 
 22
 00:06:32,800 --> 00:06:36,340
-got to
+have got to
 ~해야만 한다
 
 23

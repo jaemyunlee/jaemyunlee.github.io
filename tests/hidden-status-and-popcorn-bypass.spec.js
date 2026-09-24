@@ -64,8 +64,8 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await page.goto('http://localhost:8855/index.html');
     await page.evaluate(() => {
       localStorage.removeItem('rhyrhy_show_hidden_lessons');
-      // Mark lessons 1, 2, 3, 4, 5, 6 as seen
-      localStorage.setItem('rhyrhy_seen_lessons', JSON.stringify(['lesson-01', 'lesson-02', 'lesson-03', 'lesson-04', 'lesson-05', 'lesson-06']));
+      // Mark lessons 1, 2, 3, 4, 5, 6, 7 as seen
+      localStorage.setItem('rhyrhy_seen_lessons', JSON.stringify(['lesson-01', 'lesson-02', 'lesson-03', 'lesson-04', 'lesson-05', 'lesson-06', 'lesson-07']));
     });
     await page.reload();
 
@@ -103,7 +103,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await expect(hiddenBadge).toContainText('비공개 (테스트)');
 
     const countEl = page.locator('#total-lessons-count');
-    await expect(countEl).toHaveText('7');
+    await expect(countEl).toHaveText('8');
   });
 
   test('Hidden status bypass via query parameter ?show_hidden=true', async ({ page }) => {
@@ -130,7 +130,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await page.evaluate(() => window.App.enableDevTesting());
 
     await expect(page.locator('#card-lesson-draft')).toBeVisible();
-    await expect(page.locator('#total-lessons-count')).toHaveText('7');
+    await expect(page.locator('#total-lessons-count')).toHaveText('8');
 
     // Turn OFF dev mode dynamically
     await page.evaluate(() => window.App.disableDevTesting());

@@ -170,7 +170,37 @@ const CONCISE_DEFINITIONS = {
   "you've got to": '~해야만 한다',
   'youve got to': '~해야만 한다',
   'have got to': '~해야만 한다',
-  'figuring out': '방법을 알아내다, 파악하다'
+  'figuring out': '방법을 알아내다, 파악하다',
+
+  // Lesson 07
+  'stop me in': '가던 길을 멈춰 세우다',
+  'random': '뜬금없는, 엉뚱한',
+  'really random': '정말 뜬금없는',
+  'standpoint': '관점, 입장',
+  'fermented': '발효된',
+  'used to': '~하곤 했다',
+  'every other week': '격주로, 2주에 한 번',
+  'there were ever times where': '혹시라도 ~했던 적이 있다면',
+  'got stared at': '빤히 쳐다보는 시선을 받다',
+  'at least': '적어도, 최소한',
+  'encouraged': '부추기다, 계속하도록 북돋우다',
+  'encourage': '부추기다, 북돋우다',
+  'have lived up to': '기대치에 부응하다, 미치다',
+  'lived up to': '기대치에 부응하다, 미치다',
+  'live up to': '기대치에 부응하다, 미치다',
+  'was introduced to': '소개받아서 알게 되다',
+  'be introduced by': '소개받다',
+  'cant say': '확실히 꼬집어 말하긴 어렵다',
+  "can't say": '확실히 꼬집어 말하긴 어렵다',
+  'supposed to': '원래 마땅히 ~해야 하는',
+  'taste the same': '예전의 똑같은 그 맛이 나다',
+  'technically': '엄밀히 따져보면',
+  'based it off of': '~을 바탕(기준)으로 삼다',
+  'as good as': '~만큼 좋은(맛있는)',
+  'turn out': '결과가 나오다, 완성되다',
+  'whereas': '반면에, ~임에 비하여',
+  'oilier to': '~에게 더 기름지게 느껴지는',
+  'break from': '~을 잠시 쉬다, 휴식기를 갖다'
 };
 
 function extractConciseDefinition(quiz) {
