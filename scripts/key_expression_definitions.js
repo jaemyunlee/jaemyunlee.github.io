@@ -174,6 +174,8 @@ const CONCISE_DEFINITIONS = {
 
   // Lesson 07
   'stop me in': '가던 길을 멈춰 세우다',
+  'random': '뜬금없는, 엉뚱한',
+  'really random': '정말 뜬금없는',
   'standpoint': '관점, 입장',
   'fermented': '발효된',
   'used to': '~하곤 했다',

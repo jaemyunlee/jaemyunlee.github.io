@@ -17,7 +17,7 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     const comingSoonBanner = page.locator('#coming-soon-banner');
     await expect(comingSoonBanner).toBeVisible();
     await expect(comingSoonBanner).toContainText('본영상 공개 예정');
-    await expect(comingSoonBanner).toContainText('켈리(Kelly)의 생생한 목소리 오디오와 21개의 퀴즈');
+    await expect(comingSoonBanner).toContainText('켈리(Kelly)의 생생한 목소리 오디오와 22개의 퀴즈');
 
     // Step navigation tabs: Steps 1 & 2 enabled, Steps 3 & 4 deactivated/disabled
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
@@ -51,7 +51,7 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     await expect(tab2.locator('.step-lock-icon')).toHaveCount(0);
   });
 
-  test('Lesson 07 loads all 21 quizzes matching requested types and target expressions', async ({ page }) => {
+  test('Lesson 07 loads all 22 quizzes matching requested types and target expressions', async ({ page }) => {
     await page.goto('/lessons/lesson-07/index.html');
 
     const quizData = await page.evaluate(async () => {
@@ -66,9 +66,9 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
       };
     });
 
-    expect(quizData.total).toBe(21);
+    expect(quizData.total).toBe(22);
     expect(quizData.counts['drag-and-drop']).toBe(5);
-    expect(quizData.counts['multiple-choice']).toBe(8);
+    expect(quizData.counts['multiple-choice']).toBe(9);
     expect(quizData.counts['fill-in-the-blank']).toBe(8);
 
     const q = quizData.quizzes;
@@ -77,88 +77,92 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     expect(q[0].type).toBe('drag-and-drop');
     expect(q[0].answer).toBe('stop me in');
 
-    // Q2: multiple-choice > standpoint
+    // Q2: multiple-choice > random
     expect(q[1].type).toBe('multiple-choice');
-    expect(q[1].answer).toBe('standpoint');
+    expect(q[1].answer).toBe('random');
 
-    // Q3: multiple-choice > fermented
+    // Q3: multiple-choice > standpoint
     expect(q[2].type).toBe('multiple-choice');
-    expect(q[2].answer).toBe('fermented');
+    expect(q[2].answer).toBe('standpoint');
 
-    // Q4: fill-in-the-blank > used to
-    expect(q[3].type).toBe('fill-in-the-blank');
-    expect(q[3].answer).toBe('used to');
+    // Q4: multiple-choice > fermented
+    expect(q[3].type).toBe('multiple-choice');
+    expect(q[3].answer).toBe('fermented');
 
-    // Q5: drag-and-drop > every other week
-    expect(q[4].type).toBe('drag-and-drop');
-    expect(q[4].answer).toBe('every other week');
+    // Q5: fill-in-the-blank > used to
+    expect(q[4].type).toBe('fill-in-the-blank');
+    expect(q[4].answer).toBe('used to');
 
-    // Q6: drag-and-drop > there were ever times where
+    // Q6: drag-and-drop > every other week
     expect(q[5].type).toBe('drag-and-drop');
-    expect(q[5].answer).toBe('there were ever times where');
+    expect(q[5].answer).toBe('every other week');
 
-    // Q7: multiple-choice > got stared at
-    expect(q[6].type).toBe('multiple-choice');
-    expect(q[6].answer).toBe('got stared at');
+    // Q7: drag-and-drop > there were ever times where
+    expect(q[6].type).toBe('drag-and-drop');
+    expect(q[6].answer).toBe('there were ever times where');
 
-    // Q8: fill-in-the-blank > at least
-    expect(q[7].type).toBe('fill-in-the-blank');
-    expect(q[7].answer).toBe('at least');
+    // Q8: multiple-choice > got stared at
+    expect(q[7].type).toBe('multiple-choice');
+    expect(q[7].answer).toBe('got stared at');
 
-    // Q9: multiple-choice > encourage (encouraged)
-    expect(q[8].type).toBe('multiple-choice');
-    expect(q[8].answer).toBe('encouraged');
+    // Q9: fill-in-the-blank > at least
+    expect(q[8].type).toBe('fill-in-the-blank');
+    expect(q[8].answer).toBe('at least');
 
-    // Q10: fill-in-the-blank > have lived up to (multi-blank)
-    expect(q[9].type).toBe('fill-in-the-blank');
-    expect(q[9].blanks).toEqual(['have', 'lived', 'up', 'to']);
+    // Q10: multiple-choice > encourage (encouraged)
+    expect(q[9].type).toBe('multiple-choice');
+    expect(q[9].answer).toBe('encouraged');
 
-    // Q11: multiple-choice > be introduced by (was introduced to)
-    expect(q[10].type).toBe('multiple-choice');
-    expect(q[10].answer).toBe('was introduced to');
+    // Q11: fill-in-the-blank > have lived up to (multi-blank)
+    expect(q[10].type).toBe('fill-in-the-blank');
+    expect(q[10].blanks).toEqual(['have', 'lived', 'up', 'to']);
 
-    // Q12: fill-in-the-blank > can't say
-    expect(q[11].type).toBe('fill-in-the-blank');
-    expect(q[11].answer).toBe("can't say");
+    // Q12: multiple-choice > be introduced by (was introduced to)
+    expect(q[11].type).toBe('multiple-choice');
+    expect(q[11].answer).toBe('was introduced to');
 
-    // Q13: fill-in-the-blank > supposed to
+    // Q13: fill-in-the-blank > can't say
     expect(q[12].type).toBe('fill-in-the-blank');
-    expect(q[12].answer).toBe('supposed to');
+    expect(q[12].answer).toBe("can't say");
 
-    // Q14: multiple-choice > taste the same
-    expect(q[13].type).toBe('multiple-choice');
-    expect(q[13].answer).toBe('taste the same');
+    // Q14: fill-in-the-blank > supposed to
+    expect(q[13].type).toBe('fill-in-the-blank');
+    expect(q[13].answer).toBe('supposed to');
 
-    // Q15: multiple-choice > technically
+    // Q15: multiple-choice > taste the same
     expect(q[14].type).toBe('multiple-choice');
-    expect(q[14].answer).toBe('technically');
+    expect(q[14].answer).toBe('taste the same');
 
-    // Q16: drag-and-drop > based it off of
-    expect(q[15].type).toBe('drag-and-drop');
-    expect(q[15].answer).toBe('based it off of');
+    // Q16: multiple-choice > technically
+    expect(q[15].type).toBe('multiple-choice');
+    expect(q[15].answer).toBe('technically');
 
-    // Q17: fill-in-the-blank > as good as
-    expect(q[16].type).toBe('fill-in-the-blank');
-    expect(q[16].answer).toBe('as good as');
+    // Q17: drag-and-drop > based it off of
+    expect(q[16].type).toBe('drag-and-drop');
+    expect(q[16].answer).toBe('based it off of');
 
-    // Q18: fill-in-the-blank > turn out
+    // Q18: fill-in-the-blank > as good as
     expect(q[17].type).toBe('fill-in-the-blank');
-    expect(q[17].answer).toBe('turn out');
+    expect(q[17].answer).toBe('as good as');
 
-    // Q19: fill-in-the-blank > whereas
+    // Q19: fill-in-the-blank > turn out
     expect(q[18].type).toBe('fill-in-the-blank');
-    expect(q[18].answer).toBe('Whereas');
+    expect(q[18].answer).toBe('turn out');
 
-    // Q20: multiple-choice > oilier to
-    expect(q[19].type).toBe('multiple-choice');
-    expect(q[19].answer).toBe('oilier to');
+    // Q20: fill-in-the-blank > whereas
+    expect(q[19].type).toBe('fill-in-the-blank');
+    expect(q[19].answer).toBe('Whereas');
 
-    // Q21: drag-and-drop > break from
-    expect(q[20].type).toBe('drag-and-drop');
-    expect(q[20].answer).toBe('break from');
+    // Q21: multiple-choice > oilier to
+    expect(q[20].type).toBe('multiple-choice');
+    expect(q[20].answer).toBe('oilier to');
+
+    // Q22: drag-and-drop > break from
+    expect(q[21].type).toBe('drag-and-drop');
+    expect(q[21].answer).toBe('break from');
   });
 
-  test('Step 2 Key Sentences Review Player initializes with Kelly speaker info and 21 items', async ({ page }) => {
+  test('Step 2 Key Sentences Review Player initializes with Kelly speaker info and 22 items', async ({ page }) => {
     await page.goto('/lessons/lesson-07/index.html');
 
     // Navigate to Step 2
@@ -178,7 +182,7 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     await expect(speakerName).toContainText('Kelly');
 
     const sentenceCards = reviewSection.locator('.quiz-sentence-card');
-    await expect(sentenceCards).toHaveCount(21);
+    await expect(sentenceCards).toHaveCount(22);
 
     // Verify first and last card English text
     const firstEn = sentenceCards.first().locator('.sentence-en-text');
@@ -199,9 +203,9 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     await expect(badge).toBeVisible();
     await expect(badge).toContainText('공개 예정');
 
-    // Verify 21 퀴즈 count pill
+    // Verify 22 퀴즈 count pill
     const meta = card.locator('.lesson-card-meta');
-    await expect(meta).toContainText('21 퀴즈');
+    await expect(meta).toContainText('22 퀴즈');
 
     // Verify Action button leads to lesson-07
     const btn = card.locator('.lesson-card-btn');

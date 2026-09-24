@@ -215,7 +215,7 @@ const App = {
       title: '코스트코 김치 에피소드와 켈리의 인생 김치찌개 이야기',
       subtitle: '미국 코스트코의 배추 질문 일화부터 한국 직장 시절 단골 식당의 추억, 남편 요리에 대한 10점 만점 리뷰',
       duration: '5:56',
-      vocabCount: 21,
+      vocabCount: 22,
       path: 'lessons/lesson-07/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
       scheduledDateText: '10월 5일 본영상 공개 예정'
@@ -1827,6 +1827,8 @@ const LESSON_06_AUDIO_MAP = [
 // Known audio files for Lesson 07 (maps keyword to WAV audio filename in lessons/lesson-07/audio/)
 const LESSON_07_AUDIO_MAP = [
   { key: 'stop me in', file: 'I had another guy randomly stop me in the grocery store to ask what people use Napa cabbages for.wav' },
+  { key: 'random', file: 'which I thought was really random..wav' },
+  { key: 'really random', file: 'which I thought was really random..wav' },
   { key: 'standpoint', file: 'I knew at least from a Korean standpoint what it gets used for..wav' },
   { key: 'fermented', file: 'Id say its fermented cabbage. Korean fermented cabbage..wav' },
   { key: 'used to', file: 'and we used to go there all the time..wav' },
