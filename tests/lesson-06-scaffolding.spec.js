@@ -100,13 +100,13 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     expect(q[5].type).toBe('fill-in-the-blank');
     expect(q[5].answer).toBe('show off');
 
-    // Q7: fill-in-the-blank > being around (show enjoyed, fill being and around)
+    // Q7: fill-in-the-blank > enjoyed being around
     expect(q[6].type).toBe('fill-in-the-blank');
-    expect(q[6].answer).toBe('being around');
+    expect(q[6].answer).toBe('enjoyed being around');
 
-    // Q8: multiple-choice > taken to the bar
+    // Q8: multiple-choice > got taken to the bar
     expect(q[7].type).toBe('multiple-choice');
-    expect(q[7].answer).toBe('taken to the bar');
+    expect(q[7].answer).toBe('got taken to the bar');
 
     // Q9: listening > one of the times (changed to listening)
     expect(q[8].type).toBe('listening');
@@ -164,9 +164,9 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     expect(q[20].type).toBe('multiple-choice');
     expect(q[20].answer).toBe('sightings');
 
-    // Q22: multiple-choice > got to (display you've, fill got to only, multiple choice)
+    // Q22: multiple-choice > have got to
     expect(q[21].type).toBe('multiple-choice');
-    expect(q[21].answer).toBe('got to');
+    expect(q[21].answer).toBe('have got to');
 
     // Q23: fill-in-the-blank > figuring out
     expect(q[22].type).toBe('fill-in-the-blank');
@@ -385,17 +385,17 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(actionBtn).toHaveAttribute('href', '/lessons/lesson-06/index.html');
   });
 
-  test('Standalone share quiz Q22 renders as multiple choice with got to', async ({ page }) => {
+  test('Standalone share quiz Q22 renders as multiple choice with have got to', async ({ page }) => {
     await page.goto('/quiz/lesson-06/q22.html');
 
-    // Options exist and include 'got to'
+    // Options exist and include 'have got to'
     const optionBtns = page.locator('.standalone-choice-btn');
     await expect(optionBtns).toHaveCount(4);
 
-    const gotToBtn = page.locator('.standalone-choice-btn', { hasText: 'got to' });
+    const gotToBtn = page.locator('.standalone-choice-btn', { hasText: 'have got to' });
     await expect(gotToBtn).toBeVisible();
 
-    // Click 'got to'
+    // Click 'have got to'
     await gotToBtn.click();
 
     // Referral modal opens as correct

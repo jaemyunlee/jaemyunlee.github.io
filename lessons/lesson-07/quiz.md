@@ -50,7 +50,7 @@
 
 ## Quiz 7
 - **Type**: drag-and-drop
-- **Audio**: audio/but if there was ever times where I really wanted it and no one could go with me I went by myself.wav
+- **Audio**: audio/but if there were ever times where I really wanted it and no one could go with me I went by myself.wav
 - **English**: but if [there, were, ever, times, where] I really wanted it, and no one could go with me, I went by myself,
 - **Answer**: there were ever times where
 - **Korean**: 하지만 혹시라도 제가 너무 먹고 싶었던 적이 있었는데 아무도 같이 갈 수 없으면, 저 혼자서라도 갔어요.

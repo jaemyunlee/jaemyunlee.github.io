@@ -217,7 +217,7 @@ const App = {
       duration: '5:56',
       vocabCount: 22,
       path: 'lessons/lesson-07/',
-      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.HIDDEN : 'hidden'),
       scheduledDateText: '10월 5일 본영상 공개 예정'
     }
   ],

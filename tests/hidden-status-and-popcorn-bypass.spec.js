@@ -38,7 +38,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     });
   });
 
-  test('Hidden status default: Hidden lesson is omitted from catalog and index, count is 7', async ({ page }) => {
+  test('Hidden status default: Hidden lesson is omitted from catalog and index, count is 6', async ({ page }) => {
     // Clear storage to test clean state
     await page.goto('http://localhost:8855/lessons.html');
     await page.evaluate(() => {
@@ -52,7 +52,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await expect(cardDraft).toHaveCount(0);
 
     const countEl = page.locator('#total-lessons-count');
-    await expect(countEl).toHaveText('7');
+    await expect(countEl).toHaveText('6');
 
     // 2. Check index.html latest lessons grid
     await page.goto('http://localhost:8855/index.html');
@@ -124,7 +124,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
 
     // Default: cardDraft not visible
     await expect(page.locator('#card-lesson-draft')).toHaveCount(0);
-    await expect(page.locator('#total-lessons-count')).toHaveText('7');
+    await expect(page.locator('#total-lessons-count')).toHaveText('6');
 
     // Turn ON dev mode dynamically
     await page.evaluate(() => window.App.enableDevTesting());
@@ -136,7 +136,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await page.evaluate(() => window.App.disableDevTesting());
 
     await expect(page.locator('#card-lesson-draft')).toHaveCount(0);
-    await expect(page.locator('#total-lessons-count')).toHaveText('7');
+    await expect(page.locator('#total-lessons-count')).toHaveText('6');
   });
 
   test('Popcorn daily limit bypass via localStorage (rhyrhy_ignore_popcorn_limit)', async ({ page }) => {

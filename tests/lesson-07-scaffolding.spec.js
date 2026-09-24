@@ -13,6 +13,11 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: Quiz');
 
+    // Hidden draft badge is visible
+    const hiddenBadge = page.locator('.lesson-header-section .badge-hidden');
+    await expect(hiddenBadge).toBeVisible();
+    await expect(hiddenBadge).toContainText('비공개 (테스트)');
+
     // Coming soon notification banner is visible
     const comingSoonBanner = page.locator('#coming-soon-banner');
     await expect(comingSoonBanner).toBeVisible();
@@ -190,18 +195,45 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
 
     const lastEn = sentenceCards.last().locator('.sentence-en-text');
     await expect(lastEn).toContainText('break from');
+
+    // Verify all 22 audio files resolve with 200 OK and match 1:1 without gaps
+    const audioCheck = await page.evaluate(async () => {
+      const player = window.reviewPlayer;
+      if (!player) return { ok: false, error: 'no reviewPlayer' };
+      const failed = [];
+      for (let i = 0; i < player.quizzes.length; i++) {
+        const url = player._resolveAudioUrl(i);
+        try {
+          const res = await fetch(url, { method: 'HEAD' });
+          if (!res.ok) {
+            failed.push({ index: i, url, status: res.status });
+          }
+        } catch (e) {
+          failed.push({ index: i, url, error: e.message });
+        }
+      }
+      return { ok: failed.length === 0, failed, total: player.quizzes.length, audioFilesCount: player.audioFiles?.length };
+    });
+
+    expect(audioCheck.total).toBe(22);
+    expect(audioCheck.audioFilesCount).toBe(22);
+    expect(audioCheck.ok).toBe(true);
+    expect(audioCheck.failed).toEqual([]);
   });
 
-  test('Lesson 07 card is rendered in catalog with coming-soon badge', async ({ page }) => {
+  test('Lesson 07 card is omitted by default in catalog, and visible with [비공개 (테스트)] badge when show_hidden=true', async ({ page }) => {
+    // 1. By default, hidden lesson is not in catalog
     await page.goto('/lessons.html');
+    await expect(page.locator('#card-lesson-07')).toHaveCount(0);
 
+    // 2. When show_hidden=true is passed, it appears with [비공개 (테스트)] badge
+    await page.goto('/lessons.html?show_hidden=true');
     const card = page.locator('#card-lesson-07');
     await expect(card).toBeVisible();
 
-    // Verify coming-soon badge
-    const badge = card.locator('.badge-coming-soon');
+    const badge = card.locator('.badge-hidden');
     await expect(badge).toBeVisible();
-    await expect(badge).toContainText('공개 예정');
+    await expect(badge).toContainText('비공개 (테스트)');
 
     // Verify 22 퀴즈 count pill
     const meta = card.locator('.lesson-card-meta');
@@ -210,12 +242,15 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     // Verify Action button leads to lesson-07
     const btn = card.locator('.lesson-card-btn');
     await expect(btn).toBeVisible();
-    await expect(btn).toContainText('학습 시작하기');
+    await expect(btn).toContainText('테스트 학습하기');
   });
 
-  test('Lesson 07 card is rendered on home page (index.html)', async ({ page }) => {
+  test('Lesson 07 card is omitted by default on home page (index.html), and visible when show_hidden=true', async ({ page }) => {
     await page.goto('/index.html');
+    await expect(page.locator('#card-lesson-07')).toHaveCount(0);
 
+    // Visible when show_hidden=true
+    await page.goto('/index.html?show_hidden=true');
     const card = page.locator('#card-lesson-07');
     await expect(card).toBeVisible();
 

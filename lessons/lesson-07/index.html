@@ -247,6 +247,7 @@
       // Pre-matched audio files for Lesson 07
       const LESSON_07_AUDIO_FILES = [
         "I had another guy randomly stop me in the grocery store to ask what people use Napa cabbages for.wav",
+        "which I thought was really random..wav",
         "I knew at least from a Korean standpoint what it gets used for..wav",
         "Id say its fermented cabbage. Korean fermented cabbage..wav",
         "and we used to go there all the time..wav",
@@ -282,10 +283,22 @@
         const metaRes = await fetch('./metadata.json');
         if (metaRes.ok) {
           metadata = await metaRes.json();
+          const isHidden = (metadata.status === 'hidden');
           if (typeof LessonStatusHelper !== 'undefined') {
-            isComingSoon = LessonStatusHelper.isComingSoon(metadata.status);
+            isComingSoon = LessonStatusHelper.isComingSoon(metadata.status) || (!metadata.youtubeId && isHidden);
           } else {
-            isComingSoon = (metadata.status === 'coming-soon');
+            isComingSoon = (metadata.status === 'coming-soon' || (!metadata.youtubeId && isHidden));
+          }
+
+          if (isHidden) {
+            const headerBadges = document.querySelector('.lesson-header-section div');
+            if (headerBadges && !headerBadges.querySelector('.badge-hidden')) {
+              const hiddenBadge = document.createElement('span');
+              hiddenBadge.className = 'badge badge-hidden';
+              hiddenBadge.style.cssText = 'background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.35);';
+              hiddenBadge.innerHTML = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 비공개 (테스트)';
+              headerBadges.appendChild(hiddenBadge);
+            }
           }
         }
       } catch (err) {
@@ -316,6 +329,12 @@
       // Configure Coming Soon State
       if (comingSoonBanner) {
         comingSoonBanner.style.display = isComingSoon ? 'flex' : 'none';
+        if (metadata.status === 'hidden') {
+          const bannerDesc = comingSoonBanner.querySelector('.coming-soon-banner-desc');
+          if (bannerDesc) {
+            bannerDesc.textContent = '현재 내부 비공개(Hidden Draft) 테스트 상태입니다. 켈리(Kelly)의 생생한 목소리 오디오와 22개의 퀴즈를 미리 학습해보세요!';
+          }
+        }
       }
 
       const stepTab3 = document.getElementById('step-tab-3');
