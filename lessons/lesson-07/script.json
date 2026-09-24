@@ -11,7 +11,7 @@
     "start": 14.83,
     "end": 16.13,
     "en": "Kelly. Yeah.",
-    "kr": "켈리 씨. - 네."
+    "kr": "켈리. - 네."
   },
   {
     "id": "s3",
@@ -32,7 +32,7 @@
     "start": 21.13,
     "end": 25.06,
     "en": "Does it happen to you often in Costco too?",
-    "kr": "코스트코에서 켈리 씨한테도 이런 일 자주 있어요?"
+    "kr": "코스트코에서 당신한테도 이런 일 자주 있어요?"
   },
   {
     "id": "s6",
@@ -249,14 +249,14 @@
     "start": 155.52,
     "end": 157.52,
     "en": "Kelly.",
-    "kr": "켈리 씨."
+    "kr": "켈리."
   },
   {
     "id": "s37",
     "start": 157.52,
     "end": 162.01,
     "en": "Did you expect that you'd have Kimchi jjigae this often in the USA?",
-    "kr": "미국에서도 김치찌개를 이렇게 자주 드실(먹게) 될 줄 알았어요?"
+    "kr": "미국에서도 김치찌개를 이렇게 자주 먹게 될 줄 알았어요?"
   },
   {
     "id": "s38",
@@ -270,14 +270,14 @@
     "start": 164.54,
     "end": 170.81,
     "en": "But I feel like I kind of encouraged it by giving you a 10 out of 10 on that one soup you made.",
-    "kr": "하지만 재면 씨가 만드셨던 그 찌개에 제가 10점 만점을 드리면서, 제가 재면 씨를 그렇게 부추긴(계속 끓이시도록 북돋운) 것 같기도 해요."
+    "kr": "하지만 제가 당신이 만든 그 찌개에 제가 10점 만점을 주면서, 제가 당신을 그렇게 부추긴 것 같기도 해요."
   },
   {
     "id": "s40",
     "start": 170.81,
     "end": 178.69,
     "en": "And unfortunately, some of them have been good, but none of them have quite lived up to that one you made.",
-    "kr": "안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 재면 씨가 만드셨던 그 찌개의 기대치(수준)에는 전혀 부응하지(미치지) 못했어요."
+    "kr": "안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 당신이 만들었던 그 찌개의 기대치에는 전혀 미치지 못했어요."
   },
   {
     "id": "s41",
@@ -291,7 +291,7 @@
     "start": 189.98,
     "end": 195.48,
     "en": "And I can't say like really why it was so good, but I just know that I really liked it,",
-    "kr": "왜 그렇게 맛있었는지는 정말 딱 꼬집어(확실히) 말할 수는 없지만, 그냥 제가 정말 좋아했다는 건 알아요,"
+    "kr": "왜 그렇게 맛있었는지는 정말 딱 꼬집어 말할 수는 없지만, 그냥 제가 정말 좋아했다는 건 알아요,"
   },
   {
     "id": "s43",
@@ -361,7 +361,7 @@
     "start": 234.86,
     "end": 240.5,
     "en": "But I don't even know, technically, was it really that good of one? I mean, probably not.",
-    "kr": "하지만 엄밀히 따져보면(기술적으로 보면), 그 집이 정말 그렇게 훌륭한 김치찌개였는지는 저도 잘 모르겠어요. 아마 아닐 수도 있죠."
+    "kr": "하지만 엄밀히 따져보면, 그 집이 정말 그렇게 훌륭한 김치찌개였는지는 저도 잘 모르겠어요. 아마 아닐 수도 있죠."
   },
   {
     "id": "s53",
@@ -389,14 +389,14 @@
     "start": 248.06,
     "end": 250.28,
     "en": "And that's what I always based it off of.",
-    "kr": "그리고 그게 바로 제가 늘 (맛의) 바탕으로(기준으로) 삼았던 거예요."
+    "kr": "그리고 그게 바로 제가 늘 (맛의) 기준으로 삼았던 거예요."
   },
   {
     "id": "s57",
     "start": 250.28,
     "end": 254.04,
     "en": "And unfortunately, like your mom started cooking kimchi jjigae,",
-    "kr": "그런데 어머님(시어머님)께서 김치찌개를 끓여주기 시작하셨을 때도,"
+    "kr": "그런데 시어머님께서 김치찌개를 끓여주기 시작하셨을 때도,"
   },
   {
     "id": "s58",
@@ -410,21 +410,21 @@
     "start": 260.51,
     "end": 264.71,
     "en": "It's definitely better than the last one you made.",
-    "kr": "지난번에 재면 씨가 끓이셨던 것보다는 확실히 나아요."
+    "kr": "지난번에 당신이 만들었던 것보다는 확실히 나아요."
   },
   {
     "id": "s60",
     "start": 264.71,
     "end": 270.08,
     "en": "It's still not as good as that very first one, that you made two months ago.",
-    "kr": "두 달 전에 재면 씨가 만들어주셨던 그 맨 처음 것만큼 맛있지는(좋지는) 여전히 않지만요."
+    "kr": "두 달 전에 당신이 만들었던 그 맨 처음 것만큼 맛있지는 여전히 않지만요."
   },
   {
     "id": "s61",
     "start": 270.66,
     "end": 277.41,
     "en": "Maybe because I haven't cooked kimchi jjigae for like six weeks, seven weeks.",
-    "kr": "제가 한 6주, 7주 동안 김치찌개를 안 끓이다 끓여서 그랬나 봐요."
+    "kr": "제가 한 6주, 7주 동안 김치찌개를 안 끓이다가 끓여서 그런가 봐요."
   },
   {
     "id": "s62",
@@ -445,7 +445,7 @@
     "start": 281.82,
     "end": 284.38,
     "en": "So, you didn't give me the answer,",
-    "kr": "그런데 저한테 점수 대답 안 해주셨잖아요,"
+    "kr": "그런데 저한테 점수 대답 안 했잖아요,"
   },
   {
     "id": "s65",
@@ -473,14 +473,14 @@
     "start": 292.67,
     "end": 295.26,
     "en": "It's a passing score.",
-    "kr": "합격점이네요."
+    "kr": "합격점이에요."
   },
   {
     "id": "s69",
     "start": 295.26,
     "end": 300.99,
     "en": "The problem is you don't follow a recipe, so every time you never know how it's going to turn out,",
-    "kr": "문제는 재면 씨가 레시피를 안 따르시니까, 매번 결과가 어떻게 나올지(어떻게 완성될지) 모른다는 거예요,"
+    "kr": "문제는 당신이 레시피를 안 따르시니까, 매번 결과가 어떻게 나올지 모른다는 거예요,"
   },
   {
     "id": "s70",
@@ -515,21 +515,21 @@
     "start": 316.2,
     "end": 322.27,
     "en": "Whereas I feel like that one didn't have that oiliness to it.",
-    "kr": "반면에(Whereas) 그 첫 번째 찌개에는 그런 기름진 느끼함이 전혀 없었던 것 같아요."
+    "kr": "반면에 그 첫 번째 찌개에는 그런 기름진 느끼함이 전혀 없었던 것 같아요."
   },
   {
     "id": "s75",
     "start": 323.14,
     "end": 326.5,
     "en": "so that'll be what you have to do",
-    "kr": "그러니까 재면 씨가 이렇게 하셔야겠어요,"
+    "kr": "그러니까 당신이 이렇게 하셔야겠어요,"
   },
   {
     "id": "s76",
     "start": 326.5,
     "end": 331.2,
     "en": "let's take a two month break from kimchi jjigae and then you cook it again",
-    "kr": "우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고(쉬고), 그러고 나서 재면 씨가 다시 끓여주세요."
+    "kr": "우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고, 그러고 나서 당신이 다시 끓여주세요."
   },
   {
     "id": "s77",

@@ -13,7 +13,7 @@
 - **Audio**: audio/which I thought was really random..wav
 - **English**: which I thought was really [random, typical, obvious, predictable].
 - **Answer**: random
-- **Korean**: (그 상황이) 정말 뜬금없다(생뚱맞다)고 생각했죠.
+- **Korean**: 정말 뜬금없다고 생각했죠.
 - **Explanation**: "random"은 구어체에서 어떤 상황이나 행동이 맥락 없이 불쑥 일어났을 때 "뜬금없는, 엉뚱한, 뜻밖의"라는 의미로 매우 자주 쓰이는 핵심 표현입니다 (really random: 정말 뜬금없는).
 
 ## Quiz 3
@@ -37,7 +37,7 @@
 - **Audio**: audio/and we used to go there all the time..wav
 - **English**: and we [used to] go there all the time.
 - **Answer**: used to
-- **Korean**: 그리고 예전엔 우리 항상 거기에 가곤 했었어요.
+- **Korean**: 예전엔 우리 항상 거기에 가곤 했었죠.
 - **Explanation**: "used to + 동사원형"은 과거에 규칙적이거나 습관적으로 "~하곤 했다(예전엔 늘 그랬다)"라는 뜻을 나타내는 필수 표현입니다. "예전에 ~하곤 했다"라는 말을 보면 바로 "used to"를 떠올릴 수 있습니다.
 
 ## Quiz 6
@@ -53,7 +53,7 @@
 - **Audio**: audio/but if there was ever times where I really wanted it and no one could go with me I went by myself.wav
 - **English**: but if [there, were, ever, times, where] I really wanted it, and no one could go with me, I went by myself,
 - **Answer**: there were ever times where
-- **Korean**: 하지만 혹시라도 제가 너무 먹고 싶었던 적이 있었는데(때가 있었는데) 아무도 같이 갈 수 없으면, 저 혼자서라도 갔어요.
+- **Korean**: 하지만 혹시라도 제가 너무 먹고 싶었던 적이 있었는데 아무도 같이 갈 수 없으면, 저 혼자서라도 갔어요.
 - **Explanation**: "if there were ever times where ~"는 과거에 "혹시라도 ~했던 때(적)가 있었다면"이라는 뜻으로, 특정한 상황이나 계기를 가정하여 회상할 때 쓰는 표현 패턴입니다.
 
 ## Quiz 8
@@ -77,7 +77,7 @@
 - **Audio**: audio/But I feel like I kind of encouraged it by giving you a 10 out of 10 on that one soup you made..wav
 - **English**: But I feel like I kind of [encouraged, prevented, postponed, dismissed] it by giving you a 10 out of 10 on that one soup you made.
 - **Answer**: encouraged
-- **Korean**: 하지만 재면 씨가 만드셨던 그 찌개에 제가 10점 만점을 드리면서, 제가 재면 씨를 그렇게 부추긴(계속 끓이시도록 북돋운) 것 같기도 해요.
+- **Korean**: 하지만 제가 당신이 만든 그 찌개에 제가 10점 만점을 주면서, 제가 당신을 그렇게 부추긴 것 같기도 해요.
 - **Explanation**: "encourage"는 어떤 행동을 하도록 "부추기다, 용기를 북돋우다, 권장하다"라는 뜻입니다 (과거형: encouraged).
 
 ## Quiz 11
@@ -85,8 +85,8 @@
 - **Audio**: audio/And unfortunately some of them have been good but none of them have quite lived up to that one you made..wav
 - **English**: And unfortunately, some of them have been good, but none of them [have] quite [lived up to] that one you made.
 - **Answer**: have lived up to
-- **Korean**: 안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 재면 씨가 만드셨던 그 찌개의 기대치(수준)에는 전혀 부응하지(미치지) 못했어요.
-- **Explanation**: "live up to ~"는 기대, 기준, 명성에 "부응하다, 미치다"라는 뜻의 핵심 숙어입니다. 현재완료형 부정문으로 "none of them have lived up to ~"는 그 어떤 것도 이전의 기대치에 부응하지 못했다는 뜻입니다.
+- **Korean**: 안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 당신이 만들었던 그 찌개의 기대치에는 전혀 미치지 못했어요.
+- **Explanation**: "live up to ~"는 기대, 기준, 명성에 "부응하다, 미치다"라는 뜻의 핵심 숙어입니다. 현재완료형 부정문으로 "none of them have lived up to ~"는 그 어떤 것도 이전의 기대치에 미치지(부응하지) 못했다는 뜻입니다.
 
 ## Quiz 12
 - **Type**: multiple-choice
@@ -101,7 +101,7 @@
 - **Audio**: audio/And I cant say like really why it was so good but I just know that I really liked it.wav
 - **English**: And I [can't say] really why it was so good, but I just know that I really liked it,
 - **Answer**: can't say
-- **Korean**: 왜 그렇게 맛있었는지는 정말 딱 꼬집어(확실히) 말할 수는 없지만, 그냥 제가 정말 좋아했다는 건 알아요.
+- **Korean**: 왜 그렇게 맛있었는지는 정말 딱 꼬집어 말할 수는 없지만, 그냥 제가 정말 좋아했다는 건 알아요.
 - **Explanation**: "can't say"는 "확실히 말할 수는 없다, 딱 꼬집어 말하기는 어렵다"라고 조심스럽게 의견을 말할 때 원어민들이 즐겨 쓰는 회화 표현입니다.
 
 ## Quiz 14
@@ -125,7 +125,7 @@
 - **Audio**: audio/But I dont even know technically was it really that good of one I mean probably not..wav
 - **English**: But I don't even know, [technically, physically, obviously, musically], was it really that good of one? I mean, probably not.
 - **Answer**: technically
-- **Korean**: 하지만 엄밀히 따져보면(기술적으로 보면), 그 집이 정말 그렇게 훌륭한 김치찌개였는지는 저도 잘 모르겠어요. 아마 아닐 수도 있죠.
+- **Korean**: 하지만 엄밀히 따져보면, 그 집이 정말 그렇게 훌륭한 김치찌개였는지는 저도 잘 모르겠어요. 아마 아닐 수도 있죠.
 - **Explanation**: "technically"는 "엄밀히 말하면, 이론상으로는, 기술적으로는"이라는 뜻의 유용한 부사입니다.
 
 ## Quiz 17
@@ -133,7 +133,7 @@
 - **Audio**: audio/And thats what I always based it off of..wav
 - **English**: And that's what I always [based, it, off, of].
 - **Answer**: based it off of
-- **Korean**: 그리고 그게 바로 제가 늘 (맛의) 바탕으로(기준으로) 삼았던 거예요.
+- **Korean**: 그리고 그게 바로 제가 늘 (맛의) 기준으로 삼았던 거예요.
 - **Explanation**: "base something off of ~"는 "~을 바탕(기준)으로 삼다"라는 실전 구동사 표현입니다 (과거형: based it off of).
 
 ## Quiz 18
@@ -141,7 +141,7 @@
 - **Audio**: audio/Its still not as good as that very first one that you made two months ago..wav
 - **English**: It's still not [as good as] that very first one, that you made two months ago.
 - **Answer**: as good as
-- **Korean**: 두 달 전에 재면 씨가 만들어주셨던 그 맨 처음 것만큼 맛있지는(좋지는) 여전히 않아요.
+- **Korean**: 두 달 전에 당신이 만들었던 그 맨 처음 것만큼 맛있지는 여전히 않지만요.
 - **Explanation**: "as ~ as ..."는 "...만큼 ~한"을 나타내는 동등 비교 구문입니다. "not as good as"는 "...만큼 좋지는(맛있지는) 않다"라는 뜻으로, 한국어의 "~만큼 맛있지는 않다"를 보고 바로 "as good as"를 영작하거나 퀴즈로 풀 수 있습니다.
 
 ## Quiz 19
@@ -149,7 +149,7 @@
 - **Audio**: audio/The problem is you dont follow a recipe so every time you never know how its going to turn out.wav
 - **English**: The problem is you don't follow a recipe, so every time you never know how it's going to [turn out],
 - **Answer**: turn out
-- **Korean**: 문제는 재면 씨가 레시피를 안 따르시니까, 매번 결과가 어떻게 나올지(어떻게 완성될지) 모른다는 거예요.
+- **Korean**: 문제는 당신이 레시피를 안 따르시니까, 매번 결과가 어떻게 나올지 모른다는 거예요.
 - **Explanation**: "turn out"은 어떤 일이나 요리 과정 끝에 "결과가 나오다, 완성되어 나오다, 판가름 나다"라는 뜻의 핵심 구동사입니다. 한국어의 "결과가 어떻게 나올지"를 보고 바로 "how it's going to turn out"을 연상할 수 있습니다.
 
 ## Quiz 20
@@ -157,7 +157,7 @@
 - **Audio**: audio/Whereas I feel like that one didnt have that oiliness to it..wav
 - **English**: [Whereas] I feel like that one didn't have that oiliness to it.
 - **Answer**: Whereas
-- **Korean**: 반면에(Whereas) 그 첫 번째 찌개에는 그런 기름진 느끼함이 전혀 없었던 것 같아요.
+- **Korean**: 반면에 그 첫 번째 찌개에는 그런 기름진 느끼함이 전혀 없었던 것 같아요.
 - **Explanation**: "Whereas"는 두 가지 사실이나 상황을 대비하여 문두에서 "반면에, ~임에 비하여"라는 뜻을 나타내는 접속사입니다.
 
 ## Quiz 21
@@ -173,5 +173,5 @@
 - **Audio**: audio/Lets take a two month break from Kimchi Jjigae and then you cook it again..wav
 - **English**: Let's take a two month [break, from] Kimchi Jjigae and then you cook it again.
 - **Answer**: break from
-- **Korean**: 우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고(쉬고), 그러고 나서 재면 씨가 다시 끓여주세요.
+- **Korean**: 우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고, 그러고 나서 당신이 다시 끓여주세요.
 - **Explanation**: "take a break from ~"은 바쁜 일상이나 특정 음식, 활동 등을 "잠시 쉬다, 휴식기를 갖다"라는 실생활 유용한 표현입니다. 한국어의 "~로부터 휴식기를 갖다/쉬다"에서 바로 "break from"을 떠올릴 수 있습니다.
