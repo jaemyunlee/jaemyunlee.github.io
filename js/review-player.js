@@ -271,7 +271,7 @@ class ReviewPlayer {
       const cleanEn = this._getCleanSentence(quiz.english, quiz.answer);
       const isSaved = Storage.isSentenceSaved(this.lessonId, cleanEn);
       const highlightedEn = this._formatHighlightedSentence(quiz.english, quiz.answer);
-      const keyword = quiz.answer || '';
+      const keyword = quiz.baseForm || quiz.answer || '';
       const meaning = quiz.korean || '';
       const explanation = quiz.explanation || '';
 
@@ -883,7 +883,7 @@ class ReviewPlayer {
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
         kr: kr,
-        expression: quiz.answer || '',
+        expression: quiz.baseForm || quiz.answer || '',
         rawEn: quiz.english || '',
         audio: cleanAudio,
         timestamp: 0

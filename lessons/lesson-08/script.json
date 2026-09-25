@@ -1,0 +1,758 @@
+[
+  {
+    "id": "s1",
+    "start": 0,
+    "end": 5.2,
+    "en": "so this week has not gone to plan well,",
+    "kr": "그래서 이번 주는 생각만큼 계획대로 잘 풀리지 않았어요,"
+  },
+  {
+    "id": "s2",
+    "start": 5.2,
+    "end": 8.07,
+    "en": "we went to go get our car washed.",
+    "kr": "우리 차를 세차하러 갔었잖아요."
+  },
+  {
+    "id": "s3",
+    "start": 8.07,
+    "end": 13.93,
+    "en": "Somehow, The truck in front of us,",
+    "kr": "어쩌다 보니, 우리 앞쪽에 있던 트럭이,"
+  },
+  {
+    "id": "s4",
+    "start": 13.93,
+    "end": 16.78,
+    "en": "I don't know if their tires were too big and they slipped",
+    "kr": "타이어가 너무 커서 미끄러진 건지,"
+  },
+  {
+    "id": "s5",
+    "start": 16.78,
+    "end": 20.08,
+    "en": "or did it got caught in the conveyor belt,",
+    "kr": "아니면 컨베이어 벨트에 바퀴가 걸린 건지 모르겠는데,"
+  },
+  {
+    "id": "s6",
+    "start": 20.08,
+    "end": 25.45,
+    "en": "but we ended up colliding with the truck in the car wash.",
+    "kr": "결국 세차장 안에서 앞 트럭과 충돌하고 말았죠."
+  },
+  {
+    "id": "s7",
+    "start": 51.38,
+    "end": 52.73,
+    "en": "um",
+    "kr": "음..."
+  },
+  {
+    "id": "s8",
+    "start": 52.73,
+    "end": 58.53,
+    "en": "So we are now in the process of having to get quotes for that to get repainted",
+    "kr": "그래서 지금 도색 작업을 위해 수리 견적들을 알아보고 있는 중이에요,"
+  },
+  {
+    "id": "s9",
+    "start": 58.53,
+    "end": 62.28,
+    "en": "and there's a little like dent. It's not a big damage,",
+    "kr": "그리고 약간 찌그러진 곳도 있고요. 큰 파손은 아니지만,"
+  },
+  {
+    "id": "s10",
+    "start": 62.28,
+    "end": 65.05,
+    "en": "but It's still, it's only,",
+    "kr": "하지만 그래도, 이건 겨우..."
+  },
+  {
+    "id": "s11",
+    "start": 65.05,
+    "end": 66.15,
+    "en": "it's a brand new car,",
+    "kr": "완전 새 차잖아요,"
+  },
+  {
+    "id": "s12",
+    "start": 66.15,
+    "end": 69.37,
+    "en": "so we're gonna get it fixed.",
+    "kr": "그래서 수리를 맡겨서 고칠 거예요."
+  },
+  {
+    "id": "s13",
+    "start": 69.37,
+    "end": 71.5,
+    "en": "So we're dealing with that.",
+    "kr": "그래서 지금 그 일을 수습하고 처리하는 중이에요."
+  },
+  {
+    "id": "s14",
+    "start": 71.5,
+    "end": 73.48,
+    "en": "And then Rhyden came yesterday.",
+    "kr": "그리고 어제 라이든이 왔을 때였죠."
+  },
+  {
+    "id": "s15",
+    "start": 73.48,
+    "end": 76.85,
+    "en": "There's some incident after school.",
+    "kr": "방과 후에 무슨 일이 좀 있었잖아요."
+  },
+  {
+    "id": "s16",
+    "start": 76.85,
+    "end": 79.1,
+    "en": "I still don't really understand what happened,",
+    "kr": "무슨 일이 있었던 건지 아직도 잘은 모르겠는데,"
+  },
+  {
+    "id": "s17",
+    "start": 79.1,
+    "end": 82.89,
+    "en": "but it ended up with him getting pushed.",
+    "kr": "결국 아이가 떠밀리는 상황으로 끝나버렸죠."
+  },
+  {
+    "id": "s18",
+    "start": 82.89,
+    "end": 84.92,
+    "en": "he fell and I don't know if he,",
+    "kr": "아이가 넘어졌는데,"
+  },
+  {
+    "id": "s19",
+    "start": 84.92,
+    "end": 87.95,
+    "en": "what from the push or from how he fell,",
+    "kr": "밀려서 그런 건지, 넘어지는 방식 때문이었는지는 몰라도,"
+  },
+  {
+    "id": "s20",
+    "start": 87.95,
+    "end": 95.33,
+    "en": "it reinjured the collarbone injury he had in Korea.",
+    "kr": "한국에서 다쳤던 그 쇄골 부위를 다시 다쳐버렸어요."
+  },
+  {
+    "id": "s21",
+    "start": 95.33,
+    "end": 99.89,
+    "en": "So we spent all morning at Prompt Care.",
+    "kr": "그래서 아침 내내 긴급 진료소(Prompt Care)에서 시간을 보냈죠."
+  },
+  {
+    "id": "s22",
+    "start": 99.89,
+    "end": 102.8,
+    "en": "getting him seen by a doctor.",
+    "kr": "아이를 의사 선생님께 진료받게 하느라고요."
+  },
+  {
+    "id": "s23",
+    "start": 102.8,
+    "end": 104.14,
+    "en": "He didn't go to school today.",
+    "kr": "오늘은 학교에도 못 갔어요."
+  },
+  {
+    "id": "s24",
+    "start": 104.14,
+    "end": 105.42,
+    "en": "He's in a sling,",
+    "kr": "아이가 지금 팔걸이(붕대)를 하고 있잖아요,"
+  },
+  {
+    "id": "s25",
+    "start": 110.92,
+    "end": 115.51,
+    "en": "and we're being referred to an orthopedic doctor.",
+    "kr": "그리고 정형외과 전문의에게 진료 의뢰를 받았어요."
+  },
+  {
+    "id": "s26",
+    "start": 115.51,
+    "end": 117.01,
+    "en": "Yay.",
+    "kr": "아이 참(참 잘됐네요)."
+  },
+  {
+    "id": "s27",
+    "start": 117.01,
+    "end": 119.37,
+    "en": "And all my classes started,",
+    "kr": "그리고 제 수업들도 다 개강했는데,"
+  },
+  {
+    "id": "s28",
+    "start": 119.37,
+    "end": 125.17,
+    "en": "which are a lot more work than I expected, again.",
+    "kr": "또 생각했던 것보다 할 일이 훨씬 더 많더라고요."
+  },
+  {
+    "id": "s29",
+    "start": 125.17,
+    "end": 128.02,
+    "en": "And I'm going to have to postpone my test,",
+    "kr": "그리고 제 시험도 연기해야 할 것 같아요,"
+  },
+  {
+    "id": "s30",
+    "start": 128.02,
+    "end": 130.91,
+    "en": "because there's no way I'm going to have time to study for it,",
+    "kr": "공부할 시간이 도저히 날 것 같지 않거든요,"
+  },
+  {
+    "id": "s31",
+    "start": 130.91,
+    "end": 137.94,
+    "en": "on top of everything else we have going on this month, week.",
+    "kr": "이번 달, 이번 주에 우리에게 일어나는 온갖 다른 일들에 더해서 말이에요."
+  },
+  {
+    "id": "s32",
+    "start": 137.94,
+    "end": 140.06,
+    "en": "And now what are you doing?",
+    "kr": "그나저나 지금은 뭐 하고 있어요?"
+  },
+  {
+    "id": "s33",
+    "start": 140.06,
+    "end": 143.82,
+    "en": "And now I'm attaching pompoms.",
+    "kr": "지금은 폼폼 방울을 붙이고 있어요."
+  },
+  {
+    "id": "s34",
+    "start": 143.82,
+    "end": 146.64,
+    "en": "Because I'm procrastinating.",
+    "kr": "제가 해야 할 일을 미루고 있거든요."
+  },
+  {
+    "id": "s35",
+    "start": 146.64,
+    "end": 148.96,
+    "en": "Oh, 'cause I have to finish my college application.",
+    "kr": "아, 대학원 입학 원서를 마무리해야 하거든요."
+  },
+  {
+    "id": "s36",
+    "start": 148.96,
+    "end": 150.04,
+    "en": "I have to write those essays,",
+    "kr": "그 에세이들을 써야 하는데,"
+  },
+  {
+    "id": "s37",
+    "start": 150.04,
+    "end": 151.22,
+    "en": "but I don't know what to talk about.",
+    "kr": "무슨 이야기를 써야 할지 모르겠어요."
+  },
+  {
+    "id": "s38",
+    "start": 151.22,
+    "end": 155.77,
+    "en": "So that's really what I'm procrastinating is working on that.",
+    "kr": "그래서 그거 쓰는 작업을 미루려고 이러고 있는 거예요."
+  },
+  {
+    "id": "s39",
+    "start": 155.77,
+    "end": 158.67,
+    "en": "What are you working on, honey?",
+    "kr": "여보, 지금 뭐 작업하고 있어요?"
+  },
+  {
+    "id": "s40",
+    "start": 158.67,
+    "end": 163.11,
+    "en": "Oh, and just so you know, Taylor Swift's coming out with new music later this week.",
+    "kr": "아, 그리고 참고로 말하자면, 테일러 스위프트 신곡이 이번 주 후반에 나와요."
+  },
+  {
+    "id": "s41",
+    "start": 163.11,
+    "end": 164.49,
+    "en": "Anything to add?",
+    "kr": "더 덧붙일 말 있어요?"
+  },
+  {
+    "id": "s42",
+    "start": 164.49,
+    "end": 166.47,
+    "en": "Oh, we also booked our trip to Hawaii.",
+    "kr": "아, 우리 하와이 여행도 예약했잖아요."
+  },
+  {
+    "id": "s43",
+    "start": 166.47,
+    "end": 170.91,
+    "en": "At least that's done, but we spent a lot of money on that.",
+    "kr": "적어도 그건 끝냈지만, 돈이 정말 많이 들었죠."
+  },
+  {
+    "id": "s44",
+    "start": 170.91,
+    "end": 174.96,
+    "en": "We have family coming in a couple of weeks,",
+    "kr": "몇 주 뒤면 가족들이 놀러 오시니까,"
+  },
+  {
+    "id": "s45",
+    "start": 174.96,
+    "end": 178.04,
+    "en": "so we have to get ready for that.",
+    "kr": "맞이할 준비도 해야 해요."
+  },
+  {
+    "id": "s46",
+    "start": 178.04,
+    "end": 179.89,
+    "en": "My mom did pay for the cleaner to come.",
+    "kr": "우리 엄마(패티 장모님)가 청소 도우미분 비용을 대주셨어요."
+  },
+  {
+    "id": "s47",
+    "start": 179.89,
+    "end": 180.92,
+    "en": "really?",
+    "kr": "정말요?"
+  },
+  {
+    "id": "s48",
+    "start": 180.92,
+    "end": 182.19,
+    "en": "Yep",
+    "kr": "네."
+  },
+  {
+    "id": "s49",
+    "start": 182.19,
+    "end": 184.42,
+    "en": "She's coming two or three days",
+    "kr": "이틀이나 사흘 전에 오실 거예요,"
+  },
+  {
+    "id": "s50",
+    "start": 184.42,
+    "end": 188.07,
+    "en": "before family gets here",
+    "kr": "가족들이 여기 도착하기 전에요."
+  },
+  {
+    "id": "s51",
+    "start": 188.07,
+    "end": 192.32,
+    "en": "I'm just going to keep rambling if you keep the camera in front of me, Jaemyun.",
+    "kr": "재면 씨가 내 앞에 카메라를 계속 대고 있으면 난 그냥 계속 횡설수설 주절거리게 될 거예요."
+  },
+  {
+    "id": "s52",
+    "start": 192.32,
+    "end": 197.22,
+    "en": "Can you explain what happened to him in Korea?",
+    "kr": "한국에서 아이한테 무슨 일이 있었던 건지 설명해 줄 수 있어요?"
+  },
+  {
+    "id": "s53",
+    "start": 197.22,
+    "end": 199.64,
+    "en": "Well, I don't really know what happened in Korea,",
+    "kr": "글쎄요, 저도 한국에서 정확히 무슨 일이 있었는지는 잘 모르지만,"
+  },
+  {
+    "id": "s54",
+    "start": 199.64,
+    "end": 203.14,
+    "en": "but it sounded like he tried to explain it to the doctor today.",
+    "kr": "오늘 라이든이 의사 선생님한테 설명하려고 했던 걸 들어보니 그런 것 같았어요."
+  },
+  {
+    "id": "s55",
+    "start": 203.14,
+    "end": 206.17,
+    "en": "So it was what he was going too fast on the scooter",
+    "kr": "킥보드를 너무 빠르게 타고 가다가"
+  },
+  {
+    "id": "s56",
+    "start": 206.17,
+    "end": 212.07,
+    "en": "and fell and hit a curb on his collarbone, right?",
+    "kr": "넘어지면서 연석(도로 턱)에 쇄골을 부딪친 거 맞죠?"
+  },
+  {
+    "id": "s57",
+    "start": 212.07,
+    "end": 215.11,
+    "en": "So that he got a hairline fracture",
+    "kr": "그래서 쇄골에 실금(미세 골절)이 갔었잖아요."
+  },
+  {
+    "id": "s58",
+    "start": 215.11,
+    "end": 217.46,
+    "en": "and he was using a,",
+    "kr": "그리고 그때,"
+  },
+  {
+    "id": "s59",
+    "start": 217.46,
+    "end": 219.61,
+    "en": "sling then,",
+    "kr": "팔걸이를 하고 있었는데,"
+  },
+  {
+    "id": "s60",
+    "start": 219.61,
+    "end": 224.41,
+    "en": "but it looked like it was getting better, so he got out of the sling.",
+    "kr": "다 나아가는 것 같아 보여서 팔걸이를 풀었던 거잖아요."
+  },
+  {
+    "id": "s61",
+    "start": 224.41,
+    "end": 226.49,
+    "en": "um",
+    "kr": "음..."
+  },
+  {
+    "id": "s62",
+    "start": 226.49,
+    "end": 230.11,
+    "en": "But the doctors now said it still looks like it's healing,",
+    "kr": "하지만 지금 의사 선생님 말씀으로는 아직도 아물고 있는 중인 것 같대요,"
+  },
+  {
+    "id": "s63",
+    "start": 230.11,
+    "end": 232.77,
+    "en": "so that's why they're going to refer us to a different doctor.",
+    "kr": "그래서 다른 의사 선생님께 우리를 의뢰해 주려는 거고요."
+  },
+  {
+    "id": "s64",
+    "start": 232.77,
+    "end": 234.76,
+    "en": "He didn't have a new hairline fracture,",
+    "kr": "새로운 실금이 생긴 건 아니었지만,"
+  },
+  {
+    "id": "s65",
+    "start": 234.76,
+    "end": 238.09,
+    "en": "but they thought it was strange that",
+    "kr": "이상하게 여기셨던 건,"
+  },
+  {
+    "id": "s66",
+    "start": 238.09,
+    "end": 241.82,
+    "en": "even though it had been so long since he had that injury,",
+    "kr": "그 부상을 입은 지 그렇게 오래되었는데도,"
+  },
+  {
+    "id": "s67",
+    "start": 241.82,
+    "end": 245.12,
+    "en": "that he still showed.",
+    "kr": "아직도 흔적이 남아있다는 점이었어요."
+  },
+  {
+    "id": "s68",
+    "start": 245.12,
+    "end": 246.69,
+    "en": "like that it was still healing",
+    "kr": "아직도 아물고 있는 상태처럼 보인다는 게요."
+  },
+  {
+    "id": "s69",
+    "start": 246.69,
+    "end": 249.72,
+    "en": "they thought it should have been healed by now",
+    "kr": "의사들은 지금쯤이면 이미 다 나았어야 했다고 생각했거든요."
+  },
+  {
+    "id": "s70",
+    "start": 249.72,
+    "end": 255.02,
+    "en": "and then i did ask because that's the same collarbone",
+    "kr": "그래서 제가 여쭤봤어요, 왜냐하면 같은 쪽 쇄골이거든요,"
+  },
+  {
+    "id": "s71",
+    "start": 255.02,
+    "end": 258.31,
+    "en": "when he was born he also had a fracture",
+    "kr": "아이가 태어났을 때도 골절이 있었잖아요."
+  },
+  {
+    "id": "s72",
+    "start": 258.31,
+    "end": 259.99,
+    "en": "then so i asked if it like",
+    "kr": "그래서 혹시,"
+  },
+  {
+    "id": "s73",
+    "start": 259.99,
+    "end": 263.19,
+    "en": "if he just is going to have a weak collarbone",
+    "kr": "아이가 원래 쇄골이 약하게 타고난 건지 여쭤봤죠."
+  },
+  {
+    "id": "s74",
+    "start": 263.19,
+    "end": 265.04,
+    "en": "so she was concerned about his diet",
+    "kr": "그러자 의사 선생님은 아이의 식습관을 염려하시더라고요,"
+  },
+  {
+    "id": "s75",
+    "start": 265.04,
+    "end": 267.76,
+    "en": "and if he maybe has a vitamin deficiency",
+    "kr": "혹시 아이에게 비타민 결핍증이 있는 건 아닌지,"
+  },
+  {
+    "id": "s76",
+    "start": 267.76,
+    "end": 271.56,
+    "en": "if he's not healing as he should",
+    "kr": "정상적으로 회복되지 않고 있다면,"
+  },
+  {
+    "id": "s77",
+    "start": 271.56,
+    "end": 273.36,
+    "en": "and is maybe weak or something",
+    "kr": "어딘가 약하거나 문제가 있는 건 아닌지 말이에요."
+  },
+  {
+    "id": "s78",
+    "start": 273.36,
+    "end": 277.29,
+    "en": "so she recommended to talk to the pediatrician",
+    "kr": "그래서 소아과 의사와 상담해 보라고 권유하시더라고요."
+  },
+  {
+    "id": "s79",
+    "start": 277.29,
+    "end": 279.94,
+    "en": "but i mean he eats",
+    "kr": "하지만 제 말은, 아이가 잘 먹잖아요."
+  },
+  {
+    "id": "s80",
+    "start": 279.94,
+    "end": 281.89,
+    "en": "he eats decently.",
+    "kr": "꽤 골고루 잘 먹는 편이에요."
+  },
+  {
+    "id": "s81",
+    "start": 281.89,
+    "end": 284.44,
+    "en": "So, I mean he...",
+    "kr": "그러니까 제 말은..."
+  },
+  {
+    "id": "s82",
+    "start": 284.44,
+    "end": 285.32,
+    "en": "No problem with dairy,",
+    "kr": "유제품도 문제없이 잘 먹고,"
+  },
+  {
+    "id": "s83",
+    "start": 285.32,
+    "end": 286.49,
+    "en": "no problem with vegetables,",
+    "kr": "야채도 문제없이 잘 먹고,"
+  },
+  {
+    "id": "s84",
+    "start": 286.49,
+    "end": 288.76,
+    "en": "no problem with fruit and stuff, so.",
+    "kr": "과일 같은 것도 잘 먹으니까요."
+  },
+  {
+    "id": "s85",
+    "start": 288.76,
+    "end": 292.12,
+    "en": "what's the next step?",
+    "kr": "그럼 다음 단계는 어떻게 돼요?"
+  },
+  {
+    "id": "s86",
+    "start": 292.12,
+    "end": 295.32,
+    "en": "So I need to figure out, through Kia,",
+    "kr": "그래서 기아(Kia) 본사를 통해서 알아봐야 해요,"
+  },
+  {
+    "id": "s87",
+    "start": 295.32,
+    "end": 298.31,
+    "en": "so we don't like void our warranty and stuff,",
+    "kr": "우리 차량 무상 보증 같은 게 무효가 되지 않도록 말이에요,"
+  },
+  {
+    "id": "s88",
+    "start": 298.31,
+    "end": 302.81,
+    "en": "that who actually can fix it.",
+    "kr": "어디에서 실제로 수리할 수 있는지 알아봐야 해요."
+  },
+  {
+    "id": "s89",
+    "start": 302.81,
+    "end": 305.69,
+    "en": "If we can get it fixed at the Hyundai dealership,",
+    "kr": "현대 딜러십에서 수리를 받을 수 있는지,"
+  },
+  {
+    "id": "s90",
+    "start": 305.69,
+    "end": 308.17,
+    "en": "or if I need to take it to the Kia dealership,",
+    "kr": "아니면 기아 딜러십으로 직접 가져가야 하는지 말이에요,"
+  },
+  {
+    "id": "s91",
+    "start": 308.17,
+    "end": 311.72,
+    "en": "and then we'll have to get a quote",
+    "kr": "그리고 견적도 받아야 하고요,"
+  },
+  {
+    "id": "s92",
+    "start": 311.72,
+    "end": 314.22,
+    "en": "And then we have to talk to",
+    "kr": "그러고 나면 이야기를 나눠야 하죠,"
+  },
+  {
+    "id": "s93",
+    "start": 314.22,
+    "end": 315.27,
+    "en": "the...",
+    "kr": "그..."
+  },
+  {
+    "id": "s94",
+    "start": 315.27,
+    "end": 316.62,
+    "en": "car wash,",
+    "kr": "세차장 측이랑요,"
+  },
+  {
+    "id": "s95",
+    "start": 316.62,
+    "end": 318.37,
+    "en": "to get it paid for.",
+    "kr": "수리 비용을 보상받으려면요."
+  },
+  {
+    "id": "s96",
+    "start": 318.37,
+    "end": 320.89,
+    "en": "have to figure all that out.",
+    "kr": "그 모든 걸 다 파악하고 해결해야 해요."
+  },
+  {
+    "id": "s97",
+    "start": 320.89,
+    "end": 323.26,
+    "en": "Ryden is having the school,",
+    "kr": "그리고 라이든 학교에서,"
+  },
+  {
+    "id": "s98",
+    "start": 323.26,
+    "end": 328.26,
+    "en": "the kindergarten class, is having an ABC parade.",
+    "kr": "유치원 반에서 'ABC 퍼레이드'를 한대요."
+  },
+  {
+    "id": "s99",
+    "start": 328.26,
+    "end": 330.74,
+    "en": "And his letter is the letter P,",
+    "kr": "라이든이 맡은 알파벳이 바로 'P'라서,"
+  },
+  {
+    "id": "s100",
+    "start": 330.74,
+    "end": 332.82,
+    "en": "so we're decorating it.",
+    "kr": "지금 'P'를 꾸미고 있는 중이에요."
+  },
+  {
+    "id": "s101",
+    "start": 332.82,
+    "end": 337.14,
+    "en": "Um, yeah, maybe I went a little too crazy with it,",
+    "kr": "음, 네, 어쩌면 제가 거기에 좀 너무 과하게 열을 올렸나 봐요,"
+  },
+  {
+    "id": "s102",
+    "start": 337.14,
+    "end": 340.62,
+    "en": "but... That's okay.",
+    "kr": "하지만... 그래도 괜찮아요."
+  },
+  {
+    "id": "s103",
+    "start": 340.62,
+    "end": 342.59,
+    "en": "So what are you putting?",
+    "kr": "그래서 뭘 붙이고 있는 거예요?"
+  },
+  {
+    "id": "s104",
+    "start": 342.59,
+    "end": 345.32,
+    "en": "Pompoms for the letter P.",
+    "kr": "알파벳 P니까 '폼폼(Pompoms)' 방울이요."
+  },
+  {
+    "id": "s105",
+    "start": 345.32,
+    "end": 347.46,
+    "en": "Well, what else?",
+    "kr": "글쎄요, 또 뭐가 있죠?"
+  },
+  {
+    "id": "s106",
+    "start": 347.46,
+    "end": 354.32,
+    "en": "We have pencils and pipe cleaners.",
+    "kr": "'연필(Pencils)'이랑 '모루 공예 철사(Pipe cleaners)'도 있어요."
+  },
+  {
+    "id": "s107",
+    "start": 354.32,
+    "end": 356.94,
+    "en": "That's it, I think.",
+    "kr": "그게 다인 것 같아요."
+  },
+  {
+    "id": "s108",
+    "start": 356.94,
+    "end": 360.52,
+    "en": "Pink, lots of pink and lots of purple.",
+    "kr": "분홍색(Pink), 분홍색 잔뜩이랑 보라색(Purple) 잔뜩이요."
+  }
+]

@@ -200,11 +200,63 @@ const CONCISE_DEFINITIONS = {
   'turn out': '결과가 나오다, 완성되다',
   'whereas': '반면에, ~임에 비하여',
   'oilier to': '~에게 더 기름지게 느껴지는',
-  'break from': '~을 잠시 쉬다, 휴식기를 갖다'
+  'break from': '~을 잠시 쉬다, 휴식기를 갖다',
+
+  // Lesson 08
+  'go to plan': '계획대로 진행되다',
+  'has not gone to plan': '계획대로 풀리지 않다',
+  'go get': '~하러 가다',
+  'went to go get': '~하러 가다',
+  'collide': '충돌하다, 부딪치다',
+  'colliding': '충돌하다, 부딪치다',
+  'get quotes': '수리 견적을 받다/알아보다',
+  'dent': '움푹 들어간 곳, 찌그러진 자국',
+  'get it fixed': '수리받다, 고치다',
+  'deal with': '대처하다, 처리하다, 수습하다',
+  'dealing with': '대처하다, 처리하다, 수습하다',
+  'incident': '사건, 일',
+  'reinjure': '다시 다치다, 재부상을 입히다',
+  'reinjured': '다시 다치다, 재부상을 입히다',
+  'sling': '팔걸이 붕대, 삼각건',
+  'be referred to': '진료 의뢰를 받다, 소개되다',
+  'being referred to': '진료 의뢰를 받다, 소개되다',
+  'postpone': '미루다, 연기하다',
+  'on top of': '~에 겹쳐서, 엎친 데 덮친 격으로',
+  'procrastinate': '미루다, 늑장 부리다',
+  'procrastinating': '미루다, 늑장 부리다',
+  'just so you know': '참고로 말하자면, 그냥 알려주는 건데',
+  'book': '예약하다',
+  'booked': '예약하다',
+  'ramble': '횡설수설하다, 주절거리다',
+  'rambling': '횡설수설하다, 주절거리다',
+  'sound like': '~처럼 들리다, ~인 것 같다',
+  'sounded like': '~처럼 들리다, ~인 것 같다',
+  'hairline fracture': '실금, 미세 골절',
+  'get out of the sling': '팔걸이를 풀다/벗어나다',
+  'got out of the sling': '팔걸이를 풀다/벗어나다',
+  'that\'s why': '그래서 ~한 것이다',
+  'thats why': '그래서 ~한 것이다',
+  'should have been': '~되었어야 했다',
+  'deficiency': '결핍, 부족',
+  'pediatrician': '소아과 의사',
+  'figure out': '알아내다, 파악하다',
+  'void warranty': '품질 보증을 무효로 만들다',
+  'void our warranty': '품질 보증을 무효로 만들다',
+  'go crazy with': '너무 지나치게 열을 올리다/과하게 하다',
+  'went a little too crazy with': '너무 지나치게 열을 올리다/과하게 하다'
 };
 
 function extractConciseDefinition(quiz) {
   if (!quiz) return '';
+  const baseKey = (quiz.baseForm || '').toLowerCase().trim();
+  const cleanBaseKey = baseKey.replace(/['"’]/g, '');
+  if (baseKey && CONCISE_DEFINITIONS[baseKey]) {
+    return CONCISE_DEFINITIONS[baseKey];
+  }
+  if (cleanBaseKey && CONCISE_DEFINITIONS[cleanBaseKey]) {
+    return CONCISE_DEFINITIONS[cleanBaseKey];
+  }
+
   const ansKey = (quiz.answer || '').toLowerCase().trim();
   const cleanKey = ansKey.replace(/['"’]/g, '');
   if (CONCISE_DEFINITIONS[ansKey]) {

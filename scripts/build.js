@@ -171,7 +171,35 @@ const CURATED_HEADLINES = {
   'lesson-07-19': '"결과가 어떻게 나올지/완성될지" 핵심 구동사는?',
   'lesson-07-20': '"반면에 그것에는 기름진 느낌이 없었죠" 대조 접속사는?',
   'lesson-07-21': '"왠지 나한테 더 기름지게 느껴지다" 비교급 표현은?',
-  'lesson-07-22': '"김치찌개는 두 달 동안 잠시 쉬자" 휴식기를 갖다는?'
+  'lesson-07-22': '"김치찌개는 두 달 동안 잠시 쉬자" 휴식기를 갖다는?',
+  'lesson-08-1': '"계획대로 잘 풀리지 않다"를 뜻하는 완료형 표현은?',
+  'lesson-08-2': '"차를 세차하러 가다" 일상 구어체 필수 표현은?',
+  'lesson-08-3': '"앞차와 쿵 충돌하다/부딪치다"를 뜻하는 핵심 동사는?',
+  'lesson-08-4': '"수리 견적을 알아보다/받다" 영어로는?',
+  'lesson-08-5': '"차체가 찌그러진 곳, 움푹 들어간 곳" 영어로 뭐라고 할까요?',
+  'lesson-08-6': '"차를 수리맡겨서 고치다" 사역 표현은?',
+  'lesson-08-7': '"골치 아픈 상황을 처리하다/수습하다" 매일 쓰는 구동사는?',
+  'lesson-08-8': '"학교에서 일어난 어떤 사건/일"을 뜻하는 명사는?',
+  'lesson-08-9': '"결국 ~한 상황으로 끝나버리다" 핵심 구동사는?',
+  'lesson-08-10': '"이전에 다쳤던 부위를 다시 다치다" 영어 동사는?',
+  'lesson-08-11': '"팔걸이 붕대/삼각건을 하고 있다" 영어로는?',
+  'lesson-08-12': '"다른 전문의에게 진료 의뢰를 받다" 병원 수동태 표현은?',
+  'lesson-08-13': '"시험이나 일정을 미루다/연기하다"를 뜻하는 핵심 동사는?',
+  'lesson-08-14': '"온갖 일들이 겹친 데 더해서"를 뜻하는 표현은?',
+  'lesson-08-15': '"해야 할 일을 미루다/늑장부리다" 고급 영어 단어는?',
+  'lesson-08-16': '"참고로 말하자면, 그냥 알려주는 건데" 유용한 영어 관용구는?',
+  'lesson-08-17': '"하와이 여행을 예약하다"를 뜻하는 동사는?',
+  'lesson-08-18': '"두서없이 횡설수설 이야기하다" 원어민들이 즐겨 쓰는 동사는?',
+  'lesson-08-19': '"말을 들어보니 ~인 것 같았다" 회화 표현은?',
+  'lesson-08-20': '"뼈에 머리카락처럼 금이 간 실금/미세 골절"을 영어로?',
+  'lesson-08-21': '"착용하던 팔걸이 붕대를 풀다" 영어 표현은?',
+  'lesson-08-22': '"앞서 말한 이유로 그래서 ~한 것이다" 인과관계 접속 표현은?',
+  'lesson-08-23': '"지금쯤 이미 다 나았어야 했는데" 과거 기대 표현은?',
+  'lesson-08-24': '"영양소나 비타민의 결핍증"을 뜻하는 영어 명사는?',
+  'lesson-08-25': '"아이들을 진료하는 소아과 의사"를 영어로 뭐라고 부를까요?',
+  'lesson-08-26': '"해결책이나 방법을 알아내다/파악하다" 구동사는?',
+  'lesson-08-27': '"차량 품질 무상 보증을 무효로 만들다" 영어로는?',
+  'lesson-08-28': '"어떤 일에 너무 과하게 열을 올리다/지나치다" 영어 표현은?'
 };
 
 function escapeAttr(str) {
@@ -190,6 +218,7 @@ function parseQuizMarkdown(content) {
     const enM = block.match(/-\s*\*\*English\*\*:\s*([^\n]+)/i);
     const koM = block.match(/-\s*\*\*Korean\*\*:\s*([^\n]+)/i);
     const ansM = block.match(/-\s*\*\*Answer\*\*:\s*([^\n]+)/i);
+    const baseM = block.match(/-\s*\*\*BaseForm\*\*:\s*([^\n]+)/i);
     const expM = block.match(/-\s*\*\*Explanation\*\*:\s*([^\n]+)/i);
     const audioM = block.match(/-\s*\*\*Audio\*\*:\s*([^\n]+)/i);
 
@@ -197,6 +226,7 @@ function parseQuizMarkdown(content) {
     let english = enM ? enM[1].trim() : '';
     const korean = koM ? koM[1].trim() : '';
     let answer = ansM ? ansM[1].trim() : '';
+    const baseForm = baseM ? baseM[1].trim() : '';
     const explanation = expM ? expM[1].trim() : '';
     const audio = audioM ? audioM[1].trim() : '';
 
@@ -241,6 +271,7 @@ function parseQuizMarkdown(content) {
       english,
       korean,
       answer,
+      ...(baseForm ? { baseForm } : {}),
       options,
       ...(isDrag ? { tokens: options } : {}),
       ...(blanks ? { blanks } : {}),

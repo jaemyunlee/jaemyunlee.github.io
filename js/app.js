@@ -219,6 +219,22 @@ const App = {
       path: 'lessons/lesson-07/',
       status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.HIDDEN : 'hidden'),
       scheduledDateText: '10월 5일 본영상 공개 예정'
+    },
+    {
+      id: 'lesson-08',
+      shortTitle: 'Lesson 8',
+      topic: "Car Wash Incident & Ryden's Collarbone",
+      icon: '🚗',
+      speaker: 'Kelly',
+      avatar: 'assets/img/avatars/kelly.jpg',
+      createdAt: '2026-09-25',
+      title: '다사다난한 한 주: 세차장 접촉사고와 라이든의 쇄골 부상 이야기',
+      subtitle: '새 차 세차장 접촉사고와 수리 견적, 학교에서 넘어져 쇄골 부상이 재발한 라이든의 병원 진료, 하와이 여행과 유치원 ABC 퍼레이드',
+      duration: '6:00',
+      vocabCount: 28,
+      path: 'lessons/lesson-08/',
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.HIDDEN : 'hidden'),
+      scheduledDateText: '10월 12일 본영상 공개 예정'
     }
   ],
 
@@ -1856,6 +1872,53 @@ const LESSON_07_AUDIO_MAP = [
   { key: 'break from', file: 'Lets take a two month break from Kimchi Jjigae and then you cook it again..wav' }
 ];
 
+// Known audio files for Lesson 08 (maps keyword to WAV audio filename in lessons/lesson-08/audio/)
+const LESSON_08_AUDIO_MAP = [
+  { key: 'has not gone to plan', file: 'so this week has not gone to plan well.wav' },
+  { key: 'go to plan', file: 'so this week has not gone to plan well.wav' },
+  { key: 'went to go get', file: 'we went to go get our car washed..wav' },
+  { key: 'go get', file: 'we went to go get our car washed..wav' },
+  { key: 'colliding', file: 'but we ended up colliding with the truck in the car wash..wav' },
+  { key: 'collide', file: 'but we ended up colliding with the truck in the car wash..wav' },
+  { key: 'get quotes', file: 'So we are now in the process of having to get quotes for that to get repainted.wav' },
+  { key: 'dent', file: 'and theres a little like dent. Its not a big damage.wav' },
+  { key: 'get it fixed', file: 'so were gonna get it fixed..wav' },
+  { key: 'dealing with', file: 'So were dealing with that..wav' },
+  { key: 'deal with', file: 'So were dealing with that..wav' },
+  { key: 'incident', file: 'Theres some incident after school..wav' },
+  { key: 'ended up', file: 'but it ended up with him getting pushed..wav' },
+  { key: 'end up', file: 'but it ended up with him getting pushed..wav' },
+  { key: 'reinjured', file: 'it reinjured the collarbone injury he had in Korea..wav' },
+  { key: 'reinjure', file: 'it reinjured the collarbone injury he had in Korea..wav' },
+  { key: 'sling', file: 'Hes in a sling.wav' },
+  { key: 'being referred to', file: 'and were being referred to an orthopedic doctor..wav' },
+  { key: 'be referred to', file: 'and were being referred to an orthopedic doctor..wav' },
+  { key: 'postpone', file: 'And Im going to have to postpone my test.wav' },
+  { key: 'on top of', file: 'on top of everything else we have going on this month week..wav' },
+  { key: 'procrastinating', file: 'Because Im procrastinating..wav' },
+  { key: 'procrastinate', file: 'Because Im procrastinating..wav' },
+  { key: 'just so you know', file: 'Oh and just so you know Taylor Swifts coming out with new music later this week..wav' },
+  { key: 'booked', file: 'Oh we also booked our trip to Hawaii..wav' },
+  { key: 'book', file: 'Oh we also booked our trip to Hawaii..wav' },
+  { key: 'rambling', file: 'Im just going to keep rambling if you keep the camera in front of me Jaemyun..wav' },
+  { key: 'ramble', file: 'Im just going to keep rambling if you keep the camera in front of me Jaemyun..wav' },
+  { key: 'sounded like', file: 'but it sounded like he tried to explain it to the doctor today..wav' },
+  { key: 'sound like', file: 'but it sounded like he tried to explain it to the doctor today..wav' },
+  { key: 'hairline fracture', file: 'So that he got a hairline fracture.wav' },
+  { key: 'got out of the sling', file: 'but it looked like it was getting better so he got out of the sling..wav' },
+  { key: 'get out of the sling', file: 'but it looked like it was getting better so he got out of the sling..wav' },
+  { key: "that's why", file: 'so thats why theyre going to refer us to a different doctor..wav' },
+  { key: 'thats why', file: 'so thats why theyre going to refer us to a different doctor..wav' },
+  { key: 'should have been', file: 'they thought it should have been healed by now.wav' },
+  { key: 'deficiency', file: 'and if he maybe has a vitamin deficiency.wav' },
+  { key: 'pediatrician', file: 'so she recommended to talk to the pediatrician.wav' },
+  { key: 'figure out', file: 'So I need to figure out through Kia.wav' },
+  { key: 'void warranty', file: 'so we dont like void our warranty and stuff.wav' },
+  { key: 'void our warranty', file: 'so we dont like void our warranty and stuff.wav' },
+  { key: 'went a little too crazy with', file: 'Um yeah maybe I went a little too crazy with it.wav' },
+  { key: 'go crazy with', file: 'Um yeah maybe I went a little too crazy with it.wav' }
+];
+
 const SavedAudioPlayer = {
   app: null,
   audio: null,
@@ -2620,6 +2683,12 @@ const SavedAudioPlayer = {
       for (const mapItem of LESSON_07_AUDIO_MAP) {
         if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
           return encodeURI(`${base}lessons/lesson-07/audio/${mapItem.file}`);
+        }
+      }
+    } else if (lesId === 'lesson-08') {
+      for (const mapItem of LESSON_08_AUDIO_MAP) {
+        if (cleanText.includes(mapItem.key) || mapItem.key.includes(cleanText)) {
+          return encodeURI(`${base}lessons/lesson-08/audio/${mapItem.file}`);
         }
       }
     }
