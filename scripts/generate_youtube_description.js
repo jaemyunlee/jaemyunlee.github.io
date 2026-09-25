@@ -94,6 +94,8 @@ function parseQuizMarkdown(content) {
       current.english = trimmed.replace(/-\s*\*\*English\*\*:\s*/, '').trim();
     } else if (trimmed.startsWith('- **Answer**:')) {
       current.answer = trimmed.replace(/-\s*\*\*Answer\*\*:\s*/, '').trim();
+    } else if (trimmed.startsWith('- **BaseForm**:')) {
+      current.baseForm = trimmed.replace(/-\s*\*\*BaseForm\*\*:\s*/, '').trim();
     } else if (trimmed.startsWith('- **Korean**:')) {
       current.korean = trimmed.replace(/-\s*\*\*Korean\*\*:\s*/, '').trim();
     } else if (trimmed.startsWith('- **Explanation**:')) {
@@ -283,7 +285,7 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, index, usedSet
     const quiz = quizzes[i] || { english: '', answer: '', korean: '' };
 
     const sentence = findMatchingSentence(srt, quizzes, readmeSentences, i, usedSet);
-    const exprTag = formatExpressionTag(srt.expression || quiz.answer);
+    const exprTag = formatExpressionTag(quiz.baseForm || srt.expression || quiz.answer);
     output += `${srt.timestamp} ${num}. ${sentence} [${exprTag}]\n`;
   }
 
@@ -297,7 +299,7 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, index, usedSet
     const srt = srtEntries[i] || { expression: '', korean: '' };
     const quiz = quizzes[i] || { answer: '', korean: '' };
 
-    const expr = (srt.expression || quiz.answer || '').replace(/,\s*/g, ' ').trim();
+    const expr = (quiz.baseForm || srt.expression || quiz.answer || '').replace(/,\s*/g, ' ').trim();
     let meaning = (srt.korean || '').trim();
     if (extractConciseDefinition) {
       const matchQuiz = quizzes.find(q => (q.answer || '').toLowerCase().trim() === expr.toLowerCase()) || quiz;

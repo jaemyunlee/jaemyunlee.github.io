@@ -58,12 +58,14 @@ function parseQuizMarkdown(content) {
     const enM = block.match(/-\s*\*\*English\*\*:\s*([^\n]+)/i);
     const koM = block.match(/-\s*\*\*Korean\*\*:\s*([^\n]+)/i);
     const ansM = block.match(/-\s*\*\*Answer\*\*:\s*([^\n]+)/i);
+    const baseM = block.match(/-\s*\*\*BaseForm\*\*:\s*([^\n]+)/i);
     const expM = block.match(/-\s*\*\*Explanation\*\*:\s*([^\n]+)/i);
 
     const typeStr = typeM ? typeM[1].trim().toLowerCase() : 'multiple-choice';
     const english = enM ? enM[1].trim() : '';
     const korean = koM ? koM[1].trim() : '';
     let answer = ansM ? ansM[1].trim() : '';
+    const baseForm = baseM ? baseM[1].trim() : '';
     const explanation = expM ? expM[1].trim() : '';
 
     const bracketM = english.match(/\[(.*?)\]/);
@@ -81,6 +83,7 @@ function parseQuizMarkdown(content) {
       english,
       korean,
       answer,
+      baseForm,
       explanation
     };
   });
@@ -188,7 +191,7 @@ function generateLessonKeyExpressionsSrt(lessonId) {
       matchedEntries.push({
         timing: matchedBlock.timing,
         start: matchedBlock.start,
-        expression: target,
+        expression: q.baseForm || target,
         korean: extractConciseDefinition(q)
       });
     }

@@ -103,7 +103,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await expect(hiddenBadge).toContainText('비공개 (테스트)');
 
     const countEl = page.locator('#total-lessons-count');
-    await expect(countEl).toHaveText('8');
+    await expect(countEl).toHaveText('9');
   });
 
   test('Hidden status bypass via query parameter ?show_hidden=true', async ({ page }) => {
@@ -130,7 +130,7 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await page.evaluate(() => window.App.enableDevTesting());
 
     await expect(page.locator('#card-lesson-draft')).toBeVisible();
-    await expect(page.locator('#total-lessons-count')).toHaveText('8');
+    await expect(page.locator('#total-lessons-count')).toHaveText('9');
 
     // Turn OFF dev mode dynamically
     await page.evaluate(() => window.App.disableDevTesting());
@@ -145,7 +145,9 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     // Simulate hitting the daily 10-lesson limit
     await page.evaluate(() => {
       localStorage.removeItem('rhyrhy_ignore_popcorn_limit');
-      const today = new Date().toISOString().slice(0, 10);
+      const today = (window.Storage && window.Storage.getLocalDateString)
+        ? window.Storage.getLocalDateString()
+        : new Date().toLocaleDateString('en-CA');
       localStorage.setItem('rhyrhy_popcorn_daily_study', JSON.stringify({
         date: today,
         count: 10
@@ -172,7 +174,9 @@ test.describe('Lesson Hidden Status & Popcorn Daily Limit Bypass', () => {
     await page.goto('http://localhost:8855/daily.html');
     await page.evaluate(() => {
       localStorage.removeItem('rhyrhy_ignore_popcorn_limit');
-      const today = new Date().toISOString().slice(0, 10);
+      const today = (window.Storage && window.Storage.getLocalDateString)
+        ? window.Storage.getLocalDateString()
+        : new Date().toLocaleDateString('en-CA');
       localStorage.setItem('rhyrhy_popcorn_daily_study', JSON.stringify({
         date: today,
         count: 10

@@ -32,6 +32,7 @@ const MarkdownQuizParser = {
           english: '',
           audio: '',
           answer: '',
+          baseForm: '',
           options: [],
           explanation: ''
         };
@@ -41,7 +42,7 @@ const MarkdownQuizParser = {
       if (!currentQuiz) continue;
 
       // Match key-value items like: "- **Type**: fill-in-the-blank" or "* Type: fill-in-the-blank"
-      const kvMatch = line.match(/^[-*]\s+\*{0,2}(Type|Korean|English|Audio|Answer|Explanation)\*{0,2}\s*:\s*(.*)/i);
+      const kvMatch = line.match(/^[-*]\s+\*{0,2}(Type|Korean|English|Audio|Answer|BaseForm|Explanation)\*{0,2}\s*:\s*(.*)/i);
       if (kvMatch) {
         const key = kvMatch[1].toLowerCase();
         const val = kvMatch[2].trim();
@@ -56,6 +57,8 @@ const MarkdownQuizParser = {
           currentQuiz.audio = val;
         } else if (key === 'answer') {
           currentQuiz.answer = val;
+        } else if (key === 'baseform') {
+          currentQuiz.baseForm = val;
         } else if (key === 'explanation') {
           currentQuiz.explanation = val;
         }
