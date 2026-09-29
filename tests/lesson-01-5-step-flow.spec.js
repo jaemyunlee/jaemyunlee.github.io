@@ -89,7 +89,7 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     expect(await playBtns.count()).toBe(26);
   });
 
-  test('Step 3: Interactive transcript renders Flag button and saves to Storage', async ({ page }) => {
+  test('Step 3: Interactive transcript renders Flag button, filter toggle, and filtered playback', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
     await expect(page.locator('#quiz-container .quiz-card')).toBeVisible();
 
@@ -103,10 +103,16 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     const totalFlags = await flagBtns.count();
     expect(totalFlags).toBeGreaterThan(0);
 
+    const filterBtn = page.locator('#btn-filter-flagged');
+    await expect(filterBtn).toBeVisible();
+    const countBadge = page.locator('#flagged-count-badge');
+    await expect(countBadge).toHaveText('0');
+
     // Click first flag button
     const firstFlagBtn = flagBtns.first();
     await firstFlagBtn.click();
     await expect(firstFlagBtn).toHaveClass(/active/);
+    await expect(countBadge).toHaveText('1');
 
     // Verify flagged in Storage
     const isStored = await page.evaluate(() => {
@@ -115,9 +121,26 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     });
     expect(isStored).toBe(true);
 
+    // Click filter button to show only flagged
+    await filterBtn.click();
+    await expect(filterBtn).toHaveClass(/active/);
+    await expect(filterBtn).toHaveAttribute('aria-pressed', 'true');
+
+    // Only flagged card should be visible
+    const firstCard = page.locator('#script-list-container .script-sentence-card').first();
+    await expect(firstCard).toBeVisible();
+    const secondCard = page.locator('#script-list-container .script-sentence-card').nth(1);
+    await expect(secondCard).toBeHidden();
+
+    // Toggle filter off
+    await filterBtn.click();
+    await expect(filterBtn).not.toHaveClass(/active/);
+    await expect(secondCard).toBeVisible();
+
     // Click again to unflag
     await firstFlagBtn.click();
     await expect(firstFlagBtn).not.toHaveClass(/active/);
+    await expect(countBadge).toHaveText('0');
 
     const isCleared = await page.evaluate(() => {
       const flagged = Storage.getFlaggedSegments('lesson-01');
@@ -126,10 +149,10 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     expect(isCleared).toBe(true);
   });
 
-  test('Step 4: Dictation practice dynamically includes key sentences and flagged segments', async ({ page }) => {
+  test('Step 4: Dictation practice strictly tests key sentences using audio segments (decoupled from step 3 flags)', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
 
-    // Pre-flag a segment in Step 3 via Storage
+    // Pre-flag a segment in Step 3 via Storage to confirm Step 4 is decoupled
     await page.evaluate(() => {
       Storage.toggleFlaggedSegment('lesson-01', {
         id: 's4',
@@ -148,11 +171,11 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     const dictCard = page.locator('#dictation-container .dictation-card');
     await expect(dictCard).toBeVisible();
 
-    // Queue size should be 26 key sentences + 1 flagged segment = 27
+    // Queue size should strictly be 26 key sentences (flagged segments from Step 3 are no longer injected)
     const queueLength = await page.evaluate(() => {
       return window.dictationEngine ? window.dictationEngine.queue.length : 0;
     });
-    expect(queueLength).toBe(27);
+    expect(queueLength).toBe(26);
 
     // Verify audio file used is from audio/segments/
     const firstAudioUrl = await page.evaluate(() => {

@@ -26,21 +26,12 @@ class DictationEngine {
     this.checkedState = null; // null | { isCorrect: boolean, diff: Array, userText: string }
 
     this.buildQueue();
-
-    // Listen for external flagged segment updates
-    if (typeof window !== 'undefined') {
-      window.addEventListener('flagged-segments-updated', (e) => {
-        if (e.detail && e.detail.lessonId === this.lessonId) {
-          this.refreshQueue();
-        }
-      });
-    }
   }
 
   buildQueue() {
     const queue = [];
 
-    // 1. Key sentences
+    // Key sentences only (flagged segments logic removed per user request)
     this.keySentences.forEach((item, idx) => {
       let audioUrl = item.audioUrl;
       if (!audioUrl) {
@@ -70,33 +61,6 @@ class DictationEngine {
         isFlagged: false
       });
     });
-
-    // 2. Flagged segments from Step 3
-    if (typeof Storage !== 'undefined' && typeof Storage.getFlaggedSegments === 'function') {
-      const flagged = Storage.getFlaggedSegments(this.lessonId);
-      flagged.forEach(seg => {
-        // Mark as flagged if already in queue
-        const existing = queue.find(q => (q.segmentId && q.segmentId === seg.id) || q.en === seg.en);
-        if (existing) {
-          existing.isFlagged = true;
-          return;
-        }
-
-        const segAudio = `${this.audioBaseUrl}segments/${seg.id}.mp3`;
-        const target = seg.target || seg.keyExpression || this._extractTarget(seg.en);
-        queue.push({
-          id: `flagged-${seg.id}`,
-          segmentId: seg.id,
-          type: 'flagged-segment',
-          en: seg.en,
-          kr: seg.kr,
-          audioUrl: segAudio,
-          keyExpression: target,
-          target: target,
-          isFlagged: true
-        });
-      });
-    }
 
     this.queue = queue;
   }
@@ -643,15 +607,13 @@ class DictationEngine {
 
   renderCompletedState() {
     const total = this.queue.length;
-    const flaggedCount = this.queue.filter(q => q.isFlagged).length;
-    const keyCount = total - flaggedCount;
 
     this.container.innerHTML = `
       <div class="dictation-card completed animate-fade-in" role="region" aria-label="Dictation Completed">
         <div class="dictation-complete-icon">🎉</div>
         <h3 class="dictation-complete-title">핵심 표현 딕테이션 완료!</h3>
         <p class="dictation-complete-desc">
-          영상 속 원어민 발음으로 핵심 표현 ${keyCount}개${flaggedCount > 0 ? ` 및 어려운 문장 ${flaggedCount}개` : ''}를 직접 귀로 듣고 받아쓰셨습니다!
+          영상 속 원어민 발음으로 핵심 표현 ${total}개를 직접 귀로 듣고 받아쓰셨습니다!
         </p>
 
         <div class="dictation-stats-card">
@@ -660,15 +622,9 @@ class DictationEngine {
             <span class="stat-label">완료한 문장</span>
           </div>
           <div class="stat-pill">
-            <span class="stat-num">${keyCount}</span>
+            <span class="stat-num">${total}</span>
             <span class="stat-label">핵심 표현</span>
           </div>
-          ${flaggedCount > 0 ? `
-          <div class="stat-pill">
-            <span class="stat-num">${flaggedCount}</span>
-            <span class="stat-label">복습한 어려운 문장</span>
-          </div>
-          ` : ''}
         </div>
 
         <div class="dictation-complete-actions">
@@ -700,7 +656,7 @@ class DictationEngine {
       });
     }
 
-    this.onComplete({ total, keyCount, flaggedCount });
+    this.onComplete({ total, keyCount: total });
   }
 
   _escapeHtml(text) {
