@@ -443,3 +443,127 @@
   max-width: 360px;
   margin: 0 auto;
 }
+
+/* ==========================================================================
+   Review Audio Player Section (Step 4 style segment player)
+   ========================================================================== */
+.review-audio-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px;
+  background-color: var(--surface-color-alt);
+  border-radius: var(--radius-lg);
+  margin-bottom: 22px;
+  border: 1px solid var(--surface-border);
+}
+
+[data-theme="light"] .review-audio-box {
+  background-color: #F8FAFC;
+  border-color: #E2E8F0;
+}
+
+.btn-review-audio-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--primary), #4F46E5);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-review-audio-play:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--primary-glow);
+}
+
+.btn-review-audio-play:active {
+  transform: translateY(0);
+}
+
+.btn-review-audio-play.playing {
+  background: linear-gradient(135deg, #10B981, #059669);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.review-audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-audio-controls .btn-audio-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  color: var(--text-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.review-audio-controls .btn-audio-ctrl:hover {
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+}
+
+[data-theme="light"] .review-audio-controls .btn-audio-ctrl {
+  background-color: #FFFFFF;
+  border-color: #CBD5E1;
+  color: #334155;
+}
+
+.review-audio-controls .speed-selector {
+  display: inline-flex;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+}
+
+[data-theme="light"] .review-audio-controls .speed-selector {
+  border-color: #CBD5E1;
+}
+
+.review-audio-controls .btn-speed-opt {
+  padding: 6px 12px;
+  background-color: var(--surface-color);
+  border: none;
+  color: var(--text-subtle);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.review-audio-controls .btn-speed-opt:hover {
+  color: var(--text-color);
+}
+
+.review-audio-controls .btn-speed-opt.active {
+  background-color: var(--primary);
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .review-audio-controls .btn-speed-opt {
+  background-color: #FFFFFF;
+  color: #64748B;
+}
+
+[data-theme="light"] .review-audio-controls .btn-speed-opt.active {
+  background-color: var(--primary);
+  color: #FFFFFF;
+}

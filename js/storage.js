@@ -5,6 +5,8 @@
 const Storage = {
   KEYS: {
     PROGRESS_PREFIX: 'rhyrhy_progress_',
+    DICTATION_PREFIX: 'rhyrhy_dictation_',
+    REVIEW_QUIZ_PREFIX: 'rhyrhy_review_quiz_',
     HISTORY: 'rhyrhy_history',
     SAVED_SENTENCES: 'rhyrhy_saved_sentences',
     LAST_LESSON: 'rhyrhy_last_lesson',
@@ -58,6 +60,71 @@ const Storage = {
       this.setLastActiveLesson(lessonId);
     } catch (e) {
       console.warn('LocalStorage error saving progress', e);
+    }
+  },
+
+  /**
+   * Get dictation (Step 4) progress for a specific lesson
+   * @param {string} lessonId
+   * @returns {{ completed: boolean, currentIndex: number }}
+   */
+  getDictationProgress(lessonId) {
+    try {
+      const data = localStorage.getItem(this.KEYS.DICTATION_PREFIX + lessonId);
+      if (data) return JSON.parse(data);
+    } catch (e) {
+      console.warn('LocalStorage error reading dictation progress', e);
+    }
+    return {
+      completed: false,
+      currentIndex: 0
+    };
+  },
+
+  /**
+   * Save dictation (Step 4) progress for a specific lesson
+   * @param {string} lessonId
+   * @param {object} progress
+   */
+  saveDictationProgress(lessonId, progress) {
+    try {
+      localStorage.setItem(this.KEYS.DICTATION_PREFIX + lessonId, JSON.stringify(progress));
+      this.setLastActiveLesson(lessonId);
+    } catch (e) {
+      console.warn('LocalStorage error saving dictation progress', e);
+    }
+  },
+
+  /**
+   * Get review quiz / speaking (Step 5) progress for a specific lesson
+   * @param {string} lessonId
+   * @returns {{ completed: boolean, currentIndex: number, results: object }}
+   */
+  getReviewQuizProgress(lessonId) {
+    try {
+      const data = localStorage.getItem(this.KEYS.REVIEW_QUIZ_PREFIX + lessonId);
+      if (data) return JSON.parse(data);
+    } catch (e) {
+      console.warn('LocalStorage error reading review quiz progress', e);
+    }
+    return {
+      completed: false,
+      currentIndex: 0,
+      results: {}
+    };
+  },
+
+  /**
+   * Save review quiz / speaking (Step 5) progress for a specific lesson
+   * @param {string} lessonId
+   * @param {object} progress
+   */
+  saveReviewQuizProgress(lessonId, progress) {
+    try {
+      localStorage.setItem(this.KEYS.REVIEW_QUIZ_PREFIX + lessonId, JSON.stringify(progress));
+      this.setLastActiveLesson(lessonId);
+    } catch (e) {
+      console.warn('LocalStorage error saving review quiz progress', e);
     }
   },
 
@@ -682,6 +749,18 @@ const Storage = {
         }
       }
 
+      const dictData = localStorage.getItem(this.KEYS.DICTATION_PREFIX + lessonId);
+      if (dictData) {
+        const dProg = JSON.parse(dictData);
+        if (dProg && (dProg.completed || dProg.currentIndex > 0)) return true;
+      }
+
+      const revData = localStorage.getItem(this.KEYS.REVIEW_QUIZ_PREFIX + lessonId);
+      if (revData) {
+        const rProg = JSON.parse(revData);
+        if (rProg && (rProg.completed || rProg.currentIndex > 0 || (rProg.results && Object.keys(rProg.results).length > 0))) return true;
+      }
+
       if (this.getLessonAccessCount(lessonId) > 0) return true;
       if (this.getStudyTime(lessonId) > 0) return true;
     } catch (_) { }
@@ -720,9 +799,9 @@ const Storage = {
 
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.startsWith(this.KEYS.PROGRESS_PREFIX)) {
+        if (key && (key.startsWith(this.KEYS.PROGRESS_PREFIX) || key.startsWith(this.KEYS.DICTATION_PREFIX) || key.startsWith(this.KEYS.REVIEW_QUIZ_PREFIX))) {
           const val = JSON.parse(localStorage.getItem(key));
-          if (val && (val.completed || val.currentQuestionIndex > 0 || (val.answeredQuestions && Object.keys(val.answeredQuestions).length > 0))) {
+          if (val && (val.completed || val.currentQuestionIndex > 0 || val.currentIndex > 0 || (val.answeredQuestions && Object.keys(val.answeredQuestions).length > 0))) {
             return true;
           }
         }
@@ -745,6 +824,8 @@ const Storage = {
         if (!key) continue;
         if (
           key.startsWith(this.KEYS.PROGRESS_PREFIX) ||
+          key.startsWith(this.KEYS.DICTATION_PREFIX) ||
+          key.startsWith(this.KEYS.REVIEW_QUIZ_PREFIX) ||
           key.startsWith(this.KEYS.IN_PROGRESS_PREFIX) ||
           key.startsWith('rhyrhy_step_') ||
           key.startsWith(this.KEYS.LESSON_ACCESS_PREFIX) ||

@@ -685,8 +685,13 @@
         // Pause audio if leaving steps
         if (step !== 2 && reviewPlayer) reviewPlayer.pause();
         if (step !== 3 && videoPlayer) videoPlayer.pause();
-        if (step !== 4 && dictationEngine) dictationEngine.pauseAudio();
-        if (step !== 5 && reviewQuizEngine && reviewQuizEngine.isListening) reviewQuizEngine.toggleSpeechRecognition();
+        if (step !== 4 && dictationEngine) {
+          if (typeof dictationEngine.pauseAudio === 'function') dictationEngine.pauseAudio();
+        }
+        if (step !== 5 && reviewQuizEngine) {
+          if (reviewQuizEngine.isListening) reviewQuizEngine.toggleSpeechRecognition();
+          if (typeof reviewQuizEngine.pauseAudio === 'function') reviewQuizEngine.pauseAudio();
+        }
 
         // Manage Section Displays
         if (quizSection) quizSection.style.display = (step === 1) ? 'block' : 'none';
@@ -806,8 +811,8 @@
               keySentences: keySentences,
               audioBaseUrl: './audio/',
               onNextStep: () => showStep(5, true),
-              onComplete: () => {
-                if (typeof Analytics !== 'undefined') {
+              onComplete: (info) => {
+                if (typeof Analytics !== 'undefined' && (!info || !info.alreadyCompleted)) {
                   Analytics.trackStepComplete(LESSON_ID, 4, { trigger: 'dictation_complete' });
                 }
               }
@@ -819,16 +824,17 @@
           }
         }
 
-        // Lazy-init Review Quiz Engine on Step 5 (복습 퀴즈)
+        // Lazy-init Review Quiz Engine on Step 5 (스피킹 퀴즈)
         if (step === 5) {
           if (!reviewQuizEngine) {
             reviewQuizEngine = new ReviewQuizEngine({
               container: '#review-quiz-container',
               lessonId: LESSON_ID,
               quizzes: loadedReviewQuizzes,
+              audioBaseUrl: './audio/',
               celebrationManager: celebrationManager,
-              onComplete: () => {
-                if (typeof Analytics !== 'undefined') {
+              onComplete: (info) => {
+                if (typeof Analytics !== 'undefined' && (!info || !info.alreadyCompleted)) {
                   Analytics.trackStepComplete(LESSON_ID, 5, { trigger: 'review_quiz_complete' });
                 }
               }

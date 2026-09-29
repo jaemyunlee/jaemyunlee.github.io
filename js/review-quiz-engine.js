@@ -86,15 +86,150 @@ class ReviewQuizEngine {
       : options.container;
     this.lessonId = options.lessonId;
     this.quizzes = (options.quizzes || []).map(q => ({ ...q, type: 'speaking' }));
+    this.audioBaseUrl = options.audioBaseUrl || './audio/';
     this.onComplete = options.onComplete || (() => {});
     this.celebrationManager = options.celebrationManager || null;
 
     this.currentIndex = 0;
     this.results = {}; // index -> { passed: boolean, score: number, userText: string }
+
+    this.state = (typeof Storage !== 'undefined' && typeof Storage.getReviewQuizProgress === 'function')
+      ? Storage.getReviewQuizProgress(this.lessonId)
+      : { completed: false, currentIndex: 0, results: {} };
+
+    if (this.state && typeof this.state.currentIndex === 'number') {
+      this.currentIndex = this.state.currentIndex;
+    }
+    if (this.state && this.state.results) {
+      this.results = { ...this.state.results };
+    }
+
     this.isListening = false;
     this.recognition = null;
     this.sttSupported = this._initSTT();
     this.showManualInput = false;
+
+    // Segment audio player
+    this.audio = null;
+    this.isPlaying = false;
+    this.playbackRate = 1.0;
+  }
+
+  _resolveAudioUrl(q) {
+    if (!q) return null;
+    if (q.audioUrl) return q.audioUrl;
+    if (q.segmentAudio) {
+      return `${this.audioBaseUrl}${q.segmentAudio}`;
+    }
+    if (q.segmentId) {
+      return `${this.audioBaseUrl}segments/${q.segmentId}.mp3`;
+    }
+    if (q.audioFile) {
+      return `${this.audioBaseUrl}${encodeURIComponent(q.audioFile)}`;
+    }
+    return null;
+  }
+
+  toggleAudio() {
+    if (this.isPlaying) {
+      this.pauseAudio();
+    } else {
+      this.playAudio();
+    }
+  }
+
+  playAudio() {
+    const q = this.quizzes[this.currentIndex];
+    if (!q) return;
+
+    const audioUrl = this._resolveAudioUrl(q);
+    if (!audioUrl) return;
+
+    // Stop speech recognition if active to avoid recording speaker output
+    if (this.isListening && this.recognition) {
+      try {
+        this.recognition.stop();
+      } catch (_) {}
+      this.isListening = false;
+      this._updateMicButton(false);
+    }
+
+    const targetSrc = typeof window !== 'undefined'
+      ? new URL(audioUrl, window.location.href).href
+      : audioUrl;
+
+    if (!this.audio || this.audio.src !== targetSrc) {
+      if (this.audio) {
+        this.audio.pause();
+      }
+      this.audio = new Audio(audioUrl);
+      this.audio.playbackRate = this.playbackRate;
+
+      this.audio.addEventListener('play', () => {
+        this.isPlaying = true;
+        this._updateAudioButtonState(true);
+      });
+      this.audio.addEventListener('pause', () => {
+        this.isPlaying = false;
+        this._updateAudioButtonState(false);
+      });
+      this.audio.addEventListener('ended', () => {
+        this.isPlaying = false;
+        this._updateAudioButtonState(false);
+      });
+    }
+
+    this.audio.playbackRate = this.playbackRate;
+    this.audio.play().catch(err => {
+      console.warn('Audio play error in ReviewQuizEngine:', err);
+    });
+  }
+
+  pauseAudio() {
+    if (this.audio) {
+      this.audio.pause();
+    }
+    this.isPlaying = false;
+    this._updateAudioButtonState(false);
+  }
+
+  replayAudio() {
+    if (this.audio) {
+      this.audio.currentTime = 0;
+      this.audio.play().catch(() => {});
+    } else {
+      this.playAudio();
+    }
+  }
+
+  setPlaybackRate(rate) {
+    this.playbackRate = rate;
+    if (this.audio) {
+      this.audio.playbackRate = rate;
+    }
+  }
+
+  _updateAudioButtonState(isPlaying) {
+    const playBtn = this.container.querySelector('#btn-review-audio-play');
+    if (!playBtn) return;
+
+    if (isPlaying) {
+      playBtn.classList.add('playing');
+      playBtn.innerHTML = `
+        <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+        <span class="play-label">일시 정지</span>
+      `;
+    } else {
+      playBtn.classList.remove('playing');
+      playBtn.innerHTML = `
+        <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <span class="play-label">원문 소리 듣기</span>
+      `;
+    }
   }
 
   _initSTT() {
@@ -169,6 +304,13 @@ class ReviewQuizEngine {
 
   init() {
     if (!this.container) return;
+    if (this.state && this.state.completed) {
+      this.renderCompletedState(true);
+      return;
+    }
+    if (this.currentIndex >= this.quizzes.length && this.quizzes.length > 0) {
+      this.currentIndex = Math.max(0, this.quizzes.length - 1);
+    }
     this.render();
   }
 
@@ -202,6 +344,7 @@ class ReviewQuizEngine {
     const parts = q.english.split(/\[.*?\]/);
     const beforeText = parts[0] || '';
     const afterText = parts[1] || '';
+    const audioUrl = this._resolveAudioUrl(q);
 
     let interactiveHtml = '';
 
@@ -302,6 +445,40 @@ class ReviewQuizEngine {
           <span class="sentence-part">${this._escapeHtml(afterText)}</span>
         </div>
 
+        <!-- Segment Audio Player Section (원문 듣기) -->
+        ${audioUrl ? `
+          <div class="review-audio-box" id="review-audio-box">
+            <button type="button" class="btn-review-audio-play ${this.isPlaying ? 'playing' : ''}" id="btn-review-audio-play" aria-label="원문 소리 듣기 / 일시 정지">
+              ${this.isPlaying ? `
+                <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+                <span class="play-label">일시 정지</span>
+              ` : `
+                <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <span class="play-label">원문 소리 듣기</span>
+              `}
+            </button>
+
+            <div class="review-audio-controls">
+              <button type="button" class="btn-audio-ctrl" id="btn-review-audio-replay" title="처음부터 다시 듣기">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+                <span>다시 듣기</span>
+              </button>
+
+              <div class="speed-selector" role="group" aria-label="Playback Speed">
+                <button type="button" class="btn-speed-opt ${this.playbackRate === 0.75 ? 'active' : ''}" data-speed="0.75">0.75x</button>
+                <button type="button" class="btn-speed-opt ${this.playbackRate === 1.0 ? 'active' : ''}" data-speed="1.0">1.0x</button>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+
         <!-- Interactive Area -->
         ${interactiveHtml}
 
@@ -314,6 +491,29 @@ class ReviewQuizEngine {
   }
 
   _bindEvents(q) {
+    const playAudioBtn = this.container.querySelector('#btn-review-audio-play');
+    if (playAudioBtn) {
+      playAudioBtn.addEventListener('click', () => {
+        this.toggleAudio();
+      });
+    }
+
+    const replayAudioBtn = this.container.querySelector('#btn-review-audio-replay');
+    if (replayAudioBtn) {
+      replayAudioBtn.addEventListener('click', () => {
+        this.replayAudio();
+      });
+    }
+
+    const speedBtns = this.container.querySelectorAll('.review-audio-controls .btn-speed-opt');
+    speedBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const speed = parseFloat(btn.dataset.speed) || 1.0;
+        this.setPlaybackRate(speed);
+        speedBtns.forEach(b => b.classList.toggle('active', parseFloat(b.dataset.speed) === speed));
+      });
+    });
+
     if (q.type === 'speaking') {
       const micBtn = this.container.querySelector('#btn-speaking-mic');
       if (micBtn) {
@@ -369,6 +569,10 @@ class ReviewQuizEngine {
   }
 
   toggleSpeechRecognition() {
+    if (this.isPlaying) {
+      this.pauseAudio();
+    }
+
     if (!this.sttSupported || !this.recognition) {
       const transcriptDisplay = this.container.querySelector('#spoken-transcript-live');
       if (transcriptDisplay) {
@@ -657,6 +861,8 @@ class ReviewQuizEngine {
       feedbackBox.style.display = 'block';
       if (isPassed) {
         this.results[this.currentIndex] = { passed: true, score: percentScore, userText: spokenText };
+        this.state.results = this.results;
+        this._saveProgress();
         feedbackBox.className = 'review-feedback-box success animate-fade-in';
         feedbackBox.innerHTML = `
           <div class="feedback-badge success">
@@ -668,11 +874,19 @@ class ReviewQuizEngine {
           </p>
           ${q.explanation ? `<p class="feedback-explanation">💡 ${this._escapeHtml(q.explanation)}</p>` : ''}
           <div class="feedback-actions">
+            <button type="button" class="btn btn-secondary btn-feedback-action audio-btn" id="btn-feedback-listen" title="원문 소리 다시 듣기">
+              <span>원문 다시 듣기 🎧</span>
+            </button>
             <button type="button" class="btn btn-primary" id="btn-next-review-q">
               <span>다음 문제로 ▶</span>
             </button>
           </div>
         `;
+
+        const feedbackListenBtn = feedbackBox.querySelector('#btn-feedback-listen');
+        if (feedbackListenBtn) {
+          feedbackListenBtn.addEventListener('click', () => this.replayAudio());
+        }
 
         const nextBtn = feedbackBox.querySelector('#btn-next-review-q');
         if (nextBtn) {
@@ -690,6 +904,9 @@ class ReviewQuizEngine {
             <strong>인식된 발음:</strong> "${this._escapeHtml(spokenText)}"
           </p>
           <div class="feedback-actions">
+            <button type="button" class="btn btn-secondary btn-feedback-action audio-btn" id="btn-feedback-listen" title="원문 소리 듣고 힌트 얻기">
+              <span>원문 듣기 🎧</span>
+            </button>
             <button type="button" class="btn btn-secondary" id="btn-retry-speaking">
               <span>다시 말하기 🎙️</span>
             </button>
@@ -698,6 +915,11 @@ class ReviewQuizEngine {
             </button>
           </div>
         `;
+
+        const feedbackListenBtn = feedbackBox.querySelector('#btn-feedback-listen');
+        if (feedbackListenBtn) {
+          feedbackListenBtn.addEventListener('click', () => this.replayAudio());
+        }
 
         const retryBtn = feedbackBox.querySelector('#btn-retry-speaking');
         if (retryBtn) {
@@ -712,6 +934,8 @@ class ReviewQuizEngine {
         if (passBtn) {
           passBtn.addEventListener('click', () => {
             this.results[this.currentIndex] = { passed: false, score: percentScore, userText: spokenText };
+            this.state.results = this.results;
+            this._saveProgress();
             this.advanceNext();
           });
         }
@@ -740,6 +964,8 @@ class ReviewQuizEngine {
       feedbackBox.style.display = 'block';
       if (isPassed) {
         this.results[this.currentIndex] = { passed: true, score: 100, userText };
+        this.state.results = this.results;
+        this._saveProgress();
         feedbackBox.className = 'review-feedback-box success animate-fade-in';
         feedbackBox.innerHTML = `
           <div class="feedback-badge success">
@@ -795,6 +1021,8 @@ class ReviewQuizEngine {
         if (passBtn) {
           passBtn.addEventListener('click', () => {
             this.results[this.currentIndex] = { passed: false, score: 0, userText };
+            this.state.results = this.results;
+            this._saveProgress();
             this.advanceNext();
           });
         }
@@ -803,12 +1031,51 @@ class ReviewQuizEngine {
   }
 
   advanceNext() {
+    this.pauseAudio();
     this.showManualInput = false;
     this.currentIndex++;
+    if (this.currentIndex >= this.quizzes.length) {
+      this.completeAll();
+    } else {
+      this.state.currentIndex = this.currentIndex;
+      this.state.results = this.results;
+      this._saveProgress();
+      this.render();
+    }
+  }
+
+  completeAll() {
+    this.state.completed = true;
+    this.state.currentIndex = this.quizzes.length;
+    this.state.results = this.results;
+    this._saveProgress();
+    this.renderCompletedState();
+  }
+
+  restartQuiz() {
+    this.pauseAudio();
+    this.currentIndex = 0;
+    this.results = {};
+    this.state.completed = false;
+    this.state.currentIndex = 0;
+    this.state.results = {};
+    this._saveProgress();
     this.render();
   }
 
-  renderCompletedState() {
+  _saveProgress() {
+    if (typeof Storage !== 'undefined' && typeof Storage.saveReviewQuizProgress === 'function') {
+      Storage.saveReviewQuizProgress(this.lessonId, this.state);
+    }
+  }
+
+  renderCompletedState(isInitialLoad = false) {
+    this.pauseAudio();
+    this.state.completed = true;
+    this.state.currentIndex = this.quizzes.length;
+    this.state.results = this.results;
+    this._saveProgress();
+
     const total = this.quizzes.length;
     let passedCount = 0;
     this.quizzes.forEach((q, idx) => {
@@ -823,7 +1090,7 @@ class ReviewQuizEngine {
       Storage.setLessonCompleted(this.lessonId, true);
     }
 
-    if (this.celebrationManager && typeof this.celebrationManager._launchConfettiParticles === 'function') {
+    if (!isInitialLoad && this.celebrationManager && typeof this.celebrationManager._launchConfettiParticles === 'function') {
       this.celebrationManager._launchConfettiParticles();
     }
 
@@ -876,13 +1143,11 @@ class ReviewQuizEngine {
     const restartBtn = this.container.querySelector('#btn-restart-review');
     if (restartBtn) {
       restartBtn.addEventListener('click', () => {
-        this.currentIndex = 0;
-        this.results = {};
-        this.render();
+        this.restartQuiz();
       });
     }
 
-    this.onComplete({ total, passedCount, percent });
+    this.onComplete({ total, passedCount, percent, alreadyCompleted: isInitialLoad });
   }
 
   _escapeHtml(text) {

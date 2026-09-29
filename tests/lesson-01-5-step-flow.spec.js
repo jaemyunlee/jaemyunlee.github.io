@@ -271,6 +271,36 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     await expect(page.locator('#spoken-transcript-live')).toBeVisible();
     await expect(page.locator('.review-pill.speaking')).toBeVisible();
 
+    // Verify native segment audio player renders in Step 5 (Issue #108)
+    const audioBox = page.locator('#review-quiz-container .review-audio-box');
+    await expect(audioBox).toBeVisible();
+
+    const playBtn = page.locator('#btn-review-audio-play');
+    await expect(playBtn).toBeVisible();
+    await expect(playBtn).toContainText('원문 소리 듣기');
+
+    const replayBtn = page.locator('#btn-review-audio-replay');
+    await expect(replayBtn).toBeVisible();
+    await expect(replayBtn).toContainText('다시 듣기');
+
+    // Verify speed controls
+    const speed075 = page.locator('.review-audio-controls .btn-speed-opt[data-speed="0.75"]');
+    const speed10 = page.locator('.review-audio-controls .btn-speed-opt[data-speed="1.0"]');
+    await expect(speed10).toHaveClass(/active/);
+    await speed075.click();
+    await expect(speed075).toHaveClass(/active/);
+    await expect(speed10).not.toHaveClass(/active/);
+
+    const playbackRate = await page.evaluate(() => window.reviewQuizEngine.playbackRate);
+    expect(playbackRate).toBe(0.75);
+
+    // Verify audio url resolves to segments/sXX.mp3
+    const audioUrl = await page.evaluate(() => {
+      const engine = window.reviewQuizEngine;
+      return engine._resolveAudioUrl(engine.quizzes[0]);
+    });
+    expect(audioUrl).toContain('segments/s9.mp3');
+
     // Verify ReviewQuizEngine calculateSimilarity logic
     const similarityTests = await page.evaluate(() => {
       const engine = window.reviewQuizEngine;
@@ -308,6 +338,11 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     await expect(feedback).toBeVisible();
     await expect(feedback).toHaveClass(/success/);
     await expect(feedback).toContainText('통과');
+
+    // Feedback should offer audio listen button
+    const feedbackAudioBtn = page.locator('#review-feedback-box .btn-feedback-action.audio-btn');
+    await expect(feedbackAudioBtn).toBeVisible();
+    await expect(feedbackAudioBtn).toContainText('원문 다시 듣기');
   });
 
   test('Step 5: Completing Review Quiz sets lessonCompleted in Storage', async ({ page }) => {
@@ -330,5 +365,125 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     // Verify completion screen in DOM
     const completeTitle = page.locator('.review-complete-title');
     await expect(completeTitle).toContainText('모든 5단계 학습 완료');
+  });
+
+  test('Step 4: Saves quiz index to Storage and restores last index or completed state on revisit', async ({ page }) => {
+    await page.goto('/lessons/lesson-01/index.html');
+
+    // Switch to Step 4 Dictation
+    await page.locator('.step-tab-btn[data-step="4"]').click();
+    await expect(page.locator('#dictation-section')).toBeVisible();
+
+    // Initially at sentence 1
+    const badge = page.locator('.dictation-badge');
+    await expect(badge).toHaveText('문장 1 / 26');
+
+    // Advance to sentence 2
+    await page.evaluate(() => {
+      window.dictationEngine.advanceNext();
+    });
+    await expect(badge).toHaveText('문장 2 / 26');
+
+    // Verify saved to Storage
+    const savedState = await page.evaluate(() => {
+      return Storage.getDictationProgress('lesson-01');
+    });
+    expect(savedState.completed).toBe(false);
+    expect(savedState.currentIndex).toBe(1);
+
+    // Reload page and navigate back to Step 4
+    await page.reload();
+    await page.locator('.step-tab-btn[data-step="4"]').click();
+    await expect(page.locator('#dictation-section')).toBeVisible();
+
+    // Should resume on sentence 2
+    await expect(page.locator('.dictation-badge')).toHaveText('문장 2 / 26');
+
+    // Complete all in Step 4
+    await page.evaluate(() => {
+      window.dictationEngine.completeAll();
+    });
+    await expect(page.locator('.dictation-card.completed')).toBeVisible();
+
+    const completedState = await page.evaluate(() => {
+      return Storage.getDictationProgress('lesson-01');
+    });
+    expect(completedState.completed).toBe(true);
+
+    // Reload page and check completed state displays directly
+    await page.reload();
+    await page.locator('.step-tab-btn[data-step="4"]').click();
+    await expect(page.locator('.dictation-card.completed')).toBeVisible();
+    await expect(page.locator('.dictation-complete-title')).toContainText('핵심 표현 받아쓰기 완료');
+
+    // Click restart button
+    await page.locator('#btn-dictation-restart').click();
+    await expect(page.locator('.dictation-badge')).toHaveText('문장 1 / 26');
+
+    const resetState = await page.evaluate(() => {
+      return Storage.getDictationProgress('lesson-01');
+    });
+    expect(resetState.completed).toBe(false);
+    expect(resetState.currentIndex).toBe(0);
+  });
+
+  test('Step 5: Saves quiz index to Storage and restores last index or completed state on revisit', async ({ page }) => {
+    await page.goto('/lessons/lesson-01/index.html');
+
+    // Switch to Step 5 Review Quiz
+    await page.locator('.step-tab-btn[data-step="5"]').click();
+    await expect(page.locator('#review-quiz-section')).toBeVisible();
+
+    // Initially at question 1
+    const badge = page.locator('.review-quiz-badge');
+    await expect(badge).toHaveText('복습 퀴즈 1 / 26');
+
+    // Advance to question 2
+    await page.evaluate(() => {
+      window.reviewQuizEngine.advanceNext();
+    });
+    await expect(badge).toHaveText('복습 퀴즈 2 / 26');
+
+    // Verify saved to Storage
+    const savedState = await page.evaluate(() => {
+      return Storage.getReviewQuizProgress('lesson-01');
+    });
+    expect(savedState.completed).toBe(false);
+    expect(savedState.currentIndex).toBe(1);
+
+    // Reload page and navigate back to Step 5
+    await page.reload();
+    await page.locator('.step-tab-btn[data-step="5"]').click();
+    await expect(page.locator('#review-quiz-section')).toBeVisible();
+
+    // Should resume on question 2
+    await expect(page.locator('.review-quiz-badge')).toHaveText('복습 퀴즈 2 / 26');
+
+    // Complete all in Step 5
+    await page.evaluate(() => {
+      window.reviewQuizEngine.completeAll();
+    });
+    await expect(page.locator('.review-quiz-card.completed')).toBeVisible();
+
+    const completedState = await page.evaluate(() => {
+      return Storage.getReviewQuizProgress('lesson-01');
+    });
+    expect(completedState.completed).toBe(true);
+
+    // Reload page and check completed state displays directly
+    await page.reload();
+    await page.locator('.step-tab-btn[data-step="5"]').click();
+    await expect(page.locator('.review-quiz-card.completed')).toBeVisible();
+    await expect(page.locator('.review-complete-title')).toContainText('모든 5단계 학습 완료');
+
+    // Click restart button
+    await page.locator('#btn-restart-review').click();
+    await expect(page.locator('.review-quiz-badge')).toHaveText('복습 퀴즈 1 / 26');
+
+    const resetState = await page.evaluate(() => {
+      return Storage.getReviewQuizProgress('lesson-01');
+    });
+    expect(resetState.completed).toBe(false);
+    expect(resetState.currentIndex).toBe(0);
   });
 });

@@ -25,6 +25,14 @@ class DictationEngine {
     this.hintRevealed = false;
     this.checkedState = null; // null | { isCorrect: boolean, diff: Array, userText: string }
 
+    this.state = (typeof Storage !== 'undefined' && typeof Storage.getDictationProgress === 'function')
+      ? Storage.getDictationProgress(this.lessonId)
+      : { completed: false, currentIndex: 0 };
+
+    if (this.state && typeof this.state.currentIndex === 'number') {
+      this.currentIndex = this.state.currentIndex;
+    }
+
     this.buildQueue();
   }
 
@@ -75,8 +83,12 @@ class DictationEngine {
   }
 
   refreshQueue() {
-    const currentItem = this.queue[this.currentIndex];
     this.buildQueue();
+    if (this.state && this.state.completed) {
+      this.renderCompletedState(true);
+      return;
+    }
+    const currentItem = this.queue[this.currentIndex];
     if (currentItem) {
       const newIdx = this.queue.findIndex(q => q.id === currentItem.id);
       if (newIdx >= 0) {
@@ -84,12 +96,21 @@ class DictationEngine {
       } else {
         this.currentIndex = Math.min(this.currentIndex, Math.max(0, this.queue.length - 1));
       }
+    } else if (this.state && typeof this.state.currentIndex === 'number') {
+      this.currentIndex = Math.min(this.state.currentIndex, Math.max(0, this.queue.length - 1));
     }
     this.render();
   }
 
   init() {
     if (!this.container) return;
+    if (this.state && this.state.completed) {
+      this.renderCompletedState(true);
+      return;
+    }
+    if (this.currentIndex >= this.queue.length && this.queue.length > 0) {
+      this.currentIndex = Math.max(0, this.queue.length - 1);
+    }
     this.render();
   }
 
@@ -609,10 +630,43 @@ class DictationEngine {
     this.pauseAudio();
     this.hintRevealed = false;
     this.currentIndex++;
+    if (this.currentIndex >= this.queue.length) {
+      this.completeAll();
+    } else {
+      this.state.currentIndex = this.currentIndex;
+      this._saveProgress();
+      this.render();
+    }
+  }
+
+  completeAll() {
+    this.state.completed = true;
+    this.state.currentIndex = this.queue.length;
+    this._saveProgress();
+    this.renderCompletedState();
+  }
+
+  restartDictation() {
+    this.pauseAudio();
+    this.currentIndex = 0;
+    this.state.completed = false;
+    this.state.currentIndex = 0;
+    this._saveProgress();
     this.render();
   }
 
-  renderCompletedState() {
+  _saveProgress() {
+    if (typeof Storage !== 'undefined' && typeof Storage.saveDictationProgress === 'function') {
+      Storage.saveDictationProgress(this.lessonId, this.state);
+    }
+  }
+
+  renderCompletedState(isInitialLoad = false) {
+    this.pauseAudio();
+    this.state.completed = true;
+    this.state.currentIndex = this.queue.length;
+    this._saveProgress();
+
     const total = this.queue.length;
 
     this.container.innerHTML = `
@@ -658,12 +712,11 @@ class DictationEngine {
     const restartBtn = this.container.querySelector('#btn-dictation-restart');
     if (restartBtn) {
       restartBtn.addEventListener('click', () => {
-        this.currentIndex = 0;
-        this.render();
+        this.restartDictation();
       });
     }
 
-    this.onComplete({ total, keyCount: total });
+    this.onComplete({ total, keyCount: total, alreadyCompleted: isInitialLoad });
   }
 
   _escapeHtml(text) {
