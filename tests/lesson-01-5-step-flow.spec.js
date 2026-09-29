@@ -136,6 +136,20 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     await expect(filterBtn).toHaveClass(/active/);
     await expect(filterBtn).toHaveAttribute('aria-pressed', 'true');
 
+    // Verify video is NOT automatically playing when clicking filter button
+    const isPlaying = await page.evaluate(() => {
+      if (window.videoPlayer) {
+        if (window.videoPlayer.isFallbackMode) {
+          return !!window.videoPlayer.simTimer;
+        }
+        if (window.videoPlayer.player && typeof window.videoPlayer.player.getPlayerState === 'function') {
+          return window.videoPlayer.player.getPlayerState() === 1;
+        }
+      }
+      return false;
+    });
+    expect(isPlaying).toBe(false);
+
     // Only flagged card should be visible
     const firstCard = page.locator('#script-list-container .script-sentence-card').first();
     await expect(firstCard).toBeVisible();

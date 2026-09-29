@@ -998,12 +998,6 @@ class VideoScriptPlayer {
         if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
           App.showToast(`🚩 어려운 문장 ${flagged.length}개만 모아봅니다. 재생 시 해당 구간만 이어서 재생됩니다.`, 'success');
         }
-        const curTime = this.isFallbackMode ? this.simTime : (this.player && this.player.getCurrentTime ? this.player.getCurrentTime() : 0);
-        const inside = flagged.some(f => curTime >= f.start - 0.25 && curTime < f.end);
-        if (!inside) {
-          const next = flagged.find(f => f.start >= curTime) || flagged[0];
-          this.seekToSentence(next.index);
-        }
       }
     } else {
       if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
