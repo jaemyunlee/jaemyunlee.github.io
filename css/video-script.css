@@ -533,11 +533,21 @@
   backdrop-filter: blur(8px);
 }
 
+.script-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .script-header-actions {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
 .btn-filter-flagged {
@@ -1046,6 +1056,61 @@
     max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
+  }
+
+  /* Script panel header alignment on mobile (Issue #108) */
+  .script-panel-header {
+    padding: 12px 14px;
+  }
+
+  .script-panel-header:has(.script-header-actions),
+  .script-panel-header.has-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    row-gap: 10px;
+    column-gap: 8px;
+    align-items: center;
+  }
+
+  .script-panel-header:has(.script-header-actions) .script-header-title,
+  .script-panel-header.has-actions .script-header-title {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    justify-self: start;
+  }
+
+  .script-panel-header:has(.script-header-actions) .script-header-actions,
+  .script-panel-header.has-actions .script-header-actions {
+    display: contents;
+  }
+
+  .script-panel-header:has(.script-header-actions) .btn-filter-flagged,
+  .script-panel-header.has-actions .btn-filter-flagged {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 0.78rem;
+  }
+
+  .script-panel-header:has(.script-header-actions) .script-sub-toggle-group,
+  .script-panel-header.has-actions .script-sub-toggle-group {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .script-panel-header:has(.script-header-actions) .btn-toggle-sub,
+  .script-panel-header.has-actions .btn-toggle-sub {
+    flex: 1;
+    height: 32px;
+    font-size: 0.78rem;
+    padding: 0;
   }
 
   .script-list-container {

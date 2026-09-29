@@ -112,6 +112,7 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     const firstFlagBtn = flagBtns.first();
     await firstFlagBtn.click();
     await expect(firstFlagBtn).toHaveClass(/active/);
+    await expect(firstFlagBtn.locator('.flag-label')).toHaveText('어려움');
     await expect(countBadge).toHaveText('1');
 
     // Verify flagged in Storage
@@ -120,6 +121,15 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
       return flagged.length > 0;
     });
     expect(isStored).toBe(true);
+
+    // Verify mobile header layout at 375px width
+    await page.setViewportSize({ width: 375, height: 812 });
+    const headerTitle = page.locator('.script-header-title');
+    await expect(headerTitle).toBeVisible();
+    await expect(headerTitle).toContainText('자막');
+    await expect(filterBtn).toBeVisible();
+    const subGroup = page.locator('.script-sub-toggle-group');
+    await expect(subGroup).toBeVisible();
 
     // Click filter button to show only flagged
     await filterBtn.click();
@@ -140,6 +150,7 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     // Click again to unflag
     await firstFlagBtn.click();
     await expect(firstFlagBtn).not.toHaveClass(/active/);
+    await expect(firstFlagBtn.locator('.flag-label')).toHaveText('어려움');
     await expect(countBadge).toHaveText('0');
 
     const isCleared = await page.evaluate(() => {

@@ -758,7 +758,7 @@ class VideoScriptPlayer {
                 <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
                 <line x1="4" y1="22" x2="4" y2="15"/>
               </svg>
-              <span class="flag-label">${isFlagged ? '어려움 🚩' : '어려움'}</span>
+              <span class="flag-label">어려움</span>
             </button>
             <button type="button" class="btn-card-loop ${isLooping ? 'active' : ''}" data-index="${index}" title="${isLooping ? '구간 반복 끄기 (Click to cancel loop)' : '이 문장 구간 반복 재생 (Loop)'}" aria-label="이 문장 구간 반복 재생" aria-pressed="${isLooping ? 'true' : 'false'}">
               <svg class="icon-loop" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -801,7 +801,7 @@ class VideoScriptPlayer {
             }
             const flagLabel = flagBtn.querySelector('.flag-label');
             if (flagLabel) {
-              flagLabel.textContent = flagged ? '어려움 🚩' : '어려움';
+              flagLabel.textContent = '어려움';
             }
             flagBtn.title = flagged ? '어려운 문장 표시 해제' : '이해가 어려운 문장 표시 (어려운 문장 모아보기 및 재생)';
             card.classList.toggle('flagged-card', flagged);
