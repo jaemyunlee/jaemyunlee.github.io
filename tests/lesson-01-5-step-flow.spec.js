@@ -154,21 +154,38 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     });
     expect(queueLength).toBe(27);
 
-    // Check hint button toggles masked letters
+    // Verify audio file used is from audio/segments/
+    const firstAudioUrl = await page.evaluate(() => {
+      return window.dictationEngine && window.dictationEngine.queue[0] ? window.dictationEngine.queue[0].audioUrl : '';
+    });
+    expect(firstAudioUrl).toContain('segments/s9.mp3');
+
+    // Verify Cloze blank slot renders with sentence context
+    const clozeText = page.locator('#dictation-cloze-text');
+    await expect(clozeText).toBeVisible();
+    const blankSlot = page.locator('#dictation-blank-slot');
+    await expect(blankSlot).toBeVisible();
+
+    // Check hint button toggles masked letters for the key expression
     const hintBtn = page.locator('#btn-dictation-hint');
     await hintBtn.click();
     const hintBox = page.locator('#dictation-hint-box');
     await expect(hintBox).toBeVisible();
+    await expect(page.locator('.hint-text')).toContainText('h');
 
-    // Type input and check answer
-    const textarea = page.locator('#dictation-input');
-    await textarea.fill('I just happened to look.');
+    // Type key expression and verify live blank reflection
+    const input = page.locator('#dictation-input');
+    await input.fill('happened to');
+    await expect(blankSlot).toHaveText('happened to');
+
+    // Submit answer
     await page.locator('#btn-dictation-submit').click();
 
-    // Feedback should show success
+    // Feedback should show success and highlight key expression
     const feedback = page.locator('#dictation-feedback');
     await expect(feedback).toBeVisible();
     await expect(feedback).toHaveClass(/success/);
+    await expect(page.locator('.dictation-highlight')).toHaveText('happened to');
   });
 
   test('Step 5: Review Quiz supports Fill-in-the-Blank and Speaking Quiz with >= 85% similarity', async ({ page }) => {

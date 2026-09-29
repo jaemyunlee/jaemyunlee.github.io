@@ -778,10 +778,15 @@
             const step4Sentences = keySentencesData.length > 0 ? keySentencesData : loadedQuizzes;
             const keySentences = step4Sentences.map((q, idx) => ({
               id: `key-${idx + 1}`,
-              en: q.english ? q.english.replace(/\[.*?\]/, q.answer || q.keyExpression || '').replace(/\s+/g, ' ').trim() : '',
-              kr: q.korean,
-              audioFile: LESSON_01_AUDIO_FILES[idx],
-              keyExpression: q.answer || q.keyExpression
+              segmentId: q.segmentId,
+              segmentAudio: q.segmentAudio || (q.segmentId ? `segments/${q.segmentId}.mp3` : null),
+              audioUrl: q.segmentAudio ? `./audio/${q.segmentAudio}` : (q.segmentId ? `./audio/segments/${q.segmentId}.mp3` : (LESSON_01_AUDIO_FILES[idx] ? `./audio/${encodeURIComponent(LESSON_01_AUDIO_FILES[idx])}` : null)),
+              segmentEn: q.segmentEn,
+              en: q.segmentEn || (q.english ? q.english.replace(/\[.*?\]/, q.answer || q.keyExpression || '').replace(/\s+/g, ' ').trim() : ''),
+              kr: q.segmentKr || q.korean,
+              target: q.target || q.keyExpression || q.answer || '',
+              keyExpression: q.keyExpression || q.answer || '',
+              audioFile: LESSON_01_AUDIO_FILES[idx]
             }));
 
             dictationEngine = new DictationEngine({

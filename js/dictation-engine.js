@@ -2,7 +2,9 @@
  * Dictation Engine for RhyRhy English (Issue #108)
  * Step 4: Dictation Practice
  * Supports all key sentences by default + dynamically flagged transcript segments from Step 3.
- * Features audio playback, 0.75x/1.0x speed, first-letter masking hints, word-by-word diff checking.
+ * Uses native video segment audio in audio/segments/sXX.mp3.
+ * Focuses dictation on key expressions / important phrases rather than typing the entire sentence.
+ * Features audio playback, 0.75x/1.0x speed, first-letter masking hints, live blank preview, and word-by-word diff checking.
  */
 class DictationEngine {
   constructor(options = {}) {
@@ -41,16 +43,30 @@ class DictationEngine {
     // 1. Key sentences
     this.keySentences.forEach((item, idx) => {
       let audioUrl = item.audioUrl;
-      if (!audioUrl && item.audioFile) {
-        audioUrl = `${this.audioBaseUrl}${encodeURIComponent(item.audioFile)}`;
+      if (!audioUrl) {
+        if (item.segmentAudio) {
+          audioUrl = `${this.audioBaseUrl}${item.segmentAudio}`;
+        } else if (item.segmentId) {
+          audioUrl = `${this.audioBaseUrl}segments/${item.segmentId}.mp3`;
+        } else if (item.audioFile) {
+          audioUrl = `${this.audioBaseUrl}${encodeURIComponent(item.audioFile)}`;
+        }
       }
+
+      const en = item.segmentEn || item.en || item.english || '';
+      const kr = item.segmentKr || item.kr || item.korean || '';
+      const target = item.target || item.keyExpression || item.answer || '';
+
       queue.push({
         id: `key-${idx + 1}`,
+        segmentId: item.segmentId || null,
         type: 'key-sentence',
-        en: item.en || item.english || '',
-        kr: item.kr || item.korean || '',
+        en: en,
+        kr: kr,
         audioUrl: audioUrl,
-        keyExpression: item.keyExpression || item.answer || '',
+        keyExpression: item.keyExpression || target,
+        target: target,
+        explanation: item.explanation || '',
         isFlagged: false
       });
     });
@@ -59,20 +75,39 @@ class DictationEngine {
     if (typeof Storage !== 'undefined' && typeof Storage.getFlaggedSegments === 'function') {
       const flagged = Storage.getFlaggedSegments(this.lessonId);
       flagged.forEach(seg => {
+        // Mark as flagged if already in queue
+        const existing = queue.find(q => (q.segmentId && q.segmentId === seg.id) || q.en === seg.en);
+        if (existing) {
+          existing.isFlagged = true;
+          return;
+        }
+
         const segAudio = `${this.audioBaseUrl}segments/${seg.id}.mp3`;
+        const target = seg.target || seg.keyExpression || this._extractTarget(seg.en);
         queue.push({
           id: `flagged-${seg.id}`,
+          segmentId: seg.id,
           type: 'flagged-segment',
           en: seg.en,
           kr: seg.kr,
           audioUrl: segAudio,
-          keyExpression: '',
+          keyExpression: target,
+          target: target,
           isFlagged: true
         });
       });
     }
 
     this.queue = queue;
+  }
+
+  _extractTarget(en) {
+    if (!en) return '';
+    const clean = en.replace(/\[(.*?)\]/, '$1').trim();
+    const words = clean.split(/\s+/);
+    if (words.length <= 3) return clean;
+    // Fallback: pick first 2-3 words
+    return words.slice(0, 2).join(' ');
   }
 
   refreshQueue() {
@@ -158,6 +193,16 @@ class DictationEngine {
           </div>
         </div>
 
+        <!-- Sentence Cloze Context Box -->
+        <div class="dictation-cloze-box">
+          <div class="dictation-cloze-card">
+            <span class="cloze-badge">📝 핵심 표현 받아쓰기</span>
+            <p class="dictation-cloze-text" id="dictation-cloze-text">
+              ${this._renderClozeHtml(item.en, item.target)}
+            </p>
+          </div>
+        </div>
+
         <!-- Korean Meaning Prompt -->
         <div class="dictation-korean-box">
           <span class="korean-icon">💬</span>
@@ -167,25 +212,25 @@ class DictationEngine {
         <!-- Hint Box (Toggleable) -->
         <div class="dictation-hint-container" id="dictation-hint-box" style="display: ${this.hintRevealed ? 'block' : 'none'};">
           <div class="hint-inner">
-            <span class="hint-label">💡 첫 글자 힌트:</span>
-            <span class="hint-text">${this._generateMaskedHint(item.en)}</span>
+            <span class="hint-label">💡 핵심 표현 첫 글자 힌트:</span>
+            <span class="hint-text">${this._generateMaskedHint(item.target || item.en)}</span>
           </div>
         </div>
 
         <!-- Input & Actions Form -->
         <div class="dictation-input-area" id="dictation-input-area">
           <div class="input-wrapper">
-            <textarea 
+            <input 
+              type="text"
               id="dictation-input" 
-              class="dictation-textarea" 
-              placeholder="들리는 영어 문장을 입력하세요... (대소문자/구두점 무관)" 
-              rows="2"
+              class="dictation-input" 
+              placeholder="들리는 핵심 표현을 입력하세요... (대소문자/구두점 무관)" 
               autocomplete="off" 
               autocorrect="off" 
               autocapitalize="none" 
               spellcheck="false"
-              aria-label="들리는 영어 문장 입력"
-            ></textarea>
+              aria-label="들리는 핵심 표현 입력"
+            />
           </div>
 
           <div class="dictation-action-buttons">
@@ -215,6 +260,55 @@ class DictationEngine {
     if (input) {
       setTimeout(() => input.focus(), 100);
     }
+  }
+
+  _renderClozeHtml(en, target, userText = '') {
+    if (!en) return '';
+    const cleanEn = en.replace(/\s+/g, ' ').trim();
+    const cleanTarget = (target || '').trim();
+
+    const blankContent = userText 
+      ? this._escapeHtml(userText) 
+      : `<span class="blank-placeholder">[ 핵심 표현 ]</span>`;
+    const blankHtml = `<span class="dictation-blank-slot ${userText ? 'has-input' : ''}" id="dictation-blank-slot">${blankContent}</span>`;
+
+    // 1. If target exists, search in en
+    if (cleanTarget) {
+      const lowerEn = cleanEn.toLowerCase();
+      const lowerTarget = cleanTarget.toLowerCase();
+      const idx = lowerEn.indexOf(lowerTarget);
+      if (idx !== -1) {
+        const before = cleanEn.substring(0, idx);
+        const after = cleanEn.substring(idx + cleanTarget.length);
+        return `${this._escapeHtml(before)}${blankHtml}${this._escapeHtml(after)}`;
+      }
+    }
+
+    // 2. Fallback: check if en contains [ ... ]
+    if (cleanEn.includes('[') && cleanEn.includes(']')) {
+      return this._escapeHtml(cleanEn).replace(/\[(.*?)\]/, blankHtml);
+    }
+
+    // 3. Fallback: append blank at end
+    return `${this._escapeHtml(cleanEn)} ${blankHtml}`;
+  }
+
+  _highlightTarget(en, target) {
+    if (!en) return '';
+    const cleanEn = en.replace(/\[|\]/g, '').replace(/\s+/g, ' ').trim();
+    const cleanTarget = (target || '').trim();
+    if (!cleanTarget) return this._escapeHtml(cleanEn);
+
+    const lowerEn = cleanEn.toLowerCase();
+    const lowerTarget = cleanTarget.toLowerCase();
+    const idx = lowerEn.indexOf(lowerTarget);
+    if (idx !== -1) {
+      const before = cleanEn.substring(0, idx);
+      const matched = cleanEn.substring(idx, idx + cleanTarget.length);
+      const after = cleanEn.substring(idx + cleanTarget.length);
+      return `${this._escapeHtml(before)}<mark class="dictation-highlight">${this._escapeHtml(matched)}</mark>${this._escapeHtml(after)}`;
+    }
+    return this._escapeHtml(cleanEn);
   }
 
   _bindEvents() {
@@ -257,6 +351,20 @@ class DictationEngine {
 
     const submitBtn = this.container.querySelector('#btn-dictation-submit');
     const input = this.container.querySelector('#dictation-input');
+    const blankSlot = this.container.querySelector('#dictation-blank-slot');
+
+    if (input && blankSlot) {
+      input.addEventListener('input', () => {
+        const val = input.value.trim();
+        if (val) {
+          blankSlot.textContent = val;
+          blankSlot.classList.add('has-input');
+        } else {
+          blankSlot.innerHTML = '<span class="blank-placeholder">[ 핵심 표현 ]</span>';
+          blankSlot.classList.remove('has-input');
+        }
+      });
+    }
 
     if (submitBtn) {
       submitBtn.addEventListener('click', () => {
@@ -266,7 +374,7 @@ class DictationEngine {
 
     if (input) {
       input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
+        if (e.key === 'Enter') {
           e.preventDefault();
           this.checkAnswer();
         }
@@ -365,7 +473,8 @@ class DictationEngine {
   }
 
   _generateMaskedHint(text) {
-    const words = (text || '').split(/\s+/);
+    const clean = (text || '').replace(/\[(.*?)\]/, '$1').trim();
+    const words = clean.split(/\s+/);
     return words.map(w => {
       const match = w.match(/^([^a-zA-Z0-9]*)([a-zA-Z0-9])([a-zA-Z0-9]*)([^a-zA-Z0-9]*)$/);
       if (!match) return w;
@@ -390,9 +499,14 @@ class DictationEngine {
     }
 
     const normUser = this._normalizeText(userText);
-    const normTarget = this._normalizeText(item.en);
+    const normTarget = this._normalizeText(item.target);
+    const normFull = this._normalizeText(item.en);
 
-    const isMatch = normUser === normTarget;
+    // Accept if user text matches target, contains target, or equals full sentence
+    const isMatch = (normTarget && normUser === normTarget) ||
+                    (normTarget && normUser.includes(normTarget)) ||
+                    (normFull && normUser === normFull);
+
     const feedbackBox = this.container.querySelector('#dictation-feedback');
     const inputArea = this.container.querySelector('#dictation-input-area');
 
@@ -410,7 +524,7 @@ class DictationEngine {
             <span>정답입니다! 완벽해요 🎉</span>
           </div>
           <div class="feedback-sentence">
-            <p class="feedback-en">${this._escapeHtml(item.en)}</p>
+            <p class="feedback-en">${this._highlightTarget(item.en, item.target)}</p>
             <p class="feedback-kr">${this._escapeHtml(item.kr)}</p>
           </div>
           <div class="feedback-actions">
@@ -426,8 +540,8 @@ class DictationEngine {
         }
       }
     } else {
-      // Diff feedback
-      const targetWords = item.en.split(/\s+/);
+      // Diff feedback on the target expression
+      const targetWords = (item.target || item.en).split(/\s+/);
       const userWords = userText.split(/\s+/);
 
       const diffHtml = targetWords.map((tw, idx) => {
@@ -446,14 +560,15 @@ class DictationEngine {
         feedbackBox.className = 'dictation-feedback-box try-again animate-fade-in';
         feedbackBox.innerHTML = `
           <div class="feedback-badge mismatch">
-            <span>아쉬워요! 틀린 단어를 확인해보세요 ✍️</span>
+            <span>아쉬워요! 핵심 표현을 확인해보세요 ✍️</span>
           </div>
           <div class="diff-comparison">
             <div class="diff-words-container">
-              ${diffHtml}
+              <span class="diff-label">정답 핵심 표현:</span>
+              <div class="diff-words">${diffHtml}</div>
             </div>
             <div class="diff-user-text">
-              <span class="sub-label">내가 입력한 문장:</span>
+              <span class="sub-label">내가 입력한 내용:</span>
               <p>${this._escapeHtml(userText)}</p>
             </div>
           </div>
@@ -502,7 +617,7 @@ class DictationEngine {
           <span>정답 확인 👀</span>
         </div>
         <div class="feedback-sentence">
-          <p class="feedback-en">${this._escapeHtml(item.en)}</p>
+          <p class="feedback-en">${this._highlightTarget(item.en, item.target)}</p>
           <p class="feedback-kr">${this._escapeHtml(item.kr)}</p>
         </div>
         <div class="feedback-actions">
@@ -534,9 +649,9 @@ class DictationEngine {
     this.container.innerHTML = `
       <div class="dictation-card completed animate-fade-in" role="region" aria-label="Dictation Completed">
         <div class="dictation-complete-icon">🎉</div>
-        <h3 class="dictation-complete-title">딕테이션 연습 완료!</h3>
+        <h3 class="dictation-complete-title">핵심 표현 딕테이션 완료!</h3>
         <p class="dictation-complete-desc">
-          핵심 문장 ${keyCount}개${flaggedCount > 0 ? ` 및 어려운 문장 ${flaggedCount}개` : ''}를 귀로 듣고 모두 직접 작성해보셨습니다!
+          영상 속 원어민 발음으로 핵심 표현 ${keyCount}개${flaggedCount > 0 ? ` 및 어려운 문장 ${flaggedCount}개` : ''}를 직접 귀로 듣고 받아쓰셨습니다!
         </p>
 
         <div class="dictation-stats-card">
@@ -546,7 +661,7 @@ class DictationEngine {
           </div>
           <div class="stat-pill">
             <span class="stat-num">${keyCount}</span>
-            <span class="stat-label">핵심 문장</span>
+            <span class="stat-label">핵심 표현</span>
           </div>
           ${flaggedCount > 0 ? `
           <div class="stat-pill">

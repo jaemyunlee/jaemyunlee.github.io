@@ -216,6 +216,87 @@
   color: #FFFFFF;
 }
 
+/* Cloze Sentence Context Box */
+.dictation-cloze-box {
+  margin-bottom: 16px;
+}
+
+.dictation-cloze-card {
+  padding: 18px 20px;
+  background-color: var(--surface-color-alt);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .dictation-cloze-card {
+  background-color: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.cloze-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-light);
+  background: rgba(99, 102, 241, 0.15);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  margin-bottom: 10px;
+}
+
+[data-theme="light"] .cloze-badge {
+  color: var(--primary);
+  background: #EEF2FF;
+}
+
+.dictation-cloze-text {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.dictation-blank-slot {
+  display: inline-block;
+  min-width: 80px;
+  padding: 2px 10px;
+  margin: 0 4px;
+  border-bottom: 2.5px solid var(--primary);
+  background: rgba(99, 102, 241, 0.12);
+  border-radius: 4px;
+  font-weight: 700;
+  color: var(--primary-light);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .dictation-blank-slot {
+  background: #EEF2FF;
+  border-bottom-color: var(--primary);
+  color: var(--primary);
+}
+
+.dictation-blank-slot.has-input {
+  background: rgba(16, 185, 129, 0.15);
+  border-bottom-color: #10B981;
+  color: #10B981;
+}
+
+[data-theme="light"] .dictation-blank-slot.has-input {
+  background: #D1FAE5;
+  border-bottom-color: #059669;
+  color: #059669;
+}
+
+.blank-placeholder {
+  color: var(--text-subtle);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
 /* Korean Meaning Box */
 .dictation-korean-box {
   display: flex;
@@ -282,7 +363,8 @@
   margin-top: 14px;
 }
 
-.dictation-textarea {
+.dictation-textarea,
+.dictation-input {
   width: 100%;
   padding: 14px 16px;
   border-radius: var(--radius-lg);
@@ -293,21 +375,32 @@
   line-height: 1.5;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dictation-input {
+  height: 52px;
+  padding: 0 16px;
+}
+
+.dictation-textarea {
   resize: none;
 }
 
-.dictation-textarea:focus {
+.dictation-textarea:focus,
+.dictation-input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
-[data-theme="light"] .dictation-textarea {
+[data-theme="light"] .dictation-textarea,
+[data-theme="light"] .dictation-input {
   background-color: #FFFFFF;
   border-color: #CBD5E1;
   color: #0F172A;
 }
 
-[data-theme="light"] .dictation-textarea:focus {
+[data-theme="light"] .dictation-textarea:focus,
+[data-theme="light"] .dictation-input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
@@ -400,6 +493,20 @@
   font-weight: 700;
   color: var(--text-color);
   margin: 0 0 6px 0;
+  line-height: 1.6;
+}
+
+.dictation-highlight {
+  background-color: rgba(16, 185, 129, 0.25);
+  color: #10B981;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+[data-theme="light"] .dictation-highlight {
+  background-color: #D1FAE5;
+  color: #059669;
 }
 
 .feedback-kr {
