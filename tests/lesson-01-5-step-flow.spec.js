@@ -279,7 +279,12 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
         caseInsensitive: engine.calculateSimilarity('Happened To', 'happened to'),
         substringMatch: engine.calculateSimilarity('happened to', 'I just happened to look around'),
         closeTypo: engine.calculateSimilarity('happened to', 'happen to'),
-        completelyDifferent: engine.calculateSimilarity('happened to', 'completely different text')
+        completelyDifferent: engine.calculateSimilarity('happened to', 'completely different text'),
+        dueVsDo: engine.calculateSimilarity('due', 'do'),
+        dueToVsDoTo: engine.calculateSimilarity('due to', 'do to'),
+        turnedOutVsTurnOut: engine.calculateSimilarity('turned out', 'turn out'),
+        comparedToVsCompareTo: engine.calculateSimilarity('Compared to', 'compare to'),
+        tryingToVsTryTo: engine.calculateSimilarity('trying to', 'try to')
       };
     });
 
@@ -288,10 +293,15 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     expect(similarityTests.substringMatch).toBe(1.0);
     expect(similarityTests.closeTypo).toBeGreaterThanOrEqual(0.85);
     expect(similarityTests.completelyDifferent).toBeLessThan(0.85);
+    expect(similarityTests.dueVsDo).toBeGreaterThanOrEqual(0.85);
+    expect(similarityTests.dueToVsDoTo).toBeGreaterThanOrEqual(0.85);
+    expect(similarityTests.turnedOutVsTurnOut).toBeGreaterThanOrEqual(0.85);
+    expect(similarityTests.comparedToVsCompareTo).toBeGreaterThanOrEqual(0.85);
+    expect(similarityTests.tryingToVsTryTo).toBeGreaterThanOrEqual(0.85);
 
-    // Test speaking evaluation
+    // Test speaking evaluation with multi-hypothesis array (e.g. STT returning multiple alternatives)
     await page.evaluate(() => {
-      window.reviewQuizEngine.evaluateSpokenAnswer('I just happened to look');
+      window.reviewQuizEngine.evaluateSpokenAnswer(['happen to', 'happened to']);
     });
 
     const feedback = page.locator('#review-feedback-box');

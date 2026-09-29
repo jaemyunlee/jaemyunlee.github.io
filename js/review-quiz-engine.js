@@ -5,6 +5,80 @@
  * 2. Speaking Quiz with in-browser Speech-to-Text (STT) and >=85% similarity evaluation
  * Automatically completes the lesson upon passing Step 5.
  */
+
+// Comprehensive English homophone clusters for Speech-to-Text phonetic alignment
+const HOMOPHONE_SETS = [
+  ['due', 'do', 'dew'],
+  ['to', 'too', 'two'],
+  ['their', 'there', 'theyre', 'theyd'],
+  ['by', 'buy', 'bye'],
+  ['right', 'write', 'rite'],
+  ['hear', 'here'],
+  ['see', 'sea'],
+  ['weather', 'whether'],
+  ['for', 'four', 'fore'],
+  ['in', 'inn'],
+  ['no', 'know'],
+  ['new', 'knew'],
+  ['our', 'hour'],
+  ['one', 'won'],
+  ['passed', 'past'],
+  ['piece', 'peace'],
+  ['some', 'sum'],
+  ['wait', 'weight'],
+  ['whole', 'hole'],
+  ['break', 'brake'],
+  ['meet', 'meat'],
+  ['road', 'rode', 'rowed'],
+  ['role', 'roll'],
+  ['sight', 'site', 'cite'],
+  ['scene', 'seen'],
+  ['plain', 'plane'],
+  ['pair', 'pear'],
+  ['fair', 'fare'],
+  ['bare', 'bear'],
+  ['tail', 'tale'],
+  ['stare', 'stair'],
+  ['waste', 'waist'],
+  ['weak', 'week'],
+  ['would', 'wood'],
+  ['wear', 'where', 'ware'],
+  ['which', 'witch'],
+  ['son', 'sun'],
+  ['ate', 'eight'],
+  ['bored', 'board'],
+  ['allowed', 'aloud'],
+  ['threw', 'through'],
+  ['blew', 'blue'],
+  ['cell', 'sell'],
+  ['flour', 'flower'],
+  ['heal', 'heel'],
+  ['idle', 'idol'],
+  ['knight', 'night'],
+  ['knot', 'not'],
+  ['mail', 'male'],
+  ['main', 'mane'],
+  ['none', 'nun'],
+  ['pain', 'pane'],
+  ['poor', 'pour', 'pore'],
+  ['pray', 'prey'],
+  ['real', 'reel'],
+  ['root', 'route'],
+  ['sail', 'sale'],
+  ['sole', 'soul'],
+  ['steal', 'steel'],
+  ['sweet', 'suite'],
+  ['toe', 'tow'],
+  ['way', 'weigh']
+];
+
+const HOMOPHONE_LOOKUP = {};
+HOMOPHONE_SETS.forEach((group, gid) => {
+  group.forEach(w => {
+    HOMOPHONE_LOOKUP[w.toLowerCase().replace(/[^a-z]/g, '')] = gid;
+  });
+});
+
 class ReviewQuizEngine {
   constructor(options = {}) {
     this.container = typeof options.container === 'string'
@@ -35,7 +109,7 @@ class ReviewQuizEngine {
       this.recognition.lang = 'en-US';
       this.recognition.continuous = false;
       this.recognition.interimResults = true;
-      this.recognition.maxAlternatives = 3;
+      this.recognition.maxAlternatives = 5;
 
       this.recognition.onstart = () => {
         this.isListening = true;
@@ -44,23 +118,30 @@ class ReviewQuizEngine {
 
       this.recognition.onresult = (event) => {
         let interimTranscript = '';
-        let finalTranscript = '';
+        const finalCandidateMap = {};
 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript;
-          } else {
-            interimTranscript += event.results[i][0].transcript;
+          const res = event.results[i];
+          if (res.isFinal) {
+            for (let alt = 0; alt < res.length; alt++) {
+              if (res[alt] && res[alt].transcript) {
+                finalCandidateMap[alt] = (finalCandidateMap[alt] ? finalCandidateMap[alt] + ' ' : '') + res[alt].transcript.trim();
+              }
+            }
+          } else if (res[0] && res[0].transcript) {
+            interimTranscript += res[0].transcript;
           }
         }
 
+        const finalCandidates = Object.values(finalCandidateMap);
+
         const transcriptDisplay = this.container.querySelector('#spoken-transcript-live');
         if (transcriptDisplay) {
-          transcriptDisplay.textContent = finalTranscript || interimTranscript || '말씀을 듣고 있습니다...';
+          transcriptDisplay.textContent = finalCandidates[0] || interimTranscript || '말씀을 듣고 있습니다...';
         }
 
-        if (finalTranscript) {
-          this.evaluateSpokenAnswer(finalTranscript);
+        if (finalCandidates.length > 0) {
+          this.evaluateSpokenAnswer(finalCandidates);
         }
       };
 
@@ -330,20 +411,119 @@ class ReviewQuizEngine {
     }
   }
 
+  _areHomophones(w1, w2) {
+    if (!w1 || !w2) return false;
+    const clean1 = w1.toLowerCase().replace(/[^a-z]/g, '');
+    const clean2 = w2.toLowerCase().replace(/[^a-z]/g, '');
+    if (clean1 === clean2) return true;
+    const g1 = HOMOPHONE_LOOKUP[clean1];
+    const g2 = HOMOPHONE_LOOKUP[clean2];
+    return g1 !== undefined && g1 === g2;
+  }
+
+  _toPhoneticCode(word) {
+    if (!word) return '';
+    let w = word.toLowerCase().replace(/[^a-z]/g, '');
+    if (!w) return '';
+
+    // Silent consonants at word start
+    w = w.replace(/^kn/, 'n')
+         .replace(/^wr/, 'r')
+         .replace(/^ps/, 's')
+         .replace(/^pn/, 'n')
+         .replace(/^gn/, 'n');
+
+    // Consonant cluster normalization
+    w = w.replace(/ph/g, 'f')
+         .replace(/ck/g, 'k')
+         .replace(/qu/g, 'kw')
+         .replace(/c(?=[eiy])/g, 's')
+         .replace(/c/g, 'k')
+         .replace(/dg(?=[eiy])/g, 'j')
+         .replace(/tch/g, 'ch')
+         .replace(/z/g, 's');
+
+    // Deduplicate consecutive identical consonants
+    w = w.replace(/([a-z])\1+/g, '$1');
+
+    return w;
+  }
+
+  _wordMatchScore(tWord, cWord) {
+    if (!tWord || !cWord) return 0;
+    if (tWord === cWord) return 1.0;
+
+    // Direct homophone match
+    if (this._areHomophones(tWord, cWord)) return 1.0;
+
+    // Past tense -ed elision / connected speech reduction (e.g. happened -> happen, turned -> turn)
+    if (tWord.endsWith('ed') && (tWord.slice(0, -2) === cWord || tWord.slice(0, -1) === cWord)) return 1.0;
+    if (cWord.endsWith('ed') && (cWord.slice(0, -2) === tWord || cWord.slice(0, -1) === tWord)) return 1.0;
+
+    // Present participle -ing elision / reduction (e.g. trying -> try)
+    if (tWord.endsWith('ing') && (tWord.slice(0, -3) === cWord || tWord.slice(0, -3) + 'e' === cWord)) return 1.0;
+    if (cWord.endsWith('ing') && (cWord.slice(0, -3) === tWord || cWord.slice(0, -3) + 'e' === tWord)) return 1.0;
+
+    // Plural / 3rd person -s / -es inflection (e.g. seats -> seat)
+    if (tWord.length > 3 && tWord.endsWith('s') && (tWord.slice(0, -1) === cWord || (tWord.endsWith('es') && tWord.slice(0, -2) === cWord))) return 1.0;
+    if (cWord.length > 3 && cWord.endsWith('s') && (cWord.slice(0, -1) === tWord || (cWord.endsWith('es') && cWord.slice(0, -2) === tWord))) return 1.0;
+
+    // Phonetic code equivalence
+    if (Math.abs(tWord.length - cWord.length) <= 2 && this._toPhoneticCode(tWord) === this._toPhoneticCode(cWord)) {
+      return 0.95;
+    }
+
+    // Levenshtein character similarity fallback
+    const dist = this._levenshteinDistance(tWord, cWord);
+    const maxLen = Math.max(tWord.length, cWord.length);
+    return maxLen > 0 ? Math.max(0, 1 - (dist / maxLen)) : 0;
+  }
+
   _normalizeString(str) {
-    return (str || '')
-      .toLowerCase()
-      .replace(/[.,!?;:"'’`~()[\]{}]/g, '')
-      .replace(/\bgonna\b/g, 'going to')
-      .replace(/\bwanna\b/g, 'want to')
-      .replace(/\bkinda\b/g, 'kind of')
-      .replace(/\bdon't\b/g, 'do not')
-      .replace(/\bdid't\b/g, 'did not')
-      .replace(/\bcan't\b/g, 'cannot')
-      .replace(/\bi'm\b/g, 'i am')
-      .replace(/\bit's\b/g, 'it is')
-      .replace(/\s+/g, ' ')
-      .trim();
+    if (!str) return '';
+    let s = str.toLowerCase();
+
+    // Standard contractions
+    s = s.replace(/\bdon't\b/g, 'do not')
+         .replace(/\bdidn't\b/g, 'did not')
+         .replace(/\bcan't\b/g, 'cannot')
+         .replace(/\bi'm\b/g, 'i am')
+         .replace(/\bit's\b/g, 'it is')
+         .replace(/\bwe're\b/g, 'we are')
+         .replace(/\bthey're\b/g, 'they are')
+         .replace(/\byou're\b/g, 'you are');
+
+    // Remove punctuation
+    s = s.replace(/[.,!?;:"'’`~()[\]{}]/g, ' ');
+
+    // Spoken reductions and linking sound assimilation
+    s = s.replace(/\bdo to\b/g, 'due to')
+         .replace(/\bdew to\b/g, 'due to')
+         .replace(/\bhappen to\b/g, 'happened to')
+         .replace(/\bturn out\b/g, 'turned out')
+         .replace(/\bcompare to\b/g, 'compared to')
+         .replace(/\bstart to\b/g, 'started to')
+         .replace(/\buse to\b/g, 'used to')
+         .replace(/\bsuppose to\b/g, 'supposed to')
+         .replace(/\bgonna\b/g, 'going to')
+         .replace(/\bwanna\b/g, 'want to')
+         .replace(/\bkinda\b/g, 'kind of')
+         .replace(/\bsorta\b/g, 'sort of')
+         .replace(/\boutta\b/g, 'out of')
+         .replace(/\blotta\b/g, 'lot of')
+         .replace(/\bshould of\b|\bshoulda\b|\bshouldve\b/g, 'should have')
+         .replace(/\bcould of\b|\bcoulda\b|\bcouldve\b/g, 'could have')
+         .replace(/\bwould of\b|\bwoulda\b|\bwouldve\b/g, 'would have')
+         .replace(/\bmust of\b|\bmustve\b/g, 'must have')
+         .replace(/\bmight of\b|\bmightve\b/g, 'might have')
+         .replace(/\bgimme\b/g, 'give me')
+         .replace(/\blemme\b/g, 'let me')
+         .replace(/\bhafta\b/g, 'have to')
+         .replace(/\bhasta\b/g, 'has to')
+         .replace(/\balot\b/g, 'a lot')
+         .replace(/\balright\b/g, 'all right');
+
+    return s.replace(/\s+/g, ' ').trim();
   }
 
   _levenshteinDistance(s1, s2) {
@@ -373,6 +553,16 @@ class ReviewQuizEngine {
     if (!normTarget || !normCandidate) return 0;
     if (normTarget === normCandidate) return 1.0;
 
+    // Compound word match without spaces (e.g. "nosebleed" vs "nose bleed")
+    if (normTarget.replace(/\s+/g, '') === normCandidate.replace(/\s+/g, '')) {
+      return 1.0;
+    }
+
+    // Direct homophone check for single-word targets
+    if (this._areHomophones(normTarget, normCandidate)) {
+      return 1.0;
+    }
+
     // Substring match: if user spoken phrase contains the target phrase
     if (normCandidate.includes(normTarget)) {
       return 1.0;
@@ -384,17 +574,18 @@ class ReviewQuizEngine {
     const charSim = Math.max(0, 1 - (dist / maxLen));
 
     // Word-level token search in candidate
-    const targetWords = normTarget.split(' ');
-    const candidateWords = normCandidate.split(' ');
+    const targetWords = normTarget.split(' ').filter(Boolean);
+    const candidateWords = normCandidate.split(' ').filter(Boolean);
 
     let bestWindowSim = 0;
     if (candidateWords.length >= targetWords.length) {
       for (let i = 0; i <= candidateWords.length - targetWords.length; i++) {
-        const windowStr = candidateWords.slice(i, i + targetWords.length).join(' ');
-        const wDist = this._levenshteinDistance(normTarget, windowStr);
-        const wMax = Math.max(normTarget.length, windowStr.length);
-        const wSim = Math.max(0, 1 - (wDist / wMax));
-        if (wSim > bestWindowSim) bestWindowSim = wSim;
+        let windowScore = 0;
+        for (let j = 0; j < targetWords.length; j++) {
+          windowScore += this._wordMatchScore(targetWords[j], candidateWords[i + j]);
+        }
+        const wAvg = windowScore / targetWords.length;
+        if (wAvg > bestWindowSim) bestWindowSim = wAvg;
       }
     }
 
@@ -405,9 +596,7 @@ class ReviewQuizEngine {
       for (const tWord of targetWords) {
         let bestWScore = 0;
         for (const cWord of candidateWords) {
-          const wDist = this._levenshteinDistance(tWord, cWord);
-          const wMax = Math.max(tWord.length, cWord.length);
-          const score = wMax > 0 ? (1 - wDist / wMax) : 0;
+          const score = this._wordMatchScore(tWord, cWord);
           if (score > bestWScore) bestWScore = score;
         }
         totalWordScore += bestWScore;
@@ -418,18 +607,46 @@ class ReviewQuizEngine {
     return Math.max(charSim, bestWindowSim, tokenSim);
   }
 
-  evaluateSpokenAnswer(spokenText) {
+  evaluateSpokenAnswer(spokenInput) {
     const q = this.quizzes[this.currentIndex];
     if (!q) return;
 
+    const candidates = Array.isArray(spokenInput)
+      ? spokenInput.filter(Boolean)
+      : [spokenInput].filter(Boolean);
+
+    if (candidates.length === 0) {
+      candidates.push('');
+    }
+
     const target = q.target || q.keyExpression || q.answer || '';
-    const similarity = this.calculateSimilarity(target, spokenText);
+
+    // Evaluate across all candidate transcripts to find the best match
+    let bestSimilarity = 0;
+    let bestSpokenText = candidates[0] || '';
+
+    for (const cand of candidates) {
+      const sim = this.calculateSimilarity(target, cand);
+      // Prefer higher similarity, or if equal, prefer exact target match
+      if (sim > bestSimilarity || (sim === bestSimilarity && this._normalizeString(cand) === this._normalizeString(target))) {
+        bestSimilarity = sim;
+        bestSpokenText = cand;
+      }
+    }
+
+    const similarity = bestSimilarity;
+    const spokenText = bestSpokenText;
     const passThreshold = 0.85; // 85% requirement from Issue #108
     const isPassed = similarity >= passThreshold;
     const percentScore = Math.round(similarity * 100);
 
     const feedbackBox = this.container.querySelector('#review-feedback-box');
     const slot = this.container.querySelector('#sentence-blank-slot');
+    const liveDisplay = this.container.querySelector('#spoken-transcript-live');
+
+    if (liveDisplay && spokenText) {
+      liveDisplay.textContent = spokenText;
+    }
 
     if (slot) {
       slot.textContent = `[ ${target} ]`;
