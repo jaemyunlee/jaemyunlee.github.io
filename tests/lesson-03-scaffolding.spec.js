@@ -13,23 +13,31 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
-    // Step navigation tabs: all 4 steps active and enabled in published mode
+    // Step navigation tabs: all steps active and enabled in published mode
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
 
     await expect(tab1).toBeVisible();
     await expect(tab2).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
     await expect(tab3).toBeEnabled();
     await expect(tab4).toBeEnabled();
+    await expect(tab5).toBeEnabled();
+    await expect(tabWriting).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
     await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
-    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
+    await expect(tab4.locator('.step-label')).toHaveText('받아쓰기');
+    await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
+    await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
   });
 
   test('Lesson 03 loads all 13 quizzes with multiple-choice, fill-in-the-blank, and listening', async ({ page }) => {
@@ -42,7 +50,7 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     const quizDistribution = await page.evaluate(async () => {
       const parser = window.MarkdownQuizParser;
       const quizzes = await parser.loadFromUrl('./quiz.md');
-      const counts = { 'multiple-choice': 0, 'fill-in-the-blank': 0, 'listening': 0 };
+      const counts = { 'multiple-choice': 0, 'fill-in-the-blank': 0, 'listening': 0, 'drag-and-drop': 0 };
       quizzes.forEach(q => counts[q.type] = (counts[q.type] || 0) + 1);
       return {
         total: quizzes.length,
@@ -58,9 +66,7 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     });
 
     expect(quizDistribution.total).toBe(13);
-    expect(quizDistribution.counts['multiple-choice']).toBe(9); // ~69.2% (~70%)
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(3);  // ~23.1% (~20%)
-    expect(quizDistribution.counts['listening']).toBe(1);          // ~7.7% (~10%)
+    expect(quizDistribution.counts['multiple-choice']).toBe(13);
 
     // Check sample multiple choice
     expect(quizDistribution.sampleQ1.answer).toBe('strong-willed');
@@ -71,8 +77,8 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     expect(quizDistribution.sampleQ8.answer).toBe('leash');
     expect(quizDistribution.sampleQ8.options).toContain('leash');
 
-    // Check Q9 is fill-in-the-blank
-    expect(quizDistribution.sampleQ9.type).toBe('fill-in-the-blank');
+    // Check Q9 is multiple-choice
+    expect(quizDistribution.sampleQ9.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ9.answer).toBe('stubborn');
 
     // Check Q12 is multiple-choice
@@ -80,15 +86,15 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     expect(quizDistribution.sampleQ12.answer).toBe('going off');
     expect(quizDistribution.sampleQ12.options).toContain('going off');
 
-    // Check sample fill-in-the-blank
+    // Check sample multiple-choice
     expect(quizDistribution.sampleQ6.answer).toBe('ended up');
 
-    // Check sample listening
+    // Check sample multiple-choice
     expect(quizDistribution.sampleQ10.answer).toBe('diapers');
 
-    // Check last quiz Q13 is fill-in-the-blank
-    expect(quizDistribution.sampleQ13.type).toBe('fill-in-the-blank');
-    expect(quizDistribution.sampleQ13.answer).toBe('son in law');
+    // Check last quiz Q13 is multiple-choice
+    expect(quizDistribution.sampleQ13.type).toBe('multiple-choice');
+    expect(quizDistribution.sampleQ13.answer).toBe('son-in-law');
   });
 
   test('Published status displays all 4 steps with Pati avatar, full video, and writing unlocked', async ({ page }) => {
@@ -127,13 +133,19 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     const gotoStep3Btn = completeCard.locator('#btn-goto-step3');
     await expect(gotoStep3Btn).toBeVisible();
 
-    // Verify Step 3 and Step 4 tabs are enabled and unlocked
+    // Verify Step 3, Step 4, Step 5, and writing tabs are enabled and unlocked
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
     await expect(tab3).toBeEnabled();
     await expect(tab4).toBeEnabled();
+    await expect(tab5).toBeEnabled();
+    await expect(tabWriting).toBeEnabled();
 
     // Navigate to Step 3
     await tab3.click();
@@ -142,7 +154,17 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
 
     // Navigate to Step 4
     await tab4.click();
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 영작하기');
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 받아쓰기');
+    await expect(page.locator('#dictation-section')).toBeVisible();
+
+    // Navigate to Step 5
+    await tab5.click();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 5: 스피킹 퀴즈');
+    await expect(page.locator('#review-quiz-section')).toBeVisible();
+
+    // Navigate to Step Writing
+    await tabWriting.click();
+    await expect(page.locator('#lesson-status-badge')).toContainText('영작하기');
     await expect(page.locator('#reflection-section')).toBeVisible();
   });
 
@@ -280,13 +302,17 @@ test.describe('Lesson 03 Scaffolding & Integration', () => {
     expect(Math.abs(box03.width - box01.width)).toBeLessThanOrEqual(2);
     expect(box03.width).toBeGreaterThan(600);
 
-    // Step 1, 2, 3, and 4 buttons are all visible and enabled
+    // Step buttons are all visible and enabled
     await expect(page.locator('.step-tab-btn[data-step="1"]')).toBeVisible();
     await expect(page.locator('.step-tab-btn[data-step="2"]')).toBeVisible();
     await expect(page.locator('.step-tab-btn[data-step="3"]')).toBeVisible();
     await expect(page.locator('.step-tab-btn[data-step="4"]')).toBeVisible();
+    await expect(page.locator('.step-tab-btn[data-step="5"]')).toBeVisible();
+    await expect(page.locator('.step-tab-btn[data-step="writing"]')).toBeVisible();
     await expect(page.locator('.step-tab-btn[data-step="3"]')).toBeEnabled();
     await expect(page.locator('.step-tab-btn[data-step="4"]')).toBeEnabled();
+    await expect(page.locator('.step-tab-btn[data-step="5"]')).toBeEnabled();
+    await expect(page.locator('.step-tab-btn[data-step="writing"]')).toBeEnabled();
   });
 
 });

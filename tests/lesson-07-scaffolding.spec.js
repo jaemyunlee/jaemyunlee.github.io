@@ -11,7 +11,7 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
 
     // Status badge
     const statusBadge = page.locator('#lesson-status-badge');
-    await expect(statusBadge).toHaveText('Step 1: Quiz');
+    await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
     // Hidden draft badge is visible
     const hiddenBadge = page.locator('.lesson-header-section .badge-hidden');
@@ -24,34 +24,48 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     await expect(comingSoonBanner).toContainText('본영상 공개 예정');
     await expect(comingSoonBanner).toContainText('켈리(Kelly)의 생생한 목소리 오디오와 22개의 퀴즈');
 
-    // Step navigation tabs: Steps 1 & 2 enabled, Steps 3 & 4 deactivated/disabled
+    // Step navigation tabs: Steps 1 & 2 enabled, Steps 3, 4, 5, writing deactivated/disabled
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
 
     await expect(tab1).toBeVisible();
     await expect(tab2).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
 
     await expect(tab1).not.toHaveClass(/deactivated/);
     await expect(tab2).not.toHaveClass(/deactivated/);
     await expect(tab3).toHaveClass(/deactivated/);
     await expect(tab4).toHaveClass(/deactivated/);
+    await expect(tab5).toHaveClass(/deactivated/);
+    await expect(tabWriting).toHaveClass(/deactivated/);
     await expect(tab3).toBeDisabled();
     await expect(tab4).toBeDisabled();
+    await expect(tab5).toBeDisabled();
+    await expect(tabWriting).toBeDisabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
     await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
-    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
+    await expect(tab4.locator('.step-label')).toHaveText('받아쓰기');
+    await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
+    await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
 
     // Locked coming-soon steps display lock icons
     await expect(tab3.locator('.step-lock-icon')).toBeVisible();
     await expect(tab3.locator('.step-lock-icon')).toHaveText('🔒');
     await expect(tab4.locator('.step-lock-icon')).toBeVisible();
     await expect(tab4.locator('.step-lock-icon')).toHaveText('🔒');
+    await expect(tab5.locator('.step-lock-icon')).toBeVisible();
+    await expect(tab5.locator('.step-lock-icon')).toHaveText('🔒');
+    await expect(tabWriting.locator('.step-lock-icon')).toBeVisible();
+    await expect(tabWriting.locator('.step-lock-icon')).toHaveText('🔒');
     await expect(tab1.locator('.step-lock-icon')).toHaveCount(0);
     await expect(tab2.locator('.step-lock-icon')).toHaveCount(0);
   });
@@ -72,14 +86,12 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     });
 
     expect(quizData.total).toBe(22);
-    expect(quizData.counts['drag-and-drop']).toBe(5);
-    expect(quizData.counts['multiple-choice']).toBe(9);
-    expect(quizData.counts['fill-in-the-blank']).toBe(8);
+    expect(quizData.counts['multiple-choice']).toBe(22);
 
     const q = quizData.quizzes;
 
-    // Q1: drag-and-drop > stop me in
-    expect(q[0].type).toBe('drag-and-drop');
+    // Q1: multiple-choice > stop me in
+    expect(q[0].type).toBe('multiple-choice');
     expect(q[0].answer).toBe('stop me in');
 
     // Q2: multiple-choice > random
@@ -94,44 +106,44 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     expect(q[3].type).toBe('multiple-choice');
     expect(q[3].answer).toBe('fermented');
 
-    // Q5: fill-in-the-blank > used to
-    expect(q[4].type).toBe('fill-in-the-blank');
+    // Q5: multiple-choice > used to
+    expect(q[4].type).toBe('multiple-choice');
     expect(q[4].answer).toBe('used to');
 
-    // Q6: drag-and-drop > every other week
-    expect(q[5].type).toBe('drag-and-drop');
+    // Q6: multiple-choice > every other week
+    expect(q[5].type).toBe('multiple-choice');
     expect(q[5].answer).toBe('every other week');
 
-    // Q7: drag-and-drop > there were ever times where
-    expect(q[6].type).toBe('drag-and-drop');
+    // Q7: multiple-choice > there were ever times where
+    expect(q[6].type).toBe('multiple-choice');
     expect(q[6].answer).toBe('there were ever times where');
 
     // Q8: multiple-choice > got stared at
     expect(q[7].type).toBe('multiple-choice');
     expect(q[7].answer).toBe('got stared at');
 
-    // Q9: fill-in-the-blank > at least
-    expect(q[8].type).toBe('fill-in-the-blank');
+    // Q9: multiple-choice > at least
+    expect(q[8].type).toBe('multiple-choice');
     expect(q[8].answer).toBe('at least');
 
     // Q10: multiple-choice > encourage (encouraged)
     expect(q[9].type).toBe('multiple-choice');
     expect(q[9].answer).toBe('encouraged');
 
-    // Q11: fill-in-the-blank > have lived up to (multi-blank)
-    expect(q[10].type).toBe('fill-in-the-blank');
-    expect(q[10].blanks).toEqual(['have', 'lived', 'up', 'to']);
+    // Q11: multiple-choice > have lived up to
+    expect(q[10].type).toBe('multiple-choice');
+    expect(q[10].answer).toBe('have lived up to');
 
-    // Q12: multiple-choice > be introduced by (was introduced to)
+    // Q12: multiple-choice > was introduced to
     expect(q[11].type).toBe('multiple-choice');
     expect(q[11].answer).toBe('was introduced to');
 
-    // Q13: fill-in-the-blank > can't say
-    expect(q[12].type).toBe('fill-in-the-blank');
+    // Q13: multiple-choice > can't say
+    expect(q[12].type).toBe('multiple-choice');
     expect(q[12].answer).toBe("can't say");
 
-    // Q14: fill-in-the-blank > supposed to
-    expect(q[13].type).toBe('fill-in-the-blank');
+    // Q14: multiple-choice > supposed to
+    expect(q[13].type).toBe('multiple-choice');
     expect(q[13].answer).toBe('supposed to');
 
     // Q15: multiple-choice > taste the same
@@ -140,30 +152,30 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
 
     // Q16: multiple-choice > technically
     expect(q[15].type).toBe('multiple-choice');
-    expect(q[15].answer).toBe('technically');
+    expect(q[15].answer).toBe('Technically');
 
-    // Q17: drag-and-drop > based it off of
-    expect(q[16].type).toBe('drag-and-drop');
+    // Q17: multiple-choice > based it off of
+    expect(q[16].type).toBe('multiple-choice');
     expect(q[16].answer).toBe('based it off of');
 
-    // Q18: fill-in-the-blank > as good as
-    expect(q[17].type).toBe('fill-in-the-blank');
+    // Q18: multiple-choice > as good as
+    expect(q[17].type).toBe('multiple-choice');
     expect(q[17].answer).toBe('as good as');
 
-    // Q19: fill-in-the-blank > turn out
-    expect(q[18].type).toBe('fill-in-the-blank');
+    // Q19: multiple-choice > turn out
+    expect(q[18].type).toBe('multiple-choice');
     expect(q[18].answer).toBe('turn out');
 
-    // Q20: fill-in-the-blank > whereas
-    expect(q[19].type).toBe('fill-in-the-blank');
-    expect(q[19].answer).toBe('Whereas');
+    // Q20: multiple-choice > whereas
+    expect(q[19].type).toBe('multiple-choice');
+    expect(q[19].answer).toBe('whereas');
 
     // Q21: multiple-choice > oilier to
     expect(q[20].type).toBe('multiple-choice');
     expect(q[20].answer).toBe('oilier to');
 
-    // Q22: drag-and-drop > break from
-    expect(q[21].type).toBe('drag-and-drop');
+    // Q22: multiple-choice > break from
+    expect(q[21].type).toBe('multiple-choice');
     expect(q[21].answer).toBe('break from');
   });
 
@@ -268,7 +280,7 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     // Card contains question
     const challengeCard = page.locator('.quiz-standalone-card');
     await expect(challengeCard).toBeVisible();
-    await expect(challengeCard).toContainText('Napa cabbages');
+    await expect(challengeCard).toContainText('Napa cabbage');
 
     // Main action button in referral modal links to full lesson
     const fullLessonBtn = page.locator('#btn-full-lesson');

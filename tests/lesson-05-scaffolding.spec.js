@@ -11,49 +11,71 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
 
     // Status badge
     const statusBadge = page.locator('#lesson-status-badge');
-    await expect(statusBadge).toHaveText('Step 1: Quiz');
+    await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
     // Coming soon notification banner is hidden
     const comingSoonBanner = page.locator('#coming-soon-banner');
     await expect(comingSoonBanner).toBeHidden();
 
-    // Step navigation tabs: Steps 1, 2, 3, 4 all active and enabled
+    // Step navigation tabs: Steps 1, 2, 3, 4, 5, writing all active and enabled
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
 
     await expect(tab1).toBeVisible();
     await expect(tab2).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
 
     await expect(tab1).not.toHaveClass(/deactivated/);
     await expect(tab2).not.toHaveClass(/deactivated/);
     await expect(tab3).not.toHaveClass(/deactivated/);
     await expect(tab4).not.toHaveClass(/deactivated/);
+    await expect(tab5).not.toHaveClass(/deactivated/);
+    await expect(tabWriting).not.toHaveClass(/deactivated/);
     await expect(tab3).toBeEnabled();
     await expect(tab4).toBeEnabled();
+    await expect(tab5).toBeEnabled();
+    await expect(tabWriting).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
     await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
-    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
+    await expect(tab4.locator('.step-label')).toHaveText('받아쓰기');
+    await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
+    await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
 
     // Clicking Step 3 activates Video & Script section
     await tab3.click();
     const videoSection = page.locator('#video-section');
     await expect(videoSection).toBeVisible();
-    await expect(statusBadge).toHaveText('Step 3: Full Video');
+    await expect(statusBadge).toHaveText('Step 3: 전체 영상');
 
-    // Clicking Step 4 activates Reflection section
+    // Clicking Step 4 activates Dictation section
     await tab4.click();
+    const dictationSection = page.locator('#dictation-section');
+    await expect(dictationSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 4: 받아쓰기');
+
+    // Clicking Step 5 activates Review Quiz section
+    await tab5.click();
+    const reviewQuizSection = page.locator('#review-quiz-section');
+    await expect(reviewQuizSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 5: 스피킹 퀴즈');
+
+    // Clicking Step Writing activates Reflection section
+    await tabWriting.click();
     const reflectionSection = page.locator('#reflection-section');
     await expect(reflectionSection).toBeVisible();
-    await expect(statusBadge).toHaveText('Step 4: Writing');
+    await expect(statusBadge).toContainText('영작하기');
   });
 
-  test('Lesson 05 loads all 21 quizzes with drag-and-drop, multiple-choice, fill-in-the-blank, and listening', async ({ page }) => {
+  test('Lesson 05 loads all 20 quizzes with drag-and-drop and multiple-choice', async ({ page }) => {
     await page.goto('/lessons/lesson-05/index.html');
 
     // Wait for quiz container to render first question
@@ -74,9 +96,7 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
 
     expect(quizDistribution.total).toBe(20);
     expect(quizDistribution.counts['drag-and-drop']).toBe(1);
-    expect(quizDistribution.counts['multiple-choice']).toBe(11);
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(4);
-    expect(quizDistribution.counts['listening']).toBe(4);
+    expect(quizDistribution.counts['multiple-choice']).toBe(19);
 
     const q = quizDistribution.quizzes;
 
@@ -90,8 +110,8 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     expect(q[1].answer).toBe('minors');
     expect(q[1].options).toContain('minors');
 
-    // Q3: listening > have to do with
-    expect(q[2].type).toBe('listening');
+    // Q3: multiple-choice > had to do with
+    expect(q[2].type).toBe('multiple-choice');
     expect(q[2].answer).toBe('had to do with');
 
     // Q4: multiple-choice > get into
@@ -102,8 +122,8 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     expect(q[4].type).toBe('multiple-choice');
     expect(q[4].answer).toBe('transcript');
 
-    // Q6: listening > suit their requirements
-    expect(q[5].type).toBe('listening');
+    // Q6: multiple-choice > suit their requirements
+    expect(q[5].type).toBe('multiple-choice');
     expect(q[5].answer).toBe('suit their requirements');
 
     // Q7: multiple-choice > cover / covers
@@ -122,12 +142,12 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     expect(q[9].type).toBe('multiple-choice');
     expect(q[9].answer).toBe('cover');
 
-    // Q11: listening > as well
-    expect(q[10].type).toBe('listening');
+    // Q11: multiple-choice > as well
+    expect(q[10].type).toBe('multiple-choice');
     expect(q[10].answer).toBe('as well');
 
-    // Q12: fill-in-the-blank > come up
-    expect(q[11].type).toBe('fill-in-the-blank');
+    // Q12: multiple-choice > come up
+    expect(q[11].type).toBe('multiple-choice');
     expect(q[11].answer).toBe('come up');
 
     // Q13: multiple-choice > multiple choice
@@ -142,24 +162,24 @@ test.describe('Lesson 05 Scaffolding & Integration', () => {
     expect(q[14].type).toBe('multiple-choice');
     expect(q[14].answer).toBe('decently');
 
-    // Q16: listening > out of the three
-    expect(q[15].type).toBe('listening');
+    // Q16: multiple-choice > out of the three
+    expect(q[15].type).toBe('multiple-choice');
     expect(q[15].answer).toBe('out of the three');
 
-    // Q17: fill-in-the-blank > come up with
-    expect(q[16].type).toBe('fill-in-the-blank');
+    // Q17: multiple-choice > come up with
+    expect(q[16].type).toBe('multiple-choice');
     expect(q[16].answer).toBe('come up with');
 
-    // Q18: multiple-choice > open my eyes
+    // Q18: multiple-choice > opened my eyes
     expect(q[17].type).toBe('multiple-choice');
     expect(q[17].answer).toBe('opened my eyes');
 
-    // Q19: fill-in-the-blank > in-depth
-    expect(q[18].type).toBe('fill-in-the-blank');
+    // Q19: multiple-choice > in-depth
+    expect(q[18].type).toBe('multiple-choice');
     expect(q[18].answer).toBe('in-depth');
 
-    // Q20: fill-in-the-blank > fall into
-    expect(q[19].type).toBe('fill-in-the-blank');
+    // Q20: multiple-choice > fell into
+    expect(q[19].type).toBe('multiple-choice');
     expect(q[19].answer).toBe('fell into');
   });
 

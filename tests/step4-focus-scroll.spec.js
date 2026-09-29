@@ -4,9 +4,9 @@ test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
   test('Step 4: Clicking Copy Button scrolls smoothly to show reflection feedback description rather than scrolling to the top', async ({ page }) => {
     await page.goto('/lessons/lesson-02/index.html');
 
-    // Switch to Step 4
-    const tab4 = page.locator('.step-tab-btn[data-step="4"]');
-    await tab4.click();
+    // Switch to Step Writing
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
+    await tabWriting.click();
 
     const reflectionCard = page.locator('#reflection-card');
     const textarea = page.locator('#user-reflection-sentence');
@@ -49,9 +49,9 @@ test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
   test('Step 4: Clicking YouTube link button before copying scrolls to show encouragement description', async ({ page }) => {
     await page.goto('/lessons/lesson-02/index.html');
 
-    // Switch to Step 4
-    const tab4 = page.locator('.step-tab-btn[data-step="4"]');
-    await tab4.click();
+    // Switch to Step Writing
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
+    await tabWriting.click();
 
     const youtubeBtn = page.locator('#btn-post-comment');
     const feedback = page.locator('#reflection-feedback');
@@ -86,8 +86,8 @@ test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
       localStorage.setItem('rhyrhy_theme', 'light');
     });
 
-    // Switch to Step 4
-    await page.locator('.step-tab-btn[data-step="4"]').click();
+    // Switch to Step Writing
+    await page.locator('.step-tab-btn[data-step="writing"]').click();
 
     const copyBtn = page.locator('#btn-copy-sentence');
     const youtubeBtn = page.locator('#btn-post-comment');
@@ -136,8 +136,8 @@ test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
   test('Mobile UX: pageshow event clears sticky focus from active button', async ({ page }) => {
     await page.goto('/lessons/lesson-02/index.html');
 
-    // Switch to Step 4
-    await page.locator('.step-tab-btn[data-step="4"]').click();
+    // Switch to Step Writing
+    await page.locator('.step-tab-btn[data-step="writing"]').click();
 
     const youtubeBtn = page.locator('#btn-post-comment');
     await youtubeBtn.focus();

@@ -73,8 +73,8 @@ test.describe('Lesson Progress States & Session Resumption (Issue #35)', () => {
       await page.evaluate(() => localStorage.clear());
       await page.reload();
 
-      // Navigate to Step 4
-      await page.click('.step-tab-btn[data-step="4"]');
+      // Navigate to Step Writing
+      await page.click('.step-tab-btn[data-step="writing"]');
       await page.waitForSelector('#reflection-section', { state: 'visible' });
 
       // Mock clipboard API
@@ -125,8 +125,8 @@ test.describe('Lesson Progress States & Session Resumption (Issue #35)', () => {
       await page.evaluate(() => localStorage.clear());
       await page.reload();
 
-      // Navigate to Step 4
-      await page.click('.step-tab-btn[data-step="4"]');
+      // Navigate to Step Writing
+      await page.click('.step-tab-btn[data-step="writing"]');
       await page.waitForSelector('#reflection-section', { state: 'visible' });
 
       // Click YouTube link button directly without copying

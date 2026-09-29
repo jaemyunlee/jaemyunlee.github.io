@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
-  <!-- Cache Control (Issue #3: Maximize Browser Caching) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>RhyRhy English - Lesson 02</title>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Lesson 2: Uncle Wayne's Cabin & Dry Creek - RhyRhy English</title>
-  <link rel="manifest" href="../../manifest.webmanifest">
-  <meta name="theme-color" content="#4F46E5">
-  <link rel="icon" type="image/svg+xml" href="../../assets/icons/icon.svg">
-  <link rel="apple-touch-icon" href="../../assets/icons/icon.svg">
-
-  <script>
-    (function(){try{var t=localStorage.getItem('rhyrhy_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-  </script>
-  <!-- Google tag (gtag.js) - only loaded in production -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
   <script>
     (function () {
-      var isLocal = Boolean(
+      var saved = localStorage.getItem('rhyrhy_theme');
+      var theme = saved || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    (function() {
+      var isLocal = (
         window.location.hostname === 'localhost' ||
         window.location.hostname === '127.0.0.1' ||
         window.location.hostname === '0.0.0.0' ||
@@ -48,6 +47,8 @@
   <link rel="stylesheet" href="../../css/video-script.css">
   <link rel="stylesheet" href="../../css/modal.css">
   <link rel="stylesheet" href="../../css/review-player.css">
+  <link rel="stylesheet" href="../../css/dictation.css">
+  <link rel="stylesheet" href="../../css/review-quiz.css">
 </head>
 
 <body>
@@ -60,11 +61,10 @@
     <section class="lesson-header-section" style="margin-bottom: 14px;">
       <div style="display: flex; align-items: center; gap: 10px;">
         <span class="badge badge-primary">Lesson 02</span>
-        <span class="badge badge-emerald" id="lesson-status-badge">Step 1: Quiz</span>
+        <span class="badge badge-emerald" id="lesson-status-badge">Step 1: 퀴즈</span>
       </div>
     </section>
-
-    <!-- Step Navigation Tabs (1, 2, 3, 4) -->
+    <!-- Step Navigation Tabs (1, 2, Deep Dive, 3, 4, 5, Writing) -->
     <nav class="lesson-step-tabs" id="lesson-step-tabs" aria-label="학습 단계 이동">
       <button type="button" class="step-tab-btn active" data-step="1">
         <span class="step-num">1</span>
@@ -78,12 +78,20 @@
         <span class="step-icon" aria-hidden="true">🥜</span>
         <span class="step-label">심화 학습</span>
       </button>
-      <button type="button" class="step-tab-btn" data-step="3">
+      <button type="button" class="step-tab-btn" data-step="3" id="step-tab-3">
         <span class="step-num">3</span>
         <span class="step-label">전체 영상</span>
       </button>
-      <button type="button" class="step-tab-btn" data-step="4">
+      <button type="button" class="step-tab-btn" data-step="4" id="step-tab-4">
         <span class="step-num">4</span>
+        <span class="step-label">받아쓰기</span>
+      </button>
+      <button type="button" class="step-tab-btn" data-step="5" id="step-tab-5">
+        <span class="step-num">5</span>
+        <span class="step-label">스피킹 퀴즈</span>
+      </button>
+      <button type="button" class="step-tab-btn" data-step="writing" id="step-tab-writing" title="보너스: 영작 및 유튜브 댓글 작성">
+        <span class="step-icon" aria-hidden="true">✍️</span>
         <span class="step-label">영작하기</span>
       </button>
     </nav>
@@ -103,8 +111,7 @@
       style="display: none;">
       <div id="review-player-container"></div>
     </section>
-
-    <!-- Deep Dive: 심화 학습 Section -->
+<!-- Deep Dive: 심화 학습 Section -->
     <section class="deep-dive-section-wrapper" id="deep-dive-section" aria-label="심화 학습: Deep Dive" style="display: none;">
       <div class="deep-dive-card">
         <!-- Header / Question Prompt -->
@@ -416,7 +423,6 @@
         </div>
       </div>
     </section>
-
     <!-- Step 3: Video & Interactive Script Section -->
     <section class="video-section" id="video-section" aria-label="Step 3: Video and Interactive Script"
       style="display: none; margin-top: 24px;">
@@ -453,7 +459,7 @@
 
         <!-- Interactive Script Panel (Bottom on mobile, Right on desktop) -->
         <div class="script-panel-column" id="script-panel-main">
-          <div class="script-panel-header">
+          <div class="script-panel-header has-actions">
             <div class="script-header-title">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -464,18 +470,29 @@
               <strong>자막</strong>
             </div>
 
-            <div class="script-sub-toggle-group" role="group" aria-label="Subtitle Language">
-              <button type="button" class="btn-toggle-sub active" data-subtitle-mode="both" title="한/영 자막 동시 보기 (Both Subtitles)" aria-label="한영 자막 동시 보기">Both</button>
-              <button type="button" class="btn-toggle-sub" data-subtitle-mode="en" title="영어 자막만 보기 (English Only)" aria-label="영어 자막만 보기">EN</button>
-              <button type="button" class="btn-toggle-sub" data-subtitle-mode="kr" title="한국어 자막만 보기 (Korean Only)" aria-label="한국어 자막만 보기">KR</button>
-              <button type="button" class="btn-toggle-sub" data-subtitle-mode="off" title="자막 숨기기 / 리스닝 집중 모드 (Subtitles Off)" aria-label="자막 숨기기">
-                <svg class="sub-icon sub-icon-off" viewBox="0 0 20 14" width="20" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="1" y="1" width="18" height="12" rx="2.5" stroke="currentColor" stroke-width="1.3" fill="none"/>
-                  <line x1="4.5" y1="5.2" x2="15.5" y2="5.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-                  <line x1="4.5" y1="8.8" x2="11.5" y2="8.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-                  <line x1="2.5" y1="12" x2="17.5" y2="2" stroke="#EF4444" stroke-width="1.8" stroke-linecap="round"/>
+            <div class="script-header-actions">
+              <button type="button" class="btn-filter-flagged" id="btn-filter-flagged" aria-pressed="false" title="내가 표시한 어려운 문장만 보기 및 연속 재생">
+                <svg class="icon-flag" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                  <line x1="4" y1="22" x2="4" y2="15"/>
                 </svg>
+                <span>어려운 문장만</span>
+                <span class="flagged-count-badge" id="flagged-count-badge">0</span>
               </button>
+
+              <div class="script-sub-toggle-group" role="group" aria-label="Subtitle Language">
+                <button type="button" class="btn-toggle-sub active" data-subtitle-mode="both" title="한/영 자막 동시 보기 (Both Subtitles)" aria-label="한영 자막 동시 보기">Both</button>
+                <button type="button" class="btn-toggle-sub" data-subtitle-mode="en" title="영어 자막만 보기 (English Only)" aria-label="영어 자막만 보기">EN</button>
+                <button type="button" class="btn-toggle-sub" data-subtitle-mode="kr" title="한국어 자막만 보기 (Korean Only)" aria-label="한국어 자막만 보기">KR</button>
+                <button type="button" class="btn-toggle-sub" data-subtitle-mode="off" title="자막 숨기기 / 리스닝 집중 모드 (Subtitles Off)" aria-label="자막 숨기기">
+                  <svg class="sub-icon sub-icon-off" viewBox="0 0 20 14" width="20" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="18" height="12" rx="2.5" stroke="currentColor" stroke-width="1.3" fill="none"/>
+                    <line x1="4.5" y1="5.2" x2="15.5" y2="5.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="4.5" y1="8.8" x2="11.5" y2="8.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="2.5" y1="12" x2="17.5" y2="2" stroke="#EF4444" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -486,8 +503,18 @@
       </div>
     </section>
 
-    <!-- Step 4: Writing & Commenting Section -->
-    <section class="reflection-wrapper" id="reflection-section" aria-label="Step 4: Writing and Commenting" style="display: none;">
+    <!-- Step 4: Dictation Practice Section -->
+    <section class="dictation-wrapper" id="dictation-section" aria-label="Step 4: Dictation Practice" style="display: none; margin-top: 24px;">
+      <div id="dictation-container"></div>
+    </section>
+
+    <!-- Step 5: Review Quiz Section -->
+    <section class="review-quiz-wrapper" id="review-quiz-section" aria-label="Step 5: Review Quiz" style="display: none; margin-top: 24px;">
+      <div id="review-quiz-container"></div>
+    </section>
+
+    <!-- Step Bonus: Writing & Commenting Section -->
+    <section class="reflection-wrapper" id="reflection-section" aria-label="Writing and Commenting" style="display: none;">
       <div id="reflection-container"></div>
     </section>
   </main>
@@ -508,6 +535,8 @@
   <script src="../../js/celebration.js"></script>
   <script src="../../js/youtube-comment.js?v=step4"></script>
   <script src="../../js/review-player.js"></script>
+  <script src="../../js/dictation-engine.js"></script>
+  <script src="../../js/review-quiz-engine.js"></script>
   <script src="../../js/pwa-manager.js"></script>
   <script src="../../js/app.js"></script>
 
@@ -527,6 +556,8 @@
       const quizSection = document.getElementById('quiz-section');
       const lessonHeader = document.querySelector('.lesson-header-section');
       const videoSection = document.getElementById('video-section');
+      const dictationSection = document.getElementById('dictation-section');
+      const reviewQuizSection = document.getElementById('review-quiz-section');
       const reflectionSection = document.getElementById('reflection-section');
       const reviewSection = document.getElementById('review-section');
       const deepDiveSection = document.getElementById('deep-dive-section');
@@ -559,9 +590,13 @@
 
       let metadata = {};
       let scriptData = [];
+      let keySentencesData = [];
       let loadedQuizzes = [];
+      let loadedReviewQuizzes = [];
       let videoPlayer = null;
       let reviewPlayer = null;
+      let dictationEngine = null;
+      let reviewQuizEngine = null;
 
       try {
         const metaRes = await fetch('./metadata.json');
@@ -577,10 +612,17 @@
         console.warn('Could not load script.json', e);
       }
 
+      try {
+        const ksRes = await fetch('./key-sentences.json');
+        if (ksRes.ok) keySentencesData = await ksRes.json();
+      } catch (e) {
+        console.warn('Could not load key-sentences.json', e);
+      }
+
       // Initialize Analytics for Lesson 02
       if (typeof Analytics !== 'undefined') {
         Analytics.init();
-        Analytics.trackLessonView(LESSON_ID, metadata.title || "Lesson 2: Uncle Wayne's Cabin & Dry Creek");
+        Analytics.trackLessonView(LESSON_ID, metadata.title || 'Lesson 02');
       }
 
       const commentManager = new YouTubeCommentManager({
@@ -591,15 +633,19 @@
         container: '#reflection-container',
         nextLessonUrl: (typeof App !== 'undefined' && App.getNextLessonUrl) ? App.getNextLessonUrl(LESSON_ID) : '/lessons.html',
         onComplete: () => {
-          showStep(4, false);
+          showStep('writing', false);
         }
       });
       commentManager.init();
 
-      // Unified Step Navigation (1, 2, 'deep-dive', 3, 4) with LocalStorage Memory
+      // Unified Step Navigation (1, 2, deep-dive, 3, 4, 5, writing) with LocalStorage Memory
       let currentActiveStep = 1;
       const showStep = (stepNumber, scroll = true) => {
-        let step = (stepNumber === 'deep-dive') ? 'deep-dive' : Math.min(4, Math.max(1, parseInt(stepNumber, 10) || 1));
+        let step = stepNumber;
+        if (step !== 'deep-dive' && step !== 'writing') {
+          step = Math.min(5, Math.max(1, parseInt(stepNumber, 10) || 1));
+        }
+
         currentActiveStep = step;
         Storage.setCurrentStep(LESSON_ID, step);
 
@@ -610,14 +656,15 @@
         const nudgeModal = document.getElementById('step4-nudge-modal') || document.getElementById('step3-nudge-modal');
         if (nudgeModal) nudgeModal.style.display = 'none';
 
-        // Pause review audio if leaving step 2
-        if (step !== 2 && reviewPlayer) {
-          reviewPlayer.pause();
+        // Pause audio if leaving steps
+        if (step !== 2 && reviewPlayer) reviewPlayer.pause();
+        if (step !== 3 && videoPlayer) videoPlayer.pause();
+        if (step !== 4 && dictationEngine) {
+          if (typeof dictationEngine.pauseAudio === 'function') dictationEngine.pauseAudio();
         }
-
-        // Pause video player if leaving step 3
-        if (step !== 3 && videoPlayer) {
-          videoPlayer.pause();
+        if (step !== 5 && reviewQuizEngine) {
+          if (reviewQuizEngine.isListening) reviewQuizEngine.toggleSpeechRecognition();
+          if (typeof reviewQuizEngine.pauseAudio === 'function') reviewQuizEngine.pauseAudio();
         }
 
         // Manage Section Displays
@@ -625,53 +672,59 @@
         if (reviewSection) reviewSection.style.display = (step === 2) ? 'block' : 'none';
         if (deepDiveSection) deepDiveSection.style.display = (step === 'deep-dive') ? 'block' : 'none';
         if (videoSection) videoSection.style.display = (step === 3) ? 'block' : 'none';
-        if (reflectionSection) reflectionSection.style.display = (step === 4) ? 'block' : 'none';
+        if (dictationSection) dictationSection.style.display = (step === 4) ? 'block' : 'none';
+        if (reviewQuizSection) reviewQuizSection.style.display = (step === 5) ? 'block' : 'none';
+        if (reflectionSection) reflectionSection.style.display = (step === 'writing') ? 'block' : 'none';
 
         // Update Step Tab Buttons
         const tabBtns = document.querySelectorAll('.step-tab-btn');
         tabBtns.forEach(btn => {
-          const s = btn.dataset.step;
-          btn.classList.toggle('active', String(s) === String(step));
+          const raw = btn.dataset.step;
+          const s = (raw === 'deep-dive' || raw === 'writing') ? raw : parseInt(raw, 10);
+          btn.classList.toggle('active', s === step);
         });
 
-        // Horizontally scroll tabs:
+        // Horizontally scroll tabs
         const tabsNav = document.getElementById('lesson-step-tabs');
         if (tabsNav) {
           const maxScroll = tabsNav.scrollWidth - tabsNav.clientWidth;
           if (maxScroll > 0) {
-            const targetLeft = (step === 1 || step === 2) ? 0 : (step === 'deep-dive' ? Math.round(maxScroll * 0.4) : maxScroll);
+            let targetLeft = 0;
+            if (step === 1 || step === 2) targetLeft = 0;
+            else if (step === 'deep-dive') targetLeft = Math.round(maxScroll * 0.25);
+            else if (step === 3) targetLeft = Math.round(maxScroll * 0.5);
+            else if (step === 4) targetLeft = Math.round(maxScroll * 0.75);
+            else targetLeft = maxScroll;
             tabsNav.scrollTo({ left: targetLeft, behavior: scroll ? 'smooth' : 'auto' });
           }
         }
 
-        // Update Status Badge (Consistent green highlight across all steps)
+        // Update Status Badge
         if (statusBadge) {
           statusBadge.className = 'badge badge-emerald';
-          if (step === 1) {
-            statusBadge.textContent = 'Step 1: 퀴즈';
-          } else if (step === 2) {
-            statusBadge.textContent = 'Step 2: 핵심 문장';
-          } else if (step === 'deep-dive') {
-            statusBadge.textContent = '🥜 심화 학습';
-          } else if (step === 3) {
-            statusBadge.textContent = 'Step 3: 전체 영상';
-          } else if (step === 4) {
-            statusBadge.textContent = 'Step 4: 영작하기';
-          }
+          if (step === 1) statusBadge.textContent = 'Step 1: 퀴즈';
+          else if (step === 2) statusBadge.textContent = 'Step 2: 핵심 문장';
+          else if (step === 'deep-dive') statusBadge.textContent = '🥜 심화 학습';
+          else if (step === 3) statusBadge.textContent = 'Step 3: 전체 영상';
+          else if (step === 4) statusBadge.textContent = 'Step 4: 받아쓰기';
+          else if (step === 5) statusBadge.textContent = 'Step 5: 스피킹 퀴즈';
+          else if (step === 'writing') statusBadge.textContent = '✍️ 영작하기';
         }
 
         // Lazy-init Review Player on Step 2 (핵심 문장)
-        if (step === 2 && loadedQuizzes.length > 0) {
+        if (step === 2 && (keySentencesData.length > 0 || loadedQuizzes.length > 0)) {
           if (!reviewPlayer) {
+            const step2Sentences = keySentencesData.length > 0 ? keySentencesData : loadedQuizzes;
             reviewPlayer = new ReviewPlayer({
               container: '#review-player-container',
               lessonId: LESSON_ID,
-              quizzes: loadedQuizzes,
+              quizzes: step2Sentences,
               audioBaseUrl: './audio/',
               audioFiles: LESSON_02_AUDIO_FILES,
               speakerName: metadata?.speaker?.name || 'Wayne',
               speakerAvatar: metadata?.speaker?.avatar || '../../assets/img/avatars/wayne.jpeg',
               hasDeepDive: true,
+              showSaveButton: false, // Save button removed (Issue #108)
               celebrationManager: celebrationManager,
               onComplete: () => {
                 showStep('deep-dive', true);
@@ -709,6 +762,62 @@
           }
         }
 
+        // Lazy-init Dictation Engine on Step 4 (받아쓰기)
+        if (step === 4 && (keySentencesData.length > 0 || loadedQuizzes.length > 0)) {
+          if (!dictationEngine) {
+            const step4Sentences = keySentencesData.length > 0 ? keySentencesData : loadedQuizzes;
+            const keySentences = step4Sentences.map((q, idx) => ({
+              id: `key-${idx + 1}`,
+              segmentId: q.segmentId,
+              segmentAudio: q.segmentAudio || (q.segmentId ? `segments/${q.segmentId}.mp3` : null),
+              audioUrl: q.segmentAudio ? `./audio/${q.segmentAudio}` : (q.segmentId ? `./audio/segments/${q.segmentId}.mp3` : (LESSON_02_AUDIO_FILES[idx] ? `./audio/${encodeURIComponent(LESSON_02_AUDIO_FILES[idx])}` : null)),
+              segmentEn: q.segmentEn,
+              en: q.segmentEn || (q.english ? q.english.replace(/\[.*?\]/, q.answer || q.keyExpression || '').replace(/\s+/g, ' ').trim() : ''),
+              kr: q.segmentKr || q.korean,
+              target: q.target || q.keyExpression || q.answer || '',
+              keyExpression: q.keyExpression || q.answer || '',
+              audioFile: LESSON_02_AUDIO_FILES[idx]
+            }));
+
+            dictationEngine = new DictationEngine({
+              container: '#dictation-container',
+              lessonId: LESSON_ID,
+              keySentences: keySentences,
+              audioBaseUrl: './audio/',
+              onNextStep: () => showStep(5, true),
+              onComplete: (info) => {
+                if (typeof Analytics !== 'undefined' && (!info || !info.alreadyCompleted)) {
+                  Analytics.trackStepComplete(LESSON_ID, 4, { trigger: 'dictation_complete' });
+                }
+              }
+            });
+            dictationEngine.init();
+            window.dictationEngine = dictationEngine;
+          } else {
+            dictationEngine.refreshQueue();
+          }
+        }
+
+        // Lazy-init Review Quiz Engine on Step 5 (스피킹 퀴즈)
+        if (step === 5) {
+          if (!reviewQuizEngine) {
+            reviewQuizEngine = new ReviewQuizEngine({
+              container: '#review-quiz-container',
+              lessonId: LESSON_ID,
+              quizzes: loadedReviewQuizzes,
+              audioBaseUrl: './audio/',
+              celebrationManager: celebrationManager,
+              onComplete: (info) => {
+                if (typeof Analytics !== 'undefined' && (!info || !info.alreadyCompleted)) {
+                  Analytics.trackStepComplete(LESSON_ID, 5, { trigger: 'review_quiz_complete' });
+                }
+              }
+            });
+            reviewQuizEngine.init();
+            window.reviewQuizEngine = reviewQuizEngine;
+          }
+        }
+
         // Uniform Scroll to fit active contents section across all steps
         if (scroll) {
           try {
@@ -717,7 +826,9 @@
             else if (step === 2) targetSection = reviewSection;
             else if (step === 'deep-dive') targetSection = deepDiveSection;
             else if (step === 3) targetSection = videoSection;
-            else if (step === 4) targetSection = document.getElementById('reflection-card') || reflectionSection;
+            else if (step === 4) targetSection = dictationSection;
+            else if (step === 5) targetSection = reviewQuizSection;
+            else if (step === 'writing') targetSection = document.getElementById('reflection-card') || reflectionSection;
 
             if (targetSection) {
               const navHeight = 70;
@@ -736,8 +847,9 @@
       // Step Navigation Tabs Click Binding
       document.querySelectorAll('.step-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
+          if (btn.disabled || btn.classList.contains('deactivated')) return;
           const raw = btn.dataset.step;
-          const s = (raw === 'deep-dive') ? 'deep-dive' : parseInt(raw, 10);
+          const s = (raw === 'deep-dive' || raw === 'writing') ? raw : parseInt(raw, 10);
           showStep(s, true);
         });
       });
@@ -767,7 +879,7 @@
         const diffY = touchEndY - touchStartY;
         const duration = Date.now() - touchStartTime;
 
-        const stepsSeq = [1, 2, 'deep-dive', 3, 4];
+        const stepsSeq = [1, 2, 'deep-dive', 3, 4, 5, 'writing'];
         const currentIndex = stepsSeq.indexOf(currentActiveStep);
         if (Math.abs(diffX) >= 50 && Math.abs(diffX) > Math.abs(diffY) * 1.5 && duration <= 600) {
           if (diffX < 0 && currentIndex < stepsSeq.length - 1) {
@@ -790,7 +902,7 @@
       const shareDeepDive = () => {
         const origin = window.location.origin || 'https://rhyrhyenglish.site';
         const shareUrl = `${origin}/lessons/${LESSON_ID}/deep-dive.html`;
-        const title = '[현서네 리얼 영어] 심화 학습: 어릴 적 추억을 이야기할 때, 왜 used to와 would를 섞어 쓸까?';
+        const title = `[현서네 리얼 영어] 심화 학습: ${metadata.title || ''}`;
         const text = '영어 공부하는 다른 사람에게도 알려주세요!';
 
         if (typeof Analytics !== 'undefined' && typeof Analytics.trackEvent === 'function') {
@@ -866,15 +978,33 @@
         }
       };
 
+      // Click timestamp to jump to video step and seek
+      document.querySelectorAll('.deep-dive-time-badge').forEach(badge => {
+        badge.addEventListener('click', () => {
+          const timeText = badge.textContent.replace('⏱', '').trim();
+          const parts = timeText.split(':');
+          if (parts.length === 2) {
+            const seconds = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+            showStep(3, true);
+            if (videoPlayer && videoPlayer.seekTo) {
+              setTimeout(() => videoPlayer.seekTo(seconds, true), 300);
+            }
+          }
+        });
+      });
+
       // Global click delegation
       document.addEventListener('click', (e) => {
         if (e.target.closest('#btn-goto-video') || e.target.closest('#btn-goto-sentences')) {
           e.preventDefault();
           showStep(2, true);
+        } else if (e.target.closest('#btn-goto-step3')) {
+          e.preventDefault();
+          showStep(3, true);
         } else if (e.target.closest('#btn-goto-deep-dive')) {
           e.preventDefault();
           showStep('deep-dive', true);
-        } else if (e.target.closest('#btn-goto-step3') || e.target.closest('#btn-deep-dive-next')) {
+        } else if (e.target.closest('#btn-deep-dive-next')) {
           e.preventDefault();
           showStep(3, true);
         } else if (e.target.closest('#btn-deep-dive-share') || e.target.closest('#btn-deep-dive-share-nudge')) {
@@ -924,12 +1054,34 @@
         loadedQuizzes = quizzes;
         commentManager.setQuizzes(quizzes);
 
-        // Resume active step: URL query param (?step=deep-dive), hash (#deep-dive), or LocalStorage
+        let quizPool = null;
+        try {
+          const poolRes = await fetch('./quiz-pool.json');
+          if (poolRes.ok) quizPool = await poolRes.json();
+        } catch (_) {}
+
+        try {
+          const rqRes = await fetch('./review-quiz.json');
+          if (rqRes.ok) loadedReviewQuizzes = await rqRes.json();
+        } catch (_) {}
+
+        if (!keySentencesData || keySentencesData.length === 0) {
+          try {
+            const ksRes = await fetch('./key-sentences.json');
+            if (ksRes.ok) keySentencesData = await ksRes.json();
+          } catch (_) {}
+        }
+
+        if ((currentActiveStep === 2 && !reviewPlayer) || (currentActiveStep === 4 && !dictationEngine)) {
+          showStep(currentActiveStep, false);
+        }
+
+        // Resume active step: URL query param, hash, or LocalStorage
         const urlParams = new URLSearchParams(window.location.search);
         const paramStep = urlParams.get('step');
         const hashStep = window.location.hash ? window.location.hash.replace('#', '') : null;
-        const initialStep = (paramStep === 'deep-dive' || hashStep === 'deep-dive')
-          ? 'deep-dive'
+        const initialStep = (paramStep === 'deep-dive' || hashStep === 'deep-dive' || paramStep === 'writing' || hashStep === 'writing')
+          ? (paramStep || hashStep)
           : (paramStep ? parseInt(paramStep, 10) : (hashStep ? parseInt(hashStep, 10) : Storage.getCurrentStep(LESSON_ID)));
         showStep(initialStep, false);
 
@@ -937,6 +1089,7 @@
           container: '#quiz-container',
           lessonId: LESSON_ID,
           quizzes: quizzes,
+          quizPool: quizPool,
           onComplete: (info) => {
             if (typeof Analytics !== 'undefined') {
               Analytics.trackStepComplete(LESSON_ID, 1, {
@@ -967,15 +1120,15 @@
   <div class="nudge-modal-overlay" id="step4-nudge-modal" style="display: none;" role="dialog" aria-modal="true"
     aria-labelledby="nudge-modal-title">
     <div class="nudge-modal-card">
-      <div class="nudge-modal-icon">🎬</div>
+      <div class="nudge-modal-icon">🎧</div>
       <h3 class="nudge-modal-title" id="nudge-modal-title">전체 영상 & 대본 학습 완료!</h3>
       <p class="nudge-modal-desc">
         영상과 대본을 모두 집중해서 학습하셨습니다.<br>
-        이제 오늘 배운 핵심 어휘와 표현을 활용해 <strong>나만의 문장을 직접 영작</strong>하고, <strong>유튜브에 댓글</strong>을 남겨보세요!
+        이제 오늘 배운 핵심 문장들을 <strong>귀로 듣고 직접 써보는 받아쓰기(Step 4)</strong>를 시작해보세요!
       </p>
       <div class="nudge-modal-actions">
         <button type="button" class="btn btn-primary btn-modal-step4" id="btn-modal-goto-step4">
-          <span>✍️ 문장 작성 & 댓글 남기기</span>
+          <span>🎧 받아쓰기 연습 시작하기</span>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />

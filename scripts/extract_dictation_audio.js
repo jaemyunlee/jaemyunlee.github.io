@@ -20,6 +20,7 @@ function extractLessonDictationAudio(lessonId = 'lesson-01') {
 
   // Video source candidates: video/{lessonId}-clean-version.mp4
   const videoCandidates = [
+    path.join(lessonDir, 'video', `${lessonId}-clean-version.mp4`),
     path.join(ROOT_DIR, 'video', `${lessonId}-clean-version.mp4`),
     path.join(ROOT_DIR, 'video', 'original', `${lessonId}-clean-version.mp4`)
   ];

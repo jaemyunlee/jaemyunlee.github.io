@@ -26,7 +26,7 @@ const LessonStep = Object.freeze({
   FULL_VIDEO: 3,
   DICTATION: 4,
   REVIEW_QUIZ: 5,
-  WRITING: 4
+  WRITING: 'writing'
 });
 
 const LessonStatusHelper = Object.freeze({

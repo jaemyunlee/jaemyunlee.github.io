@@ -1,177 +1,177 @@
-# Lesson 7: Costco Kimchi & Kelly's Kimchi Jjigae Quizzes
+# Lesson 7: Costco Kimchi & Kelly's Kimchi Jjigae Review Quizzes
 
 ## Quiz 1
-- **Type**: drag-and-drop
-- **Audio**: audio/I had another guy randomly stop me in the grocery store to ask what people use Napa cabbages for.wav
-- **English**: I had another guy randomly [stop, me, in] the grocery store to ask what people use Napa cabbages for,
+- **Type**: multiple-choice
+- **English**: A friendly stranger had the nerve to [stop me in, throw me out, pick me up, push me away] the grocery store aisle to ask how to cook Napa cabbage.
 - **Answer**: stop me in
-- **Korean**: 식료품점에서 또 어떤 분이 불쑥 가던 저를 멈춰 세우더니(불러세우더니), 사람들이 배추를 어디에 쓰냐고 묻더라고요.
-- **Explanation**: "stop someone in ~"은 매장이나 길 등 특정 장소에서 가던 사람을 "불러세우다, 멈춰 세우다"라는 뜻입니다 (randomly stop me in the grocery store: 식료품점에서 불쑥 나를 멈춰 세우다). 한국어의 "가던 나를 멈춰 세우다"를 떠올리면 "stop me in"을 쉽게 맞힐 수 있습니다.
+- **Options**: stop me in, throw me out, pick me up, push me away
+- **Korean**: 어떤 친절한 낯선 분이 식료품점 통로에서 불쑥 가던 나를 불러세우더니(멈춰 세우더니) 배추를 어떻게 요리하는지 묻더라고요.
+- **Explanation**: "stop someone in (a place)"는 가던 사람을 특정 장소에서 "불러세우다, 멈춰 세우다"라는 뜻입니다.
 
 ## Quiz 2
 - **Type**: multiple-choice
-- **Audio**: audio/which I thought was really random..wav
-- **English**: which I thought was really [random, typical, obvious, predictable].
+- **English**: Getting asked about Korean culinary recipes while standing in the bakery line felt completely [random, punctual, official, logical] to me.
 - **Answer**: random
-- **Korean**: 정말 뜬금없다고 생각했죠.
-- **Explanation**: "random"은 구어체에서 어떤 상황이나 행동이 맥락 없이 불쑥 일어났을 때 "뜬금없는, 엉뚱한, 뜻밖의"라는 의미로 매우 자주 쓰이는 핵심 표현입니다 (really random: 정말 뜬금없는).
+- **Options**: random, punctual, official, logical
+- **Korean**: 빵집 줄에 서 있는 동안 한국 요리 레시피에 대한 질문을 받은 것은 나에게 정말 뜬금없고 생뚱맞게 느껴졌어요.
+- **Explanation**: "random"은 맥락에 맞지 않고 "뜬금없는, 뜻밖의, 무작위의"라는 일상적인 구어 표현입니다.
 
 ## Quiz 3
 - **Type**: multiple-choice
-- **Audio**: audio/I knew at least from a Korean standpoint what it gets used for..wav
-- **English**: I knew at least, from a Korean [standpoint, breakthrough, background, checkpoint], what it gets used for.
+- **English**: From an authentic cultural [standpoint, boundary, destination, foundation], fermenting kimchi with seafood enhances its umami depth.
 - **Answer**: standpoint
-- **Korean**: 적어도 한국인의 관점(입장)에서 배추가 어디에 쓰이는지는 제가 알고 있었죠.
-- **Explanation**: "standpoint"는 사물이나 문제를 바라보는 "관점, 시각, 견해, 입장"을 뜻하는 명사입니다 (from a Korean standpoint: 한국인의 관점/입장에서).
+- **Options**: standpoint, boundary, destination, foundation
+- **Korean**: 전통적인 문화적 관점(입장)에서 볼 때 해산물과 함께 김치를 발효시키는 것은 감칠맛의 깊이를 더해줍니다.
+- **Explanation**: "standpoint"는 판단이나 주장의 근거가 되는 "관점, 입장, 견지"를 뜻합니다.
 
 ## Quiz 4
 - **Type**: multiple-choice
-- **Audio**: audio/Id say its fermented cabbage. Korean fermented cabbage..wav
-- **English**: I'd say it's [fermented, seasoned, shredded, marinated] cabbage. Korean fermented cabbage.
+- **English**: Traditional Korean kimchi is naturally [fermented, dehydrated, evaporated, incinerated] with garlic, ginger, and chili flakes.
 - **Answer**: fermented
-- **Korean**: "발효된 배추"라고 말할 것 같아요. 한국의 발효 배추(김치)요.
-- **Explanation**: "fermented"는 효모나 유산균으로 "발효된" 상태를 의미하는 핵심 형용사입니다 (fermented cabbage: 발효된 배추).
+- **Options**: fermented, dehydrated, evaporated, incinerated
+- **Korean**: 전통 한국 김치는 마늘, 생강, 고춧가루와 함께 자연적으로 발효됩니다.
+- **Explanation**: "fermented"는 미생물의 작용으로 "발효된"을 뜻합니다.
 
 ## Quiz 5
-- **Type**: fill-in-the-blank
-- **Audio**: audio/and we used to go there all the time..wav
-- **English**: and we [used to] go there all the time.
+- **Type**: multiple-choice
+- **English**: When Kelly lived in Seoul, she [used to, forgot to, refused to, hesitated to] visit that famous hole-in-the-wall Kimchi Jjigae eatery every week.
 - **Answer**: used to
-- **Korean**: 예전엔 우리 항상 거기에 가곤 했었죠.
-- **Explanation**: "used to + 동사원형"은 과거에 규칙적이거나 습관적으로 "~하곤 했다(예전엔 늘 그랬다)"라는 뜻을 나타내는 필수 표현입니다. "예전에 ~하곤 했다"라는 말을 보면 바로 "used to"를 떠올릴 수 있습니다.
+- **Options**: used to, forgot to, refused to, hesitated to
+- **Korean**: 켈리는 서울에 살았을 때 매주 그 유명하고 허름한 김치찌개 맛집을 찾곤 했었어요.
+- **Explanation**: "used to (동사원형)"는 과거에 지속적으로 "하곤 했다"라는 과거의 습관을 나타냅니다.
 
 ## Quiz 6
-- **Type**: drag-and-drop
-- **Audio**: audio/Like we probably as a group would go there once a week every other week or so.wav
-- **English**: Like, we probably as a group would go there once a week, [every, other, week] or so,
+- **Type**: multiple-choice
+- **English**: Our office study group gathers [every other week, every single day, once a century, twice a minute] on Thursday to practice spoken English.
 - **Answer**: every other week
-- **Korean**: 동료들이랑 다 같이 일주일에 한 번이나 격주에 한 번(2주에 한 번)꼴로 그곳에 갔던 것 같아요.
-- **Explanation**: "every other week"는 한 주 걸러 한 주, 즉 "격주로 / 2주에 한 번"을 뜻하는 일상 대화 빈출 표현입니다.
+- **Options**: every other week, every single day, once a century, twice a minute
+- **Korean**: 우리 사무실 스터디 그룹은 영어 회화를 연습하기 위해 격주로(2주에 한 번씩) 목요일마다 모입니다.
+- **Explanation**: "every other week"는 "격주로, 2주에 한 번꼴로"라는 빈도 표현입니다.
 
 ## Quiz 7
-- **Type**: drag-and-drop
-- **Audio**: audio/but if there were ever times where I really wanted it and no one could go with me I went by myself.wav
-- **English**: but if [there, were, ever, times, where] I really wanted it, and no one could go with me, I went by myself,
+- **Type**: multiple-choice
+- **English**: If [there were ever times where, there were never days when, there were no places that, there were few reasons why] no one was available to join her, Kelly went to the restaurant alone.
 - **Answer**: there were ever times where
-- **Korean**: 하지만 혹시라도 제가 너무 먹고 싶었던 적이 있었는데 아무도 같이 갈 수 없으면, 저 혼자서라도 갔어요.
-- **Explanation**: "if there were ever times where ~"는 과거에 "혹시라도 ~했던 때(적)가 있었다면"이라는 뜻으로, 특정한 상황이나 계기를 가정하여 회상할 때 쓰는 표현 패턴입니다.
+- **Options**: there were ever times where, there were never days when, there were no places that, there were few reasons why
+- **Korean**: 혹시라도 아무도 같이 갈 수 없었던 적이 있으면, 켈리는 혼자서라도 그 식당에 갔어요.
+- **Explanation**: "there were ever times where ~"는 "혹시라도 ~했던 적/경우가 있으면"이라는 회상 및 조건 표현입니다.
 
 ## Quiz 8
 - **Type**: multiple-choice
-- **Audio**: audio/I mean all of us as a group of foreigners kind of got stared at..wav
-- **English**: I mean, all of us as a group of foreigners kind of [got stared at, got cheered on, got turned away, got pointed out].
+- **English**: Walking into a rural traditional restaurant as a group of tall foreigners, we naturally [got stared at, got thrown out, got cheered on, got paid off] with curious eyes.
 - **Answer**: got stared at
-- **Korean**: 외국인 무리로 다 같이 가면 아무래도 사람들에게 빤히 쳐다봄을 당하긴(시선 집중을 받긴) 했죠.
-- **Explanation**: "get stared at"은 "빤히 쳐다봄을 당하다, 시선 집중을 받다"라는 뜻의 수동태 표현입니다 (stare at: ~을 빤히 쳐다보다). "사람들이 빤히 쳐다보는 시선을 받다"라는 한국어 의미를 그대로 담고 있습니다.
+- **Options**: got stared at, got thrown out, got cheered on, got paid off
+- **Korean**: 키 큰 외국인 무리로 시골 전통 식당에 들어서자, 우리는 자연스럽게 호기심 어린 시선으로 사람들에게 빤히 쳐다봄을 당했어요(시선 집중을 받았어요).
+- **Explanation**: "get stared at"는 다른 사람들에게 "빤히 쳐다봄을 당하다, 시선 집중을 받다"라는 수동 표현입니다.
 
 ## Quiz 9
-- **Type**: fill-in-the-blank
-- **Audio**: audio/So yeah so I had my meal paid for. They bought it at least two times I think..wav
-- **English**: So yeah, so I had my meal paid for. They bought it [at least] two times, I think.
+- **Type**: multiple-choice
+- **English**: Even if the spicy stew didn't turn out completely authentic, [at least, at best, at random, at large] you tried your hardest to cook it for dinner.
 - **Answer**: at least
-- **Korean**: 제 밥값을 대신 내주셨어요. 제 기억엔 적어도(최소한) 두 번은 사주셨던 것 같아요.
-- **Explanation**: "at least"는 수량이나 횟수 앞에서 "적어도, 최소한"이라는 뜻을 나타내는 필수 부사구입니다.
+- **Options**: at least, at best, at random, at large
+- **Korean**: 비록 매운 찌개가 완벽하게 원조 맛으로 나오진 않았더라도, 적어도 당신이 저녁으로 끓여주려고 최선을 다했다는 점만으로도 좋아요.
+- **Explanation**: "at least"는 "적어도, 최소한"이라는 뜻으로 아쉬움 속에서 긍정적인 면을 짚을 때 씁니다.
 
 ## Quiz 10
 - **Type**: multiple-choice
-- **Audio**: audio/But I feel like I kind of encouraged it by giving you a 10 out of 10 on that one soup you made..wav
-- **English**: But I feel like I kind of [encouraged, prevented, postponed, dismissed] it by giving you a 10 out of 10 on that one soup you made.
+- **English**: Giving Jaemyun a perfect ten-out-of-ten review on his very first Kimchi Jjigae definitely [encouraged, discouraged, intimidated, prohibited] him to keep experimenting in the kitchen.
 - **Answer**: encouraged
-- **Korean**: 하지만 제가 당신이 만든 그 찌개에 제가 10점 만점을 주면서, 제가 당신을 그렇게 부추긴 것 같기도 해요.
-- **Explanation**: "encourage"는 어떤 행동을 하도록 "부추기다, 용기를 북돋우다, 권장하다"라는 뜻입니다 (과거형: encouraged).
+- **Options**: encouraged, discouraged, intimidated, prohibited
+- **Korean**: 남편 재면의 맨 첫 번째 김치찌개에 10점 만점을 주었던 것이 확실히 그가 주방에서 계속 요리 실험을 하도록 부추기고(격려하고) 말았어요.
+- **Explanation**: "encourage"는 상대방의 행동을 "부추기다, 용기를 북돋우다, 격려하다"라는 뜻입니다 (과거형: encouraged).
 
 ## Quiz 11
-- **Type**: fill-in-the-blank
-- **Audio**: audio/And unfortunately some of them have been good but none of them have quite lived up to that one you made..wav
-- **English**: And unfortunately, some of them have been good, but none of them [have] quite [lived up to] that one you made.
+- **Type**: multiple-choice
+- **English**: He tried cooking Kimchi Jjigae several times since, but none of the later batches [have lived up to, have given birth to, have turned blind to, have run out of] that legendary first pot.
 - **Answer**: have lived up to
-- **Korean**: 안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 당신이 만들었던 그 찌개의 기대치에는 전혀 미치지 못했어요.
-- **Explanation**: "live up to ~"는 기대, 기준, 명성에 "부응하다, 미치다"라는 뜻의 핵심 숙어입니다. 현재완료형 부정문으로 "none of them have lived up to ~"는 그 어떤 것도 이전의 기대치에 미치지(부응하지) 못했다는 뜻입니다.
+- **Options**: have lived up to, have given birth to, have turned blind to, have run out of
+- **Korean**: 그 이후로 그가 김치찌개를 여러 번 끓여보았지만, 그 어떤 후속작도 그 전설적인 첫 번째 냄비의 기대치에는 전혀 미치지 못했어요.
+- **Explanation**: "live up to ~"는 기대나 기준에 "부응하다, 미치다"라는 뜻입니다 (현재완료: have lived up to).
 
 ## Quiz 12
 - **Type**: multiple-choice
-- **Audio**: audio/I was introduced to the Kimchi Jjigae restaurant by my coworkers..wav
-- **English**: I [was introduced to, was turned down by, was taken aback by, was left out of] the Kimchi Jjigae restaurant by my coworkers.
+- **English**: Kelly [was introduced to, was accused of, was deprived of, was disposed of] the hidden alleyway Kimchi Jjigae spot by her friendly coworkers in Seoul.
 - **Answer**: was introduced to
-- **Korean**: 저는 직장 동료들의 소개로 그 김치찌개 식당을 소개받아서 처음 알게 되었어요.
-- **Explanation**: "be introduced to ~ by ..."는 "...의 소개로 ~를 처음 소개받아 알게 되다"라는 뜻의 수동태 표현입니다.
+- **Options**: was introduced to, was accused of, was deprived of, was disposed of
+- **Korean**: 켈리는 서울에서 다정한 직장 동료들의 소개로 그 골목길 숨은 김치찌개 맛집을 소개받아 처음 알게 되었어요.
+- **Explanation**: "be introduced to ~"는 누군가의 소개로 사람이나 사물을 "소개받다, 처음 접하다"라는 뜻입니다.
 
 ## Quiz 13
-- **Type**: fill-in-the-blank
-- **Audio**: audio/And I cant say like really why it was so good but I just know that I really liked it.wav
-- **English**: And I [can't say] really why it was so good, but I just know that I really liked it,
+- **Type**: multiple-choice
+- **English**: I know I loved the soup, but I honestly [can't say, shouldn't listen, mustn't eat, wouldn't doubt] exactly which secret ingredient made it taste so remarkable.
 - **Answer**: can't say
-- **Korean**: 왜 그렇게 맛있었는지는 정말 딱 꼬집어 말할 수는 없지만, 그냥 제가 정말 좋아했다는 건 알아요.
-- **Explanation**: "can't say"는 "확실히 말할 수는 없다, 딱 꼬집어 말하기는 어렵다"라고 조심스럽게 의견을 말할 때 원어민들이 즐겨 쓰는 회화 표현입니다.
+- **Options**: can't say, shouldn't listen, mustn't eat, wouldn't doubt
+- **Korean**: 내가 그 찌개를 정말 좋아했다는 건 알지만, 솔직히 어떤 비밀 재료가 그렇게 놀라운 맛을 냈는지는 딱 꼬집어 말할 수가 없어요.
+- **Explanation**: "can't say"는 정확한 이유나 사실을 "딱 잘라 말할 수 없다, 잘 모르겠다"라는 완곡한 표현입니다.
 
 ## Quiz 14
-- **Type**: fill-in-the-blank
-- **Audio**: audio/I dont know that just always made it to me that that is what Kimchi Jjigae is supposed to taste like..wav
-- **English**: I don't know, that just always made it to me that that is what Kimchi Jjigae is [supposed to] taste like.
+- **Type**: multiple-choice
+- **English**: Is authentic Kimchi Jjigae really [supposed to, forced to, liable to, prone to] be thick and stew-like, or lighter like a clear broth?
 - **Answer**: supposed to
-- **Korean**: 모르겠어요, 그냥 그 집 맛이 저에게는 김치찌개라면 '원래 나야 마땅한 바로 그 맛'이 되어버렸어요.
-- **Explanation**: "be supposed to + 동사원형"은 본래 그러해야 하는 본질이나 표준을 나타내어 "~하기로 되어 있다, 원래 마땅히 ~해야 한다"라는 뜻입니다 (supposed to taste like: 원래 마땅히 나야 하는 맛이다).
+- **Options**: supposed to, forced to, liable to, prone to
+- **Korean**: 진짜 원조 김치찌개는 진하고 찌개다워야 하는 게 맞는 건가요(원래 그런 건가요), 아니면 맑은 국물처럼 더 가벼워야 하는 건가요?
+- **Explanation**: "be supposed to ~"는 원래의 규칙이나 기준에 따라 "~하기로 되어 있다, 원래 ~해야 한다"라는 뜻입니다.
 
 ## Quiz 15
 - **Type**: multiple-choice
-- **Audio**: audio/So everything else just didnt taste the same..wav
-- **English**: So everything else just didn't [taste the same, sound the same, look the part, feel the heat].
+- **English**: Ever since eating at that memorable Seoul restaurant, other versions of the soup just don't [taste the same, sound the alarm, see the point, feel the pinch] to Kelly.
 - **Answer**: taste the same
-- **Korean**: 그래서 다른 모든 김치찌개는 그냥 예전의 '똑같은 그 맛'이 나지 않았어요.
-- **Explanation**: "taste the same"은 기준이 되는 대상과 "똑같은 맛이 나다, 예전 그 맛이 나다"라는 뜻입니다. 부정문에서는 예전의 그 특별한 맛이 나지 않을 때 쓰입니다.
+- **Options**: taste the same, sound the alarm, see the point, feel the pinch
+- **Korean**: 그 기억에 남는 서울 식당에서 먹어본 이후로 다른 김치찌개들은 켈리에게 그냥 예전의 똑같은 그 맛이 나지 않았어요.
+- **Explanation**: "taste the same"은 음식의 맛이 "똑같은 맛이 나다"라는 뜻입니다.
 
 ## Quiz 16
 - **Type**: multiple-choice
-- **Audio**: audio/But I dont even know technically was it really that good of one I mean probably not..wav
-- **English**: But I don't even know, [technically, physically, obviously, musically], was it really that good of one? I mean, probably not.
-- **Answer**: technically
-- **Korean**: 하지만 엄밀히 따져보면, 그 집이 정말 그렇게 훌륭한 김치찌개였는지는 저도 잘 모르겠어요. 아마 아닐 수도 있죠.
-- **Explanation**: "technically"는 "엄밀히 말하면, 이론상으로는, 기술적으로는"이라는 뜻의 유용한 부사입니다.
+- **English**: [Technically, Emotionally, Casually, Hastily], tomatoes are botanically classified as fruits, although we cook them as vegetables.
+- **Answer**: Technically
+- **Options**: Technically, Emotionally, Casually, Hastily
+- **Korean**: 엄밀히 따져보면(기술적으로는), 토마토는 채소처럼 요리해 먹지만 식물학적으로는 과일로 분류됩니다.
+- **Explanation**: "technically"는 규칙이나 사실을 "엄밀히 따지면, 정확히 말하자면"이라는 부사입니다.
 
 ## Quiz 17
-- **Type**: drag-and-drop
-- **Audio**: audio/And thats what I always based it off of..wav
-- **English**: And that's what I always [based, it, off, of].
+- **Type**: multiple-choice
+- **English**: Whenever she evaluates a bowl of spicy kimchi soup, Kelly [based it off of, tore it up from, gave it up to, looked it down on] that nostalgic memory from her early Seoul days.
 - **Answer**: based it off of
-- **Korean**: 그리고 그게 바로 제가 늘 (맛의) 기준으로 삼았던 거예요.
-- **Explanation**: "base something off of ~"는 "~을 바탕(기준)으로 삼다"라는 실전 구동사 표현입니다 (과거형: based it off of).
+- **Options**: based it off of, tore it up from, gave it up to, looked it down on
+- **Korean**: 매운 김치찌개 한 그릇을 맛보고 평가할 때마다 켈리는 서울 초기 시절의 그 아련한 추억을 (맛의) 기준으로 삼았어요.
+- **Explanation**: "base something off of ~"는 무엇을 "~을 바탕으로 삼다, ~을 기준으로 삼다"라는 뜻입니다.
 
 ## Quiz 18
-- **Type**: fill-in-the-blank
-- **Audio**: audio/Its still not as good as that very first one that you made two months ago..wav
-- **English**: It's still not [as good as] that very first one, that you made two months ago.
+- **Type**: multiple-choice
+- **English**: The restaurant was decent, but their Kimchi Jjigae was still not [as good as, as bad as, as tall as, as loud as] the phenomenal one Jaemyun made two months ago.
 - **Answer**: as good as
-- **Korean**: 두 달 전에 당신이 만들었던 그 맨 처음 것만큼 맛있지는 여전히 않지만요.
-- **Explanation**: "as ~ as ..."는 "...만큼 ~한"을 나타내는 동등 비교 구문입니다. "not as good as"는 "...만큼 좋지는(맛있지는) 않다"라는 뜻으로, 한국어의 "~만큼 맛있지는 않다"를 보고 바로 "as good as"를 영작하거나 퀴즈로 풀 수 있습니다.
+- **Options**: as good as, as bad as, as tall as, as loud as
+- **Korean**: 그 식당도 괜찮았지만 그들의 김치찌개는 두 달 전 남편 재면이 만들어 주었던 그 환상적인 찌개만큼 맛있지는 여전히 않았어요.
+- **Explanation**: "as good as ~"는 "~만큼 좋은, ~만큼 훌륭한/맛있는"을 뜻하는 동등 비교 표현입니다.
 
 ## Quiz 19
-- **Type**: fill-in-the-blank
-- **Audio**: audio/The problem is you dont follow a recipe so every time you never know how its going to turn out.wav
-- **English**: The problem is you don't follow a recipe, so every time you never know how it's going to [turn out],
+- **Type**: multiple-choice
+- **English**: The problem with cooking without measuring cups is that you never know how the recipe is going to [turn out, back down, blow away, fall off] in the end.
 - **Answer**: turn out
-- **Korean**: 문제는 당신이 레시피를 안 따르시니까, 매번 결과가 어떻게 나올지 모른다는 거예요.
-- **Explanation**: "turn out"은 어떤 일이나 요리 과정 끝에 "결과가 나오다, 완성되어 나오다, 판가름 나다"라는 뜻의 핵심 구동사입니다. 한국어의 "결과가 어떻게 나올지"를 보고 바로 "how it's going to turn out"을 연상할 수 있습니다.
+- **Options**: turn out, back down, blow away, fall off
+- **Korean**: 계량컵 없이 요리할 때의 문제는 최종적으로 요리 결과가 어떻게 나올지 결코 알 수 없다는 점이에요.
+- **Explanation**: "turn out"은 결과나 상태가 최종적으로 "어떻게 되다, 결과가 나오다"라는 뜻입니다.
 
 ## Quiz 20
-- **Type**: fill-in-the-blank
-- **Audio**: audio/Whereas I feel like that one didnt have that oiliness to it..wav
-- **English**: [Whereas] I feel like that one didn't have that oiliness to it.
-- **Answer**: Whereas
-- **Korean**: 반면에 그 첫 번째 찌개에는 그런 기름진 느끼함이 전혀 없었던 것 같아요.
-- **Explanation**: "Whereas"는 두 가지 사실이나 상황을 대비하여 문두에서 "반면에, ~임에 비하여"라는 뜻을 나타내는 접속사입니다.
+- **Type**: multiple-choice
+- **English**: Recent batches of Kimchi Jjigae tasted quite greasy, [whereas, therefore, otherwise, despite] that first one Kelly loved had no heavy oiliness at all.
+- **Answer**: whereas
+- **Options**: whereas, therefore, otherwise, despite
+- **Korean**: 최근 끓인 김치찌개들은 꽤 기름지게 느껴졌던 반면에, 켈리가 너무나 좋아했던 그 첫 번째 찌개에는 그런 텁텁한 기름기가 전혀 없었어요.
+- **Explanation**: "whereas"는 두 가지 사실을 대조하여 "반면에, ~임에 반하여"를 뜻하는 핵심 접속사입니다.
 
 ## Quiz 21
 - **Type**: multiple-choice
-- **Audio**: audio/Something about these ones feel oilier to me.wav
-- **English**: Something about these ones feel [oilier to, sweeter to, saltier to, spicier to] me,
+- **English**: Adding extra pork belly made the stew taste noticeably [oilier to, drier to, colder to, firmer to] Kelly's palate than before.
 - **Answer**: oilier to
-- **Korean**: 이번 것들은 왠지 모르게 저한테 더 기름지게(느끼하게) 느껴져요.
-- **Explanation**: "feel oilier to someone"은 "누군가에게 더 기름지게(느끼하게) 느껴지다"라는 표현입니다 (oily의 비교급: oilier).
+- **Options**: oilier to, drier to, colder to, firmer to
+- **Korean**: 삼겹살을 추가로 더 넣었더니 찌개가 예전보다 켈리의 입맛에 확연히 더 기름지게(느끼하게) 느껴졌어요.
+- **Explanation**: "oilier to ~"는 기름기가 더 많아 누구에게 "~에게 더 기름지게/느끼하게 느껴지는"이라는 뜻입니다.
 
 ## Quiz 22
-- **Type**: drag-and-drop
-- **Audio**: audio/Lets take a two month break from Kimchi Jjigae and then you cook it again..wav
-- **English**: Let's take a two month [break, from] Kimchi Jjigae and then you cook it again.
+- **Type**: multiple-choice
+- **English**: After eating stew for four nights in a row, Kelly suggested taking a two-month [break from, fight with, step into, look at] Kimchi Jjigae so Jaemyun could reset his recipe.
 - **Answer**: break from
-- **Korean**: 우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고, 그러고 나서 당신이 다시 끓여주세요.
-- **Explanation**: "take a break from ~"은 바쁜 일상이나 특정 음식, 활동 등을 "잠시 쉬다, 휴식기를 갖다"라는 실생활 유용한 표현입니다. 한국어의 "~로부터 휴식기를 갖다/쉬다"에서 바로 "break from"을 떠올릴 수 있습니다.
+- **Options**: break from, fight with, step into, look at
+- **Korean**: 나흘 밤 연속으로 찌개를 먹은 뒤, 켈리는 남편 재면이 레시피를 재정비할 수 있도록 김치찌개는 두 달 동안 잠시 휴식기를 갖자고 제안했어요.
+- **Explanation**: "take a break from ~"는 특정 활동이나 음식 등으로부터 "잠시 휴식기를 갖다, 잠시 쉬다"라는 뜻입니다.
