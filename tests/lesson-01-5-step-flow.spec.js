@@ -177,6 +177,9 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
   test('Step 4: Dictation practice strictly tests key sentences using audio segments (decoupled from step 3 flags)', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
 
+    // Verify Step 4 tab label is '받아쓰기'
+    await expect(page.locator('.step-tab-btn[data-step="4"] .step-label')).toHaveText('받아쓰기');
+
     // Pre-flag a segment in Step 3 via Storage to confirm Step 4 is decoupled
     await page.evaluate(() => {
       Storage.toggleFlaggedSegment('lesson-01', {
@@ -221,6 +224,13 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     await expect(hintBox).toBeVisible();
     await expect(page.locator('.hint-text')).toContainText('h');
 
+    // Verify mobile layout for 힌트보기, 건너뛰기, 정답확인 matches Step 1 Quiz style
+    await page.setViewportSize({ width: 375, height: 812 });
+    await expect(page.locator('.dictation-action-buttons')).toBeVisible();
+    await expect(page.locator('#btn-dictation-hint')).toBeVisible();
+    await expect(page.locator('#btn-dictation-skip')).toBeVisible();
+    await expect(page.locator('#btn-dictation-submit')).toBeVisible();
+
     // Type key expression and verify live blank reflection
     const input = page.locator('#dictation-input');
     await input.fill('happened to');
@@ -236,8 +246,11 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
     await expect(page.locator('.dictation-highlight')).toHaveText('happened to');
   });
 
-  test('Step 5: Review Quiz supports Fill-in-the-Blank and Speaking Quiz with >= 85% similarity', async ({ page }) => {
+  test('Step 5: Review Quiz is speaking-only with >= 85% similarity and microphone interface', async ({ page }) => {
     await page.goto('/lessons/lesson-01/index.html');
+
+    // Verify Step 5 tab label is '스피킹 퀴즈'
+    await expect(page.locator('.step-tab-btn[data-step="5"] .step-label')).toHaveText('스피킹 퀴즈');
 
     // Switch to Step 5
     await page.locator('.step-tab-btn[data-step="5"]').click();
@@ -245,6 +258,18 @@ test.describe('Lesson 01 - 5-Step Flow Architecture (Issue #108)', () => {
 
     const quizCard = page.locator('#review-quiz-container .review-quiz-card');
     await expect(quizCard).toBeVisible();
+
+    // Verify all quizzes are speaking type
+    const allSpeaking = await page.evaluate(() => {
+      return window.reviewQuizEngine && window.reviewQuizEngine.quizzes.length > 0 &&
+        window.reviewQuizEngine.quizzes.every(q => q.type === 'speaking');
+    });
+    expect(allSpeaking).toBe(true);
+
+    // Verify speaking UI components render
+    await expect(page.locator('#btn-speaking-mic')).toBeVisible();
+    await expect(page.locator('#spoken-transcript-live')).toBeVisible();
+    await expect(page.locator('.review-pill.speaking')).toBeVisible();
 
     // Verify ReviewQuizEngine calculateSimilarity logic
     const similarityTests = await page.evaluate(() => {

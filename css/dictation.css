@@ -408,10 +408,21 @@
 .dictation-action-buttons {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 12px;
   margin-top: 14px;
   flex-wrap: wrap;
+}
+
+.dictation-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dictation-actions-right {
+  display: flex;
+  align-items: center;
 }
 
 /* Feedback Box */
@@ -650,3 +661,48 @@
   max-width: 360px;
   margin: 0 auto;
 }
+
+/* ==========================================================================
+   Mobile Responsive Alignment (Step 4: Dictation / 받아쓰기)
+   Matches Step 1 Quiz button layout identically
+   ========================================================================== */
+@media (max-width: 640px) {
+  .dictation-action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "hint hint"
+      "skip check";
+    gap: 10px;
+    width: 100%;
+  }
+
+  .dictation-actions-left,
+  .dictation-actions-right {
+    display: contents;
+  }
+
+  .btn-dictation-hint {
+    grid-area: hint;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-dictation-skip {
+    grid-area: skip;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-dictation-submit {
+    grid-area: check;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-dictation-next {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

@@ -11,7 +11,7 @@ class ReviewQuizEngine {
       ? document.querySelector(options.container)
       : options.container;
     this.lessonId = options.lessonId;
-    this.quizzes = options.quizzes || [];
+    this.quizzes = (options.quizzes || []).map(q => ({ ...q, type: 'speaking' }));
     this.onComplete = options.onComplete || (() => {});
     this.celebrationManager = options.celebrationManager || null;
 
@@ -594,14 +594,9 @@ class ReviewQuizEngine {
   renderCompletedState() {
     const total = this.quizzes.length;
     let passedCount = 0;
-    let speakingCount = 0;
-    let blankCount = 0;
-
     this.quizzes.forEach((q, idx) => {
       const res = this.results[idx];
       if (res && res.passed) passedCount++;
-      if (q.type === 'speaking') speakingCount++;
-      else blankCount++;
     });
 
     const percent = Math.round((passedCount / total) * 100);
@@ -620,22 +615,18 @@ class ReviewQuizEngine {
         <div class="review-complete-icon">🏆</div>
         <h3 class="review-complete-title">모든 5단계 학습 완료!</h3>
         <p class="review-complete-desc">
-          축하합니다! 퀴즈, 핵심 문장, 전체 영상, 딕테이션, 그리고 복습 퀴즈까지<br>
+          축하합니다! 퀴즈, 핵심 문장, 전체 영상, 받아쓰기, 그리고 스피킹 퀴즈까지<br>
           <strong>5단계 학습을 모두 완벽하게 마스터</strong>하셨습니다!
         </p>
 
         <div class="review-stats-grid">
           <div class="review-stat-box">
             <span class="stat-value">${passedCount} / ${total}</span>
-            <span class="stat-name">맞힌 문제 (${percent}%)</span>
+            <span class="stat-name">스피킹 통과 (${percent}%)</span>
           </div>
           <div class="review-stat-box">
-            <span class="stat-value">${speakingCount}개</span>
+            <span class="stat-value">${total}개</span>
             <span class="stat-name">스피킹 퀴즈</span>
-          </div>
-          <div class="review-stat-box">
-            <span class="stat-value">${blankCount}개</span>
-            <span class="stat-name">빈칸 퀴즈</span>
           </div>
         </div>
 
@@ -647,7 +638,7 @@ class ReviewQuizEngine {
             <span>📚 전체 레슨 목록으로</span>
           </a>
           <button type="button" class="btn btn-ghost" id="btn-restart-review">
-            <span>복습 퀴즈 다시 풀기 ↺</span>
+            <span>스피킹 퀴즈 다시 풀기 ↺</span>
           </button>
         </div>
       </div>

@@ -99,7 +99,7 @@ class DictationEngine {
     if (this.queue.length === 0) {
       this.container.innerHTML = `
         <div class="dictation-card empty-state">
-          <p>딕테이션할 문장이 없습니다.</p>
+          <p>받아쓰기할 문장이 없습니다.</p>
         </div>
       `;
       return;
@@ -198,18 +198,25 @@ class DictationEngine {
           </div>
 
           <div class="dictation-action-buttons">
-            <button type="button" class="btn btn-secondary btn-dictation-hint" id="btn-dictation-hint">
-              <span>💡 힌트 보기</span>
-            </button>
-            <button type="button" class="btn btn-secondary btn-dictation-skip" id="btn-dictation-skip">
-              <span>건너뛰기</span>
-            </button>
-            <button type="button" class="btn btn-primary btn-dictation-submit" id="btn-dictation-submit">
-              <span>정답 확인 (Enter)</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </button>
+            <div class="dictation-actions-left">
+              <button type="button" class="btn btn-secondary btn-dictation-hint" id="btn-dictation-hint" title="핵심 표현 첫 글자 힌트 보기">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 18h6m-4 3h2a9 9 0 1 1 6-6c0 2.5-2 3.5-2 5"/>
+                </svg>
+                <span>힌트 보기</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-dictation-skip" id="btn-dictation-skip" title="정답 확인 후 넘어가기">
+                <span>건너뛰기</span>
+              </button>
+            </div>
+            <div class="dictation-actions-right">
+              <button type="button" class="btn btn-primary btn-dictation-submit" id="btn-dictation-submit">
+                <span>정답 확인</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -611,7 +618,7 @@ class DictationEngine {
     this.container.innerHTML = `
       <div class="dictation-card completed animate-fade-in" role="region" aria-label="Dictation Completed">
         <div class="dictation-complete-icon">🎉</div>
-        <h3 class="dictation-complete-title">핵심 표현 딕테이션 완료!</h3>
+        <h3 class="dictation-complete-title">핵심 표현 받아쓰기 완료!</h3>
         <p class="dictation-complete-desc">
           영상 속 원어민 발음으로 핵심 표현 ${total}개를 직접 귀로 듣고 받아쓰셨습니다!
         </p>
@@ -629,7 +636,7 @@ class DictationEngine {
 
         <div class="dictation-complete-actions">
           <button type="button" class="btn btn-primary btn-dictation-goto-step5" id="btn-goto-step5">
-            <span>Step 5: 복습 퀴즈 풀러 가기 🎯</span>
+            <span>Step 5: 스피킹 퀴즈 풀러 가기 🎙️</span>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="9 18 15 12 9 6"/>
             </svg>

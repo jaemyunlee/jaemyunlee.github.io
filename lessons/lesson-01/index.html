@@ -86,11 +86,11 @@
       </button>
       <button type="button" class="step-tab-btn" data-step="4">
         <span class="step-num">4</span>
-        <span class="step-label">딕테이션</span>
+        <span class="step-label">받아쓰기</span>
       </button>
       <button type="button" class="step-tab-btn" data-step="5">
         <span class="step-num">5</span>
-        <span class="step-label">복습 퀴즈</span>
+        <span class="step-label">스피킹 퀴즈</span>
       </button>
       <button type="button" class="step-tab-btn" data-step="writing" id="step-tab-writing" title="보너스: 영작 및 유튜브 댓글 작성">
         <span class="step-icon" aria-hidden="true">✍️</span>
@@ -727,8 +727,8 @@
           else if (step === 2) statusBadge.textContent = 'Step 2: 핵심 문장';
           else if (step === 'deep-dive') statusBadge.textContent = '🥜 심화 학습';
           else if (step === 3) statusBadge.textContent = 'Step 3: 전체 영상';
-          else if (step === 4) statusBadge.textContent = 'Step 4: 딕테이션';
-          else if (step === 5) statusBadge.textContent = 'Step 5: 복습 퀴즈';
+          else if (step === 4) statusBadge.textContent = 'Step 4: 받아쓰기';
+          else if (step === 5) statusBadge.textContent = 'Step 5: 스피킹 퀴즈';
           else if (step === 'writing') statusBadge.textContent = '✍️ 영작하기';
         }
 
@@ -1141,11 +1141,11 @@
       <h3 class="nudge-modal-title" id="nudge-modal-title">전체 영상 & 대본 학습 완료!</h3>
       <p class="nudge-modal-desc">
         영상과 대본을 모두 집중해서 학습하셨습니다.<br>
-        이제 오늘 배운 핵심 문장과 어려운 문장들을 <strong>귀로 듣고 직접 받아쓰는 딕테이션(Step 4)</strong>을 시작해보세요!
+        이제 오늘 배운 핵심 문장들을 <strong>귀로 듣고 직접 써보는 받아쓰기(Step 4)</strong>를 시작해보세요!
       </p>
       <div class="nudge-modal-actions">
         <button type="button" class="btn btn-primary btn-modal-step4" id="btn-modal-goto-step4">
-          <span>🎧 딕테이션 연습 시작하기</span>
+          <span>🎧 받아쓰기 연습 시작하기</span>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />

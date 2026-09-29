@@ -10,7 +10,7 @@
   },
   {
     "id": 2,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "obviously",
     "target": "Obviously",
     "english": "[Obviously], Jaemyun cannot go with me because someone has to watch the kids.",
@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "decent",
     "target": "decent",
     "english": "We have a [decent] view.",
@@ -46,7 +46,7 @@
   },
   {
     "id": 6,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "Compared to",
     "target": "Compared to",
     "english": "[Compared to] what we paid in Korea for tickets, it is decent.",
@@ -64,7 +64,7 @@
   },
   {
     "id": 8,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "started to",
     "target": "started to",
     "english": "I [started to] like it a lot and listening to it.",
@@ -82,7 +82,7 @@
   },
   {
     "id": 10,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "no way",
     "target": "no way",
     "english": "There was [no way] you were getting up to those seats.",
@@ -100,7 +100,7 @@
   },
   {
     "id": 12,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "spend the night",
     "target": "spend the night",
     "english": "And then go to the concert and [spend the night]!",
@@ -118,7 +118,7 @@
   },
   {
     "id": 14,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "went on sale",
     "target": "went on sale",
     "english": "I do not know when they officially [went on sale], but it seemed like everything was sold.",
@@ -136,7 +136,7 @@
   },
   {
     "id": 16,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "around there",
     "target": "around there",
     "english": "I think it was [around there].",
@@ -154,7 +154,7 @@
   },
   {
     "id": 18,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "due",
     "target": "due",
     "english": "Because I have a lot of assignments [due] Sunday.",
@@ -172,7 +172,7 @@
   },
   {
     "id": 20,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "unlikely",
     "target": "unlikely",
     "english": "So I thought it was pretty [unlikely] that I would get to go and find someone.",
@@ -190,7 +190,7 @@
   },
   {
     "id": 22,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "trying to",
     "target": "trying to",
     "english": "So [trying to] find someone to go, you know.",
@@ -208,7 +208,7 @@
   },
   {
     "id": 24,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "at once",
     "target": "at once",
     "english": "All the tickets now, it is like everyone buys them [at once] and then resells them.",
@@ -226,7 +226,7 @@
   },
   {
     "id": 26,
-    "type": "fill-in-the-blank",
+    "type": "speaking",
     "keyExpression": "ahead of time",
     "target": "ahead of time",
     "english": "I should have called [ahead of time].",
