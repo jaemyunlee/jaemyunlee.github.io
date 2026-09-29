@@ -789,6 +789,61 @@
   border-color: var(--primary);
 }
 
+/* Card Flag Button (Issue #108) */
+.btn-card-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 26px;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  color: var(--text-subtle);
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn-card-flag:hover {
+  color: #EF4444;
+  border-color: #EF4444;
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.btn-card-flag.active {
+  background: rgba(239, 68, 68, 0.2);
+  color: #EF4444 !important;
+  border-color: #EF4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="light"] .btn-card-flag {
+  background-color: #FFFFFF;
+  border-color: var(--surface-border);
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .btn-card-flag:hover {
+  background-color: #FEF2F2;
+  border-color: #EF4444;
+  color: #DC2626;
+}
+
+[data-theme="light"] .btn-card-flag.active {
+  background: #FEE2E2;
+  color: #DC2626 !important;
+  border-color: #EF4444;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+}
+
+.script-sentence-card.flagged-card {
+  border-left: 3.5px solid #EF4444;
+}
+
 [data-theme="dark"] .script-sentence-card.loop-active {
   box-shadow: 0 0 14px var(--primary-glow);
 }

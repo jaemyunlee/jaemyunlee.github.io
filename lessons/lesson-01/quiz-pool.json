@@ -1,0 +1,2276 @@
+[
+  {
+    "keyExpression": "happened to",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "I just [happened to, planned to, refused to, hesitated to] look.",
+        "answer": "happened to",
+        "options": [
+          "happened to",
+          "planned to",
+          "refused to",
+          "hesitated to"
+        ],
+        "korean": "그냥 우연히 찾아보게 되었어요.",
+        "explanation": "\"happen to (동사)\"는 \"우연히 ~하다\"라는 뜻의 매우 자연스러운 일상 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "I [happened to run into] my old friend at the grocery store.",
+        "answer": "happened to run into",
+        "tokens": [
+          "happened",
+          "to",
+          "run",
+          "into"
+        ],
+        "options": [
+          "happened",
+          "to",
+          "run",
+          "into"
+        ],
+        "korean": "식료품점에서 우연히 옛 친구와 마주쳤어요.",
+        "explanation": "\"happen to run into ~\"는 \"~와 우연히 마주치다\"라는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Do you [happen to know, refuse to know, struggle to know, regret to know] what time the bus arrives?",
+        "answer": "happen to know",
+        "options": [
+          "happen to know",
+          "refuse to know",
+          "struggle to know",
+          "regret to know"
+        ],
+        "korean": "혹시 버스가 몇 시에 도착하는지 아시나요?",
+        "explanation": "\"Do you happen to know ~?\"는 공손하게 \"혹시 ~를 아시나요?\"라고 물어볼 때 자주 씁니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "We [happened to find] a wonderful coffee shop near the station.",
+        "answer": "happened to find",
+        "tokens": [
+          "happened",
+          "to",
+          "find"
+        ],
+        "options": [
+          "happened",
+          "to",
+          "find"
+        ],
+        "korean": "우리는 역 근처에서 우연히 아주 멋진 카페를 발견했어요.",
+        "explanation": "\"happened to find\"는 \"우연히 발견했다\"는 의미입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "I [happened to overhear, pretended to overhear, forgot to overhear, avoided to overhear] what they were talking about.",
+        "answer": "happened to overhear",
+        "options": [
+          "happened to overhear",
+          "pretended to overhear",
+          "forgot to overhear",
+          "avoided to overhear"
+        ],
+        "korean": "그들이 무슨 이야기를 나누는지 우연히 엿듣게 되었어요.",
+        "explanation": "\"happen to overhear\"는 의도하지 않고 \"우연히 엿듣게 되다\"라는 뜻입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "obviously",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "[Obviously, Surprisingly, Secretly, Rarely], Jaemyun cannot go with me because someone has to watch the kids.",
+        "answer": "Obviously",
+        "options": [
+          "Obviously",
+          "Surprisingly",
+          "Secretly",
+          "Rarely"
+        ],
+        "korean": "당연히 재면이는 저랑 같이 못 가요. 누군가는 애들을 봐야 하니까요.",
+        "explanation": "\"Obviously\"는 \"당연히, 명백하게\"라는 뜻으로, 누구나 짐작할 수 있는 명백한 사실을 덧붙일 때 씁니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "[Obviously, we need to leave] early if we want to beat the traffic.",
+        "answer": "Obviously we need to leave",
+        "tokens": [
+          "Obviously,",
+          "we",
+          "need",
+          "to",
+          "leave"
+        ],
+        "options": [
+          "Obviously,",
+          "we",
+          "need",
+          "to",
+          "leave"
+        ],
+        "korean": "교통 체증을 피하려면 당연히 일찍 출발해야 해요.",
+        "explanation": "\"Obviously\"는 \"당연히, 두말할 필요 없이\"라는 뉘앙스입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "He was [obviously, rarely, barely, doubtfully] exhausted after working a twelve-hour shift.",
+        "answer": "obviously",
+        "options": [
+          "obviously",
+          "rarely",
+          "barely",
+          "doubtfully"
+        ],
+        "korean": "그는 12시간 교대 근무를 마친 뒤 확연히 지쳐 보였어요.",
+        "explanation": "\"obviously exhausted\"는 겉으로 보기에 \"누가 봐도 확실히 지친\" 상태를 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "She was [obviously very proud of] her son's graduation.",
+        "answer": "obviously very proud of",
+        "tokens": [
+          "obviously",
+          "very",
+          "proud",
+          "of"
+        ],
+        "options": [
+          "obviously",
+          "very",
+          "proud",
+          "of"
+        ],
+        "korean": "그녀는 아들의 졸업을 누가 봐도 아주 자랑스러워했어요.",
+        "explanation": "\"obviously proud of\"는 명백하게 자랑스러워하는 감정을 표현합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "[Obviously, Suddenly, Accidentally, Barely], everyone wants to have a peaceful weekend.",
+        "answer": "Obviously",
+        "options": [
+          "Obviously",
+          "Suddenly",
+          "Accidentally",
+          "Barely"
+        ],
+        "korean": "당연히 누구나 평화로운 주말을 보내고 싶어 하죠.",
+        "explanation": "\"Obviously\"는 당연한 사실이나 공감대를 이끌어낼 때 문두에 씁니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "nosebleed",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "We got tickets that are pretty much in the back, the [nosebleed, front row, VIP box, ground floor] section.",
+        "answer": "nosebleed",
+        "options": [
+          "nosebleed",
+          "front row",
+          "VIP box",
+          "ground floor"
+        ],
+        "korean": "맨 뒷자리 티켓을 구했어요. 제일 꼭대기 구역(하늘석)이에요.",
+        "explanation": "\"nosebleed section\"은 경기장이나 콘서트장의 \"맨 꼭대기 높은 좌석(하늘석)\"을 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Even though we sat in [the nosebleed seats], the atmosphere was unbelievable.",
+        "answer": "the nosebleed seats",
+        "tokens": [
+          "the",
+          "nosebleed",
+          "seats,"
+        ],
+        "options": [
+          "the",
+          "nosebleed",
+          "seats,"
+        ],
+        "korean": "비록 맨 꼭대기 좌석에 앉았지만 분위기는 정말 믿기 힘들 만큼 대단했어요.",
+        "explanation": "\"the nosebleed seats\"는 경기장/공연장의 맨 위층 꼭대기 좌석을 가리킵니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Tickets for the [nosebleed, orchestra, backstage, ringside] section are usually much cheaper.",
+        "answer": "nosebleed",
+        "options": [
+          "nosebleed",
+          "orchestra",
+          "backstage",
+          "ringside"
+        ],
+        "korean": "꼭대기 하늘석 구역 티켓은 대개 훨씬 더 저렴해요.",
+        "explanation": "\"nosebleed section\"은 무대에서 가장 먼 맨 위층 좌석을 친근하게 부르는 말입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "I brought binoculars because [we were in the nosebleeds].",
+        "answer": "we were in the nosebleeds",
+        "tokens": [
+          "we",
+          "were",
+          "in",
+          "the",
+          "nosebleeds."
+        ],
+        "options": [
+          "we",
+          "were",
+          "in",
+          "the",
+          "nosebleeds."
+        ],
+        "korean": "우리가 맨 꼭대기 좌석에 있어서 쌍안경을 챙겨왔어요.",
+        "explanation": "\"in the nosebleeds\"는 꼭대기 좌석에 앉아 있다는 구어 표현입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The stairs to the [nosebleed, subterranean, dugout, baseline] section were steep and exhausting.",
+        "answer": "nosebleed",
+        "options": [
+          "nosebleed",
+          "subterranean",
+          "dugout",
+          "baseline"
+        ],
+        "korean": "꼭대기 구역으로 올라가는 계단은 가파르고 힘들었어요.",
+        "explanation": "\"nosebleed section\"은 높은 고도 때문에 붙은 위트 있는 별칭입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "decent",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "We have a [decent, terrible, blurry, blind] view.",
+        "answer": "decent",
+        "options": [
+          "decent",
+          "terrible",
+          "blurry",
+          "blind"
+        ],
+        "korean": "꽤 괜찮은 시야(뷰)를 확보했어요.",
+        "explanation": "\"decent\"는 \"꽤 괜찮은, 만족스러운, 버젓한\"을 뜻하는 핵심 형용사입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "They managed to find [a decent place to eat] downtown.",
+        "answer": "a decent place to eat",
+        "tokens": [
+          "a",
+          "decent",
+          "place",
+          "to",
+          "eat"
+        ],
+        "options": [
+          "a",
+          "decent",
+          "place",
+          "to",
+          "eat"
+        ],
+        "korean": "그들은 시내에서 꽤 괜찮은 식당을 찾아냈어요.",
+        "explanation": "\"a decent place\"는 꽤 만족스럽고 괜찮은 장소를 말합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "After shopping around, she got a very [decent, miserable, offensive, scandalous] deal on the laptop.",
+        "answer": "decent",
+        "options": [
+          "decent",
+          "miserable",
+          "offensive",
+          "scandalous"
+        ],
+        "korean": "여러 곳을 둘러본 뒤, 그녀는 노트북을 꽤 괜찮은 가격에 샀어요.",
+        "explanation": "\"decent deal\"은 가성비가 꽤 좋은 거래를 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The hotel wasn't luxurious, but [it was decent and clean].",
+        "answer": "it was decent and clean",
+        "tokens": [
+          "it",
+          "was",
+          "decent",
+          "and",
+          "clean."
+        ],
+        "options": [
+          "it",
+          "was",
+          "decent",
+          "and",
+          "clean."
+        ],
+        "korean": "호텔이 화려하진 않았지만 꽤 괜찮고 깨끗했어요.",
+        "explanation": "\"decent and clean\"은 깔끔하고 무난하게 만족스러운 상태를 나타냅니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "He makes a [decent, painful, hostile, toxic] salary working as an engineer.",
+        "answer": "decent",
+        "options": [
+          "decent",
+          "painful",
+          "hostile",
+          "toxic"
+        ],
+        "korean": "그는 엔지니어로 일하며 꽤 남부럽지 않은 수입을 벌어요.",
+        "explanation": "\"decent salary\"는 남부럽지 않고 꽤 괜찮은 급여를 의미합니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "obstructed",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "It is not like it is on the side or like at a weird or [obstructed, perfect, panoramic, crystal-clear] angle or anything.",
+        "answer": "obstructed",
+        "options": [
+          "obstructed",
+          "perfect",
+          "panoramic",
+          "crystal-clear"
+        ],
+        "korean": "너무 측면이거나 이상하거나 시야가 가려지는 각도도 아니에요.",
+        "explanation": "\"obstructed\"는 기둥이나 물건 등에 의해 \"시야가 가려진, 방해된\"을 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The stage was partially [obstructed by a large pillar].",
+        "answer": "obstructed by a large pillar",
+        "tokens": [
+          "obstructed",
+          "by",
+          "a",
+          "large",
+          "pillar."
+        ],
+        "options": [
+          "obstructed",
+          "by",
+          "a",
+          "large",
+          "pillar."
+        ],
+        "korean": "무대가 커다란 기둥에 부분적으로 가려져 있었어요.",
+        "explanation": "\"obstructed by ~\"는 \"~에 의해 가려진\" 상태를 나타냅니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Make sure you don't book an [obstructed, unlimited, unhindered, absolute] view seat at the theater.",
+        "answer": "obstructed",
+        "options": [
+          "obstructed",
+          "unlimited",
+          "unhindered",
+          "absolute"
+        ],
+        "korean": "극장에서 시야 제한석(가려진 좌석)을 예매하지 않도록 확인하세요.",
+        "explanation": "\"obstructed view seat\"은 시야 방해 좌석(시야 제한석)을 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The road was completely [obstructed by fallen branches].",
+        "answer": "obstructed by fallen branches",
+        "tokens": [
+          "obstructed",
+          "by",
+          "fallen",
+          "branches."
+        ],
+        "options": [
+          "obstructed",
+          "by",
+          "fallen",
+          "branches."
+        ],
+        "korean": "도로가 쓰러진 나뭇가지들로 완전히 막혀 있었어요.",
+        "explanation": "\"obstructed\"는 도로나 통로가 막힌 상황에서도 사용됩니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The tall person in front of me [obstructed, enhanced, brightened, revealed] my view of the screen.",
+        "answer": "obstructed",
+        "options": [
+          "obstructed",
+          "enhanced",
+          "brightened",
+          "revealed"
+        ],
+        "korean": "내 앞의 키 큰 사람이 화면을 보는 내 시야를 가렸어요.",
+        "explanation": "\"obstruct one's view\"는 \"시야를 가리다/방해하다\"라는 표현입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "Compared to",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "Compared to what we paid in Korea for tickets, it is [decent, ridiculous, unaffordable, wasteful].",
+        "answer": "decent",
+        "options": [
+          "decent",
+          "ridiculous",
+          "unaffordable",
+          "wasteful"
+        ],
+        "korean": "예전에 한국에서 냈던 티켓 가격에 비하면 꽤 괜찮은 편이에요.",
+        "explanation": "\"Compared to ~\"는 \"~와 비교하여, ~에 비하면\"이라는 대비 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "[Compared to last year, our team] has improved significantly.",
+        "answer": "Compared to last year our team",
+        "tokens": [
+          "Compared",
+          "to",
+          "last",
+          "year,",
+          "our",
+          "team"
+        ],
+        "options": [
+          "Compared",
+          "to",
+          "last",
+          "year,",
+          "our",
+          "team"
+        ],
+        "korean": "작년과 비교했을 때 우리 팀은 눈에 띄게 발전했어요.",
+        "explanation": "\"Compared to last year\"는 \"작년과 비교하면\"이라는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "[Compared to, According to, In front of, Next to] other big cities, living costs here are fairly reasonable.",
+        "answer": "Compared to",
+        "options": [
+          "Compared to",
+          "According to",
+          "In front of",
+          "Next to"
+        ],
+        "korean": "다른 대도시들과 비교하면 이곳의 생활비는 꽤 합리적인 편이에요.",
+        "explanation": "\"Compared to other cities\"는 다른 도시들과 견주어 볼 때를 나타냅니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "This smartphone is lightweight [compared to the older model].",
+        "answer": "compared to the older model",
+        "tokens": [
+          "compared",
+          "to",
+          "the",
+          "older",
+          "model."
+        ],
+        "options": [
+          "compared",
+          "to",
+          "the",
+          "older",
+          "model."
+        ],
+        "korean": "이 스마트폰은 이전 모델에 비하면 가벼워요.",
+        "explanation": "\"compared to ~\"는 비교 대상을 뒤에 둘 때도 자연스럽게 쓰입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "[Compared to, Regardless of, In place of, Because of] yesterday, today's weather is much warmer.",
+        "answer": "Compared to",
+        "options": [
+          "Compared to",
+          "Regardless of",
+          "In place of",
+          "Because of"
+        ],
+        "korean": "어제에 비하면 오늘 날씨는 훨씬 더 따뜻해요.",
+        "explanation": "\"Compared to yesterday\"는 어제와 비교했을 때를 뜻합니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "at least",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "[At least, Above all, By no means, In contrast], that is what I understood.",
+        "answer": "At least",
+        "options": [
+          "At least",
+          "Above all",
+          "By no means",
+          "In contrast"
+        ],
+        "korean": "적어도 제가 이해하기로는 그랬어요.",
+        "explanation": "\"At least\"는 \"적어도, 최소한\"이라는 뜻으로 자신의 기억이나 의견을 조심스럽게 말할 때 씁니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "It will take [at least thirty minutes] to get to the airport.",
+        "answer": "at least thirty minutes",
+        "tokens": [
+          "at",
+          "least",
+          "thirty",
+          "minutes"
+        ],
+        "options": [
+          "at",
+          "least",
+          "thirty",
+          "minutes"
+        ],
+        "korean": "공항까지 가려면 적어도 30분은 걸릴 거예요.",
+        "explanation": "\"at least thirty minutes\"는 최소 30분 이상을 의미합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "We should try to drink [at least, at most, at best, at random] two liters of water daily.",
+        "answer": "at least",
+        "options": [
+          "at least",
+          "at most",
+          "at best",
+          "at random"
+        ],
+        "korean": "우리는 매일 적어도 2리터의 물을 마시도록 해야 해요.",
+        "explanation": "\"at least two liters\"는 최소 2리터를 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "[At least we tried our best], so we have no regrets.",
+        "answer": "At least we tried our best",
+        "tokens": [
+          "At",
+          "least",
+          "we",
+          "tried",
+          "our",
+          "best,"
+        ],
+        "options": [
+          "At",
+          "least",
+          "we",
+          "tried",
+          "our",
+          "best,"
+        ],
+        "korean": "적어도 우리는 최선을 다했으니 후회는 없어요.",
+        "explanation": "\"At least we tried\"는 그래도 최소한 시도는 해보았다는 긍정적 위안의 뉘앙스입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "You need to sleep for [at least, at once, at large, at peace] seven hours to stay healthy.",
+        "answer": "at least",
+        "options": [
+          "at least",
+          "at once",
+          "at large",
+          "at peace"
+        ],
+        "korean": "건강을 유지하려면 적어도 7시간은 자야 해요.",
+        "explanation": "\"at least seven hours\"는 최소 7시간을 뜻합니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "started to",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "I [started to, stopped to, refused to, forgot to] like it a lot and listening to it.",
+        "answer": "started to",
+        "options": [
+          "started to",
+          "stopped to",
+          "refused to",
+          "forgot to"
+        ],
+        "korean": "그 노래를 엄청 좋아하기 시작했고 자주 듣게 되었어요.",
+        "explanation": "\"start to (동사)\"는 \"~하기 시작하다\"라는 뜻입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "It suddenly [started to rain heavily] on our way home.",
+        "answer": "started to rain heavily",
+        "tokens": [
+          "started",
+          "to",
+          "rain",
+          "heavily"
+        ],
+        "options": [
+          "started",
+          "to",
+          "rain",
+          "heavily"
+        ],
+        "korean": "집으로 돌아오는 길에 갑자기 비가 세차게 내리기 시작했어요.",
+        "explanation": "\"started to rain\"은 비가 내리기 시작했다는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The baby [started to, pretended to, neglected to, ceased to] smile as soon as she saw her mother.",
+        "answer": "started to",
+        "options": [
+          "started to",
+          "pretended to",
+          "neglected to",
+          "ceased to"
+        ],
+        "korean": "아기는 엄마를 보자마자 방긋 웃기 시작했어요.",
+        "explanation": "\"started to smile\"은 미소를 짓기 시작했다는 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Kelly [started to learn Spanish] earlier this spring.",
+        "answer": "started to learn Spanish",
+        "tokens": [
+          "started",
+          "to",
+          "learn",
+          "Spanish"
+        ],
+        "options": [
+          "started",
+          "to",
+          "learn",
+          "Spanish"
+        ],
+        "korean": "켈리는 올봄 초부터 스페인어를 배우기 시작했어요.",
+        "explanation": "\"started to learn\"은 배우기 시작했다는 의미입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The engine made a strange noise and then [started to, failed to, aimed to, claimed to] smoke.",
+        "answer": "started to",
+        "options": [
+          "started to",
+          "failed to",
+          "aimed to",
+          "claimed to"
+        ],
+        "korean": "엔진에서 이상한 소리가 나더니 연기가 나기 시작했어요.",
+        "explanation": "\"started to smoke\"는 연기를 내뿜기 시작했다는 뜻입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "in a cast",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "You were [in a cast, in a rush, in disguise, in trouble] up past your knee to your thigh, like all the way down.",
+        "answer": "in a cast",
+        "options": [
+          "in a cast",
+          "in a rush",
+          "in disguise",
+          "in trouble"
+        ],
+        "korean": "당신은 무릎을 지나 허벅지까지 다리 전체에 깁스를 하고 있었잖아요.",
+        "explanation": "\"in a cast\"는 팔이나 다리에 \"깁스를 하고 있는 상태\"를 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "His left arm was [in a cast for six weeks] after the fall.",
+        "answer": "in a cast for six weeks",
+        "tokens": [
+          "in",
+          "a",
+          "cast",
+          "for",
+          "six",
+          "weeks"
+        ],
+        "options": [
+          "in",
+          "a",
+          "cast",
+          "for",
+          "six",
+          "weeks"
+        ],
+        "korean": "그는 넘어진 후 6주 동안 왼팔에 깁스를 하고 있었어요.",
+        "explanation": "\"in a cast for six weeks\"는 6주 동안 깁스를 한 상태를 나타냅니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "How can you drive to work while your leg is [in a cast, in a row, in a mood, in a bind]?",
+        "answer": "in a cast",
+        "options": [
+          "in a cast",
+          "in a row",
+          "in a mood",
+          "in a bind"
+        ],
+        "korean": "다리에 깁스를 한 채로 어떻게 차를 몰고 출근할 수 있겠어요?",
+        "explanation": "\"in a cast\"는 깁스를 착용한 상태를 의미합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The doctor signed [his name on the cast].",
+        "answer": "his name on the cast",
+        "tokens": [
+          "his",
+          "name",
+          "on",
+          "the",
+          "cast."
+        ],
+        "options": [
+          "his",
+          "name",
+          "on",
+          "the",
+          "cast."
+        ],
+        "korean": "의사 선생님이 깁스 위에 이름을 서명해 주었어요.",
+        "explanation": "\"on the cast\"는 깁스 붕대 표면을 가리킵니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "She had to walk with crutches because her ankle was [in a cast, in a trance, in a jam, in a vacuum].",
+        "answer": "in a cast",
+        "options": [
+          "in a cast",
+          "in a trance",
+          "in a jam",
+          "in a vacuum"
+        ],
+        "korean": "그녀는 발목에 깁스를 하고 있어서 목발을 짚고 걸어야 했어요.",
+        "explanation": "\"ankle was in a cast\"는 발목에 깁스를 한 상태입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "no way",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "There was [no way, no doubt, some chance, every reason] you were getting up to those seats.",
+        "answer": "no way",
+        "options": [
+          "no way",
+          "no doubt",
+          "some chance",
+          "every reason"
+        ],
+        "korean": "당신이 그 꼭대기 좌석까지 올라가는 건 절대 불가능했죠.",
+        "explanation": "\"There is/was no way ~\"는 \"~할 방법이 전혀 없다 / 절대 불가능하다\"는 강한 불가능의 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "There is [no way we can finish this] report before midnight.",
+        "answer": "no way we can finish this",
+        "tokens": [
+          "no",
+          "way",
+          "we",
+          "can",
+          "finish",
+          "this"
+        ],
+        "options": [
+          "no",
+          "way",
+          "we",
+          "can",
+          "finish",
+          "this"
+        ],
+        "korean": "자정 전에 우리가 이 보고서를 끝내는 것은 절대 불가능해요.",
+        "explanation": "\"There is no way we can ~\"은 도저히 불가능함을 강조합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "There is [no way, any way, a way, one way] I am eating that spicy pepper again!",
+        "answer": "no way",
+        "options": [
+          "no way",
+          "any way",
+          "a way",
+          "one way"
+        ],
+        "korean": "내가 그 매운 고추를 다시 먹을 일은 절대 없어!",
+        "explanation": "\"There is no way (that) ~\"는 결코 그럴 리가 없음을 강하게 나타냅니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "No way! [I don't believe you at all].",
+        "answer": "I don't believe you at all",
+        "tokens": [
+          "I",
+          "don't",
+          "believe",
+          "you",
+          "at",
+          "all."
+        ],
+        "options": [
+          "I",
+          "don't",
+          "believe",
+          "you",
+          "at",
+          "all."
+        ],
+        "korean": "말도 안 돼! 너 하는 말 전혀 못 믿겠어.",
+        "explanation": "\"No way!\"는 놀람이나 강한 부정을 나타내는 감탄사로도 쓰입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "With all this heavy snow, there is [no way, high chance, broad hint, sweet dream] the flights will depart on time.",
+        "answer": "no way",
+        "options": [
+          "no way",
+          "high chance",
+          "broad hint",
+          "sweet dream"
+        ],
+        "korean": "이렇게 폭설이 내리는데 비행기가 제시간에 출발할 리는 만무해요.",
+        "explanation": "\"There is no way ~\"는 불가능한 상황을 명확히 전달합니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "turned out",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "It [turned out, looked like, caught on, went down] they are only going to two cities, Oakland and New Jersey.",
+        "answer": "turned out",
+        "options": [
+          "turned out",
+          "looked like",
+          "caught on",
+          "went down"
+        ],
+        "korean": "알고 보니 딱 두 도시만 가는 것으로 밝혀졌어요.",
+        "explanation": "\"turn out (that) ~\"은 \"알고 보니 ~임이 드러나다 / 결국 ~로 밝혀지다\"라는 뜻의 구동사입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The difficult exam [turned out to be much easier] than expected.",
+        "answer": "turned out to be much easier",
+        "tokens": [
+          "turned",
+          "out",
+          "to",
+          "be",
+          "much",
+          "easier"
+        ],
+        "options": [
+          "turned",
+          "out",
+          "to",
+          "be",
+          "much",
+          "easier"
+        ],
+        "korean": "어려울 줄 알았던 시험이 알고 보니 예상보다 훨씬 쉬웠어요.",
+        "explanation": "\"turned out to be ~\"는 \"알고 보니 ~인 것으로 드러났다\"는 의미입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "It [turned out, turned off, turned down, turned back] that the restaurant was closed on Mondays.",
+        "answer": "turned out",
+        "options": [
+          "turned out",
+          "turned off",
+          "turned down",
+          "turned back"
+        ],
+        "korean": "알고 보니 그 식당은 월요일마다 문을 닫는 곳이었어요.",
+        "explanation": "\"It turned out that ~\"는 나중에 사실이 밝혀졌을 때 자주 쓰는 구문입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Everything [turned out great in the end].",
+        "answer": "turned out great in the end",
+        "tokens": [
+          "turned",
+          "out",
+          "great",
+          "in",
+          "the",
+          "end."
+        ],
+        "options": [
+          "turned",
+          "out",
+          "great",
+          "in",
+          "the",
+          "end."
+        ],
+        "korean": "결국 모든 일이 아주 잘 풀렸어요.",
+        "explanation": "\"turned out great\"은 결과적으로 매우 잘 되었다는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The mysterious package [turned out, phased out, ran out, checked out] to be a birthday gift from my sister.",
+        "answer": "turned out",
+        "options": [
+          "turned out",
+          "phased out",
+          "ran out",
+          "checked out"
+        ],
+        "korean": "의문의 소포는 알고 보니 여동생이 보낸 생일 선물이었어요.",
+        "explanation": "\"turned out to be ~\"는 정체가 밝혀졌음을 나타냅니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "spend the night",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "And then go to the concert and [spend the night, waste the time, pass the buck, lose the face]!",
+        "answer": "spend the night",
+        "options": [
+          "spend the night",
+          "waste the time",
+          "pass the buck",
+          "lose the face"
+        ],
+        "korean": "그리고 콘서트에 갔다가 하룻밤 자고 올 거예요!",
+        "explanation": "\"spend the night\"은 어디서 \"하룻밤을 묵다 / 자고 오다\"를 뜻하는 자연스러운 숙어 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Because of the storm, we had to [spend the night at a hotel].",
+        "answer": "spend the night at a hotel",
+        "tokens": [
+          "spend",
+          "the",
+          "night",
+          "at",
+          "a",
+          "hotel."
+        ],
+        "options": [
+          "spend",
+          "the",
+          "night",
+          "at",
+          "a",
+          "hotel."
+        ],
+        "korean": "폭풍 때문에 우리는 호텔에서 하룻밤을 묵어야 했어요.",
+        "explanation": "\"spend the night at ~\"는 특정 장소에서 하룻밤을 자다라는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Would you like to [spend the night, spend the money, spend the talent, spend the life] at our place instead of driving home in the dark?",
+        "answer": "spend the night",
+        "options": [
+          "spend the night",
+          "spend the money",
+          "spend the talent",
+          "spend the life"
+        ],
+        "korean": "어두운데 차 몰고 집 가지 말고 우리 집에서 하룻밤 자고 갈래?",
+        "explanation": "\"spend the night\"은 손님에게 자고 가라고 권할 때 자주 쓰는 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The kids were excited to [spend the night at their grandparents' house].",
+        "answer": "spend the night at their grandparents' house",
+        "tokens": [
+          "spend",
+          "the",
+          "night",
+          "at",
+          "their",
+          "grandparents'",
+          "house."
+        ],
+        "options": [
+          "spend",
+          "the",
+          "night",
+          "at",
+          "their",
+          "grandparents'",
+          "house."
+        ],
+        "korean": "아이들은 조부모님 댁에서 하룻밤 자고 올 생각에 신이 났어요.",
+        "explanation": "\"spend the night\"은 밤을 지새우다, 자고 오다의 의미입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "We decided to pitch a tent and [spend the night, hit the road, bite the bullet, pull the strings] by the lake.",
+        "answer": "spend the night",
+        "options": [
+          "spend the night",
+          "hit the road",
+          "bite the bullet",
+          "pull the strings"
+        ],
+        "korean": "우리는 텐트를 치고 호숫가에서 하룻밤을 묵기로 결정했어요.",
+        "explanation": "\"spend the night by the lake\"는 호숫가에서 1박을 보낸다는 표현입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "mind",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "Hopefully Amy does not [mind, notice, forget, regret].",
+        "answer": "mind",
+        "options": [
+          "mind",
+          "notice",
+          "forget",
+          "regret"
+        ],
+        "korean": "에이미가 신경 안 썼으면 좋겠네요 (언짢아하지 않았으면 해요).",
+        "explanation": "\"mind\"는 \"신경 쓰다, 언짢아하다, 개의치 않다\"의 의미로 쓰입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Do you [mind if I open the window] for some fresh air?",
+        "answer": "mind if I open the window",
+        "tokens": [
+          "mind",
+          "if",
+          "I",
+          "open",
+          "the",
+          "window"
+        ],
+        "options": [
+          "mind",
+          "if",
+          "I",
+          "open",
+          "the",
+          "window"
+        ],
+        "korean": "환기 좀 시키게 창문 열어도 괜찮으실까요?",
+        "explanation": "\"Do you mind if ~?\"는 상대방에게 정중하게 양해를 구할 때 쓰는 대표 표현입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "I don't [mind, remember, pretend, manage] waiting a few extra minutes if you are busy.",
+        "answer": "mind",
+        "options": [
+          "mind",
+          "remember",
+          "pretend",
+          "manage"
+        ],
+        "korean": "바쁘시다면 몇 분 정도 더 기다리는 건 전혀 개의치 않아요.",
+        "explanation": "\"I don't mind ~ing\"는 \"~하는 것은 전혀 개의치 않는다/상관없다\"는 뜻입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "She didn't [mind helping us with the project].",
+        "answer": "mind helping us with the project",
+        "tokens": [
+          "mind",
+          "helping",
+          "us",
+          "with",
+          "the",
+          "project."
+        ],
+        "options": [
+          "mind",
+          "helping",
+          "us",
+          "with",
+          "the",
+          "project."
+        ],
+        "korean": "그녀는 우리가 프로젝트를 진행하는 것을 기꺼이 도와주었어요 (귀찮아하지 않았어요).",
+        "explanation": "\"didn't mind helping\"은 싫어하지 않고 기꺼이 도와줬음을 의미합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Never [mind, doubt, panic, worry]! We can easily fix that small mistake later.",
+        "answer": "mind",
+        "options": [
+          "mind",
+          "doubt",
+          "panic",
+          "worry"
+        ],
+        "korean": "신경 쓰지 마세요! 그 작은 실수는 나중에 쉽게 고칠 수 있어요.",
+        "explanation": "\"Never mind\"는 \"신경 쓰지 마 / 괜찮아\"라는 일상 관용구입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "went on sale",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "I do not know when they officially [went on sale, took a break, made a scene, dropped the ball], but it seemed like everything was sold.",
+        "answer": "went on sale",
+        "options": [
+          "went on sale",
+          "took a break",
+          "made a scene",
+          "dropped the ball"
+        ],
+        "korean": "언제 공식 판매가 시작되었는지는 모르겠지만, 전부 매진된 것 같았어요.",
+        "explanation": "\"go on sale\"은 \"판매가 시작되다\"를 의미합니다. 과거형은 \"went on sale\"입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The concert tickets [went on sale this morning at nine].",
+        "answer": "went on sale this morning at nine",
+        "tokens": [
+          "went",
+          "on",
+          "sale",
+          "this",
+          "morning",
+          "at",
+          "nine."
+        ],
+        "options": [
+          "went",
+          "on",
+          "sale",
+          "this",
+          "morning",
+          "at",
+          "nine."
+        ],
+        "korean": "콘서트 티켓은 오늘 아침 9시에 판매가 시작되었어요.",
+        "explanation": "\"went on sale at nine\"은 9시에 티켓 오픈이 되었다는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "As soon as the new phone [went on sale, went out of style, went to waste, went up in smoke], long lines formed outside the store.",
+        "answer": "went on sale",
+        "options": [
+          "went on sale",
+          "went out of style",
+          "went to waste",
+          "went up in smoke"
+        ],
+        "korean": "새 휴대폰이 시판되자마자 매장 밖에는 긴 줄이 늘어섰어요.",
+        "explanation": "\"went on sale\"은 제품이 매장에 출시되어 판매 개시되었음을 의미합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Winter coats [went on sale with a huge discount].",
+        "answer": "went on sale with a huge discount",
+        "tokens": [
+          "went",
+          "on",
+          "sale",
+          "with",
+          "a",
+          "huge",
+          "discount."
+        ],
+        "options": [
+          "went",
+          "on",
+          "sale",
+          "with",
+          "a",
+          "huge",
+          "discount."
+        ],
+        "korean": "겨울 코트들이 대폭 할인된 가격으로 세일에 들어갔어요.",
+        "explanation": "\"go on sale\"은 할인 판매를 시작하다는 맥락으로도 널리 쓰입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "When do the summer festival passes [go on sale, fall apart, take place, run out]?",
+        "answer": "go on sale",
+        "options": [
+          "go on sale",
+          "fall apart",
+          "take place",
+          "run out"
+        ],
+        "korean": "여름 페스티벌 입장권은 언제부터 판매 시작되나요?",
+        "explanation": "\"go on sale\"은 티켓이 공식적으로 오픈되는 시점을 묻는 표현입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "came out",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "I do not know [what year that came out, what time it closed, how much it earned, where it disappeared].",
+        "answer": "what year that came out",
+        "options": [
+          "what year that came out",
+          "what time it closed",
+          "how much it earned",
+          "where it disappeared"
+        ],
+        "korean": "그 노래가 몇 년도에 나왔는지는 잘 모르겠어요.",
+        "explanation": "\"come out\"은 노래, 영화, 책 등이 \"발매되다 / 출시되다 / 나오다\"라는 뜻입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Their latest album [came out a couple of months ago].",
+        "answer": "came out a couple of months ago",
+        "tokens": [
+          "came",
+          "out",
+          "a",
+          "couple",
+          "of",
+          "months",
+          "ago."
+        ],
+        "options": [
+          "came",
+          "out",
+          "a",
+          "couple",
+          "of",
+          "months",
+          "ago."
+        ],
+        "korean": "그들의 최신 앨범은 두어 달 전에 나왔어요.",
+        "explanation": "\"came out a couple of months ago\"는 두세 달 전 발매되었다는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The new superhero movie [came out, faded out, checked out, backed out] in theaters last Friday.",
+        "answer": "came out",
+        "options": [
+          "came out",
+          "faded out",
+          "checked out",
+          "backed out"
+        ],
+        "korean": "새로운 히어로 영화가 지난주 금요일 극장에서 개봉했어요.",
+        "explanation": "\"come out\"은 영화가 개봉하거나 작품이 대중에게 공개될 때 씁니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "When the sun [came out after the storm], the sky was clear.",
+        "answer": "came out after the storm",
+        "tokens": [
+          "came",
+          "out",
+          "after",
+          "the",
+          "storm,"
+        ],
+        "options": [
+          "came",
+          "out",
+          "after",
+          "the",
+          "storm,"
+        ],
+        "korean": "폭풍우가 지나간 뒤 해가 나오자 하늘이 맑게 개었어요.",
+        "explanation": "\"sun came out\"은 구름 뒤에 가려졌던 해가 고개를 내밀었다는 표현입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The truth finally [came out, blew away, passed on, stood down] during the investigation.",
+        "answer": "came out",
+        "options": [
+          "came out",
+          "blew away",
+          "passed on",
+          "stood down"
+        ],
+        "korean": "조사 과정에서 마침내 진실이 세상 밖으로 드러났어요.",
+        "explanation": "\"the truth came out\"은 감춰졌던 진실이 밝혀졌음을 의미합니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "around there",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "I think it was [around there, far beyond, out of sight, down under].",
+        "answer": "around there",
+        "options": [
+          "around there",
+          "far beyond",
+          "out of sight",
+          "down under"
+        ],
+        "korean": "그 무렵쯤(그 언저리)이었던 것 같아요.",
+        "explanation": "\"around there\"는 특정 연도나 시기, 장소의 \"그 언저리, 그 무렵, 그 근처\"를 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "I left my keys somewhere [around there on the kitchen counter].",
+        "answer": "around there on the kitchen counter",
+        "tokens": [
+          "around",
+          "there",
+          "on",
+          "the",
+          "kitchen",
+          "counter."
+        ],
+        "options": [
+          "around",
+          "there",
+          "on",
+          "the",
+          "kitchen",
+          "counter."
+        ],
+        "korean": "주방 조리대 그 근처 어딘가에 열쇠를 뒀어요.",
+        "explanation": "\"around there\"는 장소의 '그 언저리, 그 근처'를 가리킵니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The concert ended right at eleven o'clock or [around there, beneath that, opposite that, under control].",
+        "answer": "around there",
+        "options": [
+          "around there",
+          "beneath that",
+          "opposite that",
+          "under control"
+        ],
+        "korean": "콘서트는 정확히 11시나 그 무렵쯤에 끝났어요.",
+        "explanation": "\"or around there\"는 '그 즈음, 대략 그 언저리'라는 완곡한 시간 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The total bill should be [around there, about fifty dollars].",
+        "answer": "around there about fifty dollars",
+        "tokens": [
+          "around",
+          "there,",
+          "about",
+          "fifty",
+          "dollars."
+        ],
+        "options": [
+          "around",
+          "there,",
+          "about",
+          "fifty",
+          "dollars."
+        ],
+        "korean": "전체 계산서는 그 언저리인 대략 50달러 정도일 거예요.",
+        "explanation": "\"around there\"는 예상 금액 언저리를 말할 때도 씁니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "I'm pretty sure his birthday is in mid-October or somewhere [around there, outside, upstairs, inside out].",
+        "answer": "around there",
+        "options": [
+          "around there",
+          "outside",
+          "upstairs",
+          "inside out"
+        ],
+        "korean": "그의 생일은 10월 중순이나 대략 그 무렵쯤일 게 확실해요.",
+        "explanation": "\"somewhere around there\"는 시점이나 수치의 대략적인 범위를 표현합니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "grow on",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "The first time I heard it, I did not love it, but it did [grow on, run down, burn out, fall behind] me quite a lot.",
+        "answer": "grow on",
+        "options": [
+          "grow on",
+          "run down",
+          "burn out",
+          "fall behind"
+        ],
+        "korean": "처음 들었을 땐 그다지 끌리지 않았는데, 들을수록 꽤 좋아지더라고요.",
+        "explanation": "\"grow on (누구)\"는 처음엔 별로였지만 \"차츰 점점 마음에 들다 / 정이 들다\"라는 멋진 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "This new song really [started to grow on me] after a few listens.",
+        "answer": "started to grow on me",
+        "tokens": [
+          "started",
+          "to",
+          "grow",
+          "on",
+          "me"
+        ],
+        "options": [
+          "started",
+          "to",
+          "grow",
+          "on",
+          "me"
+        ],
+        "korean": "이 신곡은 몇 번 듣고 나니 정말 점점 좋아지기 시작했어요.",
+        "explanation": "\"grow on me\"는 '점점 좋아지다'라는 뜻의 숙어입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "I didn't like spicy food at first, but it has definitely [grown on, picked on, counted on, looked down on] me.",
+        "answer": "grown on",
+        "options": [
+          "grown on",
+          "picked on",
+          "counted on",
+          "looked down on"
+        ],
+        "korean": "처음엔 매운 음식을 안 좋아했는데, 지금은 확실히 입에 맞고 좋아졌어요.",
+        "explanation": "\"grow on\"의 현재완료형 \"has grown on me\"는 점점 좋아졌다는 변화를 나타냅니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Living in a quiet small town [will slowly grow on you].",
+        "answer": "will slowly grow on you",
+        "tokens": [
+          "will",
+          "slowly",
+          "grow",
+          "on",
+          "you."
+        ],
+        "options": [
+          "will",
+          "slowly",
+          "grow",
+          "on",
+          "you."
+        ],
+        "korean": "조용한 소도시에 사는 것도 천천히 정이 들고 좋아질 거예요.",
+        "explanation": "\"grow on you\"는 너에게도 점점 마음에 들게 될 것이라는 뉘앙스입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "His sense of humor is quirky, but it will eventually [grow on, turn on, hold on, bank on] you.",
+        "answer": "grow on",
+        "options": [
+          "grow on",
+          "turn on",
+          "hold on",
+          "bank on"
+        ],
+        "korean": "그의 유머 감각이 조금 독특하긴 하지만, 결국엔 점점 매력 있게 느껴질 거예요.",
+        "explanation": "\"grow on you\"는 시간이 지나며 매력이 느껴진다는 뜻입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "due",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "Because I have a lot of assignments [due, lost, past, late] Sunday.",
+        "answer": "due",
+        "options": [
+          "due",
+          "lost",
+          "past",
+          "late"
+        ],
+        "korean": "일요일까지 제출해야 하는 과제가 정말 많거든요.",
+        "explanation": "\"due (시점)\"은 과제, 요금, 보고서 등이 \"~까지 마감인 / 제출해야 하는\"을 의미합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The final project is [due next Friday afternoon].",
+        "answer": "due next Friday afternoon",
+        "tokens": [
+          "due",
+          "next",
+          "Friday",
+          "afternoon."
+        ],
+        "options": [
+          "due",
+          "next",
+          "Friday",
+          "afternoon."
+        ],
+        "korean": "최종 프로젝트는 다음 주 금요일 오후까지 마감이에요.",
+        "explanation": "\"due next Friday\"는 다음 주 금요일까지 제출해야 함을 뜻합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "When is the electricity bill [due, paid, spent, used] this month?",
+        "answer": "due",
+        "options": [
+          "due",
+          "paid",
+          "spent",
+          "used"
+        ],
+        "korean": "이번 달 전기세 납부 마감일은 언제인가요?",
+        "explanation": "\"When is ... due?\"는 마감이나 납기일이 언제인지를 묻는 기본 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "My library books are [due back by tomorrow].",
+        "answer": "due back by tomorrow",
+        "tokens": [
+          "due",
+          "back",
+          "by",
+          "tomorrow."
+        ],
+        "options": [
+          "due",
+          "back",
+          "by",
+          "tomorrow."
+        ],
+        "korean": "도서관 책들을 내일까지 반납해야 해요.",
+        "explanation": "\"due back\"은 반납 기한이 도래했음을 나타냅니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Her baby is [due, early, old, ripe] in mid-November.",
+        "answer": "due",
+        "options": [
+          "due",
+          "early",
+          "old",
+          "ripe"
+        ],
+        "korean": "그녀의 출산 예정일은 11월 중순이에요.",
+        "explanation": "\"baby is due\"는 출산 예정일을 말할 때 쓰는 자연스러운 영어 표현입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "came out",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "It was when the new song [came out, gave up, ran down, fell through].",
+        "answer": "came out",
+        "options": [
+          "came out",
+          "gave up",
+          "ran down",
+          "fell through"
+        ],
+        "korean": "그건 신곡이 막 나왔을 무렵이었어요.",
+        "explanation": "\"come out\"은 새로운 노래나 작품이 \"발표되다 / 세상에 나오다\"를 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Their new music video [came out yesterday and went viral].",
+        "answer": "came out yesterday and went viral",
+        "tokens": [
+          "came",
+          "out",
+          "yesterday",
+          "and",
+          "went",
+          "viral."
+        ],
+        "options": [
+          "came",
+          "out",
+          "yesterday",
+          "and",
+          "went",
+          "viral."
+        ],
+        "korean": "그들의 새 뮤직비디오가 어제 공개되자마자 엄청난 인기를 끌었어요.",
+        "explanation": "\"came out and went viral\"은 출시되어 바이럴을 탔다는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "A brand new collection of stories [came out, passed by, held back, looked up] last month.",
+        "answer": "came out",
+        "options": [
+          "came out",
+          "passed by",
+          "held back",
+          "looked up"
+        ],
+        "korean": "새로운 단편 소설집이 지난달에 출간되었어요.",
+        "explanation": "\"came out\"은 책이나 도서가 출간되었음을 의미합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "When the new smartphone [came out, people camped outside].",
+        "answer": "came out people camped outside",
+        "tokens": [
+          "came",
+          "out,",
+          "people",
+          "camped",
+          "outside."
+        ],
+        "options": [
+          "came",
+          "out,",
+          "people",
+          "camped",
+          "outside."
+        ],
+        "korean": "새 스마트폰이 출시되었을 때 사람들은 매장 밖에서 텐트를 치고 기다렸어요.",
+        "explanation": "\"smartphone came out\"은 스마트폰이 출시되었다는 의미입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The flowers [came out, ran out, died out, checked out] beautifully in early spring.",
+        "answer": "came out",
+        "options": [
+          "came out",
+          "ran out",
+          "died out",
+          "checked out"
+        ],
+        "korean": "초봄이 되자 꽃들이 아름답게 피어났어요.",
+        "explanation": "\"flowers came out\"은 꽃이 개화했다는 뜻으로도 쓰입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "unlikely",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "So I thought it was pretty [unlikely, realistic, certain, obvious] that I would get to go and find someone.",
+        "answer": "unlikely",
+        "options": [
+          "unlikely",
+          "realistic",
+          "certain",
+          "obvious"
+        ],
+        "korean": "그래서 제가 갈 수 있거나 같이 갈 사람을 찾는 건 거의 불가능할(가망 없을) 거라 생각했죠.",
+        "explanation": "\"unlikely\"는 \"있을 법하지 않은, 가망 없는, 가능성이 낮은\"이라는 뜻입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "It is very [unlikely that prices will drop] anytime soon.",
+        "answer": "unlikely that prices will drop",
+        "tokens": [
+          "unlikely",
+          "that",
+          "prices",
+          "will",
+          "drop"
+        ],
+        "options": [
+          "unlikely",
+          "that",
+          "prices",
+          "will",
+          "drop"
+        ],
+        "korean": "조만간 물가가 떨어질 가능성은 매우 희박해요.",
+        "explanation": "\"unlikely that ~\"은 ~할 가능성이 희박하다는 표현입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Given the clear blue sky, rain seems highly [unlikely, inevitable, predictable, urgent] today.",
+        "answer": "unlikely",
+        "options": [
+          "unlikely",
+          "inevitable",
+          "predictable",
+          "urgent"
+        ],
+        "korean": "이렇게 맑고 파란 하늘을 보니 오늘은 비가 올 가능성이 거의 없어 보여요.",
+        "explanation": "\"highly unlikely\"는 가능성이 극히 낮음을 강조합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "An unlikely friendship [developed between the two rivals].",
+        "answer": "developed between the two rivals",
+        "tokens": [
+          "developed",
+          "between",
+          "the",
+          "two",
+          "rivals."
+        ],
+        "options": [
+          "developed",
+          "between",
+          "the",
+          "two",
+          "rivals."
+        ],
+        "korean": "그 두 라이벌 사이에서 생각지도 못했던 우정이 싹텄어요.",
+        "explanation": "\"unlikely friendship\"은 전혀 예상치 못했던 우정을 뜻합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "It is [unlikely, obvious, sure, guaranteed] to happen without thorough preparation.",
+        "answer": "unlikely",
+        "options": [
+          "unlikely",
+          "obvious",
+          "sure",
+          "guaranteed"
+        ],
+        "korean": "철저한 준비 없이는 그런 일이 일어날 가능성이 희박해요.",
+        "explanation": "\"unlikely to happen\"은 일어날 가망이 적다는 의미입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "handicap seats",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "They finally just put us into one of the [handicap seats, front rows, standing pits, aisle spots] which ended up having an amazing view.",
+        "answer": "handicap seats",
+        "options": [
+          "handicap seats",
+          "front rows",
+          "standing pits",
+          "aisle spots"
+        ],
+        "korean": "그들이 마침내 우리를 장애인 전용석 중 한 곳으로 안내해 주었는데, 결국 엄청난 뷰를 보게 되었어요.",
+        "explanation": "\"handicap seats\"는 휠체어나 깁스를 한 관객을 배려한 \"장애인/교통약자 전용석\"을 뜻합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "The stadium has designated [handicap seats with extra space].",
+        "answer": "handicap seats with extra space",
+        "tokens": [
+          "handicap",
+          "seats",
+          "with",
+          "extra",
+          "space."
+        ],
+        "options": [
+          "handicap",
+          "seats",
+          "with",
+          "extra",
+          "space."
+        ],
+        "korean": "그 경기장에는 넓은 공간을 갖춘 장애인 전용석이 마련되어 있어요.",
+        "explanation": "\"handicap seats\"는 이동 약자를 위한 전용 좌석입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Please leave the [handicap seats, reserved booths, sound booths, control rooms] open for guests with disabilities.",
+        "answer": "handicap seats",
+        "options": [
+          "handicap seats",
+          "reserved booths",
+          "sound booths",
+          "control rooms"
+        ],
+        "korean": "장애를 가진 관람객들을 위해 장애인 배려석을 비워두세요.",
+        "explanation": "\"handicap seats\"는 약자 배려 좌석을 가리킵니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "We booked the [accessible handicap seats for my grandfather].",
+        "answer": "accessible handicap seats for my grandfather",
+        "tokens": [
+          "accessible",
+          "handicap",
+          "seats",
+          "for",
+          "my",
+          "grandfather."
+        ],
+        "options": [
+          "accessible",
+          "handicap",
+          "seats",
+          "for",
+          "my",
+          "grandfather."
+        ],
+        "korean": "우리는 할아버지를 위해 휠체어 접근이 가능한 배려석을 예매했어요.",
+        "explanation": "\"accessible handicap seats\"는 접근성이 확보된 배려석입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The staff kindly relocated our family to the [handicap seats, upper rafters, exit doors, ticket counters].",
+        "answer": "handicap seats",
+        "options": [
+          "handicap seats",
+          "upper rafters",
+          "exit doors",
+          "ticket counters"
+        ],
+        "korean": "직원분들이 친절하게도 우리 가족을 배려석 구역으로 옮겨주었어요.",
+        "explanation": "\"handicap seats\"는 배려석입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "trying to",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "So [trying to, failing to, refusing to, forgetting to] find someone to go, you know.",
+        "answer": "trying to",
+        "options": [
+          "trying to",
+          "failing to",
+          "refusing to",
+          "forgetting to"
+        ],
+        "korean": "그래서 같이 갈 사람을 찾아보려고 애썼죠, 아시잖아요.",
+        "explanation": "\"trying to (동사)\"는 \"~하려고 애쓰다, 노력하다, 시도하다\"라는 뜻의 대표 일상 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "I am [trying to finish my homework] before dinner.",
+        "answer": "trying to finish my homework",
+        "tokens": [
+          "trying",
+          "to",
+          "finish",
+          "my",
+          "homework"
+        ],
+        "options": [
+          "trying",
+          "to",
+          "finish",
+          "my",
+          "homework"
+        ],
+        "korean": "저는 저녁 식사 전에 숙제를 끝내려고 노력하고 있어요.",
+        "explanation": "\"trying to finish\"는 끝내려고 애쓰는 중이라는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "She was [trying to, managing to, pausing to, daring to] learn how to bake homemade bread.",
+        "answer": "trying to",
+        "options": [
+          "trying to",
+          "managing to",
+          "pausing to",
+          "daring to"
+        ],
+        "korean": "그녀는 집에서 빵 굽는 법을 배우려고 노력하는 중이었어요.",
+        "explanation": "\"trying to learn\"은 배우려고 애쓰다는 의미입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "We are [trying to save enough money] for a family trip.",
+        "answer": "trying to save enough money",
+        "tokens": [
+          "trying",
+          "to",
+          "save",
+          "enough",
+          "money"
+        ],
+        "options": [
+          "trying",
+          "to",
+          "save",
+          "enough",
+          "money"
+        ],
+        "korean": "우리는 가족 여행을 위해 충분한 돈을 모으려고 노력하고 있어요.",
+        "explanation": "\"trying to save\"는 모으려고 애쓰다라는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Stop [trying to, starting to, waiting to, learning to] please everyone all the time.",
+        "answer": "trying to",
+        "options": [
+          "trying to",
+          "starting to",
+          "waiting to",
+          "learning to"
+        ],
+        "korean": "항상 모든 사람을 만족시키려고 애쓰는 건 그만두세요.",
+        "explanation": "\"trying to please everyone\"은 모두를 기쁘게 하려고 애쓰다는 표현입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "all the way",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "And then we are going to drive [all the way, on the road, out of line, by the way] down together with her family.",
+        "answer": "all the way",
+        "options": [
+          "all the way",
+          "on the road",
+          "out of line",
+          "by the way"
+        ],
+        "korean": "그리고 그녀의 가족과 함께 저 아래까지 먼 길을 차로 쭉 운전해서 갈 거예요.",
+        "explanation": "\"all the way\"는 먼 거리를 \"내내, 줄곧, 끝까지\"라는 뜻으로 원어민들이 자주 쓰는 강조 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "She walked [all the way to the top] of the mountain.",
+        "answer": "all the way to the top",
+        "tokens": [
+          "all",
+          "the",
+          "way",
+          "to",
+          "the",
+          "top"
+        ],
+        "options": [
+          "all",
+          "the",
+          "way",
+          "to",
+          "the",
+          "top"
+        ],
+        "korean": "그녀는 산꼭대기까지 먼 길을 끝까지 걸어 올라갔어요.",
+        "explanation": "\"all the way to the top\"은 정상까지 끝까지 올라갔음을 뜻합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Did you really fly [all the way, in the way, on the way, by the way] from New York just to see this show?",
+        "answer": "all the way",
+        "options": [
+          "all the way",
+          "in the way",
+          "on the way",
+          "by the way"
+        ],
+        "korean": "이 공연을 보려고 뉴욕에서 그 먼 거리를 비행기 타고 날아오셨다고요?",
+        "explanation": "\"fly all the way from ~\"는 먼 거리에서부터 줄곧 날아왔음을 강조합니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "I will support your decision [all the way to the end].",
+        "answer": "all the way to the end",
+        "tokens": [
+          "all",
+          "the",
+          "way",
+          "to",
+          "the",
+          "end."
+        ],
+        "options": [
+          "all",
+          "the",
+          "way",
+          "to",
+          "the",
+          "end."
+        ],
+        "korean": "나는 당신의 결정을 마지막 끝까지 온전히 지지할 거예요.",
+        "explanation": "\"all the way to the end\"는 끝까지 완전히라는 비유적 표현입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "He pushed the pedal [all the way, across the board, behind the scenes, out of bounds] down to accelerate.",
+        "answer": "all the way",
+        "options": [
+          "all the way",
+          "across the board",
+          "behind the scenes",
+          "out of bounds"
+        ],
+        "korean": "그는 가속하기 위해 페달을 바닥 끝까지 밟았어요.",
+        "explanation": "\"all the way down\"은 바닥 끝까지를 의미합니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "at once",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "All the tickets now, it is like everyone buys them [at once, in turn, one by one, off hand] and then resells them.",
+        "answer": "at once",
+        "options": [
+          "at once",
+          "in turn",
+          "one by one",
+          "off hand"
+        ],
+        "korean": "요즘 티켓은 모두가 한꺼번에 사들인 뒤 다시 되파는 식이에요.",
+        "explanation": "\"at once\"는 \"동시에, 한꺼번에\" 또는 문맥에 따라 \"즉시\"를 뜻하는 핵심 숙어입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Don't try to answer [all the questions at once].",
+        "answer": "all the questions at once",
+        "tokens": [
+          "all",
+          "the",
+          "questions",
+          "at",
+          "once."
+        ],
+        "options": [
+          "all",
+          "the",
+          "questions",
+          "at",
+          "once."
+        ],
+        "korean": "모든 질문에 한꺼번에 대답하려고 하지 마세요.",
+        "explanation": "\"all at once\"는 일제히, 한꺼번에라는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "When the bell rang, all the students stood up [at once, at bay, at length, at random].",
+        "answer": "at once",
+        "options": [
+          "at once",
+          "at bay",
+          "at length",
+          "at random"
+        ],
+        "korean": "종이 울리자 모든 학생들이 일제히 자리에서 일어섰어요.",
+        "explanation": "\"stood up at once\"는 동시에 일어섰음을 나타냅니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Please call the doctor [at once; this is an emergency].",
+        "answer": "at once this is an emergency",
+        "tokens": [
+          "at",
+          "once;",
+          "this",
+          "is",
+          "an",
+          "emergency."
+        ],
+        "options": [
+          "at",
+          "once;",
+          "this",
+          "is",
+          "an",
+          "emergency."
+        ],
+        "korean": "즉시 의사를 불러주세요. 응급 상황입니다.",
+        "explanation": "\"at once\"는 즉시(immediately)의 의미로도 사용됩니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "I cannot do three tasks [at once, at fault, at sea, at odds], so let me take them in order.",
+        "answer": "at once",
+        "options": [
+          "at once",
+          "at fault",
+          "at sea",
+          "at odds"
+        ],
+        "korean": "세 가지 일을 한꺼번에 할 수는 없으니 순서대로 할게요.",
+        "explanation": "\"do three tasks at once\"는 세 가지 일을 동시에 한다는 뜻입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "in advance",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "We should have called [in advance, after all, on time, by chance] to say that, but we did not.",
+        "answer": "in advance",
+        "options": [
+          "in advance",
+          "after all",
+          "on time",
+          "by chance"
+        ],
+        "korean": "그 말을 사전에(미리) 전화해서 했어야 했는데 그러지 못했어요.",
+        "explanation": "\"in advance\"는 \"미리, 사전에\"를 뜻하는 대표적인 비즈니스 및 일상 숙어입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "You should book your tickets [in advance to get a discount].",
+        "answer": "in advance to get a discount",
+        "tokens": [
+          "in",
+          "advance",
+          "to",
+          "get",
+          "a",
+          "discount."
+        ],
+        "options": [
+          "in",
+          "advance",
+          "to",
+          "get",
+          "a",
+          "discount."
+        ],
+        "korean": "할인을 받으려면 티켓을 미리 예매하셔야 해요.",
+        "explanation": "\"book in advance\"는 미리 예매하다는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Thank you [in advance, in return, in person, in detail] for your kind cooperation.",
+        "answer": "in advance",
+        "options": [
+          "in advance",
+          "in return",
+          "in person",
+          "in detail"
+        ],
+        "korean": "미리 감사드립니다 (협조에 미리 감사드립니다).",
+        "explanation": "\"Thank you in advance\"는 이메일 등에서 미리 감사를 표할 때 쓰는 필수 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Please let us know [in advance if you can't attend].",
+        "answer": "in advance if you can't attend",
+        "tokens": [
+          "in",
+          "advance",
+          "if",
+          "you",
+          "can't",
+          "attend."
+        ],
+        "options": [
+          "in",
+          "advance",
+          "if",
+          "you",
+          "can't",
+          "attend."
+        ],
+        "korean": "참석하지 못하시는 경우 사전에 미리 알려주세요.",
+        "explanation": "\"let us know in advance\"는 사전에 알려달라는 요청입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Hotel rooms must be paid for [in advance, in vain, in private, in tears] during the holiday season.",
+        "answer": "in advance",
+        "options": [
+          "in advance",
+          "in vain",
+          "in private",
+          "in tears"
+        ],
+        "korean": "연휴 기간에는 호텔 객실료를 선불로 미리 지불하셔야 합니다.",
+        "explanation": "\"paid in advance\"는 선불로 미리 지불하다는 뜻입니다."
+      }
+    ]
+  },
+  {
+    "keyExpression": "ahead of time",
+    "sentences": [
+      {
+        "type": "multiple-choice",
+        "english": "I should have called [ahead of time, out of breath, off the hook, under the weather].",
+        "answer": "ahead of time",
+        "options": [
+          "ahead of time",
+          "out of breath",
+          "off the hook",
+          "under the weather"
+        ],
+        "korean": "미리 앞서서 전화를 해뒀어야 했는데 그러지 못했어요.",
+        "explanation": "\"ahead of time\"은 구어체에서 즐겨 쓰는 \"미리, 예정보다 앞서서\"라는 표현입니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "Preparing meals [ahead of time saves a lot of stress].",
+        "answer": "ahead of time saves a lot of stress",
+        "tokens": [
+          "ahead",
+          "of",
+          "time",
+          "saves",
+          "a",
+          "lot",
+          "of",
+          "stress."
+        ],
+        "options": [
+          "ahead",
+          "of",
+          "time",
+          "saves",
+          "a",
+          "lot",
+          "of",
+          "stress."
+        ],
+        "korean": "음식을 미리 준비해 두면 스트레스를 크게 줄일 수 있어요.",
+        "explanation": "\"ahead of time\"은 사전에 미리 준비한다는 의미입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "We arrived at the station twenty minutes [ahead of time, out of date, behind schedule, on edge].",
+        "answer": "ahead of time",
+        "options": [
+          "ahead of time",
+          "out of date",
+          "behind schedule",
+          "on edge"
+        ],
+        "korean": "우리는 예정 시간보다 20분 일찍 역에 도착했어요.",
+        "explanation": "\"ahead of time\"은 예정된 시간보다 앞서서 도착했음을 나타냅니다."
+      },
+      {
+        "type": "drag-and-drop",
+        "english": "If you notify us [ahead of time, we can arrange transportation].",
+        "answer": "ahead of time we can arrange transportation",
+        "tokens": [
+          "ahead",
+          "of",
+          "time,",
+          "we",
+          "can",
+          "arrange",
+          "transportation."
+        ],
+        "options": [
+          "ahead",
+          "of",
+          "time,",
+          "we",
+          "can",
+          "arrange",
+          "transportation."
+        ],
+        "korean": "미리 알려주시면 저희가 교통편을 준비해 드릴 수 있어요.",
+        "explanation": "\"notify ahead of time\"은 미리 통보하다는 뜻입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "She always plans her weekly schedule [ahead of time, under pressure, by heart, at odds].",
+        "answer": "ahead of time",
+        "options": [
+          "ahead of time",
+          "under pressure",
+          "by heart",
+          "at odds"
+        ],
+        "korean": "그녀는 항상 주간 일정을 사전에 미리 계획해요.",
+        "explanation": "\"plan ahead of time\"은 일정을 미리 짜둔다는 뜻입니다."
+      }
+    ]
+  }
+]

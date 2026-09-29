@@ -12,6 +12,31 @@ class QuizEngine {
       ...q,
       _origIndex: typeof q._origIndex === 'number' ? q._origIndex : idx
     }));
+    this.quizPool = options.quizPool || null;
+    this.selectedPoolIndices = {};
+
+    // If quizPool is available, pick initial random sentence for each question
+    if (this.quizPool && Array.isArray(this.quizPool) && this.quizPool.length > 0) {
+      this.originalQuizzes = this.originalQuizzes.map((q, idx) => {
+        const poolItem = this.quizPool[idx];
+        if (poolItem && Array.isArray(poolItem.sentences) && poolItem.sentences.length > 0) {
+          const randIdx = Math.floor(Math.random() * poolItem.sentences.length);
+          this.selectedPoolIndices[idx] = randIdx;
+          const s = poolItem.sentences[randIdx];
+          return {
+            ...q,
+            ...s,
+            _origIndex: idx,
+            num: idx + 1,
+            keyExpression: poolItem.keyExpression || q.keyExpression,
+            _shuffledOptions: null,
+            _shuffledTokens: null
+          };
+        }
+        return q;
+      });
+    }
+
     this.quizzes = [...this.originalQuizzes];
     this.onComplete = options.onComplete || (() => { });
     this.onProgressChange = options.onProgressChange || (() => { });
@@ -1521,19 +1546,44 @@ class QuizEngine {
       overlay.setAttribute('aria-hidden', 'true');
     }
 
+    // Helper to rotate to an alternate sentence from the pool (Issue #108)
+    const rotateSentenceFromPool = (qIndex) => {
+      if (!this.quizPool || !Array.isArray(this.quizPool)) return;
+      const poolItem = this.quizPool[qIndex];
+      if (poolItem && Array.isArray(poolItem.sentences) && poolItem.sentences.length > 1) {
+        const prevIdx = this.selectedPoolIndices[qIndex] ?? 0;
+        const newIdx = (prevIdx + 1 + Math.floor(Math.random() * (poolItem.sentences.length - 1))) % poolItem.sentences.length;
+        this.selectedPoolIndices[qIndex] = newIdx;
+        const s = poolItem.sentences[newIdx];
+        const prevQ = this.originalQuizzes[qIndex];
+        this.originalQuizzes[qIndex] = {
+          ...prevQ,
+          ...s,
+          _origIndex: qIndex,
+          num: qIndex + 1,
+          keyExpression: poolItem.keyExpression || prevQ.keyExpression,
+          _shuffledOptions: null,
+          _shuffledTokens: null
+        };
+      }
+    };
+
     if (onlyFailed) {
       const results = this.state.questionResults || {};
       const failed = this.originalQuizzes.filter(q => results[q._origIndex] !== true);
       if (failed.length > 0) {
-        this.quizzes = failed;
         failed.forEach(q => {
+          rotateSentenceFromPool(q._origIndex);
           delete this.state.questionResults[q._origIndex];
         });
+        this.quizzes = failed.map(q => this.originalQuizzes[q._origIndex]);
       } else {
+        this.originalQuizzes.forEach((_, idx) => rotateSentenceFromPool(idx));
         this.quizzes = [...this.originalQuizzes];
         this.state.questionResults = {};
       }
     } else {
+      this.originalQuizzes.forEach((_, idx) => rotateSentenceFromPool(idx));
       this.quizzes = [...this.originalQuizzes];
       this.state.questionResults = {};
     }

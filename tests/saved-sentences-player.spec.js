@@ -591,7 +591,7 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
   });
 
   test('Issue #37 Regression: Saving sentence in ReviewPlayer saves clean audio filename', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 2 (ReviewPlayer)
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
@@ -607,10 +607,10 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
       return JSON.parse(localStorage.getItem('rhyrhy_saved_sentences') || '{}');
     });
 
-    expect(savedSentences['lesson-01']).toBeDefined();
-    expect(savedSentences['lesson-01'].length).toBeGreaterThanOrEqual(1);
+    expect(savedSentences['lesson-02']).toBeDefined();
+    expect(savedSentences['lesson-02'].length).toBeGreaterThanOrEqual(1);
 
-    const firstSaved = savedSentences['lesson-01'][0];
+    const firstSaved = savedSentences['lesson-02'][0];
     // Must NOT start with page-relative './audio/'
     expect(firstSaved.audio).not.toMatch(/^\.\/audio\//);
     expect(firstSaved.audio).toContain('.wav');
@@ -625,7 +625,7 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
       return audio ? audio.src : '';
     });
 
-    expect(audioSrc).toContain('lessons/lesson-01/audio/');
+    expect(audioSrc).toContain('lessons/lesson-02/audio/');
     expect(audioSrc).not.toMatch(/^https?:\/\/[^/]+\/audio\//);
   });
 

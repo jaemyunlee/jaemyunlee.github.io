@@ -643,6 +643,11 @@ class VideoScriptPlayer {
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', `Jump to sentence: ${item.en}`);
 
+      const isFlagged = (typeof Storage !== 'undefined' && typeof Storage.isSegmentFlagged === 'function')
+        ? Storage.isSegmentFlagged(this.lessonId, item.id || `s${index + 1}`)
+        : false;
+      if (isFlagged) card.classList.add('flagged-card');
+
       const timeFormatted = this._formatTimestamp(item.start);
 
       card.innerHTML = `
@@ -653,15 +658,24 @@ class VideoScriptPlayer {
             </svg>
             ${timeFormatted}
           </span>
-          <button type="button" class="btn-card-loop ${isLooping ? 'active' : ''}" data-index="${index}" title="${isLooping ? '구간 반복 끄기 (Click to cancel loop)' : '이 문장 구간 반복 재생 (Loop)'}" aria-label="이 문장 구간 반복 재생" aria-pressed="${isLooping ? 'true' : 'false'}">
-            <svg class="icon-loop" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 2l4 4-4 4"/>
-              <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
-              <path d="M7 22l-4-4 4-4"/>
-              <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
-            </svg>
-            <span class="loop-label">${isLooping ? '반복 중' : '구간 반복'}</span>
-          </button>
+          <div class="script-card-header-actions" style="display: inline-flex; align-items: center; gap: 6px;">
+            <button type="button" class="btn-card-flag ${isFlagged ? 'active' : ''}" data-index="${index}" title="${isFlagged ? '어려운 문장 표시 해제' : '이해가 어려운 문장 표시 (Step 4 딕테이션에 추가)'}" aria-label="이해가 어려운 문장 북마크" aria-pressed="${isFlagged ? 'true' : 'false'}">
+              <svg class="icon-flag" viewBox="0 0 24 24" width="13" height="13" fill="${isFlagged ? '#EF4444' : 'none'}" stroke="${isFlagged ? '#EF4444' : 'currentColor'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                <line x1="4" y1="22" x2="4" y2="15"/>
+              </svg>
+              <span class="flag-label">${isFlagged ? '어려움 🚩' : '어려움'}</span>
+            </button>
+            <button type="button" class="btn-card-loop ${isLooping ? 'active' : ''}" data-index="${index}" title="${isLooping ? '구간 반복 끄기 (Click to cancel loop)' : '이 문장 구간 반복 재생 (Loop)'}" aria-label="이 문장 구간 반복 재생" aria-pressed="${isLooping ? 'true' : 'false'}">
+              <svg class="icon-loop" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 2l4 4-4 4"/>
+                <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                <path d="M7 22l-4-4 4-4"/>
+                <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+              </svg>
+              <span class="loop-label">${isLooping ? '반복 중' : '구간 반복'}</span>
+            </button>
+          </div>
         </div>
 
         <div class="script-card-body">
@@ -669,6 +683,45 @@ class VideoScriptPlayer {
           <p class="sentence-kr">${this._escapeHtml(item.kr)}</p>
         </div>
       `;
+
+      // Flag button click binding
+      const flagBtn = card.querySelector('.btn-card-flag');
+      if (flagBtn) {
+        flagBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (typeof Storage !== 'undefined' && typeof Storage.toggleFlaggedSegment === 'function') {
+            const segItem = {
+              id: item.id || `s${index + 1}`,
+              start: item.start,
+              end: item.end,
+              en: item.en,
+              kr: item.kr
+            };
+            const flagged = Storage.toggleFlaggedSegment(this.lessonId, segItem);
+            flagBtn.classList.toggle('active', flagged);
+            flagBtn.setAttribute('aria-pressed', flagged ? 'true' : 'false');
+            const flagSvg = flagBtn.querySelector('.icon-flag');
+            if (flagSvg) {
+              flagSvg.setAttribute('fill', flagged ? '#EF4444' : 'none');
+              flagSvg.setAttribute('stroke', flagged ? '#EF4444' : 'currentColor');
+            }
+            const flagLabel = flagBtn.querySelector('.flag-label');
+            if (flagLabel) {
+              flagLabel.textContent = flagged ? '어려움 🚩' : '어려움';
+            }
+            flagBtn.title = flagged ? '어려운 문장 표시 해제' : '이해가 어려운 문장 표시 (Step 4 딕테이션에 추가)';
+            card.classList.toggle('flagged-card', flagged);
+
+            if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+              if (flagged) {
+                App.showToast('🚩 어려운 문장으로 표시되었습니다! Step 4 딕테이션에 추가됩니다.', 'info');
+              } else {
+                App.showToast('🚩 어려운 문장 표시가 해제되었습니다.', 'default');
+              }
+            }
+          }
+        });
+      }
 
       // Loop button click binding
       const loopBtn = card.querySelector('.btn-card-loop');

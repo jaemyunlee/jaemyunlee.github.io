@@ -24,7 +24,8 @@ const Storage = {
     POPCORN_STATS: 'rhyrhy_popcorn_stats',
     SEEN_LESSONS: 'rhyrhy_seen_lessons',
     SHOW_HIDDEN_LESSONS: 'rhyrhy_show_hidden_lessons',
-    IGNORE_POPCORN_LIMIT: 'rhyrhy_ignore_popcorn_limit'
+    IGNORE_POPCORN_LIMIT: 'rhyrhy_ignore_popcorn_limit',
+    FLAGGED_SEGMENTS: 'rhyrhy_flagged_segments'
   },
 
   /**
@@ -470,6 +471,104 @@ const Storage = {
       if (Array.isArray(list)) count += list.length;
     });
     return count;
+  },
+
+  /**
+   * Get all flagged transcript segments across all lessons
+   * @returns {Object} { [lessonId]: Array<Segment> }
+   */
+  getAllFlaggedSegments() {
+    try {
+      const data = localStorage.getItem(this.KEYS.FLAGGED_SEGMENTS);
+      return data ? JSON.parse(data) : {};
+    } catch (e) {
+      console.warn('LocalStorage error reading flagged segments', e);
+    }
+    return {};
+  },
+
+  /**
+   * Get flagged transcript segments for a single lesson
+   * @param {string} lessonId
+   * @returns {Array}
+   */
+  getFlaggedSegments(lessonId) {
+    const all = this.getAllFlaggedSegments();
+    return all[lessonId] || [];
+  },
+
+  /**
+   * Check if a transcript segment is flagged
+   * @param {string} lessonId
+   * @param {string} segmentId
+   * @returns {boolean}
+   */
+  isSegmentFlagged(lessonId, segmentId) {
+    if (!segmentId) return false;
+    const list = this.getFlaggedSegments(lessonId);
+    return list.some(s => s.id === segmentId);
+  },
+
+  /**
+   * Toggle a flagged transcript segment
+   * @param {string} lessonId
+   * @param {Object} segment
+   * @returns {boolean} True if flagged, false if unflagged
+   */
+  toggleFlaggedSegment(lessonId, segment) {
+    try {
+      const all = this.getAllFlaggedSegments();
+      all[lessonId] = all[lessonId] || [];
+      const index = all[lessonId].findIndex(s => s.id === segment.id);
+      let isFlagged = false;
+      if (index >= 0) {
+        all[lessonId].splice(index, 1);
+        isFlagged = false;
+      } else {
+        all[lessonId].push({
+          id: segment.id,
+          start: segment.start,
+          end: segment.end,
+          en: segment.en,
+          kr: segment.kr,
+          lessonId,
+          flaggedAt: new Date().toISOString()
+        });
+        isFlagged = true;
+      }
+      localStorage.setItem(this.KEYS.FLAGGED_SEGMENTS, JSON.stringify(all));
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('flagged-segments-updated', {
+          detail: { lessonId, segmentId: segment.id, isFlagged, segments: all[lessonId] }
+        }));
+      }
+      return isFlagged;
+    } catch (e) {
+      console.warn('LocalStorage error toggling flagged segment', e);
+      return false;
+    }
+  },
+
+  /**
+   * Remove a flagged transcript segment
+   * @param {string} lessonId
+   * @param {string} segmentId
+   */
+  removeFlaggedSegment(lessonId, segmentId) {
+    try {
+      const all = this.getAllFlaggedSegments();
+      if (all[lessonId]) {
+        all[lessonId] = all[lessonId].filter(s => s.id !== segmentId);
+        localStorage.setItem(this.KEYS.FLAGGED_SEGMENTS, JSON.stringify(all));
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('flagged-segments-updated', {
+            detail: { lessonId, segmentId, isFlagged: false, segments: all[lessonId] }
+          }));
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage error removing flagged segment', e);
+    }
   },
 
   /**

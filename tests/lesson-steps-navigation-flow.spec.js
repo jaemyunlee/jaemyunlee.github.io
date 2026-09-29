@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => {
   test('Navigation tabs display the new 4-step sequence and Korean labels', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
@@ -51,7 +51,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
   });
 
   test('Step 3 completion banner guides user to Step 4 (Writing & Commenting)', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 3
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
@@ -96,7 +96,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
   });
 
   test('Step 4: Copy button disabled message, activates on text, and clicking completes lesson and shows encouragement description', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 4
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
@@ -148,7 +148,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
 
     // Verify storage has lesson completed
     const isCompleted = await page.evaluate(() => {
-      return Storage.isLessonCompleted('lesson-01');
+      return Storage.isLessonCompleted('lesson-02');
     });
     expect(isCompleted).toBe(true);
 
@@ -175,7 +175,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
   });
 
   test('Step 4: Clicking YouTube link button before copying displays encouragement description first, and subsequent click opens YouTube', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 4
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
@@ -204,7 +204,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
 
     // Verify storage is completed
     const isCompleted = await page.evaluate(() => {
-      return Storage.isLessonCompleted('lesson-01');
+      return Storage.isLessonCompleted('lesson-02');
     });
     expect(isCompleted).toBe(true);
 

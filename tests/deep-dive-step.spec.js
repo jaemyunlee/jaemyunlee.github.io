@@ -168,7 +168,7 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
       await page.goto('/lessons/lesson-01/index.html');
 
       const tabs = page.locator('#lesson-step-tabs .step-tab-btn');
-      await expect(tabs).toHaveCount(5);
+      await expect(tabs).toHaveCount(7);
 
       const deepDiveTab = page.locator('#step-tab-deep-dive');
       await expect(deepDiveTab).toBeVisible();

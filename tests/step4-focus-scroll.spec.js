@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
   test('Step 4: Clicking Copy Button scrolls smoothly to show reflection feedback description rather than scrolling to the top', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 4
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
@@ -47,7 +47,7 @@ test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
   });
 
   test('Step 4: Clicking YouTube link button before copying scrolls to show encouragement description', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 4
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
@@ -78,7 +78,7 @@ test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
   });
 
   test('Light Mode: Buttons maintain accessible high contrast across default, hover, and focus states', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Force light mode
     await page.evaluate(() => {
@@ -134,7 +134,7 @@ test.describe('Button Focus and Scroll Behavior on Step 4 (Issue #27)', () => {
   });
 
   test('Mobile UX: pageshow event clears sticky focus from active button', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 4
     await page.locator('.step-tab-btn[data-step="4"]').click();

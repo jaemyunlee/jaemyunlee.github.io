@@ -24,6 +24,8 @@ const LessonStep = Object.freeze({
   KEY_SENTENCES: 2,
   DEEP_DIVE: 'deep-dive',
   FULL_VIDEO: 3,
+  DICTATION: 4,
+  REVIEW_QUIZ: 5,
   WRITING: 4
 });
 

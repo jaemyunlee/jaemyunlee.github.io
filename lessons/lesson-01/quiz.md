@@ -71,73 +71,82 @@
 - **Explanation**: "There was no way (that) ~"는 "~할 방법이 전혀 없다 / 절대 불가능하다"는 강한 불가능의 의미를 나타냅니다.
 
 ## Quiz 11
-- **Type**: fill-in-the-blank
-- **English**: It [turned out] they are only going to two cities, Oakland and New Jersey.
+- **Type**: multiple-choice
+- **English**: It [turned out, looked like, caught on, went down] they are only going to two cities, Oakland and New Jersey.
+- **Answer**: turned out
 - **Korean**: 알고 보니 딱 두 도시만 가는 것으로 밝혀졌어요.
 - **Explanation**: "turn out (that) ~"은 "알고 보니 ~임이 드러나다 / 결국 ~로 밝혀지다"라는 뜻의 구동사입니다.
 
 ## Quiz 12
-- **Type**: fill-in-the-blank
-- **English**: And then go to the concert and [spend the night]!
+- **Type**: multiple-choice
+- **English**: And then go to the concert and [spend the night, waste the time, pass the buck, lose the face]!
+- **Answer**: spend the night
 - **Korean**: 그리고 콘서트에 갔다가 하룻밤 자고 올 거예요!
 - **Explanation**: "spend the night"은 어디서 "하룻밤을 묵다 / 자고 오다"를 뜻하는 자연스러운 숙어 표현입니다.
 
 ## Quiz 13
-- **Type**: fill-in-the-blank
-- **English**: Hopefully Amy does not [mind].
+- **Type**: multiple-choice
+- **English**: Hopefully Amy does not [mind, notice, forget, regret].
+- **Answer**: mind
 - **Korean**: 에이미가 신경 안 썼으면 좋겠네요 (언짢아하지 않았으면 해요).
-- **Explanation**: "mind"는 "신경 쓰다, 언짢아하다, 개의치 않다"의 의미로 쓰입니다. "does not mind"는 "신경 쓰지 않다"입니다.
+- **Explanation**: "mind"는 "신경 쓰다, 언짢아하다, 개의치 않다"의 의미로 쓰입니다.
 
 ## Quiz 14
-- **Type**: fill-in-the-blank
-- **English**: I do not know when they officially [went on sale], but it seemed like everything was sold.
+- **Type**: multiple-choice
+- **English**: I do not know when they officially [went on sale, took a break, made a scene, dropped the ball], but it seemed like everything was sold.
+- **Answer**: went on sale
 - **Korean**: 언제 공식 판매가 시작되었는지는 모르겠지만, 전부 매진된 것 같았어요.
 - **Explanation**: "go on sale"은 "판매가 시작되다"를 의미합니다. 과거형은 "went on sale"입니다.
 
 ## Quiz 15
-- **Type**: fill-in-the-blank
-- **English**: I do not know [what year that came out].
+- **Type**: multiple-choice
+- **English**: I do not know [what year that came out, what time it closed, how much it earned, where it disappeared].
+- **Answer**: what year that came out
 - **Korean**: 그 노래가 몇 년도에 나왔는지는 잘 모르겠어요.
-- **Explanation**: 곡이나 작품이 세상에 "발매되다, 출시되다"는 "come out", 과거형은 "came out"입니다.
+- **Explanation**: "come out"은 노래, 영화, 책 등이 "발매되다 / 출시되다 / 나오다"라는 뜻입니다.
 
 ## Quiz 16
-- **Type**: fill-in-the-blank
-- **English**: I think it was [around] there.
-- **Korean**: 제 생각엔 대략 그 정도(가격대)였던 것 같아요.
-- **Explanation**: "around"는 숫자나 장소, 기준 앞에서 "대략, 대략 그쯤"을 의미합니다.
+- **Type**: multiple-choice
+- **English**: I think it was [around there, far beyond, out of sight, down under].
+- **Answer**: around there
+- **Korean**: 그 무렵쯤(그 언저리)이었던 것 같아요.
+- **Explanation**: "around there"는 특정 연도나 시기, 장소의 "그 언저리, 그 무렵, 그 근처"를 뜻합니다.
 
 ## Quiz 17
-- **Type**: fill-in-the-blank
-- **English**: The first time I heard it, I did not love it, but it did [grow on me] quite a lot.
-- **Korean**: 처음 들었을 때는 별로 안 끌렸는데, 들을수록 점점 마음에 들더라고요.
-- **Explanation**: "grow on (someone)"은 어떤 노래나 대상이 "들을수록/시간이 지날수록 점점 좋아지다"를 의미하는 매우 매력적인 구동사입니다.
+- **Type**: multiple-choice
+- **English**: The first time I heard it, I did not love it, but it did [grow on, run down, burn out, fall behind] me quite a lot.
+- **Answer**: grow on
+- **Korean**: 처음 들었을 땐 그다지 끌리지 않았는데, 들을수록 꽤 좋아지더라고요.
+- **Explanation**: "grow on (누구)"는 처음엔 별로였지만 "차츰 점점 마음에 들다 / 정이 들다"라는 멋진 표현입니다.
 
 ## Quiz 18
-- **Type**: fill-in-the-blank
-- **English**: Because I have a lot of assignments [due] Sunday.
-- **Korean**: 일요일까지 제출해야 할 과제가 너무 많아서요.
-- **Explanation**: "due (날짜/요일)"는 "~까지 마감인 / 제출 기한인"을 뜻하는 형용사입니다.
+- **Type**: multiple-choice
+- **English**: Because I have a lot of assignments [due, lost, past, late] Sunday.
+- **Answer**: due
+- **Korean**: 일요일까지 제출해야 하는 과제가 정말 많거든요.
+- **Explanation**: "due (시점)"은 과제, 요금, 보고서 등이 "~까지 마감인 / 제출해야 하는"을 의미합니다.
 
 ## Quiz 19
-- **Type**: listening
-- **Audio**: audio/it was when the new song came out.wav
-- **English**: It was when the [new song came out].
-- **Korean**: 신곡이 나왔을 때였어요.
-- **Explanation**: "come out"은 앨범이나 신곡이 "발매되다 / 출시되다 / 나오다"를 뜻하는 일상 표현입니다. 과거형은 "came out"입니다.
+- **Type**: multiple-choice
+- **English**: It was when the new song [came out, gave up, ran down, fell through].
+- **Answer**: came out
+- **Korean**: 그건 신곡이 막 나왔을 무렵이었어요.
+- **Explanation**: "come out"은 새로운 노래나 작품이 "발표되다 / 세상에 나오다"를 뜻합니다.
 
 ## Quiz 20
-- **Type**: listening
-- **Audio**: audio/So I thought it was pretty unlikely that I would get to go and find someone..wav
-- **English**: So I thought it was pretty [unlikely] that I would get to go and find someone.
-- **Korean**: 그래서 같이 갈 사람을 찾아서 가게 될 가능성은 매우 희박하다고 생각했어요.
-- **Explanation**: "unlikely"는 "일어날 것 같지 않은, 가망이 없는"을 뜻합니다. "pretty unlikely"는 "가능성이 꽤 희박한"입니다.
+- **Type**: multiple-choice
+- **English**: So I thought it was pretty [unlikely, realistic, certain, obvious] that I would get to go and find someone.
+- **Answer**: unlikely
+- **Korean**: 그래서 제가 갈 수 있거나 같이 갈 사람을 찾는 건 거의 불가능할(가망 없을) 거라 생각했죠.
+- **Explanation**: "unlikely"는 "있을 법하지 않은, 가망 없는, 가능성이 낮은"이라는 뜻입니다.
 
 ## Quiz 21
-- **Type**: listening
-- **Audio**: audio/but they finally just put us in to one of the handicap seats which ended up having an amazing view.wav
-- **English**: But they finally just put us in to one of the handicap seats which [ended up] having an amazing view.
-- **Korean**: 하지만 결국 장애인석 중 하나로 안내해 주셨는데, 결과적으로 뷰가 엄청나게 좋았어요.
-- **Explanation**: "end up (동명사/-ing)"는 "결국 ~하게 되다 / 결국 ~한 결과가 되다"라는 핵심 구동사입니다.
+- **Type**: multiple-choice
+- **English**: They finally just put us into one of the [handicap seats, front rows, standing pits, aisle spots] which ended up having an amazing view.
+- **Answer**: handicap seats
+- **Korean**: 그들이 마침내 우리를 장애인 전용석 중 한 곳으로 안내해 주었는데, 결국 엄청난 뷰를 보게 되었어요.
+- **Explanation**: "handicap seats"는 휠체어나 깁스를 한 관객을 배려한 "장애인/교통약자 전용석"을 뜻합니다.
+
 
 ## Quiz 22
 - **Type**: multiple-choice
