@@ -62,7 +62,19 @@ test.describe('Quiz Share Functionality (Issue #11)', () => {
     // Answer Quiz 1 to advance or click next
     // Answer Quiz 1 (select any choice to advance or answer correctly)
     const choiceBtn = page.locator('.choice-btn').first();
-    await choiceBtn.click();
+    if (await choiceBtn.isVisible()) {
+      await choiceBtn.click();
+    } else {
+      const chips = page.locator('.token-chip, .drag-chip');
+      const count = await chips.count();
+      for (let i = 0; i < count; i++) {
+        await chips.first().click();
+      }
+      const checkBtn = page.locator('#btn-check-answer');
+      if (await checkBtn.isVisible()) {
+        await checkBtn.click();
+      }
+    }
 
     // If check answer is required or next button appears
     const nextBtn = page.locator('#btn-next-question');

@@ -606,6 +606,7 @@
 
       let metadata = {};
       let scriptData = [];
+      let keySentencesData = [];
       let loadedQuizzes = [];
       let loadedReviewQuizzes = [];
       let videoPlayer = null;
@@ -625,6 +626,13 @@
         if (scriptRes.ok) scriptData = await scriptRes.json();
       } catch (e) {
         console.warn('Could not load script.json', e);
+      }
+
+      try {
+        const ksRes = await fetch('./key-sentences.json');
+        if (ksRes.ok) keySentencesData = await ksRes.json();
+      } catch (e) {
+        console.warn('Could not load key-sentences.json', e);
       }
 
       // Initialize Analytics for Lesson 01
@@ -714,12 +722,13 @@
         }
 
         // Lazy-init Review Player on Step 2 (핵심 문장)
-        if (step === 2 && loadedQuizzes.length > 0) {
+        if (step === 2 && (keySentencesData.length > 0 || loadedQuizzes.length > 0)) {
           if (!reviewPlayer) {
+            const step2Sentences = keySentencesData.length > 0 ? keySentencesData : loadedQuizzes;
             reviewPlayer = new ReviewPlayer({
               container: '#review-player-container',
               lessonId: LESSON_ID,
-              quizzes: loadedQuizzes,
+              quizzes: step2Sentences,
               audioBaseUrl: './audio/',
               audioFiles: LESSON_01_AUDIO_FILES,
               speakerName: metadata?.speaker?.name || 'Kelly',
@@ -764,14 +773,15 @@
         }
 
         // Lazy-init Dictation Engine on Step 4 (딕테이션)
-        if (step === 4 && loadedQuizzes.length > 0) {
+        if (step === 4 && (keySentencesData.length > 0 || loadedQuizzes.length > 0)) {
           if (!dictationEngine) {
-            const keySentences = loadedQuizzes.map((q, idx) => ({
+            const step4Sentences = keySentencesData.length > 0 ? keySentencesData : loadedQuizzes;
+            const keySentences = step4Sentences.map((q, idx) => ({
               id: `key-${idx + 1}`,
-              en: q.english ? q.english.replace(/\[.*?\]/, q.answer || '').replace(/\s+/g, ' ').trim() : '',
+              en: q.english ? q.english.replace(/\[.*?\]/, q.answer || q.keyExpression || '').replace(/\s+/g, ' ').trim() : '',
               kr: q.korean,
               audioFile: LESSON_01_AUDIO_FILES[idx],
-              keyExpression: q.answer
+              keyExpression: q.answer || q.keyExpression
             }));
 
             dictationEngine = new DictationEngine({
@@ -1055,6 +1065,17 @@
           const rqRes = await fetch('./review-quiz.json');
           if (rqRes.ok) loadedReviewQuizzes = await rqRes.json();
         } catch (_) {}
+
+        if (!keySentencesData || keySentencesData.length === 0) {
+          try {
+            const ksRes = await fetch('./key-sentences.json');
+            if (ksRes.ok) keySentencesData = await ksRes.json();
+          } catch (_) {}
+        }
+
+        if ((currentActiveStep === 2 && !reviewPlayer) || (currentActiveStep === 4 && !dictationEngine)) {
+          showStep(currentActiveStep, false);
+        }
 
         // Resume active step: URL query param (?step=deep-dive), hash (#deep-dive), or LocalStorage
         const urlParams = new URLSearchParams(window.location.search);

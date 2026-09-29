@@ -49,7 +49,7 @@
     "type": "fill-in-the-blank",
     "keyExpression": "Compared to",
     "target": "Compared to",
-    "english": "Compared to what we paid in Korea for tickets, it is [Compared to].",
+    "english": "[Compared to] what we paid in Korea for tickets, it is decent.",
     "korean": "예전에 한국에서 냈던 티켓 가격에 비하면 꽤 괜찮은 편이에요.",
     "explanation": "\"Compared to ~\"는 \"~와 비교하여, ~에 비하면\"이라는 대비 표현입니다."
   },
@@ -130,7 +130,7 @@
     "type": "speaking",
     "keyExpression": "came out",
     "target": "came out",
-    "english": "I do not know [came out].",
+    "english": "I do not know what year that [came out].",
     "korean": "그 노래가 몇 년도에 나왔는지는 잘 모르겠어요.",
     "explanation": "\"come out\"은 노래, 영화, 책 등이 \"발매되다 / 출시되다 / 나오다\"라는 뜻입니다."
   },

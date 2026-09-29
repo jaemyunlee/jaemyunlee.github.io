@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1,
+    "keyExpression": "happened to",
+    "answer": "happened to",
+    "english": "I just [happened to] look.",
+    "korean": "그냥 우연히 찾아보게 되었어요.",
+    "explanation": "\"happen to (동사)\"는 \"우연히 ~하다\"라는 뜻의 매우 자연스러운 일상 표현입니다.",
+    "audioFile": "I just happened to look.wav"
+  },
+  {
+    "id": 2,
+    "keyExpression": "obviously",
+    "answer": "Obviously",
+    "english": "[Obviously], Jaemyun cannot go with me because someone has to watch the kids.",
+    "korean": "당연히 재면이는 저랑 같이 못 가요. 누군가는 애들을 봐야 하니까요.",
+    "explanation": "\"Obviously\"는 \"당연히, 명백하게\"라는 뜻으로, 누구나 짐작할 수 있는 당연한 사실을 덧붙일 때 씁니다.",
+    "audioFile": "obviously Jaemyun cant go with me because someone has to watch the kids..wav"
+  },
+  {
+    "id": 3,
+    "keyExpression": "nosebleed",
+    "answer": "nosebleed",
+    "english": "We got tickets that are pretty much in the back, the [nosebleed] section.",
+    "korean": "맨 뒷자리 티켓을 구했어요. 제일 꼭대기 구역(하늘석)이에요.",
+    "explanation": "\"nosebleed section\" 또는 \"nosebleed seats\"는 경기장이나 공연장의 \"맨 꼭대기 높은 좌석(코피가 날 정도로 높다는 비유)\"을 뜻합니다.",
+    "audioFile": "We got tickets that are pretty much in the back the nosebleed section..wav"
+  },
+  {
+    "id": 4,
+    "keyExpression": "decent",
+    "answer": "decent",
+    "english": "We have a [decent] view.",
+    "korean": "꽤 괜찮은 시야(뷰)를 확보했어요.",
+    "explanation": "\"decent\"는 \"꽤 괜찮은, 만족스러운, 버젓한\"을 뜻하는 핵심 형용사입니다.",
+    "audioFile": "we have a decent view..wav"
+  },
+  {
+    "id": 5,
+    "keyExpression": "obstructed",
+    "answer": "obstructed",
+    "english": "It is not like it is on the side or like at a weird or [obstructed] angle or anything.",
+    "korean": "너무 측면이거나 이상하거나 시야가 가려지는 각도도 아니에요.",
+    "explanation": "\"obstructed\"는 기둥이나 구조물에 의해 \"시야가 가려진, 방해된\"을 뜻합니다.",
+    "audioFile": "Its not like its on the side or like at a weird or obstructed angle or anything.wav"
+  },
+  {
+    "id": 6,
+    "keyExpression": "Compared to",
+    "answer": "Compared to",
+    "english": "[Compared to] what we paid in Korea for tickets, it is decent.",
+    "korean": "예전에 한국에서 냈던 티켓 가격에 비하면 꽤 괜찮은 편이에요.",
+    "explanation": "\"Compared to ~\"는 \"~에 비하면, ~와 비교했을 때\"라는 뜻으로 두 대상의 비용이나 상태를 대조할 때 씁니다.",
+    "audioFile": "Compared to what we paid in Korea for tickets its decent.wav"
+  },
+  {
+    "id": 7,
+    "keyExpression": "at least",
+    "answer": "At least",
+    "english": "[At least], that is what I understood.",
+    "korean": "적어도 제가 이해하기로는 그랬어요.",
+    "explanation": "\"At least\"는 \"적어도, 최소한\"이라는 뜻으로 자신이 알고 있는 한계를 조심스럽게 표현할 때 쓰입니다.",
+    "audioFile": "At least thats what I understood.wav"
+  },
+  {
+    "id": 8,
+    "keyExpression": "started to",
+    "answer": "started to",
+    "english": "I [started to] like it a lot and listening to it.",
+    "korean": "그 노래를 엄청 좋아하기 시작했고 자주 듣게 되었어요.",
+    "explanation": "\"start to (동사원형)\"는 \"~하기 시작하다\"라는 뜻입니다.",
+    "audioFile": "I started to like it a lot and listening to it..wav"
+  },
+  {
+    "id": 9,
+    "keyExpression": "in a cast",
+    "answer": "in a cast",
+    "english": "You were [in a cast] up past your knee to your thigh, like all the way down.",
+    "korean": "당신은 무릎을 지나 허벅지까지 다리 전체에 깁스를 하고 있었잖아요.",
+    "explanation": "\"in a cast\"는 팔이나 다리에 \"깁스를 하고 있는 상태\"를 나타냅니다.",
+    "audioFile": "you were in a cast up past your knee to your thigh like all the way down.wav"
+  },
+  {
+    "id": 10,
+    "keyExpression": "no way",
+    "answer": "no way",
+    "english": "There was [no way] you were getting up to those seats.",
+    "korean": "당신이 그 꼭대기 좌석까지 올라가는 건 절대 불가능했죠.",
+    "explanation": "\"There was no way (that) ~\"는 \"~할 방법이 전혀 없다 / 절대 불가능하다\"는 강한 불가능의 의미를 나타냅니다.",
+    "audioFile": "there was no way you were getting up to those seats.wav"
+  },
+  {
+    "id": 11,
+    "keyExpression": "turned out",
+    "answer": "turned out",
+    "english": "It [turned out] they are only going to two cities, Oakland and New Jersey.",
+    "korean": "알고 보니 딱 두 도시만 가는 것으로 밝혀졌어요.",
+    "explanation": "\"turn out (that) ~\"은 \"알고 보니 ~임이 드러나다 / 결국 ~로 밝혀지다\"라는 뜻의 구동사입니다.",
+    "audioFile": "it turned out theyre only going to two citiesOakland and New Jersey.wav"
+  },
+  {
+    "id": 12,
+    "keyExpression": "spend the night",
+    "answer": "spend the night",
+    "english": "And then go to the concert and [spend the night]!",
+    "korean": "그리고 콘서트에 갔다가 하룻밤 자고 올 거예요!",
+    "explanation": "\"spend the night\"은 어디서 \"하룻밤을 묵다 / 자고 오다\"를 뜻하는 자연스러운 숙어 표현입니다.",
+    "audioFile": "And then go to the concert and spend the night.wav"
+  },
+  {
+    "id": 13,
+    "keyExpression": "mind",
+    "answer": "mind",
+    "english": "Hopefully Amy does not [mind].",
+    "korean": "에이미가 신경 안 썼으면 좋겠네요 (언짢아하지 않았으면 해요).",
+    "explanation": "\"mind\"는 \"신경 쓰다, 언짢아하다, 개의치 않다\"의 의미로 부정문/의문문에서 자주 쓰입니다.",
+    "audioFile": "Hopefully Amy doesnt mind..wav"
+  },
+  {
+    "id": 14,
+    "keyExpression": "went on sale",
+    "answer": "went on sale",
+    "english": "I do not know when they officially [went on sale], but it seemed like everything was sold.",
+    "korean": "언제 공식 판매가 시작되었는지는 모르겠지만, 전부 매진된 것 같았어요.",
+    "explanation": "\"go on sale\"은 \"판매가 시작되다\"를 의미합니다. 과거형은 \"went on sale\"입니다.",
+    "audioFile": "I dont know when they officially went on sale but it seemed like everything was sold..wav"
+  },
+  {
+    "id": 15,
+    "keyExpression": "came out",
+    "answer": "came out",
+    "english": "I do not know what year that [came out].",
+    "korean": "그 노래가 몇 년도에 나왔는지는 잘 모르겠어요.",
+    "explanation": "\"come out\"은 노래, 영화, 책 등이 세상에 \"발매되다 / 출시되다 / 나오다\"라는 뜻입니다.",
+    "audioFile": "I dont know what year that came out.wav"
+  },
+  {
+    "id": 16,
+    "keyExpression": "around there",
+    "answer": "around there",
+    "english": "I think it was [around there].",
+    "korean": "그 무렵쯤(그 언저리)이었던 것 같아요.",
+    "explanation": "\"around there\"는 특정 연도나 시기, 장소의 \"그 언저리, 그 무렵, 그 근처\"를 뜻합니다.",
+    "audioFile": "i think it was around there.wav"
+  },
+  {
+    "id": 17,
+    "keyExpression": "grow on",
+    "answer": "grow on",
+    "english": "The first time I heard it, I did not love it, but it did [grow on] me quite a lot.",
+    "korean": "처음 들었을 땐 그다지 끌리지 않았는데, 들을수록 꽤 좋아지더라고요.",
+    "explanation": "\"grow on (누구)\"는 처음엔 별로였지만 \"차츰 점점 마음에 들다 / 정이 들다\"라는 멋진 표현입니다.",
+    "audioFile": "The first time I heard it I didnt love it but it did grow on me quite a lot..wav"
+  },
+  {
+    "id": 18,
+    "keyExpression": "due",
+    "answer": "due",
+    "english": "Because I have a lot of assignments [due] Sunday.",
+    "korean": "일요일까지 제출해야 하는 과제가 정말 많거든요.",
+    "explanation": "\"due (시점)\"은 과제, 요금, 보고서 등이 \"~까지 마감인 / 제출해야 하는\"을 의미합니다.",
+    "audioFile": "because I have a lot of assignments due Sunday.wav"
+  },
+  {
+    "id": 19,
+    "keyExpression": "came out",
+    "answer": "came out",
+    "english": "It was when the new song [came out].",
+    "korean": "그건 신곡이 막 나왔을 무렵이었어요.",
+    "explanation": "\"come out\"은 새로운 노래나 작품이 \"발표되다 / 세상에 나오다\"를 뜻합니다.",
+    "audioFile": "it was when the new song came out.wav"
+  },
+  {
+    "id": 20,
+    "keyExpression": "unlikely",
+    "answer": "unlikely",
+    "english": "So I thought it was pretty [unlikely] that I would get to go and find someone.",
+    "korean": "그래서 제가 갈 수 있거나 같이 갈 사람을 찾는 건 거의 불가능할(가망 없을) 거라 생각했죠.",
+    "explanation": "\"unlikely\"는 \"있을 법하지 않은, 가망 없는, 가능성이 낮은\"이라는 뜻입니다.",
+    "audioFile": "So I thought it was pretty unlikely that I would get to go and find someone..wav"
+  },
+  {
+    "id": 21,
+    "keyExpression": "handicap seats",
+    "answer": "handicap seats",
+    "english": "They finally just put us into one of the [handicap seats] which ended up having an amazing view.",
+    "korean": "그들이 마침내 우리를 장애인 전용석 중 한 곳으로 안내해 주었는데, 결국 엄청난 뷰를 보게 되었어요.",
+    "explanation": "\"handicap seats\"는 휠체어나 깁스를 한 관객을 배려한 \"장애인/교통약자 전용석\"을 뜻합니다.",
+    "audioFile": "but they finally just put us in to one of the handicap seats which ended up having an amazing view.wav"
+  },
+  {
+    "id": 22,
+    "keyExpression": "trying to",
+    "answer": "trying to",
+    "english": "So [trying to] find someone to go, you know.",
+    "korean": "그래서 같이 갈 사람을 찾아보려고 애썼죠, 아시잖아요.",
+    "explanation": "\"try to (동사원형)\"는 \"~하려고 노력하다, 애쓰다, 시도하다\"라는 뜻으로 일상에서 무언가를 하려고 할 때 가장 자연스럽게 쓰는 핵심 표현입니다.",
+    "audioFile": "So trying to find someone to go you know.wav"
+  },
+  {
+    "id": 23,
+    "keyExpression": "all the way",
+    "answer": "all the way",
+    "english": "And then we are going to drive [all the way] down together with her family.",
+    "korean": "그리고 그녀의 가족과 함께 저 아래까지 먼 길을 차로 쭉 운전해서 갈 거예요.",
+    "explanation": "\"all the way\"는 먼 거리나 목적지까지 \"끝까지, 내내, 쭉\" 이동하거나 거칠 때 사용하는 생생한 표현입니다.",
+    "audioFile": "And then were going to drive all the way down together with her family..wav"
+  },
+  {
+    "id": 24,
+    "keyExpression": "at once",
+    "answer": "at once",
+    "english": "All the tickets now, it is like everyone buys them [at once] and then resells them.",
+    "korean": "요즘 티켓은 모두가 한꺼번에 사들인 뒤 다시 되파는 식이에요.",
+    "explanation": "\"at once\"는 \"동시에, 한꺼번에, 일제히\"라는 뜻으로, 여러 동작이나 상황이 한순간에 몰려서 일어날 때 자주 쓰입니다.",
+    "audioFile": "All the tickets now its like everyone buys them at once and then sells them resells it..wav"
+  },
+  {
+    "id": 25,
+    "keyExpression": "in advance",
+    "answer": "in advance",
+    "english": "We should have called [in advance] to say that, but we did not.",
+    "korean": "그 말을 사전에(미리) 전화해서 했어야 했는데 그러지 못했어요.",
+    "explanation": "\"in advance\"는 어떤 일이나 상황이 일어나기 전에 \"미리, 사전에\"라는 뜻으로 예약이나 연락 시 필수적으로 쓰이는 표현입니다.",
+    "audioFile": "we should have called in advance to say that but we didnt..wav"
+  },
+  {
+    "id": 26,
+    "keyExpression": "ahead of time",
+    "answer": "ahead of time",
+    "english": "I should have called [ahead of time].",
+    "korean": "미리 앞서서 전화를 해뒀어야 했는데 그러지 못했어요.",
+    "explanation": "\"ahead of time\"은 \"in advance\"와 마찬가지로 약속이나 일정에 앞서 \"미리, 사전에, 시간 여유를 두고\"라는 뜻의 매우 친숙한 구어체 표현입니다.",
+    "audioFile": "i should have called ahead of time..wav"
+  }
+]

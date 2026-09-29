@@ -199,6 +199,15 @@ function generateLessonYouTubeDescription(lessonId) {
     quizzes = parseQuizMarkdown(fs.readFileSync(quizPath, 'utf8'));
   }
 
+  // Also check key-sentences.json (contains exact video lines)
+  const keySentencesPath = path.join(lessonDir, 'key-sentences.json');
+  let keySentences = [];
+  if (fs.existsSync(keySentencesPath)) {
+    try {
+      keySentences = JSON.parse(fs.readFileSync(keySentencesPath, 'utf8'));
+    } catch (_) {}
+  }
+
   // Also check README.md for curated clean sentences if present
   const readmePath = path.join(lessonDir, 'README.md');
   let readmeSentences = [];
@@ -227,8 +236,21 @@ function generateLessonYouTubeDescription(lessonId) {
 /**
  * Find matching sentence for an SRT expression from README or quizzes
  */
-function findMatchingSentence(srtEntry, quizzes, readmeSentences, index, usedSet) {
+function findMatchingSentence(srtEntry, quizzes, readmeSentences, keySentences, index, usedSet) {
   const srtExprNorm = (srtEntry.expression || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  // 0. Try keySentences if present (contains exact video lines)
+  if (keySentences && keySentences.length > 0) {
+    for (let j = 0; j < keySentences.length; j++) {
+      if (usedSet && usedSet.has(`key_${j}`)) continue;
+      const ks = keySentences[j];
+      const ansNorm = (ks.answer || ks.keyExpression || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (ansNorm && (ansNorm === srtExprNorm || (ansNorm.length > 3 && srtExprNorm.length > 3 && (ansNorm.includes(srtExprNorm) || srtExprNorm.includes(ansNorm))))) {
+        if (usedSet) usedSet.add(`key_${j}`);
+        return cleanQuizSentence(ks.english, ks.answer || ks.keyExpression);
+      }
+    }
+  }
 
   // 1. Try to find a sentence in README.md whose [bracketed] expression matches
   if (readmeSentences && readmeSentences.length > 0) {
@@ -284,7 +306,7 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, index, usedSet
     const srt = srtEntries[i] || { timestamp: '00:00', expression: '' };
     const quiz = quizzes[i] || { english: '', answer: '', korean: '' };
 
-    const sentence = findMatchingSentence(srt, quizzes, readmeSentences, i, usedSet);
+    const sentence = findMatchingSentence(srt, quizzes, readmeSentences, keySentences, i, usedSet);
     const exprTag = formatExpressionTag(quiz.baseForm || srt.expression || quiz.answer);
     output += `${srt.timestamp} ${num}. ${sentence} [${exprTag}]\n`;
   }
