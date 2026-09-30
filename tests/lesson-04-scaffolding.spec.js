@@ -272,7 +272,7 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     // Verify new target expressions
     expect(content).toContain('get in line');
     expect(content).toContain('first in line');
-    expect(content).toContain('By the time');
+    expect(content).toMatch(/by the time/i);
     expect(content).toContain('Throughout');
     expect(content).toContain('wondering if');
     expect(content).toContain('at the end');

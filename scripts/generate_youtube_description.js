@@ -47,7 +47,9 @@ const LESSON_ICONS = {
   'lesson-03': '🏡',
   'lesson-04': '🎤',
   'lesson-05': '🎓',
-  'lesson-06': '🌲'
+  'lesson-06': '🌲',
+  'lesson-07': '🥬',
+  'lesson-08': '🚗'
 };
 
 /**
@@ -244,10 +246,13 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, keySentences, 
     for (let j = 0; j < keySentences.length; j++) {
       if (usedSet && usedSet.has(`key_${j}`)) continue;
       const ks = keySentences[j];
-      const ansNorm = (ks.answer || ks.keyExpression || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-      if (ansNorm && (ansNorm === srtExprNorm || (ansNorm.length > 3 && srtExprNorm.length > 3 && (ansNorm.includes(srtExprNorm) || srtExprNorm.includes(ansNorm))))) {
+      const baseNorm = (ks.baseForm || ks.keyExpression || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const ansNorm = (ks.target || ks.answer || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (baseNorm === srtExprNorm || ansNorm === srtExprNorm ||
+          (baseNorm.length > 3 && srtExprNorm.length > 3 && (baseNorm.includes(srtExprNorm) || srtExprNorm.includes(baseNorm))) ||
+          (ansNorm.length > 3 && srtExprNorm.length > 3 && (ansNorm.includes(srtExprNorm) || srtExprNorm.includes(ansNorm)))) {
         if (usedSet) usedSet.add(`key_${j}`);
-        return cleanQuizSentence(ks.english, ks.answer || ks.keyExpression);
+        return cleanQuizSentence(ks.english, ks.target || ks.answer || ks.keyExpression);
       }
     }
   }
@@ -304,10 +309,14 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, keySentences, 
   for (let i = 0; i < count; i++) {
     const num = (i + 1).toString().padStart(2, '0');
     const srt = srtEntries[i] || { timestamp: '00:00', expression: '' };
-    const quiz = quizzes[i] || { english: '', answer: '', korean: '' };
+    const srtBaseNorm = (srt.expression || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+    const matchedQuiz = quizzes.find(q => {
+      const qBase = (q.baseForm || q.keyExpression || q.answer || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+      return qBase && srtBaseNorm && qBase === srtBaseNorm;
+    }) || quizzes[i] || { english: '', answer: '', korean: '' };
 
     const sentence = findMatchingSentence(srt, quizzes, readmeSentences, keySentences, i, usedSet);
-    const exprTag = formatExpressionTag(quiz.baseForm || srt.expression || quiz.answer);
+    const exprTag = formatExpressionTag(srt.expression || matchedQuiz.baseForm || matchedQuiz.keyExpression || matchedQuiz.answer);
     output += `${srt.timestamp} ${num}. ${sentence} [${exprTag}]\n`;
   }
 
@@ -319,19 +328,22 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, keySentences, 
   for (let i = 0; i < count; i++) {
     const num = (i + 1).toString().padStart(2, '0');
     const srt = srtEntries[i] || { expression: '', korean: '' };
-    const quiz = quizzes[i] || { answer: '', korean: '' };
+    const srtBaseNorm = (srt.expression || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+    const matchedQuiz = quizzes.find(q => {
+      const qBase = (q.baseForm || q.keyExpression || q.answer || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+      return qBase && srtBaseNorm && qBase === srtBaseNorm;
+    }) || quizzes[i] || { answer: '', korean: '' };
 
-    const expr = (quiz.baseForm || srt.expression || quiz.answer || '').replace(/,\s*/g, ' ').trim();
+    const expr = (srt.expression || matchedQuiz.baseForm || matchedQuiz.keyExpression || matchedQuiz.answer || '').replace(/,\s*/g, ' ').trim();
     let meaning = (srt.korean || '').trim();
     if (extractConciseDefinition) {
-      const matchQuiz = quizzes.find(q => (q.answer || '').toLowerCase().trim() === expr.toLowerCase()) || quiz;
-      const concise = extractConciseDefinition({ answer: expr, explanation: matchQuiz.explanation, korean: matchQuiz.korean });
-      if (concise && concise !== matchQuiz.korean) {
+      const concise = extractConciseDefinition({ answer: expr, baseForm: expr, keyExpression: expr, translation: matchedQuiz.translation, explanation: matchedQuiz.explanation, korean: matchedQuiz.korean });
+      if (concise && concise !== matchedQuiz.korean) {
         meaning = concise;
       }
     }
     if (!meaning) {
-      meaning = (quiz.korean || '').trim();
+      meaning = (matchedQuiz.korean || '').trim();
     }
 
     output += `${num}. ${expr} : ${meaning}\n`;

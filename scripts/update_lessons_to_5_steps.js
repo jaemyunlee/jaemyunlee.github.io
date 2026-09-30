@@ -52,6 +52,14 @@ const lessons = [
     hasDeepDive: false,
     speakerName: 'Kelly',
     speakerAvatar: '../../assets/img/avatars/kelly.jpg'
+  },
+  {
+    id: 'lesson-08',
+    num: '08',
+    titleBadge: 'Lesson 08',
+    hasDeepDive: false,
+    speakerName: 'Kelly',
+    speakerAvatar: '../../assets/img/avatars/kelly.jpg'
   }
 ];
 
@@ -580,6 +588,20 @@ ${deepDiveSectionHtml}
         console.warn('Could not load metadata.json', e);
       }
 
+      const isHidden = (typeof LessonStatusHelper !== 'undefined')
+        ? LessonStatusHelper.isHidden(metadata.status)
+        : (metadata.status === 'hidden');
+      if (isHidden) {
+        const headerBadges = document.querySelector('.lesson-header-section div');
+        if (headerBadges && !headerBadges.querySelector('.badge-hidden')) {
+          const hiddenBadge = document.createElement('span');
+          hiddenBadge.className = 'badge badge-hidden';
+          hiddenBadge.style.cssText = 'background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.35);';
+          hiddenBadge.innerHTML = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 비공개 (테스트)';
+          headerBadges.appendChild(hiddenBadge);
+        }
+      }
+
       try {
         const scriptRes = await fetch('./script.json');
         if (scriptRes.ok) scriptData = await scriptRes.json();
@@ -691,7 +713,7 @@ ${comingSoonGuardInShowStep}
               speakerName: metadata?.speaker?.name || '${cfg.speakerName}',
               speakerAvatar: metadata?.speaker?.avatar || '${cfg.speakerAvatar}',
               hasDeepDive: ${cfg.hasDeepDive ? 'true' : 'false'},
-              showSaveButton: false, // Save button removed (Issue #108)
+              showSaveButton: new URLSearchParams(window.location.search).has('show_save'), // Save button removed by default (Issue #108), supported via flag for tests
               celebrationManager: celebrationManager,
               onComplete: () => {
                 ${reviewPlayerCompleteAction}
@@ -1005,7 +1027,9 @@ ${deepDiveJsLogic}
 `;
 }
 
-lessons.forEach(cfg => {
+const targetLesson = process.argv[2];
+const toUpdate = targetLesson ? lessons.filter(l => l.id === targetLesson) : lessons;
+toUpdate.forEach(cfg => {
   const html = generateHtml(cfg);
   const targetPath = path.join(__dirname, '..', 'lessons', cfg.id, 'index.html');
   fs.writeFileSync(targetPath, html, 'utf8');

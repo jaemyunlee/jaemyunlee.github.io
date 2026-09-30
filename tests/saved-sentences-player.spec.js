@@ -591,7 +591,7 @@ test.describe('Saved Sentences Audio Player & Background Playback (Issue #13)', 
   });
 
   test('Issue #37 Regression: Saving sentence in ReviewPlayer saves clean audio filename', async ({ page }) => {
-    await page.goto('/lessons/lesson-08/index.html');
+    await page.goto('/lessons/lesson-08/index.html?show_save=true');
 
     // Switch to Step 2 (ReviewPlayer)
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');

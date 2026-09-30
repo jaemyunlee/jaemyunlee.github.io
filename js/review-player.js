@@ -272,7 +272,8 @@ class ReviewPlayer {
       const cleanEn = this._getCleanSentence(quiz.english, quiz.answer);
       const isSaved = Storage.isSentenceSaved(this.lessonId, cleanEn);
       const highlightedEn = this._formatHighlightedSentence(quiz.english, quiz.answer);
-      const keyword = quiz.baseForm || quiz.answer || '';
+      const keyword = quiz.baseForm || quiz.keyExpression || quiz.answer || '';
+      const translation = quiz.translation || quiz.meaning || '';
       const meaning = quiz.korean || '';
       const explanation = quiz.explanation || '';
 
@@ -290,7 +291,7 @@ class ReviewPlayer {
                 <div class="sentence-card-content">
                   <div class="sentence-card-header">
                     <span class="sentence-index-pill">Sentence ${(idx + 1).toString().padStart(2, '0')}</span>
-                    ${keyword ? `<span class="sentence-keyword-badge">💡 ${this._escapeHtml(keyword)}</span>` : ''}
+                    ${keyword ? `<span class="sentence-keyword-badge">💡 ${this._escapeHtml(keyword)}${translation ? ` : ${this._escapeHtml(translation)}` : ''}</span>` : ''}
                   </div>
 
                   <div class="sentence-en-text">
@@ -886,7 +887,8 @@ class ReviewPlayer {
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
         kr: kr,
-        expression: quiz.baseForm || quiz.answer || '',
+        expression: quiz.baseForm || quiz.keyExpression || quiz.answer || '',
+        translation: quiz.translation || quiz.meaning || '',
         rawEn: quiz.english || '',
         audio: cleanAudio,
         timestamp: 0

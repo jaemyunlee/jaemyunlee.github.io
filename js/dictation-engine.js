@@ -64,6 +64,7 @@ class DictationEngine {
         kr: kr,
         audioUrl: audioUrl,
         keyExpression: item.keyExpression || target,
+        translation: item.translation || '',
         target: target,
         explanation: item.explanation || '',
         isFlagged: false
@@ -518,6 +519,7 @@ class DictationEngine {
           <div class="feedback-sentence">
             <p class="feedback-en">${this._highlightTarget(item.en, item.target)}</p>
             <p class="feedback-kr">${this._escapeHtml(item.kr)}</p>
+            ${item.keyExpression && item.translation ? `<p class="feedback-key-expr" style="font-size:0.875rem; color:var(--accent-amber,#f59e0b); margin-top:0.25rem; font-weight:600;">💡 ${this._escapeHtml(item.keyExpression)} : ${this._escapeHtml(item.translation)}</p>` : ''}
           </div>
           <div class="feedback-actions">
             <button type="button" class="btn btn-primary btn-dictation-next" id="btn-dictation-next">

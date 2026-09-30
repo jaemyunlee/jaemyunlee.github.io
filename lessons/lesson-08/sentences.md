@@ -11,10 +11,10 @@ it reinjured the collarbone injury he had in Korea.
 He's in a sling,
 and we're being referred to an orthopedic doctor.
 And I'm going to have to postpone my test,
-on top of everything else we have going on this month, week.
 Because I'm procrastinating.
 Oh, and just so you know, Taylor Swift's coming out with new music later this week.
 Oh, we also booked our trip to Hawaii.
+We have family coming in a couple of weeks.
 I'm just going to keep rambling if you keep the camera in front of me, Jaemyun.
 but it sounded like he tried to explain it to the doctor today.
 So that he got a hairline fracture

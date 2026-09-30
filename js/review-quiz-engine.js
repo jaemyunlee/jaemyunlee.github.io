@@ -870,6 +870,7 @@ class ReviewQuizEngine {
           </div>
           <p class="feedback-comparison">
             <strong>정답 표현:</strong> "${this._escapeHtml(target)}"<br>
+            ${q.keyExpression && q.translation ? `<strong>핵심 표현:</strong> 💡 ${this._escapeHtml(q.keyExpression)} : ${this._escapeHtml(q.translation)}<br>` : ''}
             <strong>인식된 발음:</strong> "${this._escapeHtml(spokenText)}"
           </p>
           ${q.explanation ? `<p class="feedback-explanation">💡 ${this._escapeHtml(q.explanation)}</p>` : ''}
@@ -972,7 +973,8 @@ class ReviewQuizEngine {
             <span>🎉 정답입니다! 정확하게 채우셨습니다!</span>
           </div>
           <p class="feedback-comparison">
-            <strong>정답:</strong> "${this._escapeHtml(target)}"
+            <strong>정답:</strong> "${this._escapeHtml(target)}"<br>
+            ${q.keyExpression && q.translation ? `<strong>핵심 표현:</strong> 💡 ${this._escapeHtml(q.keyExpression)} : ${this._escapeHtml(q.translation)}<br>` : ''}
           </p>
           ${q.explanation ? `<p class="feedback-explanation">💡 ${this._escapeHtml(q.explanation)}</p>` : ''}
           <div class="feedback-actions">

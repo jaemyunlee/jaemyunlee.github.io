@@ -12,7 +12,9 @@
     "segmentAudio": "segments/s15.mp3",
     "segmentEn": "I had another guy randomly stop me in the grocery store to ask what people use Napa cabbages for,",
     "segmentKr": "또 어떤 분은 식료품점에서 불쑥 가던 저를 멈춰 세우더니(불러세우더니), 사람들이 배추를 어디에 쓰냐고 묻더라고요,",
-    "clozeSentence": "I had another guy randomly [ ______ ] the grocery store to ask what people use Napa cabbages for,"
+    "clozeSentence": "I had another guy randomly [ ______ ] the grocery store to ask what people use Napa cabbages for,",
+    "baseForm": "stop me in",
+    "translation": "가던 길을 멈춰 세우다"
   },
   {
     "id": 2,
@@ -27,7 +29,9 @@
     "segmentAudio": "segments/s16.mp3",
     "segmentEn": "which I thought was really random.",
     "segmentKr": "정말 뜬금없다고 생각했죠.",
-    "clozeSentence": "which I thought was really [ ______ ]."
+    "clozeSentence": "which I thought was really [ ______ ].",
+    "baseForm": "random",
+    "translation": "뜬금없는, 엉뚱한"
   },
   {
     "id": 3,
@@ -42,7 +46,9 @@
     "segmentAudio": "segments/s18.mp3",
     "segmentEn": "I knew At least, from a Korean standpoint, what it gets used for.",
     "segmentKr": "적어도 한국인의 관점(입장)에서 배추가 어디에 쓰이는지는 제가 알고 있었으니까요.",
-    "clozeSentence": "I knew At least, from a Korean [ ______ ], what it gets used for."
+    "clozeSentence": "I knew At least, from a Korean [ ______ ], what it gets used for.",
+    "baseForm": "standpoint",
+    "translation": "관점, 입장"
   },
   {
     "id": 4,
@@ -57,7 +63,9 @@
     "segmentAudio": "segments/s21.mp3",
     "segmentEn": "I'd say it's fermented cabbage. Korean fermented cabbage.",
     "segmentKr": "\"발효된 배추\"라고 말할 것 같아요. 한국의 발효 배추(김치)요.",
-    "clozeSentence": "I'd say it's [ ______ ] cabbage. Korean fermented cabbage."
+    "clozeSentence": "I'd say it's [ ______ ] cabbage. Korean fermented cabbage.",
+    "baseForm": "fermented",
+    "translation": "발효된"
   },
   {
     "id": 5,
@@ -72,7 +80,9 @@
     "segmentAudio": "segments/s23.mp3",
     "segmentEn": "and we used to go there all the time.",
     "segmentKr": "예전엔 우리 항상 거기에 가곤 했었죠.",
-    "clozeSentence": "and we [ ______ ] go there all the time."
+    "clozeSentence": "and we [ ______ ] go there all the time.",
+    "baseForm": "used to",
+    "translation": "~하곤 했다"
   },
   {
     "id": 6,
@@ -87,7 +97,9 @@
     "segmentAudio": "segments/s24.mp3",
     "segmentEn": "Like, we probably as a group would go there once a week, every other week or so,",
     "segmentKr": "동료들이랑 다 같이 일주일에 한 번이나 격주에 한 번(2주에 한 번)꼴로 그곳에 갔던 것 같아요,",
-    "clozeSentence": "Like, we probably as a group would go there once a week, [ ______ ] or so,"
+    "clozeSentence": "Like, we probably as a group would go there once a week, [ ______ ] or so,",
+    "baseForm": "every other week",
+    "translation": "격주로, 2주에 한 번"
   },
   {
     "id": 7,
@@ -102,11 +114,13 @@
     "segmentAudio": "segments/s25.mp3",
     "segmentEn": "but if there was ever times where I really wanted it, and no one could go with me, I went by myself,",
     "segmentKr": "하지만 혹시라도 제가 너무 먹고 싶었던 적이 있었는데 아무도 같이 갈 수 없으면, 저 혼자서라도 갔어요,",
-    "clozeSentence": "but if there was ever times where I really wanted it, and no one could go with me, I went by myself,"
+    "clozeSentence": "but if there was ever times where I really wanted it, and no one could go with me, I went by myself,",
+    "baseForm": "there were ever times where",
+    "translation": "혹시라도 ~했던 적이 있다면"
   },
   {
     "id": 8,
-    "keyExpression": "got stared at",
+    "keyExpression": "get stared at",
     "answer": "got stared at",
     "english": "I mean, all of us as a group of foreigners kind of [got stared at, got cheered on, got turned away, got pointed out].",
     "korean": "외국인 무리로 다 같이 가면 아무래도 사람들에게 빤히 쳐다봄을 당하긴(시선 집중을 받긴) 했죠.",
@@ -117,7 +131,9 @@
     "segmentAudio": "segments/s30.mp3",
     "segmentEn": "I mean, all of us as a group of foreigners kind of got stared at.",
     "segmentKr": "외국인 무리로 다 같이 가면 아무래도 사람들에게 빤히 쳐다봄을 당하긴(시선 집중을 받긴) 했죠.",
-    "clozeSentence": "I mean, all of us as a group of foreigners kind of [ ______ ]."
+    "clozeSentence": "I mean, all of us as a group of foreigners kind of [ ______ ].",
+    "baseForm": "get stared at",
+    "translation": "빤히 쳐다보는 시선을 받다"
   },
   {
     "id": 9,
@@ -128,15 +144,17 @@
     "explanation": "\"at least\"는 수량이나 횟수 앞에서 \"적어도, 최소한\"이라는 뜻을 나타내는 필수 부사구입니다.",
     "audioFile": "So yeah so I had my meal paid for. They bought it at least two times I think..wav",
     "target": "at least",
-    "segmentId": "s4",
-    "segmentAudio": "segments/s4.mp3",
-    "segmentEn": "Yeah.",
-    "segmentKr": "그래요?",
-    "clozeSentence": "Yeah."
+    "segmentId": "s35",
+    "segmentAudio": "segments/s35.mp3",
+    "segmentEn": "So yeah, so I had my meal paid for. They bought it at least two times, I think.",
+    "segmentKr": "제 밥값을 대신 내주셨어요. 제 기억엔 적어도(최소한) 두 번은 사주셨던 것 같아요.",
+    "clozeSentence": "So yeah, so I had my meal paid for. They bought it [ ______ ] two times, I think.",
+    "baseForm": "at least",
+    "translation": "적어도, 최소한"
   },
   {
     "id": 10,
-    "keyExpression": "encouraged",
+    "keyExpression": "encourage",
     "answer": "encouraged",
     "english": "But I feel like I kind of [encouraged, prevented, postponed, dismissed] it by giving you a 10 out of 10 on that one soup you made.",
     "korean": "하지만 제가 당신이 만든 그 찌개에 제가 10점 만점을 주면서, 제가 당신을 그렇게 부추긴 것 같기도 해요.",
@@ -147,26 +165,30 @@
     "segmentAudio": "segments/s39.mp3",
     "segmentEn": "But I feel like I kind of encouraged it by giving you a 10 out of 10 on that one soup you made.",
     "segmentKr": "하지만 제가 당신이 만든 그 찌개에 제가 10점 만점을 주면서, 제가 당신을 그렇게 부추긴 것 같기도 해요.",
-    "clozeSentence": "But I feel like I kind of [ ______ ] it by giving you a 10 out of 10 on that one soup you made."
+    "clozeSentence": "But I feel like I kind of [ ______ ] it by giving you a 10 out of 10 on that one soup you made.",
+    "baseForm": "encourage",
+    "translation": "부추기다, 용기를 북돋우다"
   },
   {
     "id": 11,
-    "keyExpression": "have lived up to",
+    "keyExpression": "live up to",
+    "baseForm": "live up to",
+    "translation": "기대에 부응하다, 미치다",
     "answer": "have lived up to",
     "english": "And unfortunately, some of them have been good, but none of them [have] quite [lived up to] that one you made.",
     "korean": "안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 당신이 만들었던 그 찌개의 기대치에는 전혀 미치지 못했어요.",
-    "explanation": "\"live up to ~\"는 기대, 기준, 명성에 \"부응하다, 미치다\"라는 뜻의 핵심 숙어입니다. 현재완료형 부정문으로 \"none of them have lived up to ~\"는 그 어떤 것도 이전의 기대치에 미치지(부응하지) 못했다는 뜻입니다.",
+    "explanation": "\"live up to ~\"는 기대나 기준, 명성에 '부응하다, 미치다'라는 뜻의 핵심 구동사입니다. 여기에 현재완료 시제인 'have + p.p.(have lived up to)'가 결합되어 과거부터 지금까지 경험한 것들을 통틀어 '기대에 부응해 왔다'라는 의미를 나타내며, 문장 앞의 'none of them(그 어떤 것도 ~않다)'과 함께 쓰여 '그 이후로 어떤 것도 그 기대치에 미치지 못했다'라는 완료 부정의 뉘앙스를 자연스럽게 표현합니다.",
     "audioFile": "And unfortunately some of them have been good but none of them have quite lived up to that one you made..wav",
     "target": "have lived up to",
     "segmentId": "s40",
     "segmentAudio": "segments/s40.mp3",
     "segmentEn": "And unfortunately, some of them have been good, but none of them have quite lived up to that one you made.",
     "segmentKr": "안타깝게도 몇몇은 괜찮았지만, 그 어떤 것도 당신이 만들었던 그 찌개의 기대치에는 전혀 미치지 못했어요.",
-    "clozeSentence": "And unfortunately, some of them have been good, but none of them have quite lived up to that one you made."
+    "clozeSentence": "And unfortunately, some of them have been good, but none of them [ ______ ] that one you made."
   },
   {
     "id": 12,
-    "keyExpression": "was introduced to",
+    "keyExpression": "be introduced to",
     "answer": "was introduced to",
     "english": "I [was introduced to, was turned down by, was taken aback by, was left out of] the Kimchi Jjigae restaurant by my coworkers.",
     "korean": "저는 직장 동료들의 소개로 그 김치찌개 식당을 소개받아서 처음 알게 되었어요.",
@@ -177,7 +199,9 @@
     "segmentAudio": "segments/s41.mp3",
     "segmentEn": "I was introduced to the Kimchi Jjigae restaurant by my coworkers.",
     "segmentKr": "저는 직장 동료들의 소개로 그 김치찌개 식당을 소개받아서 처음 알게 되었어요.",
-    "clozeSentence": "I [ ______ ] the Kimchi Jjigae restaurant by my coworkers."
+    "clozeSentence": "I [ ______ ] the Kimchi Jjigae restaurant by my coworkers.",
+    "baseForm": "be introduced to",
+    "translation": "소개받아서 알게 되다"
   },
   {
     "id": 13,
@@ -192,7 +216,9 @@
     "segmentAudio": "segments/s42.mp3",
     "segmentEn": "And I can't say like really why it was so good, but I just know that I really liked it,",
     "segmentKr": "왜 그렇게 맛있었는지는 정말 딱 꼬집어 말할 수는 없지만, 그냥 제가 정말 좋아했다는 건 알아요,",
-    "clozeSentence": "And I [ ______ ] like really why it was so good, but I just know that I really liked it,"
+    "clozeSentence": "And I [ ______ ] like really why it was so good, but I just know that I really liked it,",
+    "baseForm": "can't say",
+    "translation": "확실히 꼬집어 말하긴 어렵다"
   },
   {
     "id": 14,
@@ -207,7 +233,9 @@
     "segmentAudio": "segments/s71.mp3",
     "segmentEn": "I don't know,",
     "segmentKr": "모르겠어요,",
-    "clozeSentence": "I don't know,"
+    "clozeSentence": "I don't know,",
+    "baseForm": "supposed to",
+    "translation": "원래 마땅히 ~해야 하는"
   },
   {
     "id": 15,
@@ -222,7 +250,9 @@
     "segmentAudio": "segments/s50.mp3",
     "segmentEn": "So everything else just didn't taste the same",
     "segmentKr": "그래서 다른 모든 김치찌개는 그냥 예전의 '똑같은 그 맛'이 나지 않았어요,",
-    "clozeSentence": "So everything else just didn't [ ______ ]"
+    "clozeSentence": "So everything else just didn't [ ______ ]",
+    "baseForm": "taste the same",
+    "translation": "예전의 똑같은 그 맛이 나다"
   },
   {
     "id": 16,
@@ -237,11 +267,13 @@
     "segmentAudio": "segments/s52.mp3",
     "segmentEn": "But I don't even know, technically, was it really that good of one? I mean, probably not.",
     "segmentKr": "하지만 엄밀히 따져보면, 그 집이 정말 그렇게 훌륭한 김치찌개였는지는 저도 잘 모르겠어요. 아마 아닐 수도 있죠.",
-    "clozeSentence": "But I don't even know, [ ______ ], was it really that good of one? I mean, probably not."
+    "clozeSentence": "But I don't even know, [ ______ ], was it really that good of one? I mean, probably not.",
+    "baseForm": "technically",
+    "translation": "엄밀히 따져보면"
   },
   {
     "id": 17,
-    "keyExpression": "based it off of",
+    "keyExpression": "base off of",
     "answer": "based it off of",
     "english": "And that's what I always [based, it, off, of].",
     "korean": "그리고 그게 바로 제가 늘 (맛의) 기준으로 삼았던 거예요.",
@@ -252,7 +284,9 @@
     "segmentAudio": "segments/s56.mp3",
     "segmentEn": "And that's what I always based it off of.",
     "segmentKr": "그리고 그게 바로 제가 늘 (맛의) 기준으로 삼았던 거예요.",
-    "clozeSentence": "And that's what I always [ ______ ]."
+    "clozeSentence": "And that's what I always [ ______ ].",
+    "baseForm": "base off of",
+    "translation": "~을 바탕(기준)으로 삼다"
   },
   {
     "id": 18,
@@ -267,7 +301,9 @@
     "segmentAudio": "segments/s60.mp3",
     "segmentEn": "It's still not as good as that very first one, that you made two months ago.",
     "segmentKr": "두 달 전에 당신이 만들었던 그 맨 처음 것만큼 맛있지는 여전히 않지만요.",
-    "clozeSentence": "It's still not [ ______ ] that very first one, that you made two months ago."
+    "clozeSentence": "It's still not [ ______ ] that very first one, that you made two months ago.",
+    "baseForm": "as good as",
+    "translation": "~만큼 좋은(맛있는)"
   },
   {
     "id": 19,
@@ -282,11 +318,13 @@
     "segmentAudio": "segments/s69.mp3",
     "segmentEn": "The problem is you don't follow a recipe, so every time you never know how it's going to turn out,",
     "segmentKr": "문제는 당신이 레시피를 안 따르시니까, 매번 결과가 어떻게 나올지 모른다는 거예요,",
-    "clozeSentence": "The problem is you don't follow a recipe, so every time you never know how it's going to [ ______ ],"
+    "clozeSentence": "The problem is you don't follow a recipe, so every time you never know how it's going to [ ______ ],",
+    "baseForm": "turn out",
+    "translation": "결과가 나오다, 완성되다"
   },
   {
     "id": 20,
-    "keyExpression": "Whereas",
+    "keyExpression": "whereas",
     "answer": "Whereas",
     "english": "[Whereas] I feel like that one didn't have that oiliness to it.",
     "korean": "반면에 그 첫 번째 찌개에는 그런 기름진 느끼함이 전혀 없었던 것 같아요.",
@@ -297,7 +335,9 @@
     "segmentAudio": "segments/s74.mp3",
     "segmentEn": "Whereas I feel like that one didn't have that oiliness to it.",
     "segmentKr": "반면에 그 첫 번째 찌개에는 그런 기름진 느끼함이 전혀 없었던 것 같아요.",
-    "clozeSentence": "[ ______ ] I feel like that one didn't have that oiliness to it."
+    "clozeSentence": "[ ______ ] I feel like that one didn't have that oiliness to it.",
+    "baseForm": "whereas",
+    "translation": "반면에, ~임에 비하여"
   },
   {
     "id": 21,
@@ -312,7 +352,9 @@
     "segmentAudio": "segments/s72.mp3",
     "segmentEn": "something about these ones feel oilier to me,",
     "segmentKr": "이번 것들은 왠지 모르게 저한테 더 기름지게(느끼하게) 느껴져요,",
-    "clozeSentence": "something about these ones feel [ ______ ] me,"
+    "clozeSentence": "something about these ones feel [ ______ ] me,",
+    "baseForm": "oilier to",
+    "translation": "~에게 더 기름지게 느껴지는"
   },
   {
     "id": 22,
@@ -327,6 +369,8 @@
     "segmentAudio": "segments/s76.mp3",
     "segmentEn": "let's take a two month break from kimchi jjigae and then you cook it again",
     "segmentKr": "우리 김치찌개는 두 달 동안 잠시 휴식기를 갖고, 그러고 나서 당신이 다시 끓여주세요.",
-    "clozeSentence": "let's take a two month [ ______ ] kimchi jjigae and then you cook it again"
+    "clozeSentence": "let's take a two month [ ______ ] kimchi jjigae and then you cook it again",
+    "baseForm": "break from",
+    "translation": "~을 잠시 쉬다, 휴식기를 갖다"
   }
 ]
