@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Lesson 06 Scaffolding & Integration', () => {
 
-  test('Lesson 06 page loads and displays header badges and coming-soon pre-release state', async ({ page }) => {
+  test('Lesson 06 page loads and displays header badges and navigation tabs in published mode', async ({ page }) => {
     await page.goto('/lessons/lesson-06/index.html');
 
     // Header badge
@@ -13,13 +13,11 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
-    // Coming soon notification banner is visible
+    // Coming soon notification banner is hidden
     const comingSoonBanner = page.locator('#coming-soon-banner');
-    await expect(comingSoonBanner).toBeVisible();
-    await expect(comingSoonBanner).toContainText('본영상 공개 예정');
-    await expect(comingSoonBanner).toContainText('장인어른 진(Gene)의 생생한 목소리 오디오와 23개의 퀴즈');
+    await expect(comingSoonBanner).toBeHidden();
 
-    // Step navigation tabs: Steps 1 & 2 enabled, Steps 3, 4, 5, writing deactivated/disabled
+    // Step navigation tabs: Steps 1, 2, 3, 4, 5, writing all active and enabled
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
@@ -36,14 +34,14 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
 
     await expect(tab1).not.toHaveClass(/deactivated/);
     await expect(tab2).not.toHaveClass(/deactivated/);
-    await expect(tab3).toHaveClass(/deactivated/);
-    await expect(tab4).toHaveClass(/deactivated/);
-    await expect(tab5).toHaveClass(/deactivated/);
-    await expect(tabWriting).toHaveClass(/deactivated/);
-    await expect(tab3).toBeDisabled();
-    await expect(tab4).toBeDisabled();
-    await expect(tab5).toBeDisabled();
-    await expect(tabWriting).toBeDisabled();
+    await expect(tab3).not.toHaveClass(/deactivated/);
+    await expect(tab4).not.toHaveClass(/deactivated/);
+    await expect(tab5).not.toHaveClass(/deactivated/);
+    await expect(tabWriting).not.toHaveClass(/deactivated/);
+    await expect(tab3).toBeEnabled();
+    await expect(tab4).toBeEnabled();
+    await expect(tab5).toBeEnabled();
+    await expect(tabWriting).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
@@ -52,17 +50,35 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
     await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
 
-    // Locked coming-soon steps display lock icons
-    await expect(tab3.locator('.step-lock-icon')).toBeVisible();
-    await expect(tab3.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tab4.locator('.step-lock-icon')).toBeVisible();
-    await expect(tab4.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tab5.locator('.step-lock-icon')).toBeVisible();
-    await expect(tab5.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tabWriting.locator('.step-lock-icon')).toBeVisible();
-    await expect(tabWriting.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tab1.locator('.step-lock-icon')).toHaveCount(0);
-    await expect(tab2.locator('.step-lock-icon')).toHaveCount(0);
+    // No lock icons in published mode
+    await expect(tab3.locator('.step-lock-icon')).toHaveCount(0);
+    await expect(tab4.locator('.step-lock-icon')).toHaveCount(0);
+    await expect(tab5.locator('.step-lock-icon')).toHaveCount(0);
+    await expect(tabWriting.locator('.step-lock-icon')).toHaveCount(0);
+
+    // Clicking Step 3 activates Video & Script section
+    await tab3.click();
+    const videoSection = page.locator('#video-section');
+    await expect(videoSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 3: 전체 영상');
+
+    // Clicking Step 4 activates Dictation section
+    await tab4.click();
+    const dictationSection = page.locator('#dictation-section');
+    await expect(dictationSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 4: 받아쓰기');
+
+    // Clicking Step 5 activates Speaking Quiz section
+    await tab5.click();
+    const reviewQuizSection = page.locator('#review-quiz-section');
+    await expect(reviewQuizSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 5: 스피킹 퀴즈');
+
+    // Clicking Writing tab activates Reflection section
+    await tabWriting.click();
+    const reflectionSection = page.locator('#reflection-section');
+    await expect(reflectionSection).toBeVisible();
+    await expect(statusBadge).toHaveText('✍️ 영작하기');
   });
 
   test('Lesson 06 loads all 24 quizzes matching requested types and target expressions', async ({ page }) => {
@@ -201,7 +217,7 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     await expect(keywordBadge).toBeVisible();
   });
 
-  test('App.lessons contains Lesson 06 with coming-soon status and 24 vocabCount', async ({ page }) => {
+  test('App.lessons contains Lesson 06 with published status and 23 vocabCount', async ({ page }) => {
     await page.goto('/lessons.html');
 
     const lesson06Data = await page.evaluate(() => {
@@ -213,7 +229,7 @@ test.describe('Lesson 06 Scaffolding & Integration', () => {
     expect(lesson06Data.id).toBe('lesson-06');
     expect(lesson06Data.speaker).toBe('Gene');
     expect(lesson06Data.vocabCount).toBe(23);
-    expect(lesson06Data.status).toBe('coming-soon');
+    expect(lesson06Data.status).toBe('published');
     expect(lesson06Data.avatar).toContain('gene.jpeg');
   });
 

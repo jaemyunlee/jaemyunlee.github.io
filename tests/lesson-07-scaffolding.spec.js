@@ -13,10 +13,8 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
-    // Hidden draft badge is visible
-    const hiddenBadge = page.locator('.lesson-header-section .badge-hidden');
-    await expect(hiddenBadge).toBeVisible();
-    await expect(hiddenBadge).toContainText('비공개 (테스트)');
+    // Hidden draft badge is not present for public coming-soon lesson
+    await expect(page.locator('.lesson-header-section .badge-hidden')).toHaveCount(0);
 
     // Coming soon notification banner is visible
     const comingSoonBanner = page.locator('#coming-soon-banner');
@@ -233,19 +231,14 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     expect(audioCheck.failed).toEqual([]);
   });
 
-  test('Lesson 07 card is omitted by default in catalog, and visible with [비공개 (테스트)] badge when show_hidden=true', async ({ page }) => {
-    // 1. By default, hidden lesson is not in catalog
+  test('Lesson 07 card is displayed in catalog with coming-soon badge and scheduled date (10월 3일)', async ({ page }) => {
     await page.goto('/lessons.html');
-    await expect(page.locator('#card-lesson-07')).toHaveCount(0);
-
-    // 2. When show_hidden=true is passed, it appears with [비공개 (테스트)] badge
-    await page.goto('/lessons.html?show_hidden=true');
     const card = page.locator('#card-lesson-07');
     await expect(card).toBeVisible();
 
-    const badge = card.locator('.badge-hidden');
+    const badge = card.locator('.badge-coming-soon');
     await expect(badge).toBeVisible();
-    await expect(badge).toContainText('비공개 (테스트)');
+    await expect(badge).toContainText('10월 3일');
 
     // Verify 22 퀴즈 count pill
     const meta = card.locator('.lesson-card-meta');
@@ -254,21 +247,21 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     // Verify Action button leads to lesson-07
     const btn = card.locator('.lesson-card-btn');
     await expect(btn).toBeVisible();
-    await expect(btn).toContainText('테스트 학습하기');
+    await expect(btn).toContainText('학습 시작하기');
   });
 
-  test('Lesson 07 card is omitted by default on home page (index.html), and visible when show_hidden=true', async ({ page }) => {
+  test('Lesson 07 card is displayed on home page (index.html) with coming-soon badge', async ({ page }) => {
     await page.goto('/index.html');
-    await expect(page.locator('#card-lesson-07')).toHaveCount(0);
-
-    // Visible when show_hidden=true
-    await page.goto('/index.html?show_hidden=true');
     const card = page.locator('#card-lesson-07');
     await expect(card).toBeVisible();
 
     const title = card.locator('.lesson-card-title');
     await expect(title).toBeVisible();
     await expect(title).toContainText('김치');
+
+    const badge = card.locator('.badge-coming-soon');
+    await expect(badge).toBeVisible();
+    await expect(badge).toContainText('10월 3일');
   });
 
   test('Dedicated standalone quiz page loads for Lesson 07 Q1 and shows CTA', async ({ page }) => {

@@ -201,8 +201,7 @@ const App = {
       duration: '7:11',
       vocabCount: 23,
       path: 'lessons/lesson-06/',
-      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
-      scheduledDateText: '9월 28일 본영상 공개 예정'
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.PUBLISHED : 'published')
     },
     {
       id: 'lesson-07',
@@ -217,8 +216,8 @@ const App = {
       duration: '5:56',
       vocabCount: 22,
       path: 'lessons/lesson-07/',
-      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.HIDDEN : 'hidden'),
-      scheduledDateText: '10월 5일 본영상 공개 예정'
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
+      scheduledDateText: '10월 3일 본영상 공개 예정'
     },
     {
       id: 'lesson-08',
