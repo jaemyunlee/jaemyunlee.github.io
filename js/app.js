@@ -232,8 +232,8 @@ const App = {
       duration: '6:00',
       vocabCount: 28,
       path: 'lessons/lesson-08/',
-      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.HIDDEN : 'hidden'),
-      scheduledDateText: '10월 12일 본영상 공개 예정'
+      status: (typeof LessonPublicationStatus !== 'undefined' ? LessonPublicationStatus.COMING_SOON : 'coming-soon'),
+      scheduledDateText: '10월 10일 본영상 공개 예정'
     }
   ],
 
