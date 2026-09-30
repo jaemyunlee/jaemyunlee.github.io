@@ -98,7 +98,7 @@ test.describe('First Save Local Storage Warning Popup Theming (Issue #48)', () =
   });
 
   test('First sentence bookmark triggers modal and records seen state in localStorage', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-08/index.html?show_save=true');
 
     // Switch to Light Mode
     const themeBtn = page.locator('#btn-toggle-theme');

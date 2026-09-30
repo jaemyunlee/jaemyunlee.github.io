@@ -1,23 +1,29 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => {
-  test('Navigation tabs display the new 4-step sequence and Korean labels', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+  test('Navigation tabs display the 5-step sequence and Korean labels', async ({ page }) => {
+    await page.goto('/lessons/lesson-02/index.html');
 
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
 
     await expect(tab1).toBeVisible();
     await expect(tab2).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
     await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
-    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
+    await expect(tab4.locator('.step-label')).toHaveText('받아쓰기');
+    await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
+    await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
   });
 
   test('Step 2 displays Key Sentences review player and guides user to Step 3 (Interactive Video)', async ({ page }) => {
@@ -50,8 +56,8 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     await expect(tab3).toHaveClass(/active/);
   });
 
-  test('Step 3 completion banner guides user to Step 4 (Writing & Commenting)', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+  test('Step 3 completion banner guides user to Step 4 (받아쓰기 / Dictation)', async ({ page }) => {
+    await page.goto('/lessons/lesson-02/index.html');
 
     // Switch to Step 3
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
@@ -81,9 +87,9 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     const modalBtn = modal.locator('#btn-modal-goto-step4');
     await modalBtn.click();
 
-    // Step 4 (reflection/writing) should be active
-    const reflectionSection = page.locator('#reflection-section');
-    await expect(reflectionSection).toBeVisible();
+    // Step 4 (dictation/받아쓰기) should be active
+    const dictationSection = page.locator('#dictation-section');
+    await expect(dictationSection).toBeVisible();
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
     await expect(tab4).toHaveClass(/active/);
 
@@ -91,16 +97,16 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     await tab3.click();
     await expect(videoSection).toBeVisible();
     await bannerBtn.click();
-    await expect(reflectionSection).toBeVisible();
+    await expect(dictationSection).toBeVisible();
     await expect(tab4).toHaveClass(/active/);
   });
 
-  test('Step 4: Copy button disabled message, activates on text, and clicking completes lesson and shows encouragement description', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+  test('Step Writing: Copy button disabled message, activates on text, and clicking completes lesson and shows encouragement description', async ({ page }) => {
+    await page.goto('/lessons/lesson-02/index.html');
 
-    // Switch to Step 4
-    const tab4 = page.locator('.step-tab-btn[data-step="4"]');
-    await tab4.click();
+    // Switch to Step Writing (영작하기)
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
+    await tabWriting.click();
 
     const reflectionSection = page.locator('#reflection-section');
     await expect(reflectionSection).toBeVisible();
@@ -148,7 +154,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
 
     // Verify storage has lesson completed
     const isCompleted = await page.evaluate(() => {
-      return Storage.isLessonCompleted('lesson-01');
+      return Storage.isLessonCompleted('lesson-02');
     });
     expect(isCompleted).toBe(true);
 
@@ -174,12 +180,12 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
     expect(openedUrls[0]).toContain('youtube.com/watch?v=');
   });
 
-  test('Step 4: Clicking YouTube link button before copying displays encouragement description first, and subsequent click opens YouTube', async ({ page }) => {
-    await page.goto('/lessons/lesson-01/index.html');
+  test('Step Writing: Clicking YouTube link button before copying displays encouragement description first, and subsequent click opens YouTube', async ({ page }) => {
+    await page.goto('/lessons/lesson-02/index.html');
 
-    // Switch to Step 4
-    const tab4 = page.locator('.step-tab-btn[data-step="4"]');
-    await tab4.click();
+    // Switch to Step Writing (영작하기)
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
+    await tabWriting.click();
 
     const copyBtn = page.locator('#btn-copy-sentence');
     const youtubeBtn = page.locator('#btn-post-comment');
@@ -204,7 +210,7 @@ test.describe('Lesson Steps & Navigation Flow Restructuring (Issue #21)', () => 
 
     // Verify storage is completed
     const isCompleted = await page.evaluate(() => {
-      return Storage.isLessonCompleted('lesson-01');
+      return Storage.isLessonCompleted('lesson-02');
     });
     expect(isCompleted).toBe(true);
 

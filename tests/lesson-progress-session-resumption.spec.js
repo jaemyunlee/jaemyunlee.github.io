@@ -69,12 +69,12 @@ test.describe('Lesson Progress States & Session Resumption (Issue #35)', () => {
     });
 
     test('Completed state: clicking Step 4 Copy button completes lesson and displays "학습 완료" badge', async ({ page }) => {
-      await page.goto('/lessons/lesson-01/index.html');
+      await page.goto('/lessons/lesson-02/index.html');
       await page.evaluate(() => localStorage.clear());
       await page.reload();
 
-      // Navigate to Step 4
-      await page.click('.step-tab-btn[data-step="4"]');
+      // Navigate to Step Writing
+      await page.click('.step-tab-btn[data-step="writing"]');
       await page.waitForSelector('#reflection-section', { state: 'visible' });
 
       // Mock clipboard API
@@ -95,19 +95,19 @@ test.describe('Lesson Progress States & Session Resumption (Issue #35)', () => {
 
       // Verify localStorage was updated to completed
       const isCompleted = await page.evaluate(() => {
-        return Storage.isLessonCompleted('lesson-01');
+        return Storage.isLessonCompleted('lesson-02');
       });
       expect(isCompleted).toBe(true);
 
       // Verify state helper
       const state = await page.evaluate(() => {
-        return Storage.getLessonState('lesson-01');
+        return Storage.getLessonState('lesson-02');
       });
       expect(state).toBe('completed');
 
       // Check card on homepage
       await page.goto('/index.html?redirect=false');
-      const card = page.locator('#card-lesson-01');
+      const card = page.locator('#card-lesson-02');
       await expect(card).toHaveClass(/completed/);
       await expect(card).toHaveClass(/state-completed/);
 
@@ -125,8 +125,8 @@ test.describe('Lesson Progress States & Session Resumption (Issue #35)', () => {
       await page.evaluate(() => localStorage.clear());
       await page.reload();
 
-      // Navigate to Step 4
-      await page.click('.step-tab-btn[data-step="4"]');
+      // Navigate to Step Writing
+      await page.click('.step-tab-btn[data-step="writing"]');
       await page.waitForSelector('#reflection-section', { state: 'visible' });
 
       // Click YouTube link button directly without copying

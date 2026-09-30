@@ -33,7 +33,9 @@ test.describe('Lesson Status & State Static Enums (js/lesson-status.js)', () => 
     expect(LessonStep.KEY_SENTENCES).toBe(2);
     expect(LessonStep.DEEP_DIVE).toBe('deep-dive');
     expect(LessonStep.FULL_VIDEO).toBe(3);
-    expect(LessonStep.WRITING).toBe(4);
+    expect(LessonStep.DICTATION).toBe(4);
+    expect(LessonStep.REVIEW_QUIZ).toBe(5);
+    expect(LessonStep.WRITING).toBe('writing');
 
     expect(Object.isFrozen(LessonStep)).toBe(true);
   });

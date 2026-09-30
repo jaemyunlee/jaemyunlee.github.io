@@ -1,170 +1,169 @@
-# Lesson 4: Amy and Kelly at the BigBang Concert in Oakland Quizzes
+# Lesson 4: Oakland BigBang Concert Quizzes
 
 ## Quiz 1
 - **Type**: multiple-choice
-- **Audio**: audio/I felt like Amy kind of stood out because she was wearing a white dress..wav
-- **English**: I felt like Amy kind of [stood out, looked down, backed out, passed by] because she was wearing a white dress.
+- **English**: Among dozens of qualified applicants, her creative portfolio really [stood out, fell behind, backed down, checked out] to the hiring panel.
 - **Answer**: stood out
-- **Korean**: 에이미가 흰색 드레스를 입고 있어서 유독 눈에 띈다는 느낌이 들었어요.
-- **Explanation**: "stand out"은 여러 사람이나 사물들 사이에서 "유독 눈에 띄다, 두드러지다"라는 뜻의 핵심 구동사입니다. 과거형은 "stood out"입니다.
+- **Options**: stood out, fell behind, backed down, checked out
+- **Korean**: 수십 명의 쟁쟁한 지원자들 중에서 그녀의 창의적인 포트폴리오는 면접관들에게 유독 눈에 띄었어요.
+- **Explanation**: "stand out"은 여러 사람이나 사물들 사이에서 "유독 눈에 띄다, 두드러지다"라는 뜻입니다.
 
 ## Quiz 2
 - **Type**: multiple-choice
-- **Audio**: audio/and like other clothes that didnt quite fit..wav
-- **English**: And like other clothes that didn't quite [fit, lock, miss, sink].
+- **English**: The upbeat pop soundtrack didn't really [fit, break, cost, lose] the melancholic atmosphere of the historical documentary film.
 - **Answer**: fit
-- **Korean**: 그리고 분위기에 그리 꼭 맞지 않는 다른 옷들도 있었고요.
-- **Explanation**: "fit"은 옷의 치수가 맞을 때뿐만 아니라, 특정 장소나 분위기, 상황에 "어울리다, 꼭 들어맞다"라는 뜻으로도 아주 자주 쓰입니다.
+- **Options**: fit, break, cost, lose
+- **Korean**: 신나는 팝 음악 사운드트랙은 역사 다큐멘터리 영화의 쓸쓸한 분위기와 전혀 어울리지 않았어요.
+- **Explanation**: "fit"은 분위기나 상황, 장소에 "어울리다, 꼭 들어맞다"라는 뜻입니다.
 
 ## Quiz 3
 - **Type**: multiple-choice
-- **Audio**: audio/There werent that many blonde girls you know in the crowd but there are still quite a few..wav
-- **English**: There weren't that many blonde girls you know in the crowd, but there are still [quite a few, very little, rare ones, just none].
+- **English**: Although the weather forecast predicted rain, [quite a few, scarcely any, hardly one, barely all] fans still showed up at the stadium.
 - **Answer**: quite a few
-- **Korean**: 관중들 사이에 금발 머리 여자가 많지는 않았지만, 그래도 꽤 많은 편이었어요.
-- **Explanation**: "quite a few"는 생각보다 "꽤 많은, 상당수"를 뜻하는 빈출 수량 표현입니다. 셀 수 있는 명사와 함께 쓰이며, '적지 않은 수'를 긍정적으로 나타냅니다.
+- **Options**: quite a few, scarcely any, hardly one, barely all
+- **Korean**: 비가 올 거라는 일기예보에도 불구하고, 꽤 많은 팬들이 여전히 경기장에 나타났어요.
+- **Explanation**: "quite a few"는 생각보다 "꽤 많은, 상당수의"를 뜻합니다.
 
 ## Quiz 4
 - **Type**: multiple-choice
-- **Audio**: audio/There were very short lines for different merch sections selling just the light sticks in certain spots of the stadium..wav
-- **English**: There were very short lines for different [merch sections, food courts, ticket booths, parking zones] selling just the light sticks in certain spots of the stadium.
+- **English**: Enthusiastic concertgoers rushed toward the official [merch sections, luggage checks, emergency exits, boiler rooms] to grab tour hoodies.
 - **Answer**: merch sections
-- **Korean**: 경기장 특정 구역마다 응원봉만 따로 파는 굿즈 코너들은 줄이 엄청 짧았어요.
-- **Explanation**: "merch"는 상품을 뜻하는 "merchandise"의 일상 구어 줄임말이며, "merch sections"는 콘서트장이나 행사장에서 공식 기념품을 파는 "굿즈 판매 구역/코너"를 뜻합니다.
+- **Options**: merch sections, luggage checks, emergency exits, boiler rooms
+- **Korean**: 열정적인 콘서트 관객들은 투어 후드티를 사기 위해 공식 굿즈 판매 코너로 서둘러 달려갔어요.
+- **Explanation**: "merch sections"는 공연장이나 행사장 내의 "굿즈(기념품) 판매 부스/구역"을 의미합니다.
 
 ## Quiz 5
 - **Type**: multiple-choice
-- **Audio**: audio/If they went at like a very odd time.wav
-- **English**: If they went at like a very [odd time, rush hour, free shift, peak season].
+- **English**: Three o'clock in the morning is such an [odd time, exact moment, urgent date, ideal pace] to receive a non-urgent phone notification.
 - **Answer**: odd time
-- **Korean**: 그 사람들이 아주 애매한 시간대에 갔다면요.
-- **Explanation**: "odd time"은 남들이 잘 찾지 않거나 일반적이지 않은 "애매한 시간대, 특이한 시간"을 의미합니다.
+- **Options**: odd time, exact moment, urgent date, ideal pace
+- **Korean**: 새벽 3시는 급하지도 않은 스마트폰 알림을 받기에는 참 뜬금없고 애매한 시간이에요.
+- **Explanation**: "odd time"은 남들이 잘 찾지 않거나 일반적이지 않은 "애매한 시간대, 특이한 시간"을 뜻합니다.
 
 ## Quiz 6
 - **Type**: multiple-choice
-- **Audio**: audio/We were definitely in the nosebleed seats..wav
-- **English**: We were definitely in the [nosebleed seats, front row, royal box, ringside area].
+- **English**: Even though we got [nosebleed seats, ringside chairs, floor passes, orchestra tickets] at the baseball park, we could still see the entire field clearly.
 - **Answer**: nosebleed seats
-- **Korean**: 저희는 진짜 하늘석(맨 꼭대기 좌석)에 앉아 있었어요.
-- **Explanation**: "nosebleed seats"는 경기장이나 대형 공연장에서 코피가 날 만큼 높은 고도라는 뜻에서 유래한 "하늘석, 맨 꼭대기 좌석"을 뜻하는 매우 생생한 미국 구어 표현입니다.
+- **Options**: nosebleed seats, ringside chairs, floor passes, orchestra tickets
+- **Korean**: 야구장에서 비록 맨 꼭대기 좌석(하늘석)을 예매했지만, 그라운드 전체를 한눈에 또렷이 볼 수 있었어요.
+- **Explanation**: "nosebleed seats"는 경기장이나 대형 공연장의 "맨 꼭대기 높은 좌석(하늘석)"을 뜻합니다.
 
 ## Quiz 7
 - **Type**: multiple-choice
-- **Audio**: audio/Its an open air stadium..wav
-- **English**: It's an [open air stadium, indoor arena, underground bunker, private studio].
+- **English**: Attending a summer evening rock concert at an [open air stadium, indoor theater, cinema room, recording studio] under starry skies is magical.
 - **Answer**: open air stadium
-- **Korean**: 야외 경기장이라서 지붕이 뚫려 있어요.
-- **Explanation**: "open air stadium"은 돔이나 천장이 덮여 있지 않은 "야외 경기장/스타디움"을 뜻합니다.
+- **Options**: open air stadium, indoor theater, cinema room, recording studio
+- **Korean**: 별빛 가득한 하늘 아래 야외 경기장(오픈 에어 스타디움)에서 열리는 여름 저녁 록 콘서트에 가는 것은 마법 같아요.
+- **Explanation**: "open air stadium"은 지붕이 없는 "야외 경기장/스타디움"을 뜻합니다.
 
 ## Quiz 8
 - **Type**: multiple-choice
-- **Audio**: audio/It did not feel like a super serious scripted setup..wav
-- **English**: It did not feel like a super serious, [scripted setup, natural flow, raw recording, blind date].
+- **English**: The host's supposedly awkward blunder on stage was actually a clever [scripted setup, accidental glitch, random tragedy, genuine sorrow] to hype the audience.
 - **Answer**: scripted setup
-- **Korean**: 완전 진지하거나 대본대로 짜인 연출이라는 느낌이 전혀 안 들었어요.
-- **Explanation**: "scripted setup"은 미리 각본이나 대본을 짜놓고 연출한 "대본에 따른 설정/기획"을 의미합니다. 즉흥적이지 않고 인위적으로 계획된 구성을 뜻할 때 씁니다.
+- **Options**: scripted setup, accidental glitch, random tragedy, genuine sorrow
+- **Korean**: 무대 위 사회자의 어색한 실수 같았던 행동은 사실 관객들의 호응을 끌어올리기 위한 영리한 대본 설정(각본 연출)이었어요.
+- **Explanation**: "scripted setup"은 미리 연출하고 짠 "대본에 따른 설정/기획"을 의미합니다.
 
 ## Quiz 9
-- **Type**: fill-in-the-blank
-- **Audio**: audio/It was up to us to make it hot so he didnt catch a cold..wav
-- **English**: It was [up to] us to make it hot so he didn't catch a cold.
+- **Type**: multiple-choice
+- **English**: We have provided all the resources and guidelines, so now the final outcome is strictly [up to, down on, out of, off with] you.
 - **Answer**: up to
-- **Korean**: 태양 씨가 감기 안 걸리게 뜨겁게 만드는 건 온전히 우리 관객들의 몫이었죠.
-- **Explanation**: "be up to someone"은 "~에게 달려 있다, ~의 책임/몫이다"라는 필수 관용구입니다. "It was up to us"는 '우리 손에 달려 있었다, 우리가 할 일이었다'라는 뜻입니다.
+- **Options**: up to, down on, out of, off with
+- **Korean**: 우리가 모든 자료와 가이드라인을 제공했으니, 이제 최종 결과는 전적으로 여러분에게 달려 있습니다.
+- **Explanation**: "be up to someone"은 "~에게 달려 있다, ~의 몫이다"라는 필수 관용구입니다.
 
 ## Quiz 10
 - **Type**: multiple-choice
-- **Audio**: audio/So he just kind of really played that up to see whether or not he was going to take his shirt off..wav
-- **English**: So he just kind of really [played that up, toned that down, backed that up, threw that away] to see whether or not he was going to take his shirt off.
+- **English**: When the idol singer noticed the crowd screaming, he playfully [played that up, toned it down, backed away, cut it out] by winking toward the camera.
 - **Answer**: played that up
-- **Korean**: 그래서 솔로 무대 때 과연 상의를 벗을지 말지 분위기를 엄청 띄우며 장난을 치더라고요.
-- **Explanation**: "play something up"은 어떤 상황이나 행동을 능청스럽게 "과장하다, 부각하다, (기대감을 자극하며) 뜸 들이거나 분위기를 띄우다"라는 뜻의 구동사입니다.
+- **Options**: played that up, toned it down, backed away, cut it out
+- **Korean**: 아이돌 가수는 관객들의 함성을 알아차리자 카메라를 향해 윙크하며 능청스럽게 분위기를 한껏 띄우고 과장했어요.
+- **Explanation**: "play something up"은 상황이나 매력을 "능청스럽게 과장하다, 부각하다, 분위기를 띄우다"라는 뜻입니다.
 
 ## Quiz 11
-- **Type**: listening
-- **Audio**: audio/Daesung definitely made jokes about his appearance especially features of his face..wav
-- **English**: Daesung definitely made jokes about his [appearance], especially features of his face.
+- **Type**: multiple-choice
+- **English**: Professional flight attendants maintain a neat personal [appearance, velocity, fragrance, temperature] according to airline dress codes.
 - **Answer**: appearance
-- **Korean**: 대성 씨는 자기 외모에 대해서도 농담을 많이 던졌는데, 특히 얼굴 생김새에 대해서요.
-- **Explanation**: "appearance"는 사람의 "외모, 겉모습, 생김새"를 뜻하는 필수 명사입니다. "make jokes about one's appearance"는 '외모로 농담하다'라는 자연스러운 연어(collocation)입니다.
+- **Options**: appearance, velocity, fragrance, temperature
+- **Korean**: 전문 항공 승무원들은 항공사 복장 규정에 따라 단정한 개인 용모와 겉모습을 유지합니다.
+- **Explanation**: "appearance"는 사람의 "용모, 외모, 겉모습"을 뜻합니다.
 
 ## Quiz 12
-- **Type**: fill-in-the-blank
-- **Audio**: audio/but it turns out it was a brand name that said d squared..wav
-- **English**: But it [turns out] it was a brand name that said d squared.
+- **Type**: multiple-choice
+- **English**: I thought I lost my car keys, but it [turns out, blows away, cuts off, falls down] they were tucked inside my winter coat pocket.
 - **Answer**: turns out
-- **Korean**: 그런데 알고 보니 '디스퀘어드(Dsquared)'라는 브랜드 이름이었던 거예요.
-- **Explanation**: "it turns out (that) ~"은 몰랐던 사실이 밝혀지거나 "알고 보니 ~이다, 드러나다"라는 뜻으로 일상 대화에서 매일 쓰이는 핵심 표현입니다.
+- **Options**: turns out, blows away, cuts off, falls down
+- **Korean**: 차 열쇠를 잃어버린 줄 알았는데, 알고 보니 겨울 코트 주머니 속에 쏙 들어가 있었더라고요.
+- **Explanation**: "it turns out (that)"은 몰랐던 사실이 밝혀지거나 "알고 보니 ~이다"라는 뜻입니다.
 
 ## Quiz 13
-- **Type**: fill-in-the-blank
-- **Audio**: audio/Maybe in English the way they were saying it came across more silly..wav
-- **English**: Maybe in English, the way they were saying it [came across] more silly.
+- **Type**: multiple-choice
+- **English**: While cleaning the dusty attic boxes, I [came across, fell behind, held up, backed off] a stack of grandfather's handwritten letters.
 - **Answer**: came across
-- **Korean**: 아마 영어로 말하다 보니 그 표현 방식이 더 엉뚱하고 재미있게 다가온 것 같아요.
-- **Explanation**: "come across (as) ~"는 다른 사람들에게 어떤 느낌이나 인상으로 "다가오다, 전달되다, 비치다"라는 매우 세련된 원어민 구동사입니다.
+- **Options**: came across, fell behind, held up, backed off
+- **Korean**: 먼지 쌓인 다락방 상자들을 정리하다가 할아버지의 자필 편지 묶음을 우연히 발견했어요.
+- **Explanation**: "come across"는 물건이나 사람을 "우연히 발견하다/마주치다"라는 뜻입니다.
 
 ## Quiz 14
-- **Type**: fill-in-the-blank
-- **Audio**: audio/They were making mistakes and it turned into something humorous..wav
-- **English**: They were making mistakes and it [turned into] something humorous.
+- **Type**: multiple-choice
+- **English**: What started as a quiet picnic quickly [turned into, walked away, gave up, fell off] a lively birthday celebration with dozens of friends.
 - **Answer**: turned into
-- **Korean**: 멤버들이 실수를 연발하면서 그게 오히려 유머러스하고 재미있는 상황으로 바뀌었죠.
-- **Explanation**: "turn into ~"는 원래의 상태에서 다른 무언가로 "변하다, 바뀌다, 발전하다"라는 핵심 구동사입니다.
+- **Options**: turned into, walked away, gave up, fell off
+- **Korean**: 조용한 소풍으로 시작했던 자리가 순식간에 수십 명의 친구들과 함께하는 떠들썩한 생일 파티로 변모했어요.
+- **Explanation**: "turn into ~"는 원래의 상태에서 다른 무언가로 "변하다, 바뀌다"라는 핵심 구동사입니다.
 
 ## Quiz 15
-- **Type**: listening
-- **Audio**: audio/but it just felt Oakland felt random to me..wav
-- **English**: But it just felt Oakland [felt random] to me.
+- **Type**: multiple-choice
+- **English**: The sudden question about 18th-century French poetry in our physics lecture [felt random, sounded logical, made sense, seemed normal] to everyone.
 - **Answer**: felt random
-- **Korean**: 그래도 저한테는 오클랜드라는 장소 자체가 참 뜬금없고 뜻밖으로 느껴졌어요.
-- **Explanation**: "feel random"은 맥락에 맞지 않거나 예상치 못해 "뜬금없게 느껴지다, 생뚱맞다, 뜻밖이다"라는 뜻으로 원어민들이 자주 쓰는 일상적인 표현입니다.
+- **Options**: felt random, sounded logical, made sense, seemed normal
+- **Korean**: 물리학 강의 도중 나온 18세기 프랑스 시에 대한 뜬금없는 질문은 모두에게 정말 생뚱맞게 느껴졌어요.
+- **Explanation**: "felt random"은 맥락에 맞지 않거나 "뜬금없게 느껴지다, 생뚱맞다"라는 뜻입니다.
 
 ## Quiz 16
 - **Type**: multiple-choice
-- **Audio**: audio/Hopefully we can get in line..wav
-- **English**: Hopefully we can [get in line, cut in line, step outside, head back].
+- **English**: To buy hot freshly baked croissants before they sell out, you must [get in line, get in touch, get along, get ahead] by seven in the morning.
 - **Answer**: get in line
-- **Korean**: '줄이라도 설 수 있으면 좋겠다' 싶었죠.
-- **Explanation**: "get in line"은 차례를 기다리기 위해 "줄을 서다"라는 뜻의 가장 흔하고 자연스러운 일상 표현입니다.
+- **Options**: get in line, get in touch, get along, get ahead
+- **Korean**: 갓 구운 따끈한 크루아상이 매진되기 전에 사려면 아침 7시까지 줄을 서야만 해요.
+- **Explanation**: "get in line"은 차례를 기다리기 위해 "줄을 서다"라는 뜻의 가장 자연스러운 표현입니다.
 
 ## Quiz 17
 - **Type**: multiple-choice
-- **Audio**: audio/Maybe they were first in line..wav
-- **English**: Maybe they were [first in line, out of line, last to leave, second best].
+- **English**: Dedicated fans camped on the sidewalk overnight so they could be [first in line, last in order, late in arrival, lost in crowd] when doors opened.
 - **Answer**: first in line
-- **Korean**: 어쩌면 제일 첫 번째로 줄을 섰던 건지도 몰라요.
-- **Explanation**: "first in line"은 대기열에서 "맨 앞줄에 선, 가장 먼저 줄을 선" 사람이나 순서를 뜻합니다.
+- **Options**: first in line, last in order, late in arrival, lost in crowd
+- **Korean**: 열성적인 팬들은 문이 열릴 때 맨 첫 번째로 줄을 서기 위해 보도블록 위에서 밤을 새워 텐트를 쳤어요.
+- **Explanation**: "first in line"은 대기열에서 "맨 앞줄에 선, 가장 먼저 줄을 선" 순서를 뜻합니다.
 
 ## Quiz 18
-- **Type**: fill-in-the-blank
-- **Audio**: audio/So definitely by the time the sun was going down..wav
-- **English**: So definitely [by the time] the sun was going down.
-- **Answer**: by the time
-- **Korean**: 해가 질 무렵이 되니까 확실히 (분위기가 달라졌죠).
-- **Explanation**: "by the time ~"은 "~할 때쯤에는, ~할 무렵에는"이라는 뜻으로, 특정 시점이나 동작이 완료되는 기준 시간을 나타내는 필수 접속사구입니다.
+- **Type**: multiple-choice
+- **English**: [By the time, As long as, In case of, Due to the] we finally arrived at the concert arena, the opening act was already finishing.
+- **Answer**: By the time
+- **Options**: By the time, As long as, In case of, Due to the
+- **Korean**: 우리가 마침내 콘서트장에 도착했을 무렵에는 이미 오프닝 무대가 거의 끝나가고 있었어요.
+- **Explanation**: "by the time ~"은 "~할 때쯤에는, ~할 무렵에는"이라는 뜻입니다.
 
 ## Quiz 19
 - **Type**: multiple-choice
-- **Audio**: audio/Throughout the entire concert it was really funny..wav
-- **English**: [Throughout, Without, Except for, Ahead of] the entire concert, it was really funny.
+- **English**: [Throughout, Beneath, Against, Between] the two-hour acoustic performance, the audience remained completely captivated and silent.
 - **Answer**: Throughout
-- **Korean**: 콘서트 내내 정말 너무 재미있고 웃겼어요.
-- **Explanation**: "throughout"은 시간의 "처음부터 끝까지 내내, 줄곧" 또는 공간의 "구석구석 전체에"를 뜻하는 필수 전치사입니다.
+- **Options**: Throughout, Beneath, Against, Between
+- **Korean**: 2시간 동안의 어쿠스틱 공연 내내, 관객들은 완전히 매료되어 숨죽이고 있었습니다.
+- **Explanation**: "throughout"은 시간의 "처음부터 끝까지 내내, 줄곧"을 뜻하는 전치사입니다.
 
 ## Quiz 20
-- **Type**: fill-in-the-blank
-- **Audio**: audio/So we were wondering if he had like a girls name written on the belt buckle..wav
-- **English**: So we were [wondering if] he had like a girl's name written on the belt buckle.
+- **Type**: multiple-choice
+- **English**: I called the local clinic, [wondering if, deciding that, proving why, knowing how] any doctor appointments were available today.
 - **Answer**: wondering if
-- **Korean**: 그래서 벨트 버클에 어떤 여자 이름이라도 적혀 있는 건가 궁금해했거든요.
-- **Explanation**: "wonder if ~"는 "~인지 아닌지 궁금하다, ~일까 생각하다"라는 뜻으로 일상 회화에서 호기심이나 궁금증을 나타낼 때 매일 쓰이는 핵심 패턴입니다.
+- **Options**: wondering if, deciding that, proving why, knowing how
+- **Korean**: 오늘 진료 예약이 가능한지 궁금해서 동네 의원에 전화를 걸어보았어요.
+- **Explanation**: "wonder if ~"는 "~인지 아닌지 궁금하다"라는 뜻입니다.
 
 ## Quiz 21
 - **Type**: multiple-choice
-- **Audio**: audio/So it was a little unorganized at the end..wav
-- **English**: So it was a little unorganized [at the end, at first, in general, on purpose].
+- **English**: Surprise fireworks erupted over the stadium stage [at the end, in the middle, at the start, on the way] of the encore performance.
 - **Answer**: at the end
-- **Korean**: 그래서 마지막엔 조금 정리되지 않은 분위기였지만요.
-- **Explanation**: "at the end"는 공연, 영화, 사건 등의 "마지막에, 끝 무렵에"를 뜻하는 일상 필수 전치사구입니다.
-
+- **Options**: at the end, in the middle, at the start, on the way
+- **Korean**: 앵콜 무대의 마지막 끝 무렵에 스타디움 무대 위로 깜짝 불꽃놀이가 터져 나왔어요.
+- **Explanation**: "at the end"는 공연이나 행사의 "마지막에, 끝 무렵에"를 뜻합니다.

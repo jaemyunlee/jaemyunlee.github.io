@@ -182,6 +182,7 @@ const CONCISE_DEFINITIONS = {
   'every other week': '격주로, 2주에 한 번',
   'there were ever times where': '혹시라도 ~했던 적이 있다면',
   'got stared at': '빤히 쳐다보는 시선을 받다',
+  'get stared at': '빤히 쳐다보는 시선을 받다',
   'at least': '적어도, 최소한',
   'encouraged': '부추기다, 계속하도록 북돋우다',
   'encourage': '부추기다, 북돋우다',
@@ -189,6 +190,7 @@ const CONCISE_DEFINITIONS = {
   'lived up to': '기대치에 부응하다, 미치다',
   'live up to': '기대치에 부응하다, 미치다',
   'was introduced to': '소개받아서 알게 되다',
+  'be introduced to': '소개받아서 알게 되다',
   'be introduced by': '소개받다',
   'cant say': '확실히 꼬집어 말하긴 어렵다',
   "can't say": '확실히 꼬집어 말하긴 어렵다',
@@ -196,6 +198,7 @@ const CONCISE_DEFINITIONS = {
   'taste the same': '예전의 똑같은 그 맛이 나다',
   'technically': '엄밀히 따져보면',
   'based it off of': '~을 바탕(기준)으로 삼다',
+  'base off of': '~을 바탕(기준)으로 삼다',
   'as good as': '~만큼 좋은(맛있는)',
   'turn out': '결과가 나오다, 완성되다',
   'whereas': '반면에, ~임에 비하여',
@@ -215,16 +218,25 @@ const CONCISE_DEFINITIONS = {
   'deal with': '대처하다, 처리하다, 수습하다',
   'dealing with': '대처하다, 처리하다, 수습하다',
   'incident': '사건, 일',
+  'end up': '결국 ~하게 되다',
+  'ended up': '결국 ~하게 되다',
+  'get pushed': '밀리다, 떠밀리다',
+  'getting pushed': '밀리다, 떠밀리다',
   'reinjure': '다시 다치다, 재부상을 입히다',
   'reinjured': '다시 다치다, 재부상을 입히다',
   'sling': '팔걸이 붕대, 삼각건',
+  'in a sling': '팔걸이 붕대를 하고 있다',
   'be referred to': '진료 의뢰를 받다, 소개되다',
+  'refer to': '진료 의뢰를 받다, 소개되다',
   'being referred to': '진료 의뢰를 받다, 소개되다',
   'postpone': '미루다, 연기하다',
   'on top of': '~에 겹쳐서, 엎친 데 덮친 격으로',
+  'in': '~(시간) 후에, ~(시간) 있으면 [시간 경과]',
+  'in (시간)': '~(시간) 후에, ~(시간) 있으면 [시간 경과]',
+  'in a couple of weeks': '몇 주 후에/있으면',
   'procrastinate': '미루다, 늑장 부리다',
   'procrastinating': '미루다, 늑장 부리다',
-  'just so you know': '참고로 말하자면, 그냥 알려주는 건데',
+  'just so you know': '참고로 알아둬, 그냥 알려주는 건데',
   'book': '예약하다',
   'booked': '예약하다',
   'ramble': '횡설수설하다, 주절거리다',
@@ -248,7 +260,8 @@ const CONCISE_DEFINITIONS = {
 
 function extractConciseDefinition(quiz) {
   if (!quiz) return '';
-  const baseKey = (quiz.baseForm || '').toLowerCase().trim();
+  if (quiz.translation) return quiz.translation;
+  const baseKey = (quiz.baseForm || quiz.keyExpression || '').toLowerCase().trim();
   const cleanBaseKey = baseKey.replace(/['"’]/g, '');
   if (baseKey && CONCISE_DEFINITIONS[baseKey]) {
     return CONCISE_DEFINITIONS[baseKey];

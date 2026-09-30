@@ -6,8 +6,8 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await page.goto('/lessons/lesson-04/index.html');
 
     const tabs = page.locator('#lesson-step-tabs .step-tab-btn');
-    // Tab order: 1 (퀴즈), 2 (핵심 문장), deep-dive (심화 학습), 3 (전체 영상), 4 (영작하기)
-    await expect(tabs).toHaveCount(5);
+    // Tab order: 1 (퀴즈), 2 (핵심 문장), deep-dive (심화 학습), 3 (전체 영상), 4 (받아쓰기), 5 (스피킹 퀴즈), writing (영작하기)
+    await expect(tabs).toHaveCount(7);
 
     const deepDiveTab = page.locator('#step-tab-deep-dive');
     await expect(deepDiveTab).toBeVisible();
@@ -154,7 +154,7 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
     await expect(page.locator('#step-tab-deep-dive')).toHaveCount(0);
     await expect(page.locator('#deep-dive-section')).toHaveCount(0);
     const tabs03 = page.locator('#lesson-step-tabs .step-tab-btn');
-    await expect(tabs03).toHaveCount(4);
+    await expect(tabs03).toHaveCount(6);
 
     // Step 2 completion card in Lesson 03 points directly to Step 3
     await page.locator('.step-tab-btn[data-step="2"]').click();
@@ -168,7 +168,7 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
       await page.goto('/lessons/lesson-01/index.html');
 
       const tabs = page.locator('#lesson-step-tabs .step-tab-btn');
-      await expect(tabs).toHaveCount(5);
+      await expect(tabs).toHaveCount(7);
 
       const deepDiveTab = page.locator('#step-tab-deep-dive');
       await expect(deepDiveTab).toBeVisible();
@@ -286,7 +286,7 @@ test.describe('Optional Deep Dive (심화 학습) Step (Issue #70)', () => {
       await page.goto('/lessons/lesson-02/index.html');
 
       const tabs = page.locator('#lesson-step-tabs .step-tab-btn');
-      await expect(tabs).toHaveCount(5);
+      await expect(tabs).toHaveCount(7);
 
       const deepDiveTab = page.locator('#step-tab-deep-dive');
       await expect(deepDiveTab).toBeVisible();

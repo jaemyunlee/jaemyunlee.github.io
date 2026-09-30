@@ -36,6 +36,10 @@ class VideoScriptPlayer {
     // Single-card loop playback state (Issue #22)
     this.loopingSentenceIndex = null;
     this.isLoopSeeking = false;
+
+    // Filtered flagged playback state (Issue #108)
+    this.showOnlyFlagged = false;
+    this.isFlaggedSeeking = false;
   }
 
   init() {
@@ -43,6 +47,7 @@ class VideoScriptPlayer {
     this.initYouTubePlayer();
     this._bindControls();
     this.setSubtitleMode(this.subtitleMode);
+    this.updateFlaggedFilterUI();
 
     // Global audio coordination: pause video when any other player starts
     window.addEventListener('app-audio-started', (e) => {
@@ -385,6 +390,35 @@ class VideoScriptPlayer {
   }
 
   togglePlayPause() {
+    // If playing only flagged sentences (Issue #108)
+    if (this.showOnlyFlagged) {
+      const flaggedItems = this.getFlaggedItems();
+      if (flaggedItems.length === 0) {
+        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+          App.showToast('표시된 어려운 문장이 없습니다. 먼저 문장의 🚩 버튼을 눌러주세요.', 'warning');
+        }
+        return;
+      }
+      const curTime = this.isFallbackMode ? this.simTime : (this.player && this.player.getCurrentTime ? this.player.getCurrentTime() : 0);
+      const isInside = flaggedItems.some(f => curTime >= f.start - 0.25 && curTime < f.end);
+      if (!isInside) {
+        const nextItem = flaggedItems.find(f => f.start >= curTime) || flaggedItems[0];
+        if (this.isFallbackMode) {
+          this.simTime = nextItem.start;
+          this._updateFallbackUI();
+          this._startFallbackSync();
+          this._updatePlayPauseButton(true);
+        } else if (this.player && typeof this.player.seekTo === 'function') {
+          try {
+            this.player.seekTo(nextItem.start, true);
+            this.player.playVideo();
+          } catch (_) { }
+        }
+        this.setActiveSentence(nextItem.index);
+        return;
+      }
+    }
+
     if (this.isFallbackMode) {
       if (this.simTimer) {
         this._pauseFallbackSync();
@@ -466,6 +500,66 @@ class VideoScriptPlayer {
           }, 250);
         }
         return;
+      }
+    }
+
+    // Filtered Flagged Playback: Only play flagged segments (Issue #108)
+    if (this.showOnlyFlagged && this.loopingSentenceIndex === null) {
+      const flaggedItems = this.getFlaggedItems();
+      if (flaggedItems.length > 0) {
+        const currentItemIdx = flaggedItems.findIndex(f => currentTime >= f.start - 0.25 && currentTime < f.end);
+        if (currentItemIdx !== -1) {
+          const curItem = flaggedItems[currentItemIdx];
+          if (currentTime >= curItem.end - 0.15) {
+            if (!this.isFlaggedSeeking) {
+              this.isFlaggedSeeking = true;
+              const nextIdx = currentItemIdx + 1;
+              if (nextIdx < flaggedItems.length) {
+                const nextItem = flaggedItems[nextIdx];
+                if (this.isFallbackMode) {
+                  this.simTime = nextItem.start;
+                  this._updateFallbackUI();
+                } else if (this.player && typeof this.player.seekTo === 'function') {
+                  try {
+                    this.player.seekTo(nextItem.start, true);
+                    this.player.playVideo();
+                  } catch (_) { }
+                }
+                this.setActiveSentence(nextItem.index);
+              } else {
+                // Completed all flagged segments!
+                this.pause();
+                if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+                  App.showToast('🚩 표시된 어려운 문장 재생을 모두 완료했습니다!', 'success');
+                }
+              }
+              setTimeout(() => {
+                this.isFlaggedSeeking = false;
+              }, 350);
+            }
+            return;
+          }
+        } else {
+          // If currentTime drifted outside flagged segments, jump to next flagged
+          if (!this.isFlaggedSeeking) {
+            this.isFlaggedSeeking = true;
+            const nextItem = flaggedItems.find(f => f.start >= currentTime) || flaggedItems[0];
+            if (this.isFallbackMode) {
+              this.simTime = nextItem.start;
+              this._updateFallbackUI();
+            } else if (this.player && typeof this.player.seekTo === 'function') {
+              try {
+                this.player.seekTo(nextItem.start, true);
+                this.player.playVideo();
+              } catch (_) { }
+            }
+            this.setActiveSentence(nextItem.index);
+            setTimeout(() => {
+              this.isFlaggedSeeking = false;
+            }, 350);
+            return;
+          }
+        }
       }
     }
 
@@ -643,6 +737,11 @@ class VideoScriptPlayer {
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', `Jump to sentence: ${item.en}`);
 
+      const isFlagged = (typeof Storage !== 'undefined' && typeof Storage.isSegmentFlagged === 'function')
+        ? Storage.isSegmentFlagged(this.lessonId, item.id || `s${index + 1}`)
+        : false;
+      if (isFlagged) card.classList.add('flagged-card');
+
       const timeFormatted = this._formatTimestamp(item.start);
 
       card.innerHTML = `
@@ -653,15 +752,24 @@ class VideoScriptPlayer {
             </svg>
             ${timeFormatted}
           </span>
-          <button type="button" class="btn-card-loop ${isLooping ? 'active' : ''}" data-index="${index}" title="${isLooping ? '구간 반복 끄기 (Click to cancel loop)' : '이 문장 구간 반복 재생 (Loop)'}" aria-label="이 문장 구간 반복 재생" aria-pressed="${isLooping ? 'true' : 'false'}">
-            <svg class="icon-loop" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 2l4 4-4 4"/>
-              <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
-              <path d="M7 22l-4-4 4-4"/>
-              <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
-            </svg>
-            <span class="loop-label">${isLooping ? '반복 중' : '구간 반복'}</span>
-          </button>
+          <div class="script-card-header-actions" style="display: inline-flex; align-items: center; gap: 6px;">
+            <button type="button" class="btn-card-flag ${isFlagged ? 'active' : ''}" data-index="${index}" title="${isFlagged ? '어려운 문장 표시 해제' : '이해가 어려운 문장 표시 (어려운 문장 모아보기 및 재생)'}" aria-label="이해가 어려운 문장 북마크" aria-pressed="${isFlagged ? 'true' : 'false'}">
+              <svg class="icon-flag" viewBox="0 0 24 24" width="13" height="13" fill="${isFlagged ? '#EF4444' : 'none'}" stroke="${isFlagged ? '#EF4444' : 'currentColor'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                <line x1="4" y1="22" x2="4" y2="15"/>
+              </svg>
+              <span class="flag-label">어려움</span>
+            </button>
+            <button type="button" class="btn-card-loop ${isLooping ? 'active' : ''}" data-index="${index}" title="${isLooping ? '구간 반복 끄기 (Click to cancel loop)' : '이 문장 구간 반복 재생 (Loop)'}" aria-label="이 문장 구간 반복 재생" aria-pressed="${isLooping ? 'true' : 'false'}">
+              <svg class="icon-loop" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 2l4 4-4 4"/>
+                <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                <path d="M7 22l-4-4 4-4"/>
+                <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+              </svg>
+              <span class="loop-label">${isLooping ? '반복 중' : '구간 반복'}</span>
+            </button>
+          </div>
         </div>
 
         <div class="script-card-body">
@@ -669,6 +777,46 @@ class VideoScriptPlayer {
           <p class="sentence-kr">${this._escapeHtml(item.kr)}</p>
         </div>
       `;
+
+      // Flag button click binding
+      const flagBtn = card.querySelector('.btn-card-flag');
+      if (flagBtn) {
+        flagBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (typeof Storage !== 'undefined' && typeof Storage.toggleFlaggedSegment === 'function') {
+            const segItem = {
+              id: item.id || `s${index + 1}`,
+              start: item.start,
+              end: item.end,
+              en: item.en,
+              kr: item.kr
+            };
+            const flagged = Storage.toggleFlaggedSegment(this.lessonId, segItem);
+            flagBtn.classList.toggle('active', flagged);
+            flagBtn.setAttribute('aria-pressed', flagged ? 'true' : 'false');
+            const flagSvg = flagBtn.querySelector('.icon-flag');
+            if (flagSvg) {
+              flagSvg.setAttribute('fill', flagged ? '#EF4444' : 'none');
+              flagSvg.setAttribute('stroke', flagged ? '#EF4444' : 'currentColor');
+            }
+            const flagLabel = flagBtn.querySelector('.flag-label');
+            if (flagLabel) {
+              flagLabel.textContent = '어려움';
+            }
+            flagBtn.title = flagged ? '어려운 문장 표시 해제' : '이해가 어려운 문장 표시 (어려운 문장 모아보기 및 재생)';
+            card.classList.toggle('flagged-card', flagged);
+            this.updateFlaggedFilterUI();
+
+            if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+              if (flagged) {
+                App.showToast('🚩 어려운 문장으로 표시되었습니다! 상단의 [어려운 문장만] 버튼으로 모아볼 수 있습니다.', 'info');
+              } else {
+                App.showToast('🚩 어려운 문장 표시가 해제되었습니다.', 'default');
+              }
+            }
+          }
+        });
+      }
 
       // Loop button click binding
       const loopBtn = card.querySelector('.btn-card-loop');
@@ -811,6 +959,102 @@ class VideoScriptPlayer {
           this.player.seekTo(t, true);
         }
       });
+    }
+
+    // Flagged sentences filter button (Issue #108)
+    const filterFlaggedBtn = document.getElementById('btn-filter-flagged');
+    if (filterFlaggedBtn) {
+      filterFlaggedBtn.addEventListener('click', () => {
+        this.toggleShowOnlyFlagged();
+      });
+    }
+  }
+
+  getFlaggedItems() {
+    if (typeof Storage === 'undefined' || typeof Storage.getFlaggedSegments !== 'function') {
+      return [];
+    }
+    const flaggedSegments = Storage.getFlaggedSegments(this.lessonId);
+    if (!flaggedSegments || flaggedSegments.length === 0) {
+      return [];
+    }
+    const flaggedIds = new Set(flaggedSegments.map(s => s.id));
+    return this.scriptData
+      .map((item, index) => ({ ...item, index, id: item.id || `s${index + 1}` }))
+      .filter(item => flaggedIds.has(item.id));
+  }
+
+  toggleShowOnlyFlagged() {
+    this.showOnlyFlagged = !this.showOnlyFlagged;
+    this.updateFlaggedFilterUI();
+
+    if (this.showOnlyFlagged) {
+      const flagged = this.getFlaggedItems();
+      if (flagged.length === 0) {
+        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+          App.showToast('표시된 어려운 문장이 없습니다. 먼저 각 문장의 🚩 버튼을 눌러주세요.', 'info');
+        }
+      } else {
+        if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+          App.showToast(`🚩 어려운 문장 ${flagged.length}개만 모아봅니다. 재생 시 해당 구간만 이어서 재생됩니다.`, 'success');
+        }
+      }
+    } else {
+      if (typeof App !== 'undefined' && typeof App.showToast === 'function') {
+        App.showToast('전체 문장 보기 모드로 전환되었습니다.', 'default');
+      }
+    }
+  }
+
+  updateFlaggedFilterUI() {
+    const filterFlaggedBtn = document.getElementById('btn-filter-flagged');
+    const badge = document.getElementById('flagged-count-badge');
+    const flaggedCount = (typeof Storage !== 'undefined' && typeof Storage.getFlaggedSegments === 'function')
+      ? Storage.getFlaggedSegments(this.lessonId).length
+      : 0;
+
+    if (badge) {
+      badge.textContent = flaggedCount;
+    }
+
+    if (filterFlaggedBtn) {
+      filterFlaggedBtn.classList.toggle('active', this.showOnlyFlagged);
+      filterFlaggedBtn.setAttribute('aria-pressed', this.showOnlyFlagged ? 'true' : 'false');
+    }
+
+    if (!this.scriptListContainer) return;
+
+    const cards = this.scriptListContainer.querySelectorAll('.script-sentence-card');
+    cards.forEach(card => {
+      if (this.showOnlyFlagged) {
+        const isFlagged = card.classList.contains('flagged-card');
+        card.style.display = isFlagged ? '' : 'none';
+      } else {
+        card.style.display = '';
+      }
+    });
+
+    let emptyState = this.scriptListContainer.querySelector('#flagged-empty-state');
+    if (this.showOnlyFlagged && flaggedCount === 0) {
+      if (!emptyState) {
+        emptyState = document.createElement('div');
+        emptyState.className = 'flagged-empty-state';
+        emptyState.id = 'flagged-empty-state';
+        emptyState.innerHTML = `
+          <div style="font-size: 2rem; margin-bottom: 8px;">🚩</div>
+          <p style="font-weight: 600; margin-bottom: 4px;">표시된 어려운 문장이 없습니다</p>
+          <p style="font-size: 0.85rem; opacity: 0.8;">문장 카드의 🚩 버튼을 누르면 여기에 모아서 집중 학습할 수 있습니다.</p>
+        `;
+        this.scriptListContainer.appendChild(emptyState);
+      }
+      emptyState.style.display = '';
+    } else if (emptyState) {
+      emptyState.style.display = 'none';
+    }
+
+    const completionBanner = document.getElementById('script-completion-banner');
+    if (completionBanner) {
+      completionBanner.style.display = this.showOnlyFlagged ? 'none' : '';
     }
   }
 

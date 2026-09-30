@@ -23,22 +23,32 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const tabDeepDive = page.locator('#step-tab-deep-dive');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
 
     await expect(tab1).toBeVisible();
     await expect(tab2).toBeVisible();
     await expect(tabDeepDive).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
 
     await expect(tab3).not.toHaveClass(/deactivated/);
     await expect(tab4).not.toHaveClass(/deactivated/);
+    await expect(tab5).not.toHaveClass(/deactivated/);
+    await expect(tabWriting).not.toHaveClass(/deactivated/);
     await expect(tab3).toBeEnabled();
     await expect(tab4).toBeEnabled();
+    await expect(tab5).toBeEnabled();
+    await expect(tabWriting).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
     await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
-    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
+    await expect(tab4.locator('.step-label')).toHaveText('받아쓰기');
+    await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
+    await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
   });
 
   test('Lesson 04 loads all 21 quizzes with multiple-choice, fill-in-the-blank, and listening', async ({ page }) => {
@@ -51,7 +61,7 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const quizDistribution = await page.evaluate(async () => {
       const parser = window.MarkdownQuizParser;
       const quizzes = await parser.loadFromUrl('./quiz.md');
-      const counts = { 'multiple-choice': 0, 'fill-in-the-blank': 0, 'listening': 0 };
+      const counts = { 'multiple-choice': 0, 'fill-in-the-blank': 0, 'listening': 0, 'drag-and-drop': 0 };
       quizzes.forEach(q => counts[q.type] = (counts[q.type] || 0) + 1);
       return {
         total: quizzes.length,
@@ -76,9 +86,7 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     });
 
     expect(quizDistribution.total).toBe(21);
-    expect(quizDistribution.counts['multiple-choice']).toBe(13);
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(6);
-    expect(quizDistribution.counts['listening']).toBe(2);
+    expect(quizDistribution.counts['multiple-choice']).toBe(21);
 
     // Check sample initial quizzes
     expect(quizDistribution.sampleQ1.answer).toBe('stood out');
@@ -102,14 +110,14 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     expect(quizDistribution.sampleQ17.answer).toBe('first in line');
     expect(quizDistribution.sampleQ17.options).toContain('first in line');
 
-    expect(quizDistribution.sampleQ18.type).toBe('fill-in-the-blank');
-    expect(quizDistribution.sampleQ18.answer).toBe('by the time');
+    expect(quizDistribution.sampleQ18.type).toBe('multiple-choice');
+    expect(quizDistribution.sampleQ18.answer).toBe('By the time');
 
     expect(quizDistribution.sampleQ19.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ19.answer).toBe('Throughout');
     expect(quizDistribution.sampleQ19.options).toContain('Throughout');
 
-    expect(quizDistribution.sampleQ20.type).toBe('fill-in-the-blank');
+    expect(quizDistribution.sampleQ20.type).toBe('multiple-choice');
     expect(quizDistribution.sampleQ20.answer).toBe('wondering if');
 
     expect(quizDistribution.sampleQ21.type).toBe('multiple-choice');
@@ -147,13 +155,19 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     const avatarAlt = await avatarImg.getAttribute('alt');
     expect(avatarAlt).toBe('Kelly');
 
-    // Verify Step 3 and Step 4 tabs are visible and clickable
+    // Verify Step 3, Step 4, Step 5, and writing tabs are visible and clickable
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
     await expect(tab3).toBeEnabled();
     await expect(tab4).toBeEnabled();
+    await expect(tab5).toBeEnabled();
+    await expect(tabWriting).toBeEnabled();
 
     // Verify clicking Step 3 tab navigates to Step 3
     await tab3.click();
@@ -162,7 +176,17 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
 
     // Verify clicking Step 4 tab navigates to Step 4
     await tab4.click();
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 영작하기');
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 받아쓰기');
+    await expect(page.locator('#dictation-section')).toBeVisible();
+
+    // Verify clicking Step 5 tab navigates to Step 5
+    await tab5.click();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 5: 스피킹 퀴즈');
+    await expect(page.locator('#review-quiz-section')).toBeVisible();
+
+    // Verify clicking Step Writing tab navigates to writing
+    await tabWriting.click();
+    await expect(page.locator('#lesson-status-badge')).toContainText('영작하기');
     await expect(page.locator('#reflection-section')).toBeVisible();
   });
 
@@ -248,7 +272,7 @@ test.describe('Lesson 04 Scaffolding & Integration', () => {
     // Verify new target expressions
     expect(content).toContain('get in line');
     expect(content).toContain('first in line');
-    expect(content).toContain('by the time');
+    expect(content).toMatch(/by the time/i);
     expect(content).toContain('Throughout');
     expect(content).toContain('wondering if');
     expect(content).toContain('at the end');

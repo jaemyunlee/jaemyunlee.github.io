@@ -20,6 +20,7 @@ class ReviewPlayer {
     this.isComingSoon = options.isComingSoon || false;
     this.scheduledDateText = options.scheduledDateText || '9월 15일';
     this.hasDeepDive = options.hasDeepDive || false;
+    this.showSaveButton = options.showSaveButton !== undefined ? options.showSaveButton : (options.lessonId === 'lesson-01' ? false : true);
 
     this.currentIndex = 0;
     this.isPlaying = false;
@@ -271,7 +272,8 @@ class ReviewPlayer {
       const cleanEn = this._getCleanSentence(quiz.english, quiz.answer);
       const isSaved = Storage.isSentenceSaved(this.lessonId, cleanEn);
       const highlightedEn = this._formatHighlightedSentence(quiz.english, quiz.answer);
-      const keyword = quiz.baseForm || quiz.answer || '';
+      const keyword = quiz.baseForm || quiz.keyExpression || quiz.answer || '';
+      const translation = quiz.translation || quiz.meaning || '';
       const meaning = quiz.korean || '';
       const explanation = quiz.explanation || '';
 
@@ -289,7 +291,7 @@ class ReviewPlayer {
                 <div class="sentence-card-content">
                   <div class="sentence-card-header">
                     <span class="sentence-index-pill">Sentence ${(idx + 1).toString().padStart(2, '0')}</span>
-                    ${keyword ? `<span class="sentence-keyword-badge">💡 ${this._escapeHtml(keyword)}</span>` : ''}
+                    ${keyword ? `<span class="sentence-keyword-badge">💡 ${this._escapeHtml(keyword)}${translation ? ` : ${this._escapeHtml(translation)}` : ''}</span>` : ''}
                   </div>
 
                   <div class="sentence-en-text">
@@ -315,11 +317,13 @@ class ReviewPlayer {
                     <span>듣기</span>
                   </button>
 
+                  ${this.showSaveButton ? `
                   <button type="button" class="btn-card-bookmark ${isSaved ? 'saved' : ''}" data-bookmark-index="${idx}" title="${isSaved ? '저장된 문장 (단어장에서 제거)' : '단어장에 문장 저장'}">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="${isSaved ? '#F59E0B' : 'none'}" stroke="${isSaved ? '#F59E0B' : 'currentColor'}" stroke-width="2">
                       <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
                     </svg>
                   </button>
+                  ` : ''}
                 </div>
               </div>
             `;
@@ -883,7 +887,8 @@ class ReviewPlayer {
       Storage.saveSentence(this.lessonId, {
         en: cleanEn,
         kr: kr,
-        expression: quiz.baseForm || quiz.answer || '',
+        expression: quiz.baseForm || quiz.keyExpression || quiz.answer || '',
+        translation: quiz.translation || quiz.meaning || '',
         rawEn: quiz.english || '',
         audio: cleanAudio,
         timestamp: 0

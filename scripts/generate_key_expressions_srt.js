@@ -114,27 +114,46 @@ function generateLessonKeyExpressionsSrt(lessonId) {
   const srtContent = fs.readFileSync(srtPath, 'utf8');
   const srtBlocks = parseSrt(srtContent);
 
+  const keySentencesPath = path.join(lessonDir, 'key-sentences.json');
+  let keySentences = null;
+  if (fs.existsSync(keySentencesPath)) {
+    try {
+      keySentences = JSON.parse(fs.readFileSync(keySentencesPath, 'utf8'));
+    } catch (_) {}
+  }
+
   const quizContent = fs.readFileSync(quizPath, 'utf8');
   const quizzes = parseQuizMarkdown(quizContent);
+  const itemsToIterate = (keySentences && keySentences.length > 0) ? keySentences : quizzes;
 
   const matchedEntries = [];
 
-  for (const q of quizzes) {
-    const target = q.answer.trim();
+  for (const q of itemsToIterate) {
+    const target = (q.target || q.answer || q.keyExpression || '').trim();
     const normTarget = normalize(target);
-    const cleanEn = q.english.replace(/\[.*?\]/, target);
+    const cleanEn = (q.english || '').replace(/\[.*?\]/, target);
     const normCleanEn = normalize(cleanEn);
 
+    let matchedBlock = null;
+
+    // 0. Direct match via segmentId (e.g. "s54" -> block 54)
+    if (q.segmentId) {
+      const segNum = parseInt(q.segmentId.replace('s', ''), 10);
+      matchedBlock = srtBlocks.find(b => b.num === segNum);
+    }
+
     // 1. First priority: Exact sentence match with SRT blocks that contain the target expression
-    let matchedBlock = srtBlocks.find(b => {
-      const normB = normalize(b.text);
-      if (normB.includes(normTarget)) {
-        if (normCleanEn.includes(normB) || normB.includes(normCleanEn)) {
-          return true;
+    if (!matchedBlock) {
+      matchedBlock = srtBlocks.find(b => {
+        const normB = normalize(b.text);
+        if (normB.includes(normTarget)) {
+          if (normCleanEn.includes(normB) || normB.includes(normCleanEn)) {
+            return true;
+          }
         }
-      }
-      return false;
-    });
+        return false;
+      });
+    }
 
     // 2. Second priority: Any block containing the target expression
     if (!matchedBlock) {
@@ -191,7 +210,7 @@ function generateLessonKeyExpressionsSrt(lessonId) {
       matchedEntries.push({
         timing: matchedBlock.timing,
         start: matchedBlock.start,
-        expression: q.baseForm || target,
+        expression: q.baseForm || q.keyExpression || target,
         korean: extractConciseDefinition(q)
       });
     }

@@ -2,15 +2,29 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Quiz Hint Contrast & Theming (Issue #25)', () => {
   test('Light Mode: Hints have high contrast, warm amber theme, and clear legibility', async ({ page }) => {
-    // Seed light theme and jump to fill-in-the-blank question (Quiz 11)
+    // Seed light theme and jump to fill-in-the-blank question (Quiz 15 in Lesson 02)
     await page.addInitScript(() => {
       localStorage.setItem('rhyrhy_theme', 'light');
-      localStorage.setItem('rhyrhy_progress_lesson-01', JSON.stringify({
-        currentQuestionIndex: 10
+      localStorage.setItem('rhyrhy_progress_lesson-02', JSON.stringify({
+        currentQuestionIndex: 14
       }));
     });
 
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
+    await page.waitForFunction(() => window.quizEngine && window.quizEngine.quizzes);
+
+    await page.evaluate(() => {
+      if (window.showStep) window.showStep(1, false);
+      window.quizEngine.quizzes[0] = {
+        type: 'fill-in-the-blank',
+        english: 'We [used to] go exploring up there.',
+        answer: 'used to',
+        korean: '우리는 저 위를 탐험하곤 했었다.',
+        explanation: 'used to test'
+      };
+      window.quizEngine.currentIndex = 0;
+      window.quizEngine.renderCurrentQuestion();
+    });
 
     // Ensure theme is light
     const htmlTheme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
@@ -79,15 +93,29 @@ test.describe('Quiz Hint Contrast & Theming (Issue #25)', () => {
   });
 
   test('Dark Mode: Hints preserve golden-amber glow and proper styling', async ({ page }) => {
-    // Seed dark theme and jump to fill-in-the-blank question (Quiz 11)
+    // Seed dark theme and jump to fill-in-the-blank question (Quiz 15 in Lesson 02)
     await page.addInitScript(() => {
       localStorage.setItem('rhyrhy_theme', 'dark');
-      localStorage.setItem('rhyrhy_progress_lesson-01', JSON.stringify({
-        currentQuestionIndex: 10
+      localStorage.setItem('rhyrhy_progress_lesson-02', JSON.stringify({
+        currentQuestionIndex: 14
       }));
     });
 
-    await page.goto('/lessons/lesson-01/index.html');
+    await page.goto('/lessons/lesson-02/index.html');
+    await page.waitForFunction(() => window.quizEngine && window.quizEngine.quizzes);
+
+    await page.evaluate(() => {
+      if (window.showStep) window.showStep(1, false);
+      window.quizEngine.quizzes[0] = {
+        type: 'fill-in-the-blank',
+        english: 'We [used to] go exploring up there.',
+        answer: 'used to',
+        korean: '우리는 저 위를 탐험하곤 했었다.',
+        explanation: 'used to test'
+      };
+      window.quizEngine.currentIndex = 0;
+      window.quizEngine.renderCurrentQuestion();
+    });
 
     const hintBtn = page.locator('#btn-hint');
     await expect(hintBtn).toBeVisible();

@@ -18,16 +18,22 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
 
     await expect(tab1).toBeVisible();
     await expect(tab2).toBeVisible();
     await expect(tab3).toBeVisible();
     await expect(tab4).toBeVisible();
+    await expect(tab5).toBeVisible();
+    await expect(tabWriting).toBeVisible();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
     await expect(tab3.locator('.step-label')).toHaveText('전체 영상');
-    await expect(tab4.locator('.step-label')).toHaveText('영작하기');
+    await expect(tab4.locator('.step-label')).toHaveText('받아쓰기');
+    await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
+    await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
   });
 
   test('Lesson 02 loads all 21 quizzes including multiple-choice, fill-in-the-blank, listening, and drag-and-drop', async ({ page }) => {
@@ -51,17 +57,13 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
         counts,
         sampleQ1: quizzes[0],
         sampleQ5: quizzes[4],
-        sampleQ15: quizzes[14],
-        sampleQ18: quizzes[17],
         sampleQ20: quizzes[19],
         sampleQ21: quizzes[20]
       };
     });
 
     expect(quizDistribution.total).toBe(21);
-    expect(quizDistribution.counts['multiple-choice']).toBe(14);
-    expect(quizDistribution.counts['fill-in-the-blank']).toBe(4);
-    expect(quizDistribution.counts['listening']).toBe(2);
+    expect(quizDistribution.counts['multiple-choice']).toBe(20);
     expect(quizDistribution.counts['drag-and-drop']).toBe(1);
 
     // Check sample multiple choice
@@ -72,16 +74,9 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     expect(quizDistribution.sampleQ5.answer).toBe('passed');
     expect(quizDistribution.sampleQ5.options).toContain('passed');
 
-    // Check sample fill-in-the-blank
-    expect(quizDistribution.sampleQ15.answer).toBe('moldy');
-
-    // Check sample listening
-    expect(quizDistribution.sampleQ18.answer).toBe('mining');
-    expect(quizDistribution.sampleQ18.audio).toContain('mining equipment');
-
-    // Check Quiz 20 fill-in-the-blank
+    // Check Quiz 20 multiple-choice
     expect(quizDistribution.sampleQ20.answer).toBe('used to');
-    expect(quizDistribution.sampleQ20.type).toBe('fill-in-the-blank');
+    expect(quizDistribution.sampleQ20.type).toBe('multiple-choice');
 
     // Check Quiz 21 drag-and-drop
     expect(quizDistribution.sampleQ21.type).toBe('drag-and-drop');
@@ -120,13 +115,29 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     const scriptCount = await scriptCards.count();
     expect(scriptCount).toBe(102);
 
-    // Switch to Step 4 (영작하기)
+    // Switch to Step 4 (받아쓰기)
     const tab4 = page.locator('.step-tab-btn[data-step="4"]');
     await tab4.click();
 
+    const dictationSection = page.locator('#dictation-section');
+    await expect(dictationSection).toBeVisible();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 받아쓰기');
+
+    // Switch to Step 5 (스피킹 퀴즈)
+    const tab5 = page.locator('.step-tab-btn[data-step="5"]');
+    await tab5.click();
+
+    const reviewQuizSection = page.locator('#review-quiz-section');
+    await expect(reviewQuizSection).toBeVisible();
+    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 5: 스피킹 퀴즈');
+
+    // Switch to Step Writing (영작하기)
+    const tabWriting = page.locator('.step-tab-btn[data-step="writing"]');
+    await tabWriting.click();
+
     const reflectionSection = page.locator('#reflection-section');
     await expect(reflectionSection).toBeVisible();
-    await expect(page.locator('#lesson-status-badge')).toHaveText('Step 4: 영작하기');
+    await expect(page.locator('#lesson-status-badge')).toContainText('영작하기');
   });
 
   test('Catalog (lessons.html) and Homepage (index.html) display Lesson 02 card with 21 quizzes', async ({ page }) => {
@@ -209,26 +220,27 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
     await expect(page.locator('#modal-result-header')).toContainText('정답입니다!');
   });
 
-  test('Lesson player Quiz 20 (fill-in-the-blank) accepts correct answer "used to"', async ({ page }) => {
+  test('Lesson player Quiz 20 (multiple-choice) accepts correct answer "used to"', async ({ page }) => {
     await page.goto('/lessons/lesson-02/index.html');
     await page.waitForFunction(() => !!window.quizEngine);
 
     // Jump to question 20
     await page.evaluate(() => {
       window.quizEngine.currentIndex = 19;
+      if (window.quizEngine.quizPool && window.quizEngine.quizPool[19]) {
+        const s0 = window.quizEngine.quizPool[19].sentences[0];
+        window.quizEngine.quizzes[19] = { ...window.quizEngine.quizzes[19], ...s0 };
+      }
       window.quizEngine.renderCurrentQuestion();
     });
 
     const quizBadge = page.locator('.quiz-badge');
     await expect(quizBadge).toHaveText('Quiz 20 of 21');
-    await expect(page.locator('.quiz-type-tag')).toHaveText('빈칸 채우기');
+    await expect(page.locator('.quiz-type-tag')).toHaveText('객관식 퀴즈');
 
-    const input = page.locator('#quiz-blank-input');
-    await expect(input).toBeVisible();
-    await input.fill('used to');
-
-    const checkBtn = page.locator('#btn-check');
-    await checkBtn.click();
+    const optionBtn = page.locator('.choice-btn[data-option="used to"]');
+    await expect(optionBtn).toBeVisible();
+    await optionBtn.click();
 
     const feedback = page.locator('#quiz-feedback');
     await expect(feedback).toContainText('정답입니다!');
@@ -385,9 +397,9 @@ test.describe('Lesson 02 Scaffolding & Integration', () => {
 
     // Wait for quiz engine to be ready
     await page.waitForFunction(() => window.quizEngine && window.quizEngine.quizzes && window.quizEngine.quizzes.length > 0);
-    // Go to a fill-in-the-blank question (Quiz 20) with action buttons
+    // Go to drag-and-drop question (Quiz 21) with action buttons
     await page.evaluate(() => {
-      window.quizEngine.currentIndex = 19; // Quiz 20
+      window.quizEngine.currentIndex = 20; // Quiz 21
       window.quizEngine.renderCurrentQuestion();
     });
 

@@ -47,7 +47,9 @@ const LESSON_ICONS = {
   'lesson-03': '🏡',
   'lesson-04': '🎤',
   'lesson-05': '🎓',
-  'lesson-06': '🌲'
+  'lesson-06': '🌲',
+  'lesson-07': '🥬',
+  'lesson-08': '🚗'
 };
 
 /**
@@ -199,6 +201,15 @@ function generateLessonYouTubeDescription(lessonId) {
     quizzes = parseQuizMarkdown(fs.readFileSync(quizPath, 'utf8'));
   }
 
+  // Also check key-sentences.json (contains exact video lines)
+  const keySentencesPath = path.join(lessonDir, 'key-sentences.json');
+  let keySentences = [];
+  if (fs.existsSync(keySentencesPath)) {
+    try {
+      keySentences = JSON.parse(fs.readFileSync(keySentencesPath, 'utf8'));
+    } catch (_) {}
+  }
+
   // Also check README.md for curated clean sentences if present
   const readmePath = path.join(lessonDir, 'README.md');
   let readmeSentences = [];
@@ -227,8 +238,24 @@ function generateLessonYouTubeDescription(lessonId) {
 /**
  * Find matching sentence for an SRT expression from README or quizzes
  */
-function findMatchingSentence(srtEntry, quizzes, readmeSentences, index, usedSet) {
+function findMatchingSentence(srtEntry, quizzes, readmeSentences, keySentences, index, usedSet) {
   const srtExprNorm = (srtEntry.expression || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  // 0. Try keySentences if present (contains exact video lines)
+  if (keySentences && keySentences.length > 0) {
+    for (let j = 0; j < keySentences.length; j++) {
+      if (usedSet && usedSet.has(`key_${j}`)) continue;
+      const ks = keySentences[j];
+      const baseNorm = (ks.baseForm || ks.keyExpression || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const ansNorm = (ks.target || ks.answer || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (baseNorm === srtExprNorm || ansNorm === srtExprNorm ||
+          (baseNorm.length > 3 && srtExprNorm.length > 3 && (baseNorm.includes(srtExprNorm) || srtExprNorm.includes(baseNorm))) ||
+          (ansNorm.length > 3 && srtExprNorm.length > 3 && (ansNorm.includes(srtExprNorm) || srtExprNorm.includes(ansNorm)))) {
+        if (usedSet) usedSet.add(`key_${j}`);
+        return cleanQuizSentence(ks.english, ks.target || ks.answer || ks.keyExpression);
+      }
+    }
+  }
 
   // 1. Try to find a sentence in README.md whose [bracketed] expression matches
   if (readmeSentences && readmeSentences.length > 0) {
@@ -282,10 +309,14 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, index, usedSet
   for (let i = 0; i < count; i++) {
     const num = (i + 1).toString().padStart(2, '0');
     const srt = srtEntries[i] || { timestamp: '00:00', expression: '' };
-    const quiz = quizzes[i] || { english: '', answer: '', korean: '' };
+    const srtBaseNorm = (srt.expression || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+    const matchedQuiz = quizzes.find(q => {
+      const qBase = (q.baseForm || q.keyExpression || q.answer || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+      return qBase && srtBaseNorm && qBase === srtBaseNorm;
+    }) || quizzes[i] || { english: '', answer: '', korean: '' };
 
-    const sentence = findMatchingSentence(srt, quizzes, readmeSentences, i, usedSet);
-    const exprTag = formatExpressionTag(quiz.baseForm || srt.expression || quiz.answer);
+    const sentence = findMatchingSentence(srt, quizzes, readmeSentences, keySentences, i, usedSet);
+    const exprTag = formatExpressionTag(srt.expression || matchedQuiz.baseForm || matchedQuiz.keyExpression || matchedQuiz.answer);
     output += `${srt.timestamp} ${num}. ${sentence} [${exprTag}]\n`;
   }
 
@@ -297,19 +328,22 @@ function findMatchingSentence(srtEntry, quizzes, readmeSentences, index, usedSet
   for (let i = 0; i < count; i++) {
     const num = (i + 1).toString().padStart(2, '0');
     const srt = srtEntries[i] || { expression: '', korean: '' };
-    const quiz = quizzes[i] || { answer: '', korean: '' };
+    const srtBaseNorm = (srt.expression || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+    const matchedQuiz = quizzes.find(q => {
+      const qBase = (q.baseForm || q.keyExpression || q.answer || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+      return qBase && srtBaseNorm && qBase === srtBaseNorm;
+    }) || quizzes[i] || { answer: '', korean: '' };
 
-    const expr = (quiz.baseForm || srt.expression || quiz.answer || '').replace(/,\s*/g, ' ').trim();
+    const expr = (srt.expression || matchedQuiz.baseForm || matchedQuiz.keyExpression || matchedQuiz.answer || '').replace(/,\s*/g, ' ').trim();
     let meaning = (srt.korean || '').trim();
     if (extractConciseDefinition) {
-      const matchQuiz = quizzes.find(q => (q.answer || '').toLowerCase().trim() === expr.toLowerCase()) || quiz;
-      const concise = extractConciseDefinition({ answer: expr, explanation: matchQuiz.explanation, korean: matchQuiz.korean });
-      if (concise && concise !== matchQuiz.korean) {
+      const concise = extractConciseDefinition({ answer: expr, baseForm: expr, keyExpression: expr, translation: matchedQuiz.translation, explanation: matchedQuiz.explanation, korean: matchedQuiz.korean });
+      if (concise && concise !== matchedQuiz.korean) {
         meaning = concise;
       }
     }
     if (!meaning) {
-      meaning = (quiz.korean || '').trim();
+      meaning = (matchedQuiz.korean || '').trim();
     }
 
     output += `${num}. ${expr} : ${meaning}\n`;

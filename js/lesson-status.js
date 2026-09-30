@@ -24,7 +24,9 @@ const LessonStep = Object.freeze({
   KEY_SENTENCES: 2,
   DEEP_DIVE: 'deep-dive',
   FULL_VIDEO: 3,
-  WRITING: 4
+  DICTATION: 4,
+  REVIEW_QUIZ: 5,
+  WRITING: 'writing'
 });
 
 const LessonStatusHelper = Object.freeze({

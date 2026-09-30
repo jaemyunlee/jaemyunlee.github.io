@@ -1,0 +1,995 @@
+const fs = require('fs');
+const path = require('path');
+
+const LESSON_ID = 'lesson-05';
+const LESSON_DIR = path.join(__dirname, '..', 'lessons', LESSON_ID);
+
+const POOL = [
+  // 1. My brain is mush
+  {
+    keyExpression: 'My brain is mush',
+    sentences: [
+      {
+        type: 'drag-and-drop',
+        english: 'After studying for five consecutive hours for the bar exam, [My, brain, is, mush] and I cannot read another paragraph.',
+        answer: 'My brain is mush',
+        tokens: ['My', 'brain', 'is', 'mush'],
+        options: ['My', 'brain', 'is', 'mush'],
+        korean: '변호사 시험을 위해 5시간 연속으로 공부했더니, 머리가 완전히 멍하고 생각이 안 돌아가서 더 이상 한 문단도 읽을 수가 없어요.',
+        explanation: '"my brain is mush"는 머리가 너무 지쳐 "머리가 멍하다, 생각이 안 돌아간다, 뇌가 굳었다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'I have worked all day without a break, and [My, brain, is, mush] right now.',
+        answer: 'My brain is mush',
+        tokens: ['My', 'brain', 'is', 'mush'],
+        options: ['My', 'brain', 'is', 'mush'],
+        korean: '쉬지 않고 하루 종일 일했더니, 지금은 머리가 완전히 멍해져서 생각이 하나도 안 나요.',
+        explanation: '과도한 업무 후 뇌가 녹초가 된 상태를 유쾌하게 묘사합니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: "Don't ask me to solve any complex calculus equations tonight; [My, brain, is, mush].",
+        answer: 'My brain is mush',
+        tokens: ['My', 'brain', 'is', 'mush'],
+        options: ['My', 'brain', 'is', 'mush'],
+        korean: '오늘 밤엔 복잡한 미적분 방정식 풀라고 하지 마세요. 머리가 완전히 굳어버렸거든요.',
+        explanation: '정신적 에너지가 소진되었음을 알릴 때 씁니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'By Friday afternoon following back-to-back budget meetings, [My, brain, is, mush].',
+        answer: 'My brain is mush',
+        tokens: ['My', 'brain', 'is', 'mush'],
+        options: ['My', 'brain', 'is', 'mush'],
+        korean: '연이은 예산 회의가 끝난 금요일 오후가 되면 머리가 멍해져서 아무 생각도 안 돌아가요.',
+        explanation: '연속 회의로 지친 직장인의 멘탈 상태입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'I stared blankly at the grocery list because [My, brain, is, mush] from lack of sleep.',
+        answer: 'My brain is mush',
+        tokens: ['My', 'brain', 'is', 'mush'],
+        options: ['My', 'brain', 'is', 'mush'],
+        korean: '수면 부족으로 머리가 멍해지는 바람에 나는 장보기 목록을 멍하니 쳐다보고만 있었어요.',
+        explanation: '잠을 못 자서 머리가 잘 안 돌아가는 상태입니다.'
+      }
+    ]
+  },
+
+  // 2. minors
+  {
+    keyExpression: 'minors',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'In addition to her primary major in biology, she chose two related [minors, careers, leagues, dorms] in chemistry and statistics.',
+        answer: 'minors',
+        options: ['minors', 'careers', 'leagues', 'dorms'],
+        korean: '생물학 주전공 외에도 그녀는 화학과 통계학에서 두 개의 관련 부전공을 선택했습니다.',
+        explanation: '"minors"는 대학교에서의 "부전공"들을 뜻합니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'College students often complete [academic minors to broaden their job prospects].',
+        answer: 'academic minors to broaden their job prospects',
+        tokens: ['academic', 'minors', 'to', 'broaden', 'their', 'job', 'prospects'],
+        options: ['academic', 'minors', 'to', 'broaden', 'their', 'job', 'prospects'],
+        korean: '대학생들은 종종 취업 전망을 넓히기 위해 부전공을 이수합니다.',
+        explanation: '취업 경쟁력을 위해 부전공을 취득하는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The university offers interdisciplinary [minors, penalties, budgets, seasons] such as digital humanities and environmental ethics.',
+        answer: 'minors',
+        options: ['minors', 'penalties', 'budgets', 'seasons'],
+        korean: '그 대학교는 디지털 인문학과 환경윤리 같은 학제 간 부전공 과정들을 제공합니다.',
+        explanation: '대학의 다양한 부전공 프로그램을 뜻합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'She graduated with high honors with a major in psychology and two [minors, tenants, patients, agents] in philosophy and French.',
+        answer: 'minors',
+        options: ['minors', 'tenants', 'patients', 'agents'],
+        korean: '그녀는 심리학 주전공과 철학 및 프랑스어 부전공 2개를 이수하고 우등으로 졸업했습니다.',
+        explanation: '학위 취득 시 복수의 부전공 이수를 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Completing two demanding [minors, collisions, interruptions, disputes] required taking summer courses every year.',
+        answer: 'minors',
+        options: ['minors', 'collisions', 'interruptions', 'disputes'],
+        korean: '까다로운 두 개의 부전공을 이수하기 위해서는 매년 계절학기 수업을 들어야만 했습니다.',
+        explanation: '부전공 학점 이수의 노력과 과정을 말합니다.'
+      }
+    ]
+  },
+
+  // 3. had to do with
+  {
+    keyExpression: 'had to do with',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Her decision to move closer to the coast [had to do with, made fun of, kept track of, ran out of] her deep passion for scuba diving.',
+        answer: 'had to do with',
+        options: ['had to do with', 'made fun of', 'kept track of', 'ran out of'],
+        korean: '그녀가 해안가 가까이 이사하기로 한 결정은 스쿠버 다이빙에 대한 깊은 열정과 관련이 있었어요.',
+        explanation: '"have to do with ~"는 "~와 관련이 있다"라는 필수 숙어입니다 (과거형: had to do with).'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'The sudden delay [had to do with severe mechanical issues] on the train.',
+        answer: 'had to do with severe mechanical issues',
+        tokens: ['had', 'to', 'do', 'with', 'severe', 'mechanical', 'issues'],
+        options: ['had', 'to', 'do', 'with', 'severe', 'mechanical', 'issues'],
+        korean: '갑작스러운 지연은 기차의 심각한 기계적 결함과 관련이 있었습니다.',
+        explanation: '지연의 원인이 기계적 문제와 관련 있었음을 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Most of the questions on the certification exam [had to do with, gave birth to, took hold of, looked down on] international trade regulations.',
+        answer: 'had to do with',
+        options: ['had to do with', 'gave birth to', 'took hold of', 'looked down on'],
+        korean: '자격증 시험 문제 대부분은 국제 무역 규정과 관련된 것들이었어요.',
+        explanation: '시험 문제의 주제가 무엇과 관련되어 있는지를 설명합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The sudden meeting this morning [had nothing to do with, fell in love with, caught up with, came down with] budget cuts, fortunately.',
+        answer: 'had nothing to do with',
+        options: ['had nothing to do with', 'fell in love with', 'caught up with', 'came down with'],
+        korean: '다행스럽게도 오늘 아침의 급작스러운 회의는 예산 삭감과는 아무런 관련이 없었습니다.',
+        explanation: '"had nothing to do with"는 전혀 무관함을 뜻합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Her research thesis [had to do with, put up with, did away with, kept pace with] cognitive child development and bilingual language acquisition.',
+        answer: 'had to do with',
+        options: ['had to do with', 'put up with', 'did away with', 'kept pace with'],
+        korean: '그녀의 연구 논문은 유아 인지 발달 및 이중언어 습득과 깊은 관련이 있었습니다.',
+        explanation: '연구 주제의 관련 분야를 설명합니다.'
+      }
+    ]
+  },
+
+  // 4. get into
+  {
+    keyExpression: 'get into',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Competition was fierce, but she managed to [get into, back out of, run away from, drop down to] the top-ranked medical school in the state.',
+        answer: 'get into',
+        options: ['get into', 'back out of', 'run away from', 'drop down to'],
+        korean: '경쟁이 치열했지만 그녀는 주 내 최고 명문 의과대학에 합격해 입학할 수 있었어요.',
+        explanation: '"get into ~"는 학교나 프로그램에 "입학하다, 합격하다, 들어가다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'He worked hard to [get into the credential program this semester].',
+        answer: 'get into the credential program this semester',
+        tokens: ['get', 'into', 'the', 'credential', 'program', 'this', 'semester'],
+        options: ['get', 'into', 'the', 'credential', 'program', 'this', 'semester'],
+        korean: '그는 이번 학기에 교사 자격증 프로그램에 입학하기 위해 열심히 노력했어요.',
+        explanation: '자격증 과정에 합격하여 들어가는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'What qualifications do prospective candidates need to [get into, pull out of, fall through, hold against] this specialized internship?',
+        answer: 'get into',
+        options: ['get into', 'pull out of', 'fall through', 'hold against'],
+        korean: '이 전문 인턴십 프로그램에 들어가기 위해 예비 지원자들은 어떤 자격을 갖추어야 하나요?',
+        explanation: '프로그램 참여 자격을 물을 때 씁니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'My daughter is practicing her cello audition pieces every afternoon to [get into, turn down, call off, blow up] the youth symphony.',
+        answer: 'get into',
+        options: ['get into', 'turn down', 'call off', 'blow up'],
+        korean: '내 딸은 청소년 오케스트라에 입단하기 위해 매일 오후 첼로 오디션 곡들을 연습하고 있어요.',
+        explanation: '오케스트라나 단체에 합격해 들어가는 모습입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'I recently started to [get into, fall out of, run down, look down on] road cycling on weekends with a group of friends.',
+        answer: 'get into',
+        options: ['get into', 'fall out of', 'run down', 'look down on'],
+        korean: '나는 최근 주말마다 친구들과 함께 로드 사이클링 취미에 푹 빠지기 시작했어요.',
+        explanation: '"get into (취미)"는 어떤 취미나 활동에 "흥미를 붙이다, 빠져들다"라는 뜻으로도 매우 자주 쓰입니다.'
+      }
+    ]
+  },
+
+  // 5. transcript
+  {
+    keyExpression: 'transcript',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Graduate school admissions require you to submit an official sealed [transcript, brochure, receipt, greeting] from your undergraduate university.',
+        answer: 'transcript',
+        options: ['transcript', 'brochure', 'receipt', 'greeting'],
+        korean: '대학원 입학처에서는 대학교의 공식 봉인된 성적 증명서를 제출할 것을 요구합니다.',
+        explanation: '"transcript"는 대학이나 고등학교의 공식 "성적 증명서 / 학업 이수 기록"을 뜻합니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'Please request an official copy of [your college transcript from the registrar].',
+        answer: 'your college transcript from the registrar',
+        tokens: ['your', 'college', 'transcript', 'from', 'the', 'registrar'],
+        options: ['your', 'college', 'transcript', 'from', 'the', 'registrar'],
+        korean: '학적과에 대학 성적 증명서 공식 사본을 신청해 주세요.',
+        explanation: '학적과에서 공식 성적표를 발급받는 표현입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The academic advisor reviewed my [transcript, passport, ticket, warranty] to check whether all prerequisite units were completed.',
+        answer: 'transcript',
+        options: ['transcript', 'passport', 'ticket', 'warranty'],
+        korean: '지도교수님께서는 선수 과목 학점들이 모두 이수되었는지 확인하기 위해 제 성적표를 검토하셨어요.',
+        explanation: '선수 과목 이수 여부를 성적표로 검토하는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Employers sometimes request an academic [transcript, billboard, advertisement, coupon] to verify a candidate\'s engineering coursework.',
+        answer: 'transcript',
+        options: ['transcript', 'billboard', 'advertisement', 'coupon'],
+        korean: '기업들은 지원자의 공학 관련 이수 과목을 검증하기 위해 때때로 성적 증명서를 요청합니다.',
+        explanation: '취업 시 제출하는 학업 성적표입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The courtroom reporter provided a word-for-word [transcript, sculpture, souvenir, painting] of the witness testimony.',
+        answer: 'transcript',
+        options: ['transcript', 'sculpture', 'souvenir', 'painting'],
+        korean: '법원 속기사는 증인 증언에 대한 한마디 한마디를 그대로 기록한 녹취록(속기록)을 제공했습니다.',
+        explanation: '"transcript"는 구두 진술이나 오디오의 "녹취록/기록"을 의미하기도 합니다.'
+      }
+    ]
+  },
+
+  // 6. suit their requirements
+  {
+    keyExpression: 'suit their requirements',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Applicants must demonstrate that their coursework and credits [suit their requirements, defy their expectations, break their boundaries, cost their fortunes] before enrollment.',
+        answer: 'suit their requirements',
+        options: ['suit their requirements', 'defy their expectations', 'break their boundaries', 'cost their fortunes'],
+        korean: '지원자들은 등록 전에 자신의 이수 과목과 학점이 입학 요구 조건에 부합함을 입증해야 합니다.',
+        explanation: '"suit their requirements"는 "그들의 요구 조건에 부합하다, 맞추다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'Make sure your portfolio and qualifications [suit their requirements for the position].',
+        answer: 'suit their requirements for the position',
+        tokens: ['suit', 'their', 'requirements', 'for', 'the', 'position'],
+        options: ['suit', 'their', 'requirements', 'for', 'the', 'position'],
+        korean: '귀하의 포트폴리오와 자격 요건이 해당 직무의 요구 조건에 꼭 맞는지 확인하세요.',
+        explanation: '직무 요건에 부합하도록 준비하는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'We modified the software specifications so that the customized system would [suit their requirements, lower their spirits, breach their trust, cloud their vision].',
+        answer: 'suit their requirements',
+        options: ['suit their requirements', 'lower their spirits', 'breach their trust', 'cloud their vision'],
+        korean: '우리는 맞춤형 시스템이 고객사의 요구 사항에 부합하도록 소프트웨어 사양을 수정했습니다.',
+        explanation: '고객의 요구 조건에 맞추어 시스템을 개발하는 표현입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Does this proposed meeting schedule [suit your requirements, cross your fingers, blow your mind, pull your leg], or should we pick another date?',
+        answer: 'suit your requirements',
+        options: ['suit your requirements', 'cross your fingers', 'blow your mind', 'pull your leg'],
+        korean: '제안된 이 회의 일정이 귀하의 요구 조건(일정)에 맞으신가요, 아니면 다른 날짜를 잡을까요?',
+        explanation: '일정이나 조건이 상대방에게 맞는지 정중히 묻는 표현입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Finding an affordable venue that would [suit their requirements, test their patience, break their hearts, shake their heads] for four hundred guests was tricky.',
+        answer: 'suit their requirements',
+        options: ['suit their requirements', 'test their patience', 'break their hearts', 'shake their heads'],
+        korean: '하객 400명을 위한 요구 조건에 딱 들어맞는 저렴한 행사장을 찾는 것은 쉽지 않았습니다.',
+        explanation: '조건에 알맞은 장소를 찾는 상황입니다.'
+      }
+    ]
+  },
+
+  // 7. covers
+  {
+    keyExpression: 'covers',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'This comprehensive biology syllabus [covers, avoids, deletes, ignores] everything from cellular genetics to marine ecology.',
+        answer: 'covers',
+        options: ['covers', 'avoids', 'deletes', 'ignores'],
+        korean: '이 포괄적인 생물학 강의 계획서는 세포 유전학부터 해양 생태학까지 모든 것을 다룹니다.',
+        explanation: '"cover"는 강의나 책이 특정 주제를 "다루다, 포함하다"라는 뜻입니다 (3인칭 단수: covers).'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'The textbook [covers modern economic theory in great detail].',
+        answer: 'covers modern economic theory in great detail',
+        tokens: ['covers', 'modern', 'economic', 'theory', 'in', 'great', 'detail'],
+        options: ['covers', 'modern', 'economic', 'theory', 'in', 'great', 'detail'],
+        korean: '그 교과서는 현대 경제학 이론을 매우 상세하게 다룹니다.',
+        explanation: '교재가 특정 이론을 상세히 다루고 있음을 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Our company insurance policy fully [covers, cancels, forbids, damages] emergency medical treatment while traveling abroad.',
+        answer: 'covers',
+        options: ['covers', 'cancels', 'forbids', 'damages'],
+        korean: '우리 회사 보험 제도는 해외 출장 중 응급 의료 치료비를 전액 보장(포함)합니다.',
+        explanation: '보험이 비용을 보장/부담함을 의미하는 "cover"입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Today\'s orientation session [covers, conceals, postpones, drops] campus safety rules, library privileges, and dining services.',
+        answer: 'covers',
+        options: ['covers', 'conceals', 'postpones', 'drops'],
+        korean: '오늘 오리엔테이션 세션에서는 교내 안전 수칙, 도서관 이용 권한, 구내식당 서비스를 다룹니다.',
+        explanation: '오리엔테이션에서 다루는 주제들을 설명합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The investigative journalist [covers, hides, skips, silences] local government politics and environmental policies for the daily paper.',
+        answer: 'covers',
+        options: ['covers', 'hides', 'skips', 'silences'],
+        korean: '그 탐사보도 기자는 일간지에서 지방정부 정치와 환경 정책을 취재(전담 보도)합니다.',
+        explanation: '기자가 특정 분야를 취재/보도함을 뜻합니다.'
+      }
+    ]
+  },
+
+  // 8. prerequisite
+  {
+    keyExpression: 'prerequisite',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Passing Introduction to Statistics is a strict [prerequisite, coincidence, decoration, celebration] before registering for Advanced Data Modeling.',
+        answer: 'prerequisite',
+        options: ['prerequisite', 'coincidence', 'decoration', 'celebration'],
+        korean: '기초 통계학을 통과하는 것은 고급 데이터 모델링을 수강 신청하기 위한 엄격한 선수 과목(필수 선행 조건)입니다.',
+        explanation: '"prerequisite"는 특정 과정을 이수하기 위해 미리 들어야 하는 "선수 요건, 필수 선행 과목"입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'Chemistry 101 is [a required prerequisite for this laboratory course].',
+        answer: 'a required prerequisite for this laboratory course',
+        tokens: ['a', 'required', 'prerequisite', 'for', 'this', 'laboratory', 'course'],
+        options: ['a', 'required', 'prerequisite', 'for', 'this', 'laboratory', 'course'],
+        korean: '화학 101은 이 실험 실습 과정을 위한 필수 선행 과목입니다.',
+        explanation: '실습 과정을 수강하기 위한 필수 선수 과목입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Fluency in at least two languages is a core [prerequisite, souvenir, obstacle, miracle] for international diplomatic positions.',
+        answer: 'prerequisite',
+        options: ['prerequisite', 'souvenir', 'obstacle', 'miracle'],
+        korean: '최소 2개 국어의 능통함은 국제 외교관 직책의 핵심 필수 요건입니다.',
+        explanation: '직무 수행을 위한 필수 전제 조건을 뜻합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Without completing the safety training [prerequisite, compliment, superstition, illusion], workers are not permitted on the construction site.',
+        answer: 'prerequisite',
+        options: ['prerequisite', 'compliment', 'superstition', 'illusion'],
+        korean: '안전 교육 선행 요건을 수료하지 않고는 작업자들이 건설 현장에 출입할 수 없습니다.',
+        explanation: '현장 근무를 위한 필수 사전 교육 요건입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Mutual trust is an indispensable [prerequisite, detour, discount, trophy] for any enduring and healthy partnership.',
+        answer: 'prerequisite',
+        options: ['prerequisite', 'detour', 'discount', 'trophy'],
+        korean: '상호 신뢰는 오래 지속되는 건강한 동반자 관계를 위한 없어서는 안 될 필수 전제 조건입니다.',
+        explanation: '인간관계의 필수 바탕 요건을 비유적으로 표현합니다.'
+      }
+    ]
+  },
+
+  // 9. waived
+  {
+    keyExpression: 'waived',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Because of her impressive prior research background, the academic dean [waived, doubled, imposed, rejected] the introductory seminar requirement.',
+        answer: 'waived',
+        options: ['waived', 'doubled', 'imposed', 'rejected'],
+        korean: '그녀의 뛰어난 이전 연구 경력 덕분에 학과장님은 입문 세미나 이수 요건을 면제해 주셨어요.',
+        explanation: '"waive"는 (학점, 요건, 수수료 등을) "면제해주다, 적용하지 않다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'The university [waived the application fee for low-income students].',
+        answer: 'waived the application fee for low-income students',
+        tokens: ['waived', 'the', 'application', 'fee', 'for', 'low-income', 'students'],
+        options: ['waived', 'the', 'application', 'fee', 'for', 'low-income', 'students'],
+        korean: '대학교는 저소득층 학생들을 위해 입학 지원 수수료를 면제해 주었습니다.',
+        explanation: '수수료를 면제해 주는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The bank kindly [waived, charged, inflated, demanded] the late payment fee after I explained the unexpected medical emergency.',
+        answer: 'waived',
+        options: ['waived', 'charged', 'inflated', 'demanded'],
+        korean: '예기치 못한 응급 의료 상황을 설명하자 은행은 연체료를 친절하게 면제해 주었습니다.',
+        explanation: '연체료나 벌금을 면제해 주는 표현입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Candidates with ten years of field experience had the testing requirement [waived, complicated, magnified, condemned] by the committee.',
+        answer: 'waived',
+        options: ['waived', 'complicated', 'magnified', 'condemned'],
+        korean: '10년의 현장 경력을 갖춘 지원자들은 위원회로부터 시험 요건을 면제받았습니다.',
+        explanation: '경력을 인정받아 시험을 면제받는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Before participating in extreme sports, athletes sign a legal form agreeing that claims are [waived, expanded, fabricated, celebrated].',
+        answer: 'waived',
+        options: ['waived', 'expanded', 'fabricated', 'celebrated'],
+        korean: '익스트림 스포츠에 참여하기 전 운동선수들은 손해배상 청구권이 면제(포기)됨에 동의하는 법적 양식에 서명합니다.',
+        explanation: '법적 권리를 포기/면제함을 뜻합니다.'
+      }
+    ]
+  },
+
+  // 10. cover
+  {
+    keyExpression: 'cover',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Can your previous internship hours [cover, destroy, violate, forget] the practical fieldwork unit for this credential?',
+        answer: 'cover',
+        options: ['cover', 'destroy', 'violate', 'forget'],
+        korean: '이전 인턴십 시간이 이 자격증의 현장 실습 학점을 대신 충족(대체 인정)해 줄 수 있나요?',
+        explanation: '"cover"는 요건이나 학점을 "대신 충족하다, 대체하여 인정받다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'This grant will [cover all your tuition expenses this year].',
+        answer: 'cover all your tuition expenses this year',
+        tokens: ['cover', 'all', 'your', 'tuition', 'expenses', 'this', 'year'],
+        options: ['cover', 'all', 'your', 'tuition', 'expenses', 'this', 'year'],
+        korean: '이 장학금이 올해 너의 등록금 전액을 충당(커버)해 줄 거야.',
+        explanation: '비용을 전액 감당/부담함을 뜻합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Could you please [cover, fire, ignore, report] my afternoon shift at the front desk while I attend a doctor appointment?',
+        answer: 'cover',
+        options: ['cover', 'fire', 'ignore', 'report'],
+        korean: '제가 병원 진료를 받는 동안 안내 데스크 오후 근무를 대신 맡아(커버해) 주실 수 있나요?',
+        explanation: '동료의 근무를 대신 맡아줄 때 "cover someone\'s shift"를 씁니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Twenty dollars should easily [cover, worsen, dismiss, divide] our lunch at the campus cafeteria.',
+        answer: 'cover',
+        options: ['cover', 'worsen', 'dismiss', 'divide'],
+        korean: '20달러면 학교 구내식당 점심값을 넉넉하게 감당(커버)할 수 있을 거예요.',
+        explanation: '식사 비용을 충당하기에 충분함을 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The textbook aims to [cover, erase, abandon, scatter] the fundamentals of organic chemistry in twelve concise chapters.',
+        answer: 'cover',
+        options: ['cover', 'erase', 'abandon', 'scatter'],
+        korean: '그 교재는 유기화학의 기초를 12개의 간결한 장에서 다루는 것을 목표로 합니다.',
+        explanation: '특정 내용을 포괄하여 다룸을 뜻합니다.'
+      }
+    ]
+  },
+
+  // 11. as well
+  {
+    keyExpression: 'as well',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'She passed the written subject exam, and she successfully completed the oral interview [as well, by far, at once, out loud].',
+        answer: 'as well',
+        options: ['as well', 'by far', 'at once', 'out loud'],
+        korean: '그녀는 필기 과목 시험에 합격했고, 구술 면접 또한 성공적으로 마쳤습니다.',
+        explanation: '"as well"은 문장 끝에서 "또한, 마찬가지로" (= too, also)를 뜻합니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'Kelly speaks fluent English, and [she understands Korean quite well as well].',
+        answer: 'she understands Korean quite well as well',
+        tokens: ['she', 'understands', 'Korean', 'quite', 'well', 'as', 'well'],
+        options: ['she', 'understands', 'Korean', 'quite', 'well', 'as', 'well'],
+        korean: '켈리는 유창한 영어를 구사하고, 한국어 또한 꽤 잘 이해해요.',
+        explanation: '두 가지 역량을 겸비했음을 덧붙이는 표현입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'We ordered savory pasta for dinner and decided to get chocolate cake for dessert [as well, in vain, off hand, by heart].',
+        answer: 'as well',
+        options: ['as well', 'in vain', 'off hand', 'by heart'],
+        korean: '우리는 저녁으로 맛있는 파스타를 주문했고, 디저트로 초콜릿 케이크 또한 먹기로 결정했어요.',
+        explanation: '추가로 무언가를 더 선택할 때 씁니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'If our team wins the championship, the assistant coaches will receive medals [as well, at odds, on edge, under fire].',
+        answer: 'as well',
+        options: ['as well', 'at odds', 'on edge', 'under fire'],
+        korean: '우리 팀이 우승하면 코치진 또한 메달을 수여받게 됩니다.',
+        explanation: '동일한 혜택을 함께 받는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Reading English news daily expands your vocabulary and sharpens your analytical thinking [as well, for good, by sight, out cold].',
+        answer: 'as well',
+        options: ['as well', 'for good', 'by sight', 'out cold'],
+        korean: '매일 영어 뉴스를 읽는 것은 어휘력을 넓혀줄 뿐만 아니라 분석적 사고력 또한 날카롭게 해줍니다.',
+        explanation: '추가적인 긍정적 효과를 덧붙입니다.'
+      }
+    ]
+  },
+
+  // 12. come up
+  {
+    keyExpression: 'come up',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'You should review child psychology theories thoroughly because they always [come up, run down, drop by, hold back] on the state credential test.',
+        answer: 'come up',
+        options: ['come up', 'run down', 'drop by', 'hold back'],
+        korean: '주 교사 자격 시험에 늘 문제로 출제되기 때문에 아동 심리학 이론들을 철저히 복습해야 합니다.',
+        explanation: '"come up"은 시험 문제나 화두가 "(문제나 주제로) 나오다, 출제되다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'The issue of funding did not [come up during our staff meeting].',
+        answer: 'come up during our staff meeting',
+        tokens: ['come', 'up', 'during', 'our', 'staff', 'meeting'],
+        options: ['come', 'up', 'during', 'our', 'staff', 'meeting'],
+        korean: '자금 지원 문제는 직원 회의 중에 화두로 나오지 않았습니다.',
+        explanation: '회의에서 안건으로 다루어지지 않았음을 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Whenever unexpected technical difficulties [come up, back off, burn out, give in], remain calm and contact IT support.',
+        answer: 'come up',
+        options: ['come up', 'back off', 'burn out', 'give in'],
+        korean: '예상치 못한 기술적 문제가 발생할 때는 언제나 침착함을 유지하고 IT 지원팀에 연락하세요.',
+        explanation: '문제나 돌발 상황이 "발생하다"라는 의미입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Her impressive volunteer experience happened to [come up, fade away, break apart, look down] naturally during the interview.',
+        answer: 'come up',
+        options: ['come up', 'fade away', 'break apart', 'look down'],
+        korean: '그녀의 인상적인 봉사활동 경험이 면접 도중 자연스럽게 화제로 떠올랐습니다.',
+        explanation: '대화 도중 어떤 화제가 자연스럽게 언급되는 모습입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'I will definitely let you know if any new job vacancies [come up, shut down, pull over, fall through] in our department.',
+        answer: 'come up',
+        options: ['come up', 'shut down', 'pull over', 'fall through'],
+        korean: '우리 부서에 새로운 채용 공석이 생기면 꼭 바로 알려드릴게요.',
+        explanation: '기회나 공석이 "생기다, 나오다"라는 뜻입니다.'
+      }
+    ]
+  },
+
+  // 13. multiple choice
+  {
+    keyExpression: 'multiple choice',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'The licensing examination consists of eighty [multiple choice, open ended, oral speech, free verse] questions and two essay prompts.',
+        answer: 'multiple choice',
+        options: ['multiple choice', 'open ended', 'oral speech', 'free verse'],
+        korean: '그 자격시험은 80개의 객관식 문제와 두 개의 논술형 문제로 구성되어 있습니다.',
+        explanation: '"multiple choice"는 여러 보기 중 하나를 고르는 "객관식"을 뜻합니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'I find [multiple choice tests easier than writing essays] under time pressure.',
+        answer: 'multiple choice tests easier than writing essays',
+        tokens: ['multiple', 'choice', 'tests', 'easier', 'than', 'writing', 'essays'],
+        options: ['multiple', 'choice', 'tests', 'easier', 'than', 'writing', 'essays'],
+        korean: '시간 압박 속에서는 논술 작성보다 객관식 시험이 더 수월하게 느껴져요.',
+        explanation: '객관식 시험과 논술 시험을 비교하는 문장입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'On a standardized [multiple choice, physical fitness, visual arts, musical rhythm] exam, eliminating obviously wrong answers increases your odds.',
+        answer: 'multiple choice',
+        options: ['multiple choice', 'physical fitness', 'visual arts', 'musical rhythm'],
+        korean: '표준화된 객관식 시험에서는 명백히 틀린 오답을 소거하는 것이 정답 확률을 높여줍니다.',
+        explanation: '객관식 시험의 소거법 풀이 전략입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Each [multiple choice, random guessing, private tutor, study group] question offers four distinct options labeled A through D.',
+        answer: 'multiple choice',
+        options: ['multiple choice', 'random guessing', 'private tutor', 'study group'],
+        korean: '각 객관식 문제는 A부터 D까지 네 개의 뚜렷한 보기를 제공합니다.',
+        explanation: '객관식 4지선다형 시험의 구조입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Although it looked simple, that tricky [multiple choice, physical sprint, spoken dialogue, group debate] problem confused many test takers.',
+        answer: 'multiple choice',
+        options: ['multiple choice', 'physical sprint', 'spoken dialogue', 'group debate'],
+        korean: '간단해 보였지만, 그 까다로운 객관식 문제는 많은 수험생들을 혼란에 빠뜨렸어요.',
+        explanation: '함정이 있는 까다로운 객관식 문항입니다.'
+      }
+    ]
+  },
+
+  // 14. second guess
+  {
+    keyExpression: 'second guess',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'When taking timed tests, try not to [second guess, take pride in, make sense of, give credit to] your initial instincts too often.',
+        answer: 'second guess',
+        options: ['second guess', 'take pride in', 'make sense of', 'give credit to'],
+        korean: '시간제한이 있는 시험을 볼 때는 원래의 첫 직감을 너무 자주 뒤늦게 의심(재고)하지 않도록 하세요.',
+        explanation: '"second guess"는 이미 내린 결정이나 정답을 "뒤늦게 의심하다, 재고하다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'Once you make a thoughtful choice, [do not second guess yourself constantly].',
+        answer: 'do not second guess yourself constantly',
+        tokens: ['do', 'not', 'second', 'guess', 'yourself', 'constantly'],
+        options: ['do', 'not', 'second', 'guess', 'yourself', 'constantly'],
+        korean: '신중하게 결정을 내렸다면 스스로를 끊임없이 의심하지 마세요.',
+        explanation: '"second guess yourself"는 자기 자신의 결정을 의심하다라는 뜻입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Critics who sit on the sidelines love to [second guess, carry out, make up for, break into] difficult decisions made by surgeons in the operating room.',
+        answer: 'second guess',
+        options: ['second guess', 'carry out', 'make up for', 'break into'],
+        korean: '방관하는 비판자들은 수술실에서 외과의사가 내린 힘든 결정을 사후에 뒤늦게 왈가왈부 비판하기를 좋아합니다.',
+        explanation: '타인의 결정을 사후에 비판하거나 문제 삼는 경우입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'I started to [second guess, set fire to, keep pace with, run short of] my career direction after working three grueling years at the corporate firm.',
+        answer: 'second guess',
+        options: ['second guess', 'set fire to', 'keep pace with', 'run short of'],
+        korean: '대기업에서 힘겨운 3년을 일한 뒤, 나는 내 진로 방향에 대해 뒤늦게 의구심을 품기 시작했습니다.',
+        explanation: '자신의 진로 선택을 다시 고민하는 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Trust your preparation and avoid the urge to [second guess, brush up on, put down to, look forward to] your answers in the final minutes.',
+        answer: 'second guess',
+        options: ['second guess', 'brush up on', 'put down to', 'look forward to'],
+        korean: '자신의 준비를 믿고, 마지막 몇 분 동안 정답을 뒤늦게 고치고 의심하려는 충동을 피하세요.',
+        explanation: '시험 직전 정답을 바꾸려는 불안감을 경계할 때 씁니다.'
+      }
+    ]
+  },
+
+  // 15. decently
+  {
+    keyExpression: 'decently',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Although she didn\'t get a perfect score, she performed [decently, terribly, miserably, poorly] enough on the exam to earn her certificate.',
+        answer: 'decently',
+        options: ['decently', 'terribly', 'miserably', 'poorly'],
+        korean: '만점을 받지는 못했지만, 그녀는 자격증을 취득할 수 있을 만큼 시험을 꽤 괜찮게(준수하게) 치렀습니다.',
+        explanation: '"decently"는 완벽하지는 않더라도 "남부럽지 않게, 꽤 괜찮게, 준수하게"를 뜻합니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'The whole team played [decently well despite the rainy conditions].',
+        answer: 'decently well despite the rainy conditions',
+        tokens: ['decently', 'well', 'despite', 'the', 'rainy', 'conditions'],
+        options: ['decently', 'well', 'despite', 'the', 'rainy', 'conditions'],
+        korean: '우천 상황에도 불구하고 팀 전체가 꽤 훌륭하게 경기를 치렀어요.',
+        explanation: '악조건 속에서도 준수한 경기력을 보였음을 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'For a self-taught baker, he makes sourdough bread [decently, awkwardly, sadly, blindly] and with great flavor.',
+        answer: 'decently',
+        options: ['decently', 'awkwardly', 'sadly', 'blindly'],
+        korean: '독학한 제빵사치고 그는 사워도우 빵을 꽤 괜찮게, 그리고 훌륭한 풍미로 구워냅니다.',
+        explanation: '솜씨가 꽤 준수함을 칭찬할 때 씁니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Every entry-level employee deserves to be paid [decently, harshly, rarely, seldom] to afford rent in this metropolitan area.',
+        answer: 'decently',
+        options: ['decently', 'harshly', 'rarely', 'seldom'],
+        korean: '모든 신입 직원은 이 대도시 지역에서 월세를 감당할 수 있을 만큼 어엿하게(적정 수준으로) 급여를 받아야 마땅합니다.',
+        explanation: '적정하고 타당한 수준으로 대우받음을 뜻합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The cheap hotel room was furnished [decently, horribly, viciously, bitterly] with a clean queen bed and a modern desk.',
+        answer: 'decently',
+        options: ['decently', 'horribly', 'viciously', 'bitterly'],
+        korean: '그 저렴한 호텔 방은 깨끗한 퀸 침대와 현대식 책상으로 꽤 깔끔하고 준수하게 꾸며져 있었어요.',
+        explanation: '시설이 가격 대비 꽤 괜찮음을 나타냅니다.'
+      }
+    ]
+  },
+
+  // 16. out of the three
+  {
+    keyExpression: 'out of the three',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'She took all three section tests and scored the highest in linguistics [out of the three, into the blue, over the moon, under the weather].',
+        answer: 'out of the three',
+        options: ['out of the three', 'into the blue', 'over the moon', 'under the weather'],
+        korean: '그녀는 세 개 영역 시험을 모두 치렀고, 그 셋 중에서 언어학 영역에서 가장 높은 점수를 받았습니다.',
+        explanation: '"out of the three"는 "그 셋 중에서 / 3개 중에서"라는 뜻의 수량 범위 표현입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'This blue jacket was [the warmest one out of the three] coats.',
+        answer: 'the warmest one out of the three',
+        tokens: ['the', 'warmest', 'one', 'out', 'of', 'the', 'three'],
+        options: ['the', 'warmest', 'one', 'out', 'of', 'the', 'three'],
+        korean: '이 파란색 자켓이 그 세 벌의 코트 중에서 가장 따뜻했어요.',
+        explanation: '세 가지 대상 중 하나를 비교 선택하는 표현입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'There were three final job candidates, and Sarah was clearly the most qualified [out of the three, out of the box, out of the woods, out of the fire].',
+        answer: 'out of the three',
+        options: ['out of the three', 'out of the box', 'out of the woods', 'out of the fire'],
+        korean: '최종 면접 후보자가 3명 있었는데, 사라가 그 셋 중에서 단연 가장 뛰어난 자격을 갖추고 있었어요.',
+        explanation: '세 명의 후보자 중 비교 우위를 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The mechanic evaluated all three used sedans and recommended the silver one as the best value [out of the three, off the hook, at the drop, by the skin].',
+        answer: 'out of the three',
+        options: ['out of the three', 'off the hook', 'at the drop', 'by the skin'],
+        korean: '정비사는 중고 세단 세 대를 모두 점검한 뒤, 그 셋 중에서 은색 차량을 가성비 최고로 추천했어요.',
+        explanation: '세 대의 차량 중 가장 추천할 만한 대상을 꼽습니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'We sampled three distinct varieties of olive oil, and the Greek one tasted richest [out of the three, under the rose, beyond the pale, behind the veil].',
+        answer: 'out of the three',
+        options: ['out of the three', 'under the rose', 'beyond the pale', 'behind the veil'],
+        korean: '우리는 서로 다른 세 종류의 올리브유를 시식해 보았는데, 그리스산이 그 셋 중에서 가장 풍미가 깊었어요.',
+        explanation: '세 가지 맛 중 최고를 평가하는 상황입니다.'
+      }
+    ]
+  },
+
+  // 17. come up with
+  {
+    keyExpression: 'come up with',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'During the marketing brainstorming session, the intern managed to [come up with, back down from, run out of, keep up with] a brilliant advertising slogan.',
+        answer: 'come up with',
+        options: ['come up with', 'back down from', 'run out of', 'keep up with'],
+        korean: '마케팅 브레인스토밍 회의 동안 그 인턴은 기발한 광고 슬로건 하나를 생각해 냈어요.',
+        explanation: '"come up with ~"는 아이디어나 해결책을 "생각해내다, 짜내다"라는 핵심 구동사입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'We need to [come up with an effective solution quickly].',
+        answer: 'come up with an effective solution quickly',
+        tokens: ['come', 'up', 'with', 'an', 'effective', 'solution', 'quickly'],
+        options: ['come', 'up', 'with', 'an', 'effective', 'solution', 'quickly'],
+        korean: '우리는 신속하게 효과적인 해결책을 마련해야 합니다.',
+        explanation: '해결 방안을 고안해 내는 긴급한 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Can anyone [come up with, break away from, get rid of, catch on to] a plausible explanation for why the server crashed at midnight?',
+        answer: 'come up with',
+        options: ['come up with', 'break away from', 'get rid of', 'catch on to'],
+        korean: '자정에 서버가 다운된 이유에 대해 그럴듯한 설명을 제시해 주실 분 계신가요?',
+        explanation: '이유나 설명을 제시할 때 씁니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'My daughter loved to [come up with, do away with, look down on, give birth to] imaginative bedtime stories about talking forest animals.',
+        answer: 'come up with',
+        options: ['come up with', 'do away with', 'look down on', 'give birth to'],
+        korean: '내 딸은 말하는 숲속 동물들에 대한 상상력 풍부한 베드타임 스토리를 지어내는 것을 무척 좋아했어요.',
+        explanation: '이야기를 창작하거나 지어내는 모습입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Despite having an empty pantry, grandma [came up with, gave up on, ran down, fell out with] a delicious hot soup for our unexpected guests.',
+        answer: 'came up with',
+        options: ['came up with', 'gave up on', 'ran down', 'fell out with'],
+        korean: '식료품 저장고가 텅 비었음에도 불구하고 할머니께서는 불시의 손님들을 위해 맛있는 따뜻한 수프를 뚝딱 만들어 내셨어요.',
+        explanation: '상황에 맞춰 요리나 대안을 뚝딱 마련하는 표현입니다.'
+      }
+    ]
+  },
+
+  // 18. opened my eyes
+  {
+    keyExpression: 'opened my eyes',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'Volunteering at the rural community clinic truly [opened my eyes, turned my head, broke my heart, tied my hands] to the realities of healthcare inequality.',
+        answer: 'opened my eyes',
+        options: ['opened my eyes', 'turned my head', 'broke my heart', 'tied my hands'],
+        korean: '시골 지역사회 보건소에서 봉사활동을 했던 것은 의료 불평등의 현실에 대해 진정으로 내 눈을 뜨게(새로운 깨달음을) 해주었어요.',
+        explanation: '"open one\'s eyes to ~"는 "~에 대해 새로운 깨달음을 주다, 눈을 뜨게 하다"라는 관용구입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'Studying abroad in Spain [opened my eyes to different cultural perspectives].',
+        answer: 'opened my eyes to different cultural perspectives',
+        tokens: ['opened', 'my', 'eyes', 'to', 'different', 'cultural', 'perspectives'],
+        options: ['opened', 'my', 'eyes', 'to', 'different', 'cultural', 'perspectives'],
+        korean: '스페인 유학 생활은 다양한 문화적 관점에 내 눈을 번쩍 뜨이게 해주었습니다.',
+        explanation: '새로운 문화적 시야를 넓혀주었음을 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Reading that investigative environmental book completely [opened my eyes, closed my doors, chilled my bones, burned my bridges] to ocean plastic waste.',
+        answer: 'opened my eyes',
+        options: ['opened my eyes', 'closed my doors', 'chilled my bones', 'burned my bridges'],
+        korean: '그 탐사 환경 도서를 읽은 것은 해양 플라스틱 쓰레기 문제에 대해 내 눈을 완전히 뜨이게 만들었습니다.',
+        explanation: '심각한 문제에 대해 경각심과 깨달음을 얻은 상황입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Her encouraging high school mentor [opened her eyes, kept her secret, stole her thunder, lost her patience] to the vast possibilities in astrophysics.',
+        answer: 'opened her eyes',
+        options: ['opened her eyes', 'kept her secret', 'stole her thunder', 'lost her patience'],
+        korean: '격려를 아끼지 않던 고등학교 멘토 선생님은 천체물리학의 무궁무진한 가능성에 그녀의 눈을 뜨게 해주셨습니다.',
+        explanation: '새로운 학문 분야에 시야를 열어준 스승의 영향력입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Experiencing an earthquake first-hand definitely [opened their eyes, swept their feet, bit their tongues, cleared their names] to disaster preparedness.',
+        answer: 'opened their eyes',
+        options: ['opened their eyes', 'swept their feet', 'bit their tongues', 'cleared their names'],
+        korean: '지진을 직접 겪어본 것은 재난 대비의 중요성에 대해 그들의 눈을 번쩍 뜨이게 만들었습니다.',
+        explanation: '직접 경험을 통해 안전의식에 눈을 뜬 모습입니다.'
+      }
+    ]
+  },
+
+  // 19. in-depth
+  {
+    keyExpression: 'in-depth',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'The professor conducted an [in-depth, superficial, hasty, careless] analysis of linguistic development in multilingual children.',
+        answer: 'in-depth',
+        options: ['in-depth', 'superficial', 'hasty', 'careless'],
+        korean: '교수님은 다국어 구사 아동들의 언어 발달에 대해 심도 있고 깊이 있는 분석을 수행하셨습니다.',
+        explanation: '"in-depth"는 "심도 있는, 상세하고 깊이 있는"을 뜻하는 형용사입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'The podcast provides [in-depth discussions on modern educational reform].',
+        answer: 'in-depth discussions on modern educational reform',
+        tokens: ['in-depth', 'discussions', 'on', 'modern', 'educational', 'reform'],
+        options: ['in-depth', 'discussions', 'on', 'modern', 'educational', 'reform'],
+        korean: '그 팟캐스트는 현대 교육 개혁에 대한 심도 있는 토론을 제공합니다.',
+        explanation: '깊이 있는 심층 토론을 다루는 표현입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'We held an [in-depth, off-hand, second-rate, short-lived] workshop over the weekend to redesign our user interface.',
+        answer: 'in-depth',
+        options: ['in-depth', 'off-hand', 'second-rate', 'short-lived'],
+        korean: '우리는 사용자 인터페이스를 재설계하기 위해 주말 동안 심층 워크숍을 진행했습니다.',
+        explanation: '집중적이고 깊이 있는 워크숍을 의미합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'This documentary offers an [in-depth, absent, blind, partial] look into the daily training routine of Olympic marathoners.',
+        answer: 'in-depth',
+        options: ['in-depth', 'absent', 'blind', 'partial'],
+        korean: '이 다큐멘터리는 올림픽 마라톤 선수들의 일상 훈련 루틴을 깊이 있게 밀착 조명합니다.',
+        explanation: '심층 취재 다큐멘터리를 묘사합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Before launching the mobile app, engineering teams performed an [in-depth, clumsy, empty, dizzy] security audit.',
+        answer: 'in-depth',
+        options: ['in-depth', 'clumsy', 'empty', 'dizzy'],
+        korean: '모바일 앱을 출시하기 전, 엔지니어링 팀은 심도 있는 보안 감사를 실시했습니다.',
+        explanation: '철저하고 꼼꼼한 보안 검증입니다.'
+      }
+    ]
+  },
+
+  // 20. fell into
+  {
+    keyExpression: 'fell into',
+    sentences: [
+      {
+        type: 'multiple-choice',
+        english: 'He originally studied chemistry in college, but he [fell into, backed out of, gave away, tore up] software programming after building a website for a friend.',
+        answer: 'fell into',
+        options: ['fell into', 'backed out of', 'gave away', 'tore up'],
+        korean: '그는 원래 대학에서 화학을 전공했지만, 친구의 웹사이트를 만들어주다가 우연히 소프트웨어 프로그래밍의 길로 발을 들이게 되었어요.',
+        explanation: '"fall into ~"는 계획해서가 아니라 "우연히 시작하다, 어쩌다 보니 발을 들이게 되다"라는 뜻입니다.'
+      },
+      {
+        type: 'drag-and-drop',
+        english: 'She never planned to teach, but [she just fell into the profession].',
+        answer: 'she just fell into the profession',
+        tokens: ['she', 'just', 'fell', 'into', 'the', 'profession'],
+        options: ['she', 'just', 'fell', 'into', 'the', 'profession'],
+        korean: '그녀는 교사가 될 계획이 전혀 없었지만, 어쩌다 보니 그 직업의 길에 들어서게 되었어요.',
+        explanation: '우연한 계기로 직업을 갖게 되었음을 나타냅니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'I accidentally [fell into, broke away from, turned off, grew out of] the habit of waking up at sunrise during our month on the farm.',
+        answer: 'fell into',
+        options: ['fell into', 'broke away from', 'turned off', 'grew out of'],
+        korean: '농장에서 한 달을 보내는 동안 나는 어쩌다 보니 자연스럽게 일출에 일어나는 습관이 들게 되었어요.',
+        explanation: '자연스럽게 어떤 습관에 젖어들 때 씁니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'After helping out at a local animal shelter for a weekend, Mark [fell into, dropped out of, cut back on, stood up to] animal rescue work full-time.',
+        answer: 'fell into',
+        options: ['fell into', 'dropped out of', 'cut back on', 'stood up to'],
+        korean: '주말 동안 동네 동물보호소에서 일손을 도운 뒤, 마크는 우연한 계기로 동물 구조 활동에 전념하게 되었습니다.',
+        explanation: '봉사를 계기로 활동에 뛰어들게 된 계기입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Neither of them sought acting fame, yet both sisters [fell into, turned down, pulled back, held on] commercial voiceover work serendipitously.',
+        answer: 'fell into',
+        options: ['fell into', 'turned down', 'pulled back', 'held on'],
+        korean: '자매 둘 다 연기자의 명성을 좇은 적은 없었지만, 둘 다 뜻밖의 행운으로 광고 성우 일에 발을 들이게 되었습니다.',
+        explanation: '우연히 성우 일을 시작하게 된 운명적인 계기입니다.'
+      }
+    ]
+  }
+];
+
+// Write quiz-pool.json
+const poolPath = path.join(LESSON_DIR, 'quiz-pool.json');
+fs.writeFileSync(poolPath, JSON.stringify(POOL, null, 2), 'utf8');
+console.log(`[Success] Written: ${poolPath} (${POOL.length} expressions, ${POOL.length * 5} sentences)`);
+
+// Write quiz.md using the 1st sentence of each pool entry
+let md = `# Lesson 5: Kelly's Teaching Credential Journey Quizzes\n\n`;
+POOL.forEach((item, idx) => {
+  const s = item.sentences[0];
+  md += `## Quiz ${idx + 1}\n`;
+  md += `- **Type**: ${s.type}\n`;
+  md += `- **English**: ${s.english}\n`;
+  md += `- **Answer**: ${s.answer}\n`;
+  if (s.options) {
+    md += `- **Options**: ${s.options.join(', ')}\n`;
+  }
+  md += `- **Korean**: ${s.korean}\n`;
+  md += `- **Explanation**: ${s.explanation}\n\n`;
+});
+
+const quizMdPath = path.join(LESSON_DIR, 'quiz.md');
+fs.writeFileSync(quizMdPath, md.trim() + '\n', 'utf8');
+console.log(`[Success] Written: ${quizMdPath}`);

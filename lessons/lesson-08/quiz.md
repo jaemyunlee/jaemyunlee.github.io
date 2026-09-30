@@ -1,253 +1,253 @@
 # Lesson 8: Car Wash Incident, Ryden's Collarbone & ABC Parade Quizzes
 
 ## Quiz 1
-- **Type**: drag-and-drop
-- **Audio**: audio/so this week has not gone to plan well.wav
-- **English**: so this week [has, not, gone, to, plan] well,
+- **Type**: multiple-choice
+- **English**: With the flight cancellations and sudden storm, our vacation [has not gone to plan, has stayed on schedule, has broken the bank, has made ends meet] at all.
 - **Answer**: has not gone to plan
 - **BaseForm**: go to plan
-- **Korean**: 그래서 이번 주는 생각만큼 계획대로 잘 풀리지 않았어요,
-- **Explanation**: "go to plan"은 '계획대로 되다/진행되다'라는 뜻이에요. "has not gone to plan"은 '계획대로 풀리지 않았다'는 현재완료 부정 표현입니다.
+- **Options**: has not gone to plan, has stayed on schedule, has broken the bank, has made ends meet
+- **Korean**: 항공편 취소와 갑작스러운 폭풍우 때문에 우리 휴가는 전혀 계획대로 풀리지 않았어요.
+- **Explanation**: "go to plan"은 "계획대로 되다/진행되다"라는 뜻이며, "has not gone to plan"은 "계획대로 풀리지 않았다"라는 완료형 부정 표현입니다.
 
 ## Quiz 2
-- **Type**: drag-and-drop
-- **Audio**: audio/we went to go get our car washed..wav
-- **English**: we [went, to, go, get] our car washed.
+- **Type**: multiple-choice
+- **English**: Since we ran out of fresh milk, dad [went to go get, decided to call off, refused to pick up, forgot to throw out] some from the nearby convenience store.
 - **Answer**: went to go get
 - **BaseForm**: go get
-- **Korean**: 우리 차를 세차하러 갔었잖아요.
-- **Explanation**: "go get ~"은 구어체에서 '~하러 가다, 가져오다'라는 뜻으로 아주 자주 쓰여요. "went to go get our car washed"는 세차를 맡기러 갔다는 의미입니다.
+- **Options**: went to go get, decided to call off, refused to pick up, forgot to throw out
+- **Korean**: 신선한 우유가 다 떨어져서 아빠는 근처 편의점에 가서 좀 사 오셨어요.
+- **Explanation**: "go get ~"은 구어체에서 "~하러 가다, 사러/가져오러 가다"라는 뜻으로 매우 자주 쓰이며, "went to go get"은 과거에 사러/가져오러 갔다는 의미입니다.
 
 ## Quiz 3
 - **Type**: multiple-choice
-- **Audio**: audio/but we ended up colliding with the truck in the car wash..wav
-- **English**: but we ended up [colliding, dodging, speeding, reversing] with the truck in the car wash.
+- **English**: Because of the thick fog on the highway, two delivery vans ended up [colliding, speeding, parking, turning] with each other.
 - **Answer**: colliding
 - **BaseForm**: collide
-- **Korean**: 그런데 결국 세차장 안에서 앞 트럭과 충돌하고 말았죠.
-- **Explanation**: "collide"는 차량이나 물체가 '충돌하다, 부딪치다'라는 뜻의 동사예요. "end up -ing"와 함께 쓰여 '결국 부딪치고 말았다'는 뜻이 됩니다.
+- **Options**: colliding, speeding, parking, turning
+- **Korean**: 고속도로의 짙은 안개 때문에 두 대의 배달 밴이 서로 충돌하고 말았습니다.
+- **Explanation**: "collide (with)"는 차량이나 물체가 서로 "충돌하다, 부딪치다"를 뜻합니다.
 
 ## Quiz 4
-- **Type**: drag-and-drop
-- **Audio**: audio/So we are now in the process of having to get quotes for that to get repainted.wav
-- **English**: So we are now in the process of having to [get, quotes] for that to get repainted
+- **Type**: multiple-choice
+- **English**: Before deciding on a home contractor, we need to [get quotes, make enemies, pay fines, lose receipts] from at least three different companies.
 - **Answer**: get quotes
 - **BaseForm**: get quotes
-- **Korean**: 그래서 지금 도색 작업을 위해 수리 견적들을 알아보고 있는 중이에요.
-- **Explanation**: "get quotes"는 수리나 시공 비용이 얼마나 나오는지 '견적을 받다/알아보다'라는 뜻이에요.
+- **Options**: get quotes, make enemies, pay fines, lose receipts
+- **Korean**: 주택 시공업체를 결정하기 전에 적어도 세 곳 이상의 다른 업체로부터 견적을 받아봐야 해요.
+- **Explanation**: "get quotes"는 공사, 수리, 인테리어 등의 비용이 얼마나 드는지 "견적을 받다/알아보다"라는 뜻입니다.
 
 ## Quiz 5
 - **Type**: multiple-choice
-- **Audio**: audio/and theres a little like dent. Its not a big damage.wav
-- **English**: and there's a little like [dent, scrape, crack, puncture]. It's not a big damage,
+- **English**: Someone opened their car door too hard in the parking lot and left a small [dent, mirror, engine, pedal] on my passenger side door.
 - **Answer**: dent
 - **BaseForm**: dent
-- **Korean**: 그리고 약간 찌그러진 곳도 있고요. 큰 파손은 아니지만,
-- **Explanation**: "dent"는 차체나 금속 표면이 쿵 부딪쳐서 '움푹 들어간 곳, 찌그러진 자국'을 뜻해요.
+- **Options**: dent, mirror, engine, pedal
+- **Korean**: 주차장에서 누군가 차 문을 너무 세게 열어서 내 조수석 쪽 문에 작은 찌그러진 자국(문콕)을 남겼어요.
+- **Explanation**: "dent"는 차체나 금속 표면이 부딪혀 "움푹 들어간 곳, 찌그러진 자국"을 의미합니다.
 
 ## Quiz 6
-- **Type**: fill-in-the-blank
-- **Audio**: audio/so were gonna get it fixed..wav
-- **English**: so we're gonna [get it fixed].
+- **Type**: multiple-choice
+- **English**: The kitchen sink started leaking yesterday, so we are going to [get it fixed, let it freeze, turn it red, make it dirty] before the weekend.
 - **Answer**: get it fixed
 - **BaseForm**: get it fixed
-- **Korean**: 그래서 수리를 맡겨서 고칠 거예요.
-- **Explanation**: "get it fixed"는 정비소 등 전문가에게 '수리받다, 고치다'라는 뜻의 사역 수동 표현이에요 (get + 목적어 + 과거분사).
+- **Options**: get it fixed, let it freeze, turn it red, make it dirty
+- **Korean**: 어제 싱크대에서 물이 새기 시작해서 주말이 오기 전에 수리를 맡겨 고칠 생각이에요.
+- **Explanation**: "get it fixed"는 수리공이나 전문가에게 "수리를 맡겨서 고치다"라는 뜻의 사역 수동 표현입니다 (get + it + fixed).
 
 ## Quiz 7
-- **Type**: fill-in-the-blank
-- **Audio**: audio/So were dealing with that..wav
-- **English**: So we're [dealing with] that.
+- **Type**: multiple-choice
+- **English**: Our team spent the entire afternoon [dealing with, running away from, cheering up for, turning into] customer complaints about the server crash.
 - **Answer**: dealing with
 - **BaseForm**: deal with
-- **Korean**: 그래서 그 일을 수습하고 처리하는 중이에요.
-- **Explanation**: "deal with ~"는 골치 아픈 문제나 일에 '대처하다, 처리하다, 수습하다'라는 뜻의 핵심 구동사예요.
+- **Options**: dealing with, running away from, cheering up for, turning into
+- **Korean**: 우리 팀은 서버 다운으로 인한 고객들의 불만을 처리하고 수습하느라 오후 내내 시간을 보냈어요.
+- **Explanation**: "deal with"는 복잡한 문제나 일상적인 난관을 "처리하다, 대처하다, 수습하다"라는 뜻입니다.
 
 ## Quiz 8
 - **Type**: multiple-choice
-- **Audio**: audio/Theres some incident after school..wav
-- **English**: There's some [incident, celebration, ceremony, appointment] after school.
+- **English**: The school principal sent an email to all parents regarding a minor [incident, celebration, festival, graduation] on the playground during recess.
 - **Answer**: incident
 - **BaseForm**: incident
-- **Korean**: 방과 후에 무슨 일이 좀 있었잖아요.
-- **Explanation**: "incident"는 학교나 일상에서 일어난 '어떤 사건, 일'을 뜻하는 명사예요.
+- **Options**: incident, celebration, festival, graduation
+- **Korean**: 학교 교장 선생님은 쉬는 시간 운동장에서 발생한 사소한 사건(일)에 대해 모든 학부모에게 이메일을 보냈습니다.
+- **Explanation**: "incident"는 뜻밖의 불미스럽거나 특이하게 발생한 "일, 사건"을 뜻합니다.
 
 ## Quiz 9
-- **Type**: fill-in-the-blank
-- **Audio**: audio/but it ended up with him getting pushed..wav
-- **English**: but it [ended up] with him getting pushed.
+- **Type**: multiple-choice
+- **English**: The unexpected heavy rain forced us to cancel our outdoor hike, so we [ended up, stayed away from, called off, gave up] spending the whole afternoon playing board games at home.
 - **Answer**: ended up
 - **BaseForm**: end up
-- **Korean**: 그런데 결국 아이가 떠밀리는 상황으로 끝나버렸죠.
-- **Explanation**: "end up with ~"는 '결국 ~한 결과로 끝나다, ~한 상황에 처하다'라는 뜻이에요.
+- **Options**: ended up, stayed away from, called off, gave up
+- **Korean**: 갑작스러운 폭우 때문에 야외 하이킹을 취소해야 해서, 우리는 결국 집에서 오후 내내 보드게임을 하며 보내게 되었어요.
+- **Explanation**: "end up -ing"는 어떤 일의 결과로 "결국 ~하게 되다"라는 뜻의 핵심 회화 표현입니다.
 
 ## Quiz 10
 - **Type**: multiple-choice
-- **Audio**: audio/it reinjured the collarbone injury he had in Korea..wav
-- **English**: it [reinjured, healed, protected, ignored] the collarbone injury he had in Korea.
+- **English**: By returning to basketball practice too soon, the athlete [reinjured, strengthened, replaced, protected] his right ankle.
 - **Answer**: reinjured
 - **BaseForm**: reinjure
-- **Korean**: 한국에서 다쳤던 그 쇄골 부위를 다시 다쳐버렸어요.
-- **Explanation**: "reinjure"는 이전에 다쳤던 부위를 '다시 다치다, 재부상을 입히다'라는 뜻이에요.
+- **Options**: reinjured, strengthened, replaced, protected
+- **Korean**: 농구 연습에 너무 일찍 복귀하는 바람에 그 선수는 오른쪽 발목을 다시 다쳐버렸습니다.
+- **Explanation**: "reinjure"는 이미 다쳤던 부위를 "다시 다치다, 재부상을 입히다"라는 뜻입니다.
 
 ## Quiz 11
 - **Type**: multiple-choice
-- **Audio**: audio/Hes in a sling.wav
-- **English**: He's in a [sling, cast, brace, wheelchair],
-- **Answer**: sling
-- **BaseForm**: sling
-- **Korean**: 아이가 지금 팔걸이(붕대)를 하고 있잖아요,
-- **Explanation**: "sling"은 팔이나 쇄골 부상 시 목에 걸어 팔을 지탱해 주는 '팔걸이(삼각건)'를 뜻해요 (be in a sling: 팔걸이를 하고 있다).
+- **English**: After dislocating his shoulder during the match, the tennis player had to keep his arm [in a sling, on a diet, under a spell, at a loss] for three weeks.
+- **Answer**: in a sling
+- **BaseForm**: in a sling
+- **Options**: in a sling, on a diet, under a spell, at a loss
+- **Korean**: 경기 중 어깨가 탈구된 뒤 그 테니스 선수는 3주 동안 팔에 팔걸이(붕대)를 하고 있어야 했습니다.
+- **Explanation**: "in a sling"은 다친 팔이나 어깨를 보호하기 위해 "팔걸이(삼각건)를 한 상태"를 뜻합니다.
 
 ## Quiz 12
 - **Type**: multiple-choice
-- **Audio**: audio/and were being referred to an orthopedic doctor..wav
-- **English**: and we're [being referred to, being discharged from, being admitted to, being ignored by] an orthopedic doctor.
+- **English**: Since my knee pain didn't improve with medication, I am [being referred to, being blamed for, being arrested by, being charged with] an orthopedic specialist.
 - **Answer**: being referred to
 - **BaseForm**: be referred to
-- **Korean**: 그리고 정형외과 전문의에게 진료 의뢰를 받았어요.
-- **Explanation**: "be referred to ~"는 1차 진료 후 다른 전문의에게 '진료 의뢰를 받다, 소개되다'라는 뜻이에요.
+- **Options**: being referred to, being blamed for, being arrested by, being charged with
+- **Korean**: 약물로 무릎 통증이 나아지지 않아서 저는 정형외과 전문의에게 진료 의뢰를 받게 되었어요.
+- **Explanation**: "be referred to (a specialist/doctor)"는 일반의나 다른 의사로부터 전문의에게 "진료 의뢰를 받다, 소개되다"라는 뜻입니다.
 
 ## Quiz 13
 - **Type**: multiple-choice
-- **Audio**: audio/And Im going to have to postpone my test.wav
-- **English**: And I'm going to have to [postpone, take, cancel, pass] my test,
+- **English**: Because three key members were sick with the flu, we decided to [postpone, celebrate, accelerate, summarize] our marketing presentation until next Friday.
 - **Answer**: postpone
 - **BaseForm**: postpone
-- **Korean**: 그리고 제 시험도 연기해야 할 것 같아요,
-- **Explanation**: "postpone"은 시험이나 일정을 '미루다, 연기하다'라는 뜻이에요 (= put off, delay).
+- **Options**: postpone, celebrate, accelerate, summarize
+- **Korean**: 핵심 팀원 세 명이 독감에 걸리는 바람에 우리는 마케팅 발표를 다음 주 금요일까지 연기하기로 결정했습니다.
+- **Explanation**: "postpone"은 시험이나 회의, 일정 등을 "미루다, 연기하다"라는 뜻입니다 (= put off, delay).
 
 ## Quiz 14
 - **Type**: multiple-choice
-- **Audio**: audio/on top of everything else we have going on this month week..wav
-- **English**: [on top of, instead of, in spite of, because of] everything else we have going on this month, week.
-- **Answer**: on top of
-- **BaseForm**: on top of
-- **Korean**: 이번 달, 이번 주에 우리에게 일어나는 온갖 다른 일들에 더해서(겹쳐서) 말이에요.
-- **Explanation**: "on top of ~"는 이미 많은 일들이 있는 상황에서 '그 위에 겹쳐서, 엎친 데 덮친 격으로'라는 뜻이에요.
+- **English**: Instead of studying for his chemistry exam, he spent hours organizing his bookshelves because he was [procrastinating, graduating, exercising, meditating].
+- **Answer**: procrastinating
+- **BaseForm**: procrastinate
+- **Options**: procrastinating, graduating, exercising, meditating
+- **Korean**: 화학 시험공부를 하는 대신 그는 해야 할 일을 미루느라 책장을 정리하며 몇 시간을 보냈어요.
+- **Explanation**: "procrastinate"는 해야 할 중요한 과제나 공부를 자꾸 "미루다, 늑장 부리다"라는 뜻입니다.
 
 ## Quiz 15
 - **Type**: multiple-choice
-- **Audio**: audio/Because Im procrastinating..wav
-- **English**: Because I'm [procrastinating, preparing, exercising, rushing].
-- **Answer**: procrastinating
-- **BaseForm**: procrastinate
-- **Korean**: 제가 해야 할 일을 미루고 있거든요.
-- **Explanation**: "procrastinate"는 해야 할 일(과제나 공부 등)을 '미루다, 늑장 부리다'라는 뜻의 단어예요.
-
-## Quiz 16
-- **Type**: drag-and-drop
-- **Audio**: audio/Oh and just so you know Taylor Swifts coming out with new music later this week..wav
-- **English**: Oh, and [just, so, you, know], Taylor Swift's coming out with new music later this week.
+- **English**: Oh, and [just so you know, out of the blue, at the same time, all of a sudden], the office will be closed this coming Friday for routine maintenance.
 - **Answer**: just so you know
 - **BaseForm**: just so you know
-- **Korean**: 아, 그리고 참고로 말하자면, 테일러 스위프트 신곡이 이번 주 후반에 나와요.
-- **Explanation**: "just so you know"는 상대방에게 참고 삼아 정보를 넌지시 알려줄 때 쓰는 '참고로 알아둬, 그냥 알려주는 건데'라는 유용한 구어 표현이에요 (줄임말로 JSYK).
+- **Options**: just so you know, out of the blue, at the same time, all of a sudden
+- **Korean**: 아, 그리고 참고로 말씀드리자면, 정기 점검으로 인해 이번 주 금요일에는 사무실 문을 닫습니다.
+- **Explanation**: "just so you know"는 상대방에게 참고 삼아 정보를 넌지시 건넬 때 쓰는 "참고로 알아둬, 그냥 알려주는 건데"라는 핵심 구어 표현입니다 (약어: JSYK).
+
+## Quiz 16
+- **Type**: multiple-choice
+- **English**: We finally [booked, canceled, ruined, lost] our direct flights to Honolulu for our family vacation.
+- **Answer**: booked
+- **BaseForm**: book
+- **Options**: booked, canceled, ruined, lost
+- **Korean**: 우리는 마침내 가족 휴가를 위해 호놀룰루행 직항 항공편을 예약했습니다.
+- **Explanation**: "book"은 항공권, 호텔, 공연 티켓, 여행 상품 등을 "예약하다"라는 뜻의 동사입니다.
 
 ## Quiz 17
 - **Type**: multiple-choice
-- **Audio**: audio/Oh we also booked our trip to Hawaii..wav
-- **English**: Oh, we also [booked, canceled, delayed, missed] our trip to Hawaii.
-- **Answer**: booked
-- **BaseForm**: book
-- **Korean**: 아, 우리 하와이 여행도 예약했잖아요.
-- **Explanation**: "book"은 여행, 항공권, 숙소 등을 '예약하다'라는 뜻의 동사예요.
+- **English**: We have family coming [in, after, at, on] a couple of weeks, so we need to deep clean the guest bedroom.
+- **Answer**: in
+- **BaseForm**: in (시간)
+- **Options**: in, after, at, on
+- **Korean**: 몇 주 뒤에 가족들이 놀러 오시니까 손님방을 대청소해야 해요.
+- **Explanation**: 현재 시점에서 "일정 시간 후에, ~(시간) 있으면"이라는 미래 시점의 시간 경과를 나타낼 때는 "after"가 아닌 전치사 "in"을 씁니다 (in a couple of weeks: 2~3주 후에/있으면).
 
 ## Quiz 18
 - **Type**: multiple-choice
-- **Audio**: audio/Im just going to keep rambling if you keep the camera in front of me Jaemyun..wav
-- **English**: I'm just going to keep [rambling, singing, whispering, lecturing] if you keep the camera in front of me, Jaemyun.
+- **English**: I'm just going to keep [rambling, jogging, baking, sleeping] if you keep pointing that video camera right at my face.
 - **Answer**: rambling
 - **BaseForm**: ramble
-- **Korean**: 재면 씨가 내 앞에 카메라를 계속 대고 있으면 난 그냥 계속 횡설수설 주절거리게 될 거예요.
-- **Explanation**: "ramble"은 두서없이 '횡설수설하다, 주절주절 이야기하다'라는 뜻의 동사예요.
+- **Options**: rambling, jogging, baking, sleeping
+- **Korean**: 내 얼굴에 그 비디오카메라를 계속 대고 있으면 난 그냥 두서없이 횡설수설 주절거리게 될 거예요.
+- **Explanation**: "ramble"은 목적이나 두서없이 길게 "횡설수설하다, 주절거리다"라는 뜻입니다.
 
 ## Quiz 19
 - **Type**: multiple-choice
-- **Audio**: audio/but it sounded like he tried to explain it to the doctor today..wav
-- **English**: but it [sounded like, looked like, felt like, smelled like] he tried to explain it to the doctor today.
+- **English**: From what the manager explained over the phone, it [sounded like, smelled like, looked after, tasted like] the shipment was delayed by a week.
 - **Answer**: sounded like
 - **BaseForm**: sound like
-- **Korean**: 하지만 오늘 라이든이 의사 선생님한테 설명하려고 했던 걸 들어보니 그런 것 같았어요.
-- **Explanation**: "sound like ~"는 말이나 소리를 들었을 때 '~처럼 들리다, ~인 것 같았다'라는 회화 표현이에요.
+- **Options**: sounded like, smelled like, looked after, tasted like
+- **Korean**: 매니저가 전화로 설명해 준 바에 따르면, 배송이 일주일 연기된 것처럼 들렸어요.
+- **Explanation**: "sound like ~"는 들은 이야기를 바탕으로 판단할 때 "~처럼 들리다, ~인 것 같다"라는 의미로 씁니다.
 
 ## Quiz 20
 - **Type**: multiple-choice
-- **Audio**: audio/So that he got a hairline fracture.wav
-- **English**: So that he got a [hairline fracture, complete break, muscle strain, sprained wrist]
+- **English**: The doctor examined the wrist X-ray and pointed out a tiny [hairline fracture, mosquito bite, paper cut, sun spot] on the bone.
 - **Answer**: hairline fracture
 - **BaseForm**: hairline fracture
-- **Korean**: 그래서 쇄골에 실금(미세 골절)이 갔었잖아요.
-- **Explanation**: "hairline fracture"는 뼈에 머리카락처럼 가느다랗게 금이 간 '실금, 미세 골절'을 뜻해요.
+- **Options**: hairline fracture, mosquito bite, paper cut, sun spot
+- **Korean**: 의사 선생님은 손목 엑스레이를 살펴보며 뼈에 생긴 미세한 실금(미세 골절)을 짚어 주셨습니다.
+- **Explanation**: "hairline fracture"는 뼈가 완전히 부러지지 않고 머리카락처럼 얇게 금이 간 "실금, 미세 골절"을 뜻합니다.
 
 ## Quiz 21
-- **Type**: drag-and-drop
-- **Audio**: audio/but it looked like it was getting better so he got out of the sling..wav
-- **English**: but it looked like it was getting better, so he [got, out, of, the, sling].
+- **Type**: multiple-choice
+- **English**: His injured shoulder recovered faster than expected, so he finally [got out of the sling, got into trouble, got behind the wheel, got out of hand] after three weeks.
 - **Answer**: got out of the sling
 - **BaseForm**: get out of the sling
-- **Korean**: 하지만 다 나아가는 것 같아 보여서 팔걸이를 풀었던 거잖아요.
-- **Explanation**: "get out of the sling"은 착용하고 있던 '팔걸이(보호 붕대)를 풀다/벗어나다'라는 뜻이에요.
+- **Options**: got out of the sling, got into trouble, got behind the wheel, got out of hand
+- **Korean**: 다친 어깨가 예상보다 빠르게 회복되어서 그는 3주 만에 마침내 팔걸이 붕대를 풀었습니다.
+- **Explanation**: "get out of the sling"은 팔이나 어깨 부상 후 착용하고 있던 "팔걸이(삼각건)를 풀다, 벗어나다"를 뜻합니다.
 
 ## Quiz 22
 - **Type**: multiple-choice
-- **Audio**: audio/so thats why theyre going to refer us to a different doctor..wav
-- **English**: so [that's why, that's how, that's what, that's when] they're going to refer us to a different doctor.
+- **English**: We haven't slept in over twenty-four hours, and [that's why, in spite of, for example, on the contrary] everyone is feeling so exhausted.
 - **Answer**: that's why
 - **BaseForm**: that's why
-- **Korean**: 그래서 병원에서 다른 의사 선생님께 우리를 의뢰해 주려는 거예요.
-- **Explanation**: "that's why ~"는 앞서 말한 이유로 인해 '그래서 ~한 것이다'라는 결과를 나타내는 핵심 연결 표현이에요.
+- **Options**: that's why, in spite of, for example, on the contrary
+- **Korean**: 우리는 24시간 넘게 잠을 자지 못했고, 그래서 다들 이렇게 기진맥진해 있는 거예요.
+- **Explanation**: "that's why ~"는 앞서 언급한 이유 때문에 "그래서 ~한 것이다"라는 인과관계를 나타낼 때 자주 씁니다.
 
 ## Quiz 23
-- **Type**: drag-and-drop
-- **Audio**: audio/they thought it should have been healed by now.wav
-- **English**: they thought it [should, have, been] healed by now
+- **Type**: multiple-choice
+- **English**: According to the standard recovery timeline, the sprained wrist [should have been, must have been, could not be, will never be] fully healed by now.
 - **Answer**: should have been
 - **BaseForm**: should have been
-- **Korean**: 의사들은 지금쯤이면 이미 다 나았어야 했다고 생각했거든요.
-- **Explanation**: "should have been -ed"는 과거의 기대나 판단을 나타내어 '~되었어야 했다'라는 뜻이에요. "should have been healed"는 '다 나았어야 했다'라는 뜻입니다.
+- **Options**: should have been, must have been, could not be, will never be
+- **Korean**: 일반적인 회복 기간에 따르면, 삐었던 손목은 지금쯤 완전히 나았어야 했습니다.
+- **Explanation**: "should have been (과거분사)"는 과거의 예상이나 당위에 비추어 보았을 때 "이미 ~되었어야 했다"라는 아쉬움이나 의문을 나타냅니다.
 
 ## Quiz 24
 - **Type**: multiple-choice
-- **Audio**: audio/and if he maybe has a vitamin deficiency.wav
-- **English**: and if he maybe has a vitamin [deficiency, overdose, allergy, infection]
+- **English**: The blood test revealed that her chronic fatigue was caused by a severe iron [deficiency, surplus, abundance, luxury].
 - **Answer**: deficiency
 - **BaseForm**: deficiency
-- **Korean**: 혹시 아이에게 비타민 결핍증이 있는 건 아닌지,
-- **Explanation**: "deficiency"는 영양소나 물질의 '결핍, 부족'을 뜻해요 ("vitamin deficiency": 비타민 결핍증).
+- **Options**: deficiency, surplus, abundance, luxury
+- **Korean**: 혈액 검사 결과 그녀의 만성 피로는 심각한 철분 결핍증(부족) 때문에 발생한 것으로 밝혀졌습니다.
+- **Explanation**: "deficiency"는 신체 영양소나 물질이 필요한 만큼 있지 않은 "결핍, 부족"을 뜻합니다.
 
 ## Quiz 25
 - **Type**: multiple-choice
-- **Audio**: audio/so she recommended to talk to the pediatrician.wav
-- **English**: so she recommended to talk to the [pediatrician, dermatologist, cardiologist, optometrist]
+- **English**: When the baby developed a high fever in the middle of the night, the worried parents called their [pediatrician, architect, mechanic, electrician] for medical advice.
 - **Answer**: pediatrician
 - **BaseForm**: pediatrician
-- **Korean**: 그래서 소아과 의사와 상담해 보라고 권유하시더라고요.
-- **Explanation**: "pediatrician"은 영유아와 어린이의 질병 및 건강을 다루는 '소아과 의사'를 말해요.
+- **Options**: pediatrician, architect, mechanic, electrician
+- **Korean**: 아기가 한밤중에 고열이 나자 걱정된 부모는 의학적 조언을 구하기 위해 소아과 의사에게 전화를 걸었습니다.
+- **Explanation**: "pediatrician"은 유아와 어린이의 질병을 전문적으로 진료하는 "소아과 의사"를 뜻합니다.
 
 ## Quiz 26
-- **Type**: fill-in-the-blank
-- **Audio**: audio/So I need to figure out through Kia.wav
-- **English**: So I need to [figure out], through Kia,
+- **Type**: multiple-choice
+- **English**: We spent hours reading the car manual to [figure out, throw away, give up, look down on] why the dashboard warning light was blinking.
 - **Answer**: figure out
 - **BaseForm**: figure out
-- **Korean**: 그래서 기아(Kia) 본사를 통해서 알아봐야 해요,
-- **Explanation**: "figure out"은 문제나 방법을 '알아내다, 파악하다'라는 뜻의 핵심 구동사예요.
+- **Options**: figure out, throw away, give up, look down on
+- **Korean**: 우리는 계기판 경고등이 왜 깜빡거리는지 알아내기 위해 자동차 설명서를 몇 시간 동안 읽었습니다.
+- **Explanation**: "figure out"은 깊이 생각하거나 조사해서 "알아내다, 파악하다, 해결책을 찾다"라는 뜻입니다.
 
 ## Quiz 27
-- **Type**: drag-and-drop
-- **Audio**: audio/so we dont like void our warranty and stuff.wav
-- **English**: so we don't like [void, our, warranty] and stuff,
-- **Answer**: void our warranty
+- **Type**: multiple-choice
+- **English**: If you open the sealed laptop case yourself with an unauthorized screwdriver, you will completely [void your warranty, renew your passport, earn your badge, clean your room].
+- **Answer**: void your warranty
 - **BaseForm**: void warranty
-- **Korean**: 우리 차량 무상 보증 같은 게 무효가 되지 않도록 말이에요,
-- **Explanation**: "void (one's) warranty"는 규정이나 지정 정비업소를 어겨서 '품질 보증을 무효로 만들다'라는 뜻이에요.
+- **Options**: void your warranty, renew your passport, earn your badge, clean your room
+- **Korean**: 공인되지 않은 드라이버로 밀봉된 노트북 케이스를 직접 열면 품질 보증(무상 보증)이 완전히 무효가 됩니다.
+- **Explanation**: "void a warranty"는 규정을 지키지 않아 제조업체의 "품질/무상 보증을 무효로 만들다"라는 뜻입니다.
 
 ## Quiz 28
-- **Type**: drag-and-drop
-- **Audio**: audio/Um yeah maybe I went a little too crazy with it.wav
-- **English**: Um, yeah, maybe I [went, a, little, too, crazy, with] it,
+- **Type**: multiple-choice
+- **English**: While decorating the Christmas tree, the kids [went a little too crazy with, stayed away from, were disappointed by, gave up on] the silver glitter and tinsel.
 - **Answer**: went a little too crazy with
 - **BaseForm**: go crazy with
-- **Korean**: 음, 네, 어쩌면 제가 거기에 좀 너무 과하게 열을 올렸나 봐요,
-- **Explanation**: "go crazy with ~"는 어떤 일이나 꾸미기 등에 '너무 지나치게 열중하다, 과하게 하다'라는 뜻이에요.
+- **Options**: went a little too crazy with, stayed away from, were disappointed by, gave up on
+- **Korean**: 크리스마스트리를 장식하면서 아이들은 은색 반짝이와 반짝이 줄을 조금 너무 과하게 뿌려댔어요.
+- **Explanation**: "go crazy with ~"는 어떤 재료나 행동에 "너무 지나치게 열을 올리다/과하게 쏟아붓다"라는 재미있는 일상 표현입니다.
