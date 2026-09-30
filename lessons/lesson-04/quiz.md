@@ -2,50 +2,50 @@
 
 ## Quiz 1
 - **Type**: multiple-choice
-- **English**: Among dozens of qualified applicants, her creative portfolio really [stood out, fell behind, backed down, checked out] to the hiring panel.
+- **English**: Her bright red hat really [stood out, fell behind, backed down, checked out] in the big crowd.
 - **Answer**: stood out
 - **Options**: stood out, fell behind, backed down, checked out
-- **Korean**: 수십 명의 쟁쟁한 지원자들 중에서 그녀의 창의적인 포트폴리오는 면접관들에게 유독 눈에 띄었어요.
+- **Korean**: 그녀의 밝은 빨간 모자는 많은 인파 속에서 유독 눈에 띄었어요.
 - **Explanation**: "stand out"은 여러 사람이나 사물들 사이에서 "유독 눈에 띄다, 두드러지다"라는 뜻입니다.
 
 ## Quiz 2
 - **Type**: multiple-choice
-- **English**: The upbeat pop soundtrack didn't really [fit, break, cost, lose] the melancholic atmosphere of the historical documentary film.
+- **English**: This new jacket looks very nice, but it does not [fit, break, cost, lose] me well because it is too small.
 - **Answer**: fit
 - **Options**: fit, break, cost, lose
-- **Korean**: 신나는 팝 음악 사운드트랙은 역사 다큐멘터리 영화의 쓸쓸한 분위기와 전혀 어울리지 않았어요.
-- **Explanation**: "fit"은 분위기나 상황, 장소에 "어울리다, 꼭 들어맞다"라는 뜻입니다.
+- **Korean**: 이 새 자켓은 참 멋져 보이지만, 너무 작아서 내 몸에 잘 맞지 않아요.
+- **Explanation**: "fit"은 크기나 치수가 몸에 "맞다", 혹은 상황에 "어울리다"라는 뜻입니다.
 
 ## Quiz 3
 - **Type**: multiple-choice
-- **English**: Although the weather forecast predicted rain, [quite a few, scarcely any, hardly one, barely all] fans still showed up at the stadium.
+- **English**: Although it was cold outside, [quite a few, scarcely any, hardly one, barely all] people still came to the park.
 - **Answer**: quite a few
 - **Options**: quite a few, scarcely any, hardly one, barely all
-- **Korean**: 비가 올 거라는 일기예보에도 불구하고, 꽤 많은 팬들이 여전히 경기장에 나타났어요.
+- **Korean**: 날씨가 쌀쌀했음에도 불구하고, 꽤 많은 사람들이 여전히 공원에 나왔어요.
 - **Explanation**: "quite a few"는 생각보다 "꽤 많은, 상당수의"를 뜻합니다.
 
 ## Quiz 4
 - **Type**: multiple-choice
-- **English**: Enthusiastic concertgoers rushed toward the official [merch sections, luggage checks, emergency exits, boiler rooms] to grab tour hoodies.
+- **English**: After the concert, many happy fans went to the [merch sections, luggage checks, emergency exits, boiler rooms] to buy tour t-shirts.
 - **Answer**: merch sections
 - **Options**: merch sections, luggage checks, emergency exits, boiler rooms
-- **Korean**: 열정적인 콘서트 관객들은 투어 후드티를 사기 위해 공식 굿즈 판매 코너로 서둘러 달려갔어요.
+- **Korean**: 콘서트가 끝난 후, 많은 행복한 팬들이 투어 티셔츠를 사기 위해 굿즈 판매 구역으로 갔어요.
 - **Explanation**: "merch sections"는 공연장이나 행사장 내의 "굿즈(기념품) 판매 부스/구역"을 의미합니다.
 
 ## Quiz 5
 - **Type**: multiple-choice
-- **English**: Three o'clock in the morning is such an [odd time, exact moment, urgent date, ideal pace] to receive a non-urgent phone notification.
+- **English**: Three o'clock in the morning is such an [odd time, exact moment, urgent date, ideal pace] to get a phone call.
 - **Answer**: odd time
 - **Options**: odd time, exact moment, urgent date, ideal pace
-- **Korean**: 새벽 3시는 급하지도 않은 스마트폰 알림을 받기에는 참 뜬금없고 애매한 시간이에요.
-- **Explanation**: "odd time"은 남들이 잘 찾지 않거나 일반적이지 않은 "애매한 시간대, 특이한 시간"을 뜻합니다.
+- **Korean**: 새벽 3시는 전화를 받기에는 참 뜬금없고 이상한 시간이에요.
+- **Explanation**: "odd time"은 일반적이지 않은 "애매한 시간대, 특이한 시간"을 뜻합니다.
 
 ## Quiz 6
 - **Type**: multiple-choice
-- **English**: Even though we got [nosebleed seats, ringside chairs, floor passes, orchestra tickets] at the baseball park, we could still see the entire field clearly.
+- **English**: Even though we got [nosebleed seats, ringside chairs, floor passes, front rows] at the big stadium, we still enjoyed the game.
 - **Answer**: nosebleed seats
-- **Options**: nosebleed seats, ringside chairs, floor passes, orchestra tickets
-- **Korean**: 야구장에서 비록 맨 꼭대기 좌석(하늘석)을 예매했지만, 그라운드 전체를 한눈에 또렷이 볼 수 있었어요.
+- **Options**: nosebleed seats, ringside chairs, floor passes, front rows
+- **Korean**: 큰 경기장에서 비록 맨 꼭대기 좌석(하늘석)에 앉았지만, 우리는 여전히 경기를 즐겼어요.
 - **Explanation**: "nosebleed seats"는 경기장이나 대형 공연장의 "맨 꼭대기 높은 좌석(하늘석)"을 뜻합니다.
 
 ## Quiz 7

@@ -19,36 +19,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'After hiking off the trail, we [ended up near a hidden mountain waterfall].',
-        answer: 'ended up near a hidden mountain waterfall',
-        tokens: ['ended', 'up', 'near', 'a', 'hidden', 'mountain', 'waterfall'],
-        options: ['ended', 'up', 'near', 'a', 'hidden', 'mountain', 'waterfall'],
-        korean: '등산로를 벗어나 걷다가 우리는 결국 숨겨진 산골 폭포 근처에 이르게 되었어요.',
-        explanation: '방향을 틀어 결국 뜻밖의 장소에 도달했음을 나타냅니다.'
+        english: 'I went to buy milk, but I [ended up buying some sweet apples] as well.',
+        answer: 'ended up buying some sweet apples',
+        tokens: ['ended', 'up', 'buying', 'some', 'sweet', 'apples'],
+        options: ['ended', 'up', 'buying', 'some', 'sweet', 'apples'],
+        korean: '우유를 사러 갔는데, 결국 달콤한 사과도 몇 개 사게 되었어요.',
+        explanation: '"ended up buying"은 결국 사게 되었다는 뜻입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Gene originally planned to stay for just one summer, but he [ended up, stood by, dropped in, cut out] living in the mountains for decades.',
+        english: 'They missed the evening bus and [ended up, began to, refused to, hoped to] walking all the way home.',
         answer: 'ended up',
-        options: ['ended up', 'stood by', 'dropped in', 'cut out'],
-        korean: '진(Gene) 아버님은 원래 딱 한 해 여름만 머물 계획이었지만, 결국 수십 년 동안 산골에서 살게 되셨어요.',
-        explanation: '당초 계획과 달리 산골 생활을 지속하게 된 결말입니다.'
+        options: ['ended up', 'began to', 'refused to', 'hoped to'],
+        korean: '그들은 저녁 버스를 놓쳐서 결국 집까지 내내 걸어가게 되었어요.',
+        explanation: '"ended up walking"은 결국 걸어가게 되었음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The heavy evening fog rolled in, so the road trip group [ended up, pulled through, broke out, gave in] staying at a cozy motel.',
+        english: 'We intended to watch only one episode, but we [ended up, failed to, stopped to, hated to] watching three more.',
         answer: 'ended up',
-        options: ['ended up', 'pulled through', 'broke out', 'gave in'],
-        korean: '짙은 저녁 안개가 몰려와서 로드트립 일행은 결국 아늑한 모텔에서 하룻밤을 묵게 되었습니다.',
-        explanation: '날씨로 인해 일정의 결말이 바뀌었음을 뜻합니다.'
+        options: ['ended up', 'failed to', 'stopped to', 'hated to'],
+        korean: '우리는 딱 한 편만 볼 생각이었지만, 결국 세 편을 더 보게 되었어요.',
+        explanation: '"ended up watching"은 결국 더 보게 되었다는 뜻입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'They had so much fun chatting around the campfire that everyone [ended up, held back, passed up, checked out] sleeping under the stars.',
+        english: 'He took the wrong road and [ended up, looked for, aimed at, planned to] at a quiet mountain lake.',
         answer: 'ended up',
-        options: ['ended up', 'held back', 'passed up', 'checked out'],
-        korean: '캠프파이어 주변에서 수다 떠는 것이 너무 재미있어서 모두가 결국 별빛 아래에서 잠을 자게 되었어요.',
-        explanation: '즐거운 대화 끝에 야외 취침을 하게 된 상황입니다.'
+        options: ['ended up', 'looked for', 'aimed at', 'planned to'],
+        korean: '그는 길을 잘못 들어서 결국 조용한 산골 호수에 도달하게 되었어요.',
+        explanation: '"ended up"은 예상치 못한 장소에 다다름을 나타냅니다.'
       }
     ]
   },
@@ -67,43 +67,43 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'Wild deer often [hang around our cabin porch in the morning].',
-        answer: 'hang around our cabin porch in the morning',
-        tokens: ['hang', 'around', 'our', 'cabin', 'porch', 'in', 'the', 'morning'],
-        options: ['hang', 'around', 'our', 'cabin', 'porch', 'in', 'the', 'morning'],
-        korean: '아침이면 야생 사슴들이 우리 오두막 현관 주변에서 자주 어슬렁거려요.',
-        explanation: '야생동물이 집 근처를 서성거리는 모습입니다.'
+        english: 'We often [hang around the cozy cafe] with friends after school.',
+        answer: 'hang around the cozy cafe',
+        tokens: ['hang', 'around', 'the', 'cozy', 'cafe'],
+        options: ['hang', 'around', 'the', 'cozy', 'cafe'],
+        korean: '우리는 방과 후에 친구들과 아늑한 카페 주변에서 자주 시간을 보내요.',
+        explanation: '"hang around"는 특별한 일 없이 어울려 시간을 보내는 것입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Tourists should not [hang around, speed up, cheer up, wrap up] near bear habitats after dusk when predators hunt.',
+        english: 'Do not [hang around, drive through, pass by, move along] the train tracks because it can be dangerous.',
         answer: 'hang around',
-        options: ['hang around', 'speed up', 'cheer up', 'wrap up'],
-        korean: '맹수들이 사냥하는 해 질 녘 이후에는 관광객들이 곰 서식지 주변을 서성거려서는 안 됩니다.',
-        explanation: '위험 지역에서 어슬렁거리지 말라는 경고입니다.'
+        options: ['hang around', 'drive through', 'pass by', 'move along'],
+        korean: '위험할 수 있으니 기찻길 주변을 서성거리지 마세요.',
+        explanation: '"hang around"는 특정 장소 주변을 서성거리는 행동입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Instead of going straight home after school, the teenagers liked to [hang around, back out, break down, drop out] by the town skate park.',
+        english: 'The friendly pet dogs love to [hang around, turn off, fall down, walk away] the kitchen whenever dad is cooking.',
         answer: 'hang around',
-        options: ['hang around', 'back out', 'break down', 'drop out'],
-        korean: '방과 후 곧장 집에 가는 대신 십대 청소년들은 동네 스케이트 공원 근처에서 서성거리며 어울리는 것을 좋아했어요.',
-        explanation: '친구들과 함께 시간을 보내는 모습입니다.'
+        options: ['hang around', 'turn off', 'fall down', 'walk away'],
+        korean: '다정한 반려견들은 아빠가 요리하실 때마다 주방 주변을 서성거리기를 참 좋아해요.',
+        explanation: '"hang around"는 곁을 맴돌며 시간을 보내는 모습입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Feel free to [hang around, turn away, cut off, stand aside] inside the visitor center until the afternoon rainstorm passes.',
+        english: 'He likes to [hang around, hurry off, drop out, step down] the quiet library reading nature magazines.',
         answer: 'hang around',
-        options: ['hang around', 'turn away', 'cut off', 'stand aside'],
-        korean: '오후 폭풍우가 지나갈 때까지 방문자 센터 안에서 편하게 머무르며 시간 보내세요.',
-        explanation: '비를 피하며 실내에서 시간을 보내도록 권하는 말입니다.'
+        options: ['hang around', 'hurry off', 'drop out', 'step down'],
+        korean: '그는 조용한 도서관에서 자연 잡지를 읽으며 여유롭게 시간을 보내는 것을 좋아해요.',
+        explanation: '"hang around"는 여유롭게 머무르는 것을 뜻합니다.'
       }
     ]
   },
 
-  // 3. Practical
+  // 3. practical
   {
-    keyExpression: 'Practical',
+    keyExpression: 'practical',
     sentences: [
       {
         type: 'multiple-choice',
@@ -115,36 +115,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'He always gives [practical advice for fixing household appliances].',
-        answer: 'practical advice for fixing household appliances',
-        tokens: ['practical', 'advice', 'for', 'fixing', 'household', 'appliances'],
-        options: ['practical', 'advice', 'for', 'fixing', 'household', 'appliances'],
-        korean: '그는 가전제품 수리에 대해 항상 현실적이고 실용적인 조언을 해줍니다.',
-        explanation: '실생활에 바로 도움 되는 조언을 나타냅니다.'
+        english: 'A sturdy backpack is [a practical gift for a student] going to school.',
+        answer: 'a practical gift for a student',
+        tokens: ['a', 'practical', 'gift', 'for', 'a', 'student'],
+        options: ['a', 'practical', 'gift', 'for', 'a', 'student'],
+        korean: '튼튼한 배낭은 등교하는 학생에게 아주 실용적인 선물이에요.',
+        explanation: '"practical gift"는 실용적인 선물을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'A four-wheel-drive pickup truck is much more [practical, fancy, fragile, imaginary] than a luxury convertible on steep dirt roads.',
+        english: 'Wearing warm boots in the cold winter snow is a very [practical, theoretical, decorative, delicate] choice.',
         answer: 'practical',
-        options: ['practical', 'fancy', 'fragile', 'imaginary'],
-        korean: '가파른 비포장 흙길에서는 고급 오픈카보다 4륜구동 픽업트럭이 훨씬 더 실용적입니다.',
-        explanation: '상황에 부합하는 실용적인 차량입니다.'
+        options: ['practical', 'theoretical', 'decorative', 'delicate'],
+        korean: '추운 겨울 눈 속에서 따뜻한 부츠를 신는 것은 매우 실용적인 선택이에요.',
+        explanation: '"practical"은 실제로 유용하고 쓸모가 있음을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Instead of buying ornamental souvenirs, she prefers [practical, useless, invisible, wasteful] gifts that people can use daily.',
+        english: 'Learning how to cook simple meals at home is a [practical, useless, broken, dangerous] skill for everyday life.',
         answer: 'practical',
-        options: ['practical', 'useless', 'invisible', 'wasteful'],
-        korean: '그녀는 장식용 기념품을 사는 대신 사람들이 매일 쓸 수 있는 실용적인 선물을 더 선호합니다.',
-        explanation: '실용적인 선물의 가치를 뜻합니다.'
+        options: ['practical', 'useless', 'broken', 'dangerous'],
+        korean: '집에서 간단한 식사를 요리하는 법을 배우는 것은 일상생활에 아주 실용적인 기술이에요.',
+        explanation: '"practical skill"은 실생활에 바로 쓰이는 기술입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The forestry workshop focuses on [practical, abstract, fictional, distant] hands-on training rather than academic lectures.',
+        english: 'He bought a small, [practical, heavy, complicated, weak] car that is very easy to park in town.',
         answer: 'practical',
-        options: ['practical', 'abstract', 'fictional', 'distant'],
-        korean: '산림 워크숍은 이론적인 학술 강의보다 실질적인 실습 훈련에 집중합니다.',
-        explanation: '이론과 대비되는 실습 중심 교육입니다.'
+        options: ['practical', 'heavy', 'complicated', 'weak'],
+        korean: '그는 동네에서 주차하기가 매우 쉬운 작고 실용적인 차 한 대를 샀어요.',
+        explanation: '"practical car"는 실속 있고 편리한 자동차를 뜻합니다.'
       }
     ]
   },
@@ -163,43 +163,43 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'The whole family [went out to dinner at a seafood restaurant].',
-        answer: 'went out to dinner at a seafood restaurant',
-        tokens: ['went', 'out', 'to', 'dinner', 'at', 'a', 'seafood', 'restaurant'],
-        options: ['went', 'out', 'to', 'dinner', 'at', 'a', 'seafood', 'restaurant'],
-        korean: '온 가족이 해산물 식당으로 저녁 외식을 하러 나갔습니다.',
-        explanation: '가족 전체가 저녁 외식을 즐기는 상황입니다.'
+        english: 'After finishing our school exams, my friends and I [went out to dinner at a pizza place].',
+        answer: 'went out to dinner at a pizza place',
+        tokens: ['went', 'out', 'to', 'dinner', 'at', 'a', 'pizza', 'place'],
+        options: ['went', 'out', 'to', 'dinner', 'at', 'a', 'pizza', 'place'],
+        korean: '학교 시험을 마친 뒤, 친구들과 나는 피자 가게로 저녁 외식을 하러 나갔어요.',
+        explanation: '"went out to dinner"는 저녁을 먹으러 밖으로 나갔음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Whenever Uncle Wayne visited town, Gene and Wayne [went out to dinner, called a doctor, fought a bear, ran a marathon] to catch up over steak.',
+        english: 'Because nobody wanted to cook tonight, the whole family [went out to dinner, washed the car, cut the grass, fixed the roof] together.',
         answer: 'went out to dinner',
-        options: ['went out to dinner', 'called a doctor', 'fought a bear', 'ran a marathon'],
-        korean: '웨인 삼촌이 마을을 방문할 때마다, 진 아버님과 웨인은 스테이크를 먹으며 밀린 이야기를 나누기 위해 저녁 외식을 하러 나가셨어요.',
-        explanation: '형제가 회포를 풀기 위해 외식을 나가는 정겨운 모습입니다.'
+        options: ['went out to dinner', 'washed the car', 'cut the grass', 'fixed the roof'],
+        korean: '오늘 밤 아무도 요리하고 싶어 하지 않아서, 온 가족이 함께 저녁 외식을 하러 나갔어요.',
+        explanation: '"went out to dinner"는 식당으로 저녁을 먹으러 나감을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Instead of cooking after our long road trip, we simply [went out to dinner, cut down trees, swept the roof, mowed the lawn] at the local diner.',
+        english: 'They [went out to dinner, took a shower, went to sleep, did the dishes] at a quiet restaurant right after the movie ended.',
         answer: 'went out to dinner',
-        options: ['went out to dinner', 'cut down trees', 'swept the roof', 'mowed the lawn'],
-        korean: '긴 로드트립 후 요리하는 대신 우리는 동네 식당에서 편하게 저녁 외식을 했습니다.',
-        explanation: '피곤할 때 밖에서 사 먹는 자연스러운 일상입니다.'
+        options: ['went out to dinner', 'took a shower', 'went to sleep', 'did the dishes'],
+        korean: '영화가 끝난 직후 그들은 조용한 식당으로 저녁 외식을 하러 갔어요.',
+        explanation: '"went out to dinner"는 외식하러 간 상황을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The office team finished the big quarterly project and happily [went out to dinner, stayed up late, packed their bags, filed complaints] together.',
+        english: 'Every Friday evening, grandma and grandpa [went out to dinner, stayed outside, worked in the field, painted the house] at their favorite neighborhood diner.',
         answer: 'went out to dinner',
-        options: ['went out to dinner', 'stayed up late', 'packed their bags', 'filed complaints'],
-        korean: '사무실 팀원들은 분기별 대형 프로젝트를 마무리하고 기분 좋게 다 함께 저녁 외식을 하러 나갔어요.',
-        explanation: '프로젝트 성공 기념 회식입니다.'
+        options: ['went out to dinner', 'stayed outside', 'worked in the field', 'painted the house'],
+        korean: '금요일 저녁마다 할머니와 할아버지께서는 가장 좋아하시는 동네 식당으로 저녁 외식을 하러 나가셨어요.',
+        explanation: '"went out to dinner"는 규칙적인 저녁 외식을 뜻합니다.'
       }
     ]
   },
 
-  // 5. pushing, aside
+  // 5. pushing the peppers aside
   {
-    keyExpression: 'pushing, aside',
+    keyExpression: 'pushing the peppers aside',
     sentences: [
       {
         type: 'multiple-choice',
@@ -211,36 +211,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'She was gently [pushing her vegetables aside on the plate].',
-        answer: 'pushing her vegetables aside on the plate',
-        tokens: ['pushing', 'her', 'vegetables', 'aside', 'on', 'the', 'plate'],
-        options: ['pushing', 'her', 'vegetables', 'aside', 'on', 'the', 'plate'],
-        korean: '그녀는 접시 위에서 야채들을 살포시 한쪽 옆으로 밀어두고 있었어요.',
-        explanation: '먹기 싫은 야채를 옆으로 밀어놓는 행동입니다.'
+        english: 'She ate her fried rice while carefully [pushing the green peppers aside] on the plate.',
+        answer: 'pushing the green peppers aside',
+        tokens: ['pushing', 'the', 'green', 'peppers', 'aside'],
+        options: ['pushing', 'the', 'green', 'peppers', 'aside'],
+        korean: '그녀는 접시 위에 있는 피망들을 조심스레 한쪽으로 밀어 치우면서 볶음밥을 먹었어요.',
+        explanation: '"pushing peppers aside"는 먹지 않는 고추를 옆으로 치우는 모습입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Before sitting down at the cluttered workbench, he started [pushing tools aside, building a house, painting walls, breaking glass] to clear space.',
-        answer: 'pushing tools aside',
-        options: ['pushing tools aside', 'building a house', 'painting walls', 'breaking glass'],
-        korean: '어수선한 작업대에 앉기 전 그는 공간을 확보하기 위해 공구들을 옆으로 밀어 치워두기 시작했어요.',
-        explanation: '물건을 옆으로 밀어 공간을 만드는 상황입니다.'
+        english: 'The little boy did not like spicy food, so he was [pushing the peppers aside, eating the crust first, drinking all the milk, cutting the steak up] with his fork.',
+        answer: 'pushing the peppers aside',
+        options: ['pushing the peppers aside', 'eating the crust first', 'drinking all the milk', 'cutting the steak up'],
+        korean: '어린 소년은 매운 음식을 좋아하지 않아서 포크로 고추들을 한쪽 옆으로 밀어두고 있었어요.',
+        explanation: '"pushing the peppers aside"는 고추를 옆으로 제쳐놓는 행동입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The determined hiker kept [pushing thorny branches aside, dropping her compass, losing her boots, falling backward] while navigating through dense brush.',
-        answer: 'pushing thorny branches aside',
-        options: ['pushing thorny branches aside', 'dropping her compass', 'losing her boots', 'falling backward'],
-        korean: '결의에 찬 등산객은 빽빽한 덤불숲을 헤쳐 나가며 가시나무 가지들을 계속 옆으로 밀어 제쳤습니다.',
-        explanation: '나뭇가지를 옆으로 헤치며 걷는 모습입니다.'
+        english: 'He was [pushing the peppers aside, mixing the bowl fast, boiling the water, freezing the ice] so the curry would not taste too hot.',
+        answer: 'pushing the peppers aside',
+        options: ['pushing the peppers aside', 'mixing the bowl fast', 'boiling the water', 'freezing the ice'],
+        korean: '그는 카레가 너무 맵지 않도록 고추들을 한쪽 옆으로 밀어 치워두고 있었어요.',
+        explanation: '"pushing peppers aside"는 매운맛을 줄이기 위해 고추를 치우는 것입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'He succeeded by [pushing fear aside, running away quickly, giving up early, blaming others] and focusing entirely on his presentation.',
-        answer: 'pushing fear aside',
-        options: ['pushing fear aside', 'running away quickly', 'giving up early', 'blaming others'],
-        korean: '그는 두려움을 한쪽 옆으로 제쳐두고 발표에만 온전히 집중함으로써 성공을 거두었습니다.',
-        explanation: '감정이나 걱정을 떨쳐낼 때도 "push aside"를 씁니다.'
+        english: 'Before taking a bite of the noodles, she started [pushing the peppers aside, throwing the bowl, pouring the soup out, baking the bread] to the edge of the bowl.',
+        answer: 'pushing the peppers aside',
+        options: ['pushing the peppers aside', 'throwing the bowl', 'pouring the soup out', 'baking the bread'],
+        korean: '국수를 한 입 먹기 전에 그녀는 그릇 가장자리로 고추들을 밀어두기 시작했어요.',
+        explanation: '"pushing peppers aside"는 피하려는 식재료를 옆으로 밀어내는 동작입니다.'
       }
     ]
   },
@@ -259,36 +259,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'He brought his guitar to [show off his musical skills at the party].',
-        answer: 'show off his musical skills at the party',
-        tokens: ['show', 'off', 'his', 'musical', 'skills', 'at', 'the', 'party'],
-        options: ['show', 'off', 'his', 'musical', 'skills', 'at', 'the', 'party'],
-        korean: '그는 파티에서 자신의 음악 실력을 뽐내기 위해 기타를 가져왔어요.',
-        explanation: '자신의 재능을 남들에게 과시하려는 모습입니다.'
+        english: 'The little boy wanted to [show off his shiny new bicycle] to everyone.',
+        answer: 'show off his shiny new bicycle',
+        tokens: ['show', 'off', 'his', 'shiny', 'new', 'bicycle'],
+        options: ['show', 'off', 'his', 'shiny', 'new', 'bicycle'],
+        korean: '어린 소년은 자신의 반짝이는 새 자전거를 모두에게 자랑하고(뽐내고) 싶어 했어요.',
+        explanation: '"show off"는 새 물건이나 능력을 자랑하는 것입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Don\'t buy flashy designer sports cars just to [show off, save money, live quietly, avoid traffic] to shallow acquaintances.',
+        english: 'She did not want to [show off, speak up, play along, run away], so she quietly put her first-place medal in her pocket.',
         answer: 'show off',
-        options: ['show off', 'save money', 'live quietly', 'avoid traffic'],
-        korean: '천박한 지인들에게 과시하기 위해서만 화려한 명품 스포츠카를 사지 마세요.',
-        explanation: '남에게 보여주기 위한 과시적 소비를 경계하는 말입니다.'
+        options: ['show off', 'speak up', 'play along', 'run away'],
+        korean: '그녀는 뽐내거나 자랑하고 싶지 않아서 1등 메달을 조용히 주머니에 넣었어요.',
+        explanation: '"show off"는 남에게 과시하거나 자랑하는 태도입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The little boy did a clumsy cartwheel on the lawn just to [show off, break a bone, fall asleep, cry loudly] for his grandparents.',
+        english: 'The playful puppy ran fast in the yard to [show off, fall down, go to bed, sit still] how high he could leap.',
         answer: 'show off',
-        options: ['show off', 'break a bone', 'fall asleep', 'cry loudly'],
-        korean: '어린 소년은 조부모님께 자랑해 보이려고 잔디밭에서 어설픈 옆돌기를 해 보였습니다.',
-        explanation: '어린아이가 어른들에게 재롱을 뽐내는 귀여운 모습입니다.'
+        options: ['show off', 'fall down', 'go to bed', 'sit still'],
+        korean: '장난꾸러기 강아지는 자신이 얼마나 높이 뛸 수 있는지 뽐내기 위해 마당에서 빠르게 달렸어요.',
+        explanation: '"show off"는 귀엽게 능력을 뽐냄을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'True martial artists are humble and never feel the need to [show off, train hard, bow respectfully, stay disciplined] in public.',
+        english: 'He likes to [show off, turn down, drop out, walk away] his simple magic card tricks at family gatherings.',
         answer: 'show off',
-        options: ['show off', 'train hard', 'bow respectfully', 'stay disciplined'],
-        korean: '진정한 무도인은 겸손하며 대중 앞에서 자신의 실력을 과시할 필요를 결코 느끼지 않습니다.',
-        explanation: '진정한 고수의 겸양을 나타냅니다.'
+        options: ['show off', 'turn down', 'drop out', 'walk away'],
+        korean: '그는 가족 모임에서 간단한 마술 카드 묘기를 뽐내는 것을 좋아해요.',
+        explanation: '"show off"는 재주를 남들에게 자랑스레 보여주는 것입니다.'
       }
     ]
   },
@@ -307,36 +307,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'Everyone in the office [enjoyed being around his cheerful personality].',
-        answer: 'enjoyed being around his cheerful personality',
-        tokens: ['enjoyed', 'being', 'around', 'his', 'cheerful', 'personality'],
-        options: ['enjoyed', 'being', 'around', 'his', 'cheerful', 'personality'],
-        korean: '사무실의 모든 사람들은 그의 유쾌한 성격 곁에 함께 어울리는 것을 좋아했습니다.',
-        explanation: '밝은 사람 주변에 머물며 함께하는 즐거움입니다.'
+        english: 'The children always [enjoyed being around their kind grandpa] on summer visits.',
+        answer: 'enjoyed being around their kind grandpa',
+        tokens: ['enjoyed', 'being', 'around', 'their', 'kind', 'grandpa'],
+        options: ['enjoyed', 'being', 'around', 'their', 'kind', 'grandpa'],
+        korean: '아이들은 여름 방문 때 다정한 할아버지 곁에 함께 있는 것을 늘 무척 좋아했어요.',
+        explanation: '"enjoyed being around"는 함께 있는 시간을 즐겼음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Children always [enjoyed being around, refused staying with, cried loudly near, ran away from] Uncle Wayne because of his hilarious campfire tales.',
+        english: 'Everyone in the class [enjoyed being around, ran away from, stayed away from, cried in front of] the cheerful new student.',
         answer: 'enjoyed being around',
-        options: ['enjoyed being around', 'refused staying with', 'cried loudly near', 'ran away from'],
-        korean: '웨인 삼촌의 재미있는 모닥불 이야기 덕분에 아이들은 늘 웨인 삼촌 곁에 어울려 있는 것을 너무 좋아했어요.',
-        explanation: '유쾌한 삼촌 곁을 좋아하는 아이들의 모습입니다.'
+        options: ['enjoyed being around', 'ran away from', 'stayed away from', 'cried in front of'],
+        korean: '반의 모든 학생들이 그 밝고 유쾌한 전학생 곁에 함께 어울려 있는 것을 좋아했어요.',
+        explanation: '"enjoyed being around"는 주위에 함께 있기를 좋아함을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'She has such a calming presence that patients sincerely [enjoyed being around, complained bitterly about, ran away from, grew nervous of] her during therapy.',
+        english: 'Kelly always [enjoyed being around, was bored by, disliked seeing, refused to meet] her friendly uncle Wayne during family trips.',
         answer: 'enjoyed being around',
-        options: ['enjoyed being around', 'complained bitterly about', 'ran away from', 'grew nervous of'],
-        korean: '그녀는 사람을 편안하게 해주는 힘이 있어서 환자들은 치료 시간 동안 그녀 곁에 함께 있는 것을 진심으로 좋아했습니다.',
-        explanation: '마음을 편안하게 해주는 사람과 함께하는 만족감입니다.'
+        options: ['enjoyed being around', 'was bored by', 'disliked seeing', 'refused to meet'],
+        korean: '켈리는 가족 여행 동안 친근한 웨인 삼촌 곁에 함께 어울려 있는 것을 언제나 좋아했어요.',
+        explanation: '웨인은 켈리의 삼촌(Wayne is Kelly\'s uncle)입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Even though they held differing opinions on politics, they [enjoyed being around, fought each other, broke relations with, refused greeting] one another as friends.',
+        english: 'I truly [enjoyed being around, was afraid of, hated sitting with, stayed apart from] my cousins during the holiday vacation.',
         answer: 'enjoyed being around',
-        options: ['enjoyed being around', 'fought each other', 'broke relations with', 'refused greeting'],
-        korean: '비록 정치적 견해는 달랐지만, 그들은 친구로서 서로의 곁에 함께 어울리는 시간을 즐겼습니다.',
-        explanation: '성숙한 우정을 묘사합니다.'
+        options: ['enjoyed being around', 'was afraid of', 'hated sitting with', 'stayed apart from'],
+        korean: '나는 연휴 방학 동안 사촌들 곁에 함께 어울려 있는 시간을 진심으로 즐겼어요.',
+        explanation: '"enjoyed being around"는 어울리는 시간을 즐겁게 보냄을 뜻합니다.'
       }
     ]
   },
@@ -355,36 +355,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'Gene and Wayne Hunter [got taken to the bar by the elders].',
-        answer: 'got taken to the bar by the elders',
-        tokens: ['got', 'taken', 'to', 'the', 'bar', 'by', 'the', 'elders'],
-        options: ['got', 'taken', 'to', 'the', 'bar', 'by', 'the', 'elders'],
-        korean: '진과 웨인 헌터는 어른들에게 이끌려 술집으로 함께 데려가 졌어요.',
-        explanation: '어른들의 손에 이끌려 펍으로 향했던 에피소드입니다.'
+        english: 'On his twenty-first birthday, he [got taken to the local bar by friends] for a drink.',
+        answer: 'got taken to the local bar by friends',
+        tokens: ['got', 'taken', 'to', 'the', 'local', 'bar', 'by', 'friends'],
+        options: ['got', 'taken', 'to', 'the', 'local', 'bar', 'by', 'friends'],
+        korean: '스물한 번째 생일에 그는 친구들에게 이끌려 동네 술집으로 축하 한잔을 하러 데려가 졌어요.',
+        explanation: '"got taken to the bar"는 다른 사람들에게 이끌려 술집에 감을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'When my father visited his old hometown buddies, he inevitably [got taken to the bar, was thrown in jail, got lost at sea, was taken to court] on main street.',
+        english: 'After the big game, the happy soccer players [got taken to the bar, went to the clinic, slept in the bus, waited in the snow] to celebrate their victory.',
         answer: 'got taken to the bar',
-        options: ['got taken to the bar', 'was thrown in jail', 'got lost at sea', 'was taken to court'],
-        korean: '아버지께서 옛 고향 친구들을 만나러 가셨을 때, 어김없이 번화가의 단골 술집으로 이끌려 가셨어요.',
-        explanation: '오랜 친구들에게 이끌려 술자리에 가게 되는 상황입니다.'
+        options: ['got taken to the bar', 'went to the clinic', 'slept in the bus', 'waited in the snow'],
+        korean: '큰 경기가 끝난 뒤, 신난 축구 선수들은 승리를 축하하기 위해 모두 술집으로 데려가 졌어요.',
+        explanation: '"got taken to the bar"는 축하 자리에 데려가진 상황입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The visiting sales reps [got taken to the bar, were given tickets, got kicked off, were turned away] by their hosts to celebrate the finalized contract.',
+        english: 'The out-of-town guests [got taken to the bar, were put in jail, fell into the river, stayed at the station] by their friendly host to hear live music.',
         answer: 'got taken to the bar',
-        options: ['got taken to the bar', 'were given tickets', 'got kicked off', 'were turned away'],
-        korean: '방문한 영업 담당자들은 계약 성사를 축하하기 위해 고객사 측의 안내로 술집으로 데려가 졌습니다.',
-        explanation: '축하 술자리로 초대받아 동행한 모습입니다.'
+        options: ['got taken to the bar', 'were put in jail', 'fell into the river', 'stayed at the station'],
+        korean: '외지에서 온 손님들은 라이브 음악을 듣기 위해 친절한 호스트에게 이끌려 술집(바)으로 안내받아 갔어요.',
+        explanation: '"got taken to the bar"는 안내되어 데려가짐을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'On his twenty-first birthday, Mark happily [got taken to the bar, was locked up, got left behind, fell off a roof] by his college roommates.',
+        english: 'When he completed the difficult project, he [got taken to the bar, was kept in bed, got lost in town, walked off the ship] by his coworkers for a toast.',
         answer: 'got taken to the bar',
-        options: ['got taken to the bar', 'was locked up', 'got left behind', 'fell off a roof'],
-        korean: '스물한 번째 생일에 마크는 대학 룸메이트들의 손에 이끌려 기분 좋게 펍으로 향했습니다.',
-        explanation: '합법적 음주 연령이 된 생일 축하 파티입니다.'
+        options: ['got taken to the bar', 'was kept in bed', 'got lost in town', 'walked off the ship'],
+        korean: '어려운 프로젝트를 완수했을 때, 그는 건배를 나누기 위해 직장 동료들에게 이끌려 바로 데려가 졌어요.',
+        explanation: '"got taken to the bar"는 동료들과 축하 자리에 함께 가게 된 것입니다.'
       }
     ]
   },
@@ -395,7 +395,7 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'I don\'t recall the exact date, but it was [one of the times, none of the days, all of the reasons, out of the blue] we visited grandma\'s country farmhouse.',
+        english: "I don't recall the exact date, but it was [one of the times, none of the days, all of the reasons, out of the blue] we visited grandma's country farmhouse.",
         answer: 'one of the times',
         options: ['one of the times', 'none of the days', 'all of the reasons', 'out of the blue'],
         korean: '정확한 날짜는 기억나지 않지만, 우리가 할머니의 시골 농가를 찾아갔던 여러 번 중 어느 한 번이었어요.',
@@ -403,36 +403,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'That funny incident happened during [one of the times we went camping].',
+        english: 'This funny photo was taken during [one of the times we went camping] in the woods.',
         answer: 'one of the times we went camping',
         tokens: ['one', 'of', 'the', 'times', 'we', 'went', 'camping'],
         options: ['one', 'of', 'the', 'times', 'we', 'went', 'camping'],
-        korean: '그 재미있는 사건은 우리가 캠핑을 갔던 여러 번 중 어느 한 번 동안 일어났어요.',
-        explanation: '여러 번의 캠핑 중 한 일화를 떠올릴 때 쓰는 표현입니다.'
+        korean: '이 재미있는 사진은 우리가 숲으로 캠핑을 갔던 여러 번 중 어느 한 번에 찍힌 거예요.',
+        explanation: '"one of the times"는 여러 번 중 한 번을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'This photograph was snapped during [one of the times, each of the rules, out of the question, ahead of the pack] we fished along the dry creek.',
+        english: 'I remember that chilly day; it was [one of the times, none of the rules, all of the games, out of the way] it snowed heavily in April.',
         answer: 'one of the times',
-        options: ['one of the times', 'each of the rules', 'out of the question', 'ahead of the pack'],
-        korean: '이 사진은 우리가 마른 개울을 따라 낚시를 하러 갔던 여러 번 중 한 번에 찍힌 사진입니다.',
-        explanation: '사진 속 추억의 순간을 회상합니다.'
+        options: ['one of the times', 'none of the rules', 'all of the games', 'out of the way'],
+        korean: '나는 그 쌀쌀했던 날을 기억해요. 4월에 눈이 많이 내렸던 여러 번 중 어느 한 번이었어요.',
+        explanation: '"one of the times"는 과거 특정 경험을 회상할 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Do you remember [one of the times, none of the places, all of the borders, some of the maps] our old station wagon broke down on highway 50?',
+        english: 'That was [one of the times, none of the words, all of the songs, away from home] my sister baked sweet cookies for our family.',
         answer: 'one of the times',
-        options: ['one of the times', 'none of the places', 'all of the borders', 'some of the maps'],
-        korean: '우리 옛 왜건 차량이 50번 국도에서 고장 났던 그 여러 번 중 한 번을 기억하니?',
-        explanation: '자주 고장 나던 시절의 한 장면을 묻는 회상입니다.'
+        options: ['one of the times', 'none of the words', 'all of the songs', 'away from home'],
+        korean: '그때는 내 여동생이 우리 가족을 위해 달콤한 쿠키를 구워주었던 여러 번 중 한 번이었어요.',
+        explanation: '"one of the times"는 다회 중 하나의 사건을 지칭합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'It was [one of the times, side by side, neck and neck, far and wide] Patty baked fresh apple pie for the family Sunday picnic.',
+        english: 'It happened during [one of the times, none of the books, each of the cars, out of place] we drove along the ocean road together.',
         answer: 'one of the times',
-        options: ['one of the times', 'side by side', 'neck and neck', 'far and wide'],
-        korean: '패티(Patty) 어머님이 가족 일요일 소풍을 위해 신선한 사과파이를 구워주셨던 여러 번 중 어느 한 번이었어요.',
-        explanation: '어머니의 정성 어린 파이를 추억하는 표현입니다.'
+        options: ['one of the times', 'none of the books', 'each of the cars', 'out of place'],
+        korean: '우리가 함께 해안 도로를 드라이브했던 여러 번 중 한 번 일어난 일이었어요.',
+        explanation: '"one of the times"는 추억 속 특정 시점을 가리킵니다.'
       }
     ]
   },
@@ -451,43 +451,43 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'They had that awkward conversation [early in their relationship].',
-        answer: 'early in their relationship',
-        tokens: ['early', 'in', 'their', 'relationship'],
-        options: ['early', 'in', 'their', 'relationship'],
-        korean: '그들은 교제 초기 단계에 그 어색한 대화를 나누었습니다.',
-        explanation: '연애 초기의 풋풋하거나 어색했던 순간입니다.'
+        english: 'They were shy with each other [early in the relationship as friends].',
+        answer: 'early in the relationship as friends',
+        tokens: ['early', 'in', 'the', 'relationship', 'as', 'friends'],
+        options: ['early', 'in', 'the', 'relationship', 'as', 'friends'],
+        korean: '그들은 친구로서의 관계 초기에는 서로 수줍어했어요.',
+        explanation: '"early in the relationship"은 관계의 초기 단계를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Establishing honest communication [early in the relationship, out of the blue, behind the curve, down the drain] prevents deep misunderstandings later.',
+        english: 'They talked for hours about their favorite books [early in the relationship, late at night, high in the air, far from home] when they first met.',
         answer: 'early in the relationship',
-        options: ['early in the relationship', 'out of the blue', 'behind the curve', 'down the drain'],
-        korean: '연애 초기 단계에 솔직한 소통 방식을 정착시키는 것은 나중에 깊은 오해를 예방해 줍니다.',
-        explanation: '관계 초기의 신뢰 형성을 강조합니다.'
+        options: ['early in the relationship', 'late at night', 'high in the air', 'far from home'],
+        korean: '처음 만났을 때 그들은 교제 초기 단계에 좋아하는 책에 대해 몇 시간 동안 이야기했어요.',
+        explanation: '"early in the relationship"은 사귀기 시작한 지 얼마 안 된 무렵입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'He surprised her with handmade pottery [early in the relationship, late in the night, deep in thought, wide in range] which she still keeps on her mantelpiece.',
+        english: 'It is very common to feel polite and careful [early in the relationship, deep in the water, late in the winter, out of the door] with someone new.',
         answer: 'early in the relationship',
-        options: ['early in the relationship', 'late in the night', 'deep in thought', 'wide in range'],
-        korean: '그는 연애 초기에 직접 만든 도자기로 그녀를 깜짝 놀라게 해주었는데, 그녀는 그것을 지금도 벽난로 선반 위에 간직하고 있습니다.',
-        explanation: '연애 초기의 뜻깊은 선물 추억입니다.'
+        options: ['early in the relationship', 'deep in the water', 'late in the winter', 'out of the door'],
+        korean: '새로운 사람과의 교제 초기 단계에는 예의를 차리고 조심스러워하는 것이 무척 자연스러워요.',
+        explanation: '"early in the relationship"은 관계 형성의 초반부입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Both of them were nervous and shy [early in the relationship, out of the box, beside the mark, under the thumb] before realizing how much they shared in common.',
+        english: 'They went for a simple picnic in the park [early in the relationship, late in life, up in the hills, down the road] on their third date.',
         answer: 'early in the relationship',
-        options: ['early in the relationship', 'out of the box', 'beside the mark', 'under the thumb'],
-        korean: '둘은 공통점이 얼마나 많은지 깨닫기 전인 교제 초기에는 긴장하고 수줍어했어요.',
-        explanation: '연애 초기의 수줍은 감정입니다.'
+        options: ['early in the relationship', 'late in life', 'up in the hills', 'down the road'],
+        korean: '그들은 세 번째 데이트였던 교제 초기 단계에 공원으로 간단한 소풍을 갔어요.',
+        explanation: '"early in the relationship"은 연애 초기를 가리킵니다.'
       }
     ]
   },
 
-  // 11. all, the, way, from, to
+  // 11. all the way from
   {
-    keyExpression: 'all, the, way, from, to',
+    keyExpression: 'all the way from',
     sentences: [
       {
         type: 'multiple-choice',
@@ -499,36 +499,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'They drove [all the way from Martinez to Lafayette in heavy traffic].',
-        answer: 'all the way from Martinez to Lafayette in heavy traffic',
-        tokens: ['all', 'the', 'way', 'from', 'Martinez', 'to', 'Lafayette', 'in', 'heavy', 'traffic'],
-        options: ['all', 'the', 'way', 'from', 'Martinez', 'to', 'Lafayette', 'in', 'heavy', 'traffic'],
-        korean: '그들은 극심한 교통 체증 속에서 마티네즈에서 라피엣까지 먼 길을 내내 운전해 갔어요.',
-        explanation: '먼 거리를 중단 없이 이동한 상황입니다.'
+        english: 'My grandparents traveled [all the way from Korea to visit us] this summer.',
+        answer: 'all the way from Korea to visit us',
+        tokens: ['all', 'the', 'way', 'from', 'Korea', 'to', 'visit', 'us'],
+        options: ['all', 'the', 'way', 'from', 'Korea', 'to', 'visit', 'us'],
+        korean: '우리 조부모님께서는 올여름 우리를 방문하기 위해 한국에서부터 먼 길을 내내 찾아오셨어요.',
+        explanation: '"all the way from"은 먼 거리에서부터 줄곧 찾아왔음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'My grandparents flew [all the way from, instead of, far behind, out toward] Seoul to attend our daughter\'s college graduation ceremony in California.',
+        english: 'He walked [all the way from, in front of, on top of, by way of] the train station to our front door in the rain.',
         answer: 'all the way from',
-        options: ['all the way from', 'instead of', 'far behind', 'out toward'],
-        korean: '우리 조부모님께서는 캘리포니아에서 열린 딸의 대학교 졸업식에 참석하기 위해 서울에서 그 먼 거리를 줄곧 비행기 타고 오셨어요.',
-        explanation: '먼 곳에서 먼 길을 마다하지 않고 찾아온 정성입니다.'
+        options: ['all the way from', 'in front of', 'on top of', 'by way of'],
+        korean: '그는 빗속에서 기차역에서부터 우리 집 현관문까지 먼 길을 내내 걸어왔어요.',
+        explanation: '"all the way from"은 출발지로부터 쉬지 않고 걸어옴을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Water in this aqueduct flows [all the way from, by way of, at the cost of, under cover of] the Sierra snowpack directly into valley irrigation canals.',
+        english: 'The whole family drove [all the way from, because of, inside of, next to] California to Texas for the reunion.',
         answer: 'all the way from',
-        options: ['all the way from', 'by way of', 'at the cost of', 'under cover of'],
-        korean: '이 수로의 물은 시에라 산맥의 만년설로부터 계곡 관개 수로로 먼 거리를 내내 흘러 들어옵니다.',
-        explanation: '자연의 물이 먼 거리를 흘러오는 모습입니다.'
+        options: ['all the way from', 'because of', 'inside of', 'next to'],
+        korean: '온 가족이 가족 모임을 위해 캘리포니아에서부터 텍사스까지 먼 거리를 내내 운전해 갔어요.',
+        explanation: '"all the way from"은 긴 이동 거리를 강조합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The historic steam train carried logs [all the way from, regardless of, in place of, on terms with] the high alpine ridge down to the coastal sawmill.',
+        english: 'She rode her bicycle [all the way from, despite of, on account of, in view of] her school to the beach on Saturday.',
         answer: 'all the way from',
-        options: ['all the way from', 'regardless of', 'in place of', 'on terms with'],
-        korean: '역사적인 증기 기관차는 높은 산등성이에서 해안가 제재소까지 통나무를 먼 거리를 내내 실어 날랐습니다.',
-        explanation: '장거리 운송 과정을 묘사합니다.'
+        options: ['all the way from', 'despite of', 'on account of', 'in view of'],
+        korean: '그녀는 토요일에 학교에서부터 해변까지 먼 거리를 자전거로 줄곧 달렸어요.',
+        explanation: '"all the way from"은 장거리 이동의 연속성을 나타냅니다.'
       }
     ]
   },
@@ -541,42 +541,42 @@ const POOL = [
         type: 'multiple-choice',
         english: 'The car suddenly [went around a corner, backed up a hill, stopped at a sign, blew a radiator] too fast, and the unsecured groceries slid across the backseat.',
         answer: 'went around a corner',
-        options: ['went around a corner', 'backed up a hill', 'stopped at a sign,', 'blew a radiator'],
+        options: ['went around a corner', 'backed up a hill', 'stopped at a sign', 'blew a radiator'],
         korean: '차가 너무 빠르게 길모퉁이(코너)를 도는 바람에 고정되지 않은 장보기 식료품들이 뒷좌석 바닥으로 미끄러져 쏟아졌어요.',
         explanation: '"go around a corner"는 운전 중에 "길모퉁이/코너를 돌다"라는 뜻입니다 (과거형: went around a corner).'
       },
       {
         type: 'drag-and-drop',
-        english: 'As soon as the truck [went around a sharp mountain corner], the pies slid over.',
-        answer: 'went around a sharp mountain corner',
-        tokens: ['went', 'around', 'a', 'sharp', 'mountain', 'corner'],
-        options: ['went', 'around', 'a', 'sharp', 'mountain', 'corner'],
-        korean: '트럭이 가파른 산길 모퉁이를 돌자마자 파이들이 옆으로 미끄러져 버렸어요.',
-        explanation: '산길 코너를 돌 때 짐이 쏠리는 상황입니다.'
+        english: 'The yellow school bus [went around a corner and stopped] by the gate.',
+        answer: 'went around a corner and stopped',
+        tokens: ['went', 'around', 'a', 'corner', 'and', 'stopped'],
+        options: ['went', 'around', 'a', 'corner', 'and', 'stopped'],
+        korean: '노란 스쿨버스가 모퉁이를 돌아 교문 옆에 멈춰 섰어요.',
+        explanation: '"went around a corner"는 코너를 돌았음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Slow down before you [go around a corner, drop your guard, lose your mind, run out of gas] on icy mountain roads.',
-        answer: 'go around a corner',
-        options: ['go around a corner', 'drop your guard', 'lose your mind', 'run out of gas'],
-        korean: '빙판길 산골 도로에서는 모퉁이를 돌기 전에 속도를 줄이세요.',
-        explanation: '코너링 전 감속 운전 안전 수칙입니다.'
-      },
-      {
-        type: 'multiple-choice',
-        english: 'The cyclist signaled with his left hand as he [went around a corner, took a shower, built a shelter, tied a knot] onto oak avenue.',
+        english: 'He slowed down safely as he [went around a corner, climbed up a tree, jumped into water, flew in the air] on his bicycle.',
         answer: 'went around a corner',
-        options: ['went around a corner', 'took a shower', 'built a shelter', 'tied a knot'],
-        korean: '자전거 라이더는 오크 애비뉴로 모퉁이를 돌면서 왼손으로 수신호를 보냈습니다.',
-        explanation: '자전거로 코너를 도는 모습입니다.'
+        options: ['went around a corner', 'climbed up a tree', 'jumped into water', 'flew in the air'],
+        korean: '그는 자전거로 모퉁이를 돌 때 안전하게 속도를 줄였어요.',
+        explanation: '"went around a corner"는 코너를 도는 주행 동작입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We [went around a corner, broke the bank, jumped the gun, hit the wall] and suddenly beheld a breathtaking panoramic view of the Pacific Ocean.',
+        english: 'The playful puppy ran fast and [went around a corner, fell asleep, sat down, flew away] into the garden path.',
         answer: 'went around a corner',
-        options: ['went around a corner', 'broke the bank', 'jumped the gun', 'hit the wall'],
-        korean: '우리가 길모퉁이를 돌자마자 눈앞에 태평양의 숨 막히는 파노라마 전망이 활짝 펼쳐졌어요.',
-        explanation: '길모퉁이를 돌자마자 마주친 경이로운 풍경입니다.'
+        options: ['went around a corner', 'fell asleep', 'sat down', 'flew away'],
+        korean: '장난꾸러기 강아지는 빠르게 달려 모퉁이를 돌아 정원 길로 들어섰어요.',
+        explanation: '"went around a corner"는 방향을 꺾어 모퉁이를 돌아가는 것입니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The delivery truck carefully [went around a corner, backed up a tree, broke the sea, flew in space] on the narrow street.',
+        answer: 'went around a corner',
+        options: ['went around a corner', 'backed up a tree', 'broke the sea', 'flew in space'],
+        korean: '배달 트럭은 좁은 골목길에서 조심스럽게 모퉁이를 돌았어요.',
+        explanation: '"went around a corner"는 길모퉁이를 도는 동작입니다.'
       }
     ]
   },
@@ -595,84 +595,85 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'Autumn is [my favorite time of year for cabin camping].',
-        answer: 'my favorite time of year for cabin camping',
-        tokens: ['my', 'favorite', 'time', 'of', 'year', 'for', 'cabin', 'camping'],
-        options: ['my', 'favorite', 'time', 'of', 'year', 'for', 'cabin', 'camping'],
-        korean: '가을은 오두막 캠핑을 하기에 내가 일 년 중 가장 좋아하는 시기예요.',
-        explanation: '캠핑하기 좋은 특정 계절을 나타냅니다.'
+        english: 'The forest leaves change color depending on [the time of year in our state].',
+        answer: 'the time of year in our state',
+        tokens: ['the', 'time', 'of', 'year', 'in', 'our', 'state'],
+        options: ['the', 'time', 'of', 'year', 'in', 'our', 'state'],
+        korean: '숲의 나뭇잎들은 우리 주에서 연중 어느 시기인지(계절)에 따라 색이 변해요.',
+        explanation: '"the time of year"는 연중 시기나 계절을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Flight ticket prices fluctuate wildly depending on [the time of year, the color of paint, the depth of water, the size of shoes], peaking in late December.',
+        english: 'Fresh sweet apples are very cheap depending on [the time of year, the shape of cars, the size of shoes, the color of paint].',
         answer: 'the time of year',
-        options: ['the time of year', 'the color of paint', 'the depth of water', 'the size of shoes'],
-        korean: '항공권 가격은 연중 어느 시기인지에 따라 크게 요동치며, 12월 말에 정점을 찍습니다.',
-        explanation: '시기나 성수기에 따른 가격 변동입니다.'
+        options: ['the time of year', 'the shape of cars', 'the size of shoes', 'the color of paint'],
+        korean: '신선하고 달콤한 사과는 연중 어느 시기(철)인지에 따라 가격이 매우 저렴해요.',
+        explanation: '"the time of year"는 과일 등의 제철 시기를 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Spring is [the time of year, out of hand, down to earth, above the law] when mountain wildflowers bloom across the alpine meadows.',
-        answer: 'the time of year',
-        options: ['the time of year', 'out of hand', 'down to earth', 'above the law'],
-        korean: '봄은 고산지대 초원에 산골 야생화들이 만발하는 연중 시기입니다.',
-        explanation: '꽃이 피는 계절적 시기를 뜻합니다.'
+        english: 'December is always a cheerful and busy [time of year, place to live, road to take, song to sing] for families.',
+        answer: 'time of year',
+        options: ['time of year', 'place to live', 'road to take', 'song to sing'],
+        korean: '12월은 가족들에게 언제나 유쾌하고 바쁜 연중 시기(연말)예요.',
+        explanation: '"time of year"는 1년 중 특정 달이나 계절 시기를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Wearing heavy wool flannel is perfectly normal for [this time of year, that side of street, this kind of metal, that line of code] in northern California.',
-        answer: 'this time of year',
-        options: ['this time of year', 'that side of street', 'this kind of metal', 'that line of code'],
-        korean: '북부 캘리포니아에서는 연중 이맘때 두꺼운 모직 플란넬 셔츠를 입는 것이 지극히 자연스럽습니다.',
-        explanation: '계절적 시기에 맞는 옷차림입니다.'
+        english: 'The sun goes down very early at this [time of year, part of town, side of the room, kind of book] in the winter.',
+        answer: 'time of year',
+        options: ['time of year', 'part of town', 'side of the room', 'kind of book'],
+        korean: '겨울철 이 시기에는 해가 매우 일찍 져요.',
+        explanation: '"at this time of year"는 연중 이 무렵에라는 뜻입니다.'
       }
     ]
   },
 
-  // 14. Take a nap
+  // 14. take a nap
   {
-    keyExpression: 'Take a nap',
+    keyExpression: 'take a nap',
     sentences: [
       {
         type: 'multiple-choice',
         english: 'After spending the morning chopping firewood in the crisp mountain air, Gene likes to [take a nap, run an errand, buy a ticket, start a fire] on the porch hammock.',
         answer: 'take a nap',
+        options: ['take a nap', 'run an errand', 'buy a ticket, start a fire'],
         options: ['take a nap', 'run an errand', 'buy a ticket', 'start a fire'],
         korean: '상쾌한 산골 공기 속에서 아침 내내 장작을 팬 뒤, 진(Gene) 아버님은 현관 해먹에서 낮잠을 잠깐 주무시는 것을 좋아하십니다.',
         explanation: '"take a nap"은 "낮잠을 자다"라는 뜻입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'I always feel refreshed after [I take a short twenty-minute nap].',
-        answer: 'I take a short twenty-minute nap',
-        tokens: ['I', 'take', 'a', 'short', 'twenty-minute', 'nap'],
-        options: ['I', 'take', 'a', 'short', 'twenty-minute', 'nap'],
-        korean: '나는 20분 동안 짧은 낮잠을 자고 나면 늘 몸이 개운해져요.',
-        explanation: '짧은 낮잠 후의 재충전입니다.'
+        english: 'Grandpa likes to [take a short nap in the afternoon] on the porch.',
+        answer: 'take a short nap in the afternoon',
+        tokens: ['take', 'a', 'short', 'nap', 'in', 'the', 'afternoon'],
+        options: ['take', 'a', 'short', 'nap', 'in', 'the', 'afternoon'],
+        korean: '할아버지께서는 오후에 현관 테라스에서 짧게 낮잠을 주무시는 것을 좋아하세요.',
+        explanation: '"take a nap"은 낮잠을 자는 것입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'If you feel exhausted after the long highway drive, pull into a rest stop and [take a nap, wash the car, buy a souvenir, read the news] safely.',
+        english: 'I felt so sleepy after lunch that I decided to [take a nap, paint the wall, wash the car, cook dinner] for thirty minutes.',
         answer: 'take a nap',
-        options: ['take a nap', 'wash the car', 'buy a souvenir', 'read the news'],
-        korean: '장거리 고속도로 운전 후 너무 피곤하다면 휴게소에 차를 대고 안전하게 낮잠을 청하세요.',
-        explanation: '졸음운전 예방을 위한 낮잠 권장입니다.'
+        options: ['take a nap', 'paint the wall', 'wash the car', 'cook dinner'],
+        korean: '점심 식사 후 너무 졸려서 나는 30분 동안 낮잠을 자기로 했어요.',
+        explanation: '"take a nap"은 잠깐 잠을 자서 피로를 푸는 것입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The warm autumn sunshine streaming through the cabin window tempted everyone to [take a nap, clean the roof, dig a trench, paint the barn].',
+        english: 'The little baby will usually [take a nap, read a book, ride a bike, write a letter] after drinking warm milk.',
         answer: 'take a nap',
-        options: ['take a nap', 'clean the roof', 'dig a trench', 'paint the barn'],
-        korean: '오두막 창문으로 쏟아지는 따사로운 가을 햇살은 모두에게 나른하게 낮잠을 자고 싶게 만들었어요.',
-        explanation: '따뜻한 햇살 속의 나른한 휴식입니다.'
+        options: ['take a nap', 'read a book', 'ride a bike', 'write a letter'],
+        korean: '어린 아기는 보통 따뜻한 우유를 마신 후에 낮잠을 자요.',
+        explanation: '"take a nap"은 아기나 어른의 낮잠입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Our energetic puppy finally exhausted himself after playing fetch and curled up to [take a nap, chew the rug, bark at clouds, dig a hole].',
+        english: 'On lazy Sunday afternoons, dad often likes to [take a nap, build a shed, buy a boat, fix the car] on the soft living room couch.',
         answer: 'take a nap',
-        options: ['take a nap', 'chew the rug', 'bark at clouds', 'dig a hole'],
-        korean: '우리 활기찬 강아지는 공놀이를 한 뒤 마침내 지쳐서 몸을 웅크리고 낮잠을 잤어요.',
-        explanation: '강아지가 낮잠을 자는 귀여운 모습입니다.'
+        options: ['take a nap', 'build a shed', 'buy a boat', 'fix the car'],
+        korean: '나른한 일요일 오후면 아빠는 거실의 푹신한 소파에서 종종 낮잠을 주무시는 것을 좋아하세요.',
+        explanation: '"take a nap"은 나른할 때 낮잠을 자는 행동입니다.'
       }
     ]
   },
@@ -685,42 +686,42 @@ const POOL = [
         type: 'multiple-choice',
         english: 'Living in the forest with wildlife sightings and endless cabin chores means there is never a [dull moment, bright future, clear sky, deep ocean].',
         answer: 'dull moment',
-        options: ['dull moment', 'bright future', 'clear sky,', 'deep ocean'],
+        options: ['dull moment', 'bright future', 'clear sky', 'deep ocean'],
         korean: '야생동물 출몰과 끝없는 오두막 일거리 속에서 숲속에 산다는 것은 지루하거나 심심한 순간이 결코 없다는 것을 의미합니다.',
         explanation: '"never a dull moment"는 언제나 활기차고 사건이 끊이지 않아 "지루할 틈이 없다"라는 관용 표현입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'With three playful puppies in the house, [there is never a single dull moment].',
-        answer: 'there is never a single dull moment',
-        tokens: ['there', 'is', 'never', 'a', 'single', 'dull', 'moment'],
-        options: ['there', 'is', 'never', 'a', 'single', 'dull', 'moment'],
-        korean: '집에 장난꾸러기 강아지 세 마리가 있으니 단 한 순간도 심심할 틈이 없어요.',
-        explanation: '항상 떠들썩하고 재미있는 일상을 표현합니다.'
+        english: 'With three playful puppies in the house, there is [never a dull moment for our family].',
+        answer: 'never a dull moment for our family',
+        tokens: ['never', 'a', 'dull', 'moment', 'for', 'our', 'family'],
+        options: ['never', 'a', 'dull', 'moment', 'for', 'our', 'family'],
+        korean: '집에 장난꾸러기 강아지 세 마리가 있어서 우리 가족에게는 지루할 틈이 전혀 없어요.',
+        explanation: '"never a dull moment"는 언제나 재미있고 바쁘다는 뜻입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Between hosting foreign exchange students and running an organic bakery, they rarely experience a [dull moment, quick temper, fair trial, cold shoulder].',
+        english: 'Our summer camp was so full of fun games that there was never a [dull moment, dark night, cold drink, loud sound] all week.',
         answer: 'dull moment',
-        options: ['dull moment', 'quick temper', 'fair trial', 'cold shoulder'],
-        korean: '외국인 유학생들을 홈스테이로 돌보고 유기농 빵집을 운영하느라 그들은 지루한 순간을 거의 겪지 않습니다.',
-        explanation: '바쁘고 역동적인 라이프스타일입니다.'
+        options: ['dull moment', 'dark night', 'cold drink', 'loud sound'],
+        korean: '우리 여름 캠프는 재미있는 게임으로 가득 차서 일주일 내내 지루할 틈이 한순간도 없었어요.',
+        explanation: '"never a dull moment"는 지루하거나 심심할 틈이 없음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Uncle Wayne always brings so much laughter to family dinners that there is never a [dull moment, heavy heart, sharp pain, second thought] at the table.',
+        english: 'Traveling with my cheerful cousins means there is rarely a [dull moment, sad song, heavy storm, red light] on the road.',
         answer: 'dull moment',
-        options: ['dull moment', 'heavy heart', 'sharp pain', 'second thought'],
-        korean: '웨인 삼촌은 가족 저녁 식사 자리에 언제나 많은 웃음을 가져다주셔서 식탁에 지루할 틈이 전혀 없어요.',
-        explanation: '웨인 삼촌의 유쾌한 입담을 묘사합니다.'
+        options: ['dull moment', 'sad song', 'heavy storm', 'red light'],
+        korean: '유쾌한 사촌들과 함께 여행하는 것은 길 위에서 지루할 틈이 거의 없다는 것을 의미해요.',
+        explanation: '"rarely a dull moment"는 심심할 틈이 거의 없음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The chaotic backstage production of the live Broadway musical ensured there was not one [dull moment, empty chair, flat note, wild animal] for the crew.',
+        english: 'In a lively classroom with young children, there is never a [dull moment, warm coat, small desk, tall tree] for the teacher.',
         answer: 'dull moment',
-        options: ['dull moment', 'empty chair', 'flat note', 'wild animal'],
-        korean: '생방송 브로드웨이 뮤지컬의 긴박한 백스테이지 현장은 스태프들에게 잠시도 지루할 틈을 주지 않았습니다.',
-        explanation: '분주하고 흥미진진한 무대 뒤편입니다.'
+        options: ['dull moment', 'warm coat', 'small desk', 'tall tree'],
+        korean: '어린아이들이 있는 활기찬 교실에서는 선생님에게 지루할 틈이 전혀 없어요.',
+        explanation: '"never a dull moment"는 늘 활력이 넘치고 사건이 이어짐을 뜻합니다.'
       }
     ]
   },
@@ -739,47 +740,47 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'He was [backing out of the narrow driveway] very cautiously.',
-        answer: 'backing out of the narrow driveway',
-        tokens: ['backing', 'out', 'of', 'the', 'narrow', 'driveway'],
-        options: ['backing', 'out', 'of', 'the', 'narrow', 'driveway'],
-        korean: '그는 좁은 진입로에서 매우 조심스럽게 후진하여 차를 빼고 있었어요.',
-        explanation: '차량을 후진하여 밖으로 빼는 동작입니다.'
+        english: 'I noticed a loose screw [backing out of the wooden chair leg] yesterday.',
+        answer: 'backing out of the wooden chair leg',
+        tokens: ['backing', 'out', 'of', 'the', 'wooden', 'chair', 'leg'],
+        options: ['backing', 'out', 'of', 'the', 'wooden', 'chair', 'leg'],
+        korean: '어제 나무 의자 다리에서 헐거워진 나사가 밖으로 삐져나오고 있는 것을 발견했어요.',
+        explanation: '"backing out"은 나사가 풀려 삐져나옴을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'After promising to finance our start-up project, the lead investor is suddenly [backing out, leaning in, stepping up, digging down] at the eleventh hour.',
+        english: 'The old nails on the garden fence were slowly [backing out, sticking down, painting over, locking up] after years of rain.',
         answer: 'backing out',
-        options: ['backing out', 'leaning in', 'stepping up', 'digging down'],
-        korean: '우리 스타트업 프로젝트에 자금을 대기로 약속해 놓고 주요 투자자가 마지막 순간에 갑자기 발을 빼고(약속을 번복하고) 있어요.',
-        explanation: '약속이나 계약에서 "발을 빼다, 철회하다"라는 비유적 표현입니다.'
+        options: ['backing out', 'sticking down', 'painting over', 'locking up'],
+        korean: '정원 울타리의 오래된 못들이 오랜 비바람 끝에 서서히 밖으로 삐져나오고 있었어요.',
+        explanation: '"backing out"은 못이나 나사가 헐거워져 밀려 나옴을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Check the wooden fence posts periodically to make sure the galvanized nails aren\'t [backing out, rusting fast, growing tall, shining bright] over time.',
+        english: 'Watch out for that metal pin [backing out, holding fast, lying still, drying up] of the door hinge.',
         answer: 'backing out',
-        options: ['backing out', 'rusting fast', 'growing tall', 'shining bright'],
-        korean: '시간이 지나면서 아연도금 못들이 밖으로 삐져나오지 않는지 나무 울타리 기둥을 주기적으로 점검하세요.',
-        explanation: '못이나 나사가 헐거워져 빠지는 현상입니다.'
+        options: ['backing out', 'holding fast', 'lying still', 'drying up'],
+        korean: '문경첩에서 밖으로 빠져나오고 있는 저 쇠핀을 조심하세요.',
+        explanation: '"backing out"은 고정된 핀이나 나사가 밀려 나오는 상태입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'There is no [backing out, speeding ahead, standing around, looking down] once you sign the legal property deed.',
+        english: 'Dad used a screwdriver to tighten the loose screws that were [backing out, falling asleep, cooling off, washing away] of the kitchen cabinet.',
         answer: 'backing out',
-        options: ['backing out', 'speeding ahead', 'standing around', 'looking down'],
-        korean: '법적 부동산 증서에 서명하고 나면 약속을 번복하고 발을 뺄 수 없습니다.',
-        explanation: '계약 체결 후 철회 불가함을 뜻합니다.'
+        options: ['backing out', 'falling asleep', 'cooling off', 'washing away'],
+        korean: '아빠는 주방 수납장에서 밖으로 삐져나오고 있던 헐거운 나사들을 드라이버로 조이셨어요.',
+        explanation: '"backing out"은 나사가 느슨해져 밀려 나오는 현상입니다.'
       }
     ]
   },
 
-  // 17. It's a pain
+  // 17. it's a pain
   {
-    keyExpression: 'It\'s a pain',
+    keyExpression: "it's a pain",
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Climbing up on a steep ladder in subzero cold to replace hundreds of loose roofing screws—[it\'s a pain, it\'s a breeze, it\'s a delight, it\'s a miracle] to deal with every winter.',
+        english: "Climbing up on a steep ladder in subzero cold to replace hundreds of loose roofing screws—[it's a pain, it's a breeze, it's a delight, it's a miracle] to deal with every winter.",
         answer: "it's a pain",
         options: ["it's a pain", "it's a breeze", "it's a delight", "it's a miracle"],
         korean: '영하의 추위 속에서 수백 개의 헐거워진 지붕 나사를 교체하기 위해 가파른 사다리에 오르는 것—겨울마다 처리하기 참 골칫거리이자 성가신 일이에요.',
@@ -787,36 +788,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'Clearing heavy wet snow from the long driveway is [such a pain every morning].',
-        answer: 'such a pain every morning',
-        tokens: ['such', 'a', 'pain', 'every', 'morning'],
-        options: ['such', 'a', 'pain', 'every', 'morning'],
-        korean: '긴 진입로에서 무겁고 축축한 눈을 치우는 것은 매일 아침 정말 성가신 일이에요.',
-        explanation: '매일 반복되는 번거로운 일거리를 묘사합니다.'
+        english: "Washing a huge mountain of dishes by hand after dinner—[it's a pain for everyone].",
+        answer: "it's a pain for everyone",
+        tokens: ["it's", 'a', 'pain', 'for', 'everyone'],
+        options: ["it's", 'a', 'pain', 'for', 'everyone'],
+        korean: '저녁 식사 후 산더미 같은 설거지를 손으로 하는 것—모두에게 참 성가신 일이에요.',
+        explanation: '"it\'s a pain"은 번거롭고 귀찮은 일을 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Filling out forty pages of bureaucratic immigration paperwork is [a pain, a pleasure, a breeze, a celebration], but necessary for the visa.',
-        answer: 'a pain',
-        options: ['a pain', 'a pleasure', 'a breeze', 'a celebration'],
-        korean: '40페이지에 달하는 관료적 이민 서류를 작성하는 것은 참 골칫거리이지만 비자를 위해서는 필수적입니다.',
-        explanation: '지루하고 성가신 서류 작업입니다.'
+        english: "Cleaning deep snow off the car windshield every freezing morning—[it's a pain, it's a joy, it's a gift, it's a party] in the winter.",
+        answer: "it's a pain",
+        options: ["it's a pain", "it's a joy", "it's a gift", "it's a party"],
+        korean: '매서운 아침마다 자동차 앞 유리의 두꺼운 눈을 치우는 것—겨울철엔 참 귀찮고 성가신 일이에요.',
+        explanation: '"it\'s a pain"은 귀찮은 수고로움을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'When the internet router drops connection during an important video conference, [it\'s a real pain, it\'s a big gift, it\'s a sweet treat, it\'s an easy fix].',
-        answer: "it's a real pain",
-        options: ["it's a real pain", "it's a big gift", "it's a sweet treat", "it's an easy fix"],
-        korean: '중요한 화상 회의 중에 인터넷 공유기 연결이 끊기면 정말 골치 아프고 짜증 나는 일이에요.',
-        explanation: '짜증 나고 성가신 기술 오류입니다.'
+        english: "Carrying heavy grocery bags up four flights of stairs—[it's a pain, it's a song, it's a dream, it's a breeze] without an elevator.",
+        answer: "it's a pain",
+        options: ["it's a pain", "it's a song", "it's a dream", "it's a breeze"],
+        korean: '엘리베이터 없이 무거운 장보기 가방을 4층까지 계단으로 들고 올라가는 것—정말 골칫거리이자 힘든 일이에요.',
+        explanation: '"it\'s a pain"은 번거롭고 힘든 일입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Finding parking downtown on a Saturday night is [such a pain, such a joy, so simple, so quiet] that we prefer taking the subway.',
-        answer: 'such a pain',
-        options: ['such a pain', 'such a joy', 'so simple', 'so quiet'],
-        korean: '토요일 밤에 시내에서 주차 공간을 찾는 것은 너무나 번거롭고 골칫거리여서 우리는 지하철 타는 것을 더 선호해요.',
-        explanation: '주차난의 번거로움을 표현합니다.'
+        english: "Waiting in a slow, crowded line at the post office on Monday morning—[it's a pain, it's a laugh, it's a game, it's a treat] for busy people.",
+        answer: "it's a pain",
+        options: ["it's a pain", "it's a laugh", "it's a game", "it's a treat"],
+        korean: '월요일 아침 우체국에서 느리고 붐비는 줄을 서서 기다리는 것—바쁜 사람들에겐 참 성가신 일이에요.',
+        explanation: '"it\'s a pain"은 짜증 나거나 답답하고 귀찮은 상황을 뜻합니다.'
       }
     ]
   },
@@ -835,36 +836,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'Gene met Patty [way back when they were young].',
-        answer: 'way back when they were young',
-        tokens: ['way', 'back', 'when', 'they', 'were', 'young'],
-        options: ['way', 'back', 'when', 'they', 'were', 'young'],
-        korean: '진 아버님은 패티 어머님을 두 분이 젊으셨던 아주 오래전에 처음 만나셨어요.',
-        explanation: '젊은 시절 아득한 옛 추억을 회상할 때 씁니다.'
+        english: '[Way back when I was a little kid], we played outside until dinner without phones.',
+        answer: 'Way back when I was a little kid',
+        tokens: ['Way', 'back', 'when', 'I', 'was', 'a', 'little', 'kid'],
+        options: ['Way', 'back', 'when', 'I', 'was', 'a', 'little', 'kid'],
+        korean: '내가 어린아이였던 아주 먼 옛날에는 휴대전화 없이도 저녁때까지 밖에서 놀았어요.',
+        explanation: '"Way back when"은 아주 오래전 시절을 회상할 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: '[Way back, Near ahead, In between, Close by] before smartphones existed, travelers relied on folded paper highway maps and payphones.',
+        english: '[Way back, Soon then, Just now, Up front] in elementary school, we walked to school together every morning.',
         answer: 'Way back',
-        options: ['Way back', 'Near ahead', 'In between', 'Close by'],
-        korean: '스마트폰이 존재하기 훨씬 전 먼 옛날에는 여행자들이 종이 고속도로 지도와 공중전화에 의존했습니다.',
-        explanation: '아날로그 시절의 과거를 회상합니다.'
+        options: ['Way back', 'Soon then', 'Just now', 'Up front'],
+        korean: '아주 오래전 초등학교 시절에는 매일 아침 함께 걸어서 등교했어요.',
+        explanation: '"Way back"은 오래전 과거 시점을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We used to hike this rugged mountain trail [way back, right now, just yet, soon enough] when Wayne and Gene were energetic teenagers.',
+        english: 'My grandfather built that small red barn [way back, right now, soon after, forward then] in nineteen-sixty.',
         answer: 'way back',
-        options: ['way back', 'right now', 'just yet', 'soon enough'],
-        korean: '웨인 삼촌과 진 아버님이 에너지 넘치던 십대였던 아주 먼 옛날에 우리는 이 험준한 산길을 하이킹하곤 했어요.',
-        explanation: '형제의 청소년기 추억입니다.'
+        options: ['way back', 'right now', 'soon after', 'forward then'],
+        korean: '우리 할아버지께서는 아주 오래전 1960년에 저 작은 빨간 헛간을 지으셨어요.',
+        explanation: '"way back in (year)"는 아주 먼 과거 연도를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The original stone foundation of the cabin was laid [way back, up close, out front, by side] during the California gold rush era.',
-        answer: 'way back',
-        options: ['way back', 'up close', 'out front', 'by side'],
-        korean: '오두막의 최초 석조 기초는 캘리포니아 골드러시 시대인 아주 먼 옛날에 놓였습니다.',
-        explanation: '역사적인 과거 시점을 가리킵니다.'
+        english: '[Way back, Near by, Look out, Come here] when my mother was young, her family lived on a small dairy farm.',
+        answer: 'Way back',
+        options: ['Way back', 'Near by', 'Look out', 'Come here'],
+        korean: '아주 오래전 우리 엄마가 어렸을 적에, 외가 식구들은 작은 낙농 농장에 살았어요.',
+        explanation: '"Way back"은 부모님 세대의 오랜 옛날을 뜻합니다.'
       }
     ]
   },
@@ -883,36 +884,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: '[It was surprising that the mountain wildlife came so close] to the porch.',
-        answer: 'It was surprising that the mountain wildlife came so close',
-        tokens: ['It', 'was', 'surprising', 'that', 'the', 'mountain', 'wildlife', 'came', 'so', 'close'],
-        options: ['It', 'was', 'surprising', 'that', 'the', 'mountain', 'wildlife', 'came', 'so', 'close'],
-        korean: '산골 야생동물이 현관 가까이까지 다가왔다는 사실은 참 놀라웠습니다.',
-        explanation: '야생동물이 인가 근처에 다가온 뜻밖의 광경입니다.'
+        english: '[It was surprising that the sun came out] after such a stormy morning.',
+        answer: 'It was surprising that the sun came out',
+        tokens: ['It', 'was', 'surprising', 'that', 'the', 'sun', 'came', 'out'],
+        options: ['It', 'was', 'surprising', 'that', 'the', 'sun', 'came', 'out'],
+        korean: '그렇게 폭풍우가 몰아치던 아침 뒤에 해가 쨍쨍 나왔다는 사실은 참 놀라웠어요.',
+        explanation: '"It was surprising that"은 예상치 못한 일에 놀라움을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: '[It was surprising that, It was illegal that, It was boring that, It was painful that] the fragile solar battery array survived the heavy blizzard without damage.',
+        english: '[It was surprising that, It was illegal that, It was boring that, It was painful that] our small school team won the city soccer championship.',
         answer: 'It was surprising that',
         options: ['It was surprising that', 'It was illegal that', 'It was boring that', 'It was painful that'],
-        korean: '연약한 태양광 배터리 설비가 거센 눈보라를 파손 없이 견뎌냈다는 사실은 참으로 놀라웠습니다.',
-        explanation: '혹독한 날씨를 견뎌낸 뜻밖의 내구성입니다.'
+        korean: '우리 작은 학교 팀이 도시 축구 대회에서 우승했다는 사실은 참 놀라웠어요.',
+        explanation: '"It was surprising that"은 놀라운 성과를 말할 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: '[It was surprising that, It was formal that, It was typical that, It was silent that] the shy toddler recited the entire poem from memory on stage.',
+        english: '[It was surprising that, It was bad that, It was late that, It was dark that] all fifteen guests arrived at the dinner on time.',
         answer: 'It was surprising that',
-        options: ['It was surprising that', 'It was formal that', 'It was typical that', 'It was silent that'],
-        korean: '수줍음 많은 어린아이가 무대 위에서 시 전체를 암기하여 낭독했다는 사실은 대단히 놀라웠습니다.',
-        explanation: '아이의 놀라운 발표 능력에 대한 감탄입니다.'
+        options: ['It was surprising that', 'It was bad that', 'It was late that', 'It was dark that'],
+        korean: '열다섯 명의 손님 전원이 저녁 식사에 제시간에 도착했다는 것은 참 놀라웠어요.',
+        explanation: '"It was surprising that"은 뜻밖의 사실을 언급할 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: '[It was surprising that, It was cruel that, It was hollow that, It was fake that] the ancient wooden bridge remained structurally sound after a century of use.',
+        english: '[It was surprising that, It was ugly that, It was cold that, It was poor that] he solved the difficult puzzle in just five minutes.',
         answer: 'It was surprising that',
-        options: ['It was surprising that', 'It was cruel that', 'It was hollow that', 'It was fake that'],
-        korean: '그 오래된 목조 다리가 100년의 사용 후에도 구조적으로 여전히 튼튼하다는 사실은 참으로 놀라웠습니다.',
-        explanation: '오래된 다리의 견고함에 대한 놀라움입니다.'
+        options: ['It was surprising that', 'It was ugly that', 'It was cold that', 'It was poor that'],
+        korean: '그가 어려운 퍼즐을 단 5분 만에 풀었다는 사실은 참 놀라웠어요.',
+        explanation: '"It was surprising that"은 기대 이상의 빠른 결과에 놀라움을 표합니다.'
       }
     ]
   },
@@ -931,36 +932,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'Do not make loud noises that could [disturbed the nesting mountain birds].',
-        answer: 'disturbed the nesting mountain birds',
-        tokens: ['disturbed', 'the', 'nesting', 'mountain', 'birds'],
-        options: ['disturbed', 'the', 'nesting', 'mountain', 'birds'],
-        korean: '둥지를 튼 산새들의 평온을 방해할 수 있는 큰 소음을 내지 마세요.',
-        explanation: '야생동물의 안식을 해치지 말라는 당부입니다.'
+        english: 'The loud barking dog [disturbed my sleep early this morning] at dawn.',
+        answer: 'disturbed my sleep early this morning',
+        tokens: ['disturbed', 'my', 'sleep', 'early', 'this', 'morning'],
+        options: ['disturbed', 'my', 'sleep', 'early', 'this', 'morning'],
+        korean: '시끄럽게 짖는 개가 오늘 이른 새벽 내 잠을 방해했어요.',
+        explanation: '"disturbed my sleep"은 수면을 방해받았음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The sudden drone of a chainsaw [disturbed, blessed, welcomed, cleaned] the peaceful tranquility of the alpine valley.',
+        english: 'Please turn your phone to silent so other moviegoers are not [disturbed, helped, painted, washed] during the film.',
         answer: 'disturbed',
-        options: ['disturbed', 'blessed', 'welcomed', 'cleaned'],
-        korean: '전기톱의 갑작스러운 굉음이 고산 계곡의 평화로운 고요를 깨뜨리고 방해했습니다.',
-        explanation: '소음이 평화를 깨뜨리는 상황입니다.'
+        options: ['disturbed', 'helped', 'painted', 'washed'],
+        korean: '영화 상영 중에 다른 관객들이 방해받지 않도록 휴대전화를 무음으로 바꿔주세요.',
+        explanation: '"disturbed"는 집중이나 관람을 방해받는 상태입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'He left a "Do Not Disturb" sign on his door so his deep sleep would not be [disturbed, assisted, encouraged, rewarded] by housekeeping.',
+        english: 'The sudden knock on the front door [disturbed, pleased, fed, thanked] her quiet reading time in the study.',
         answer: 'disturbed',
-        options: ['disturbed', 'assisted', 'encouraged', 'rewarded'],
-        korean: '그는 룸서비스 직원에 의해 깊은 잠을 방해받지 않도록 문에 "방해하지 마세요" 팻말을 걸어두었습니다.',
-        explanation: '호텔의 방해금지 팻말 용법입니다.'
+        options: ['disturbed', 'pleased', 'fed', 'thanked'],
+        korean: '현관문을 두드리는 갑작스러운 소리가 서재에서의 그녀의 조용한 독서 시간을 방해했어요.',
+        explanation: '"disturbed"는 평온한 시간을 깨뜨림을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Hikers should walk softly so wildlife foraging on the forest floor is not [disturbed, defended, glorified, multiplied].',
+        english: 'The gentle sound of soft rain outside never [disturbed, dried, bought, cleaned] the sleeping cat on the sofa.',
         answer: 'disturbed',
-        options: ['disturbed', 'defended', 'glorified', 'multiplied'],
-        korean: '숲 바닥에서 먹이를 찾는 야생동물들이 방해받거나 놀라지 않도록 등산객들은 발걸음을 조용히 걸어야 합니다.',
-        explanation: '자연보호 에티켓입니다.'
+        options: ['disturbed', 'dried', 'bought', 'cleaned'],
+        korean: '창밖의 부드러운 빗소리는 소파 위에서 자고 있는 고양이의 단잠을 전혀 방해하지 않았어요.',
+        explanation: '"disturbed"는 휴식을 어지럽히다의 부정문 표현입니다.'
       }
     ]
   },
@@ -979,36 +980,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'There have been several confirmed [sightings of bald eagles near the lake].',
-        answer: 'sightings of bald eagles near the lake',
-        tokens: ['sightings', 'of', 'bald', 'eagles', 'near', 'the', 'lake'],
-        options: ['sightings', 'of', 'bald', 'eagles', 'near', 'the', 'lake'],
-        korean: '호수 근처에서 흰머리수리의 확인된 목격 사례가 여러 건 있었습니다.',
-        explanation: '조류 목격 사례를 설명합니다.'
+        english: 'There were multiple [sightings of deer in our backyard] early in the morning.',
+        answer: 'sightings of deer in our backyard',
+        tokens: ['sightings', 'of', 'deer', 'in', 'our', 'backyard'],
+        options: ['sightings', 'of', 'deer', 'in', 'our', 'backyard'],
+        korean: '이른 아침에 우리 집 뒷마당에서 사슴이 여러 차례 목격되었어요.',
+        explanation: '"sightings of deer"는 사슴 목격 사례들을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Following multiple [sightings, dismissals, inventions, departures] of coyotes on the school playground, authorities reinforced perimeter fencing.',
+        english: 'Neighbors shared recent [sightings, tickets, songs, dances] of a cute lost puppy near the school playground.',
         answer: 'sightings',
-        options: ['sightings', 'dismissals', 'inventions', 'departures'],
-        korean: '학교 운동장에서 코요테 목격 사례가 여러 차례 발생하자 당국은 외곽 울타리를 보강했습니다.',
-        explanation: '맹수 목격에 따른 안전 조치입니다.'
+        options: ['sightings', 'tickets', 'songs', 'dances'],
+        korean: '이웃들은 학교 운동장 근처에서 귀여운 길 잃은 강아지를 최근 목격한 사례들을 공유했어요.',
+        explanation: '"sightings"는 동물이나 대상을 직접 목격한 일입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Whale watching cruises guarantee high odds of humpback whale [sightings, damages, disasters, conflicts] during migration months.',
+        english: 'Hikers reported several [sightings, drawings, bookings, buildings] of colorful wild birds in the tall mountain pines.',
         answer: 'sightings',
-        options: ['sightings', 'damages', 'disasters', 'conflicts'],
-        korean: '고래 관람 유람선은 고래 이동 기간 동안 혹등고래를 직접 목격할 높은 확률을 보장합니다.',
-        explanation: '고래 탐사 투어의 목격 확률입니다.'
+        options: ['sightings', 'drawings', 'bookings', 'buildings'],
+        korean: '등산객들은 높은 산골 소나무에서 알록달록한 야생 조류들을 여러 차례 목격했다고 전했어요.',
+        explanation: '"sightings"는 자연 속 야생 동식물의 목격입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Astronomers gathered to record rare meteor [sightings, closures, bankruptcies, collisions] during the peak of the Perseid shower.',
+        english: 'The local news reported frequent [sightings, recipes, receipts, lessons] of friendly dolphins playing near the city harbor.',
         answer: 'sightings',
-        options: ['sightings', 'closures', 'bankruptcies', 'collisions'],
-        korean: '천문학자들은 페르세우스자리 유성우의 절정기 동안 드문 유성 목격 사례들을 기록하기 위해 모였습니다.',
-        explanation: '천체 현상의 관측 및 목격입니다.'
+        options: ['sightings', 'recipes', 'receipts', 'lessons'],
+        korean: '지역 뉴스는 시 항구 근처에서 노니는 다정한 돌고래들의 잦은 목격을 보도했어요.',
+        explanation: '"sightings"는 바다 동물 등의 목격 사례입니다.'
       }
     ]
   },
@@ -1027,36 +1028,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'You [have got to learn how to shut off the main water valve].',
-        answer: 'have got to learn how to shut off the main water valve',
-        tokens: ['have', 'got', 'to', 'learn', 'how', 'to', 'shut', 'off', 'the', 'main', 'water', 'valve'],
-        options: ['have', 'got', 'to', 'learn', 'how', 'to', 'shut', 'off', 'the', 'main', 'water', 'valve'],
-        korean: '메인 수도 밸브를 잠그는 법을 반드시 배워두어야만 해요.',
-        explanation: '동파 방지를 위해 꼭 숙지해야 할 필수 지침입니다.'
+        english: 'You [have got to taste this warm homemade soup] right now.',
+        answer: 'have got to taste this warm homemade soup',
+        tokens: ['have', 'got', 'to', 'taste', 'this', 'warm', 'homemade', 'soup'],
+        options: ['have', 'got', 'to', 'taste', 'this', 'warm', 'homemade', 'soup'],
+        korean: '지금 당장 이 따뜻한 집밥 수프를 꼭 맛보셔야 해요.',
+        explanation: '"have got to taste"는 꼭 맛봐야 한다는 강한 권유입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We [have got to, are free to, choose not to, hesitate to] leave the trailhead now if we hope to reach the ridge before sunset.',
+        english: 'We [have got to, must not, are banned to, are forced to not] leave the house early to catch the morning train on time.',
         answer: 'have got to',
-        options: ['have got to', 'are free to', 'choose not to', 'hesitate to'],
-        korean: '일몰 전에 능선에 도착하고 싶다면 우리는 지금 당장 등산로 입구를 출발해야만 합니다.',
-        explanation: '시간 내 도착을 위한 긴급한 출발 의무입니다.'
+        options: ['have got to', 'must not', 'are banned to', 'are forced to not'],
+        korean: '아침 기차를 제시간에 타려면 우리는 반드시 일찍 집을 나서야만 해요.',
+        explanation: '"have got to"는 반드시 해야 하는 행동을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'You [have got to, had better not, were forbidden to, failed to] taste this fresh peach cobbler; it is absolutely phenomenal!',
+        english: 'I [have got to, would rather avoid, am not supposed to, plan to never] finish my science homework before going outside to play.',
         answer: 'have got to',
-        options: ['have got to', 'had better not', 'were forbidden to', 'failed to'],
-        korean: '이 갓 구운 복숭아 코블러 파이는 꼭 맛보셔야 해요. 정말 기가 막히게 맛있거든요!',
-        explanation: '강한 권유를 나타낼 때 원어민들이 자주 쓰는 구어 표현입니다.'
+        options: ['have got to', 'would rather avoid', 'am not supposed to', 'plan to never'],
+        korean: '나가서 놀기 전에 나는 과학 숙제를 반드시 끝마쳐야만 해요.',
+        explanation: '"have got to"는 해야 할 과업의 필수성을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'In heavy blizzard conditions, drivers [have got to, are encouraged not to, are unable to, refuse to] equip tire chains on mountain passes.',
+        english: 'You [have got to, need not, should never, are unable to] see the pretty spring flowers in the park; they look lovely.',
         answer: 'have got to',
-        options: ['have got to', 'are encouraged not to', 'are unable to', 'refuse to'],
-        korean: '심한 눈보라 상황에서는 운전자들이 산고개에서 스노우 체인을 반드시 장착해야만 합니다.',
-        explanation: '안전을 위한 필수 의무 규정입니다.'
+        options: ['have got to', 'need not', 'should never', 'are unable to'],
+        korean: '공원에 핀 예쁜 봄꽃들을 꼭 보셔야 해요. 정말 사랑스러워요.',
+        explanation: '"have got to see"는 꼭 봐야 한다는 강력한 추천입니다.'
       }
     ]
   },
@@ -1075,36 +1076,36 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: 'We spent hours [figuring out how to program the solar inverter].',
-        answer: 'figuring out how to program the solar inverter',
-        tokens: ['figuring', 'out', 'how', 'to', 'program', 'the', 'solar', 'inverter'],
-        options: ['figuring', 'out', 'how', 'to', 'program', 'the', 'solar', 'inverter'],
-        korean: '우리는 태양광 인버터를 어떻게 프로그래밍하는지 방법을 알아내는 데 몇 시간을 보냈어요.',
-        explanation: '기계 설정법을 연구하여 알아내는 과정입니다.'
+        english: 'He spent the afternoon [figuring out the tricky math puzzle] in his workbook.',
+        answer: 'figuring out the tricky math puzzle',
+        tokens: ['figuring', 'out', 'the', 'tricky', 'math', 'puzzle'],
+        options: ['figuring', 'out', 'the', 'tricky', 'math', 'puzzle'],
+        korean: '그는 문제집에 있는 까다로운 수학 퍼즐을 풀어내며(알아내며) 오후를 보냈어요.',
+        explanation: '"figuring out"은 해결책이나 답을 찾아내는 과정입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Engineers are tirelessly [figuring out, giving away, turning back, shutting down] cleaner methods to capture geothermal energy.',
+        english: 'We spent an hour [figuring out, throwing out, giving up, breaking off] how to assemble the new wooden bookshelf.',
         answer: 'figuring out',
-        options: ['figuring out', 'giving away', 'turning back', 'shutting down'],
-        korean: '엔지니어들은 지열 에너지를 포집할 더 친환경적인 방법들을 끊임없이 연구해 알아내고 있습니다.',
-        explanation: '신기술 개발을 위한 탐구입니다.'
+        options: ['figuring out', 'throwing out', 'giving up', 'breaking off'],
+        korean: '우리는 새 원목 책장을 어떻게 조립해야 하는지 알아내는 데 한 시간을 보냈어요.',
+        explanation: '"figuring out how to"는 방법을 알아내다를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'She enjoys sitting by the window [figuring out, giving up on, falling off, looking down on] complex crossword puzzles over hot tea.',
+        english: 'She is very clever at [figuring out, turning away, running from, hiding behind] how to fix broken household gadgets.',
         answer: 'figuring out',
-        options: ['figuring out', 'giving up on', 'falling off', 'looking down on'],
-        korean: '그녀는 따뜻한 차를 마시며 창가에 앉아 복잡한 십자말풀이 퍼즐의 정답을 풀어내는 것을 즐깁니다.',
-        explanation: '퍼즐을 풀고 알아내는 여가 시간입니다.'
+        options: ['figuring out', 'turning away', 'running from', 'hiding behind'],
+        korean: '그녀는 고장 난 가전제품을 어떻게 고치는지 알아내는 데 매우 영리해요.',
+        explanation: '"figuring out"은 문제 해결 방안을 파악하는 것입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'It took our family months of discussion [figuring out, setting fire to, turning away from, running short of] our long-term budget savings plan.',
+        english: 'The children had fun [figuring out, burning up, walking out, giving in] the rules of the new board game together.',
         answer: 'figuring out',
-        options: ['figuring out', 'setting fire to', 'turning away from', 'running short of'],
-        korean: '장기적인 예산 저축 계획을 수립하고 알아내는 데 우리 가족은 몇 달간의 대화를 거쳐야 했습니다.',
-        explanation: '장기 계획을 숙고하여 마련하는 모습입니다.'
+        options: ['figuring out', 'burning up', 'walking out', 'giving in'],
+        korean: '아이들은 새 보드게임의 규칙을 함께 알아내며 즐거운 시간을 보냈어요.',
+        explanation: '"figuring out the rules"는 규칙을 이해하고 익히는 것입니다.'
       }
     ]
   }

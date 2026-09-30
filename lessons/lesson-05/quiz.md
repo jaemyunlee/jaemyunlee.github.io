@@ -2,10 +2,10 @@
 
 ## Quiz 1
 - **Type**: drag-and-drop
-- **English**: After studying for five consecutive hours for the bar exam, [My, brain, is, mush] and I cannot read another paragraph.
+- **English**: After studying for five long hours, [My, brain, is, mush] and I cannot read another page.
 - **Answer**: My brain is mush
 - **Options**: My, brain, is, mush
-- **Korean**: 변호사 시험을 위해 5시간 연속으로 공부했더니, 머리가 완전히 멍하고 생각이 안 돌아가서 더 이상 한 문단도 읽을 수가 없어요.
+- **Korean**: 5시간 동안 길게 공부했더니, 머리가 완전히 멍하고 생각이 안 돌아가서 더 이상 한 페이지도 못 읽겠어요.
 - **Explanation**: "my brain is mush"는 머리가 너무 지쳐 "머리가 멍하다, 생각이 안 돌아간다, 뇌가 굳었다"라는 뜻입니다.
 
 ## Quiz 2

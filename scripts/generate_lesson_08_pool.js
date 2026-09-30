@@ -5,1402 +5,2359 @@ const LESSON_ID = 'lesson-08';
 const LESSON_DIR = path.join(__dirname, '..', 'lessons', LESSON_ID);
 
 const POOL = [
-  // 1. go to plan
   {
-    keyExpression: 'go to plan',
-    baseForm: 'go to plan',
-    translation: '계획대로 진행되다',
-    sentences: [
+    "keyExpression": "go to plan",
+    "baseForm": "go to plan",
+    "translation": "계획대로 진행되다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'With the flight cancellations and sudden storm, our vacation [has not gone to plan, has stayed on schedule, has broken the bank, has made ends meet] at all.',
-        answer: 'has not gone to plan',
-        options: ['has not gone to plan', 'has stayed on schedule', 'has broken the bank', 'has made ends meet'],
-        korean: '항공편 취소와 갑작스러운 폭풍우 때문에 우리 휴가는 전혀 계획대로 풀리지 않았어요.',
-        explanation: '"go to plan"은 "계획대로 되다/진행되다"라는 뜻이며, "has not gone to plan"은 "계획대로 풀리지 않았다"라는 완료형 부정 표현입니다.'
+        "type": "multiple-choice",
+        "english": "With the flight cancellations and sudden storm, our vacation [has not gone to plan, has stayed on schedule, has broken the bank, has made ends meet] at all.",
+        "answer": "has not gone to plan",
+        "options": [
+          "has not gone to plan",
+          "has stayed on schedule",
+          "has broken the bank",
+          "has made ends meet"
+        ],
+        "korean": "항공편 취소와 갑작스러운 폭풍우 때문에 우리 휴가는 전혀 계획대로 풀리지 않았어요.",
+        "explanation": "\"go to plan\"은 \"계획대로 되다/진행되다\"라는 뜻이며, \"has not gone to plan\"은 \"계획대로 풀리지 않았다\"라는 완료형 부정 표현입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'Despite careful preparation, the product launch [has not gone to plan] due to supply shortages.',
-        answer: 'has not gone to plan',
-        tokens: ['has', 'not', 'gone', 'to', 'plan'],
-        options: ['has', 'not', 'gone', 'to', 'plan'],
-        korean: '철저한 준비에도 불구하고 공급 부족으로 인해 신제품 출시는 계획대로 흘러가지 못했습니다.',
-        explanation: '계획대로 일이 성사되지 못했음을 표현하는 문장입니다.'
+        "type": "drag-and-drop",
+        "english": "I woke up late today, so my morning [has not gone to plan at all].",
+        "answer": "has not gone to plan at all",
+        "tokens": [
+          "has",
+          "not",
+          "gone",
+          "to",
+          "plan",
+          "at",
+          "all"
+        ],
+        "options": [
+          "has",
+          "not",
+          "gone",
+          "to",
+          "plan",
+          "at",
+          "all"
+        ],
+        "korean": "오늘 늦게 일어나는 바람에 내 아침은 전혀 계획대로 풀리지 않았어요.",
+        "explanation": "\"has not gone to plan\"은 계획대로 되지 않았음을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'If everything [goes to plan, turns out blind, falls behind time, loses the grip] tomorrow, we should be able to finish moving by noon.',
-        answer: 'goes to plan',
-        options: ['goes to plan', 'turns out blind', 'falls behind time', 'loses the grip'],
-        korean: '내일 모든 일이 계획대로만 잘 풀린다면, 정오까지는 이사를 마칠 수 있을 거예요.',
-        explanation: '"goes to plan"은 순조롭게 계획대로 진행되는 상황을 나타냅니다.'
+        "type": "multiple-choice",
+        "english": "The bus broke down on the road, so our family trip [has not gone to plan, has kept the beat, has seen the light, has hit the mark] this morning.",
+        "answer": "has not gone to plan",
+        "options": [
+          "has not gone to plan",
+          "has kept the beat",
+          "has seen the light",
+          "has hit the mark"
+        ],
+        "korean": "도로에서 버스가 고장 나는 바람에 우리 가족 여행은 오늘 아침 계획대로 풀리지 않았어요.",
+        "explanation": "\"has not gone to plan\"은 뜻밖의 일로 계획이 어긋남을 나타냅니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The first day of our road trip [did not go to plan, did not run on battery, did not stay in line, did not get in touch] after we got a flat tire on the highway.',
-        answer: 'did not go to plan',
-        options: ['did not go to plan', 'did not run on battery', 'did not stay in line', 'did not get in touch'],
-        korean: '고속도로에서 타이어 펑크가 나는 바람에 로드트립 첫날은 계획대로 풀리지 않았어요.',
-        explanation: '과거에 계획대로 풀리지 않았던 상황을 "did not go to plan"으로 표현합니다.'
+        "type": "multiple-choice",
+        "english": "We lost our map in the city, so our walking tour [has not gone to plan, has done its best, has held the line, has run in circles] today.",
+        "answer": "has not gone to plan",
+        "options": [
+          "has not gone to plan",
+          "has done its best",
+          "has held the line",
+          "has run in circles"
+        ],
+        "korean": "도시에서 지도를 잃어버려서 오늘 우리 도보 관광은 계획대로 풀리지 않았어요.",
+        "explanation": "\"has not gone to plan\"은 계획대로 진행되지 않음을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'We hope our weekend camping event [goes to plan, gets off duty, falls out of love, stays in danger] without any unexpected rain.',
-        answer: 'goes to plan',
-        options: ['goes to plan', 'gets off duty', 'falls out of love', 'stays in danger'],
-        korean: '예상치 못한 비 없이 우리 주말 캠핑 행사가 계획대로 진행되기를 바라요.',
-        explanation: '행사가 차질 없이 원활하게 진행되기를 바랄 때 쓰는 표현입니다.'
+        "type": "multiple-choice",
+        "english": "Because the grocery shop was closed, our dinner plan [has not gone to plan, has met the eye, has made the cut, has won the day] tonight.",
+        "answer": "has not gone to plan",
+        "options": [
+          "has not gone to plan",
+          "has met the eye",
+          "has made the cut",
+          "has won the day"
+        ],
+        "korean": "식료품점이 문을 닫아서 오늘 밤 우리 저녁 식사 계획은 계획대로 풀리지 않았어요.",
+        "explanation": "\"has not gone to plan\"은 계획대로 풀리지 않았음을 나타냅니다."
       }
     ]
   },
-
-  // 2. go get
   {
-    keyExpression: 'go get',
-    baseForm: 'go get',
-    translation: '~하러 가다',
-    sentences: [
+    "keyExpression": "go get",
+    "baseForm": "go get",
+    "translation": "~하러 가다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Since we ran out of fresh milk, dad [went to go get, decided to call off, refused to pick up, forgot to throw out] some from the nearby convenience store.',
-        answer: 'went to go get',
-        options: ['went to go get', 'decided to call off', 'refused to pick up', 'forgot to throw out'],
-        korean: '신선한 우유가 다 떨어져서 아빠는 근처 편의점에 가서 좀 사 오셨어요.',
-        explanation: '"go get ~"은 구어체에서 "~하러 가다, 사러/가져오러 가다"라는 뜻으로 매우 자주 쓰이며, "went to go get"은 과거에 사러/가져오러 갔다는 의미입니다.'
+        "type": "multiple-choice",
+        "english": "Since we ran out of fresh milk, dad [went to go get, decided to call off, refused to pick up, forgot to throw out] some from the nearby convenience store.",
+        "answer": "went to go get",
+        "options": [
+          "went to go get",
+          "decided to call off",
+          "refused to pick up",
+          "forgot to throw out"
+        ],
+        "korean": "신선한 우유가 다 떨어져서 아빠는 근처 편의점에 가서 좀 사 오셨어요.",
+        "explanation": "\"go get ~\"은 구어체에서 \"~하러 가다, 사러/가져오러 가다\"라는 뜻으로 매우 자주 쓰이며, \"went to go get\"은 과거에 사러/가져오러 갔다는 의미입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'Kelly [went to go get our takeout dinner] while I cleaned the kitchen table.',
-        answer: 'went to go get our takeout dinner',
-        tokens: ['went', 'to', 'go', 'get', 'our', 'takeout', 'dinner'],
-        options: ['went', 'to', 'go', 'get', 'our', 'takeout', 'dinner'],
-        korean: '내가 식탁을 치우는 동안 켈리는 포장해 온 저녁을 가지러 갔어요.',
-        explanation: '식당에서 음식을 픽업하러 간 상황을 자연스럽게 나타냅니다.'
+        "type": "drag-and-drop",
+        "english": "It started raining, so she [went to go get an umbrella from her car].",
+        "answer": "went to go get an umbrella from her car",
+        "tokens": [
+          "went",
+          "to",
+          "go",
+          "get",
+          "an",
+          "umbrella",
+          "from",
+          "her",
+          "car"
+        ],
+        "options": [
+          "went",
+          "to",
+          "go",
+          "get",
+          "an",
+          "umbrella",
+          "from",
+          "her",
+          "car"
+        ],
+        "korean": "비가 내리기 시작해서 그녀는 차에서 우산을 가져오러 갔어요.",
+        "explanation": "\"went to go get\"은 물건을 가지러/가져오러 갔다는 뜻입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'During the movie break, he [went to go get, refused to ask for, stopped to look at, stayed to clean up] extra popcorn and two sodas for us.',
-        answer: 'went to go get',
-        options: ['went to go get', 'refused to ask for', 'stopped to look at', 'stayed to clean up'],
-        korean: '영화 중간 쉬는 시간에 그는 우리를 위해 팝콘과 탄산음료 두 잔을 더 사러 갔어요.',
-        explanation: '간식을 사러 매점에 다녀온 상황입니다.'
+        "type": "multiple-choice",
+        "english": "I felt thirsty after running, so I [went to go get, wanted to give away, tried to turn down, chose to leave behind] a cold glass of water from the kitchen.",
+        "answer": "went to go get",
+        "options": [
+          "went to go get",
+          "wanted to give away",
+          "tried to turn down",
+          "chose to leave behind"
+        ],
+        "korean": "달리기를 한 뒤 목이 말라서 주방에 차가운 물 한 잔을 가지러 갔어요.",
+        "explanation": "\"went to go get\"은 음료나 물건을 가지러 감을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Can someone [go get, go lose, go break, go avoid] the mail from the mailbox downstairs?',
-        answer: 'go get',
-        options: ['go get', 'go lose', 'go break', 'go avoid'],
-        korean: '누가 아래층 우편함에서 우편물 좀 가져다줄 수 있나요?',
-        explanation: '"go get"은 물건을 챙겨서 가져오라는 일상 요청 표현입니다.'
+        "type": "multiple-choice",
+        "english": "Mom was cooking dinner and [went to go get, started to throw away, stopped to look back, refused to bring in] some fresh carrots from the garden.",
+        "answer": "went to go get",
+        "options": [
+          "went to go get",
+          "started to throw away",
+          "stopped to look back",
+          "refused to bring in"
+        ],
+        "korean": "엄마는 저녁을 요리하시다가 텃밭에서 신선한 당근을 좀 가져오러 가셨어요.",
+        "explanation": "\"went to go get\"은 재료 등을 가지러 가는 행동입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'After running five miles in the park, they [went to go get, managed to throw away, agreed to put off, tried to look down] cold smoothies.',
-        answer: 'went to go get',
-        options: ['went to go get', 'managed to throw away', 'agreed to put off', 'tried to look down'],
-        korean: '공원에서 5마일을 달린 뒤 그들은 시원한 스무디를 사 먹으러 갔습니다.',
-        explanation: '운동 후 음료를 사러 간 일상 행동을 묘사합니다.'
+        "type": "multiple-choice",
+        "english": "He forgot his jacket in the classroom and [went to go get, walked to pass by, ran to break up, sat to wait for] it right after school.",
+        "answer": "went to go get",
+        "options": [
+          "went to go get",
+          "walked to pass by",
+          "ran to break up",
+          "sat to wait for"
+        ],
+        "korean": "그는 교실에 자켓을 두고 와서 방과 후 곧바로 그것을 가지러 갔어요.",
+        "explanation": "\"went to go get\"은 잊은 물건을 챙기러 감을 뜻합니다."
       }
     ]
   },
-
-  // 3. collide
   {
-    keyExpression: 'collide',
-    baseForm: 'collide',
-    translation: '충돌하다, 부딪치다',
-    sentences: [
+    "keyExpression": "collide",
+    "baseForm": "collide",
+    "translation": "충돌하다, 부딪치다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Because of the thick fog on the highway, two delivery vans ended up [colliding, speeding, parking, turning] with each other.',
-        answer: 'colliding',
-        options: ['colliding', 'speeding', 'parking', 'turning'],
-        korean: '고속도로의 짙은 안개 때문에 두 대의 배달 밴이 서로 충돌하고 말았습니다.',
-        explanation: '"collide (with)"는 차량이나 물체가 서로 "충돌하다, 부딪치다"를 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "Because of the thick fog on the highway, two delivery vans ended up [colliding, speeding, parking, turning] with each other.",
+        "answer": "colliding",
+        "options": [
+          "colliding",
+          "speeding",
+          "parking",
+          "turning"
+        ],
+        "korean": "고속도로의 짙은 안개 때문에 두 대의 배달 밴이 서로 충돌하고 말았습니다.",
+        "explanation": "\"collide (with)\"는 차량이나 물체가 서로 \"충돌하다, 부딪치다\"를 뜻합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'The small sailboat narrowly avoided [colliding with the rocky shoreline] in the dark.',
-        answer: 'colliding with the rocky shoreline',
-        tokens: ['colliding', 'with', 'the', 'rocky', 'shoreline'],
-        options: ['colliding', 'with', 'the', 'rocky', 'shoreline'],
-        korean: '작은 돛단배는 어둠 속에서 바위투성이 해안선과 충돌하는 것을 간신히 모면했습니다.',
-        explanation: '암초 지대와의 충돌을 피한 긴박한 상황입니다.'
+        "type": "drag-and-drop",
+        "english": "The two toy cars ended up [colliding on the living room rug].",
+        "answer": "colliding on the living room rug",
+        "tokens": [
+          "colliding",
+          "on",
+          "the",
+          "living",
+          "room",
+          "rug"
+        ],
+        "options": [
+          "colliding",
+          "on",
+          "the",
+          "living",
+          "room",
+          "rug"
+        ],
+        "korean": "장난감 자동차 두 대가 결국 거실 카펫 위에서 서로 충돌했어요.",
+        "explanation": "\"colliding\"은 서로 부딪치는 동작입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Two cyclists ended up [colliding, reversing, boarding, charging] at the blind turn on the bike path.',
-        answer: 'colliding',
-        options: ['colliding', 'reversing', 'boarding', 'charging'],
-        korean: '두 자전거 운전자가 자전거 도로의 시야가 가려진 모퉁이에서 부딪치고 말았어요.',
-        explanation: '모퉁이에서 서로 마주쳐 부딪힌 상황입니다.'
+        "type": "multiple-choice",
+        "english": "Because the sidewalk was dark, two bicycles ended up [colliding, singing, sleeping, reading] with each other near the park.",
+        "answer": "colliding",
+        "options": [
+          "colliding",
+          "singing",
+          "sleeping",
+          "reading"
+        ],
+        "korean": "인도가 어두워서 두 대의 자전거가 공원 근처에서 결국 서로 충돌하고 말았어요.",
+        "explanation": "\"colliding with each other\"는 서로 충돌하는 상황입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Scientists are studying the physics of two galaxies [colliding, vanishing, freezing, sleeping] in deep space.',
-        answer: 'colliding',
-        options: ['colliding', 'vanishing', 'freezing', 'sleeping'],
-        korean: '과학자들은 먼 우주에서 두 은하가 충돌하는 물리적 현상을 연구하고 있습니다.',
-        explanation: '천체들 사이의 거대한 충돌 현상을 나타냅니다.'
+        "type": "multiple-choice",
+        "english": "The playful puppy ran without looking and ended up [colliding, drawing, cooking, flying] with the wooden garden fence.",
+        "answer": "colliding",
+        "options": [
+          "colliding",
+          "drawing",
+          "cooking",
+          "flying"
+        ],
+        "korean": "장난꾸러기 강아지는 앞을 보지 않고 달리다가 결국 정원 나무 울타리에 부딪히고 말았어요.",
+        "explanation": "\"colliding with\"는 장애물에 부딪힘을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The bumper of the taxi was badly smashed after [colliding, idling, signaling, following] with the concrete barrier.',
-        answer: 'colliding',
-        options: ['colliding', 'idling', 'signaling', 'following'],
-        korean: '택시 범퍼는 콘크리트 방호벽과 충돌한 후 심하게 찌그러졌습니다.',
-        explanation: '구조물과의 차량 충돌을 설명합니다.'
+        "type": "multiple-choice",
+        "english": "The two soccer players ended up [colliding, shopping, dancing, painting] with each other as they both jumped for the ball.",
+        "answer": "colliding",
+        "options": [
+          "colliding",
+          "shopping",
+          "dancing",
+          "painting"
+        ],
+        "korean": "두 축구 선수는 공을 향해 함께 뛰어오르다가 결국 서로 충돌하고 말았어요.",
+        "explanation": "\"colliding with each other\"는 선수들끼리 부딪치는 상황입니다."
       }
     ]
   },
-
-  // 4. get quotes
   {
-    keyExpression: 'get quotes',
-    baseForm: 'get quotes',
-    translation: '수리 견적을 받다/알아보다',
-    sentences: [
+    "keyExpression": "get quotes",
+    "baseForm": "get quotes",
+    "translation": "견적을 받다/알아보다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Before deciding on a home contractor, we need to [get quotes, make enemies, pay fines, lose receipts] from at least three different companies.',
-        answer: 'get quotes',
-        options: ['get quotes', 'make enemies', 'pay fines', 'lose receipts'],
-        korean: '주택 시공업체를 결정하기 전에 적어도 세 곳 이상의 다른 업체로부터 견적을 받아봐야 해요.',
-        explanation: '"get quotes"는 공사, 수리, 인테리어 등의 비용이 얼마나 드는지 "견적을 받다/알아보다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "Before deciding on a home contractor, we need to [get quotes, make enemies, pay fines, lose receipts] from at least three different companies.",
+        "answer": "get quotes",
+        "options": [
+          "get quotes",
+          "make enemies",
+          "pay fines",
+          "lose receipts"
+        ],
+        "korean": "주택 시공업체를 결정하기 전에 적어도 세 곳 이상의 다른 업체로부터 견적을 받아봐야 해요.",
+        "explanation": "\"get quotes\"는 공사, 수리, 인테리어 등의 비용이 얼마나 드는지 \"견적을 받다/알아보다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'We are in the process of having to [get quotes for roof repair] after the storm.',
-        answer: 'get quotes for roof repair',
-        tokens: ['get', 'quotes', 'for', 'roof', 'repair'],
-        options: ['get', 'quotes', 'for', 'roof', 'repair'],
-        korean: '폭풍우가 지나간 후 우리는 지붕 수리를 위한 견적을 알아봐야 하는 상황입니다.',
-        explanation: '수리 비용 산출을 위해 견적을 받는 과정입니다.'
+        "type": "drag-and-drop",
+        "english": "Dad called two car repair shops to [get quotes for fixing the flat tire].",
+        "answer": "get quotes for fixing the flat tire",
+        "tokens": [
+          "get",
+          "quotes",
+          "for",
+          "fixing",
+          "the",
+          "flat",
+          "tire"
+        ],
+        "options": [
+          "get",
+          "quotes",
+          "for",
+          "fixing",
+          "the",
+          "flat",
+          "tire"
+        ],
+        "korean": "아빠는 펑크 난 타이어를 고치는 견적을 알아보기 위해 두 군데 정비소에 전화를 거셨어요.",
+        "explanation": "\"get quotes for\"는 수리 비용 견적을 알아보는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Always make sure to [get quotes, sign tickets, take pictures, draw maps] in writing so there are no surprise repair costs later.',
-        answer: 'get quotes',
-        options: ['get quotes', 'sign tickets', 'take pictures', 'draw maps'],
-        korean: '나중에 뜻밖의 수리비 폭탄을 맞지 않으려면 항상 서면으로 견적을 받아두도록 하세요.',
-        explanation: '비용 분쟁을 방지하기 위한 서면 견적서 수령을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "It is always smart to [get quotes, take gifts, drop coins, lose pens] from several stores before buying expensive furniture.",
+        "answer": "get quotes",
+        "options": [
+          "get quotes",
+          "take gifts",
+          "drop coins",
+          "lose pens"
+        ],
+        "korean": "비싼 가구를 사기 전에 여러 가게로부터 견적(가격)을 받아보는 것은 언제나 현명해요.",
+        "explanation": "\"get quotes\"는 가격 견적을 비교해 알아보는 행동입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'She spent the entire morning calling local garages to [get quotes, drop charges, return gifts, place bets] for changing the brake pads.',
-        answer: 'get quotes',
-        options: ['get quotes', 'drop charges', 'return gifts', 'place bets'],
-        korean: '그녀는 브레이크 패드 교체 견적을 받기 위해 아침 내내 동네 정비소들에 전화를 돌렸어요.',
-        explanation: '정비소마다 수리 가격을 비교하기 위해 견적을 구하는 모습입니다.'
+        "type": "multiple-choice",
+        "english": "We want to [get quotes, write stories, make games, sing songs] from two local painters before painting our house walls.",
+        "answer": "get quotes",
+        "options": [
+          "get quotes",
+          "write stories",
+          "make games",
+          "sing songs"
+        ],
+        "korean": "우리는 집 벽을 칠하기 전에 동네 페인트공 두 분으로부터 견적을 받아보려고 해요.",
+        "explanation": "\"get quotes\"는 시공 견적을 요청하는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'If you want to repaint your living room, it is smart to [get quotes, pay taxes, cancel orders, buy shares] from licensed painters first.',
-        answer: 'get quotes',
-        options: ['get quotes', 'pay taxes', 'cancel orders', 'buy shares'],
-        korean: '거실을 다시 칠하고 싶다면 먼저 공인된 도색 전문가들로부터 견적을 알아보는 것이 현명합니다.',
-        explanation: '전문가들에게 공사 비용 견적을 요청하는 상황입니다.'
+        "type": "multiple-choice",
+        "english": "She plans to [get quotes, break rules, hide toys, catch colds] from three builders before building the small wooden shed.",
+        "answer": "get quotes",
+        "options": [
+          "get quotes",
+          "break rules",
+          "hide toys",
+          "catch colds"
+        ],
+        "korean": "그녀는 작은 나무 헛간을 짓기 전에 세 명의 건축업자로부터 견적을 받아볼 계획이에요.",
+        "explanation": "\"get quotes\"는 공사 비용 산정을 의뢰함을 뜻합니다."
       }
     ]
   },
-
-  // 5. dent
   {
-    keyExpression: 'dent',
-    baseForm: 'dent',
-    translation: '움푹 들어간 곳, 찌그러진 자국',
-    sentences: [
+    "keyExpression": "dent",
+    "baseForm": "dent",
+    "translation": "움푹 들어간 곳, 찌그러진 자국",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Someone opened their car door too hard in the parking lot and left a small [dent, mirror, engine, pedal] on my passenger side door.',
-        answer: 'dent',
-        options: ['dent', 'mirror', 'engine', 'pedal'],
-        korean: '주차장에서 누군가 차 문을 너무 세게 열어서 내 조수석 쪽 문에 작은 찌그러진 자국(문콕)을 남겼어요.',
-        explanation: '"dent"는 차체나 금속 표면이 부딪혀 "움푹 들어간 곳, 찌그러진 자국"을 의미합니다.'
+        "type": "multiple-choice",
+        "english": "Someone opened their car door too hard in the parking lot and left a small [dent, mirror, engine, pedal] on my passenger side door.",
+        "answer": "dent",
+        "options": [
+          "dent",
+          "mirror",
+          "engine",
+          "pedal"
+        ],
+        "korean": "주차장에서 누군가 차 문을 너무 세게 열어서 내 조수석 쪽 문에 작은 찌그러진 자국(문콕)을 남겼어요.",
+        "explanation": "\"dent\"는 차체나 금속 표면이 부딪혀 \"움푹 들어간 곳, 찌그러진 자국\"을 의미합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'There is a noticeable [dent on the metal water bottle] from dropping it on the rocks.',
-        answer: 'dent on the metal water bottle',
-        tokens: ['dent', 'on', 'the', 'metal', 'water', 'bottle'],
-        options: ['dent', 'on', 'the', 'metal', 'water', 'bottle'],
-        korean: '바위 위에 떨어뜨려서 금속 물병에 눈에 띄게 찌그러진 자국이 하나 생겼어요.',
-        explanation: '금속 용기가 찌그러진 자국을 나타냅니다.'
+        "type": "drag-and-drop",
+        "english": "Dropping the metal water bottle left a [small dent on the bottom of it].",
+        "answer": "small dent on the bottom of it",
+        "tokens": [
+          "small",
+          "dent",
+          "on",
+          "the",
+          "bottom",
+          "of",
+          "it"
+        ],
+        "options": [
+          "small",
+          "dent",
+          "on",
+          "the",
+          "bottom",
+          "of",
+          "it"
+        ],
+        "korean": "금속 물병을 떨어뜨렸더니 바닥 부분에 작은 찌그러진 자국이 남았어요.",
+        "explanation": "\"dent\"는 표면이 찌그러지거나 들어간 흠집입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The hail storm was so severe that it caused dozens of tiny [dents, colors, wheels, windows] all over the roof of our sedan.',
-        answer: 'dents',
-        options: ['dents', 'colors', 'wheels', 'windows'],
-        korean: '우박이 너무 심하게 쏟아져서 우리 승용차 지붕 전체에 수십 개의 자잘한 찌그러진 자국이 생겼습니다.',
-        explanation: '우박으로 인한 차체 손상 흔적을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "He was disappointed to see a tiny [dent, ticket, carpet, window] on his new bicycle frame after dropping it.",
+        "answer": "dent",
+        "options": [
+          "dent",
+          "ticket",
+          "carpet",
+          "window"
+        ],
+        "korean": "그는 새 자전거를 떨어뜨린 뒤 프레임에 생긴 작은 찌그러진 흠집을 보고 속상했어요.",
+        "explanation": "\"dent\"는 금속 등이 눌려 들어간 흔적입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Fortunately, the repair specialist popped out the fender [dent, horn, battery, light] without needing any expensive repainting.',
-        answer: 'dent',
-        options: ['dent', 'horn', 'battery', 'light'],
-        korean: '다행히도 수리 전문 기술자가 비싼 재도색 없이 펜더의 찌그러진 부분을 말끔히 펴주었어요.',
-        explanation: '덴트 복원 시공으로 찌그러진 곳을 펴낸 상황입니다.'
+        "type": "multiple-choice",
+        "english": "A heavy falling apple left a little [dent, flower, feather, blanket] on the roof of the garden table.",
+        "answer": "dent",
+        "options": [
+          "dent",
+          "flower",
+          "feather",
+          "blanket"
+        ],
+        "korean": "무겁게 떨어진 사과가 정원 테이블 상판에 작은 찌그러진 자국을 남겼어요.",
+        "explanation": "\"dent\"는 물건이 부딪쳐 움푹 들어간 곳입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Even though there is only a minor [dent, seat, license, radio] on the trunk, we still want to have it inspected.',
-        answer: 'dent',
-        options: ['dent', 'seat', 'license', 'radio'],
-        korean: '트렁크에 겨우 작은 찌그러짐 하나만 있을 뿐이지만, 우리는 그래도 점검을 받아보고 싶어요.',
-        explanation: '가벼운 외형 손상을 가리킵니다.'
+        "type": "multiple-choice",
+        "english": "A flying baseball left a noticeable [dent, shoe, ribbon, curtain] in the side of the metal mailbox.",
+        "answer": "dent",
+        "options": [
+          "dent",
+          "shoe",
+          "ribbon",
+          "curtain"
+        ],
+        "korean": "날아온 야구공이 쇠 우체통 옆면에 눈에 띄는 찌그러진 자국을 남겼어요.",
+        "explanation": "\"dent\"는 부딪혀 찌그러진 자국을 뜻합니다."
       }
     ]
   },
-
-  // 6. get it fixed
   {
-    keyExpression: 'get it fixed',
-    baseForm: 'get it fixed',
-    translation: '수리받다, 고치다',
-    sentences: [
+    "keyExpression": "get it fixed",
+    "baseForm": "get it fixed",
+    "translation": "수리를 맡겨서 고치다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'The kitchen sink started leaking yesterday, so we are going to [get it fixed, let it freeze, turn it red, make it dirty] before the weekend.',
-        answer: 'get it fixed',
-        options: ['get it fixed', 'let it freeze', 'turn it red', 'make it dirty'],
-        korean: '어제 싱크대에서 물이 새기 시작해서 주말이 오기 전에 수리를 맡겨 고칠 생각이에요.',
-        explanation: '"get it fixed"는 수리공이나 전문가에게 "수리를 맡겨서 고치다"라는 뜻의 사역 수동 표현입니다 (get + it + fixed).'
+        "type": "multiple-choice",
+        "english": "The kitchen sink started leaking yesterday, so we are going to [get it fixed, let it freeze, turn it red, make it dirty] before the weekend.",
+        "answer": "get it fixed",
+        "options": [
+          "get it fixed",
+          "let it freeze",
+          "turn it red",
+          "make it dirty"
+        ],
+        "korean": "어제 싱크대에서 물이 새기 시작해서 주말이 오기 전에 수리를 맡겨 고칠 생각이에요.",
+        "explanation": "\"get it fixed\"는 수리공이나 전문가에게 \"수리를 맡겨서 고치다\"라는 뜻의 사역 수동 표현입니다 (get + it + fixed)."
       },
       {
-        type: 'drag-and-drop',
-        english: 'Since it is a brand-new smartphone, I want to [get it fixed by an authorized center].',
-        answer: 'get it fixed by an authorized center',
-        tokens: ['get', 'it', 'fixed', 'by', 'an', 'authorized', 'center'],
-        options: ['get', 'it', 'fixed', 'by', 'an', 'authorized', 'center'],
-        korean: '완전 새 스마트폰이니까 공식 서비스 센터에 맡겨서 수리받고 싶어요.',
-        explanation: '전문 센터에 수리를 의뢰하여 고치는 표현입니다.'
+        "type": "drag-and-drop",
+        "english": "My bicycle chain broke, so I will [get it fixed at the bike shop] tomorrow.",
+        "answer": "get it fixed at the bike shop",
+        "tokens": [
+          "get",
+          "it",
+          "fixed",
+          "at",
+          "the",
+          "bike",
+          "shop"
+        ],
+        "options": [
+          "get",
+          "it",
+          "fixed",
+          "at",
+          "the",
+          "bike",
+          "shop"
+        ],
+        "korean": "자전거 체인이 끊어져서 내일 자전거 가게에서 수리를 맡겨 고칠 거예요.",
+        "explanation": "\"get it fixed\"는 수리를 맡겨 고침을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'If your car air conditioner stops blowing cold air, you should definitely [get it fixed, throw it away, leave it unattended, break it apart] right away.',
-        answer: 'get it fixed',
-        options: ['get it fixed', 'throw it away', 'leave it unattended', 'break it apart'],
-        korean: '자동차 에어컨에서 찬 바람이 나오지 않는다면 바로 정비소에 맡겨 고쳐야 합니다.',
-        explanation: '고장 난 기기를 수리받도록 권고하는 문장입니다.'
+        "type": "multiple-choice",
+        "english": "Her phone screen cracked, and she hopes to [get it fixed, let it burn, make it loud, turn it brown] at the repair center.",
+        "answer": "get it fixed",
+        "options": [
+          "get it fixed",
+          "let it burn",
+          "make it loud",
+          "turn it brown"
+        ],
+        "korean": "그녀의 휴대전화 화면에 금이 가서 서비스센터에 맡겨 수리하기를 바라고 있어요.",
+        "explanation": "\"get it fixed\"는 고장 난 기기를 수리받는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'We took the grandfather clock to an antique shop to [get it fixed, give it up, wash it out, lock it down].',
-        answer: 'get it fixed',
-        options: ['get it fixed', 'give it up', 'wash it out', 'lock it down'],
-        korean: '우리는 그 괘종시계를 골동품점에 가져가서 수리를 맡겼습니다.',
-        explanation: '전문점에 물건의 수리를 의뢰하는 상황입니다.'
+        "type": "multiple-choice",
+        "english": "Our living room clock stopped ticking, so dad will [get it fixed, keep it lost, make it rain, let it melt] on Saturday.",
+        "answer": "get it fixed",
+        "options": [
+          "get it fixed",
+          "keep it lost",
+          "make it rain",
+          "let it melt"
+        ],
+        "korean": "거실 시계가 멈춰 서서 아빠는 토요일에 수리를 맡겨 고치실 거예요.",
+        "explanation": "\"get it fixed\"는 물건을 고쳐오게 하는 표현입니다."
       },
       {
-        type: 'multiple-choice',
-        english: "Don't worry about the cracked screen; insurance will cover it so we can [get it fixed, watch it burn, blow it away, tear it down].",
-        answer: 'get it fixed',
-        options: ['get it fixed', 'watch it burn', 'blow it away', 'tear it down'],
-        korean: '화면 깨진 건 걱정 마세요. 보험으로 처리되니 수리 맡겨서 고치면 돼요.',
-        explanation: '보험 혜택을 받아 수리한다는 내용입니다.'
+        "type": "multiple-choice",
+        "english": "The wooden chair has a wobbly leg, so we need to [get it fixed, paint it dark, throw it out, leave it open] soon.",
+        "answer": "get it fixed",
+        "options": [
+          "get it fixed",
+          "paint it dark",
+          "throw it out",
+          "leave it open"
+        ],
+        "korean": "나무 의자 다리가 덜컹거려서 곧 수리해서 고쳐야 해요.",
+        "explanation": "\"get it fixed\"는 수리해서 바로잡는 것입니다."
       }
     ]
   },
-
-  // 7. deal with
   {
-    keyExpression: 'deal with',
-    baseForm: 'deal with',
-    translation: '대처하다, 처리하다, 수습하다',
-    sentences: [
+    "keyExpression": "deal with",
+    "baseForm": "deal with",
+    "translation": "처리하다, 대처하다, 수습하다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Our team spent the entire afternoon [dealing with, running away from, cheering up for, turning into] customer complaints about the server crash.',
-        answer: 'dealing with',
-        options: ['dealing with', 'running away from', 'cheering up for', 'turning into'],
-        korean: '우리 팀은 서버 다운으로 인한 고객들의 불만을 처리하고 수습하느라 오후 내내 시간을 보냈어요.',
-        explanation: '"deal with"는 복잡한 문제나 일상적인 난관을 "처리하다, 대처하다, 수습하다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "Our team spent the entire afternoon [dealing with, running away from, cheering up for, turning into] customer complaints about the server crash.",
+        "answer": "dealing with",
+        "options": [
+          "dealing with",
+          "running away from",
+          "cheering up for",
+          "turning into"
+        ],
+        "korean": "우리 팀은 서버 다운으로 인한 고객들의 불만을 처리하고 수습하느라 오후 내내 시간을 보냈어요.",
+        "explanation": "\"deal with\"는 복잡한 문제나 일상적인 난관을 \"처리하다, 대처하다, 수습하다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'She has been [dealing with water damage in her apartment] all morning.',
-        answer: 'dealing with water damage in her apartment',
-        tokens: ['dealing', 'with', 'water', 'damage', 'in', 'her', 'apartment'],
-        options: ['dealing', 'with', 'water', 'damage', 'in', 'her', 'apartment'],
-        korean: '그녀는 아침 내내 아파트 누수 피해를 수습하고 처리하고 있어요.',
-        explanation: '발생한 피해 상황을 수습하는 모습입니다.'
+        "type": "drag-and-drop",
+        "english": "He is tired after [dealing with a difficult homework problem all evening].",
+        "answer": "dealing with a difficult homework problem all evening",
+        "tokens": [
+          "dealing",
+          "with",
+          "a",
+          "difficult",
+          "homework",
+          "problem",
+          "all",
+          "evening"
+        ],
+        "options": [
+          "dealing",
+          "with",
+          "a",
+          "difficult",
+          "homework",
+          "problem",
+          "all",
+          "evening"
+        ],
+        "korean": "저녁 내내 어려운 숙제 문제를 붙잡고 씨름하느라(처리하느라) 그는 피곤해요.",
+        "explanation": "\"dealing with\"는 문제를 해결하려 대처하는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'How are you [dealing with, voting for, dreaming of, calling off] all the unexpected stress at your new workplace?',
-        answer: 'dealing with',
-        options: ['dealing with', 'voting for', 'dreaming of', 'calling off'],
-        korean: '새 직장에서 겪는 온갖 예상치 못한 스트레스에는 어떻게 대처하고 있어?',
-        explanation: '스트레스나 어려움에 대처하는 방식을 묻는 표현입니다.'
+        "type": "multiple-choice",
+        "english": "Mom spent an hour [dealing with, running off with, flying over, swimming through] the messy toys in the children's room.",
+        "answer": "dealing with",
+        "options": [
+          "dealing with",
+          "running off with",
+          "flying over",
+          "swimming through"
+        ],
+        "korean": "엄마는 아이들 방의 어지러운 장난감들을 정리하고 처리하느라 한 시간을 보내셨어요.",
+        "explanation": "\"dealing with\"는 흩어진 일이나 어질러진 상황을 수습함입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'I really hate [dealing with, listening to, looking for, counting on] dishonest car salesmen who hide hidden fees.',
-        answer: 'dealing with',
-        options: ['dealing with', 'listening to', 'looking for', 'counting on'],
-        korean: '숨겨진 수수료를 감추는 부정직한 자동차 딜러들을 상대하고 처리하는 건 정말 싫어요.',
-        explanation: '까다롭거나 불쾌한 사람을 상대하는 상황입니다.'
+        "type": "multiple-choice",
+        "english": "The teacher was busy [dealing with, singing with, laughing at, looking away from] missing books in the classroom.",
+        "answer": "dealing with",
+        "options": [
+          "dealing with",
+          "singing with",
+          "laughing at",
+          "looking away from"
+        ],
+        "korean": "선생님께서는 교실에서 없어진 책들을 찾고 처리하시느라 바쁘셨어요.",
+        "explanation": "\"dealing with\"는 문제를 대처하고 수습하는 모습입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'After the car wash collision, we are currently [dealing with, sleeping through, singing about, looking past] insurance paperwork.',
-        answer: 'dealing with',
-        options: ['dealing with', 'sleeping through', 'singing about', 'looking past'],
-        korean: '세차장 접촉사고 이후 우리는 현재 보험 서류 작업을 수습하고 처리하는 중입니다.',
-        explanation: '사고 후속 조치 업무를 처리하고 있음을 나타냅니다.'
+        "type": "multiple-choice",
+        "english": "I spent thirty minutes [dealing with, dreaming of, staring at, escaping from] a very slow internet connection this morning.",
+        "answer": "dealing with",
+        "options": [
+          "dealing with",
+          "dreaming of",
+          "staring at",
+          "escaping from"
+        ],
+        "korean": "오늘 아침 너무 느린 인터넷 연결 문제를 해결하고 대처하느라 30분을 보냈어요.",
+        "explanation": "\"dealing with\"는 불편한 상황에 대처함을 뜻합니다."
       }
     ]
   },
-
-  // 8. incident
   {
-    keyExpression: 'incident',
-    baseForm: 'incident',
-    translation: '사건, 일',
-    sentences: [
+    "keyExpression": "incident",
+    "baseForm": "incident",
+    "translation": "일, 사건",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'The school principal sent an email to all parents regarding a minor [incident, celebration, festival, graduation] on the playground during recess.',
-        answer: 'incident',
-        options: ['incident', 'celebration', 'festival', 'graduation'],
-        korean: '학교 교장 선생님은 쉬는 시간 운동장에서 발생한 사소한 사건(일)에 대해 모든 학부모에게 이메일을 보냈습니다.',
-        explanation: '"incident"는 뜻밖의 불미스럽거나 특이하게 발생한 "일, 사건"을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "The school principal sent an email to all parents regarding a minor [incident, celebration, festival, graduation] on the playground during recess.",
+        "answer": "incident",
+        "options": [
+          "incident",
+          "celebration",
+          "festival",
+          "graduation"
+        ],
+        "korean": "학교 교장 선생님은 쉬는 시간 운동장에서 발생한 사소한 사건(일)에 대해 모든 학부모에게 이메일을 보냈습니다.",
+        "explanation": "\"incident\"는 뜻밖의 불미스럽거나 특이하게 발생한 \"일, 사건\"을 뜻합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'There was a strange [incident after school near the library] yesterday.',
-        answer: 'incident after school near the library',
-        tokens: ['incident', 'after', 'school', 'near', 'the', 'library'],
-        options: ['incident', 'after', 'school', 'near', 'the', 'library'],
-        korean: '어제 방과 후 도서관 근처에서 기이한 사건이 하나 있었습니다.',
-        explanation: '학교 주변에서 일어난 특이한 일을 가리킵니다.'
+        "type": "drag-and-drop",
+        "english": "Nobody was hurt during the small [incident in the school cafeteria today].",
+        "answer": "incident in the school cafeteria today",
+        "tokens": [
+          "incident",
+          "in",
+          "the",
+          "school",
+          "cafeteria",
+          "today"
+        ],
+        "options": [
+          "incident",
+          "in",
+          "the",
+          "school",
+          "cafeteria",
+          "today"
+        ],
+        "korean": "오늘 학교 식당에서 일어난 작은 사건(일) 동안 아무도 다치지 않았어요.",
+        "explanation": "\"incident\"는 일어난 사건이나 일입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The local police are investigating the hit-and-run [incident, carnival, wedding, parade] that took place late last night.',
-        answer: 'incident',
-        options: ['incident', 'carnival', 'wedding', 'parade'],
-        korean: '현지 경찰은 어젯밤 늦게 일어난 뺑소니 사건을 조사하고 있습니다.',
-        explanation: '경찰이 조사하는 불미스러운 사건을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "The police officer asked questions about the traffic [incident, holiday, movie, birthday] on the corner of Main Street.",
+        "answer": "incident",
+        "options": [
+          "incident",
+          "holiday",
+          "movie",
+          "birthday"
+        ],
+        "korean": "경찰관은 메인 스트리트 모퉁이에서 일어난 교통 사건(사고)에 대해 질문했어요.",
+        "explanation": "\"traffic incident\"는 도로에서 일어난 작은 사고나 일입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Thankfully, nobody was hurt during the unexpected turbulence [incident, party, competition, picnic] on our flight.',
-        answer: 'incident',
-        options: ['incident', 'party', 'competition', 'picnic'],
-        korean: '다행히도 우리 비행기에서 발생한 뜻밖의 난기류 사건 동안 아무도 다치지 않았습니다.',
-        explanation: '비행 중 겪은 돌발 상황을 의미합니다.'
+        "type": "multiple-choice",
+        "english": "Spilling red juice on the teacher's papers was an embarrassing [incident, present, prize, song] for the student.",
+        "answer": "incident",
+        "options": [
+          "incident",
+          "present",
+          "prize",
+          "song"
+        ],
+        "korean": "선생님의 서류에 빨간 주스를 쏟은 것은 그 학생에게 당황스러운 사건(일)이었어요.",
+        "explanation": "\"incident\"는 발생한 뜻밖의 해프닝이나 사건입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'She was reluctant to discuss the unfortunate [incident, victory, holiday, bonus] that happened at the office party.',
-        answer: 'incident',
-        options: ['incident', 'victory', 'holiday', 'bonus'],
-        korean: '그녀는 회사 파티에서 일어났던 불미스러운 사건에 대해 이야기하기를 꺼렸어요.',
-        explanation: '언급하기 껄끄러운 사건을 묘사합니다.'
+        "type": "multiple-choice",
+        "english": "Everyone remained calm after the little [incident, medal, cake, trophy] on the morning bus.",
+        "answer": "incident",
+        "options": [
+          "incident",
+          "medal",
+          "cake",
+          "trophy"
+        ],
+        "korean": "아침 버스에서 일어난 작은 사건 뒤에도 모두가 침착함을 유지했어요.",
+        "explanation": "\"incident\"는 일상 속 작은 사건을 가리킵니다."
       }
     ]
   },
-
-  // 9. end up
   {
-    keyExpression: 'end up',
-    baseForm: 'end up',
-    translation: '결국 ~하게 되다',
-    sentences: [
+    "keyExpression": "end up",
+    "baseForm": "end up",
+    "translation": "결국 ~하게 되다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'The unexpected heavy rain forced us to cancel our outdoor hike, so we [ended up, stayed away from, called off, gave up] spending the whole afternoon playing board games at home.',
-        answer: 'ended up',
-        options: ['ended up', 'stayed away from', 'called off', 'gave up'],
-        korean: '갑작스러운 폭우 때문에 야외 하이킹을 취소해야 해서, 우리는 결국 집에서 오후 내내 보드게임을 하며 보내게 되었어요.',
-        explanation: '"end up -ing"는 어떤 일의 결과로 "결국 ~하게 되다"라는 뜻의 핵심 회화 표현입니다.'
+        "type": "multiple-choice",
+        "english": "The unexpected heavy rain forced us to cancel our outdoor hike, so we [ended up, stayed away from, called off, gave up] spending the whole afternoon playing board games at home.",
+        "answer": "ended up",
+        "options": [
+          "ended up",
+          "stayed away from",
+          "called off",
+          "gave up"
+        ],
+        "korean": "갑작스러운 폭우 때문에 야외 하이킹을 취소해야 해서, 우리는 결국 집에서 오후 내내 보드게임을 하며 보내게 되었어요.",
+        "explanation": "\"end up -ing\"는 어떤 일의 결과로 \"결국 ~하게 되다\"라는 뜻의 핵심 회화 표현입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'After walking around the mall for hours, we [ended up having dinner] at a Korean barbecue restaurant.',
-        answer: 'ended up having dinner',
-        tokens: ['ended', 'up', 'having', 'dinner'],
-        options: ['ended', 'up', 'having', 'dinner'],
-        korean: '몰에서 몇 시간 동안 걸어 다닌 끝에, 우리는 결국 한국식 바비큐 식당에서 저녁을 먹게 되었어요.',
-        explanation: '"end up"은 계획하지 않았더라도 결국 특정 행동이나 상황으로 이어질 때 씁니다.'
+        "type": "drag-and-drop",
+        "english": "I went to buy bread, but I [ended up buying some sweet cookies] as well.",
+        "answer": "ended up buying some sweet cookies",
+        "tokens": [
+          "ended",
+          "up",
+          "buying",
+          "some",
+          "sweet",
+          "cookies"
+        ],
+        "options": [
+          "ended",
+          "up",
+          "buying",
+          "some",
+          "sweet",
+          "cookies"
+        ],
+        "korean": "빵을 사러 갔지만 결국 달콤한 쿠키도 사게 되었어요.",
+        "explanation": "\"ended up buying\"은 결국 사게 되었다는 뜻입니다."
       },
       {
-        type: 'multiple-choice',
-        english: "If you don't save any money now, you could [end up, break off, pass through, look around] in trouble when emergencies happen.",
-        answer: 'end up',
-        options: ['end up', 'break off', 'pass through', 'look around'],
-        korean: '지금 돈을 모아두지 않으면 비상 상황이 생겼을 때 결국 곤란한 처지에 놓일 수 있어요.',
-        explanation: '미래에 결국 곤경에 처할 수 있음을 "end up in trouble"로 표현합니다.'
+        "type": "multiple-choice",
+        "english": "They missed the afternoon bus and [ended up, started to, refused to, chose to] walking two miles all the way home.",
+        "answer": "ended up",
+        "options": [
+          "ended up",
+          "started to",
+          "refused to",
+          "chose to"
+        ],
+        "korean": "그들은 오후 버스를 놓쳐서 결국 집까지 2마일을 줄곧 걸어가게 되었어요.",
+        "explanation": "\"ended up walking\"은 결국 걷게 되었음을 나타냅니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The long discussion was tiring, but it [ended up with, backed down from, stayed away from, fell apart from] a great agreement that everyone liked.',
-        answer: 'ended up with',
-        options: ['ended up with', 'backed down from', 'stayed away from', 'fell apart from'],
-        korean: '오랜 논의는 지쳤지만, 결국 모두가 만족하는 훌륭한 합의로 마무리되었습니다.',
-        explanation: '"end up with ~"는 \'결국 ~로 끝나다, 마무리되다\'라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "We intended to stay thirty minutes, but we [ended up, failed to, stopped to, hated to] staying two hours talking with friends.",
+        "answer": "ended up",
+        "options": [
+          "ended up",
+          "failed to",
+          "stopped to",
+          "hated to"
+        ],
+        "korean": "우리는 30분만 머물 생각이었지만, 결국 친구들과 이야기하며 2시간 동안 머물게 되었어요.",
+        "explanation": "\"ended up staying\"은 예상보다 길게 머물게 된 결과입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Even though it was completely unplanned, the trip [ended up being, kept on losing, gave up becoming, turned out falling] one of the best vacations of my life.',
-        answer: 'ended up being',
-        options: ['ended up being', 'kept on losing', 'gave up becoming', 'turned out falling'],
-        korean: '비록 완전히 계획되지 않은 여행이었지만, 결국 내 인생 최고의 휴가 중 하나가 되었어요.',
-        explanation: '예기치 않게 최고의 결과로 끝났을 때 쓰는 유용한 표현입니다.'
+        "type": "multiple-choice",
+        "english": "He ran fast to catch the morning train, but he [ended up, looked for, aimed at, hoped to] missing it by one minute.",
+        "answer": "ended up",
+        "options": [
+          "ended up",
+          "looked for",
+          "aimed at",
+          "hoped to"
+        ],
+        "korean": "그는 아침 기차를 타려고 빨리 달렸지만, 결국 1분 차이로 놓치고 말았어요.",
+        "explanation": "\"ended up missing\"은 결국 놓쳤다는 결말입니다."
       }
     ]
   },
-
-  // 10. reinjure
   {
-    keyExpression: 'reinjure',
-    baseForm: 'reinjure',
-    translation: '다시 다치다, 재부상을 입히다',
-    sentences: [
+    "keyExpression": "reinjure",
+    "baseForm": "reinjure",
+    "translation": "다시 다치다, 재부상을 입히다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'By returning to basketball practice too soon, the athlete [reinjured, strengthened, replaced, protected] his right ankle.',
-        answer: 'reinjured',
-        options: ['reinjured', 'strengthened', 'replaced', 'protected'],
-        korean: '농구 연습에 너무 일찍 복귀하는 바람에 그 선수는 오른쪽 발목을 다시 다쳐버렸습니다.',
-        explanation: '"reinjure"는 이미 다쳤던 부위를 "다시 다치다, 재부상을 입히다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "By returning to basketball practice too soon, the athlete [reinjured, strengthened, replaced, protected] his right ankle.",
+        "answer": "reinjured",
+        "options": [
+          "reinjured",
+          "strengthened",
+          "replaced",
+          "protected"
+        ],
+        "korean": "농구 연습에 너무 일찍 복귀하는 바람에 그 선수는 오른쪽 발목을 다시 다쳐버렸습니다.",
+        "explanation": "\"reinjure\"는 이미 다쳤던 부위를 \"다시 다치다, 재부상을 입히다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'He accidentally [reinjured the collarbone injury he had] last summer.',
-        answer: 'reinjured the collarbone injury he had',
-        tokens: ['reinjured', 'the', 'collarbone', 'injury', 'he', 'had'],
-        options: ['reinjured', 'the', 'collarbone', 'injury', 'he', 'had'],
-        korean: '그는 지난여름에 입었던 쇄골 부상을 실수로 다시 다쳐버렸어요.',
-        explanation: '기존의 쇄골 부위가 재발하여 다시 다친 상황입니다.'
+        "type": "drag-and-drop",
+        "english": "Running too fast on the playground [reinjured his sore knee this morning].",
+        "answer": "reinjured his sore knee this morning",
+        "tokens": [
+          "reinjured",
+          "his",
+          "sore",
+          "knee",
+          "this",
+          "morning"
+        ],
+        "options": [
+          "reinjured",
+          "his",
+          "sore",
+          "knee",
+          "this",
+          "morning"
+        ],
+        "korean": "운동장에서 너무 빨리 달리다가 오늘 아침 아픈 무릎을 다시 다쳤어요.",
+        "explanation": "\"reinjured\"는 기존 부상 부위를 또 다치게 함을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Be careful lifting those heavy moving boxes, or you might [reinjure, polish, celebrate, build] your lower back.',
-        answer: 'reinjure',
-        options: ['reinjure', 'polish', 'celebrate', 'build'],
-        korean: '그 무거운 이사 상자들을 들 때 조심하세요, 허리를 다시 다칠 수도 있으니까요.',
-        explanation: '허리 디스크나 통증이 재발할 수 있음을 경고합니다.'
+        "type": "multiple-choice",
+        "english": "Lifting the heavy desk by himself [reinjured, cleaned, washed, decorated] his sore back yesterday.",
+        "answer": "reinjured",
+        "options": [
+          "reinjured",
+          "cleaned",
+          "washed",
+          "decorated"
+        ],
+        "korean": "무거운 책상을 혼자 들다가 그는 어제 아픈 허리를 다시 다쳤어요.",
+        "explanation": "\"reinjured his back\"은 허리를 재부상 입히다입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The soccer striker was devastated when he [reinjured, discovered, improved, donated] the same knee ligament during training.',
-        answer: 'reinjured',
-        options: ['reinjured', 'discovered', 'improved', 'donated'],
-        korean: '그 축구 공격수는 훈련 중에 같은 쪽 무릎 인대를 다시 다쳤을 때 망연자실했습니다.',
-        explanation: '선수가 같은 관절 부위를 재차 다친 안타까운 상황입니다.'
+        "type": "multiple-choice",
+        "english": "He slipped on the wet grass and [reinjured, polished, combed, wrapped] his weak shoulder during soccer.",
+        "answer": "reinjured",
+        "options": [
+          "reinjured",
+          "polished",
+          "combed",
+          "wrapped"
+        ],
+        "korean": "그는 축구 중에 젖은 잔디에서 미끄러져 약해진 어깨를 다시 다쳤어요.",
+        "explanation": "\"reinjured\"는 약해진 부위를 또 다치는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The physical therapist warned that playing tennis could [reinjure, clean up, wash away, calm down] her damaged wrist tendon.',
-        answer: 'reinjure',
-        options: ['reinjure', 'clean up', 'wash away', 'calm down'],
-        korean: '물리치료사는 테니스를 치면 손상된 손목 힘줄을 다시 다칠 수 있다고 경고했어요.',
-        explanation: '아직 덜 나은 부위의 재부상 위험을 의미합니다.'
+        "type": "multiple-choice",
+        "english": "He accidentally [reinjured, praised, thanked, cooled] his hurt finger while catching the hard ball.",
+        "answer": "reinjured",
+        "options": [
+          "reinjured",
+          "praised",
+          "thanked",
+          "cooled"
+        ],
+        "korean": "그는 딱딱한 공을 잡다가 다쳤던 손가락을 실수로 다시 다쳤어요.",
+        "explanation": "\"reinjured his finger\"는 다친 손가락을 또 다침을 뜻합니다."
       }
     ]
   },
-
-  // 11. in a sling
   {
-    keyExpression: 'in a sling',
-    baseForm: 'in a sling',
-    translation: '팔걸이 붕대를 하고 있다',
-    sentences: [
+    "keyExpression": "in a sling",
+    "baseForm": "in a sling",
+    "translation": "팔걸이(삼각건)를 한 상태",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'After dislocating his shoulder during the match, the tennis player had to keep his arm [in a sling, on a diet, under a spell, at a loss] for three weeks.',
-        answer: 'in a sling',
-        options: ['in a sling', 'on a diet', 'under a spell', 'at a loss'],
-        korean: '경기 중 어깨가 탈구된 뒤 그 테니스 선수는 3주 동안 팔에 팔걸이(붕대)를 하고 있어야 했습니다.',
-        explanation: '"in a sling"은 다친 팔이나 어깨를 보호하기 위해 "팔걸이(삼각건)를 한 상태"를 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "After dislocating his shoulder during the match, the tennis player had to keep his arm [in a sling, on a diet, under a spell, at a loss] for three weeks.",
+        "answer": "in a sling",
+        "options": [
+          "in a sling",
+          "on a diet",
+          "under a spell",
+          "at a loss"
+        ],
+        "korean": "경기 중 어깨가 탈구된 뒤 그 테니스 선수는 3주 동안 팔에 팔걸이(붕대)를 하고 있어야 했습니다.",
+        "explanation": "\"in a sling\"은 다친 팔이나 어깨를 보호하기 위해 \"팔걸이(삼각건)를 한 상태\"를 뜻합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'He cannot write with his right hand because [he is in a sling] today.',
-        answer: 'he is in a sling',
-        tokens: ['he', 'is', 'in', 'a', 'sling'],
-        options: ['he', 'is', 'in', 'a', 'sling'],
-        korean: '그는 오늘 팔걸이 붕대를 하고 있어서 오른손으로 글을 쓸 수 없어요.',
-        explanation: '팔걸이를 차고 있어 팔 사용이 제한된 상태입니다.'
+        "type": "drag-and-drop",
+        "english": "Ryden rested quietly on the sofa with his [arm in a sling after the fall].",
+        "answer": "arm in a sling after the fall",
+        "tokens": [
+          "arm",
+          "in",
+          "a",
+          "sling",
+          "after",
+          "the",
+          "fall"
+        ],
+        "options": [
+          "arm",
+          "in",
+          "a",
+          "sling",
+          "after",
+          "the",
+          "fall"
+        ],
+        "korean": "라이든은 넘어진 뒤 팔걸이 붕대를 한 채 소파에서 조용히 휴식을 취했어요.",
+        "explanation": "\"arm in a sling\"은 팔걸이에 팔을 걸친 상태입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The doctor adjusted the fabric straps to ensure the child was comfortable [in a sling, on a cruise, with a mask, off the hook].',
-        answer: 'in a sling',
-        options: ['in a sling', 'on a cruise', 'with a mask', 'off the hook'],
-        korean: '의사 선생님은 아이가 팔걸이 붕대를 편안하게 착용할 수 있도록 천 끈을 조절해 주셨습니다.',
-        explanation: '어린 환자에게 팔걸이를 맞추어 주는 모습입니다.'
+        "type": "multiple-choice",
+        "english": "The doctor told the boy to keep his broken wrist [in a sling, on a boat, at a park, by a lake] for seven days.",
+        "answer": "in a sling",
+        "options": [
+          "in a sling",
+          "on a boat",
+          "at a park",
+          "by a lake"
+        ],
+        "korean": "의사 선생님은 소년에게 부러진 손목을 7일 동안 팔걸이 붕대에 넣어두라고 말씀하셨어요.",
+        "explanation": "\"in a sling\"은 치료를 위해 팔걸이를 찬 상태입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Even while his broken collarbone was [in a sling, in a hurry, in a rush, in a panic], he managed to read books every day.',
-        answer: 'in a sling',
-        options: ['in a sling', 'in a hurry', 'in a rush', 'in a panic'],
-        korean: '쇄골 골절로 팔걸이 붕대를 하고 있는 동안에도 그는 매일 책을 읽어냈습니다.',
-        explanation: '부상으로 붕대를 착용한 채 지내는 기간을 나타냅니다.'
+        "type": "multiple-choice",
+        "english": "She could not write with her right hand because it was [in a sling, on a train, at a shop, in a tree] after the accident.",
+        "answer": "in a sling",
+        "options": [
+          "in a sling",
+          "on a train",
+          "at a shop",
+          "in a tree"
+        ],
+        "korean": "사고 후 오른손이 팔걸이 붕대에 감겨 있어서 그녀는 글씨를 쓸 수 없었어요.",
+        "explanation": "\"in a sling\"은 부상 후 고정용 걸이를 한 상태입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Seeing our son come home with his little arm [in a sling, on a mission, out of order, up in arms] broke our hearts.',
-        answer: 'in a sling',
-        options: ['in a sling', 'on a mission', 'out of order', 'up in arms'],
-        korean: '아들이 작은 팔에 팔걸이 붕대를 하고 집으로 돌아오는 모습을 보니 가슴이 찢어졌습니다.',
-        explanation: '아이가 팔걸이를 하고 귀가한 안타까운 상황입니다.'
+        "type": "multiple-choice",
+        "english": "He wore a soft band to keep his injured shoulder [in a sling, out of time, over the moon, on the go] during classes.",
+        "answer": "in a sling",
+        "options": [
+          "in a sling",
+          "out of time",
+          "over the moon",
+          "on the go"
+        ],
+        "korean": "그는 수업 중에 다친 어깨를 보호하기 위해 부드러운 띠로 팔걸이를 하고 있었어요.",
+        "explanation": "\"in a sling\"은 팔걸이(삼각건) 상태입니다."
       }
     ]
   },
-
-  // 12. be referred to
   {
-    keyExpression: 'be referred to',
-    baseForm: 'be referred to',
-    translation: '진료 의뢰를 받다, 소개되다',
-    sentences: [
+    "keyExpression": "be referred to",
+    "baseForm": "be referred to",
+    "translation": "진료 의뢰를 받다, 소개되다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Since my knee pain didn\'t improve with medication, I am [being referred to, being blamed for, being arrested by, being charged with] an orthopedic specialist.',
-        answer: 'being referred to',
-        options: ['being referred to', 'being blamed for', 'being arrested by', 'being charged with'],
-        korean: '약물로 무릎 통증이 나아지지 않아서 저는 정형외과 전문의에게 진료 의뢰를 받게 되었어요.',
-        explanation: '"be referred to (a specialist/doctor)"는 일반의나 다른 의사로부터 전문의에게 "진료 의뢰를 받다, 소개되다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "Since my knee pain didn't improve with medication, I am [being referred to, being blamed for, being arrested by, being charged with] an orthopedic specialist.",
+        "answer": "being referred to",
+        "options": [
+          "being referred to",
+          "being blamed for",
+          "being arrested by",
+          "being charged with"
+        ],
+        "korean": "약물로 무릎 통증이 나아지지 않아서 저는 정형외과 전문의에게 진료 의뢰를 받게 되었어요.",
+        "explanation": "\"be referred to (a specialist/doctor)\"는 일반의나 다른 의사로부터 전문의에게 \"진료 의뢰를 받다, 소개되다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'We are currently [being referred to an orthopedic doctor] for additional X-rays.',
-        answer: 'being referred to an orthopedic doctor',
-        tokens: ['being', 'referred', 'to', 'an', 'orthopedic', 'doctor'],
-        options: ['being', 'referred', 'to', 'an', 'orthopedic', 'doctor'],
-        korean: '우리는 추가 엑스레이 촬영을 위해 정형외과 의사에게 진료 의뢰를 받은 상태입니다.',
-        explanation: '정밀 검사를 위해 전문의에게 소개 및 의뢰된 과정입니다.'
+        "type": "drag-and-drop",
+        "english": "After seeing our family doctor, he is [being referred to a specialist in town].",
+        "answer": "being referred to a specialist in town",
+        "tokens": [
+          "being",
+          "referred",
+          "to",
+          "a",
+          "specialist",
+          "in",
+          "town"
+        ],
+        "options": [
+          "being",
+          "referred",
+          "to",
+          "a",
+          "specialist",
+          "in",
+          "town"
+        ],
+        "korean": "가정의학과 진료를 본 뒤 그는 시내의 전문의에게 진료 의뢰를 받고 있어요.",
+        "explanation": "\"being referred to\"는 전문의에게 보내지다(의뢰받다)입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'After reviewing the test results, our family physician said we were [being referred to, being called out to, being taken aback by, being drawn into] a neurologist in the city.',
-        answer: 'being referred to',
-        options: ['being referred to', 'being called out to', 'being taken aback by', 'being drawn into'],
-        korean: '검사 결과를 검토한 후 가정의학과 의사는 우리가 도시에 있는 신경과 전문의에게 의뢰될 것이라고 말씀하셨습니다.',
-        explanation: '가정의학과에서 상급 전문의로 연계되는 상황입니다.'
+        "type": "multiple-choice",
+        "english": "Ryden is [being referred to, being punished for, being locked up by, being dropped from] a children's doctor for a closer checkup.",
+        "answer": "being referred to",
+        "options": [
+          "being referred to",
+          "being punished for",
+          "being locked up by",
+          "being dropped from"
+        ],
+        "korean": "라이든은 더 정밀한 검진을 위해 소아과 의사에게 진료 의뢰를 받고 있어요.",
+        "explanation": "\"being referred to\"는 정밀 진료를 위해 타 의사에게 소개받는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Patients who suffer from chronic migraines are usually [referred to, accused of, protected from, traded with] specialized headache clinics.',
-        answer: 'referred to',
-        options: ['referred to', 'accused of', 'protected from', 'traded with'],
-        korean: '만성 편두통을 앓는 환자들은 대개 전문 두통 클리닉으로 진료 의뢰가 됩니다.',
-        explanation: '특화된 병원으로 환자가 보내지는 일반적 절차입니다.'
+        "type": "multiple-choice",
+        "english": "Because of her blurry vision, she is [being referred to, being asked out by, being called down by, being picked on by] an eye doctor.",
+        "answer": "being referred to",
+        "options": [
+          "being referred to",
+          "being asked out by",
+          "being called down by",
+          "being picked on by"
+        ],
+        "korean": "시야가 흐릿해서 그녀는 안과 의사에게 진료 의뢰를 받고 있어요.",
+        "explanation": "\"being referred to\"는 해당 전문의에게 진료를 연계받음을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Why are we [being referred to, being compared to, being pushed around by, being laughed at by] another specialist if the bone has already healed?',
-        answer: 'being referred to',
-        options: ['being referred to', 'being compared to', 'being pushed around by', 'being laughed at by'],
-        korean: '뼈가 이미 다 붙었다면 왜 우리가 다른 전문의에게 진료 의뢰를 받아야 하는 거죠?',
-        explanation: '진료 의뢰 사유에 대해 묻는 문장입니다.'
+        "type": "multiple-choice",
+        "english": "Because of my bad toothache, I am [being referred to, being sent away by, being held back by, being paid off by] a dental surgeon.",
+        "answer": "being referred to",
+        "options": [
+          "being referred to",
+          "being sent away by",
+          "being held back by",
+          "being paid off by"
+        ],
+        "korean": "심한 치통 때문에 나는 구강 외과 전문의에게 진료 의뢰를 받고 있어요.",
+        "explanation": "\"being referred to\"는 전문 의사에게 의뢰됨을 뜻합니다."
       }
     ]
   },
-
-  // 13. postpone
   {
-    keyExpression: 'postpone',
-    baseForm: 'postpone',
-    translation: '미루다, 연기하다',
-    sentences: [
+    "keyExpression": "postpone",
+    "baseForm": "postpone",
+    "translation": "미루다, 연기하다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Because three key members were sick with the flu, we decided to [postpone, celebrate, accelerate, summarize] our marketing presentation until next Friday.',
-        answer: 'postpone',
-        options: ['postpone', 'celebrate', 'accelerate', 'summarize'],
-        korean: '핵심 팀원 세 명이 독감에 걸리는 바람에 우리는 마케팅 발표를 다음 주 금요일까지 연기하기로 결정했습니다.',
-        explanation: '"postpone"은 시험이나 회의, 일정 등을 "미루다, 연기하다"라는 뜻입니다 (= put off, delay).'
+        "type": "multiple-choice",
+        "english": "Because three key members were sick with the flu, we decided to [postpone, celebrate, accelerate, summarize] our marketing presentation until next Friday.",
+        "answer": "postpone",
+        "options": [
+          "postpone",
+          "celebrate",
+          "accelerate",
+          "summarize"
+        ],
+        "korean": "핵심 팀원 세 명이 독감에 걸리는 바람에 우리는 마케팅 발표를 다음 주 금요일까지 연기하기로 결정했습니다.",
+        "explanation": "\"postpone\"은 시험이나 회의, 일정 등을 \"미루다, 연기하다\"라는 뜻입니다 (= put off, delay)."
       },
       {
-        type: 'drag-and-drop',
-        english: 'I am definitely going to have to [postpone my licensing test until next month].',
-        answer: 'postpone my licensing test until next month',
-        tokens: ['postpone', 'my', 'licensing', 'test', 'until', 'next', 'month'],
-        options: ['postpone', 'my', 'licensing', 'test', 'until', 'next', 'month'],
-        korean: '저는 자격증 시험을 다음 달까지 연기해야만 할 것 같아요.',
-        explanation: '시험 일정을 늦추는 결정을 나타냅니다.'
+        "type": "drag-and-drop",
+        "english": "Heavy rain forced the school to [postpone the field trip until next week].",
+        "answer": "postpone the field trip until next week",
+        "tokens": [
+          "postpone",
+          "the",
+          "field",
+          "trip",
+          "until",
+          "next",
+          "week"
+        ],
+        "options": [
+          "postpone",
+          "the",
+          "field",
+          "trip",
+          "until",
+          "next",
+          "week"
+        ],
+        "korean": "폭우로 인해 학교는 현장학습을 다음 주까지 연기해야만 했어요.",
+        "explanation": "\"postpone\"은 일정을 뒤로 미룸을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The bad weather forced the organizers to [postpone, launch, broadcast, admire] the outdoor music concert.',
-        answer: 'postpone',
-        options: ['postpone', 'launch', 'broadcast', 'admire'],
-        korean: '악천후로 인해 주최 측은 야외 음악 콘서트를 연기할 수밖에 없었습니다.',
-        explanation: '날씨 사정으로 일정이 지연된 행사입니다.'
+        "type": "multiple-choice",
+        "english": "Can we please [postpone, destroy, swallow, forget] our study meeting until tomorrow afternoon?",
+        "answer": "postpone",
+        "options": [
+          "postpone",
+          "destroy",
+          "swallow",
+          "forget"
+        ],
+        "korean": "우리 스터디 모임을 내일 오후로 연기할 수 있을까요?",
+        "explanation": "\"postpone\"은 회의나 약속을 미루는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Never [postpone, memorize, create, applaud] until tomorrow what you can easily finish today.',
-        answer: 'postpone',
-        options: ['postpone', 'memorize', 'create', 'applaud'],
-        korean: '오늘 쉽게 끝낼 수 있는 일을 내일로 미루지 마세요.',
-        explanation: '일을 미루지 말라는 유명한 격언입니다.'
+        "type": "multiple-choice",
+        "english": "The coach decided to [postpone, hurry, speed, welcome] the baseball game because the field was too wet.",
+        "answer": "postpone",
+        "options": [
+          "postpone",
+          "hurry",
+          "speed",
+          "welcome"
+        ],
+        "korean": "그라운드가 너무 젖어 있어서 코치님은 야구 경기를 연기하기로 결정하셨어요.",
+        "explanation": "\"postpone the game\"은 경기를 연기하다입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Due to the car accident and family emergency, she had to [postpone, pass, fail, grade] her university final exams.',
-        answer: 'postpone',
-        options: ['postpone', 'pass', 'fail', 'grade'],
-        korean: '교통사고와 집안 비상사태로 인해 그녀는 대학교 기말고사를 연기해야 했습니다.',
-        explanation: '비상 상황으로 인해 학기말 시험을 미루는 모습입니다.'
+        "type": "multiple-choice",
+        "english": "She had to [postpone, bake, draw, jump] her dentist appointment because she had an important math test.",
+        "answer": "postpone",
+        "options": [
+          "postpone",
+          "bake",
+          "draw",
+          "jump"
+        ],
+        "korean": "중요한 수학 시험이 있어서 그녀는 치과 예약을 미뤄야만 했어요.",
+        "explanation": "\"postpone an appointment\"는 예약을 연기하다를 뜻합니다."
       }
     ]
   },
-
-  // 14. procrastinate
   {
-    keyExpression: 'procrastinate',
-    baseForm: 'procrastinate',
-    translation: '미루다, 늑장 부리다',
-    sentences: [
+    "keyExpression": "procrastinate",
+    "baseForm": "procrastinate",
+    "translation": "미루다, 늑장 부리다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Instead of studying for his chemistry exam, he spent hours organizing his bookshelves because he was [procrastinating, graduating, exercising, meditating].',
-        answer: 'procrastinating',
-        options: ['procrastinating', 'graduating', 'exercising', 'meditating'],
-        korean: '화학 시험공부를 하는 대신 그는 해야 할 일을 미루느라 책장을 정리하며 몇 시간을 보냈어요.',
-        explanation: '"procrastinate"는 해야 할 중요한 과제나 공부를 자꾸 "미루다, 늑장 부리다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "Instead of studying for his chemistry exam, he spent hours organizing his bookshelves because he was [procrastinating, graduating, exercising, meditating].",
+        "answer": "procrastinating",
+        "options": [
+          "procrastinating",
+          "graduating",
+          "exercising",
+          "meditating"
+        ],
+        "korean": "화학 시험공부를 하는 대신 그는 해야 할 일을 미루느라 책장을 정리하며 몇 시간을 보냈어요.",
+        "explanation": "\"procrastinate\"는 해야 할 중요한 과제나 공부를 자꾸 \"미루다, 늑장 부리다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'Stop [procrastinating and start writing your application essay] right now.',
-        answer: 'procrastinating and start writing your application essay',
-        tokens: ['procrastinating', 'and', 'start', 'writing', 'your', 'application', 'essay'],
-        options: ['procrastinating', 'and', 'start', 'writing', 'your', 'application', 'essay'],
-        korean: '그만 미루고 지금 당장 지원서 에세이를 쓰기 시작하세요.',
-        explanation: '늑장 부리지 말고 시작하라는 당부입니다.'
+        "type": "drag-and-drop",
+        "english": "Stop [procrastinating and clean your bedroom before dinner] starts.",
+        "answer": "procrastinating and clean your bedroom before dinner",
+        "tokens": [
+          "procrastinating",
+          "and",
+          "clean",
+          "your",
+          "bedroom",
+          "before",
+          "dinner"
+        ],
+        "options": [
+          "procrastinating",
+          "and",
+          "clean",
+          "your",
+          "bedroom",
+          "before",
+          "dinner"
+        ],
+        "korean": "미루지 말고 저녁 식사 전에 네 방을 청소하렴.",
+        "explanation": "\"stop procrastinating\"은 늑장 부리지 말고 시작하라는 뜻입니다."
       },
       {
-        type: 'multiple-choice',
-        english: "I know I am [procrastinating, improving, recovering, donating] by scrolling through social media, but I just don't feel like doing taxes.",
-        answer: 'procrastinating',
-        options: ['procrastinating', 'improving', 'recovering', 'donating'],
-        korean: 'SNS를 넘겨보며 늑장 부리고 있다는 건 알지만, 세금 신고 서류를 정말 만지기 싫거든요.',
-        explanation: '귀찮은 업무를 회피하며 시간을 끄는 심리입니다.'
+        "type": "multiple-choice",
+        "english": "She was [procrastinating, singing, running, cooking] by watching funny puppy videos on her phone instead of studying.",
+        "answer": "procrastinating",
+        "options": [
+          "procrastinating",
+          "singing",
+          "running",
+          "cooking"
+        ],
+        "korean": "그녀는 공부하는 대신 휴대전화로 귀여운 강아지 영상을 보며 늑장을 부리고(할 일을 미루고) 있었어요.",
+        "explanation": "\"procrastinating\"은 딴짓하며 할 일을 미루는 태도입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The deadline is tomorrow morning, so we cannot afford to keep [procrastinating, arguing, celebrating, laughing] any longer.',
-        answer: 'procrastinating',
-        options: ['procrastinating', 'arguing', 'celebrating', 'laughing'],
-        korean: '마감이 내일 아침이라 우리는 더 이상 할 일을 미룰 여유가 없습니다.',
-        explanation: '마감 직전이라 미룰 수 없는 다급함을 강조합니다.'
+        "type": "multiple-choice",
+        "english": "I always catch myself [procrastinating, traveling, painting, swimming] whenever I have to write a long paper for school.",
+        "answer": "procrastinating",
+        "options": [
+          "procrastinating",
+          "traveling",
+          "painting",
+          "swimming"
+        ],
+        "korean": "학교 과제로 긴 글을 써야 할 때마다 나는 자꾸 일을 미루고 있는 자신을 발견해요.",
+        "explanation": "\"procrastinating\"은 해야 할 과제를 자꾸 미룸을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'She admitted that attaching colorful pompoms to the poster was just a creative way of [procrastinating, exercising, cooking, driving].',
-        answer: 'procrastinating',
-        options: ['procrastinating', 'exercising', 'cooking', 'driving'],
-        korean: '그녀는 포스터에 알록달록한 폼폼 방울을 붙이는 것이 과제를 미루기 위한 창의적인 핑계였을 뿐이라고 인정했습니다.',
-        explanation: '다른 일을 핑계 삼아 본업을 미루는 모습입니다.'
+        "type": "multiple-choice",
+        "english": "Try not to [procrastinate, climb, shout, sleep] on your science project until the very night before it is due.",
+        "answer": "procrastinate",
+        "options": [
+          "procrastinate",
+          "climb",
+          "shout",
+          "sleep"
+        ],
+        "korean": "마감 전날 밤까지 과학 프로젝트를 미루지 않도록 해보세요.",
+        "explanation": "\"procrastinate on\"은 어떤 과제를 질질 끌며 미루는 것입니다."
       }
     ]
   },
-
-  // 15. just so you know
   {
-    keyExpression: 'just so you know',
-    baseForm: 'just so you know',
-    translation: '참고로 알아둬, 그냥 알려주는 건데',
-    sentences: [
+    "keyExpression": "just so you know",
+    "baseForm": "just so you know",
+    "translation": "참고로 알아둬, 그냥 알려주는 건데",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'Oh, and [just so you know, out of the blue, at the same time, all of a sudden], the office will be closed this coming Friday for routine maintenance.',
-        answer: 'just so you know',
-        options: ['just so you know', 'out of the blue', 'at the same time', 'all of a sudden'],
-        korean: '아, 그리고 참고로 말씀드리자면, 정기 점검으로 인해 이번 주 금요일에는 사무실 문을 닫습니다.',
-        explanation: '"just so you know"는 상대방에게 참고 삼아 정보를 넌지시 건넬 때 쓰는 "참고로 알아둬, 그냥 알려주는 건데"라는 핵심 구어 표현입니다 (약어: JSYK).'
+        "type": "multiple-choice",
+        "english": "Oh, and [just so you know, out of the blue, at the same time, all of a sudden], the office will be closed this coming Friday for routine maintenance.",
+        "answer": "just so you know",
+        "options": [
+          "just so you know",
+          "out of the blue",
+          "at the same time",
+          "all of a sudden"
+        ],
+        "korean": "아, 그리고 참고로 말씀드리자면, 정기 점검으로 인해 이번 주 금요일에는 사무실 문을 닫습니다.",
+        "explanation": "\"just so you know\"는 상대방에게 참고 삼아 정보를 넌지시 건넬 때 쓰는 \"참고로 알아둬, 그냥 알려주는 건데\"라는 핵심 구어 표현입니다 (약어: JSYK)."
       },
       {
-        type: 'drag-and-drop',
-        english: '[Just so you know], the grocery store closes early on Sunday evenings.',
-        answer: 'Just so you know',
-        tokens: ['Just', 'so', 'you', 'know'],
-        options: ['Just', 'so', 'you', 'know'],
-        korean: '참고로 알아둬, 그 식료품점은 일요일 저녁에 일찍 문을 닫아.',
-        explanation: '상대방에게 미리 참고할 만한 영업시간 정보를 건넵니다.'
+        "type": "drag-and-drop",
+        "english": "Dinner will be ready in ten minutes, [just so you know before going outside].",
+        "answer": "just so you know before going outside",
+        "tokens": [
+          "just",
+          "so",
+          "you",
+          "know",
+          "before",
+          "going",
+          "outside"
+        ],
+        "options": [
+          "just",
+          "so",
+          "you",
+          "know",
+          "before",
+          "going",
+          "outside"
+        ],
+        "korean": "밖에 나가기 전에 참고로 알려주는 건데, 저녁이 10분 뒤에 다 준비될 거야.",
+        "explanation": "\"just so you know\"는 참고로 전하는 정보입니다."
       },
       {
-        type: 'multiple-choice',
-        english: '[Just so you know, By all means, Under no circumstances, In no time], there is still plenty of homemade beef stew left in the fridge.',
-        answer: 'Just so you know',
-        options: ['Just so you know', 'By all means', 'Under no circumstances', 'In no time'],
-        korean: '참고로 말하자면, 냉장고에 아직 직접 만든 소고기 스튜가 많이 남아 있어.',
-        explanation: '남은 음식에 대한 정보를 다정하게 알려주는 말입니다.'
+        "type": "multiple-choice",
+        "english": "[Just so you know, Out of hand, By the way, All at once], the morning bus leaves five minutes early tomorrow.",
+        "answer": "Just so you know",
+        "options": [
+          "Just so you know",
+          "Out of hand",
+          "By the way",
+          "All at once"
+        ],
+        "korean": "참고로 알려드리는 건데, 내일 아침 버스는 5분 일찍 출발합니다.",
+        "explanation": "\"Just so you know\"는 잊지 않도록 알려줄 때 씁니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Hey, [just so you know, over and over, back and forth, little by little], Taylor Swift announced she is dropping a brand-new album next week!',
-        answer: 'just so you know',
-        options: ['just so you know', 'over and over', 'back and forth', 'little by little'],
-        korean: '얘, 참고로 알아둬, 테일러 스위프트가 다음 주에 새 앨범을 깜짝 발매한다고 발표했어!',
-        explanation: '신나는 소식을 상대방에게 귀띔해 주는 표현입니다.'
+        "type": "multiple-choice",
+        "english": "I put some fresh cookies on the kitchen table, [just so you know, in any case, out of line, up to date] if you get hungry.",
+        "answer": "just so you know",
+        "options": [
+          "just so you know",
+          "in any case",
+          "out of line",
+          "up to date"
+        ],
+        "korean": "배고플까 봐 참고로 말해주는 건데, 주방 식탁 위에 갓 구운 쿠키를 좀 올려두었어.",
+        "explanation": "\"just so you know\"는 다정하게 정보를 귀띔해 주는 표현입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'I sent the meeting notes to your inbox, [just so you know, as a matter of fact, believe it or not, once upon a time].',
-        answer: 'just so you know',
-        options: ['just so you know', 'as a matter of fact', 'believe it or not', 'once upon a time'],
-        korean: '참고하시라고 회의록을 메일함으로 보내드렸습니다.',
-        explanation: '문장 끝에 붙어 상대방에게 참고하라고 덧붙이는 표현입니다.'
+        "type": "multiple-choice",
+        "english": "[Just so you know, From now on, As a rule, Once for all], it will rain this afternoon, so don't forget your umbrella.",
+        "answer": "Just so you know",
+        "options": [
+          "Just so you know",
+          "From now on",
+          "As a rule",
+          "Once for all"
+        ],
+        "korean": "참고로 알아둬, 오늘 오후에 비가 올 테니 우산 챙기는 거 잊지 마.",
+        "explanation": "\"Just so you know\"는 도움이 되는 조언을 넌지시 건넬 때 씁니다."
       }
     ]
   },
-
-  // 16. book
   {
-    keyExpression: 'book',
-    baseForm: 'book',
-    translation: '예약하다',
-    sentences: [
+    "keyExpression": "book",
+    "baseForm": "book",
+    "translation": "예약하다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'We finally [booked, canceled, ruined, lost] our direct flights to Honolulu for our family vacation.',
-        answer: 'booked',
-        options: ['booked', 'canceled', 'ruined', 'lost'],
-        korean: '우리는 마침내 가족 휴가를 위해 호놀룰루행 직항 항공편을 예약했습니다.',
-        explanation: '"book"은 항공권, 호텔, 공연 티켓, 여행 상품 등을 "예약하다"라는 뜻의 동사입니다.'
+        "type": "multiple-choice",
+        "english": "We finally [booked, canceled, ruined, lost] our direct flights to Honolulu for our family vacation.",
+        "answer": "booked",
+        "options": [
+          "booked",
+          "canceled",
+          "ruined",
+          "lost"
+        ],
+        "korean": "우리는 마침내 가족 휴가를 위해 호놀룰루행 직항 항공편을 예약했습니다.",
+        "explanation": "\"book\"은 항공권, 호텔, 공연 티켓, 여행 상품 등을 \"예약하다\"라는 뜻의 동사입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'We also [booked our trip to Hawaii for next summer].',
-        answer: 'booked our trip to Hawaii for next summer',
-        tokens: ['booked', 'our', 'trip', 'to', 'Hawaii', 'for', 'next', 'summer'],
-        options: ['booked', 'our', 'trip', 'to', 'Hawaii', 'for', 'next', 'summer'],
-        korean: '우리 내년 여름 하와이 여행도 예약했잖아.',
-        explanation: '여행 상품이나 일정을 미리 예약 완료했음을 나타냅니다.'
+        "type": "drag-and-drop",
+        "english": "Dad [booked a cozy room at the beach hotel] for our trip.",
+        "answer": "booked a cozy room at the beach hotel",
+        "tokens": [
+          "booked",
+          "a",
+          "cozy",
+          "room",
+          "at",
+          "the",
+          "beach",
+          "hotel"
+        ],
+        "options": [
+          "booked",
+          "a",
+          "cozy",
+          "room",
+          "at",
+          "the",
+          "beach",
+          "hotel"
+        ],
+        "korean": "아빠는 우리 여행을 위해 해변 호텔의 아늑한 방을 예약하셨어요.",
+        "explanation": "\"booked a room\"은 방을 예약했다는 뜻입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Have you already [booked, repaired, erased, painted] a cozy table at that popular Italian restaurant for Friday dinner?',
-        answer: 'booked',
-        options: ['booked', 'repaired', 'erased', 'painted'],
-        korean: '금요일 저녁으로 그 인기 있는 이탈리안 레스토랑에 아늑한 테이블을 이미 예약해 두셨나요?',
-        explanation: '식당 테이블 좌석 예약을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "She [booked, dropped, missed, forgot] four front-row tickets for the school play online.",
+        "answer": "booked",
+        "options": [
+          "booked",
+          "dropped",
+          "missed",
+          "forgot"
+        ],
+        "korean": "그녀는 학교 연극을 위한 맨 앞줄 티켓 4장을 온라인으로 예약했어요.",
+        "explanation": "\"booked tickets\"는 표를 예약하다입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'All the rental cars on the island were completely [booked, parked, colored, cracked] out weeks before the holiday season.',
-        answer: 'booked',
-        options: ['booked', 'parked', 'colored', 'cracked'],
-        korean: '연휴 몇 주 전부터 섬의 모든 렌터카가 완전히 예약 완료되었습니다.',
-        explanation: '"booked out"은 예약이 꽉 찼음을 의미합니다.'
+        "type": "multiple-choice",
+        "english": "Have you [booked, burned, broken, sold] your train tickets for the winter vacation trip yet?",
+        "answer": "booked",
+        "options": [
+          "booked",
+          "burned",
+          "broken",
+          "sold"
+        ],
+        "korean": "겨울 방학 여행을 위한 기차표를 벌써 예약하셨나요?",
+        "explanation": "\"booked train tickets\"는 기차표 예약입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'I went online and [booked, folded, built, hid] two front-row tickets for the Broadway musical.',
-        answer: 'booked',
-        options: ['booked', 'folded', 'built', 'hid'],
-        korean: '나는 인터넷에 들어가서 브로드웨이 뮤지컬 앞줄 좌석 티켓 두 장을 예약했어요.',
-        explanation: '공연 티켓을 예매한 행동입니다.'
+        "type": "multiple-choice",
+        "english": "We [booked, lost, stole, closed] a table at mom's favorite Italian restaurant for her birthday dinner.",
+        "answer": "booked",
+        "options": [
+          "booked",
+          "lost",
+          "stole",
+          "closed"
+        ],
+        "korean": "우리는 엄마 생신 저녁 식사를 위해 엄마가 가장 좋아하시는 이탈리안 식당에 테이블을 예약했어요.",
+        "explanation": "\"booked a table\"은 식당 자리를 예약하다입니다."
       }
     ]
   },
-
-  // 17. in (시간)
   {
-    keyExpression: 'in (시간)',
-    baseForm: 'in (시간)',
-    translation: '~(시간) 후에, ~(시간) 있으면 [시간 경과]',
-    sentences: [
+    "keyExpression": "in (시간)",
+    "baseForm": "in (시간)",
+    "translation": "~(시간) 후에, ~(시간) 있으면",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'We have family coming [in, after, at, on] a couple of weeks, so we need to deep clean the guest bedroom.',
-        answer: 'in',
-        options: ['in', 'after', 'at', 'on'],
-        korean: '몇 주 뒤에 가족들이 놀러 오시니까 손님방을 대청소해야 해요.',
-        explanation: '현재 시점에서 "일정 시간 후에, ~(시간) 있으면"이라는 미래 시점의 시간 경과를 나타낼 때는 "after"가 아닌 전치사 "in"을 씁니다 (in a couple of weeks: 2~3주 후에/있으면).'
+        "type": "multiple-choice",
+        "english": "We have family coming [in, after, at, on] a couple of weeks, so we need to deep clean the guest bedroom.",
+        "answer": "in",
+        "options": [
+          "in",
+          "after",
+          "at",
+          "on"
+        ],
+        "korean": "몇 주 뒤에 가족들이 놀러 오시니까 손님방을 대청소해야 해요.",
+        "explanation": "현재 시점에서 \"일정 시간 후에, ~(시간) 있으면\"이라는 미래 시점의 시간 경과를 나타낼 때는 \"after\"가 아닌 전치사 \"in\"을 씁니다 (in a couple of weeks: 2~3주 후에/있으면)."
       },
       {
-        type: 'drag-and-drop',
-        english: 'The express train to Chicago leaves [in ten minutes from platform three].',
-        answer: 'in ten minutes from platform three',
-        tokens: ['in', 'ten', 'minutes', 'from', 'platform', 'three'],
-        options: ['in', 'ten', 'minutes', 'from', 'platform', 'three'],
-        korean: '시카고행 급행열차가 10분 후에 3번 플랫폼에서 출발합니다.',
-        explanation: '"in ten minutes"는 "10분 후에"라는 뜻으로, 미래의 시간 경과를 나타낼 때 전치사 in을 씁니다.'
+        "type": "drag-and-drop",
+        "english": "The yellow school bus will arrive [in five minutes, so get ready].",
+        "answer": "in five minutes, so get ready",
+        "tokens": [
+          "in",
+          "five",
+          "minutes,",
+          "so",
+          "get",
+          "ready"
+        ],
+        "options": [
+          "in",
+          "five",
+          "minutes,",
+          "so",
+          "get",
+          "ready"
+        ],
+        "korean": "노란 스쿨버스가 5분 뒤에 도착할 테니 준비하세요.",
+        "explanation": "\"in five minutes\"는 5분 후를 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Don\'t worry, the pizza delivery will arrive [in, after, for, during] about twenty minutes.',
-        answer: 'in',
-        options: ['in', 'after', 'for', 'during'],
-        korean: '걱정 마, 피자 배달은 약 20분 후에 도착할 거야.',
-        explanation: '앞으로 20분이 지난 후 배달이 온다는 미래 시간의 경과를 말하므로 전치사 "in"이 정답입니다. 영어에서는 "after 20 minutes" 대신 "in 20 minutes"를 씁니다.'
+        "type": "multiple-choice",
+        "english": "My sister's birthday party begins [in, after, through, of] three days, and we bought her a nice gift.",
+        "answer": "in",
+        "options": [
+          "in",
+          "after",
+          "through",
+          "of"
+        ],
+        "korean": "내 여동생의 생일 파티가 3일 뒤에 열려서 우리는 좋은 선물을 사두었어요.",
+        "explanation": "\"in three days\"는 3일 후에입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'My sister is graduating from law school [in, after, since, until] two years.',
-        answer: 'in',
-        options: ['in', 'after', 'since', 'until'],
-        korean: '내 여동생은 2년 후에 로스쿨을 졸업해요.',
-        explanation: '현재를 기준으로 미래의 일정 기간이 지난 후 일어날 일을 나타낼 때는 "in + 시간"을 씁니다.'
+        "type": "multiple-choice",
+        "english": "The summer vacation starts [in, since, by, off] two weeks from today.",
+        "answer": "in",
+        "options": [
+          "in",
+          "since",
+          "by",
+          "off"
+        ],
+        "korean": "여름 방학은 오늘로부터 2주 뒤에 시작해요.",
+        "explanation": "\"in two weeks\"는 2주 후에라는 뜻입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The doctor said the test results should be ready [in, after, on, at] three to five business days.',
-        answer: 'in',
-        options: ['in', 'after', 'on', 'at'],
-        korean: '의사 선생님은 검사 결과가 영업일 기준 3일에서 5일 후에 나올 것이라고 말씀하셨습니다.',
-        explanation: '미래 시점의 경과 시간(~일 후에)을 나타내는 전치사는 "in"입니다.'
+        "type": "multiple-choice",
+        "english": "We are leaving for our camping trip [in, behind, under, over] an hour, so pack your bags.",
+        "answer": "in",
+        "options": [
+          "in",
+          "behind",
+          "under",
+          "over"
+        ],
+        "korean": "우리는 1시간 뒤에 캠핑 여행을 떠날 테니 짐을 싸세요.",
+        "explanation": "\"in an hour\"는 1시간 후에를 뜻합니다."
       }
     ]
   },
-
-  // 18. ramble
   {
-    keyExpression: 'ramble',
-    baseForm: 'ramble',
-    translation: '횡설수설하다, 주절거리다',
-    sentences: [
+    "keyExpression": "ramble",
+    "baseForm": "ramble",
+    "translation": "횡설수설하다, 주절거리다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: "I'm just going to keep [rambling, jogging, baking, sleeping] if you keep pointing that video camera right at my face.",
-        answer: 'rambling',
-        options: ['rambling', 'jogging', 'baking', 'sleeping'],
-        korean: '내 얼굴에 그 비디오카메라를 계속 대고 있으면 난 그냥 두서없이 횡설수설 주절거리게 될 거예요.',
-        explanation: '"ramble"은 목적이나 두서없이 길게 "횡설수설하다, 주절거리다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "I'm just going to keep [rambling, jogging, baking, sleeping] if you keep pointing that video camera right at my face.",
+        "answer": "rambling",
+        "options": [
+          "rambling",
+          "jogging",
+          "baking",
+          "sleeping"
+        ],
+        "korean": "내 얼굴에 그 비디오카메라를 계속 대고 있으면 난 그냥 두서없이 횡설수설 주절거리게 될 거예요.",
+        "explanation": "\"ramble\"은 목적이나 두서없이 길게 \"횡설수설하다, 주절거리다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'Sorry for [rambling on about my car problems] for so long.',
-        answer: 'rambling on about my car problems',
-        tokens: ['rambling', 'on', 'about', 'my', 'car', 'problems'],
-        options: ['rambling', 'on', 'about', 'my', 'car', 'problems'],
-        korean: '내 차 문제에 대해 너무 오랫동안 횡설수설 이야기해서 미안해요.',
-        explanation: '상대방에게 두서없이 길게 말한 것을 양해 구하는 상황입니다.'
+        "type": "drag-and-drop",
+        "english": "He was nervous and started [rambling about his puppy during the speech].",
+        "answer": "rambling about his puppy during the speech",
+        "tokens": [
+          "rambling",
+          "about",
+          "his",
+          "puppy",
+          "during",
+          "the",
+          "speech"
+        ],
+        "options": [
+          "rambling",
+          "about",
+          "his",
+          "puppy",
+          "during",
+          "the",
+          "speech"
+        ],
+        "korean": "그는 긴장해서 발표 도중에 강아지에 대해 두서없이 주절거리기 시작했어요.",
+        "explanation": "\"rambling\"은 긴장하여 말이 길어지고 횡설수설하는 모습입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'When she gets nervous during job interviews, she tends to start [rambling, whispering, singing, yawning] without making a clear point.',
-        answer: 'rambling',
-        options: ['rambling', 'whispering', 'singing', 'yawning'],
-        korean: '그녀는 입사 면접에서 긴장하면 요점을 명확히 말하지 못하고 두서없이 횡설수설하기 시작하는 경향이 있어요.',
-        explanation: '긴장해서 말이 길어지고 두서없어지는 모습을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "Please tell me the main point instead of [rambling, swimming, jumping, painting] on for ten minutes.",
+        "answer": "rambling",
+        "options": [
+          "rambling",
+          "swimming",
+          "jumping",
+          "painting"
+        ],
+        "korean": "10분 동안 횡설수설 주절거리는 대신 핵심 요점을 말해 주세요.",
+        "explanation": "\"rambling on\"은 두서없이 길게 말하는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The professor continued [rambling, jumping, swimming, hiding] about ancient coins long after class had ended.',
-        answer: 'rambling',
-        options: ['rambling', 'jumping', 'swimming', 'hiding'],
-        korean: '교수님은 수업이 끝난 뒤에도 오랫동안 고대 동전에 관해 두서없이 혼자 주절거리셨습니다.',
-        explanation: '혼자서 길게 이야기를 늘어놓는 모습입니다.'
+        "type": "multiple-choice",
+        "english": "She realized she was [rambling, flying, washing, dancing] and quickly stopped talking.",
+        "answer": "rambling",
+        "options": [
+          "rambling",
+          "flying",
+          "washing",
+          "dancing"
+        ],
+        "korean": "그녀는 자신이 두서없이 주절거리고 있다는 것을 깨닫고 서둘러 말을 멈췄어요.",
+        "explanation": "\"rambling\"은 자기도 모르게 말이 길어지는 상태입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Stop me if I am [rambling, speeding, cooking, painting], but I really love sharing stories about our summer trip.',
-        answer: 'rambling',
-        options: ['rambling', 'speeding', 'cooking', 'painting'],
-        korean: '제가 너무 횡설수설 길게 늘어놓는다 싶으면 중간에 말을 끊어주세요. 하지만 우리 여름 여행 이야기를 공유하는 게 너무 좋거든요.',
-        explanation: '신나서 말이 길어지는 상황을 유쾌하게 표현합니다.'
+        "type": "multiple-choice",
+        "english": "When grandpa gets happy, he loves [rambling, crying, hiding, slipping] on about his old school days.",
+        "answer": "rambling",
+        "options": [
+          "rambling",
+          "crying",
+          "hiding",
+          "slipping"
+        ],
+        "korean": "할아버지께서는 기분이 좋아지시면 옛 학창 시절 이야기를 길게 주절거리며 들려주시는 것을 좋아하세요.",
+        "explanation": "\"rambling on\"은 옛 추억을 끝없이 길게 이야기하는 것입니다."
       }
     ]
   },
-
-  // 19. sound like
   {
-    keyExpression: 'sound like',
-    baseForm: 'sound like',
-    translation: '~처럼 들리다, ~인 것 같다',
-    sentences: [
+    "keyExpression": "sound like",
+    "baseForm": "sound like",
+    "translation": "~처럼 들리다, ~인 것 같다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'From what the manager explained over the phone, it [sounded like, smelled like, looked after, tasted like] the shipment was delayed by a week.',
-        answer: 'sounded like',
-        options: ['sounded like', 'smelled like', 'looked after', 'tasted like'],
-        korean: '매니저가 전화로 설명해 준 바에 따르면, 배송이 일주일 연기된 것처럼 들렸어요.',
-        explanation: '"sound like ~"는 들은 이야기를 바탕으로 판단할 때 "~처럼 들리다, ~인 것 같다"라는 의미로 씁니다.'
+        "type": "multiple-choice",
+        "english": "From what the manager explained over the phone, it [sounded like, smelled like, looked after, tasted like] the shipment was delayed by a week.",
+        "answer": "sounded like",
+        "options": [
+          "sounded like",
+          "smelled like",
+          "looked after",
+          "tasted like"
+        ],
+        "korean": "매니저가 전화로 설명해 준 바에 따르면, 배송이 일주일 연기된 것처럼 들렸어요.",
+        "explanation": "\"sound like ~\"는 들은 이야기를 바탕으로 판단할 때 \"~처럼 들리다, ~인 것 같다\"라는 의미로 씁니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'It [sounded like he tried to explain] the accident to the mechanic.',
-        answer: 'sounded like he tried to explain',
-        tokens: ['sounded', 'like', 'he', 'tried', 'to', 'explain'],
-        options: ['sounded', 'like', 'he', 'tried', 'to', 'explain'],
-        korean: '그가 정비사에게 사고 상황을 설명하려고 애썼던 것처럼 들렸어요.',
-        explanation: '그의 발언이나 태도를 들어보니 그렇게 판단되었다는 의미입니다.'
+        "type": "drag-and-drop",
+        "english": "The sweet noise outside [sounded like a little bird singing in the tree].",
+        "answer": "sounded like a little bird singing in the tree",
+        "tokens": [
+          "sounded",
+          "like",
+          "a",
+          "little",
+          "bird",
+          "singing",
+          "in",
+          "the",
+          "tree"
+        ],
+        "options": [
+          "sounded",
+          "like",
+          "a",
+          "little",
+          "bird",
+          "singing",
+          "in",
+          "the",
+          "tree"
+        ],
+        "korean": "창밖의 다정한 소리는 나무에서 작은 새가 노래하는 것처럼 들렸어요.",
+        "explanation": "\"sounded like\"는 ~소리처럼 들렸다는 뜻입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'When she described her busy schedule, it really [sounded like, tasted like, acted like, felt under] she was completely overwhelmed.',
-        answer: 'sounded like',
-        options: ['sounded like', 'tasted like', 'acted like', 'felt under'],
-        korean: '그녀가 자신의 바쁜 일정을 설명했을 때 정말이지 일에 완전히 압도당한 것처럼 들렸습니다.',
-        explanation: '말투와 설명에서 극심한 피로가 묻어나는 상황입니다.'
+        "type": "multiple-choice",
+        "english": "From what dad said on the phone, it [sounded like, tasted like, looked down, ran into] he was stuck in heavy evening traffic.",
+        "answer": "sounded like",
+        "options": [
+          "sounded like",
+          "tasted like",
+          "looked down",
+          "ran into"
+        ],
+        "korean": "아빠가 전화로 하신 말씀으로 보아, 저녁 교통 체증에 갇히신 것 같았어요(그렇게 들렸어요).",
+        "explanation": "\"sounded like\"는 전화 통화 내용에 비추어 볼 때의 추측입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'That weird grinding noise coming from the brakes [sounds like, looks like, smells like, tastes like] worn-out pads.',
-        answer: 'sounds like',
-        options: ['sounds like', 'looks like', 'smells like', 'tastes like'],
-        korean: '브레이크에서 나는 그 이상한 갈리는 소리는 마모된 패드 소리처럼 들려.',
-        explanation: '청각적 소리를 근거로 추정할 때 씁니다.'
+        "type": "multiple-choice",
+        "english": "Her simple suggestion [sounded like, smelled like, felt like, grew like] a really great idea to all of us.",
+        "answer": "sounded like",
+        "options": [
+          "sounded like",
+          "smelled like",
+          "felt like",
+          "grew like"
+        ],
+        "korean": "그녀의 간단한 제안은 우리 모두에게 정말 좋은 생각처럼 들렸어요.",
+        "explanation": "\"sounded like a great idea\"는 좋은 생각으로 들렸다는 뜻입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'It [sounded like, looked like, turned into, grew upon] a fantastic opportunity, but there were too many hidden risks.',
-        answer: 'sounded like',
-        options: ['sounded like', 'looked like', 'turned into', 'grew upon'],
-        korean: '환상적인 기회처럼 들렸지만, 숨겨진 위험이 너무 많았습니다.',
-        explanation: '듣기에는 그럴듯해 보였다는 과거 판단입니다.'
+        "type": "multiple-choice",
+        "english": "It [sounded like, seemed after, looked out, felt under] rain was tapping gently on the bedroom window pane.",
+        "answer": "sounded like",
+        "options": [
+          "sounded like",
+          "seemed after",
+          "looked out",
+          "felt under"
+        ],
+        "korean": "침실 유리창에 빗방울이 부드럽게 톡톡 부딪히는 소리처럼 들렸어요.",
+        "explanation": "\"sounded like\"는 소리의 성격을 나타냅니다."
       }
     ]
   },
-
-  // 20. hairline fracture
   {
-    keyExpression: 'hairline fracture',
-    baseForm: 'hairline fracture',
-    translation: '실금, 미세 골절',
-    sentences: [
+    "keyExpression": "hairline fracture",
+    "baseForm": "hairline fracture",
+    "translation": "실금, 미세 골절",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'The doctor examined the wrist X-ray and pointed out a tiny [hairline fracture, mosquito bite, paper cut, sun spot] on the bone.',
-        answer: 'hairline fracture',
-        options: ['hairline fracture', 'mosquito bite', 'paper cut', 'sun spot'],
-        korean: '의사 선생님은 손목 엑스레이를 살펴보며 뼈에 생긴 미세한 실금(미세 골절)을 짚어 주셨습니다.',
-        explanation: '"hairline fracture"는 뼈가 완전히 부러지지 않고 머리카락처럼 얇게 금이 간 "실금, 미세 골절"을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "The doctor examined the wrist X-ray and pointed out a tiny [hairline fracture, mosquito bite, paper cut, sun spot] on the bone.",
+        "answer": "hairline fracture",
+        "options": [
+          "hairline fracture",
+          "mosquito bite",
+          "paper cut",
+          "sun spot"
+        ],
+        "korean": "의사 선생님은 손목 엑스레이를 살펴보며 뼈에 생긴 미세한 실금(미세 골절)을 짚어 주셨습니다.",
+        "explanation": "\"hairline fracture\"는 뼈가 완전히 부러지지 않고 머리카락처럼 얇게 금이 간 \"실금, 미세 골절\"을 뜻합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'The athlete suffered a [hairline fracture in his left collarbone] after falling hard.',
-        answer: 'hairline fracture in his left collarbone',
-        tokens: ['hairline', 'fracture', 'in', 'his', 'left', 'collarbone'],
-        options: ['hairline', 'fracture', 'in', 'his', 'left', 'collarbone'],
-        korean: '그 운동선수는 심하게 넘어진 뒤 왼쪽 쇄골에 실금(미세 골절)이 갔습니다.',
-        explanation: '낙상으로 인한 쇄골 미세 골절을 묘사합니다.'
+        "type": "drag-and-drop",
+        "english": "He wore a wrist band for a [hairline fracture after falling off his skateboard].",
+        "answer": "hairline fracture after falling off his skateboard",
+        "tokens": [
+          "hairline",
+          "fracture",
+          "after",
+          "falling",
+          "off",
+          "his",
+          "skateboard"
+        ],
+        "options": [
+          "hairline",
+          "fracture",
+          "after",
+          "falling",
+          "off",
+          "his",
+          "skateboard"
+        ],
+        "korean": "그는 스케이트보드에서 넘어진 뒤 미세 실금(골절) 때문에 손목 밴드를 찼어요.",
+        "explanation": "\"hairline fracture\"는 뼈에 얇게 금이 간 상태입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Even though it was only a [hairline fracture, sore throat, minor bruise, slight fever], he was advised to rest his foot for a month.',
-        answer: 'hairline fracture',
-        options: ['hairline fracture', 'sore throat', 'minor bruise', 'slight fever'],
-        korean: '겨우 미세 골절(실금)이었을 뿐이지만, 그는 한 달 동안 발을 쉬게 하라는 권고를 받았습니다.',
-        explanation: '가벼운 골절이라도 회복 기간이 필요함을 의미합니다.'
+        "type": "multiple-choice",
+        "english": "Luckily, the medical X-ray showed only a tiny [hairline fracture, water drop, green leaf, paper box] and not a broken arm.",
+        "answer": "hairline fracture",
+        "options": [
+          "hairline fracture",
+          "water drop",
+          "green leaf",
+          "paper box"
+        ],
+        "korean": "다행히도 의료용 엑스레이는 팔이 완전히 부러진 것이 아니라 작은 실금(미세 골절)만을 보여주었어요.",
+        "explanation": "\"hairline fracture\"는 경미한 실금입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'A sudden impact from the scooter handlebars caused a [hairline fracture, muscle cramp, toothache, paper tear] on his forearm.',
-        answer: 'hairline fracture',
-        options: ['hairline fracture', 'muscle cramp', 'toothache', 'paper tear'],
-        korean: '킥보드 핸들에 부딪힌 갑작스러운 충격으로 인해 그의 팔뚝에 미세 골절이 생겼습니다.',
-        explanation: '충격에 의해 팔에 실금이 간 상황입니다.'
+        "type": "multiple-choice",
+        "english": "The doctor found a slight [hairline fracture, pencil mark, sunny day, shoe print] on her finger bone after the ball hit it.",
+        "answer": "hairline fracture",
+        "options": [
+          "hairline fracture",
+          "pencil mark",
+          "sunny day",
+          "shoe print"
+        ],
+        "korean": "공에 맞은 뒤 의사 선생님은 그녀의 손가락 뼈에서 가벼운 실금(미세 골절)을 발견하셨어요.",
+        "explanation": "\"hairline fracture\"는 충격으로 인한 미세 골절입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Fortunately, the CT scan confirmed that the skull only had a small [hairline fracture, hair cut, skin rash, cold sweat] and no internal bleeding.',
-        answer: 'hairline fracture',
-        options: ['hairline fracture', 'hair cut', 'skin rash', 'cold sweat'],
-        korean: '다행히도 CT 촬영 결과 두개골에 작은 실금만 있을 뿐 내부 출혈은 없는 것으로 확인되었습니다.',
-        explanation: '정밀 촬영으로 확인된 뼈의 미세 금입니다.'
+        "type": "multiple-choice",
+        "english": "The young soccer player rested his foot for three weeks to heal the [hairline fracture, cold drink, warm coat, red hat].",
+        "answer": "hairline fracture",
+        "options": [
+          "hairline fracture",
+          "cold drink",
+          "warm coat",
+          "red hat"
+        ],
+        "korean": "어린 축구 선수는 미세 실금(골절)을 치료하기 위해 3주 동안 발을 쉬게 했어요.",
+        "explanation": "\"hairline fracture\"는 뼈의 실금을 치료하는 상황입니다."
       }
     ]
   },
-
-  // 21. get out of the sling
   {
-    keyExpression: 'get out of the sling',
-    baseForm: 'get out of the sling',
-    translation: '팔걸이를 풀다/벗어나다',
-    sentences: [
+    "keyExpression": "get out of the sling",
+    "baseForm": "get out of the sling",
+    "translation": "팔걸이(삼각건)를 풀다, 벗어나다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'His injured shoulder recovered faster than expected, so he finally [got out of the sling, got into trouble, got behind the wheel, got out of hand] after three weeks.',
-        answer: 'got out of the sling',
-        options: ['got out of the sling', 'got into trouble', 'got behind the wheel', 'got out of hand'],
-        korean: '다친 어깨가 예상보다 빠르게 회복되어서 그는 3주 만에 마침내 팔걸이 붕대를 풀었습니다.',
-        explanation: '"get out of the sling"은 팔이나 어깨 부상 후 착용하고 있던 "팔걸이(삼각건)를 풀다, 벗어나다"를 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "His injured shoulder recovered faster than expected, so he finally [got out of the sling, got into trouble, got behind the wheel, got out of hand] after three weeks.",
+        "answer": "got out of the sling",
+        "options": [
+          "got out of the sling",
+          "got into trouble",
+          "got behind the wheel",
+          "got out of hand"
+        ],
+        "korean": "다친 어깨가 예상보다 빠르게 회복되어서 그는 3주 만에 마침내 팔걸이 붕대를 풀었습니다.",
+        "explanation": "\"get out of the sling\"은 팔이나 어깨 부상 후 착용하고 있던 \"팔걸이(삼각건)를 풀다, 벗어나다\"를 뜻합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'The doctor told him it was safe to [get out of the sling] this morning.',
-        answer: 'get out of the sling',
-        tokens: ['get', 'out', 'of', 'the', 'sling'],
-        options: ['get', 'out', 'of', 'the', 'sling'],
-        korean: '의사 선생님은 오늘 아침 그에게 팔걸이 붕대를 풀어도 안전하다고 말씀하셨어요.',
-        explanation: '의사의 허락을 받고 팔걸이를 푸는 순간입니다.'
+        "type": "drag-and-drop",
+        "english": "Ryden smiled happily when he [got out of the sling at the doctor's office].",
+        "answer": "got out of the sling at the doctor's office",
+        "tokens": [
+          "got",
+          "out",
+          "of",
+          "the",
+          "sling",
+          "at",
+          "the",
+          "doctor's",
+          "office"
+        ],
+        "options": [
+          "got",
+          "out",
+          "of",
+          "the",
+          "sling",
+          "at",
+          "the",
+          "doctor's",
+          "office"
+        ],
+        "korean": "라이든은 병원에서 팔걸이 붕대를 풀었을 때 행복하게 미소 지었어요.",
+        "explanation": "\"got out of the sling\"은 착용하던 팔걸이를 풀었음을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'She was so happy when she [got out of the sling, fell out of love, ran out of gas, stayed out of sight] and could use both hands to type again.',
-        answer: 'got out of the sling',
-        options: ['got out of the sling', 'fell out of love', 'ran out of gas', 'stayed out of sight'],
-        korean: '그녀는 팔걸이 붕대를 풀고 다시 양손으로 타자를 칠 수 있게 되었을 때 너무 기뻤습니다.',
-        explanation: '팔걸이를 벗고 일상 활동으로 복귀한 기쁨을 표현합니다.'
+        "type": "multiple-choice",
+        "english": "After four weeks of resting his arm, the boy happily [got out of the sling, got into a fight, got lost in town, got off the bus] and could move his fingers.",
+        "answer": "got out of the sling",
+        "options": [
+          "got out of the sling",
+          "got into a fight",
+          "got lost in town",
+          "got off the bus"
+        ],
+        "korean": "4주 동안 팔을 쉬게 한 뒤, 소년은 기쁘게 팔걸이 붕대를 풀었고 손가락을 움직일 수 있었어요.",
+        "explanation": "\"got out of the sling\"은 회복 후 팔걸이를 벗어난 상태입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Did you check with the orthopedic doctor before you [got out of the sling, got on the train, got under the table, got into the car]?',
-        answer: 'got out of the sling',
-        options: ['got out of the sling', 'got on the train', 'got under the table', 'got into the car'],
-        korean: '팔걸이 붕대를 풀기 전에 정형외과 의사 선생님과 확인해 보셨나요?',
-        explanation: '임의로 붕대를 풀었는지 확인하는 질문입니다.'
+        "type": "multiple-choice",
+        "english": "She [got out of the sling, got onto the roof, got into the car, got off the boat] just in time for the school sports day.",
+        "answer": "got out of the sling",
+        "options": [
+          "got out of the sling",
+          "got onto the roof",
+          "got into the car",
+          "got off the boat"
+        ],
+        "korean": "그녀는 학교 운동회에 딱 맞춰 팔걸이 붕대를 풀었어요.",
+        "explanation": "\"got out of the sling\"은 부상 완치 후 팔걸이를 제거함을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The little boy couldn\'t wait to [get out of the sling, get into the gym, get off the plane, get through the door] so he could play on the playground swings.',
-        answer: 'get out of the sling',
-        options: ['get out of the sling', 'get into the gym', 'get off the plane', 'get through the door'],
-        korean: '어린 소년은 놀이터 그네를 탈 수 있도록 어서 팔걸이 붕대를 풀고 싶어 안달이 났습니다.',
-        explanation: '붕대를 어서 풀고 뛰어놀고 싶어 하는 마음을 묘사합니다.'
+        "type": "multiple-choice",
+        "english": "He was so relieved when he finally [got out of the sling, got down to work, got out of bed, got in the way] and could take a warm shower easily.",
+        "answer": "got out of the sling",
+        "options": [
+          "got out of the sling",
+          "got down to work",
+          "got out of bed",
+          "got in the way"
+        ],
+        "korean": "마침내 팔걸이 붕대를 풀고 편안하게 따뜻한 샤워를 할 수 있게 되자 그는 안도했어요.",
+        "explanation": "\"got out of the sling\"은 팔걸이를 풀고 일상으로 복귀함입니다."
       }
     ]
   },
-
-  // 22. that's why
   {
-    keyExpression: "that's why",
-    baseForm: "that's why",
-    translation: '그래서 ~한 것이다',
-    sentences: [
+    "keyExpression": "that's why",
+    "baseForm": "that's why",
+    "translation": "그래서 ~한 것이다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: "We haven't slept in over twenty-four hours, and [that's why, in spite of, for example, on the contrary] everyone is feeling so exhausted.",
-        answer: "that's why",
-        options: ["that's why", 'in spite of', 'for example', 'on the contrary'],
-        korean: '우리는 24시간 넘게 잠을 자지 못했고, 그래서 다들 이렇게 기진맥진해 있는 거예요.',
-        explanation: '"that\'s why ~"는 앞서 언급한 이유 때문에 "그래서 ~한 것이다"라는 인과관계를 나타낼 때 자주 씁니다.'
+        "type": "multiple-choice",
+        "english": "We haven't slept in over twenty-four hours, and [that's why, in spite of, for example, on the contrary] everyone is feeling so exhausted.",
+        "answer": "that's why",
+        "options": [
+          "that's why",
+          "in spite of",
+          "for example",
+          "on the contrary"
+        ],
+        "korean": "우리는 24시간 넘게 잠을 자지 못했고, 그래서 다들 이렇게 기진맥진해 있는 거예요.",
+        "explanation": "\"that's why ~\"는 앞서 언급한 이유 때문에 \"그래서 ~한 것이다\"라는 인과관계를 나타낼 때 자주 씁니다."
       },
       {
-        type: 'drag-and-drop',
-        english: "The bone is taking longer to heal, so [that's why they are referring us to a specialist].",
-        answer: "that's why they are referring us to a specialist",
-        tokens: ["that's", 'why', 'they', 'are', 'referring', 'us', 'to', 'a', 'specialist'],
-        options: ["that's", 'why', 'they', 'are', 'referring', 'us', 'to', 'a', 'specialist'],
-        korean: '뼈가 아무는 데 시간이 더 오래 걸려서 다른 전문의에게 우리를 의뢰해 주려는 거예요.',
-        explanation: '원인에 따른 결과적 조치를 설명하는 표현입니다.'
+        "type": "drag-and-drop",
+        "english": "I forgot my umbrella, and [that's why I got wet in the rain] today.",
+        "answer": "that's why I got wet in the rain",
+        "tokens": [
+          "that's",
+          "why",
+          "I",
+          "got",
+          "wet",
+          "in",
+          "the",
+          "rain"
+        ],
+        "options": [
+          "that's",
+          "why",
+          "I",
+          "got",
+          "wet",
+          "in",
+          "the",
+          "rain"
+        ],
+        "korean": "우산을 깜빡했고, 그래서 오늘 빗속에서 흠뻑 젖은 거예요.",
+        "explanation": "\"that's why\"는 이유에 따른 결과를 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: "The road was covered in black ice, and [that's why, at last, far from, out of] several vehicles skidded into the ditch.",
-        answer: "that's why",
-        options: ["that's why", 'at last', 'far from', 'out of'],
-        korean: '도로가 블랙아이스로 덮여 있었고, 바로 그 때문에 여러 차량이 도랑으로 미끄러졌습니다.',
-        explanation: '사고가 발생한 직접적인 이유를 짚어줍니다.'
+        "type": "multiple-choice",
+        "english": "He loves animals, and [that's why, even though, in fact, on the whole] he volunteers at the pet shelter every weekend.",
+        "answer": "that's why",
+        "options": [
+          "that's why",
+          "even though",
+          "in fact",
+          "on the whole"
+        ],
+        "korean": "그는 동물을 사랑하고, 그래서 주말마다 동물 보호소에서 봉사활동을 하는 거예요.",
+        "explanation": "\"that's why\"는 행동의 이유를 나타냅니다."
       },
       {
-        type: 'multiple-choice',
-        english: "She loves working with animals, so [that's why, by chance, all at once, as usual] she decided to become a veterinarian.",
-        answer: "that's why",
-        options: ["that's why", 'by chance', 'all at once', 'as usual'],
-        korean: '그녀는 동물들과 함께 일하는 것을 정말 좋아하고, 그래서 수의사가 되기로 결심한 것입니다.',
-        explanation: '진로 결정의 결정적인 계기를 말합니다.'
+        "type": "multiple-choice",
+        "english": "It snowed heavily all night long, and [that's why, besides, otherwise, instead] our school is closed today.",
+        "answer": "that's why",
+        "options": [
+          "that's why",
+          "besides",
+          "otherwise",
+          "instead"
+        ],
+        "korean": "밤새도록 눈이 많이 내렸고, 그래서 오늘 우리 학교가 문을 닫은 거예요.",
+        "explanation": "\"that's why\"는 휴교의 원인과 결과를 잇습니다."
       },
       {
-        type: 'multiple-choice',
-        english: "He forgot to set his alarm clock, and [that's why, in return, on behalf of, by no means] he showed up late for the morning meeting.",
-        answer: "that's why",
-        options: ["that's why", 'in return', 'on behalf of', 'by no means'],
-        korean: '그는 알람 시계를 맞추는 것을 잊어버렸고, 그래서 아침 회의에 지각한 것입니다.',
-        explanation: '지각한 구체적 원인을 밝히는 문장입니다.'
+        "type": "multiple-choice",
+        "english": "She practiced her song every single day, and [that's why, nevertheless, in contrast, furthermore] she won first prize.",
+        "answer": "that's why",
+        "options": [
+          "that's why",
+          "nevertheless",
+          "in contrast",
+          "furthermore"
+        ],
+        "korean": "그녀는 매일 노래 연습을 했고, 그래서 1등 상을 받게 된 거예요.",
+        "explanation": "\"that's why\"는 노력에 따른 성과를 설명합니다."
       }
     ]
   },
-
-  // 23. should have been
   {
-    keyExpression: 'should have been',
-    baseForm: 'should have been',
-    translation: '~되었어야 했다',
-    sentences: [
+    "keyExpression": "should have been",
+    "baseForm": "should have been",
+    "translation": "이미 ~되었어야 했다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'According to the standard recovery timeline, the sprained wrist [should have been, must have been, could not be, will never be] fully healed by now.',
-        answer: 'should have been',
-        options: ['should have been', 'must have been', 'could not be', 'will never be'],
-        korean: '일반적인 회복 기간에 따르면, 삐었던 손목은 지금쯤 완전히 나았어야 했습니다.',
-        explanation: '"should have been (과거분사)"는 과거의 예상이나 당위에 비추어 보았을 때 "이미 ~되었어야 했다"라는 아쉬움이나 의문을 나타냅니다.'
+        "type": "multiple-choice",
+        "english": "According to the standard recovery timeline, the sprained wrist [should have been, must have been, could not be, will never be] fully healed by now.",
+        "answer": "should have been",
+        "options": [
+          "should have been",
+          "must have been",
+          "could not be",
+          "will never be"
+        ],
+        "korean": "일반적인 회복 기간에 따르면, 삐었던 손목은 지금쯤 완전히 나았어야 했습니다.",
+        "explanation": "\"should have been (과거분사)\"는 과거의 예상이나 당위에 비추어 보았을 때 \"이미 ~되었어야 했다\"라는 아쉬움이나 의문을 나타냅니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'The doctors thought the injury [should have been healed by now].',
-        answer: 'should have been healed by now',
-        tokens: ['should', 'have', 'been', 'healed', 'by', 'now'],
-        options: ['should', 'have', 'been', 'healed', 'by', 'now'],
-        korean: '의사들은 그 부상이 지금쯤이면 이미 다 나았어야 했다고 생각했어요.',
-        explanation: '정상적인 회복 예상치를 벗어났을 때 쓰는 표현입니다.'
+        "type": "drag-and-drop",
+        "english": "The letter was sent on Monday, so it [should have been delivered to our house yesterday].",
+        "answer": "should have been delivered to our house yesterday",
+        "tokens": [
+          "should",
+          "have",
+          "been",
+          "delivered",
+          "to",
+          "our",
+          "house",
+          "yesterday"
+        ],
+        "options": [
+          "should",
+          "have",
+          "been",
+          "delivered",
+          "to",
+          "our",
+          "house",
+          "yesterday"
+        ],
+        "korean": "편지는 월요일에 부쳐졌으니, 어제 우리 집에 배달되었어야 했어요.",
+        "explanation": "\"should have been delivered\"는 이미 배달되었어야 했음을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'That package was shipped five days ago via priority mail, so it [should have been, might have been, wouldn\'t be, had never been] delivered by yesterday afternoon.',
-        answer: 'should have been',
-        options: ['should have been', 'might have been', "wouldn't be", 'had never been'],
-        korean: '그 소포는 5일 전에 빠른 우편으로 발송되었으므로, 어제 오후까지는 이미 배송되었어야 했습니다.',
-        explanation: '예정대로라면 이미 끝났어야 할 일에 대해 말합니다.'
+        "type": "multiple-choice",
+        "english": "The apple pie was in the oven for an hour, so it [should have been, will never be, might not be, cannot be] fully baked by now.",
+        "answer": "should have been",
+        "options": [
+          "should have been",
+          "will never be",
+          "might not be",
+          "cannot be"
+        ],
+        "korean": "사과 파이가 오븐 안에 한 시간 동안 있었으니 지금쯤 완전히 다 구워졌어야 했어요.",
+        "explanation": "\"should have been baked\"는 예상상 이미 다 구워졌어야 함을 나타냅니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The budget proposal [should have been, would not be, could not have, must have got] approved before the fiscal year started.',
-        answer: 'should have been',
-        options: ['should have been', 'would not be', 'could not have', 'must have got'],
-        korean: '예산안은 회계연도가 시작되기 전에 이미 승인되었어야 했습니다.',
-        explanation: '절차상 이미 완료되었어야 할 사안을 지적합니다.'
+        "type": "multiple-choice",
+        "english": "He left his home an hour ago, so he [should have been, would not be, cannot be, shall never be] at the library by now.",
+        "answer": "should have been",
+        "options": [
+          "should have been",
+          "would not be",
+          "cannot be",
+          "shall never be"
+        ],
+        "korean": "그는 한 시간 전에 집을 나섰으니 지금쯤 도서관에 도착해 있었어야 했어요.",
+        "explanation": "\"should have been\"은 이미 도착해 있었어야 함을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Her cold symptoms were persistent even though they [should have been, would have gone, might have stayed, could never be] gone within a week.',
-        answer: 'should have been',
-        options: ['should have been', 'would have gone', 'might have stayed', 'could never be'],
-        korean: '감기 증상은 일주일 이내에 사라졌어야 했는데도 계속 지속되었습니다.',
-        explanation: '예상보다 증상이 오래 지속됨을 나타냅니다.'
+        "type": "multiple-choice",
+        "english": "The broken window [should have been, could not be, might never be, will hardly be] repaired before the heavy storm hit.",
+        "answer": "should have been",
+        "options": [
+          "should have been",
+          "could not be",
+          "might never be",
+          "will hardly be"
+        ],
+        "korean": "깨진 창문은 거센 폭풍우가 닥치기 전에 수리되었어야 했어요.",
+        "explanation": "\"should have been repaired\"는 사전 조치가 이미 완료되었어야 했음을 뜻합니다."
       }
     ]
   },
-
-  // 24. deficiency
   {
-    keyExpression: 'deficiency',
-    baseForm: 'deficiency',
-    translation: '결핍, 부족',
-    sentences: [
+    "keyExpression": "deficiency",
+    "baseForm": "deficiency",
+    "translation": "결핍, 부족",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'The blood test revealed that her chronic fatigue was caused by a severe iron [deficiency, surplus, abundance, luxury].',
-        answer: 'deficiency',
-        options: ['deficiency', 'surplus', 'abundance', 'luxury'],
-        korean: '혈액 검사 결과 그녀의 만성 피로는 심각한 철분 결핍증(부족) 때문에 발생한 것으로 밝혀졌습니다.',
-        explanation: '"deficiency"는 신체 영양소나 물질이 필요한 만큼 있지 않은 "결핍, 부족"을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "The blood test revealed that her chronic fatigue was caused by a severe iron [deficiency, surplus, abundance, luxury].",
+        "answer": "deficiency",
+        "options": [
+          "deficiency",
+          "surplus",
+          "abundance",
+          "luxury"
+        ],
+        "korean": "혈액 검사 결과 그녀의 만성 피로는 심각한 철분 결핍증(부족) 때문에 발생한 것으로 밝혀졌습니다.",
+        "explanation": "\"deficiency\"는 신체 영양소나 물질이 필요한 만큼 있지 않은 \"결핍, 부족\"을 뜻합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'The doctor wondered if he maybe [has a vitamin deficiency that slows down healing].',
-        answer: 'has a vitamin deficiency that slows down healing',
-        tokens: ['has', 'a', 'vitamin', 'deficiency', 'that', 'slows', 'down', 'healing'],
-        options: ['has', 'a', 'vitamin', 'deficiency', 'that', 'slows', 'down', 'healing'],
-        korean: '의사 선생님은 혹시 아이에게 회복을 더디게 만드는 비타민 결핍증이 있는 건 아닌지 궁금해하셨어요.',
-        explanation: '상처 회복 지연의 원인으로 영양 결핍을 의심하는 문장입니다.'
+        "type": "drag-and-drop",
+        "english": "Eating fresh oranges helps prevent vitamin C [deficiency during the winter months].",
+        "answer": "deficiency during the winter months",
+        "tokens": [
+          "deficiency",
+          "during",
+          "the",
+          "winter",
+          "months"
+        ],
+        "options": [
+          "deficiency",
+          "during",
+          "the",
+          "winter",
+          "months"
+        ],
+        "korean": "신선한 오렌지를 먹는 것은 겨울철 비타민 C 결핍증(부족)을 예방하는 데 도움이 돼요.",
+        "explanation": "\"vitamin deficiency\"는 비타민 결핍을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'People who rarely get sunlight during the winter often suffer from vitamin D [deficiency, infection, overdose, balance].',
-        answer: 'deficiency',
-        options: ['deficiency', 'infection', 'overdose', 'balance'],
-        korean: '겨울철에 햇빛을 거의 쬐지 못하는 사람들은 종종 비타민 D 결핍을 겪습니다.',
-        explanation: '일조량 부족으로 생기는 영양소 결핍을 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "Not getting enough outdoor sunshine can sometimes lead to a vitamin D [deficiency, surplus, wealth, treasure].",
+        "answer": "deficiency",
+        "options": [
+          "deficiency",
+          "surplus",
+          "wealth",
+          "treasure"
+        ],
+        "korean": "야외 햇빛을 충분히 쬐지 못하면 때때로 비타민 D 결핍(부족)으로 이어질 수 있어요.",
+        "explanation": "\"deficiency\"는 영양소 부족 상태입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'A diet lacking fresh green vegetables can quickly lead to an essential nutrient [deficiency, mastery, victory, production].',
-        answer: 'deficiency',
-        options: ['deficiency', 'mastery', 'victory', 'production'],
-        korean: '신선한 녹색 채소가 부족한 식단은 필수 영양소 결핍으로 쉽게 이어질 수 있습니다.',
-        explanation: '불균형한 식단으로 인한 영양 결핍을 경고합니다.'
+        "type": "multiple-choice",
+        "english": "Eating a balanced meal with fresh vegetables helps avoid mineral [deficiency, fortune, victory, power] in growing children.",
+        "answer": "deficiency",
+        "options": [
+          "deficiency",
+          "fortune",
+          "victory",
+          "power"
+        ],
+        "korean": "신선한 채소와 균형 잡힌 식사를 하는 것은 자라나는 아이들의 미네랄 결핍을 막아줘요.",
+        "explanation": "\"mineral deficiency\"는 미네랄 부족을 의미합니다."
       },
       {
-        type: 'multiple-choice',
-        english: "The pediatrician recommended daily supplements to treat the toddler's calcium [deficiency, flavor, weight, strength].",
-        answer: 'deficiency',
-        options: ['deficiency', 'flavor', 'weight', 'strength'],
-        korean: '소아과 의사는 유아의 칼슘 결핍을 치료하기 위해 매일 보충제를 섭취할 것을 권장했습니다.',
-        explanation: '영양소 부족을 채우기 위한 처방 내용입니다.'
+        "type": "multiple-choice",
+        "english": "The checkup showed a mild calcium [deficiency, freedom, pleasure, beauty], so the doctor recommended drinking milk.",
+        "answer": "deficiency",
+        "options": [
+          "deficiency",
+          "freedom",
+          "pleasure",
+          "beauty"
+        ],
+        "korean": "건강 검진에서 가벼운 칼슘 결핍이 나타나서 의사 선생님은 우유를 마실 것을 권하셨어요.",
+        "explanation": "\"calcium deficiency\"는 칼슘 부족입니다."
       }
     ]
   },
-
-  // 25. pediatrician
   {
-    keyExpression: 'pediatrician',
-    baseForm: 'pediatrician',
-    translation: '소아과 의사',
-    sentences: [
+    "keyExpression": "pediatrician",
+    "baseForm": "pediatrician",
+    "translation": "소아과 의사",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'When the baby developed a high fever in the middle of the night, the worried parents called their [pediatrician, architect, mechanic, electrician] for medical advice.',
-        answer: 'pediatrician',
-        options: ['pediatrician', 'architect', 'mechanic', 'electrician'],
-        korean: '아기가 한밤중에 고열이 나자 걱정된 부모는 의학적 조언을 구하기 위해 소아과 의사에게 전화를 걸었습니다.',
-        explanation: '"pediatrician"은 유아와 어린이의 질병을 전문적으로 진료하는 "소아과 의사"를 뜻합니다.'
+        "type": "multiple-choice",
+        "english": "When the baby developed a high fever in the middle of the night, the worried parents called their [pediatrician, architect, mechanic, electrician] for medical advice.",
+        "answer": "pediatrician",
+        "options": [
+          "pediatrician",
+          "architect",
+          "mechanic",
+          "electrician"
+        ],
+        "korean": "아기가 한밤중에 고열이 나자 걱정된 부모는 의학적 조언을 구하기 위해 소아과 의사에게 전화를 걸었습니다.",
+        "explanation": "\"pediatrician\"은 유아와 어린이의 질병을 전문적으로 진료하는 \"소아과 의사\"를 뜻합니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'She recommended we schedule an appointment with [a pediatrician to discuss his growth].',
-        answer: 'a pediatrician to discuss his growth',
-        tokens: ['a', 'pediatrician', 'to', 'discuss', 'his', 'growth'],
-        options: ['a', 'pediatrician', 'to', 'discuss', 'his', 'growth'],
-        korean: '그녀는 아이의 성장 발달을 상담하기 위해 소아과 의사와 진료 예약을 잡으라고 권유했어요.',
-        explanation: '자녀의 성장 상태를 소아청소년과 전문의와 상담하는 모습입니다.'
+        "type": "drag-and-drop",
+        "english": "Mom takes the baby to the [friendly pediatrician for a checkup] every few months.",
+        "answer": "friendly pediatrician for a checkup",
+        "tokens": [
+          "friendly",
+          "pediatrician",
+          "for",
+          "a",
+          "checkup"
+        ],
+        "options": [
+          "friendly",
+          "pediatrician",
+          "for",
+          "a",
+          "checkup"
+        ],
+        "korean": "엄마는 몇 달마다 아기를 데리고 검진을 받으러 친절한 소아과 의사 선생님께 가요.",
+        "explanation": "\"pediatrician\"은 소아과 의사입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Every newborn infant needs to visit the [pediatrician, librarian, carpenter, florist] regularly for vaccination checkups.',
-        answer: 'pediatrician',
-        options: ['pediatrician', 'librarian', 'carpenter', 'florist'],
-        korean: '모든 신생아는 예방접종 검진을 위해 정기적으로 소아과 의사를 방문해야 합니다.',
-        explanation: '영유아 예방접종을 담당하는 의료진을 가리킵니다.'
+        "type": "multiple-choice",
+        "english": "A doctor who specializes in caring for babies and young children is called a [pediatrician, pilot, sailor, carpenter].",
+        "answer": "pediatrician",
+        "options": [
+          "pediatrician",
+          "pilot",
+          "sailor",
+          "carpenter"
+        ],
+        "korean": "아기와 어린아이들을 전문적으로 돌보는 의사를 소아과 의사라고 부릅니다.",
+        "explanation": "\"pediatrician\"의 직업 정의입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Our friendly [pediatrician, receptionist, conductor, pilot] always gives out stickers to brave kids after their shots.',
-        answer: 'pediatrician',
-        options: ['pediatrician', 'receptionist', 'conductor', 'pilot'],
-        korean: '우리 친절한 소아과 의사 선생님은 주사를 맞은 용감한 아이들에게 항상 스티커를 나눠주십니다.',
-        explanation: '아이들에게 친근하게 대하는 의사 선생님의 모습입니다.'
+        "type": "multiple-choice",
+        "english": "The kind [pediatrician, plumber, tailor, painter] checked the toddler's ears and throat with a warm smile.",
+        "answer": "pediatrician",
+        "options": [
+          "pediatrician",
+          "plumber",
+          "tailor",
+          "painter"
+        ],
+        "korean": "친절한 소아과 의사 선생님은 따뜻한 미소로 걸음마 아기의 귀와 목을 진찰하셨어요.",
+        "explanation": "\"pediatrician\"은 아동 진료 의사입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'If your child has ongoing digestive issues, you should consult a board-certified [pediatrician, journalist, photographer, astronomer].',
-        answer: 'pediatrician',
-        options: ['pediatrician', 'journalist', 'photographer', 'astronomer'],
-        korean: '자녀에게 지속적인 소화 문제가 있다면 공인된 소아과 전문의와 상담해야 합니다.',
-        explanation: '어린이 건강 문제에 대해 전문의 상담을 권하는 문장입니다.'
+        "type": "multiple-choice",
+        "english": "We visited our local [pediatrician, driver, baker, butcher] to make sure the newborn baby was healthy and growing well.",
+        "answer": "pediatrician",
+        "options": [
+          "pediatrician",
+          "driver",
+          "baker",
+          "butcher"
+        ],
+        "korean": "우리는 갓난아기가 건강하고 잘 자라는지 확인하기 위해 동네 소아과 의사 선생님을 찾아갔어요.",
+        "explanation": "\"pediatrician\"은 영유아 전문의입니다."
       }
     ]
   },
-
-  // 26. figure out
   {
-    keyExpression: 'figure out',
-    baseForm: 'figure out',
-    translation: '알아내다, 파악하다',
-    sentences: [
+    "keyExpression": "figure out",
+    "baseForm": "figure out",
+    "translation": "알아내다, 파악하다, 해결책을 찾다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'We spent hours reading the car manual to [figure out, throw away, give up, look down on] why the dashboard warning light was blinking.',
-        answer: 'figure out',
-        options: ['figure out', 'throw away', 'give up', 'look down on'],
-        korean: '우리는 계기판 경고등이 왜 깜빡거리는지 알아내기 위해 자동차 설명서를 몇 시간 동안 읽었습니다.',
-        explanation: '"figure out"은 깊이 생각하거나 조사해서 "알아내다, 파악하다, 해결책을 찾다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "We spent hours reading the car manual to [figure out, throw away, give up, look down on] why the dashboard warning light was blinking.",
+        "answer": "figure out",
+        "options": [
+          "figure out",
+          "throw away",
+          "give up",
+          "look down on"
+        ],
+        "korean": "우리는 계기판 경고등이 왜 깜빡거리는지 알아내기 위해 자동차 설명서를 몇 시간 동안 읽었습니다.",
+        "explanation": "\"figure out\"은 깊이 생각하거나 조사해서 \"알아내다, 파악하다, 해결책을 찾다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'I need to [figure out through our insurance policy] who can cover the repairs.',
-        answer: 'figure out through our insurance policy',
-        tokens: ['figure', 'out', 'through', 'our', 'insurance', 'policy'],
-        options: ['figure', 'out', 'through', 'our', 'insurance', 'policy'],
-        korean: '수리비를 누가 보상해 줄 수 있는지 보험 약관을 통해 알아봐야 해요.',
-        explanation: '보험 적용 범위를 조사하여 파악하는 과정입니다.'
+        "type": "drag-and-drop",
+        "english": "Can you help me [figure out the answer to this math problem] tonight?",
+        "answer": "figure out the answer to this math problem",
+        "tokens": [
+          "figure",
+          "out",
+          "the",
+          "answer",
+          "to",
+          "this",
+          "math",
+          "problem"
+        ],
+        "options": [
+          "figure",
+          "out",
+          "the",
+          "answer",
+          "to",
+          "this",
+          "math",
+          "problem"
+        ],
+        "korean": "오늘 밤 이 수학 문제의 답을 알아내도록 나를 좀 도와줄 수 있겠니?",
+        "explanation": "\"figure out\"은 답이나 해결책을 알아내는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Can anyone help me [figure out, point out, wipe out, rule out] how to assemble this flat-pack bookshelf?',
-        answer: 'figure out',
-        options: ['figure out', 'point out', 'wipe out', 'rule out'],
-        korean: '이 조립식 책장을 어떻게 조립해야 하는지 알아내는 것 좀 누가 도와줄 수 있나요?',
-        explanation: '조립 방법을 파악하고자 도움을 청하는 표현입니다.'
+        "type": "multiple-choice",
+        "english": "The children tried to [figure out, break in, walk away, run off] how to build the wooden toy house together.",
+        "answer": "figure out",
+        "options": [
+          "figure out",
+          "break in",
+          "walk away",
+          "run off"
+        ],
+        "korean": "아이들은 나무 장난감 집을 어떻게 조립해야 하는지 함께 알아내려고 애썼어요.",
+        "explanation": "\"figure out\"은 조립법이나 작동법을 파악함입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Detectives worked tirelessly to [figure out, back out, drop out, walk out] how the jewel thief escaped the locked vault.',
-        answer: 'figure out',
-        options: ['figure out', 'back out', 'drop out', 'walk out'],
-        korean: '형사들은 보석 도둑이 잠긴 금고에서 어떻게 탈출했는지 알아내기 위해 지치지 않고 일했습니다.',
-        explanation: '사건의 미스터리를 풀어내는 수사관들의 노력입니다.'
+        "type": "multiple-choice",
+        "english": "She checked the train map to [figure out, turn off, give in, fall down] which platform her train was leaving from.",
+        "answer": "figure out",
+        "options": [
+          "figure out",
+          "turn off",
+          "give in",
+          "fall down"
+        ],
+        "korean": "그녀는 자기 기차가 어느 플랫폼에서 출발하는지 알아내기 위해 기차 노선도를 확인했어요.",
+        "explanation": "\"figure out\"은 위치나 정보를 파악하는 것입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'After analyzing the budget, the finance team finally [figured out, stepped out, stood out, burnt out] a way to cut travel expenses.',
-        answer: 'figured out',
-        options: ['figured out', 'stepped out', 'stood out', 'burnt out'],
-        korean: '예산을 분석한 끝에 재무팀은 마침내 출장 경비를 절감할 방법을 찾아냈습니다.',
-        explanation: '분석 끝에 유용한 해결 방안을 고안해 낸 상황입니다.'
+        "type": "multiple-choice",
+        "english": "I need to [figure out, look back, drop out, pass by] what time the local grocery store closes on Sunday.",
+        "answer": "figure out",
+        "options": [
+          "figure out",
+          "look back",
+          "drop out",
+          "pass by"
+        ],
+        "korean": "동네 식료품점이 일요일에 몇 시에 문을 닫는지 알아봐야(파악해야) 해요.",
+        "explanation": "\"figure out\"은 시간을 알아내는 것입니다."
       }
     ]
   },
-
-  // 27. void warranty
   {
-    keyExpression: 'void warranty',
-    baseForm: 'void warranty',
-    translation: '품질 보증을 무효로 만들다',
-    sentences: [
+    "keyExpression": "void warranty",
+    "baseForm": "void warranty",
+    "translation": "품질/무상 보증을 무효로 만들다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'If you open the sealed laptop case yourself with an unauthorized screwdriver, you will completely [void your warranty, renew your passport, earn your badge, clean your room].',
-        answer: 'void your warranty',
-        options: ['void your warranty', 'renew your passport', 'earn your badge', 'clean your room'],
-        korean: '공인되지 않은 드라이버로 밀봉된 노트북 케이스를 직접 열면 품질 보증(무상 보증)이 완전히 무효가 됩니다.',
-        explanation: '"void a warranty"는 규정을 지키지 않아 제조업체의 "품질/무상 보증을 무효로 만들다"라는 뜻입니다.'
+        "type": "multiple-choice",
+        "english": "If you open the sealed laptop case yourself with an unauthorized screwdriver, you will completely [void your warranty, renew your passport, earn your badge, clean your room].",
+        "answer": "void your warranty",
+        "options": [
+          "void your warranty",
+          "renew your passport",
+          "earn your badge",
+          "clean your room"
+        ],
+        "korean": "공인되지 않은 드라이버로 밀봉된 노트북 케이스를 직접 열면 품질 보증(무상 보증)이 완전히 무효가 됩니다.",
+        "explanation": "\"void a warranty\"는 규정을 지키지 않아 제조업체의 \"품질/무상 보증을 무효로 만들다\"라는 뜻입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: "We want to make sure we don't [void our vehicle warranty and stuff] by visiting an uncertified body shop.",
-        answer: 'void our vehicle warranty and stuff',
-        tokens: ['void', 'our', 'vehicle', 'warranty', 'and', 'stuff'],
-        options: ['void', 'our', 'vehicle', 'warranty', 'and', 'stuff'],
-        korean: '인증되지 않은 정비소에 갔다가 우리 차량 보증 같은 게 무효가 되지 않도록 확실히 해두고 싶어요.',
-        explanation: '공식 보증 권리가 소멸하지 않도록 조심하는 태도입니다.'
+        "type": "drag-and-drop",
+        "english": "Dropping the phone into deep water might [void your warranty at the store].",
+        "answer": "void your warranty at the store",
+        "tokens": [
+          "void",
+          "your",
+          "warranty",
+          "at",
+          "the",
+          "store"
+        ],
+        "options": [
+          "void",
+          "your",
+          "warranty",
+          "at",
+          "the",
+          "store"
+        ],
+        "korean": "휴대전화를 깊은 물에 빠뜨리면 매장에서 무상 품질 보증이 무효화될 수 있어요.",
+        "explanation": "\"void warranty\"는 보증이 무효가 됨을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'Installing aftermarket software on this company phone might [void the warranty, polish the screen, charge the battery, raise the salary] provided by the manufacturer.',
-        answer: 'void the warranty',
-        options: ['void the warranty', 'polish the screen', 'charge the battery', 'raise the salary'],
-        korean: '이 회사 휴대폰에 비공식 소프트웨어를 설치하면 제조사에서 제공하는 품질 보증이 무효화될 수 있습니다.',
-        explanation: '비공식 부품이나 프로그램으로 인한 보증 상실을 경고합니다.'
+        "type": "multiple-choice",
+        "english": "Using an unapproved charger could damage the game device and [void your warranty, build your house, paint your wall, bake your cake].",
+        "answer": "void your warranty",
+        "options": [
+          "void your warranty",
+          "build your house",
+          "paint your wall",
+          "bake your cake"
+        ],
+        "korean": "미승인 충전기를 사용하면 게임 기기를 손상시키고 품질 보증을 무효로 만들 수 있어요.",
+        "explanation": "\"void your warranty\"는 품질 보증 혜택을 잃게 됨을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: "Always use genuine replacement filters so you don't accidentally [void your warranty, break your promise, loose your seat, tear your coat] on the new coffee machine.",
-        answer: 'void your warranty',
-        options: ['void your warranty', 'break your promise', 'loose your seat', 'tear your coat'],
-        korean: '새 커피 머신의 품질 보증이 실수로 무효가 되지 않도록 항상 정품 교체 필터를 사용하세요.',
-        explanation: '정품 사용을 통해 보증을 유지하라는 권고입니다.'
+        "type": "multiple-choice",
+        "english": "Do not remove the official safety sticker, or you will [void your warranty, catch a fish, sing a song, write a letter] on the microwave.",
+        "answer": "void your warranty",
+        "options": [
+          "void your warranty",
+          "catch a fish",
+          "sing a song",
+          "write a letter"
+        ],
+        "korean": "공식 안전 스티커를 떼지 마세요, 그렇지 않으면 전자레인지의 품질 보증이 무효가 됩니다.",
+        "explanation": "\"void your warranty\"는 스티커 훼손으로 보증이 무효화되는 경우입니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'The dealership confirmed that getting regular oil changes here would never [void our warranty, raise our rent, leak our secrets, scratch our windows].',
-        answer: 'void our warranty',
-        options: ['void our warranty', 'raise our rent', 'leak our secrets', 'scratch our windows'],
-        korean: '딜러십에서는 이곳에서 정기적으로 엔진오일을 교환해도 우리 무상 보증이 결코 무효가 되지 않는다고 확인해 주었습니다.',
-        explanation: '정식 정비 절차가 보증을 해치지 않음을 재확인하는 내용입니다.'
+        "type": "multiple-choice",
+        "english": "Opening the sealed battery pack by yourself will completely [void your warranty, clean your desk, wash your car, start your day].",
+        "answer": "void your warranty",
+        "options": [
+          "void your warranty",
+          "clean your desk",
+          "wash your car",
+          "start your day"
+        ],
+        "korean": "밀봉된 배터리 팩을 직접 열면 품질 보증이 완전히 무효화됩니다.",
+        "explanation": "\"void your warranty\"는 무상 보증 권리를 상실함을 뜻합니다."
       }
     ]
   },
-
-  // 28. go crazy with
   {
-    keyExpression: 'go crazy with',
-    baseForm: 'go crazy with',
-    translation: '너무 지나치게 열을 올리다/과하게 하다',
-    sentences: [
+    "keyExpression": "go crazy with",
+    "baseForm": "go crazy with",
+    "translation": "너무 지나치게 열을 올리다/과하게 쏟아붓다",
+    "sentences": [
       {
-        type: 'multiple-choice',
-        english: 'While decorating the Christmas tree, the kids [went a little too crazy with, stayed away from, were disappointed by, gave up on] the silver glitter and tinsel.',
-        answer: 'went a little too crazy with',
-        options: ['went a little too crazy with', 'stayed away from', 'were disappointed by', 'gave up on'],
-        korean: '크리스마스트리를 장식하면서 아이들은 은색 반짝이와 반짝이 줄을 조금 너무 과하게 뿌려댔어요.',
-        explanation: '"go crazy with ~"는 어떤 재료나 행동에 "너무 지나치게 열을 올리다/과하게 쏟아붓다"라는 재미있는 일상 표현입니다.'
+        "type": "multiple-choice",
+        "english": "While decorating the Christmas tree, the kids [went a little too crazy with, stayed away from, were disappointed by, gave up on] the silver glitter and tinsel.",
+        "answer": "went a little too crazy with",
+        "options": [
+          "went a little too crazy with",
+          "stayed away from",
+          "were disappointed by",
+          "gave up on"
+        ],
+        "korean": "크리스마스트리를 장식하면서 아이들은 은색 반짝이와 반짝이 줄을 조금 너무 과하게 뿌려댔어요.",
+        "explanation": "\"go crazy with ~\"는 어떤 재료나 행동에 \"너무 지나치게 열을 올리다/과하게 쏟아붓다\"라는 재미있는 일상 표현입니다."
       },
       {
-        type: 'drag-and-drop',
-        english: 'Um, yeah, maybe I [went a little too crazy with the pompoms] for his alphabet project.',
-        answer: 'went a little too crazy with the pompoms',
-        tokens: ['went', 'a', 'little', 'too', 'crazy', 'with', 'the', 'pompoms'],
-        options: ['went', 'a', 'little', 'too', 'crazy', 'with', 'the', 'pompoms'],
-        korean: '음, 네, 어쩌면 제가 아이 알파벳 과제에 폼폼 방울을 좀 너무 과하게 갖다 붙였나 봐요.',
-        explanation: '꾸미기 재료를 욕심내어 과하게 사용했음을 유쾌하게 자인하는 모습입니다.'
+        "type": "drag-and-drop",
+        "english": "Dad [went a little too crazy with hot pepper] in the soup today.",
+        "answer": "went a little too crazy with hot pepper",
+        "tokens": [
+          "went",
+          "a",
+          "little",
+          "too",
+          "crazy",
+          "with",
+          "hot",
+          "pepper"
+        ],
+        "options": [
+          "went",
+          "a",
+          "little",
+          "too",
+          "crazy",
+          "with",
+          "hot",
+          "pepper"
+        ],
+        "korean": "아빠는 오늘 수프에 고춧가루를 조금 너무 과하게 쏟아부으셨어요.",
+        "explanation": "\"went too crazy with\"는 재료를 너무 과하게 넣었음을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'He loves spicy food, but he admitted he [went a little too crazy with, backed off from, fell short of, ran out of] the habanero hot sauce on his tacos.',
-        answer: 'went a little too crazy with',
-        options: ['went a little too crazy with', 'backed off from', 'fell short of', 'ran out of'],
-        korean: '그는 매운 음식을 좋아하지만 타코에 하바네로 핫소스를 조금 너무 과하게 쳤다고 인정했어요.',
-        explanation: '양념을 지나치게 많이 넣어 매워진 상황입니다.'
+        "type": "multiple-choice",
+        "english": "She [went a little too crazy with, kept away from, took care of, turned down] the bright paint while decorating her school project poster.",
+        "answer": "went a little too crazy with",
+        "options": [
+          "went a little too crazy with",
+          "kept away from",
+          "took care of",
+          "turned down"
+        ],
+        "korean": "그녀는 학교 프로젝트 포스터를 꾸미면서 밝은 페인트를 조금 너무 과하게 칠해댔어요.",
+        "explanation": "\"went a little too crazy with\"는 지나치게 욕심내서 과하게 한 모습입니다."
       },
       {
-        type: 'multiple-choice',
-        english: "Don't [go crazy with, stay calm with, be patient with, hold back on] the salt when seasoning the fresh vegetable soup.",
-        answer: 'go crazy with',
-        options: ['go crazy with', 'stay calm with', 'be patient with', 'hold back on'],
-        korean: '신선한 야채수프의 간을 맞출 때 소금을 너무 과하게 팍팍 넣지 마세요.',
-        explanation: '재료를 과다하게 쓰지 말라는 요리 조언입니다.'
+        "type": "multiple-choice",
+        "english": "We [went a little too crazy with, looked away from, were sad about, held on to] buying sweet candy snacks at the grocery store today.",
+        "answer": "went a little too crazy with",
+        "options": [
+          "went a little too crazy with",
+          "looked away from",
+          "were sad about",
+          "held on to"
+        ],
+        "korean": "우리는 오늘 식료품점에서 달콤한 사탕 간식을 조금 너무 과하게 많이 샀어요.",
+        "explanation": "\"went crazy with buying\"은 과소비하거나 너무 많이 삼을 뜻합니다."
       },
       {
-        type: 'multiple-choice',
-        english: 'She bought seven pairs of shoes during the weekend clearance sale because she [went a little too crazy with, got tired of, backed down from, put up with] the discount coupons.',
-        answer: 'went a little too crazy with',
-        options: ['went a little too crazy with', 'got tired of', 'backed down from', 'put up with'],
-        korean: '그녀는 할인 쿠폰에 너무 과하게 열을 올린 나머지 주말 창고 대방출 세일에서 구두를 일곱 켤레나 샀어요.',
-        explanation: '쇼핑에서 자제력을 잃고 과소비한 상황을 유머러스하게 표현합니다.'
+        "type": "multiple-choice",
+        "english": "He [went a little too crazy with, stepped out of, ran away from, stayed clear of] the sticky glue while building his wooden model airplane.",
+        "answer": "went a little too crazy with",
+        "options": [
+          "went a little too crazy with",
+          "stepped out of",
+          "ran away from",
+          "stayed clear of"
+        ],
+        "korean": "그는 나무 모형 비행기를 만들면서 끈적한 풀을 조금 너무 과하게 발라댔어요.",
+        "explanation": "\"went a little too crazy with\"는 접착제나 재료를 너무 듬뿍 바른 상황입니다."
       }
     ]
   }
@@ -1431,7 +2388,6 @@ const quizMdPath = path.join(LESSON_DIR, 'quiz.md');
 fs.writeFileSync(quizMdPath, md.trim() + '\n', 'utf8');
 console.log(`[Success] Written: ${quizMdPath}`);
 
-// Build and write key-sentences.json & review-quiz.json
 const LESSON_08_AUDIO_FILES = [
   "so this week has not gone to plan well.wav",
   "we went to go get our car washed..wav",
@@ -1915,4 +2871,5 @@ const reviewQuizzes = KEY_SENTENCES_MAPPING.map(item => ({
 const rqOutPath = path.join(LESSON_DIR, 'review-quiz.json');
 fs.writeFileSync(rqOutPath, JSON.stringify(reviewQuizzes, null, 2), 'utf8');
 console.log(`[Success] Written: ${rqOutPath} (${reviewQuizzes.length} items)`);
+
 
