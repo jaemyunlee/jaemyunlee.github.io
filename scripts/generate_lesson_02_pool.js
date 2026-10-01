@@ -11,44 +11,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'The old farmhouse sits on a five-acre [property, street, hallway, pavement] surrounded by pine trees.',
+        english: 'My grandparents have a small house on a big [property, street, hallway, pavement] in the countryside.',
         answer: 'property',
         options: ['property', 'street', 'hallway', 'pavement'],
-        korean: '그 오래된 농가는 소나무 숲으로 둘러싸인 5에이커 규모의 부지(땅) 위에 자리 잡고 있어요.',
+        korean: '우리 조부모님은 시골의 넓은 부지(땅) 위에 작은 집 한 채를 갖고 계세요.',
         explanation: '"property"는 건물이나 주택이 딸린 "토지, 부지, 사유지"를 의미합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'There were several apple trees [growing on our family property] behind the barn.',
+        english: 'There were several apple trees [growing on our family property] behind the house.',
         answer: 'growing on our family property',
         tokens: ['growing', 'on', 'our', 'family', 'property'],
         options: ['growing', 'on', 'our', 'family', 'property'],
-        korean: '헛간 뒤 우리 가족 소유의 땅에는 사과나무 여러 그루가 자라고 있었어요.',
+        korean: '집 뒤 우리 가족 소유의 땅에는 사과나무 여러 그루가 자라고 있었어요.',
         explanation: '"family property"는 가족 소유의 토지나 부동산 부지를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'They put up a wooden fence around the entire [property, hallway, pavement, ceiling] to keep wild animals out.',
+        english: 'We put up a simple wooden fence around our [property, hallway, classroom, ceiling] to keep our dog inside.',
         answer: 'property',
-        options: ['property', 'hallway', 'pavement', 'ceiling'],
-        korean: '그들은 야생동물이 들어오지 못하도록 땅 전체 둘레에 나무 울타리를 둘렀어요.',
-        explanation: '"property"는 집을 둘러싼 개인 사유지 전체를 가리킬 때 아주 흔히 씁니다.'
+        options: ['property', 'hallway', 'classroom', 'ceiling'],
+        korean: '우리는 강아지가 밖으로 나가지 못하게 집 마당 땅(부지) 둘레에 간단한 나무 울타리를 둘렀어요.',
+        explanation: '"property"는 집을 둘러싼 개인 사유지 전체를 가리킬 때 자주 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We inspected the rural [property, pavement, ceiling, runway] carefully before deciding to buy it.',
+        english: 'They bought a quiet piece of [property, runway, elevator, station] outside the city to build a home.',
         answer: 'property',
-        options: ['property', 'pavement', 'ceiling', 'runway'],
-        korean: '우리는 매입을 결정하기 전에 그 시골 부지(땅)를 꼼꼼하게 둘러보았습니다.',
-        explanation: '"rural property"는 시골 지역의 토지나 전원주택 부지를 뜻합니다.'
+        options: ['property', 'runway', 'elevator', 'station'],
+        korean: '그들은 집을 짓기 위해 도시 외곽에 조용한 땅(부지) 한 곳을 샀어요.',
+        explanation: '"piece of property"는 집이나 건물을 짓기 위한 토지/부지 한 필지를 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'A small natural stream flows right through the southern border of their [property, sidewalk, escalator, classroom].',
+        english: 'He likes walking around his green [property, sidewalk, airport, bedroom] on quiet Sunday mornings.',
         answer: 'property',
-        options: ['property', 'sidewalk', 'escalator', 'classroom'],
-        korean: '작은 자연 개울 하나가 그들 소유 부지의 남쪽 경계를 가로질러 흘러요.',
-        explanation: '"property"는 자연 지형이 포함된 개인 부지를 가리킬 때 자연스럽습니다.'
+        options: ['property', 'sidewalk', 'airport', 'bedroom'],
+        korean: '그는 조용한 일요일 아침에 자신의 푸른 땅(사유지) 둘레를 산책하는 것을 좋아해요.',
+        explanation: '"property"는 자연이 딸린 개인 사유지를 가리킬 때 자연스럽습니다.'
       }
     ]
   },
@@ -59,44 +59,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Despite the heavy snowstorm, the rescue team [managed to, failed to, refused to, hesitated to] reach the stranded hikers in time.',
+        english: 'Even though the bus was late, I [managed to, failed to, refused to, hesitated to] get to work on time.',
         answer: 'managed to',
         options: ['managed to', 'failed to', 'refused to', 'hesitated to'],
-        korean: '극심한 눈보라에도 불구하고 구조대는 고립된 등산객들에게 제시간에 간신히 도착할 수 있었어요.',
-        explanation: '"manage to (동사원형)"는 열악하거나 힘든 상황 속에서도 "어떻게든/간신히 ~해내다"라는 핵심 표현입니다.'
+        korean: '버스가 늦었음에도 불구하고, 나는 어떻게든 제시간에 직장에 도착할 수 있었어요.',
+        explanation: '"manage to (동사원형)"는 힘든 상황 속에서도 "어떻게든/간신히 ~해내다"라는 핵심 표현입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Even with limited tools, we [managed to fix the generator] before nightfall.',
-        answer: 'managed to fix the generator',
-        tokens: ['managed', 'to', 'fix', 'the', 'generator'],
-        options: ['managed', 'to', 'fix', 'the', 'generator'],
-        korean: '도구가 부족했음에도 불구하고, 우리는 해가 지기 전에 어떻게든 발전기를 고쳐냈습니다.',
-        explanation: '"managed to fix"는 "어떻게든 고쳐냈다"라는 성취를 나타냅니다.'
+        english: 'The math problem was very hard, but she [managed to solve it alone] before dinner.',
+        answer: 'managed to solve it alone',
+        tokens: ['managed', 'to', 'solve', 'it', 'alone'],
+        options: ['managed', 'to', 'solve', 'it', 'alone'],
+        korean: '수학 문제가 무척 어려웠지만, 그녀는 저녁 식사 전에 혼자 힘으로 어떻게든 풀어냈어요.',
+        explanation: '"managed to solve"는 어려운 문제를 끝내 풀어냈음을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'After pushing the car out of the mud, we finally [managed to, refused to, neglected to, ceased to] start the engine again.',
+        english: 'The box was heavy, but we [managed to, failed to, forgot to, neglected to] carry it up the stairs together.',
         answer: 'managed to',
-        options: ['managed to', 'refused to', 'neglected to', 'ceased to'],
-        korean: '진흙탕에서 차를 밀어낸 뒤, 마침내 우리는 간신히 시동을 다시 걸 수 있었어요.',
-        explanation: '"managed to start"는 여러 번의 시도 끝에 간신히 시동을 걸었음을 강조합니다.'
+        options: ['managed to', 'failed to', 'forgot to', 'neglected to'],
+        korean: '상자가 무거웠지만, 우리는 함께 힘을 합쳐 어떻게든 계단 위로 옮길 수 있었어요.',
+        explanation: '"managed to carry"는 힘든 물건을 어떻게든 옮겨냈음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'With only candles and flashlights, my grandparents [managed to, failed to, avoided to, declined to] cook a warm dinner.',
+        english: 'I was very tired last night, but I [managed to, refused to, ceased to, declined to] finish all my homework.',
         answer: 'managed to',
-        options: ['managed to', 'failed to', 'avoided to', 'declined to'],
-        korean: '양초와 손전등만 가지고도 조부모님께서는 어떻게든 따뜻한 저녁 식사를 차려내셨어요.',
-        explanation: '"managed to cook"은 악조건 속에서 어떻게든 요리를 해냈다는 뜻입니다.'
+        options: ['managed to', 'refused to', 'ceased to', 'declined to'],
+        korean: '어젯밤에 무척 피곤했지만, 나는 어떻게든 모든 숙제를 끝마칠 수 있었어요.',
+        explanation: '"managed to finish"는 피로 속에서도 끝내 과제를 완수했음을 강조합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Although the trail was steep and rocky, everyone [managed to, refused to, hesitated to, forgot to] reach the mountain summit.',
+        english: 'It was raining hard, but they [managed to, failed to, refused to, hesitated to] drive home safely.',
         answer: 'managed to',
-        options: ['managed to', 'refused to', 'hesitated to', 'forgot to'],
-        korean: '산길이 가파르고 바위가 많았지만, 모두가 간신히 산 정상에 도달했어요.',
-        explanation: '"managed to reach"는 고난 끝에 목적지에 도달했음을 뜻합니다.'
+        options: ['managed to', 'failed to', 'refused to', 'hesitated to'],
+        korean: '비가 세차게 내렸지만, 그들은 어떻게든 안전하게 집으로 운전해 갈 수 있었어요.',
+        explanation: '"managed to drive"는 궂은 날씨 속에서 무사히 도착했음을 나타냅니다.'
       }
     ]
   },
@@ -107,44 +107,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'While camping in the backcountry, the hikers filled their canteens from [a spring, a waterfall, a swimming pool, a reservoir] of clean mineral water.',
+        english: 'During our walk in the woods, we drank clean, cold water from [a spring, a swimming pool, an elevator, a bathtub].',
         answer: 'a spring',
-        options: ['a spring', 'a waterfall', 'a swimming pool', 'a reservoir'],
-        korean: '오지에서 캠핑하는 동안, 등산객들은 깨끗한 미네랄 샘물에서 수통을 채웠습니다.',
+        options: ['a spring', 'a swimming pool', 'an elevator', 'a bathtub'],
+        korean: '숲속을 걷는 동안, 우리는 샘물에서 나오는 깨끗하고 시원한 물을 마셨어요.',
         explanation: '"a spring"은 땅속에서 자연스럽게 맑은 물이 솟아 나오는 "샘, 샘물, 수원지"를 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Fresh cold drinking water [flows directly from a spring] up on the hill.',
-        answer: 'flows directly from a spring',
-        tokens: ['flows', 'directly', 'from', 'a', 'spring'],
-        options: ['flows', 'directly', 'from', 'a', 'spring'],
-        korean: '시원하고 신선한 식수가 언덕 위 샘물에서 곧바로 흘러나옵니다.',
-        explanation: '"from a spring"은 "천연 샘으로부터"라는 장소의 근원을 나타냅니다.'
+        english: 'Fresh cold water comes up from [a natural spring in the hills] near our town.',
+        answer: 'a natural spring in the hills',
+        tokens: ['a', 'natural', 'spring', 'in', 'the', 'hills'],
+        options: ['a', 'natural', 'spring', 'in', 'the', 'hills'],
+        korean: '우리 마을 근처 언덕에 있는 자연 샘에서 신선하고 차가운 물이 솟아올라요.',
+        explanation: '"natural spring"은 자연적으로 솟아나는 천연 샘을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The old mountain cabin gets its entire domestic water supply from [a spring, an ocean, a drainpipe, an iceberg] nearby.',
+        english: 'The little village gets fresh drinking water from [a spring, a highway, an office, a runway] in the mountains.',
         answer: 'a spring',
-        options: ['a spring', 'an ocean', 'a drainpipe', 'an iceberg'],
-        korean: '그 오래된 산골 오두막은 인근의 자연 샘물로부터 생활용수 전량을 공급받습니다.',
-        explanation: '산골 생활에서 식수원으로 이용하는 "천연 샘"을 의미합니다.'
+        options: ['a spring', 'a highway', 'an office', 'a runway'],
+        korean: '그 작은 마을은 산속의 샘물에서 신선한 식수를 얻어요.',
+        explanation: '"a spring"은 산속에서 식수를 공급하는 자연 샘물을 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Local villagers protected [a spring, a puddle, a sewer, a ditch] on the ridge because it never dried up even during droughts.',
+        english: 'We stopped our hike to rest by [a spring, a stadium, a factory, a supermarket] of clear mountain water.',
         answer: 'a spring',
-        options: ['a spring', 'a puddle', 'a sewer', 'a ditch'],
-        korean: '동네 주민들은 가뭄 때도 결코 마르지 않는 산등성이의 샘물을 소중히 지켰습니다.',
-        explanation: '마르지 않는 식수원으로서의 "샘"을 뜻합니다.'
+        options: ['a spring', 'a stadium', 'a factory', 'a supermarket'],
+        korean: '우리는 하이킹을 멈추고 맑은 산골 샘물 옆에서 휴식을 취했어요.',
+        explanation: '"a spring"은 맑은 물이 솟는 자연 휴식처를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We cleared away fallen leaves to expose [a spring, a chimney, a driveway, a tunnel] bubbling quietly between the rocks.',
+        english: 'A cool stream begins at [a spring, a rooftop, a cinema, a bus stop] deep in the forest.',
         answer: 'a spring',
-        options: ['a spring', 'a chimney', 'a driveway', 'a tunnel'],
-        korean: '우리는 바위 사이에서 조용히 솟아오르는 샘물을 드러내기 위해 낙엽들을 치웠습니다.',
-        explanation: '"a spring bubbling"은 퐁퐁 솟아 나오는 샘물의 생생한 표현입니다.'
+        options: ['a spring', 'a rooftop', 'a cinema', 'a bus stop'],
+        korean: '시원한 시냇물은 숲속 깊은 곳에 있는 샘물에서 시작됩니다.',
+        explanation: '"spring"은 하천이나 시냇물이 시작되는 수원지를 뜻합니다.'
       }
     ]
   },
@@ -155,44 +155,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'The heavy rain began falling [midway through, ahead of, in front of, far from] our outdoor wedding reception.',
+        english: 'It began to rain [midway through, ahead of, in front of, far from] our soccer game in the park.',
         answer: 'midway through',
         options: ['midway through', 'ahead of', 'in front of', 'far from'],
-        korean: '야외 결혼 피로연이 한창 중간쯤 진행되었을 때 폭우가 쏟아지기 시작했어요.',
+        korean: '공원에서 축구 경기가 한창 중간쯤 진행되었을 때 비가 내리기 시작했어요.',
         explanation: '"midway through"는 어떤 사건이나 기간의 "중간쯤에, 한창 진행 중일 때"를 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'The lead actor lost his voice [midway through the second act] of the play.',
-        answer: 'midway through the second act',
-        tokens: ['midway', 'through', 'the', 'second', 'act'],
-        options: ['midway', 'through', 'the', 'second', 'act'],
-        korean: '연극 2막의 중간쯤에 주연 배우가 목소리를 잃어버렸습니다.',
-        explanation: '"midway through the second act"는 "2막 중간쯤에"라는 구체적 시간대입니다.'
+        english: 'He was so tired that he fell asleep [midway through the movie] on the sofa.',
+        answer: 'midway through the movie',
+        tokens: ['midway', 'through', 'the', 'movie'],
+        options: ['midway', 'through', 'the', 'movie'],
+        korean: '그는 너무 피곤해서 소파에서 영화 중간쯤에 잠이 들었어요.',
+        explanation: '"midway through"는 영화나 공연의 절반쯤 진행되었을 때를 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We ran out of drinking water [midway through, outside of, beyond, beneath] the grueling three-day desert trek.',
+        english: 'She paused to drink water [midway through, ahead of, outside of, far from] her morning run.',
         answer: 'midway through',
-        options: ['midway through', 'outside of', 'beyond', 'beneath'],
-        korean: '우리는 사흘간의 험난한 사막 트레킹 중간쯤에 마실 물이 바닥나 버렸습니다.',
-        explanation: '기간이나 여정의 "중반 무렵"을 나타낼 때 자연스럽습니다.'
+        options: ['midway through', 'ahead of', 'outside of', 'far from'],
+        korean: '그녀는 아침 달리기 중간쯤에 물을 마시기 위해 잠시 멈췄어요.',
+        explanation: '"midway through"는 운동이나 활동의 한가운데를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The power suddenly went out [midway through, far away, ahead of, contrary to] baking the anniversary cake.',
+        english: 'My phone battery died [midway through, next to, out of, away from] our phone call with mom.',
         answer: 'midway through',
-        options: ['midway through', 'far away', 'ahead of', 'contrary to'],
-        korean: '기념일 케이크를 굽는 도중 중간에 갑자기 정전이 되었어요.',
-        explanation: '어떤 동작이나 조리의 "중간 과정에"를 나타냅니다.'
+        options: ['midway through', 'next to', 'out of', 'away from'],
+        korean: '엄마와의 통화 중간쯤에 내 휴대전화 배터리가 다 닳아버렸어요.',
+        explanation: '"midway through"는 대화나 통화가 진행되던 도중을 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Several foreign students joined our study group [midway through, opposite to, out of, away from] the spring semester.',
+        english: 'The baby woke up and cried [midway through, before, across, behind] our family dinner.',
         answer: 'midway through',
-        options: ['midway through', 'opposite to', 'out of', 'away from'],
-        korean: '봄 학기 중간쯤에 몇 명의 외국인 유학생들이 우리 스터디 그룹에 합류했어요.',
-        explanation: '"midway through the semester"는 "학기 중반에"라는 빈출 표현입니다.'
+        options: ['midway through', 'before', 'across', 'behind'],
+        korean: '우리 가족 저녁 식사 중간쯤에 아기가 깨어나 울었어요.',
+        explanation: '"midway through"는 식사나 행사의 중간 시점을 뜻합니다.'
       }
     ]
   },
@@ -203,44 +203,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'After his grandfather [passed, arrived, gathered, retired] last winter, the family gathered to share their fondest memories of him.',
+        english: "My friend's grandfather [passed, arrived, gathered, visited] peacefully at the age of ninety.",
         answer: 'passed',
-        options: ['passed', 'arrived', 'gathered', 'retired'],
-        korean: '지난겨울 할아버지께서 돌아가신 뒤, 가족들은 모여 그분에 대한 따뜻한 추억들을 나누었습니다.',
+        options: ['passed', 'arrived', 'gathered', 'visited'],
+        korean: '내 친구의 할아버지께서는 아흔의 연세에 평화롭게 세상을 떠나셨어요.',
         explanation: '"pass"는 "pass away"처럼 "돌아가시다, 세상을 떠나다"의 완곡하고 정중한 표현입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Her mother [passed peacefully in her sleep] at the age of ninety-two.',
-        answer: 'passed peacefully in her sleep',
-        tokens: ['passed', 'peacefully', 'in', 'her', 'sleep'],
-        options: ['passed', 'peacefully', 'in', 'her', 'sleep'],
-        korean: '그녀의 어머님께서는 92세의 일기로 잠결에 평온히 세상을 떠나셨습니다.',
-        explanation: '"passed peacefully"는 "평온하게 영면하셨다"라는 정중한 표현입니다.'
+        english: 'After their beloved old dog [passed away last winter], the family missed him dearly.',
+        answer: 'passed away last winter',
+        tokens: ['passed', 'away', 'last', 'winter'],
+        options: ['passed', 'away', 'last', 'winter'],
+        korean: '지난겨울 사랑하던 반려견이 세상을 떠난 뒤, 가족들은 그 아이를 몹시 그리워했어요.',
+        explanation: '"passed away"는 세상을 떠났다는 정중한 완곡 표현입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'When my favorite elementary school teacher [passed, graduated, wandered, hurried], former students from all over came to the memorial.',
+        english: 'Many neighbors sent flowers when the kind old teacher [passed, returned, started, played] away.',
         answer: 'passed',
-        options: ['passed', 'graduated', 'wandered', 'hurried'],
-        korean: '제가 가장 좋아했던 초등학교 선생님께서 돌아가셨을 때, 전국 각지의 제자들이 추모식에 찾아왔습니다.',
-        explanation: '존경하는 분의 부고를 전할 때 "passed"를 씁니다.'
+        options: ['passed', 'returned', 'started', 'played'],
+        korean: '다정하셨던 옛 선생님께서 세상을 떠나셨을 때 많은 이웃들이 꽃을 보냈어요.',
+        explanation: '"passed away"는 세상을 떠났을 때 쓰는 따뜻하고 정중한 표현입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The elderly couple had been married for sixty years before the husband [passed, entered, sprinted, celebrated].',
+        english: 'Her grandmother [passed, woke, walked, opened] away last year, and she still remembers her warm smile.',
         answer: 'passed',
-        options: ['passed', 'entered', 'sprinted', 'celebrated'],
-        korean: '노부부는 남편이 세상을 떠나기 전까지 60년 동안 해로하셨습니다.',
-        explanation: '가족 관계에서 부고를 완곡하게 표현할 때 사용됩니다.'
+        options: ['passed', 'woke', 'walk', 'opened'],
+        korean: '그녀의 할머니께서는 작년에 세상을 떠나셨지만, 그녀는 여전히 할머니의 따뜻한 미소를 기억해요.',
+        explanation: '"passed"는 고인을 기릴 때 사용하는 완곡한 동사입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Years after our beloved family dog [passed, barked, jumped, wrestled], we still keep his collar on the bookshelf.',
+        english: 'When his uncle [passed, jumped, drove, called] away, he went home to stay with his family.',
         answer: 'passed',
-        options: ['passed', 'barked', 'jumped', 'wrestled'],
-        korean: '사랑하는 반려견이 무지개다리를 건넌(세상을 떠난) 지 여러 해가 지났지만, 우리는 여전히 책장에 그의 목줄을 간직하고 있어요.',
-        explanation: '반려동물이 세상을 떠났을 때도 다정하게 "passed"를 씁니다.'
+        options: ['passed', 'jumped', 'drove', 'called'],
+        korean: '삼촌께서 세상을 떠나셨을 때, 그는 가족들과 함께 있기 위해 고향으로 갔어요.',
+        explanation: '"passed away"는 가족의 부고를 전할 때 정중히 쓰는 표현입니다.'
       }
     ]
   },
@@ -251,44 +251,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'During summer vacation, the kids loved floating down the calm river on giant [inner tubes, scuba gear, life rafts, canoes].',
+        english: 'On hot summer days, the kids enjoy floating down the river on big [inner tubes, heavy coats, winter boots, snowboards].',
         answer: 'inner tubes',
-        options: ['inner tubes', 'scuba gear', 'life rafts', 'canoes'],
-        korean: '여름 방학 동안 아이들은 커다란 물놀이용 튜브를 타고 잔잔한 강을 둥둥 떠내려가는 것을 무척 좋아했습니다.',
+        options: ['inner tubes', 'heavy coats', 'winter boots', 'snowboards'],
+        korean: '무더운 여름날, 아이들은 커다란 물놀이용 튜브를 타고 강을 둥둥 떠내려가는 것을 즐겨요.',
         explanation: '"inner tubes"는 계곡이나 완만한 강에서 물놀이할 때 타는 "물놀이용 고무 튜브"를 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'We rented [colorful inner tubes to float] around the water park lazy river.',
-        answer: 'colorful inner tubes to float',
-        tokens: ['colorful', 'inner', 'tubes', 'to', 'float'],
-        options: ['colorful', 'inner', 'tubes', 'to', 'float'],
-        korean: '우리는 워터파크 유수풀에서 둥둥 떠다니기 위해 알록달록한 물놀이 튜브를 빌렸어요.',
-        explanation: '"inner tubes to float"는 물에 뜨기 위한 고무 튜브를 의미합니다.'
+        english: 'We rented two rubber [inner tubes for the lake] during our weekend trip.',
+        answer: 'inner tubes for the lake',
+        tokens: ['inner', 'tubes', 'for', 'the', 'lake'],
+        options: ['inner', 'tubes', 'for', 'the', 'lake'],
+        korean: '우리는 주말 여행 동안 호수에서 탈 고무 튜브 두 개를 빌렸어요.',
+        explanation: '"inner tubes"는 물놀이 튜브를 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'My cousins and I tied three [inner tubes, anchors, backpacks, shovels] together so we wouldn\'t drift apart in the lake.',
+        english: 'They sat on floating [inner tubes, umbrellas, stoves, desks] and splashed water under the warm sun.',
         answer: 'inner tubes',
-        options: ['inner tubes', 'anchors', 'backpacks', 'shovels'],
-        korean: '사촌들과 나는 호수에서 서로 멀어지지 않도록 튜브 세 개를 끈으로 묶었습니다.',
-        explanation: '물놀이용 고무 튜브를 뜻합니다.'
+        options: ['inner tubes', 'umbrellas', 'stoves', 'desks'],
+        korean: '그들은 물에 뜨는 고무 튜브에 앉아 따뜻한 햇살 아래에서 물장구를 쳤어요.',
+        explanation: '"inner tubes"는 물놀이에 쓰이는 둥근 튜브입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'At the snowy mountain resort, visitors can slide down the steep slopes on cushioned [inner tubes, surfboards, skateboards, rollerblades].',
+        english: 'The water park has bright yellow [inner tubes, laptops, bookcases, guitars] for swimming in the pool.',
         answer: 'inner tubes',
-        options: ['inner tubes', 'surfboards', 'skateboards', 'rollerblades'],
-        korean: '눈 덮인 산골 리조트에서 방문객들은 푹신한 튜브를 타고 가파른 눈썰매장 슬로프를 미끄러져 내려갈 수 있습니다.',
-        explanation: '눈썰매용 튜브(snow tubing)로도 흔히 쓰입니다.'
+        options: ['inner tubes', 'laptops', 'bookcases', 'guitars'],
+        korean: '그 워터파크에는 수영장에서 탈 수 있는 밝은 노란색 튜브들이 있어요.',
+        explanation: '"inner tubes"는 수영장이나 워터파크에서 흔히 타는 튜브입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We used a bicycle pump to inflate our old [inner tubes, umbrellas, blankets, tents] before heading to the swimming hole.',
+        english: 'We took our colorful [inner tubes, televisions, blankets, helmets] to the river on Saturday morning.',
         answer: 'inner tubes',
-        options: ['inner tubes', 'umbrellas', 'blankets', 'tents'],
-        korean: '우리는 계곡 수영장으로 향하기 전에 자전거 펌프로 오래된 물놀이 튜브에 공기를 넣었어요.',
-        explanation: '"inflate inner tubes"는 튜브에 바람을 넣는 일상 동작입니다.'
+        options: ['inner tubes', 'televisions', 'blankets', 'helmets'],
+        korean: '우리는 토요일 아침에 알록달록한 튜브들을 가지고 강으로 갔어요.',
+        explanation: '"inner tubes"는 야외 물놀이 필수품인 고무 튜브를 뜻합니다.'
       }
     ]
   },
@@ -299,44 +299,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'The warm autumn sun was so pleasant that my grandfather sat reading novels on the porch [all afternoon, for a second, at dawn, every midnight].',
+        english: 'It was a sunny Saturday, so the children played soccer outside [all afternoon, for a second, at dawn, every midnight].',
         answer: 'all afternoon',
         options: ['all afternoon', 'for a second', 'at dawn', 'every midnight'],
-        korean: '따뜻한 가을 햇살이 너무 기분 좋아서 할아버지는 오후 내내 현관 테라스에 앉아 소설을 읽으셨어요.',
+        korean: '화창한 토요일이어서 아이들은 오후 내내 밖에서 축구를 했어요.',
         explanation: '"all afternoon"은 "오후 내내, 오후 온종일"이라는 뜻의 시간 부사구입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'The children [played board games all afternoon] because of the thunderstorm outside.',
-        answer: 'played board games all afternoon',
-        tokens: ['played', 'board', 'games', 'all', 'afternoon'],
-        options: ['played', 'board', 'games', 'all', 'afternoon'],
-        korean: '바깥에 뇌우가 쏟아져서 아이들은 오후 내내 보드게임을 하며 놀았습니다.',
-        explanation: '"all afternoon"이 문장 끝에서 "오후 내내"의 지속 시간을 꾸며줍니다.'
+        english: 'I sat in the quiet cafe reading a good book [all afternoon with my friend].',
+        answer: 'all afternoon with my friend',
+        tokens: ['all', 'afternoon', 'with', 'my', 'friend'],
+        options: ['all', 'afternoon', 'with', 'my', 'friend'],
+        korean: '나는 친구와 함께 조용한 카페에서 오후 내내 좋은 책을 읽으며 앉아 있었어요.',
+        explanation: '"all afternoon"은 오후 시간을 온전히 보냈음을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We worked in the vegetable garden [all afternoon, in a flash, at sunrise, for a moment] pulling weeds and watering tomatoes.',
+        english: 'My dad worked in the garden [all afternoon, at midnight, in a second, at sunrise] to plant pretty flowers.',
         answer: 'all afternoon',
-        options: ['all afternoon', 'in a flash', 'at sunrise', 'for a moment'],
-        korean: '우리는 잡초를 뽑고 토마토에 물을 주며 오후 내내 채소 텃밭에서 일했어요.',
-        explanation: '오후 시간 전체를 보냈음을 뜻합니다.'
+        options: ['all afternoon', 'at midnight', 'in a second', 'at sunrise'],
+        korean: '아빠는 예쁜 꽃을 심기 위해 오후 내내 정원에서 일하셨어요.',
+        explanation: '"all afternoon"은 오후 내내 지속된 활동을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The rain poured steadily [all afternoon, at midnight, before dawn, in an instant], flooding the backyard walkway.',
+        english: 'We watched funny movies on TV [all afternoon, for an instant, at daybreak, right now] because it was raining.',
         answer: 'all afternoon',
-        options: ['all afternoon', 'at midnight', 'before dawn', 'in an instant'],
-        korean: '오후 내내 비가 꾸준히 쏟아져 뒷마당 산책로가 물에 잠겼습니다.',
-        explanation: '비가 오후 내내 지속되었음을 나타냅니다.'
+        options: ['all afternoon', 'for an instant', 'at daybreak', 'right now'],
+        korean: '비가 와서 우리는 오후 내내 TV로 재미있는 영화를 보았어요.',
+        explanation: '"all afternoon"은 오후 내내 이어진 상태를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Kelly and her mother baked pumpkin pies [all afternoon, in two seconds, at noon sharp, for a blink] to prepare for the Thanksgiving feast.',
+        english: 'She studied in the quiet library [all afternoon, in a minute, at dawn, every second] for tomorrow\'s test.',
         answer: 'all afternoon',
-        options: ['all afternoon', 'in two seconds', 'at noon sharp', 'for a blink'],
-        korean: '켈리와 엄마는 추수감사절 잔치를 준비하기 위해 오후 내내 호박 파이를 구웠어요.',
-        explanation: '가족이 함께 오후 온종일 요리하는 따뜻한 일상 맥락입니다.'
+        options: ['all afternoon', 'in a minute', 'at dawn', 'every second'],
+        korean: '그녀는 내일 시험을 위해 조용한 도서관에서 오후 내내 공부했어요.',
+        explanation: '"all afternoon"은 오후 전체 동안 집중했음을 뜻합니다.'
       }
     ]
   },
@@ -347,44 +347,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Before going out to play soccer with his friends, David had to finish his weekend [chores, celebrations, vacations, adventures] like mowing the lawn and taking out the trash.',
+        english: 'Before I could go out and play, my mom asked me to finish my [chores, vacations, celebrations, adventures] like washing the dishes.',
         answer: 'chores',
-        options: ['chores', 'celebrations', 'vacations', 'adventures'],
-        korean: '친구들과 축구를 하러 나가기 전에 데이비드는 잔디 깎기와 쓰레기 배출 같은 주말 집안일(허드렛일)을 끝마쳐야 했습니다.',
-        explanation: '"chores"는 청소, 빨래, 잔디 깎기 등 규칙적으로 해야 하는 "집안일, 허드렛일"을 뜻합니다.'
+        options: ['chores', 'vacations', 'celebrations', 'adventures'],
+        korean: '나가서 놀기 전에, 엄마는 설거지 같은 집안일(허드렛일)을 끝내라고 말씀하셨어요.',
+        explanation: '"chores"는 설거지, 청소, 빨래 등 일상적으로 해야 하는 "집안일, 허드렛일"을 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'The kids [split their daily household chores] evenly between washing dishes and feeding the pets.',
-        answer: 'split their daily household chores',
-        tokens: ['split', 'their', 'daily', 'household', 'chores'],
-        options: ['split', 'their', 'daily', 'household', 'chores'],
-        korean: '아이들은 설거지와 반려동물 밥 주기 사이에서 매일의 집안일을 공평하게 나누었습니다.',
-        explanation: '"household chores"는 매일 하는 가사 노동을 가리킵니다.'
+        english: 'On Saturday mornings, we always do our [chores around the clean house] together.',
+        answer: 'chores around the clean house',
+        tokens: ['chores', 'around', 'the', 'clean', 'house'],
+        options: ['chores', 'around', 'the', 'clean', 'house'],
+        korean: '토요일 아침에는 우리 모두 함께 집안일을 해요.',
+        explanation: '"chores around the house"는 집안 곳곳의 허드렛일을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'On the family farm, doing morning [chores, holidays, parties, concerts] included gathering fresh eggs and milking the cows.',
+        english: 'Cleaning my bedroom and taking out the trash are my daily [chores, parties, holidays, festivals].',
         answer: 'chores',
-        options: ['chores', 'holidays', 'parties', 'concerts'],
-        korean: '가족 농장에서 아침 일과(집안일)에는 신선한 달걀을 수거하고 젖을 짜는 일이 포함되었어요.',
-        explanation: '"morning chores"는 농장이나 가정의 아침 일과를 뜻합니다.'
+        options: ['chores', 'parties', 'holidays', 'festivals'],
+        korean: '내 방 청소와 쓰레기 버리기는 나의 매일의 집안일(허드렛일)이에요.',
+        explanation: '"daily chores"는 매일 해야 하는 집안일을 의미합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'My parents gave us an allowance whenever we finished all our assigned [chores, desserts, games, movies] on time.',
+        english: 'He finished all his weekend [chores, dreams, flights, concerts] so he could go play basketball with friends.',
         answer: 'chores',
-        options: ['chores', 'desserts', 'games', 'movies'],
-        korean: '부모님께서는 우리가 배정된 집안일을 제시간에 마칠 때마다 용돈을 주셨습니다.',
-        explanation: '용돈과 연계된 자녀의 가사 일과를 말합니다.'
+        options: ['chores', 'dreams', 'flights', 'concerts'],
+        korean: '그는 친구들과 농구를 하러 가기 위해 주말 집안일을 모두 끝마쳤어요.',
+        explanation: '"weekend chores"는 주말에 몰아서 하는 집안일들을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'After spending Saturday morning on exhausting [chores, vacations, banquets, voyages], we relaxed on the sofa.',
+        english: 'My sister and I always share the household [chores, movies, gifts, picnics] like setting the dinner table.',
         answer: 'chores',
-        options: ['chores', 'vacations', 'banquets', 'voyages'],
-        korean: '토요일 아침을 고된 집안일을 하며 보낸 후, 우리는 소파에서 편안히 쉬었습니다.',
-        explanation: '집안 허드렛일이라는 일상적 맥락입니다.'
+        options: ['chores', 'movies', 'gifts', 'picnics'],
+        korean: '언니와 나는 저녁 식탁 차리기 같은 집안일을 언제나 분담해요.',
+        explanation: '"household chores"는 가사 일이나 허드렛일을 뜻합니다.'
       }
     ]
   },
@@ -395,44 +395,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Going out for Italian gelato after a long hike in the hills was always [a treat, a chore, a punishment, a disaster] for the children.',
+        english: 'Getting an ice cream cone after school on Friday was always [a treat, a chore, a punishment, a trouble] for the kids.',
         answer: 'a treat',
-        options: ['a treat', 'a chore', 'a punishment', 'a disaster'],
-        korean: '언덕 하이킹을 길게 마친 뒤 이탈리아 젤라토를 먹으러 가는 것은 아이들에게 언제나 특별한 즐거움(선물)이었어요.',
+        options: ['a treat', 'a chore', 'a punishment', 'a trouble'],
+        korean: '금요일 방과 후에 아이스크림을 사 먹는 것은 아이들에게 언제나 특별한 즐거움(선물)이었어요.',
         explanation: '"a treat"는 일상적인 일 이상의 "특별한 즐거움, 큰 기쁨, 대접"을 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Getting home-baked warm cookies [was a wonderful special treat] after school.',
-        answer: 'was a wonderful special treat',
-        tokens: ['was', 'a', 'wonderful', 'special', 'treat'],
-        options: ['was', 'a', 'wonderful', 'special', 'treat'],
-        korean: '방과 후에 집에서 갓 구운 따뜻한 쿠키를 먹는 것은 정말 멋지고 특별한 즐거움이었습니다.',
-        explanation: '"a special treat"는 특별한 간식이나 기분 좋은 보상을 뜻합니다.'
+        english: 'Going to the bakery for sweet warm cookies was [a special treat on Sunday].',
+        answer: 'a special treat on Sunday',
+        tokens: ['a', 'special', 'treat', 'on', 'Sunday'],
+        options: ['a', 'special', 'treat', 'on', 'Sunday'],
+        korean: '달콤하고 따뜻한 쿠키를 사러 빵집에 가는 것은 일요일의 특별한 즐거움이었어요.',
+        explanation: '"special treat"는 특별히 주어지는 기분 좋은 보상이나 대접을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Having grandfather play the guitar by the campfire was truly [a treat, a chore, a burden, a fault] for everyone listening.',
+        english: 'Eating dinner at our favorite pizza place tonight is [a treat, a chore, a test, a task] for the whole family.',
         answer: 'a treat',
-        options: ['a treat', 'a chore', 'a burden', 'a fault'],
-        korean: '모닥불 옆에서 할아버지가 기타를 연주해 주시는 것은 듣는 모든 사람에게 진정으로 특별한 선물(기쁨)이었습니다.',
-        explanation: '특별한 감동이나 즐거운 경험을 비유적으로 "a treat"라고 표현합니다.'
+        options: ['a treat', 'a chore', 'a test', 'a task'],
+        korean: '오늘 밤 우리가 가장 좋아하는 피자 가게에서 저녁을 먹는 것은 온 가족에게 특별한 즐거움이에요.',
+        explanation: '"a treat"는 기분 전환이나 보상으로 즐기는 외식을 가리킬 때도 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'A hot cup of cocoa topped with marshmallows on a freezing winter evening is such [a treat, an obstacle, an error, a routine].',
+        english: 'Having fresh strawberries with breakfast was [a treat, a job, a pain, a worry] after a busy week.',
         answer: 'a treat',
-        options: ['a treat', 'an obstacle', 'an error', 'a routine'],
-        korean: '살을 에는 겨울 저녁에 마시멜로를 띄운 따뜻한 코코아 한 잔은 정말 각별한 기쁨이에요.',
-        explanation: '기분 좋은 소소한 힐링/간식을 "a treat"라고 합니다.'
+        options: ['a treat', 'a job', 'a pain', 'a worry'],
+        korean: '바쁜 한 주를 보낸 뒤 아침 식사로 신선한 딸기를 곁들여 먹는 것은 정말 기분 좋은 선물이었어요.',
+        explanation: '"a treat"는 작지만 큰 기쁨을 주는 특별한 순간을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Since my sister rarely gets time off work, having dinner with her tonight was [a treat, a penalty, a chore, an obligation].',
+        english: 'Mom bought us some sweet donuts as [a treat, a duty, a rule, a burden] for helping her clean the car.',
         answer: 'a treat',
-        options: ['a treat', 'a penalty', 'a chore', 'an obligation'],
-        korean: '누나가 평소에 쉴 시간이 거의 없기 때문에, 오늘 밤 그녀와 함께 저녁을 먹은 것은 참 소중하고 즐거운 시간이었어요.',
-        explanation: '소중하고 특별한 만남의 기쁨을 뜻합니다.'
+        options: ['a treat', 'a duty', 'a rule', 'a burden'],
+        korean: '엄마는 차 세차를 도와준 것에 대한 선물(보상)로 우리에게 달콤한 도넛을 사주셨어요.',
+        explanation: '"as a treat"는 도움이나 칭찬의 대가로 주는 특별한 대접을 의미합니다.'
       }
     ]
   },
@@ -443,44 +443,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'The packaging of the luxury perfume looked elegant, but the fragrance [itself, myself, herself, yourself] was rather mild.',
+        english: 'The book cover looked very simple, but the story [itself, myself, herself, yourself] was wonderful.',
         answer: 'itself',
         options: ['itself', 'myself', 'herself', 'yourself'],
-        korean: '고급 향수의 포장은 우아해 보였지만, 향기 그 자체는 꽤 은은했어요.',
+        korean: '책 표지는 아주 단순해 보였지만, 이야기 그 자체는 정말 훌륭했어요.',
         explanation: '"itself"는 사물이나 명사 뒤에 붙어 "그것 자체, 그 자체"를 강조하는 재귀대명사입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'The historic stone castle [itself was built in the twelfth century] on high ground.',
-        answer: 'itself was built in the twelfth century',
-        tokens: ['itself', 'was', 'built', 'in', 'the', 'twelfth', 'century'],
-        options: ['itself', 'was', 'built', 'in', 'the', 'twelfth', 'century'],
-        korean: '그 역사적인 석조 성채 그 자체는 12세기에 고지대에 지어졌습니다.',
-        explanation: '"The castle itself"는 성 주변 부속물이 아닌 성 본체를 강조합니다.'
+        english: 'The box was plain, but the gift [inside the package itself] was beautiful.',
+        answer: 'inside the package itself',
+        tokens: ['inside', 'the', 'package', 'itself'],
+        options: ['inside', 'the', 'package', 'itself'],
+        korean: '상자는 평범했지만, 포장 안의 선물 그 자체는 무척 아름다웠어요.',
+        explanation: '"itself"는 대상을 강조할 때 쓰입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'While the trail map had helpful notes, the hiking path [itself, ourselves, himself, herself] was completely unmarked.',
+        english: 'The hotel room was small, but the ocean view [itself, yourself, himself, myself] was amazing.',
         answer: 'itself',
-        options: ['itself', 'ourselves', 'himself', 'herself'],
-        korean: '등산 지도에는 유용한 안내가 적혀 있었지만, 등산로 그 자체에는 아무런 표시가 전혀 없었습니다.',
-        explanation: '등산로라는 대상 "자체"를 강조합니다.'
+        options: ['itself', 'yourself', 'himself', 'myself'],
+        korean: '호텔 방은 작았지만, 바다 전망 그 자체는 정말 멋졌어요.',
+        explanation: '"itself"는 사물(view)을 직접 강조할 때 사용됩니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The cabin interior was cozy, but the wooden porch [itself, yourself, themselves, ourselves] needed structural reinforcement.',
+        english: 'The car was old, but the engine [itself, herself, ourselves, themselves] ran very smoothly.',
         answer: 'itself',
-        options: ['itself', 'yourself', 'themselves', 'ourselves'],
-        korean: '오두막 내부는 아늑했지만, 나무 테라스 그 자체는 구조적 보강 공사가 필요했습니다.',
-        explanation: '건축물 특정 부위 "그 자체"를 가리킵니다.'
+        options: ['itself', 'herself', 'ourselves', 'themselves'],
+        korean: '차는 낡았지만, 엔진 그 자체는 무척 부드럽게 잘 돌아갔어요.',
+        explanation: '"itself"는 사물 명사를 강조하는 표현입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The delicious dipping sauce was spicy, but the grilled meat [itself, myself, herself, himself] was perfectly seasoned.',
+        english: 'Making dinner took some time, but the food [itself, myself, yourself, herself] tasted delicious.',
         answer: 'itself',
-        options: ['itself', 'myself', 'herself', 'himself'],
-        korean: '맛있는 디핑 소스는 매콤했지만, 구운 고기 그 자체는 간이 완벽하게 맞았어요.',
-        explanation: '소스와 대비되는 고기 자체를 강조합니다.'
+        options: ['itself', 'myself', 'yourself', 'herself'],
+        korean: '저녁을 만드는 데 시간이 좀 걸렸지만, 음식 그 자체는 정말 맛있었어요.',
+        explanation: '"itself"는 사물이나 음식 등을 강조합니다.'
       }
     ]
   },
@@ -491,44 +491,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'This clear mountain stream [feeds, blocks, drains, absorbs] into the large reservoir that provides drinking water to the city.',
+        english: 'A small, clear stream in the woods [feeds, blocks, drains, stops] into the large lake.',
         answer: 'feeds',
-        options: ['feeds', 'blocks', 'drains', 'absorbs'],
-        korean: '이 맑은 산골 개울은 시에 식수를 공급하는 대형 저수지로 흘러 들어갑니다.',
-        explanation: '"feed into"는 하천이나 물줄기가 더 큰 호수, 저수지, 바다로 "흘러 들어가다, 유입되다"를 뜻합니다.'
+        options: ['feeds', 'blocks', 'drains', 'stops'],
+        korean: '숲속의 작고 맑은 시냇물이 커다란 호수로 흘러 들어갑니다.',
+        explanation: '"feed into"는 하천이나 물줄기가 더 큰 호수나 저수지로 "흘러 들어가다, 유입되다"를 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'The melting glacier water [feeds directly into the crystal lake] below.',
-        answer: 'feeds directly into the crystal lake',
-        tokens: ['feeds', 'directly', 'into', 'the', 'crystal', 'lake'],
-        options: ['feeds', 'directly', 'into', 'the', 'crystal', 'lake'],
-        korean: '녹아내리는 빙하수는 아래쪽의 투명한 호수로 곧바로 흘러 들어갑니다.',
-        explanation: '"feeds into"는 물줄기가 호수로 유입되는 자연스러운 지리적 묘사입니다.'
+        english: 'Rainwater from the hills [feeds into our neighborhood pond] every spring.',
+        answer: 'feeds into our neighborhood pond',
+        tokens: ['feeds', 'into', 'our', 'neighborhood', 'pond'],
+        options: ['feeds', 'into', 'our', 'neighborhood', 'pond'],
+        korean: '언덕에서 내려오는 빗물이 매년 봄 우리 동네 연못으로 흘러 들어와요.',
+        explanation: '"feeds into"는 물이 다른 곳으로 흘러 들어감을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Several minor mountain tributaries [feed, block, freeze, evaporate] into the main river during the rainy spring season.',
+        english: 'This clean river [feeds, closes, covers, breaks] into the city\'s main drinking water reservoir.',
+        answer: 'feeds',
+        options: ['feeds', 'closes', 'covers', 'breaks'],
+        korean: '이 깨끗한 강은 시의 주요 식수 저수지로 흘러 들어가요.',
+        explanation: '"feeds into"는 저수지나 바다로 유입되는 물줄기를 설명합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'The little brook behind our school [feeds, hides, drops, catches] into a quiet pond.',
+        answer: 'feeds',
+        options: ['feeds', 'hides', 'drops', 'catches'],
+        korean: '우리 학교 뒤에 있는 작은 개울은 조용한 연못으로 흘러 들어가요.',
+        explanation: '"feeds into"는 물줄기가 연못이나 호수로 모이는 것을 뜻합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: 'Several small mountain streams [feed, push, shut, pull] into the big river nearby.',
         answer: 'feed',
-        options: ['feed', 'block', 'freeze', 'evaporate'],
-        korean: '비가 많이 오는 봄철에는 몇몇 작은 산골 지류들이 본류 강으로 흘러 들어갑니다.',
-        explanation: '지류가 큰 강으로 유입될 때 쓰는 동사입니다.'
-      },
-      {
-        type: 'multiple-choice',
-        english: 'The natural spring on our hill constantly [feeds, pumps, obstructs, dries] the duck pond year-round.',
-        answer: 'feeds',
-        options: ['feeds', 'pumps', 'obstructs', 'dries'],
-        korean: '우리 언덕의 천연 샘물은 일 년 내내 오리 연못으로 물을 끊임없이 공급해 줍니다.',
-        explanation: '수원이 연못으로 지속적으로 물을 채워주는 맥락입니다.'
-      },
-      {
-        type: 'multiple-choice',
-        english: 'A network of narrow underground pipes [feeds, exhausts, stains, halts] wastewater into the municipal treatment facility.',
-        answer: 'feeds',
-        options: ['feeds', 'exhausts', 'stains', 'halts'],
-        korean: '촘촘한 지하 배관망이 폐수를 시립 정화 처리 시설로 유입시킵니다.',
-        explanation: '수로나 배관이 시설로 흘러 들어가게 하는 맥락입니다.'
+        options: ['feed', 'push', 'shut', 'pull'],
+        korean: '몇몇 작은 산골 시냇물들이 근처의 큰 강으로 흘러 들어갑니다.',
+        explanation: '"feed into"는 복수 주어(streams)와 함께 사용되어 유입됨을 나타냅니다.'
       }
     ]
   },
@@ -539,44 +539,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Every spring before fishing season opens, the wildlife department will [stock, drain, poll, dry] the mountain lake with rainbow trout.',
+        english: 'Before the summer season starts, the park workers [stock, drain, burn, dry] the lake with lots of fish.',
         answer: 'stock',
-        options: ['stock', 'drain', 'poll', 'dry'],
-        korean: '매년 봄 낚시 시즌이 열리기 전에 야생동물 관리국에서는 산중 호수에 무지개송어를 방류하여 채워 넣습니다.',
-        explanation: '"stock (a lake/river) with fish"는 호수나 하천에 물고기를 "방류하다, 채우다"라는 전문 회화 표현입니다.'
+        options: ['stock', 'drain', 'burn', 'dry'],
+        korean: '여름 시즌이 시작되기 전에, 공원 관리원들은 호수에 많은 물고기를 방류하여 채워 넣어요.',
+        explanation: '"stock (a lake/river) with fish"는 호수나 강에 물고기를 "방류하다, 채우다"를 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Park rangers regularly [stock the local pond with fresh fish] for children.',
-        answer: 'stock the local pond with fresh fish',
-        tokens: ['stock', 'the', 'local', 'pond', 'with', 'fresh', 'fish'],
-        options: ['stock', 'the', 'local', 'pond', 'with', 'fresh', 'fish'],
-        korean: '공원 관리인들은 어린이들을 위해 동네 연못에 정기적으로 물고기를 방류합니다.',
-        explanation: '"stock A with B"는 A에 B를 보충하여 채우다는 뜻입니다.'
+        english: 'Every spring, our town will [stock the public pond with trout] for children to fish.',
+        answer: 'stock the public pond with trout',
+        tokens: ['stock', 'the', 'public', 'pond', 'with', 'trout'],
+        options: ['stock', 'the', 'public', 'pond', 'with', 'trout'],
+        korean: '매년 봄, 우리 마을은 아이들이 낚시할 수 있도록 공공 연못에 송어를 방류합니다.',
+        explanation: '"stock ... with ..."는 물고기를 채워 넣는다는 의미입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The owner decided to [stock, empty, desert, discard] his private farm pond with bass and catfish for family recreation.',
+        english: 'The town decided to [stock, empty, paint, lock] the local pond with small fish again.',
         answer: 'stock',
-        options: ['stock', 'empty', 'desert', 'discard'],
-        korean: '주인은 가족 레크리에이션을 위해 개인 농장 연못에 배스와 메기를 방류하기로 결정했습니다.',
-        explanation: '물고기를 양식하거나 낚시용으로 방류하는 맥락입니다.'
+        options: ['stock', 'empty', 'paint', 'lock'],
+        korean: '마을은 동네 연못에 다시 작은 물고기들을 방류하기로 결정했어요.',
+        explanation: '"stock"은 수역에 생물이나 물고기를 채워 넣는 것을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We need to [stock, dump, abandon, waste] the storm emergency pantry with canned beans and bottled water before hurricane season.',
+        english: 'They usually [stock, wash, cook, freeze] the quiet lake with fish once a year in April.',
         answer: 'stock',
-        options: ['stock', 'dump', 'abandon', 'waste'],
-        korean: '허리케인 시즌이 오기 전에 우리는 비상용 식품 저장실을 캔 콩과 생수로 채워 넣어야 합니다.',
-        explanation: '"stock A with B"는 물품을 구비해 채워 넣는다는 뜻으로도 매우 자주 쓰입니다.'
+        options: ['stock', 'wash', 'cook', 'freeze'],
+        korean: '그들은 보통 4월에 일 년에 한 번 그 조용한 호수에 물고기를 방류합니다.',
+        explanation: '"stock with fish"는 호수에 물고기를 넣어 번식이나 낚시를 돕는 것입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The local general store always makes sure to [stock, spill, hide, ruin] plenty of ice and firewood during holiday weekends.',
+        english: 'The rangers help to [stock, break, heat, dig] the mountain river with fish every May.',
         answer: 'stock',
-        options: ['stock', 'spill', 'hide', 'ruin'],
-        korean: '동네 잡화점은 연휴 주말 동안 항상 얼음과 장작을 넉넉히 비축해 둡니다.',
-        explanation: '물품을 매대에 구비/비축하다는 뜻입니다.'
+        options: ['stock', 'break', 'heat', 'dig'],
+        korean: '공원 관리원들은 매년 5월에 산골 강에 물고기를 방류하는 일을 도와요.',
+        explanation: '"stock"은 강이나 호수에 물고기를 채워 넣는 행동입니다.'
       }
     ]
   },
@@ -587,44 +587,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'The cozy mountain retreat has been expanded and remodeled multiple times [through the years, in a split second, at once, right now].',
+        english: 'Our small town has grown and changed a lot [through the years, in a second, at once, right now].',
         answer: 'through the years',
-        options: ['through the years', 'in a split second', 'at once', 'right now'],
-        korean: '그 아늑한 산골 휴식처는 세월이 흐르면서(여러 해에 걸쳐) 여러 차례 확장되고 개조되었어요.',
-        explanation: '"through the years"는 "세월이 흐르면서, 오랜 세월 동안, 여러 해에 걸쳐"라는 뜻의 품격 있는 시간 표현입니다.'
+        options: ['through the years', 'in a second', 'at once', 'right now'],
+        korean: '우리 작은 마을은 세월이 흐르면서(여러 해에 걸쳐) 많이 성장하고 변했어요.',
+        explanation: '"through the years"는 "세월이 흐르면서, 오랜 세월 동안, 여러 해에 걸쳐"라는 뜻의 시간 표현입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Our friendship [remained remarkably strong through the years] despite living far apart.',
-        answer: 'remained remarkably strong through the years',
-        tokens: ['remained', 'remarkably', 'strong', 'through', 'the', 'years'],
-        options: ['remained', 'remarkably', 'strong', 'through', 'the', 'years'],
-        korean: '멀리 떨어져 살았음에도 불구하고 우리의 우정은 세월이 흐르는 동안 놀라울 정도로 굳건히 유지되었습니다.',
-        explanation: '"through the years"는 지속된 세월의 경과를 나타냅니다.'
+        english: 'My grandparents kept many sweet family photos [through the years in a big album].',
+        answer: 'through the years in a big album',
+        tokens: ['through', 'the', 'years', 'in', 'a', 'big', 'album'],
+        options: ['through', 'the', 'years', 'in', 'a', 'big', 'album'],
+        korean: '우리 조부모님께서는 오랜 세월 동안 많은 정다운 가족사진들을 큰 앨범에 간직해 오셨어요.',
+        explanation: '"through the years"는 오랜 세월에 걸쳐 지속되었음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'My grandparents accumulated hundreds of photo albums [through the years, in an instant, overnight, at noon].',
+        english: 'We have made so many happy memories together [through the years, in one minute, instantly, at this second].',
         answer: 'through the years',
-        options: ['through the years', 'in an instant', 'overnight', 'at noon'],
-        korean: '조부모님께서는 오랜 세월 동안 수백 권의 사진 앨범을 모으셨습니다.',
-        explanation: '시간이 흐르며 차곡차곡 쌓여온 맥락을 표현합니다.'
+        options: ['through the years', 'in one minute', 'instantly', 'at this second'],
+        korean: '우리는 여러 해에 걸쳐 함께 정말 많은 행복한 추억들을 쌓아왔어요.',
+        explanation: '"through the years"는 시간이 흐르며 차곡차곡 쌓여온 것을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The quiet town gradually evolved into a bustling ski destination [through the years, in a flash, momentarily, immediately].',
+        english: 'The sturdy old dining table has stayed strong [through the years, in a flash, right away, at once].',
         answer: 'through the years',
-        options: ['through the years', 'in a flash', 'momentarily', 'immediately'],
-        korean: '그 조용한 마을은 세월이 흐르며 점차 번화한 스키 관광지로 발전했습니다.',
-        explanation: '오랜 시간 동안 일어난 점진적 변화를 뜻합니다.'
+        options: ['through the years', 'in a flash', 'right away', 'at once'],
+        korean: '그 튼튼하고 오래된 식탁은 오랜 세월 동안 변함없이 튼튼하게 유지되었어요.',
+        explanation: '"through the years"는 긴 시간에 걸쳐 변함없음을 나타낼 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Wayne kept adding personalized carpentry details to the cabin [through the years, at dawn, for a minute, in a heartbeat].',
+        english: 'They stayed best friends [through the years, in a heartbeat, in one second, immediately] after first meeting in school.',
         answer: 'through the years',
-        options: ['through the years', 'at dawn', 'for a minute', 'in a heartbeat'],
-        korean: '웨인 삼촌은 세월이 흐르면서 오두막에 직접 만든 맞춤형 목공 장식들을 계속 덧붙여 나갔어요.',
-        explanation: '가족 오두막의 오랜 역사와 어우러진 자연스러운 표현입니다.'
+        options: ['through the years', 'in a heartbeat', 'in one second', 'immediately'],
+        korean: '그들은 학창 시절에 처음 만난 뒤로 오랜 세월 동안 줄곧 가장 친한 친구로 지냈어요.',
+        explanation: '"through the years"는 우정이나 관계가 오랫동안 이어졌음을 뜻합니다.'
       }
     ]
   },
@@ -635,44 +635,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Because the basement flooded after the storm, the renovators had to [strip, paint, polish, decorate] all the water-damaged drywall down to the bare wooden framing.',
+        english: 'Before repainting the old bedroom, my dad had to [strip, build, plant, pack] the peeling wallpaper from the walls.',
         answer: 'strip',
-        options: ['strip', 'paint', 'polish', 'decorate'],
-        korean: '폭풍 후 지하실이 침수되었기 때문에, 리모델링 인부들은 물에 젖은 석고보드를 뼈대 목재까지 전부 뜯어내야 했습니다.',
-        explanation: '"strip (down)"은 건축이나 인테리어에서 내부 마감재를 뼈대만 남기고 "완전히 뜯어내다, 벗겨내다"를 뜻합니다.'
+        options: ['strip', 'build', 'plant', 'pack'],
+        korean: '오래된 침실을 다시 페인트칠하기 전에, 아빠는 벽에서 벗겨지는 벽지를 전부 뜯어내야 했어요.',
+        explanation: '"strip"은 페인트나 벽지, 낡은 마감재 등을 "벗겨내다, 뜯어내다"라는 뜻입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'We had to [strip the old peeling wallpaper off] the hallway walls.',
-        answer: 'strip the old peeling wallpaper off',
-        tokens: ['strip', 'the', 'old', 'peeling', 'wallpaper', 'off'],
-        options: ['strip', 'the', 'old', 'peeling', 'wallpaper', 'off'],
-        korean: '우리는 복도 벽에서 벗겨지던 오래된 벽지를 완전히 뜯어내야 했습니다.',
-        explanation: '"strip off"는 표면재를 깨끗이 벗겨내는 작업입니다.'
+        english: 'We helped grandpa [strip the old brown paint] off the wooden chair.',
+        answer: 'strip the old brown paint',
+        tokens: ['strip', 'the', 'old', 'brown', 'paint'],
+        options: ['strip', 'the', 'old', 'brown', 'paint'],
+        korean: '우리는 할아버지를 도와 나무 의자에서 낡은 갈색 페인트를 벗겨냈어요.',
+        explanation: '"strip off"는 겉에 칠해진 것을 벗겨내는 것을 의미합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Before applying a fresh coat of varnish, you should [strip, freeze, moisten, shatter] the old dark paint off the antique table.',
+        english: 'The workers will [strip, fill, draw, lock] the damaged floor tiles before laying new wooden floors.',
         answer: 'strip',
-        options: ['strip', 'freeze', 'moisten', 'shatter'],
-        korean: '새 니스칠을 하기 전에, 앤틱 테이블의 오래된 짙은 페인트를 벗겨내야 합니다.',
-        explanation: '가구 복원에서 페인트를 벗겨낼 때 쓰는 표준 동사입니다.'
+        options: ['strip', 'fill', 'draw', 'lock'],
+        korean: '인부들은 새 나무 바닥을 깔기 전에 손상된 바닥 타일을 모두 뜯어낼 거예요.',
+        explanation: '"strip"은 리모델링 전에 바닥재나 벽재를 뜯어낼 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The restoration crew decided to [strip, lock, heat, bury] the car interior completely to treat underlying frame rust.',
+        english: 'They had to [strip, cook, wear, fold] the torn cloth off the old chair to replace the cushion.',
         answer: 'strip',
-        options: ['strip', 'lock', 'heat', 'bury'],
-        korean: '복원 작업팀은 하부 프레임의 녹을 제거하기 위해 자동차 내부를 완전히 뜯어내기로 결정했습니다.',
-        explanation: '내부를 깡통 상태로 털어내는 작업을 뜻합니다.'
+        options: ['strip', 'cook', 'wear', 'fold'],
+        korean: '그들은 쿠션을 교체하기 위해 오래된 의자에서 찢어진 천을 뜯어내야 했어요.',
+        explanation: '"strip"은 낡은 덮개나 천을 벗겨낼 때 쓰는 동사입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'When remodeling the historic kitchen, the workers had to [strip, carpet, curtain, wax] away three layers of vintage linoleum flooring.',
+        english: 'He used sandpaper to [strip, bake, melt, water] the dark stain off the old wooden table.',
         answer: 'strip',
-        options: ['strip', 'carpet', 'curtain', 'wax'],
-        korean: '역사적인 주방을 리모델링할 때, 인부들은 세 겹이나 덧대진 빈티지 장판 바닥을 완전히 뜯어내야 했습니다.',
-        explanation: '바닥재를 뜯어낼 때 자연스러운 표현입니다.'
+        options: ['strip', 'bake', 'melt', 'water'],
+        korean: '그는 오래된 원목 테이블에서 짙은 얼룩과 칠을 벗겨내기 위해 사포를 사용했어요.',
+        explanation: '"strip"은 표면의 칠이나 코팅을 완전히 벗겨낼 때 씁니다.'
       }
     ]
   },
@@ -683,44 +683,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'If wet insulation remains sealed behind the walls without fresh air, it will quickly turn damp and [moldy, sparkling, sterile, fragrant].',
+        english: 'If you leave bread in a warm, wet bag too long, it will turn [moldy, shiny, clean, fresh].',
         answer: 'moldy',
-        options: ['moldy', 'sparkling', 'sterile', 'fragrant'],
-        korean: '젖은 단열재가 신선한 공기 없이 벽 뒤에 밀폐되어 방치되면, 금세 눅눅해지고 곰팡이가 슬게 됩니다.',
-        explanation: '"moldy"는 습기 찬 공간에서 "곰팡이가 핀, 곰팡내 나는"을 뜻하는 형용사입니다.'
+        options: ['moldy', 'shiny', 'clean', 'fresh'],
+        korean: '빵을 따뜻하고 축축한 봉투에 너무 오래 두면 곰팡이가 피게 됩니다.',
+        explanation: '"moldy"는 음식이나 습한 공간에 "곰팡이가 핀, 곰팡내 나는"을 뜻하는 형용사입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'We threw away [the moldy loaf of bread left] in the damp cabinet.',
-        answer: 'the moldy loaf of bread left',
-        tokens: ['the', 'moldy', 'loaf', 'of', 'bread', 'left'],
-        options: ['the', 'moldy', 'loaf', 'of', 'bread', 'left'],
-        korean: '우리는 눅눅한 찬장에 방치되어 곰팡이가 핀 식빵을 버렸습니다.',
-        explanation: '"moldy bread"는 곰팡이 핀 빵을 뜻합니다.'
+        english: 'The old fruit in the basket became [soft and moldy after many days].',
+        answer: 'soft and moldy after many days',
+        tokens: ['soft', 'and', 'moldy', 'after', 'many', 'days'],
+        options: ['soft', 'and', 'moldy', 'after', 'many', 'days'],
+        korean: '바구니 속의 오래된 과일은 며칠이 지나자 물러지고 곰팡이가 피었어요.',
+        explanation: '"moldy"는 곰팡이가 핀 상태를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The leaky basement smelled terribly musty and [moldy, fresh, floral, spicy] after the groundwater seeped in.',
+        english: 'The wet basement smelled bad because some old cardboard boxes got [moldy, bright, tidy, neat].',
         answer: 'moldy',
-        options: ['moldy', 'fresh', 'floral', 'spicy'],
-        korean: '물이 새는 지하실은 지하수가 스며든 뒤 지독하게 퀴퀴하고 곰팡내 나는 냄새가 났어요.',
-        explanation: '"musty and moldy"는 습한 지하 공간의 냄새를 묘사하는 단짝 표현입니다.'
+        options: ['moldy', 'bright', 'tidy', 'neat'],
+        korean: '오래된 종이 상자들에 곰팡이가 피어서 축축한 지하실에서 퀴퀴한 냄새가 났어요.',
+        explanation: '"moldy"는 습기 찬 물건에 곰팡이가 핀 상태를 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We left the windows open all weekend to prevent the humid bathroom tiles from turning [moldy, polished, spotless, sunny].',
+        english: "Don't eat that piece of bread because it looks green and [moldy, crispy, golden, sweet].",
         answer: 'moldy',
-        options: ['moldy', 'polished', 'spotless', 'sunny'],
-        korean: '우리는 습한 욕실 타일에 곰팡이가 스는 것을 막기 위해 주말 내내 창문을 열어두었습니다.',
-        explanation: '"turn moldy"는 곰팡이가 피어버리는 변화 상태입니다.'
+        options: ['moldy', 'crispy', 'golden', 'sweet'],
+        korean: '초록색으로 곰팡이가 핀 것처럼 보이니 그 빵은 먹지 마세요.',
+        explanation: '"moldy"는 음식이 상해 곰팡이가 슬었을 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Old cardboard boxes stored directly on damp concrete floors often become soggy and [moldy, crisp, brand-new, metallic].',
+        english: 'We threw away the damp towel before it became [moldy, warm, silky, smooth] and smelly.',
         answer: 'moldy',
-        options: ['moldy', 'crisp', 'brand-new', 'metallic'],
-        korean: '축축한 콘크리트 바닥에 바로 보관한 낡은 판지 상자들은 흔히 눅눅해지고 곰팡이가 핍니다.',
-        explanation: '습기로 인해 곰팡이가 스는 상태를 뜻합니다.'
+        options: ['moldy', 'warm', 'silky', 'smooth'],
+        korean: '우리는 곰팡이가 피고 냄새가 나기 전에 축축한 수건을 버렸어요.',
+        explanation: '"moldy"는 축축하게 방치되어 곰팡이가 생긴 상태를 가리킵니다.'
       }
     ]
   },
@@ -731,93 +731,92 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Because the hillside slope was uneven, the carpenters adjusted the foundational pillars to make the floor [level, crooked, steep, tilted].',
+        english: 'The kitchen table wobbled because the floor was not quite [level, steep, curved, twisted].',
         answer: 'level',
-        options: ['level', 'crooked', 'steep', 'tilted'],
-        korean: '언덕 경사면이 울퉁불퉁했기 때문에, 목수들은 바닥이 수평(평평)하도록 기초 기둥들을 조정했습니다.',
-        explanation: '"level"은 건축이나 지형에서 기울어짐 없이 "평평한, 수평인"을 뜻합니다.'
+        options: ['level', 'steep', 'curved', 'twisted'],
+        korean: '바닥이 완전히 평평(수평)하지 않아서 주방 식탁이 흔들거렸어요.',
+        explanation: '"level"은 건축이나 가구, 바닥 등에서 기울어짐 없이 "평평한, 수평인"을 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Use a spirit tool to [ensure the bookshelf is perfectly level] before mounting it.',
-        answer: 'ensure the bookshelf is perfectly level',
-        tokens: ['ensure', 'the', 'bookshelf', 'is', 'perfectly', 'level'],
-        options: ['ensure', 'the', 'bookshelf', 'is', 'perfectly', 'level'],
-        korean: '책장을 벽에 고정하기 전에 수평계를 사용하여 완벽하게 수평인지 확인하세요.',
-        explanation: '"perfectly level"은 한쪽으로 기울지 않고 완벽히 평평한 상태입니다.'
+        english: 'Use this small tool to make sure [the picture frame is level] on the wall.',
+        answer: 'the picture frame is level',
+        tokens: ['the', 'picture', 'frame', 'is', 'level'],
+        options: ['the', 'picture', 'frame', 'is', 'level'],
+        korean: '벽에 걸린 액자가 수평을 이루는지 확인하기 위해 이 작은 도구를 사용하세요.',
+        explanation: '"level"은 수평이 딱 맞게 평평한 상태를 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'We had to place a small piece of folded cardboard under the table leg to keep it [level, bouncy, diagonal, wobbling].',
+        english: 'We placed a small folded paper under the desk leg to keep the top [level, rough, crooked, tilted].',
         answer: 'level',
-        options: ['level', 'bouncy', 'diagonal, wobbling'],
-        options: ['level', 'bouncy', 'diagonal', 'slippery'],
-        korean: '우리는 테이블이 흔들리지 않고 수평을 유지하도록 다리 밑에 접은 마분지 조각을 받쳐야 했습니다.',
-        explanation: '가구의 수평을 맞추는 일상적 맥락입니다.'
+        options: ['level', 'rough', 'crooked', 'tilted'],
+        korean: '우리는 책상 윗면이 수평(평평)을 유지하도록 책상 다리 밑에 작게 접은 종이를 받쳤어요.',
+        explanation: '"keep level"은 기울지 않고 평평하게 수평을 유지한다는 뜻입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Before pitching our camping tent, we searched the woods for a completely [level, vertical, jagged, spiraled] patch of dry ground.',
+        english: 'Make sure the wooden shelf is completely [level, narrow, deep, pointed] before placing books on it.',
         answer: 'level',
-        options: ['level', 'vertical', 'jagged', 'spiraled'],
-        korean: '텐트를 치기 전에 우리는 숲속에서 완전히 평평한 마른 땅을 찾아다녔습니다.',
-        explanation: '"level ground"는 경사지지 않은 평평한 땅을 뜻합니다.'
+        options: ['level', 'narrow', 'deep', 'pointed'],
+        korean: '책을 올려놓기 전에 나무 선반이 완벽하게 수평(평평)인지 확인하세요.',
+        explanation: '"level"은 물건이 미끄러지지 않도록 평평한 수평 상태를 말합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The pool table must be precisely [level, slanted, concave, bumpy] so the balls roll fairly in all directions.',
+        english: 'The yard grass needs to be [level, bent, wavy, sharp] before we set up the picnic tent.',
         answer: 'level',
-        options: ['level', 'slanted', 'concave', 'bumpy'],
-        korean: '공들이 모든 방향으로 공정하게 굴러가도록 당구대는 정확히 수평이어야 합니다.',
-        explanation: '기울어짐 없는 수평 상태를 뜻합니다.'
+        options: ['level', 'bent', 'wavy', 'sharp'],
+        korean: '피크닉 텐트를 치기 전에 마당 잔디가 평평해야 해요.',
+        explanation: '"level"은 지면이 평탄하고 고른 상태를 가리킵니다.'
       }
     ]
   },
 
-  // 17. as
+  // 17. As
   {
-    keyExpression: 'as',
+    keyExpression: 'As',
     sentences: [
       {
         type: 'multiple-choice',
-        english: '[As, Unless, In case, Lest] the sun set behind the mountain ridge, the evening air grew noticeably chilly.',
+        english: '[As, Unless, In case, Lest] the evening sun went down, the air outside became pleasantly cool.',
         answer: 'As',
         options: ['As', 'Unless', 'In case', 'Lest'],
-        korean: '태양이 산등성이 너머로 저물어감에 따라(저물면서), 저녁 공기가 눈에 띄게 쌀쌀해졌습니다.',
-        explanation: '접속사 "as"는 두 사건이 동시에 일어나거나 시간의 흐름에 따라 변화할 때 "~함에 따라, ~하면서"라는 뜻으로 쓰입니다.'
+        korean: '저녁 해가 저물어감에 따라(저물면서), 바깥 공기가 기분 좋게 선선해졌어요.',
+        explanation: '접속사 "As"는 시간의 흐름이나 두 사건이 동시에 진행될 때 "~함에 따라, ~하면서"라는 뜻으로 쓰입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'He waved goodbye to us [as the train pulled away slowly] from the station platform.',
-        answer: 'as the train pulled away slowly',
-        tokens: ['as', 'the', 'train', 'pulled', 'away', 'slowly'],
-        options: ['as', 'the', 'train', 'pulled', 'away', 'slowly'],
-        korean: '기차가 역 플랫폼에서 천천히 멀어져 감에 따라 그는 우리에게 작별의 손을 흔들었습니다.',
-        explanation: '"as the train pulled away"는 기차가 출발하는 동작과 동시에 일어나는 배경입니다.'
+        english: '[As the train pulled into the station], everyone stood up with their bags.',
+        answer: 'As the train pulled into the station',
+        tokens: ['As', 'the', 'train', 'pulled', 'into', 'the', 'station'],
+        options: ['As', 'the', 'train', 'pulled', 'into', 'the', 'station'],
+        korean: '기차가 역 안으로 들어옴에 따라(들어오자), 모두가 가방을 들고 일어섰어요.',
+        explanation: '"As"는 어떤 동작이나 사건이 일어나는 순간을 자연스럽게 연결합니다.'
       },
       {
         type: 'multiple-choice',
-        english: '[As, Before, Instead, Rather] they earned more income over the years, the family gradually expanded their rural homestead.',
+        english: '[As, If only, Lest, Provided] the children got older, they helped more with simple house chores.',
         answer: 'As',
-        options: ['As', 'Before', 'Instead', 'Rather'],
-        korean: '수년에 걸쳐 소득이 점차 늘어남에 따라, 그 가족은 시골 가옥을 조금씩 넓혀 나갔습니다.',
-        explanation: '점진적인 진행 상황과 함께 변화하는 맥락을 나타냅니다.'
+        options: ['As', 'If only', 'Lest', 'Provided'],
+        korean: '아이들이 나이가 들어감에 따라, 간단한 집안일을 더 많이 도와주었어요.',
+        explanation: '"As"는 시간의 경과에 따른 점진적인 변화를 나타낼 때 자주 쓰입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The audience broke into applause [as, although, whereas, despite] the soloist completed the difficult piano sonata.',
-        answer: 'as',
-        options: ['as', 'although', 'whereas', 'despite'],
-        korean: '독주자가 어려운 피아노 소나타를 마치자마자(마침과 동시에) 관객들은 박수갈채를 터뜨렸습니다.',
-        explanation: '한 동작의 완료와 동시에 반응이 이어지는 접속사 "as"입니다.'
-      },
-      {
-        type: 'multiple-choice',
-        english: '[As, Provided, Unless, If only] winter approached, the cabin dwellers gathered extra firewood and insulated the exterior pipes.',
+        english: '[As, Except, Until, Unless] morning came, the birds began to sing outside my bedroom window.',
         answer: 'As',
-        options: ['As', 'Provided', 'Unless', 'If only'],
-        korean: '겨울이 다가옴에 따라 오두막 주민들은 여분의 장작을 모으고 외부 배관을 단열했습니다.',
-        explanation: '계절이 다가오는 시간적 진행을 나타냅니다.'
+        options: ['As', 'Except', 'Until', 'Unless'],
+        korean: '아침이 밝아옴에 따라, 침실 창문 밖에서 새들이 노래하기 시작했어요.',
+        explanation: '"As"는 시간이 흐르며 어떤 현상이 함께 일어남을 뜻합니다.'
+      },
+      {
+        type: 'multiple-choice',
+        english: '[As, Unless, In case, Lest] we walked closer to the ocean, the sound of the waves grew louder.',
+        answer: 'As',
+        options: ['As', 'Unless', 'In case', 'Lest'],
+        korean: '우리가 바다에 가까이 걸어감에 따라, 파도 소리가 점점 더 크게 들렸어요.',
+        explanation: '"As"는 한 동작이 진행됨에 따라 다른 현상이 함께 변화함을 나타냅니다.'
       }
     ]
   },
@@ -828,45 +827,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'During the nineteenth-century gold rush, heavy [mining, farming, sculpting, sailing] operations transformed the rivers of Northern California.',
+        english: 'A long time ago, many people moved to the mountains to work in gold [mining, farming, cooking, teaching].',
         answer: 'mining',
-        options: ['mining', 'farming', 'sculpting, sailing'],
-        options: ['mining', 'farming', 'sculpting', 'sailing'],
-        korean: '19세기 골드러시 시기에 대규모 채굴(광업) 작업은 북부 캘리포니아의 강들을 변화시켰습니다.',
-        explanation: '"mining"은 금, 은, 석탄 등 광물을 캐내는 "채굴, 광업"을 뜻합니다.'
+        options: ['mining', 'farming', 'cooking', 'teaching'],
+        korean: '오래전, 많은 사람들이 금 채굴(광업) 일에 종사하기 위해 산으로 이주했어요.',
+        explanation: '"mining"은 금, 은, 석탄 등 광물을 땅속에서 캐내는 "채굴, 광업"을 뜻합니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Hikers discovered [remnants of an abandoned silver mining] town in the canyon.',
-        answer: 'remnants of an abandoned silver mining',
-        tokens: ['remnants', 'of', 'an', 'abandoned', 'silver', 'mining'],
-        options: ['remnants', 'of', 'an', 'abandoned', 'silver', 'mining'],
-        korean: '등산객들은 협곡에서 버려진 은광 채굴 마을의 잔해를 발견했습니다.',
-        explanation: '"silver mining town"은 은 채굴로 형성되었던 광산 마을입니다.'
+        english: 'Our town was once famous for [coal mining many years ago].',
+        answer: 'coal mining many years ago',
+        tokens: ['coal', 'mining', 'many', 'years', 'ago'],
+        options: ['coal', 'mining', 'many', 'years', 'ago'],
+        korean: '우리 마을은 수년 전에 석탄 채굴(광업)로 한때 유명했어요.',
+        explanation: '"coal mining"은 석탄 채굴을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The historic museum features rusted iron equipment originally used for underground coal [mining, knitting, painting, banking].',
+        english: 'His grandfather worked in copper [mining, baking, painting, dancing] when he was a young man.',
         answer: 'mining',
-        options: ['mining', 'knitting', 'painting', 'banking'],
-        korean: '그 역사 박물관은 원래 지하 탄광 채굴에 사용되었던 녹슨 철제 장비들을 전시하고 있습니다.',
-        explanation: '광산 작업에서 쓰이는 장비를 설명할 때 "mining"을 씁니다.'
+        options: ['mining', 'baking', 'painting', 'dancing'],
+        korean: '그의 할아버지는 젊은 시절에 구리 채굴(광업) 현장에서 일하셨어요.',
+        explanation: '"mining"은 금속이나 광물을 캐내는 산업을 가리킵니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Environmental groups are working to rehabilitate forest valleys damaged by old copper [mining, baking, tailoring, reading] projects.',
+        english: 'Before modern factories opened, iron [mining, sailing, writing, singing] was the main job in this valley.',
         answer: 'mining',
-        options: ['mining', 'baking', 'tailoring', 'reading'],
-        korean: '환경 단체들은 옛 구리 광산 채굴 사업으로 훼손된 숲골짜기들을 복원하기 위해 일하고 있습니다.',
-        explanation: '구리 광산 사업을 뜻합니다.'
+        options: ['mining', 'sailing', 'writing', 'singing'],
+        korean: '현대식 공장들이 들어서기 전에는 철 채굴(광업)이 이 골짜기의 주된 일자리였어요.',
+        explanation: '"mining"은 광석을 캐내는 광업을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The old mountain trail originally served as a transport road connecting remote quartz [mining, sailing, diving, swimming] camps.',
+        english: 'Visitors can see an old silver [mining, fishing, gardening, sewing] museum near the mountain path.',
         answer: 'mining',
-        options: ['mining', 'sailing', 'diving', 'swimming'],
-        korean: '그 오래된 산길은 원래 외딴 석영 광산 캠프들을 연결하던 수송 도로 역할을 했습니다.',
-        explanation: '산속 광산 캠프를 가리킵니다.'
+        options: ['mining', 'fishing', 'gardening', 'sewing'],
+        korean: '방문객들은 산길 근처에 있는 오래된 은 채굴(광업) 박물관을 구경할 수 있어요.',
+        explanation: '"mining museum"은 과거 광산 역사를 보여주는 박물관을 뜻합니다.'
       }
     ]
   },
@@ -877,44 +875,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'Whenever we visit our grandparents\' ranch, we [get to, have to, refuse to, hesitate to] ride horses across the open meadows.',
+        english: 'Because we finished all our homework early, we [get to, have to, hate to, fail to] watch a movie tonight.',
         answer: 'get to',
-        options: ['get to', 'have to', 'refuse to', 'hesitate to'],
-        korean: '조부모님의 목장을 방문할 때마다, 우리는 탁 트인 목초지에서 말을 타는 즐거운 기회를 얻곤 해요.',
-        explanation: '"get to (동사원형)"는 의무(have to)가 아니라 감사의 마음으로 "~할 기회를 얻다, ~할 수 있게 되다"라는 뜻입니다.'
+        options: ['get to', 'have to', 'hate to', 'fail to'],
+        korean: '숙제를 일찍 다 끝마쳤기 때문에, 우리는 오늘 밤 영화를 볼 수 있는 즐거운 기회를 얻었어요.',
+        explanation: '"get to (동사원형)"는 의무(have to)가 아니라 기쁜 마음으로 "~할 기회를 얻다, ~할 수 있게 되다"라는 뜻입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'I feel very lucky because [I get to work with such talented] artists.',
-        answer: 'I get to work with such talented',
-        tokens: ['I', 'get', 'to', 'work', 'with', 'such', 'talented'],
-        options: ['I', 'get', 'to', 'work', 'with', 'such', 'talented'],
-        korean: '이렇게 뛰어난 재능을 가진 아티스트들과 함께 일할 수 있는 기회가 생겨서 저는 참 행운이라고 생각해요.',
-        explanation: '"get to work with"는 훌륭한 사람들과 함께 일하는 영광/기회를 누리다는 뜻입니다.'
+        english: 'When we visit aunt Sarah on Saturdays, we [get to play with her puppy].',
+        answer: 'get to play with her puppy',
+        tokens: ['get', 'to', 'play', 'with', 'her', 'puppy'],
+        options: ['get', 'to', 'play', 'with', 'her', 'puppy'],
+        korean: '토요일에 사라 이모 댁을 방문할 때면, 우리는 귀여운 강아지와 놀 수 있는 기쁨을 누려요.',
+        explanation: '"get to play"는 즐겁게 놀 기회를 얻었다는 뉘앙스입니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'During summer internship programs, top engineering students [get to, fail to, avoid to, deny to] test experimental aircraft prototypes.',
+        english: 'On sunny weekends, I [get to, have to, refuse to, hesitate to] ride my new bicycle in the park.',
         answer: 'get to',
-        options: ['get to', 'fail to', 'avoid to', 'deny to'],
-        korean: '여름 인턴십 프로그램 동안 우수 공학도들은 실험용 항공기 시제품을 직접 시험해 볼 기회를 얻습니다.',
-        explanation: '특별한 특권이나 경험의 기회를 가리킵니다.'
+        options: ['get to', 'have to', 'refuse to', 'hesitated to'],
+        korean: '화창한 주말이면, 나는 공원에서 새 자전거를 탈 수 있는 신나는 기회를 얻어요.',
+        explanation: '"get to"는 기대하던 일을 할 수 있게 되었음을 뜻합니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'It was such a thrill that we [got to, were forced to, refused to, declined to] see sea turtles nesting on the beach under the moonlight.',
-        answer: 'got to',
-        options: ['got to', 'were forced to', 'refused to', 'declined to'],
-        korean: '달빛 아래 해변에서 바다거북이 산란하는 모습을 직접 볼 수 있어서 정말 가슴 벅찬 경험이었어요.',
-        explanation: '희귀하고 소중한 광경을 보게 된 행운을 뜻합니다.'
+        english: 'During summer vacation, the children [get to, must, need to, are forced to] stay up a little later at night.',
+        answer: 'get to',
+        options: ['get to', 'must', 'need to', 'are forced to'],
+        korean: '여름 방학 동안에는 아이들이 밤에 조금 더 늦게까지 깨어 있을 수 있어요(허락을 얻음).',
+        explanation: '"get to"는 평소와 달리 좋은 특권을 누릴 수 있음을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'Not every young musician [gets to, fails to, dislikes to, dreads to] perform live at Carnegie Hall with a full symphony orchestra.',
-        answer: 'gets to',
-        options: ['gets to', 'fails to', 'dislikes to', 'dreads to'],
-        korean: '모든 젊은 음악가가 카네기 홀에서 풀 심포니 오케스트라와 함께 라이브 공연을 할 수 있는 기회를 얻는 것은 아닙니다.',
-        explanation: '꿈꿔온 무대에 설 수 있는 기회를 뜻합니다.'
+        english: 'If you visit my house after school, you [get to, have to, hesitate to, pretend to] taste my mom\'s warm cookies.',
+        answer: 'get to',
+        options: ['get to', 'have to', 'hesitate to', 'pretend to'],
+        korean: '방과 후에 우리 집에 놀러 오면, 우리 엄마가 구워주신 따뜻한 쿠키를 맛볼 수 있어.',
+        explanation: '"get to taste"는 특별한 음식을 맛볼 수 있는 좋은 기회를 뜻합니다.'
       }
     ]
   },
@@ -925,44 +923,44 @@ const POOL = [
     sentences: [
       {
         type: 'multiple-choice',
-        english: 'My uncle [used to, is used to, got used to, refuses to] work as a forest firefighter before opening his woodworking shop.',
+        english: 'My uncle [used to, is used to, will, gets used to] walk to school every morning when he was a boy.',
         answer: 'used to',
-        options: ['used to', 'is used to', 'got used to', 'refuses to'],
-        korean: '우리 삼촌은 목공소를 열기 전에는 산림 소방관으로 일하곤 하셨어요 (지금은 아님).',
+        options: ['used to', 'is used to', 'will', 'gets used to'],
+        korean: '우리 삼촌은 어릴 적에 매일 아침 걸어서 학교에 가곤 하셨어요 (지금은 아님).',
         explanation: '"used to (동사원형)"는 과거에는 규칙적으로 하거나 상태였지만 "지금은 더 이상 하지 않는다"는 명확한 대조를 나타냅니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'We [used to live in a small apartment] near the train station when I was a toddler.',
+        english: 'We [used to live in a small apartment] before moving to this house.',
         answer: 'used to live in a small apartment',
         tokens: ['used', 'to', 'live', 'in', 'a', 'small', 'apartment'],
         options: ['used', 'to', 'live', 'in', 'a', 'small', 'apartment'],
-        korean: '제가 걸음마를 하던 시절에는 기차역 근처의 작은 아파트에서 살곤 했었어요.',
-        explanation: '"used to live"는 과거의 지속적 상태를 회상할 때 씁니다.'
+        korean: '우리는 이 집으로 이사 오기 전에 작은 아파트에 살곤 했어요.',
+        explanation: '"used to live"는 과거의 주거 상태를 회상할 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'This busy commercial avenue [used to, tended to, is prone to, aims to] be a quiet dirt road lined with orange groves.',
+        english: 'She [used to, is used to, pretends to, refuses to] play the piano every day, but now she plays the guitar.',
         answer: 'used to',
-        options: ['used to', 'tended to', 'is prone to', 'aims to'],
-        korean: '이 번화한 상업 대로는 예전에는 오렌지 과수원이 줄지어 있던 조용한 흙길이었습니다.',
-        explanation: '과거의 옛 모습과 현재의 번화함을 대조합니다.'
+        options: ['used to', 'is used to', 'pretends to', 'refuses to'],
+        korean: '그녀는 매일 피아노를 치곤 했지만, 지금은 기타를 쳐요.',
+        explanation: '"used to"는 과거의 습관을 현재와 대조할 때 씁니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'She [used to, refuses to, learns to, prepares to] practice classical ballet five days a week until a knee injury changed her plans.',
+        english: 'My family [used to, are used to, want to, refuse to] go camping every summer when I was young.',
         answer: 'used to',
-        options: ['used to', 'refuses to', 'learns to', 'prepares to'],
-        korean: '그녀는 무릎 부상으로 계획이 바뀌기 전까지 일주일에 5일씩 클래식 발레를 연습하곤 했습니다.',
-        explanation: '과거의 열정적 일과를 회상할 때 씁니다.'
+        options: ['used to', 'are used to', 'want to', 'refuse to'],
+        korean: '내가 어렸을 때 우리 가족은 매년 여름 캠핑을 가곤 했어요.',
+        explanation: '"used to go"는 과거에 반복적으로 하던 활동을 나타냅니다.'
       },
       {
         type: 'multiple-choice',
-        english: 'The whole family [used to, pretends to, fails to, declines to] drive up to Lake Tahoe every Christmas holiday.',
+        english: 'He [used to, is used to, learns to, plans to] drink a lot of sweet soda, but now he only drinks water.',
         answer: 'used to',
-        options: ['used to', 'pretends to', 'fails to', 'declines to'],
-        korean: '온 가족이 매년 크리스마스 연휴마다 레이크 타호로 차를 몰고 올라가곤 했어요.',
-        explanation: '과거의 연례 가족 전통을 회상합니다.'
+        options: ['used to', 'is used to', 'learns to', 'plans to'],
+        korean: '그는 달콤한 탄산음료를 많이 마시곤 했지만, 지금은 물만 마셔요.',
+        explanation: '"used to"는 과거의 식습관을 표현할 때 적절합니다.'
       }
     ]
   },
@@ -982,39 +980,39 @@ const POOL = [
       },
       {
         type: 'drag-and-drop',
-        english: "For today's presentation on wildlife, [that's, all, I, got].",
+        english: "For today's talk about our friendly pet dog, [that's, all, I, got].",
         answer: "that's all I got",
         tokens: ["that's", 'all', 'I', 'got'],
         options: ["that's", 'all', 'I', 'got'],
-        korean: '야생동물에 관한 오늘 발표는 여기까지입니다.',
-        explanation: '"That\'s all I got"은 발표를 마치며 "제가 준비한 이야기는 여기까지예요"라고 매듭지을 때 쓰는 자연스러운 구어 표현입니다.'
+        korean: '우리 친근한 반려견에 관한 오늘 이야기는 여기까지예요.',
+        explanation: '"That\'s all I got"은 이야기나 발표를 마치며 "제가 준비한 건 여기까지예요"라고 매듭지을 때 쓰는 표현입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: "I shared every detail about the cabin renovation, so [that's, all, I, got].",
+        english: "I shared all my favorite travel tips, so [that's, all, I, got].",
         answer: "that's all I got",
         tokens: ["that's", 'all', 'I', 'got'],
         options: ["that's", 'all', 'I', 'got'],
-        korean: '오두막 개조 공사에 관해 아는 모든 세부사항을 말씀드렸으니, 제가 전해드릴 이야기는 이게 전부예요.',
-        explanation: '"that\'s all I got"은 더 이상 할 말이 없을 때 자연스럽게 마무리를 짓는 표현입니다.'
+        korean: '제가 좋아하는 여행 팁을 다 말씀드렸으니, 제가 전해드릴 이야기는 이게 전부예요.',
+        explanation: '"that\'s all I got"은 더 이상 할 말이 없을 때 자연스럽게 마무리를 짓는 구어 표현입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: "After listing three suggestions for improving the park, [that's, all, I, got].",
+        english: "After telling my two funny stories, [that's, all, I, got].",
         answer: "that's all I got",
         tokens: ["that's", 'all', 'I', 'got'],
         options: ["that's", 'all', 'I', 'got'],
-        korean: '공원을 개선하기 위한 세 가지 제안을 말한 뒤, 제가 드릴 의견은 여기까지입니다.',
-        explanation: '자신의 의견 제시를 간결하게 마무리하는 표현입니다.'
+        korean: '재미있는 이야기 두 가지를 말씀드렸으니, 제가 준비한 이야기는 여기까지입니다.',
+        explanation: '자신의 이야기나 발표를 간결하게 마무리하는 표현입니다.'
       },
       {
         type: 'drag-and-drop',
-        english: 'Uncle Wayne wrapped up his nostalgic stories and said, "[that\'s, all, I, got]." ',
+        english: 'Uncle Wayne smiled warmly and said, "[that\'s, all, I, got]." ',
         answer: "that's all I got",
         tokens: ["that's", 'all', 'I', 'got'],
         options: ["that's", 'all', 'I', 'got'],
-        korean: '웨인 삼촌은 추억 이야기를 마무리하며 "제가 드릴 이야기는 여기까지예요"라고 말씀하셨어요.',
-        explanation: '회상 이야기를 마치며 건네는 정감 있는 끝인사입니다.'
+        korean: '웨인 삼촌은 따뜻하게 미소 지으며 "제가 드릴 이야기는 여기까지예요"라고 말씀하셨어요.',
+        explanation: '이야기를 마치며 건네는 정감 있고 친근한 끝인사입니다.'
       }
     ]
   }

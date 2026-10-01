@@ -1,6 +1,7 @@
 [
   {
     "keyExpression": "stop me in",
+    "baseForm": "stop me in",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -17,7 +18,7 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "Shoppers often [stop me in the supermarket to ask for recommendations].",
+        "english": "Shoppers often [stop me in the supermarket to ask for recommendations] on fresh fruit.",
         "answer": "stop me in the supermarket to ask for recommendations",
         "tokens": [
           "stop",
@@ -41,12 +42,12 @@
           "for",
           "recommendations"
         ],
-        "korean": "손님들은 슈퍼마켓에서 종종 가던 나를 불러세워 추천을 물어보곤 해요.",
-        "explanation": "마트에서 사람을 불러세워 질문하는 상황입니다."
+        "korean": "손님들은 신선한 과일에 관한 추천을 묻기 위해 슈퍼마켓에서 종종 가던 나를 불러세우곤 해요.",
+        "explanation": "가던 사람을 불러세워 말을 건네는 상황입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "A tourist decided to [stop me in, look me up, turn me down, cheer me on] the subway station to ask for directions to the museum.",
+        "english": "A tourist decided to [stop me in, look me up, turn me down, cheer me on] the train station to ask for directions to the park.",
         "answer": "stop me in",
         "options": [
           "stop me in",
@@ -54,12 +55,12 @@
           "turn me down",
           "cheer me on"
         ],
-        "korean": "어떤 관광객이 지하철역에서 가던 나를 멈춰 세우고 박물관 가는 길을 물어보았습니다.",
-        "explanation": "길을 묻기 위해 길 가던 사람을 불러세우는 흔한 상황입니다."
+        "korean": "어떤 관광객이 공원 가는 길을 묻기 위해 기차역에서 가던 나를 멈춰 세웠어요.",
+        "explanation": "길을 묻기 위해 사람을 불러세우는 표현입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Did someone really [stop you in, lock you in, count you in, drop you in] the hallway just to compliment your handmade wool sweater?",
+        "english": "Did a neighbor really [stop you in, lock you in, count you in, drop you in] the hallway just to compliment your cute puppy?",
         "answer": "stop you in",
         "options": [
           "stop you in",
@@ -67,26 +68,27 @@
           "count you in",
           "drop you in"
         ],
-        "korean": "누군가 정말 복도에서 가던 너를 멈춰 세우고 네 수제 털스웨터를 칭찬해 주었니?",
-        "explanation": "복도에서 가던 사람을 멈추고 말을 건네는 모습입니다."
+        "korean": "이웃 주민이 복도에서 가던 너를 멈춰 세우고 네 귀여운 강아지를 칭찬해 주었니?",
+        "explanation": "가던 사람을 멈추어 말을 건네는 일상 구어입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Reporters attempted to [stop the mayor in, drop the mayor in, push the mayor in, call the mayor in] the lobby for a quick statement on city taxes.",
-        "answer": "stop the mayor in",
+        "english": "A nice lady tried to [stop me in, push me in, call me in, shut me in] the garden path to admire the pretty flowers.",
+        "answer": "stop me in",
         "options": [
-          "stop the mayor in",
-          "drop the mayor in",
-          "push the mayor in",
-          "call the mayor in"
+          "stop me in",
+          "push me in",
+          "call me in",
+          "shut me in"
         ],
-        "korean": "기자들은 시세에 관한 짧은 발언을 듣기 위해 로비에서 가던 시장을 불러세우려고 시도했습니다.",
-        "explanation": "취재를 위해 인물을 불러세우는 표현입니다."
+        "korean": "어떤 친절한 여성분이 예쁜 꽃을 감상하며 정원 길에서 가던 나를 불러세웠어요.",
+        "explanation": "\"stop someone in\"은 특정 장소에서 불러세움을 뜻합니다."
       }
     ]
   },
   {
     "keyExpression": "random",
+    "baseForm": "random",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -103,72 +105,73 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "He asked such [a totally random question out of nowhere].",
-        "answer": "a totally random question out of nowhere",
+        "english": "Singing a winter song on a hot summer day [felt random and funny to my friends].",
+        "answer": "felt random and funny to my friends",
         "tokens": [
-          "a",
-          "totally",
+          "felt",
           "random",
-          "question",
-          "out",
-          "of",
-          "nowhere"
+          "and",
+          "funny",
+          "to",
+          "my",
+          "friends"
         ],
         "options": [
-          "a",
-          "totally",
+          "felt",
           "random",
-          "question",
-          "out",
-          "of",
-          "nowhere"
+          "and",
+          "funny",
+          "to",
+          "my",
+          "friends"
         ],
-        "korean": "그는 난데없이 너무나 뜬금없는 질문을 던졌어요.",
-        "explanation": "맥락 없이 튀어나온 엉뚱한 질문을 뜻합니다."
+        "korean": "무더운 여름날에 겨울 노래를 부르는 것은 내 친구들에게 참 뜬금없고 재미있게 느껴졌어요.",
+        "explanation": "\"random\"은 맥락 없이 돌발적인 상황을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "I received a message from a [random, formal, identical, mutual] phone number claiming I won an international sweepstakes.",
+        "english": "Hearing a loud rooster sound inside the quiet library felt very [random, careful, polite, normal] to everyone.",
         "answer": "random",
         "options": [
           "random",
-          "formal",
-          "identical",
-          "mutual"
+          "careful",
+          "polite",
+          "normal"
         ],
-        "korean": "내가 해외 경품 추첨에 당첨되었다고 주장하는 생뚱맞은 낯선 전화번호로부터 메시지를 받았습니다.",
-        "explanation": "모르는 무작위의 번호를 가리킵니다."
+        "korean": "조용한 도서관 안에서 시끄러운 수탉 울음소리를 들은 것은 모두에게 참 뜬금없게 느껴졌어요.",
+        "explanation": "\"random\"은 장소나 상황에 맞지 않는 뜬금없음을 나타냅니다."
       },
       {
         "type": "multiple-choice",
-        "english": "We took a [random, deliberate, planned, calculated] scenic road trip on Saturday without consulting any online map beforehand.",
+        "english": "The teacher asked a [random, serious, strict, difficult] trivia question about penguins to make the class laugh.",
         "answer": "random",
         "options": [
           "random",
-          "deliberate",
-          "planned",
-          "calculated"
+          "serious",
+          "strict",
+          "difficult"
         ],
-        "korean": "우리는 토요일에 미리 온라인 지도를 확인하지도 않고 발길 닿는 대로 즉흥적인 드라이브를 떠났어요.",
-        "explanation": "계획 없이 마음 내키는 대로 떠나는 드라이브입니다."
+        "korean": "선생님께서는 학생들을 웃게 하려고 펭귄에 관한 뜬금없는 퀴즈 질문 하나를 던지셨어요.",
+        "explanation": "\"random question\"은 뜬금없는 질문입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Finding an old vintage cassette tape under the car seat was such a [random, scheduled, routine, orderly] discovery.",
+        "english": "His story about an elephant in Africa was quite [random, neat, quiet, sweet] during our dinner chat.",
         "answer": "random",
         "options": [
           "random",
-          "scheduled",
-          "routine",
-          "orderly"
+          "neat",
+          "quiet",
+          "sweet"
         ],
-        "korean": "차 시트 밑에서 오래된 빈티지 카세트테이프를 발견한 것은 참 뜻밖이고 생뚱맞은 발견이었어요.",
-        "explanation": "예상치 못한 뜻밖의 발견입니다."
+        "korean": "저녁 식사 대화 중에 나온 아프리카 코끼리에 관한 그의 이야기는 꽤 뜬금없었어요.",
+        "explanation": "\"random\"은 화제와 무관하게 불쑥 튀어나온 이야기입니다."
       }
     ]
   },
   {
     "keyExpression": "standpoint",
+    "baseForm": "standpoint",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -185,72 +188,81 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "From a financial [standpoint, cooking at home saves tremendous money].",
-        "answer": "standpoint, cooking at home saves tremendous money",
+        "english": "From a financial [standpoint, saving a little money each week is a smart idea].",
+        "answer": "standpoint, saving a little money each week is a smart idea",
         "tokens": [
           "standpoint,",
-          "cooking",
-          "at",
-          "home",
-          "saves",
-          "tremendous",
-          "money"
+          "saving",
+          "a",
+          "little",
+          "money",
+          "each",
+          "week",
+          "is",
+          "a",
+          "smart",
+          "idea"
         ],
         "options": [
           "standpoint,",
-          "cooking",
-          "at",
-          "home",
-          "saves",
-          "tremendous",
-          "money"
+          "saving",
+          "a",
+          "little",
+          "money",
+          "each",
+          "week",
+          "is",
+          "a",
+          "smart",
+          "idea"
         ],
-        "korean": "재정적인 관점에서 집에서 요리해 먹는 것은 엄청난 돈을 절약해 줍니다.",
-        "explanation": "경제적인 입장에서 바라본 평가입니다."
+        "korean": "재정적인 관점(입장)에서 볼 때, 매주 조금씩 돈을 저축하는 것은 현명한 생각이에요.",
+        "explanation": "\"from a standpoint\"는 ~의 관점에서 볼 때라는 뜻입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Looking at urban zoning from an ecological [standpoint, footprint, playground, headline], city parks provide crucial wildlife corridors.",
+        "english": "From a health [standpoint, boundary, destination, foundation], drinking plenty of fresh water every day is very important.",
         "answer": "standpoint",
         "options": [
           "standpoint",
-          "footprint",
-          "playground",
-          "headline"
+          "boundary",
+          "destination",
+          "foundation"
         ],
-        "korean": "생태학적 관점에서 도시 구역 설계를 살펴보면, 도시 공원은 야생동물에게 매우 중요한 이동 통로를 제공합니다.",
-        "explanation": "생태학적 견해를 설명합니다."
+        "korean": "건강의 관점(견지)에서 볼 때, 매일 신선한 물을 충분히 마시는 것은 매우 중요해요.",
+        "explanation": "\"from a health standpoint\"는 건강적 관점이라는 뜻입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "From a consumer's [standpoint, passport, warranty, trademark], clear nutritional labeling on grocery packaging is indispensable.",
+        "english": "Looking at the problem from her [standpoint, highway, airport, garden] helped us understand why she was upset.",
         "answer": "standpoint",
         "options": [
           "standpoint",
-          "passport",
-          "warranty",
-          "trademark"
+          "highway",
+          "airport",
+          "garden"
         ],
-        "korean": "소비자의 입장에서 볼 때 식품 포장지의 명확한 영양 성분 표시는 필수적입니다.",
-        "explanation": "소비자의 입장을 대변하는 표현입니다."
+        "korean": "그녀의 입장(관점)에서 문제를 바라보는 것은 그녀가 왜 속상했는지 이해하는 데 도움이 되었어요.",
+        "explanation": "\"from someone's standpoint\"는 그 사람의 입장에서라는 뜻입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "His scientific critique was made purely from a pedagogical [standpoint, territory, atmosphere, dimension] to help students learn better.",
+        "english": "From a teacher's [standpoint, mountain, hallway, sidewalk], reading daily helps children learn new words quickly.",
         "answer": "standpoint",
         "options": [
           "standpoint",
-          "territory",
-          "atmosphere",
-          "dimension"
+          "mountain",
+          "hallway",
+          "sidewalk"
         ],
-        "korean": "그의 과학적 비평은 학생들이 더 잘 배울 수 있도록 돕기 위해 순전히 교육적 관점에서 이루어졌습니다.",
-        "explanation": "교육적 측면에서의 판단입니다."
+        "korean": "선생님의 관점에서 볼 때, 매일 책을 읽는 것은 아이들이 새 단어를 빠르게 배우도록 도와줘요.",
+        "explanation": "\"standpoint\"는 특정 역할이나 입장에서의 관점입니다."
       }
     ]
   },
   {
     "keyExpression": "fermented",
+    "baseForm": "fermented",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -267,72 +279,71 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "Eating naturally [fermented foods promotes excellent gut microbiome health].",
-        "answer": "fermented foods promotes excellent gut microbiome health",
+        "english": "Yogurt and cheese are healthy [fermented foods made from fresh milk].",
+        "answer": "fermented foods made from fresh milk",
         "tokens": [
           "fermented",
           "foods",
-          "promotes",
-          "excellent",
-          "gut",
-          "microbiome",
-          "health"
+          "made",
+          "from",
+          "fresh",
+          "milk"
         ],
         "options": [
           "fermented",
           "foods",
-          "promotes",
-          "excellent",
-          "gut",
-          "microbiome",
-          "health"
+          "made",
+          "from",
+          "fresh",
+          "milk"
         ],
-        "korean": "자연 발효 식품을 섭취하는 것은 훌륭한 장내 미생물 건강을 촉진합니다.",
-        "explanation": "발효 식품의 건강상 이점입니다."
+        "korean": "요거트와 치즈는 신선한 우유로 만든 건강한 발효 식품이에요.",
+        "explanation": "\"fermented foods\"는 발효 식품들을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Sourdough bread gets its distinct tangy flavor and chewy texture from slowly [fermented, frozen, burned, powdered] dough.",
+        "english": "Bread dough rises softly because the yeast creates tiny air bubbles in the [fermented, frozen, burned, melted] mixture.",
         "answer": "fermented",
         "options": [
           "fermented",
           "frozen",
           "burned",
-          "powdered"
-        ],
-        "korean": "사워도우 빵은 천천히 발효된 반죽에서 특유의 톡 쏘는 풍미와 쫄깃한 식감을 얻습니다.",
-        "explanation": "발효 반죽의 특징입니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "Sauerkraut is German thinly sliced cabbage that has been salted and [fermented, boiled, fried, melted] in jars.",
-        "answer": "fermented",
-        "options": [
-          "fermented",
-          "boiled",
-          "fried",
           "melted"
         ],
-        "korean": "자우어크라우트는 소금에 절여 병 속에서 발효시킨 독일식 얇게 썬 양배추 요리입니다.",
-        "explanation": "독일의 대표적 발효 음식 설명입니다."
+        "korean": "효모가 발효된 반죽 속에 작은 공기 방울을 만들기 때문에 빵 반죽이 부드럽게 부풀어 올라요.",
+        "explanation": "\"fermented\"는 발효 과정을 거친 상태를 말합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Miso soup is made from a rich paste of [fermented, bleached, filtered, artificial] soybeans and koji rice.",
+        "english": "Korean cooking uses delicious [fermented, dry, cold, hard] soybean paste to make warm, comforting soup.",
         "answer": "fermented",
         "options": [
           "fermented",
-          "bleached",
-          "filtered",
-          "artificial"
+          "dry",
+          "cold",
+          "hard"
         ],
-        "korean": "미소 된장국은 발효된 대두와 누룩 쌀로 만든 진한 장으로 끓여집니다.",
-        "explanation": "발효된 콩으로 만든 장입니다."
+        "korean": "한국 요리는 따뜻하고 구수한 국을 끓이기 위해 맛있는 발효된 된장(대두장)을 사용해요.",
+        "explanation": "\"fermented soybean paste\"는 된장 등 발효 장류를 뜻합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Crispy pickles are made from cucumbers kept in [fermented, dry, hot, boiled] salty water jars.",
+        "answer": "fermented",
+        "options": [
+          "fermented",
+          "dry",
+          "hot",
+          "boiled"
+        ],
+        "korean": "아삭한 피클은 소금물 병에 담가 발효시킨 오이로 만들어집니다.",
+        "explanation": "\"fermented\"는 절여서 발효된 상태를 가리킵니다."
       }
     ]
   },
   {
     "keyExpression": "used to",
+    "baseForm": "used to",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -349,72 +360,75 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "My coworkers and I [used to eat lunch together every Friday].",
-        "answer": "used to eat lunch together every Friday",
+        "english": "We [used to play in the city park together] every afternoon after school.",
+        "answer": "used to play in the city park together",
         "tokens": [
           "used",
           "to",
-          "eat",
-          "lunch",
-          "together",
-          "every",
-          "Friday"
+          "play",
+          "in",
+          "the",
+          "city",
+          "park",
+          "together"
         ],
         "options": [
           "used",
           "to",
-          "eat",
-          "lunch",
-          "together",
-          "every",
-          "Friday"
+          "play",
+          "in",
+          "the",
+          "city",
+          "park",
+          "together"
         ],
-        "korean": "직장 동료들과 나는 매주 금요일마다 함께 점심을 먹곤 했어요.",
-        "explanation": "과거의 규칙적인 식사 습관입니다."
+        "korean": "우리는 방과 후 매일 오후에 시립 공원에서 함께 놀곤 했어요.",
+        "explanation": "\"used to play\"는 과거의 습관적 놀이를 회상합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Our family [used to, was used for, grew into, took over] spend every summer holiday at the cabin before we moved out of state.",
+        "english": "He [used to, gets used to, wants to, refuses to] ride the yellow school bus, but now he rides his bicycle every day.",
         "answer": "used to",
         "options": [
           "used to",
-          "was used for",
-          "grow into",
-          "took over"
+          "gets used to",
+          "wants to",
+          "refuses to"
         ],
-        "korean": "우리가 다른 주로 이사하기 전에는 온 가족이 매년 여름휴가를 오두막에서 보내곤 했습니다.",
-        "explanation": "과거의 정기적인 휴가 추억입니다."
+        "korean": "그는 노란 스쿨버스를 타곤 했지만, 지금은 매일 자전거를 타요.",
+        "explanation": "\"used to\"는 과거와 현재의 대비를 보여줍니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Grandpa [used to, had to, got to, ought to] tell us fascinating bedtime stories about growing up on a vintage orchard farm.",
+        "english": "My family [used to, are used to, learn to, hope to] go camping by the lake every summer when I was a little boy.",
         "answer": "used to",
         "options": [
           "used to",
-          "had to",
-          "got to",
-          "ought to"
+          "are used to",
+          "learn to",
+          "hope to"
         ],
-        "korean": "할아버지께서는 시골 과수원 농장에서 자라던 시절의 흥미진진한 옛날이야기를 우리에게 들려주시곤 했어요.",
-        "explanation": "할아버지의 옛날이야기 습관입니다."
+        "korean": "내가 어린 소년이었을 때 우리 가족은 매년 여름 호숫가로 캠핑을 가곤 했어요.",
+        "explanation": "\"used to go\"는 과거의 정기적인 활동입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "I [used to, tended for, aimed at, drove to] drink black coffee, but lately I prefer aromatic green tea in the morning.",
+        "english": "She [used to, is used to, learns to, hates to] drink lots of sweet soda, but now she only drinks plain water.",
         "answer": "used to",
         "options": [
           "used to",
-          "tended for",
-          "aimed at",
-          "drove to"
+          "is used to",
+          "learns to",
+          "hates to"
         ],
-        "korean": "예전에는 블랙커피를 마시곤 했지만, 요즘에는 아침에 향긋한 녹차를 더 좋아해요.",
-        "explanation": "과거와 현재의 기호 변화를 비교합니다."
+        "korean": "그녀는 달콤한 탄산음료를 많이 마시곤 했지만, 지금은 맹물만 마셔요.",
+        "explanation": "\"used to drink\"는 과거의 식습관을 나타냅니다."
       }
     ]
   },
   {
     "keyExpression": "every other week",
+    "baseForm": "every other week",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -431,74 +445,71 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "We visit the wholesale supermarket [every other week to stock up on groceries].",
-        "answer": "every other week to stock up on groceries",
+        "english": "I visit my grandparents [every other week on Sunday morning] to help in their garden.",
+        "answer": "every other week on Sunday morning",
         "tokens": [
           "every",
           "other",
           "week",
-          "to",
-          "stock",
-          "up",
           "on",
-          "groceries"
+          "Sunday",
+          "morning"
         ],
         "options": [
           "every",
           "other",
           "week",
-          "to",
-          "stock",
-          "up",
           "on",
-          "groceries"
+          "Sunday",
+          "morning"
         ],
-        "korean": "우리는 식료품을 쟁여두기 위해 격주로 대형 창고형 마트를 방문해요.",
-        "explanation": "2주에 한 번 장을 보는 주기입니다."
+        "korean": "나는 조부모님의 정원 일을 돕기 위해 2주에 한 번씩(격주로) 일요일 아침마다 찾아봬요.",
+        "explanation": "\"every other week\"는 격주 빈도를 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "The mobile library bus stops at our rural village [every other week, on thin ice, out of date, by a hair] on Wednesday morning.",
+        "english": "He gets his paycheck [every other week, once a century, twice a minute, every second] on Friday afternoon.",
         "answer": "every other week",
         "options": [
           "every other week",
-          "on thin ice",
-          "out of date",
-          "by a hair"
+          "once a century",
+          "twice a minute",
+          "every second"
         ],
-        "korean": "이동식 도서관 버스는 격주 수요일 아침마다 우리 시골 마을에 정차합니다.",
-        "explanation": "순회 도서관의 격주 운행 일정입니다."
+        "korean": "그는 금요일 오후에 2주마다 한 번씩(격주로) 급여를 받아요.",
+        "explanation": "\"every other week\"는 2주 간격의 지급 주기를 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Residential recycling collection occurs [every other week, without a hitch, off the record, behind the back], alternating with trash pickup.",
+        "english": "We clean the large kitchen windows [every other week, every second, once a decade, once a year] to keep them clear.",
         "answer": "every other week",
         "options": [
           "every other week",
-          "without a hitch",
-          "off the record",
-          "behind the back"
+          "every second",
+          "once a decade",
+          "once a year"
         ],
-        "korean": "주택가 재활용 쓰레기 수거는 일반 쓰레기 수거와 번갈아 가며 격주로 진행됩니다.",
-        "explanation": "격주 수거 시스템을 설명합니다."
+        "korean": "우리는 깨끗하게 유지하기 위해 격주로(2주마다) 큰 주방 창문들을 닦아요.",
+        "explanation": "\"every other week\"는 정기적인 격주 청소입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "She schedules a physical therapy massage [every other week, out of nowhere, at first glance, in cold blood] to relieve chronic neck pain.",
+        "english": "The mobile book bus visits our small town [every other week, every instant, each hour, twice a second] on Tuesday.",
         "answer": "every other week",
         "options": [
           "every other week",
-          "out of nowhere",
-          "at first glance",
-          "in cold blood"
+          "every instant",
+          "each hour",
+          "twice a second"
         ],
-        "korean": "그녀는 만성 목 통증을 완화하기 위해 격주로 물리치료 마사지를 예약합니다.",
-        "explanation": "격주 치료 일정입니다."
+        "korean": "이동식 도서관 버스는 화요일마다 2주에 한 번씩(격주로) 우리 작은 마을을 찾아와요.",
+        "explanation": "\"every other week\"는 2주 간격의 방문 주기입니다."
       }
     ]
   },
   {
     "keyExpression": "there were ever times where",
+    "baseForm": "there were ever times where",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -515,17 +526,17 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "If [there were ever times where you needed help], I was always there.",
-        "answer": "there were ever times where you needed help",
+        "english": "If [there were ever times where she felt tired], she rested on the park bench.",
+        "answer": "there were ever times where she felt tired",
         "tokens": [
           "there",
           "were",
           "ever",
           "times",
           "where",
-          "you",
-          "needed",
-          "help"
+          "she",
+          "felt",
+          "tired"
         ],
         "options": [
           "there",
@@ -533,56 +544,57 @@
           "ever",
           "times",
           "where",
-          "you",
-          "needed",
-          "help"
+          "she",
+          "felt",
+          "tired"
         ],
-        "korean": "혹시라도 네가 도움이 필요했던 적이 있었다면, 난 언제나 곁에 있었어.",
-        "explanation": "과거에 도움이 필요했던 상황들을 포괄하는 표현입니다."
+        "korean": "혹시라도 그녀가 피곤함을 느꼈던 때가 있으면, 그녀는 공원 벤치에서 쉬었어요.",
+        "explanation": "\"there were ever times where\"는 과거에 혹시라도 그런 때가 있었다면을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Whenever [there were ever times where, there were strictly rules that, there were zero doubts how, there were all cases if] budget deficits arose, the committee reviewed travel expenses.",
+        "english": "Whenever [there were ever times where, there were few minutes when, there were no rooms that, there were old houses why] it rained on Saturday, the kids played board games inside.",
         "answer": "there were ever times where",
         "options": [
           "there were ever times where",
-          "there were strictly rules that",
-          "there were zero doubts how",
-          "there were all cases if"
+          "there were few minutes when",
+          "there were no rooms that",
+          "there were old houses why"
         ],
-        "korean": "예산 적자가 발생했던 적이 있을 때마다 위원회는 출장비를 재검토했습니다.",
-        "explanation": "특정 상황이 발생했을 때의 대처를 나타냅니다."
+        "korean": "토요일에 비가 내렸던 적이 있을 때면 언제나 아이들은 실내에서 보드게임을 했어요.",
+        "explanation": "\"there were ever times where\"는 과거의 조건적 상황을 회상합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "I wondered whether [there were ever times where, there were clear skies that, there were heavy trucks why, there were loud bells how] the ancient lighthouse keeper felt truly lonely.",
+        "english": "If [there were ever times where, there were no books that, there were short days when, there were few boys why] we needed a helping hand, grandpa was always ready to help.",
         "answer": "there were ever times where",
         "options": [
           "there were ever times where",
-          "there were clear skies that",
-          "there were heavy trucks why",
-          "there were loud bells how"
+          "there were no books that",
+          "there were short days when",
+          "there were few boys why"
         ],
-        "korean": "그 옛날 등대지기가 진정으로 외로움을 느꼈던 적이 있었을까 나는 궁금했어요.",
-        "explanation": "과거에 그런 순간이 존재했는지에 대한 사색입니다."
+        "korean": "혹시라도 우리가 도움의 손길이 필요했던 때가 있으면, 할아버지는 언제나 도와줄 준비가 되어 계셨어요.",
+        "explanation": "\"there were ever times where\"는 필요가 발생했던 때들을 가리킵니다."
       },
       {
         "type": "multiple-choice",
-        "english": "During winter blizzards, [there were ever times where, there were warm springs that, there were sunny rays which, there were loud sirens how] roads remained blocked for three days.",
+        "english": "Whenever [there were ever times where, there were cold cups that, there were no cars when, there were bright stars why] he felt lonely, he called his mother.",
         "answer": "there were ever times where",
         "options": [
           "there were ever times where",
-          "there were warm springs that",
-          "there were sunny rays which",
-          "there were loud sirens how"
+          "there were cold cups that",
+          "there were no cars when",
+          "there were bright stars why"
         ],
-        "korean": "겨울 눈보라 동안에는 도로가 사흘 동안 막혀 있었던 적도 있었어요.",
-        "explanation": "과거의 심각했던 고립 사례를 회상합니다."
+        "korean": "혹시라도 그가 외로움을 느꼈던 때가 있을 때면 언제나 그는 어머니께 전화를 걸었어요.",
+        "explanation": "\"there were ever times where\"는 특정 감정이나 상태가 들었던 때를 뜻합니다."
       }
     ]
   },
   {
     "keyExpression": "got stared at",
+    "baseForm": "get stared at",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -599,76 +611,75 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "She [got stared at because of her colorful retro hat].",
-        "answer": "got stared at because of her colorful retro hat",
+        "english": "He wore a giant yellow hat and [got stared at by people on the street].",
+        "answer": "got stared at by people on the street",
         "tokens": [
           "got",
           "stared",
           "at",
-          "because",
-          "of",
-          "her",
-          "colorful",
-          "retro",
-          "hat"
+          "by",
+          "people",
+          "on",
+          "the",
+          "street"
         ],
         "options": [
           "got",
           "stared",
           "at",
-          "because",
-          "of",
-          "her",
-          "colorful",
-          "retro",
-          "hat"
+          "by",
+          "people",
+          "on",
+          "the",
+          "street"
         ],
-        "korean": "그녀는 화려한 복고풍 모자 때문에 사람들의 시선을 한 몸에 받았어요.",
-        "explanation": "눈에 띄는 패션으로 시선을 받는 상황입니다."
+        "korean": "그는 커다란 노란 모자를 썼고 길거리 사람들에게 빤히 쳐다봄을 당했어요(시선 집중을 받았어요).",
+        "explanation": "\"got stared at\"는 주위 사람들의 시선을 집중해서 받는 것입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "When my twin brother and I wore identical neon jumpsuits to the mall, we definitely [got stared at, got forgotten, got dismissed, got arrested] by shoppers.",
+        "english": "The very tall basketball player always [got stared at, got turned away, got dropped off, got counted out] whenever he entered a small grocery shop.",
         "answer": "got stared at",
         "options": [
           "got stared at",
-          "got forgotten",
-          "got dismissed",
-          "got arrested"
+          "got turned away",
+          "got dropped off",
+          "got counted out"
         ],
-        "korean": "쌍둥이 동생과 내가 쇼핑몰에 똑같은 네온 점프수트를 입고 갔을 때 쇼핑객들에게 확실히 시선 집중을 받았습니다.",
-        "explanation": "독특한 복장으로 사람들의 쳐다봄을 당하는 모습입니다."
+        "korean": "키가 무척 큰 그 농구 선수는 작은 식료품점에 들어갈 때마다 늘 사람들에게 빤히 쳐다봄을 당했어요.",
+        "explanation": "\"got stared at\"는 눈에 띄어 사람들이 빤히 쳐다보는 상황입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Nobody likes to [get stared at, get cheered up, get well soon, get along with] when they accidentally drop their cafeteria tray.",
-        "answer": "get stared at",
-        "options": [
-          "get stared at",
-          "get cheered up",
-          "get well soon",
-          "get along with"
-        ],
-        "korean": "실수로 구내식당 쟁반을 떨어뜨렸을 때 모든 사람이 빤히 쳐다보는 것을 좋아하는 사람은 아무도 없어요.",
-        "explanation": "당황스러운 순간 사람들의 시선이 쏠리는 불쾌함입니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "Traveling off the beaten tourist path meant we occasionally [got stared at, got carried away, got into trouble, got off the hook] in small mountain villages.",
+        "english": "She [got stared at, got left behind, got locked up, got paid back] with surprise when her phone started ringing loudly in the quiet cinema.",
         "answer": "got stared at",
         "options": [
           "got stared at",
-          "got carried away",
-          "got into trouble",
-          "got off the hook"
+          "got left behind",
+          "got locked up",
+          "got paid back"
         ],
-        "korean": "관광 코스를 벗어나 여행한다는 것은 시골 산골 마을에서 때때로 호기심 어린 시선 집중을 받는 것을 의미했습니다.",
-        "explanation": "외국인이 드문 오지에서의 시선 집중입니다."
+        "korean": "조용한 영화관에서 휴대전화가 시끄럽게 울리기 시작하자 그녀는 놀란 사람들에게 빤히 쳐다봄을 당했어요.",
+        "explanation": "\"got stared at\"는 당황스러운 상황에서 사람들의 시선을 받음입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The cute puppy wearing bright red boots [got stared at, got blown away, got picked out, got shut down] by all the children in the shopping mall.",
+        "answer": "got stared at",
+        "options": [
+          "got stared at",
+          "got blown away",
+          "got picked out",
+          "got shut down"
+        ],
+        "korean": "밝은 빨간 부츠를 신은 귀여운 강아지는 쇼핑몰 안의 모든 아이들에게 빤히 쳐다봄을 당했어요(시선을 사로잡았어요).",
+        "explanation": "\"got stared at\"는 귀엽거나 신기해서 시선 집중을 받는 것입니다."
       }
     ]
   },
   {
     "keyExpression": "at least",
+    "baseForm": "at least",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -685,72 +696,77 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "It was raining hard, but [at least we had warm rain jackets].",
-        "answer": "at least we had warm rain jackets",
+        "english": "The morning was cloudy and cold, but [at least it did not rain during our picnic].",
+        "answer": "at least it did not rain during our picnic",
         "tokens": [
           "at",
           "least",
-          "we",
-          "had",
-          "warm",
+          "it",
+          "did",
+          "not",
           "rain",
-          "jackets"
+          "during",
+          "our",
+          "picnic"
         ],
         "options": [
           "at",
           "least",
-          "we",
-          "had",
-          "warm",
+          "it",
+          "did",
+          "not",
           "rain",
-          "jackets"
+          "during",
+          "our",
+          "picnic"
         ],
-        "korean": "비가 억수같이 쏟아졌지만, 적어도 우리에겐 따뜻한 우비가 있었어요.",
-        "explanation": "악조건 속에서도 최소한의 위안이 된 요소를 나타냅니다."
+        "korean": "아침은 흐리고 추웠지만, 적어도 우리 소풍 동안 비가 내리지 않은 것만 해도 다행이었어요.",
+        "explanation": "\"at least\"는 불완전한 상황에서 다행스러운 점을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "You should spend [at least, at most, at bay, at sea] twenty minutes reviewing new vocabulary cards before going to bed.",
+        "english": "The bus arrived twenty minutes late, but [at least, at once, at random, at large] everyone found a warm, comfortable seat inside.",
         "answer": "at least",
         "options": [
           "at least",
-          "at most",
-          "at bay",
-          "at sea"
+          "at once",
+          "at random",
+          "at large"
         ],
-        "korean": "잠자리에 들기 전 적어도 20분은 새로운 어휘 카드를 복습하는 데 시간을 써야 합니다.",
-        "explanation": "최소한의 소요 시간을 권장합니다."
+        "korean": "버스가 20분 늦게 도착했지만, 적어도 모두가 안에서 따뜻하고 편안한 좌석을 찾았어요.",
+        "explanation": "\"at least\"는 최소한의 긍정적 측면을 가리킵니다."
       },
       {
         "type": "multiple-choice",
-        "english": "The flight was delayed three hours, but [at least, at sight, at heart, at odds] the airline provided complimentary lunch vouchers.",
+        "english": "We did not win the championship match, but [at least, at present, at sight, at heart] all our teammates played hard together.",
         "answer": "at least",
         "options": [
           "at least",
+          "at present",
           "at sight",
-          "at heart",
-          "at odds"
+          "at heart"
         ],
-        "korean": "비행기가 3시간 지연되었지만, 적어도 항공사에서 무료 점심 식사권을 제공해 주었습니다.",
-        "explanation": "불편 속의 최소한의 보상입니다."
+        "korean": "우리가 결승전에서 이기지는 못했지만, 적어도 우리 팀원 모두가 함께 열심히 뛰었어요.",
+        "explanation": "\"at least\"는 결과와 무관하게 가치 있는 점을 강조합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Although our proposal wasn't selected, [at least, at risk, at peace, at dawn] the panel provided constructive feedback for next time.",
+        "english": "I lost my favorite pen at school, but [at least, at ease, at speed, at will] I still have my notebook safe in my bag.",
         "answer": "at least",
         "options": [
           "at least",
-          "at risk",
-          "at peace",
-          "at dawn"
+          "at ease",
+          "at speed",
+          "at will"
         ],
-        "korean": "비록 우리 제안서가 채택되지는 않았지만, 적어도 심사위원단이 다음을 위한 건설적인 피드백을 제공해 주었습니다.",
-        "explanation": "결과의 아쉬움 속에서 얻은 배움입니다."
+        "korean": "학교에서 가장 아끼던 펜을 잃어버렸지만, 적어도 공책은 가방에 안전하게 남아 있어요.",
+        "explanation": "\"at least\"는 그나마 다행인 점을 말할 때 씁니다."
       }
     ]
   },
   {
     "keyExpression": "encouraged",
+    "baseForm": "encourage",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -767,70 +783,75 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "Her enthusiastic praise [encouraged him to cook more often].",
-        "answer": "encouraged him to cook more often",
+        "english": "The kind teacher always [encouraged the young students to read good books].",
+        "answer": "encouraged the young students to read good books",
         "tokens": [
           "encouraged",
-          "him",
+          "the",
+          "young",
+          "students",
           "to",
-          "cook",
-          "more",
-          "often"
+          "read",
+          "good",
+          "books"
         ],
         "options": [
           "encouraged",
-          "him",
+          "the",
+          "young",
+          "students",
           "to",
-          "cook",
-          "more",
-          "often"
+          "read",
+          "good",
+          "books"
         ],
-        "korean": "그녀의 열렬한 칭찬은 그가 더 자주 요리하도록 용기를 북돋아 주었습니다.",
-        "explanation": "칭찬이 더 많은 요리 시도를 부추긴 상황입니다."
+        "korean": "친절한 선생님께서는 어린 학생들이 좋은 책을 읽도록 언제나 격려해 주셨어요.",
+        "explanation": "\"encouraged someone to do\"는 ~하도록 격려하고 북돋웠다는 뜻입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "The mentor warmly [encouraged, scolded, doubted, silenced] the young writer to submit her short story to the national literary competition.",
+        "english": "Her mother's warm smile and kind words [encouraged, frightened, stopped, blocked] her to try out for the school choir.",
         "answer": "encouraged",
         "options": [
           "encouraged",
-          "scolded",
-          "doubted",
-          "silenced"
-        ],
-        "korean": "멘토는 젊은 작가에게 전국 문학 공모전에 단편 소설을 출품해 보라고 따뜻하게 격려했습니다.",
-        "explanation": "도전을 독려하고 격려하는 모습입니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "Flexible working hours strongly [encouraged, pressured, forbade, prevented] employee creativity and work-life balance.",
-        "answer": "encouraged",
-        "options": [
-          "encouraged",
-          "pressured",
-          "forbade",
-          "prevented"
-        ],
-        "korean": "유연근무제는 직원들의 창의성과 일과 삶의 균형을 강력하게 북돋워 주었습니다.",
-        "explanation": "제도가 긍정적 효과를 장려함을 뜻합니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "Hearing loud cheers from the spectators [encouraged, tired, stopped, misled] the exhausted marathoner during the final mile.",
-        "answer": "encouraged",
-        "options": [
-          "encouraged",
-          "tired",
+          "frightened",
           "stopped",
-          "misled"
+          "blocked"
         ],
-        "korean": "관중들의 큰 환호성을 들은 것은 지친 마라토너가 마지막 1마일을 달리는 데 큰 힘을 북돋아 주었습니다.",
-        "explanation": "응원이 주는 힘과 격려입니다."
+        "korean": "어머니의 따뜻한 미소와 다정한 말씀은 그녀가 학교 합창단 오디션에 도전하도록 용기를 북돋아 주었어요.",
+        "explanation": "\"encouraged\"는 용기를 주어 행동하게 함을 뜻합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "Winning their first soccer match [encouraged, bored, silenced, froze] the young players to practice even harder.",
+        "answer": "encouraged",
+        "options": [
+          "encouraged",
+          "bored",
+          "silenced",
+          "froze"
+        ],
+        "korean": "첫 축구 경기에서 승리한 것은 어린 선수들이 더 열심히 연습하도록 격려(동기부여)해 주었어요.",
+        "explanation": "\"encouraged\"는 동기부여와 의욕을 심어주는 것입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "My best friend [encouraged, refused, checked, broke] me to study every day so we could pass the test together.",
+        "answer": "encouraged",
+        "options": [
+          "encouraged",
+          "refused",
+          "checked",
+          "broke"
+        ],
+        "korean": "내 단짝 친구는 함께 시험에 합격할 수 있도록 매일 공부하라고 나를 격려해 주었어요.",
+        "explanation": "\"encouraged\"는 친구를 응원하고 북돋움을 뜻합니다."
       }
     ]
   },
   {
     "keyExpression": "have lived up to",
+    "baseForm": "live up to",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -843,20 +864,21 @@
           "have run out of"
         ],
         "korean": "그 이후로 그가 김치찌개를 여러 번 끓여보았지만, 그 어떤 후속작도 그 전설적인 첫 번째 냄비의 기대치에는 전혀 미치지 못했어요.",
-        "explanation": "\"live up to ~\"는 기대나 기준에 \"부응하다, 미치다\"라는 뜻입니다 (현재완료: have lived up to)."
+        "explanation": "\"live up to ~\"는 기대나 기준에 \"부응하다, 미치다\"라는 뜻입니다. 여기서는 \"have + p.p.(현재완료)\" 형태로 쓰여 과거부터 지금까지 경험한 것들을 아울러 \"기대에 부응해 왔다\"라는 의미를 가지며, \"none of them\"과 결합하여 \"그 어떤 것도 기대에 미치지 못했다\"라는 완료 부정의 뉘앙스를 나타냅니다."
       },
       {
         "type": "drag-and-drop",
-        "english": "None of the sequels [have lived up to the original movie].",
-        "answer": "have lived up to the original movie",
+        "english": "None of the new movie sequels [have lived up to the exciting original story].",
+        "answer": "have lived up to the exciting original story",
         "tokens": [
           "have",
           "lived",
           "up",
           "to",
           "the",
+          "exciting",
           "original",
-          "movie"
+          "story"
         ],
         "options": [
           "have",
@@ -864,55 +886,57 @@
           "up",
           "to",
           "the",
+          "exciting",
           "original",
-          "movie"
+          "story"
         ],
-        "korean": "그 어떤 속편도 원작 영화의 기대치에는 미치지 못했습니다.",
-        "explanation": "원작의 명성에 미치지 못하는 속편들을 비유합니다."
+        "korean": "새 영화 속편들 중 그 어떤 작품도 그 흥미진진했던 원작의 기대치에 부응하지 못했어요.",
+        "explanation": "\"have lived up to\"는 지금까지 기대에 미쳐왔다는 뜻입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Few modern smartphone cameras [have lived up to, have backed down from, have fallen through with, have broken down to] the excessive advertising hype.",
+        "english": "Several new bakeries opened in our town, but none [have lived up to, have passed away to, have looked down on, have run out of] grandma's warm homemade bread.",
         "answer": "have lived up to",
         "options": [
           "have lived up to",
-          "have backed down from",
-          "have fallen through with",
-          "have broken down to"
+          "have passed away to",
+          "have looked down on",
+          "have run out of"
         ],
-        "korean": "과도한 광고 홍보의 기대치에 제대로 부응한 현대 스마트폰 카메라는 거의 없었습니다.",
-        "explanation": "광고의 기대치에 부응하지 못함을 뜻합니다."
+        "korean": "우리 동네에 새 빵집들이 몇 군데 문을 열었지만, 그 어떤 곳도 할머니의 따뜻한 손맛 빵 기대치에 미치지 못했어요.",
+        "explanation": "\"have lived up to\"는 기준이나 기대치에 미침을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Her stellar performance throughout the tournament proved that she [has lived up to, has given up on, has looked down on, has turned away from] the coach's high expectations.",
-        "answer": "has lived up to",
+        "english": "The soccer team played with great energy today, and their efforts [have lived up to, have died down to, have backed off from, have broken into] the coach's high hopes.",
+        "answer": "have lived up to",
         "options": [
-          "has lived up to",
-          "has given up on",
-          "has looked down on",
-          "has turned away from"
+          "have lived up to",
+          "have died down to",
+          "have backed off from",
+          "have broken into"
         ],
-        "korean": "대회 내내 보여준 그녀의 뛰어난 활약은 그녀가 코치의 높은 기대에 훌륭하게 부응했음을 입증했습니다.",
-        "explanation": "기대에 부응하여 성과를 낸 경우입니다."
+        "korean": "오늘 축구팀은 엄청난 에너지로 뛰었고, 그들의 노력은 코치님의 높은 기대에 훌륭히 부응해 왔어요.",
+        "explanation": "\"have lived up to expectations\"는 기대에 부응했음을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "The scenic cliffside resort was so breathtaking that it [has lived up to, has fallen behind, has cut corners, has run short of] its glowing five-star reputation.",
-        "answer": "has lived up to",
+        "english": "His honest actions and kind words [have lived up to, have turned away from, have looked into, have dropped out of] his family's proud reputation.",
+        "answer": "have lived up to",
         "options": [
-          "has lived up to",
-          "has fallen behind",
-          "has cut corners",
-          "has run short of"
+          "have lived up to",
+          "have turned away from",
+          "have looked into",
+          "have dropped out of"
         ],
-        "korean": "그 아름다운 절벽 리조트는 너무나 환상적이어서 찬란한 5성급 명성에 온전히 부응했습니다.",
-        "explanation": "명성에 걸맞은 훌륭한 품질입니다."
+        "korean": "그의 정직한 행동과 따뜻한 말은 가족의 자랑스러운 명성에 걸맞게 부응해 왔어요.",
+        "explanation": "\"have lived up to\"는 명성이나 가치에 부응함을 나타냅니다."
       }
     ]
   },
   {
     "keyExpression": "was introduced to",
+    "baseForm": "be introduced to",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -929,76 +953,75 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "I [was introduced to Korean barbecue by my university roommate].",
-        "answer": "was introduced to Korean barbecue by my university roommate",
+        "english": "He [was introduced to American football by his cousins] last winter.",
+        "answer": "was introduced to American football by his cousins",
         "tokens": [
           "was",
           "introduced",
           "to",
-          "Korean",
-          "barbecue",
+          "American",
+          "football",
           "by",
-          "my",
-          "university",
-          "roommate"
+          "his",
+          "cousins"
         ],
         "options": [
           "was",
           "introduced",
           "to",
-          "Korean",
-          "barbecue",
+          "American",
+          "football",
           "by",
-          "my",
-          "university",
-          "roommate"
+          "his",
+          "cousins"
         ],
-        "korean": "나는 대학교 룸메이트의 소개로 한국식 바비큐를 처음 접하게 되었어요.",
-        "explanation": "친구를 통해 새로운 음식을 접한 계기입니다."
+        "korean": "그는 지난겨울 사촌들의 소개로 미식축구를 처음 접하게 되었어요.",
+        "explanation": "\"was introduced to\"는 스포츠나 취미를 처음 소개받았음을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "During his stay in Kyoto, he [was introduced to, was relieved of, was caught up in, was stripped of] the intricate art of traditional tea ceremony.",
+        "english": "She [was introduced to, was warned of, was robbed of, was cleared of] classical piano music by her grandmother at a young age.",
         "answer": "was introduced to",
         "options": [
           "was introduced to",
-          "was relieved of",
-          "was caught up in",
-          "was stripped of"
+          "was warned of",
+          "was robbed of",
+          "was cleared of"
         ],
-        "korean": "교토에 머무는 동안 그는 전통 다도의 정교한 예술을 처음으로 접하고 배우게 되었습니다.",
-        "explanation": "새로운 전통문화를 접하게 된 경험입니다."
+        "korean": "그녀는 어린 나이에 할머니의 소개로 클래식 피아노 음악을 처음 접했어요.",
+        "explanation": "\"was introduced to\"는 음악이나 예술을 처음 접하는 상황입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "She [was introduced to, was tired of, was guilty of, was fearful of] classic jazz records by her grandfather when she was just eight years old.",
+        "english": "The friendly new student [was introduced to, was accused of, was rid of, was stripped of] the whole school during morning assembly.",
+        "answer": "was introduced to",
+        "options": [
+          "was introduced to",
+          "was accused of",
+          "was rid of",
+          "was stripped of"
+        ],
+        "korean": "다정한 전학생은 아침 조회 시간에 전교생에게 소개되었어요.",
+        "explanation": "\"was introduced to\"는 사람들에게 소개를 받는 것입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "I [was introduced to, was tired of, was guilty of, was afraid of] this wonderful adventure book by my favorite teacher.",
         "answer": "was introduced to",
         "options": [
           "was introduced to",
           "was tired of",
           "was guilty of",
-          "was fearful of"
+          "was afraid of"
         ],
-        "korean": "그녀는 겨우 여덟 살 때 할아버지의 소개로 클래식 재즈 음반들을 처음 접하게 되었습니다.",
-        "explanation": "가족을 통해 음악에 입문한 계기입니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "New team recruits [were introduced to, were cleared of, were kept out of, were taken for] the project management software during orientation.",
-        "answer": "were introduced to",
-        "options": [
-          "were introduced to",
-          "were cleared of",
-          "were kept out of",
-          "were taken for"
-        ],
-        "korean": "신규 입사자들은 오리엔테이션 동안 프로젝트 관리 소프트웨어를 소개받았습니다.",
-        "explanation": "새로운 업무 툴을 안내받는 상황입니다."
+        "korean": "나는 내가 가장 좋아하는 선생님의 소개로 이 멋진 모험 소설을 알게 되었어요.",
+        "explanation": "\"was introduced to\"는 책이나 작품을 추천받아 접함을 뜻합니다."
       }
     ]
   },
   {
     "keyExpression": "can't say",
+    "baseForm": "can't say",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1015,76 +1038,71 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "I [can't say for sure whether the restaurant is open] today.",
-        "answer": "can't say for sure whether the restaurant is open",
+        "english": "I like both bright colors, so I [can't say which shirt looks better] on you.",
+        "answer": "can't say which shirt looks better",
         "tokens": [
           "can't",
           "say",
-          "for",
-          "sure",
-          "whether",
-          "the",
-          "restaurant",
-          "is",
-          "open"
+          "which",
+          "shirt",
+          "looks",
+          "better"
         ],
         "options": [
           "can't",
           "say",
-          "for",
-          "sure",
-          "whether",
-          "the",
-          "restaurant",
-          "is",
-          "open"
+          "which",
+          "shirt",
+          "looks",
+          "better"
         ],
-        "korean": "오늘 그 식당이 문을 열었는지 확실하게는 말할 수 없어요.",
-        "explanation": "\"can't say for sure\"는 확실히 장담할 수 없음을 나타냅니다."
+        "korean": "두 밝은 색상 다 마음에 들어서 어느 셔츠가 너한테 더 잘 어울리는지 딱 잘라 말할 수 없네.",
+        "explanation": "\"can't say\"는 확답하기 어렵다는 뜻입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "I [can't say, can't hear, can't breathe, can't swallow] that I enjoyed the horror movie, though the visual effects were impressive.",
+        "english": "The math test was tricky, so I [can't say, won't drink, can't sleep, mustn't cook] for certain if I scored a perfect grade.",
         "answer": "can't say",
         "options": [
           "can't say",
-          "can't hear",
-          "can't breathe",
-          "can't swallow"
+          "won't drink",
+          "can't sleep",
+          "mustn't cook"
         ],
-        "korean": "시각 효과는 인상 깊었지만 그 공포 영화를 즐겼다고는 솔직히 말할 수 없네요.",
-        "explanation": "솔직한 감상평을 완곡하게 전달할 때 씁니다."
+        "korean": "수학 시험이 까다로워서 만점을 받았는지 확실히 딱 잘라 말할 수는 없어요.",
+        "explanation": "\"can't say for certain\"은 확실히 말할 수 없다입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "When asked about future stock performance, financial analysts [can't say, won't watch, shan't sleep, shouldn't drink] with absolute certainty.",
+        "english": "I [can't say, shouldn't walk, won't drive, wouldn't fly] why the school bus is running twenty minutes late today.",
         "answer": "can't say",
         "options": [
           "can't say",
-          "won't watch",
-          "shan't sleep",
-          "shouldn't drink"
+          "shouldn't walk",
+          "won't drive",
+          "wouldn't fly"
         ],
-        "korean": "미래 주가 변동에 대해 질문을 받았을 때 금융 분석가들도 100% 확신을 가지고 단언할 수는 없습니다.",
-        "explanation": "예측의 불확실성을 나타냅니다."
+        "korean": "오늘 스쿨버스가 왜 20분 늦게 오는지 이유는 딱 잘라 알 수가 없어요.",
+        "explanation": "\"can't say why\"는 이유를 단정 지어 말할 수 없음을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "We [can't say, don't touch, won't jump, mustn't burn] that we were surprised when the championship trophy was awarded to the favorites.",
+        "english": "She is very gentle, so she [can't say, mustn't look, won't read, shouldn't buy] anything mean or unkind about others.",
         "answer": "can't say",
         "options": [
           "can't say",
-          "don't touch",
-          "won't jump",
-          "mustn't burn"
+          "mustn't look",
+          "won't read",
+          "shouldn't buy"
         ],
-        "korean": "우승 트로피가 가장 유력했던 팀에게 돌아갔을 때 우리가 놀랐다고는 말할 수 없었어요(예상했던 일이었죠).",
-        "explanation": "\"can't say I was surprised\"는 놀랍지 않았다는 관용구입니다."
+        "korean": "그녀는 매우 다정해서 남들에 대해 나쁘거나 불친절한 말을 차마 하지 못해요.",
+        "explanation": "\"can't say anything bad\"는 나쁜 말을 하지 못함을 뜻합니다."
       }
     ]
   },
   {
     "keyExpression": "supposed to",
+    "baseForm": "supposed to",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1101,74 +1119,71 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "You are [supposed to simmer the stew on low heat] for rich flavor.",
-        "answer": "supposed to simmer the stew on low heat",
+        "english": "Students are [supposed to turn off cell phones] during the test.",
+        "answer": "supposed to turn off cell phones",
         "tokens": [
           "supposed",
           "to",
-          "simmer",
-          "the",
-          "stew",
-          "on",
-          "low",
-          "heat"
+          "turn",
+          "off",
+          "cell",
+          "phones"
         ],
         "options": [
           "supposed",
           "to",
-          "simmer",
-          "the",
-          "stew",
-          "on",
-          "low",
-          "heat"
+          "turn",
+          "off",
+          "cell",
+          "phones"
         ],
-        "korean": "깊은 풍미를 위해서는 약불에서 찌개를 은근히 졸여야 해요.",
-        "explanation": "요리법의 기본 원칙을 설명합니다."
+        "korean": "학생들은 시험 중에 휴대전화를 끄기로 되어 있어요(꺼야 해요).",
+        "explanation": "\"supposed to turn off\"는 규칙상 끄기로 되어 있음을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "What time are the conference keynote speakers [supposed to, likely from, capable in, eager with] take the podium this morning?",
+        "english": "You are [supposed to, driven to, caught to, dropped to] wash your hands with warm water and soap before dinner.",
         "answer": "supposed to",
         "options": [
           "supposed to",
-          "likely from",
-          "capable in",
-          "eager with"
+          "driven to",
+          "caught to",
+          "dropped to"
         ],
-        "korean": "오늘 아침 콘퍼런스 기조 연설자분들은 몇 시에 연단에 오르기로 예정되어 있나요?",
-        "explanation": "공식 일정상 예정된 시간을 묻습니다."
+        "korean": "저녁 식사 전에는 따뜻한 물과 비누로 손을 씻어야 해요(씻기로 되어 있어요).",
+        "explanation": "\"supposed to wash\"는 당연히 지켜야 할 위생 수칙입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Children are [supposed to, forced by, gifted with, doomed to] wash their hands thoroughly before sitting down at the dinner table.",
+        "english": "What time is the morning passenger train [supposed to, bound to, able to, used to] arrive at the platform?",
         "answer": "supposed to",
         "options": [
           "supposed to",
-          "forced by",
-          "gifted with",
-          "doomed to"
+          "bound to",
+          "able to",
+          "used to"
         ],
-        "korean": "아이들은 식탁에 앉기 전에 손을 깨끗이 씻어야 마땅합니다.",
-        "explanation": "지켜야 할 규칙이나 예절입니다."
+        "korean": "아침 여객 기차는 플랫폼에 몇 시에 도착하기로 예정되어 있나요?",
+        "explanation": "\"supposed to arrive\"는 시간표상의 예정 시각입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "It was [supposed to, meant by, bound from, proud of] rain heavily today, but the sky remained clear and blue all afternoon.",
+        "english": "The weather report said it was [supposed to, made to, taught to, called to] be sunny and warm all weekend.",
         "answer": "supposed to",
         "options": [
           "supposed to",
-          "meant by",
-          "bound from",
-          "proud of"
+          "made to",
+          "taught to",
+          "called to"
         ],
-        "korean": "오늘 비가 많이 내리기로 예보되어 있었는데, 오후 내내 하늘이 맑고 푸르렀어요.",
-        "explanation": "예보나 예상과 달리 전개된 날씨입니다."
+        "korean": "일기예보에서는 주말 내내 날씨가 맑고 따뜻하기로 되어 있다고 했어요.",
+        "explanation": "\"supposed to be sunny\"는 예보상의 날씨를 가리킵니다."
       }
     ]
   },
   {
     "keyExpression": "taste the same",
+    "baseForm": "taste the same",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1185,16 +1200,15 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "Store-bought strawberry jam simply doesn't [taste the same as grandma's homemade jam].",
-        "answer": "taste the same as grandma's homemade jam",
+        "english": "Without real butter, these cookies just do not [taste the same as grandma's recipe].",
+        "answer": "taste the same as grandma's recipe",
         "tokens": [
           "taste",
           "the",
           "same",
           "as",
           "grandma's",
-          "homemade",
-          "jam"
+          "recipe"
         ],
         "options": [
           "taste",
@@ -1202,55 +1216,55 @@
           "same",
           "as",
           "grandma's",
-          "homemade",
-          "jam"
+          "recipe"
         ],
-        "korean": "시판 딸기잼은 할머니의 수제 잼과 결코 똑같은 맛이 나지 않아요.",
-        "explanation": "수제 음식과 시판 음식의 맛의 차이를 비교합니다."
+        "korean": "진짜 버터가 없으면 이 쿠키들은 할머니 레시피와 똑같은 맛이 나지 않아요.",
+        "explanation": "\"taste the same as\"는 ~와 똑같은 맛이 남을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Even if you substitute butter with margarine, the baked cookies will not [taste the same, look the fool, walk the line, pull the plug].",
+        "english": "Fresh warm toast just doesn't [taste the same, look the light, make the bed, hit the road] once it sits out and gets completely cold.",
         "answer": "taste the same",
         "options": [
           "taste the same",
-          "look the fool",
-          "walk the line",
-          "pull the plug"
+          "look the light",
+          "make the bed",
+          "hit the road"
         ],
-        "korean": "버터 대신 마가린을 대체해서 넣더라도 구운 쿠키에서 결코 똑같은 맛이 나지는 않을 거예요.",
-        "explanation": "재료 대체로 인한 풍미 차이입니다."
+        "korean": "갓 구운 따뜻한 토스트는 밖에 방치되어 완전히 식어버리면 예전과 똑같은 맛이 나지 않아요.",
+        "explanation": "\"taste the same\"은 원래의 맛과 동일함을 나타냅니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Coffee brewed with filtered spring water doesn't [taste the same, turn the tide, break the code, hold the fort] as tap water coffee.",
+        "english": "Does this homemade pizza [taste the same, sound the bell, ring the clock, take the seat] as the one we had at the Italian restaurant?",
         "answer": "taste the same",
         "options": [
           "taste the same",
-          "turn the tide",
-          "break the code",
-          "hold the fort"
+          "sound the bell",
+          "ring the clock",
+          "take the seat"
         ],
-        "korean": "정수된 샘물로 내린 커피는 수돗물로 내린 커피와 똑같은 맛이 나지 않습니다.",
-        "explanation": "물에 따른 커피 맛의 차이입니다."
+        "korean": "이 홈메이드 피자가 우리가 그 이탈리안 레스토랑에서 먹었던 것과 똑같은 맛이 나나요?",
+        "explanation": "\"taste the same\"은 맛의 일치 여부를 묻습니다."
       },
       {
         "type": "multiple-choice",
-        "english": "After changing their recipe last year, the soft drink doesn't [taste the same, ring the bell, bear the brunt, hit the nail] to loyal fans.",
+        "english": "Coffee with cold water never [taste the same, keep the peace, turn the key, tell the time] as a hot brewed cup.",
         "answer": "taste the same",
         "options": [
           "taste the same",
-          "ring the bell",
-          "bear the brunt",
-          "hit the nail"
+          "keep the peace",
+          "turn the key",
+          "tell the time"
         ],
-        "korean": "작년에 레시피를 바꾼 후 그 탄산음료는 오랜 팬들에게 예전과 똑같은 맛이 나지 않습니다.",
-        "explanation": "레시피 변경 후 달라진 맛에 대한 팬들의 반응입니다."
+        "korean": "찬물에 탄 커피는 갓 내린 뜨거운 커피 한 잔과 똑같은 맛이 나지 않아요.",
+        "explanation": "\"taste the same\"은 음식의 고유한 풍미가 같음을 뜻합니다."
       }
     ]
   },
   {
-    "keyExpression": "technically",
+    "keyExpression": "Technically",
+    "baseForm": "technically",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1267,76 +1281,71 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "[Technically, was it really that good of a soup]? Maybe not.",
-        "answer": "Technically, was it really that good of a soup",
+        "english": "[Technically, tomorrow is a national holiday], so our school is closed.",
+        "answer": "Technically, tomorrow is a national holiday",
         "tokens": [
           "Technically,",
-          "was",
-          "it",
-          "really",
-          "that",
-          "good",
-          "of",
+          "tomorrow",
+          "is",
           "a",
-          "soup"
+          "national",
+          "holiday"
         ],
         "options": [
           "Technically,",
-          "was",
-          "it",
-          "really",
-          "that",
-          "good",
-          "of",
+          "tomorrow",
+          "is",
           "a",
-          "soup"
+          "national",
+          "holiday"
         ],
-        "korean": "엄밀히 따져보면 그게 정말 그렇게까지 훌륭한 찌개였을까요? 아마 아닐 수도 있죠.",
-        "explanation": "객관적으로 엄밀히 재평가해 보는 화법입니다."
+        "korean": "엄밀히 따져보면 내일은 국경일이어서 우리 학교는 쉬어요.",
+        "explanation": "\"Technically\"는 공식 규정이나 엄밀한 사실에 따름을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "[Technically, Clumsily, Blindly, Loudly], the library closes at nine, but staff begin locking exterior gates ten minutes prior.",
+        "english": "[Technically, Casually, Slowly, Sadly], a spider is an arachnid and not an insect because it has eight legs.",
         "answer": "Technically",
         "options": [
           "Technically",
-          "Clumsily",
-          "Blindly",
-          "Loudly"
+          "Casually",
+          "Slowly",
+          "Sadly"
         ],
-        "korean": "엄밀히 말하면 도서관은 9시에 닫지만, 직원들은 10분 전부터 정문을 잠그기 시작합니다.",
-        "explanation": "공식 규정과 실제 운영의 미세한 차이를 짚습니다."
+        "korean": "엄밀히 따지자면 거미는 다리가 8개이므로 곤충이 아니라 거미류에 속합니다.",
+        "explanation": "\"Technically\"는 과학적·학술적 정확성을 가리킵니다."
       },
       {
         "type": "multiple-choice",
-        "english": "He is [technically, poorly, rarely, faintly] our manager, but he treats everyone on the crew like equal partners.",
-        "answer": "technically",
+        "english": "[Technically, Loudly, Happily, Blindly], calendar winter starts in December, but November is already freezing here.",
+        "answer": "Technically",
         "options": [
-          "technically",
-          "poorly",
-          "rarely",
-          "faintly"
+          "Technically",
+          "Loudly",
+          "Happily",
+          "Blindly"
         ],
-        "korean": "직함상 엄밀히 따지면 그가 우리의 관리자이지만, 그는 팀원 모두를 동등한 파트너처럼 대합니다.",
-        "explanation": "직함과 실제 태도의 차이입니다."
+        "korean": "달력상으로는 엄밀히 겨울이 12월에 시작하지만, 이곳은 11월도 이미 몹시 추워요.",
+        "explanation": "\"Technically\"는 규정상이나 공식 기준을 말할 때 씁니다."
       },
       {
         "type": "multiple-choice",
-        "english": "You can [technically, blindly, bitterly, coldly] hike the trail in running sneakers, but sturdy boots provide much better traction.",
+        "english": "He is [technically, deeply, sweetly, loudly] correct about the library rule, even if it feels very strict to us.",
         "answer": "technically",
         "options": [
           "technically",
-          "blindly",
-          "bitterly",
-          "coldly"
+          "deeply",
+          "sweetly",
+          "loudly"
         ],
-        "korean": "엄밀히 따지면 러닝화로도 그 등산로를 걸을 수는 있지만, 튼튼한 등산화가 훨씬 더 좋은 접지력을 제공합니다.",
-        "explanation": "이론상 가능하지만 권장되지 않는 상황입니다."
+        "korean": "우리에게 다소 엄격하게 느껴질지라도 도서관 규칙에 대해 엄밀히 말하자면 그의 말이 맞아요.",
+        "explanation": "\"technically correct\"는 규칙상 정확함을 뜻합니다."
       }
     ]
   },
   {
     "keyExpression": "based it off of",
+    "baseForm": "base off of",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1353,17 +1362,18 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "The screenplay writer [based it off of a true historical event].",
-        "answer": "based it off of a true historical event",
+        "english": "She drew a lovely picture and [based it off of a photo of her garden].",
+        "answer": "based it off of a photo of her garden",
         "tokens": [
           "based",
           "it",
           "off",
           "of",
           "a",
-          "true",
-          "historical",
-          "event"
+          "photo",
+          "of",
+          "her",
+          "garden"
         ],
         "options": [
           "based",
@@ -1371,56 +1381,58 @@
           "off",
           "of",
           "a",
-          "true",
-          "historical",
-          "event"
+          "photo",
+          "of",
+          "her",
+          "garden"
         ],
-        "korean": "각본가는 실제 역사적 사건을 바탕으로 그것을 집필했습니다.",
-        "explanation": "실화를 바탕으로 창작했음을 나타냅니다."
+        "korean": "그녀는 사랑스러운 그림 하나를 그렸고, 자기 정원 사진을 바탕으로 삼았어요.",
+        "explanation": "\"based it off of\"는 원본이나 사진을 기초로 제작했음을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "The architect drew the cabin blueprint and [based it off of, broke it away from, washed it out of, held it back from] traditional Scandinavian mountain shelters.",
+        "english": "He wrote an exciting short story and [based it off of, cut it out of, held it back from, gave it up to] his own childhood adventures in the woods.",
         "answer": "based it off of",
         "options": [
           "based it off of",
-          "broke it away from",
-          "washed it out of",
-          "held it back from"
+          "cut it out of",
+          "held it back from",
+          "gave it up to"
         ],
-        "korean": "건축가는 오두막 청사진을 그릴 때 전통적인 스칸디나비아 산장 양식을 바탕으로 삼았습니다.",
-        "explanation": "디자인의 기초가 된 원형입니다."
+        "korean": "그는 흥미진진한 단편 소설을 썼고, 숲속에서 겪은 자신의 어린 시절 모험을 바탕으로 삼았어요.",
+        "explanation": "\"based off of\"는 경험을 바탕으로 이야기를 지어냄을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "He calculated the quarterly financial budget and [based it off of, turned it into, pulled it down from, ran it over with] last year's sales figures.",
+        "english": "When mom prepared the potato soup, she [based it off of, threw it out of, broke it up into, ran it down to] the simple recipe grandma taught her.",
         "answer": "based it off of",
         "options": [
           "based it off of",
-          "turned it into",
-          "pulled it down from",
-          "ran it over with"
+          "threw it out of",
+          "broke it up into",
+          "ran it down to"
         ],
-        "korean": "그는 분기별 재정 예산을 산출할 때 작년 매출 수치를 바탕(기준)으로 삼았습니다.",
-        "explanation": "통계적 기준 자료를 삼는 모습입니다."
+        "korean": "엄마가 감자 수프를 만드셨을 때, 할머니께서 가르쳐주신 간단한 레시피를 바탕으로 삼으셨어요.",
+        "explanation": "\"based it off of\"는 조리법을 기초로 삼음을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "We designed the course curriculum and [based it off of, backed it out of, took it apart from, carried it over to] real-world student feedback.",
+        "english": "The movie director made a thrilling film and [based it off of, took it away from, put it down to, wiped it out of] a true historical event.",
         "answer": "based it off of",
         "options": [
           "based it off of",
-          "backed it out of",
-          "took it apart from",
-          "carried it over to"
+          "took it away from",
+          "put it down to",
+          "wiped it out of"
         ],
-        "korean": "우리는 강의 교육과정을 설계할 때 실제 학생들의 피드백을 바탕으로 구성했습니다.",
-        "explanation": "사용자 의견을 토대로 개발한 커리큘럼입니다."
+        "korean": "영화감독은 스릴 넘치는 영화를 제작했고, 실제 역사적 사건을 바탕으로 삼았어요.",
+        "explanation": "\"based off of\"는 실화를 바탕으로 함을 나타냅니다."
       }
     ]
   },
   {
     "keyExpression": "as good as",
+    "baseForm": "as good as",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1437,72 +1449,73 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "This local cafe coffee is [just as good as expensive specialty brew].",
-        "answer": "just as good as expensive specialty brew",
+        "english": "This fresh homemade pizza is [just as good as the restaurant pizza].",
+        "answer": "just as good as the restaurant pizza",
         "tokens": [
           "just",
           "as",
           "good",
           "as",
-          "expensive",
-          "specialty",
-          "brew"
+          "the",
+          "restaurant",
+          "pizza"
         ],
         "options": [
           "just",
           "as",
           "good",
           "as",
-          "expensive",
-          "specialty",
-          "brew"
+          "the",
+          "restaurant",
+          "pizza"
         ],
-        "korean": "이 동네 카페 커피는 값비싼 스페셜티 커피만큼이나 훌륭해요.",
-        "explanation": "저렴한 커피가 고급 커피에 못지않음을 칭찬합니다."
+        "korean": "이 갓 구운 집 피자는 식당 피자만큼이나 맛있어요.",
+        "explanation": "\"as good as\"는 ~만큼 훌륭한이라는 동등 비교입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "With modern digital restoration, vintage vinyl records sound almost [as good as, as dark as, as cold as, as far as] live studio master tapes.",
+        "english": "Today's sunny weather is every bit [as good as, as cold as, as dark as, as sad as] yesterday's pleasant afternoon.",
         "answer": "as good as",
         "options": [
           "as good as",
-          "as dark as",
           "as cold as",
-          "as far as"
+          "as dark as",
+          "as sad as"
         ],
-        "korean": "현대적인 디지털 복원 기술 덕분에 빈티지 LP 음반 소리는 라이브 스튜디오 마스터 테이프만큼이나 훌륭하게 들립니다.",
-        "explanation": "음질이 원본에 필적할 만큼 좋음을 뜻합니다."
+        "korean": "오늘의 화창한 날씨는 어제의 기분 좋은 오후만큼이나 참 좋아요.",
+        "explanation": "\"as good as\"는 날씨나 기분이 그에 못지않게 좋음을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "A home-cooked bowl of chicken noodle soup is [as good as, as dry as, as heavy as, as harsh as] medicine when you have a winter cold.",
+        "english": "Her new watercolor painting is every bit [as good as, as weak as, as low as, as bad as] the art on the calendar.",
         "answer": "as good as",
         "options": [
           "as good as",
-          "as dry as",
-          "as heavy as",
-          "as harsh as"
+          "as weak as",
+          "as low as",
+          "as bad as"
         ],
-        "korean": "집에서 끓인 따뜻한 치킨 누들 수프 한 그릇은 겨울 감기에 걸렸을 때 약만큼이나 좋습니다.",
-        "explanation": "치유 효과가 약에 필적함을 비유합니다."
+        "korean": "그녀의 새 수채화 그림은 달력에 실린 미술 작품만큼이나 훌륭해요.",
+        "explanation": "\"as good as\"는 작품의 완성도가 대등함을 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "His word is [as good as, as hard as, as late as, as bitter as] gold, so you can trust his business commitments completely.",
+        "english": "After wiping off the dust, my old bicycle looks [as good as, as slow as, as short as, as hard as] new.",
         "answer": "as good as",
         "options": [
           "as good as",
-          "as hard as",
-          "as late as",
-          "as bitter as"
+          "as slow as",
+          "as short as",
+          "as hard as"
         ],
-        "korean": "그의 약속은 금만큼이나 확실하고 신뢰할 수 있으니 그의 사업적 약속을 전적으로 신뢰해도 좋습니다.",
-        "explanation": "\"as good as gold\"는 매우 신뢰할 수 있음을 뜻하는 관용구입니다."
+        "korean": "먼지를 닦아내자 내 오래된 자전거는 새것만큼이나 좋아 보여요.",
+        "explanation": "\"as good as new\"는 새것이나 다름없는 상태입니다."
       }
     ]
   },
   {
     "keyExpression": "turn out",
+    "baseForm": "turn out",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1519,72 +1532,71 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "We followed the instructions, and [the chocolate cake turned out wonderfully moist].",
-        "answer": "the chocolate cake turned out wonderfully moist",
+        "english": "We practiced every day, and our school play [turned out great in the end].",
+        "answer": "turned out great in the end",
         "tokens": [
-          "the",
-          "chocolate",
-          "cake",
           "turned",
           "out",
-          "wonderfully",
-          "moist"
+          "great",
+          "in",
+          "the",
+          "end"
         ],
         "options": [
-          "the",
-          "chocolate",
-          "cake",
           "turned",
           "out",
-          "wonderfully",
-          "moist"
+          "great",
+          "in",
+          "the",
+          "end"
         ],
-        "korean": "우리가 레시피 설명대로 따랐더니 초콜릿 케이크가 놀라울 정도로 촉촉하게 완성되었어요.",
-        "explanation": "요리 결과물이 훌륭하게 완성된 결말입니다."
+        "korean": "우리는 매일 연습했고, 우리 학교 연극은 결국 대단히 훌륭하게 끝마쳐졌어요(결과가 나왔어요).",
+        "explanation": "\"turned out great\"은 결과가 대단히 훌륭하게 나오다를 뜻합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "We worried about heavy rain ruining the garden party, but everything [turned out, broke out, faded out, passed out] beautifully.",
+        "english": "Don't worry about the small mistakes; I am sure everything will [turn out, break in, run away, hold on] just fine.",
+        "answer": "turn out",
+        "options": [
+          "turn out",
+          "break in",
+          "run away",
+          "hold on"
+        ],
+        "korean": "작은 실수들에 대해 너무 걱정하지 마세요. 모든 것이 결국 잘 풀릴 거라고(결과가 좋을 거라고) 확신해요.",
+        "explanation": "\"turn out fine\"은 결과가 잘 되다를 뜻합니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "I was very nervous before the English test, but it [turned out, fell out, went down, gave in] to be much easier than I thought.",
         "answer": "turned out",
         "options": [
           "turned out",
-          "broke out",
-          "faded out",
-          "passed out"
-        ],
-        "korean": "폭우가 가든파티를 망칠까 봐 걱정했지만 모든 것이 아름답게 잘 풀렸어요.",
-        "explanation": "결과가 긍정적으로 잘 마무리된 상황입니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "No matter how the election [turns out, burns down, cuts off, falls through], the community must stay united.",
-        "answer": "turns out",
-        "options": [
-          "turns out",
-          "burns down",
-          "cuts off",
-          "falls through"
-        ],
-        "korean": "선거 결과가 어떻게 나오든 간에 우리 지역사회는 단합을 유지해야 합니다.",
-        "explanation": "결과의 향방을 나타냅니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "I was hesitant about taking the ceramics class, but it [turned out, held up, backed off, gave in] to be the most relaxing hobby.",
-        "answer": "turned out",
-        "options": [
-          "turned out",
-          "held up",
-          "backed off",
+          "fell out",
+          "went down",
           "gave in"
         ],
-        "korean": "도예 수업을 듣는 것이 망설여졌지만, 알고 보니 가장 마음을 편안하게 해주는 취미가 되었어요.",
-        "explanation": "경험 후 알게 된 뜻밖의 만족감입니다."
+        "korean": "영어 시험 전에 몹시 긴장했지만, 생각했던 것보다 훨씬 더 쉬운 것으로 드러났어요(결과가 나왔어요).",
+        "explanation": "\"turned out to be\"는 결과적으로 ~임이 밝혀지다입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "The cloudy morning [turned out, dropped out, backed down, set up] to be a warm and sunny afternoon for soccer.",
+        "answer": "turned out",
+        "options": [
+          "turned out",
+          "dropped out",
+          "backed down",
+          "set up"
+        ],
+        "korean": "흐렸던 아침은 결국 축구하기에 따뜻하고 화창한 오후로 바뀌었어요(결과가 되었어요).",
+        "explanation": "\"turned out\"은 결국 어떤 상태로 결말이 남을 뜻합니다."
       }
     ]
   },
   {
-    "keyExpression": "Whereas",
+    "keyExpression": "whereas",
+    "baseForm": "whereas",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1601,70 +1613,73 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "He prefers spicy food, [whereas his sister likes mild flavors].",
-        "answer": "whereas his sister likes mild flavors",
+        "english": "Kelly likes sweet warm tea, [whereas her husband Jaemyun prefers black coffee].",
+        "answer": "whereas her husband Jaemyun prefers black coffee",
         "tokens": [
           "whereas",
-          "his",
-          "sister",
-          "likes",
-          "mild",
-          "flavors"
+          "her",
+          "husband",
+          "Jaemyun",
+          "prefers",
+          "black",
+          "coffee"
         ],
         "options": [
           "whereas",
-          "his",
-          "sister",
-          "likes",
-          "mild",
-          "flavors"
+          "her",
+          "husband",
+          "Jaemyun",
+          "prefers",
+          "black",
+          "coffee"
         ],
-        "korean": "그는 매운 음식을 좋아하는 반면에, 그의 여동생은 순한 맛을 좋아합니다.",
-        "explanation": "상반된 음식 취향을 대조하는 문장입니다."
+        "korean": "켈리는 달콤하고 따뜻한 차를 좋아하는 반면에, 남편 재면은 블랙커피를 더 좋아해요.",
+        "explanation": "\"whereas\"는 두 사람의 취향을 대조하는 접속사입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Some people prefer living in bustling metropolitan cities, [whereas, furthermore, besides, moreover] others thrive in quiet rural cabins.",
+        "english": "The red apple was sweet and juicy, [whereas, therefore, likewise, instead] the green apple was extremely sour.",
         "answer": "whereas",
         "options": [
           "whereas",
-          "furthermore",
-          "besides",
-          "moreover"
-        ],
-        "korean": "어떤 사람들은 번화한 대도시에서 사는 것을 선호하는 반면에, 다른 사람들은 조용한 시골 오두막에서 행복을 느낍니다.",
-        "explanation": "라이프스타일의 극명한 대조입니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "The morning hike was brisk and chilly, [whereas, consequently, likewise, identically] the afternoon walk turned humid and hot.",
-        "answer": "whereas",
-        "options": [
-          "whereas",
-          "consequently",
+          "therefore",
           "likewise",
-          "identically"
+          "instead"
         ],
-        "korean": "아침 하이킹은 상쾌하고 쌀쌀했던 반면에, 오후 산책은 습하고 더워졌습니다.",
-        "explanation": "시간대에 따른 날씨 대조입니다."
+        "korean": "빨간 사과는 달콤하고 과즙이 풍부했던 반면에, 초록 사과는 아주 떫고 시었어요.",
+        "explanation": "\"whereas\"는 두 사물의 상반된 맛을 대조합니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Her first novel was a gritty psychological thriller, [whereas, hence, thus, similarly] her second book was a whimsical fantasy.",
+        "english": "Cats are quiet indoor pets, [whereas, besides, moreover, meanwhile] active dogs love to run outside in the yard.",
         "answer": "whereas",
         "options": [
           "whereas",
-          "hence",
-          "thus",
-          "similarly"
+          "besides",
+          "moreover",
+          "meanwhile"
         ],
-        "korean": "그녀의 첫 번째 소설은 어두운 심리 스릴러였던 반면에, 두 번째 책은 기발한 판타지였습니다.",
-        "explanation": "두 작품 간 장르적 대조입니다."
+        "korean": "고양이는 조용한 실내 반려동물인 반면에, 활발한 개들은 마당 밖에서 뛰어노는 것을 무척 좋아해요.",
+        "explanation": "\"whereas\"는 성향의 명확한 차이를 대조할 때 씁니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "He finished his drawing in ten minutes, [whereas, thus, anyway, however] his sister spent an hour to be very neat.",
+        "answer": "whereas",
+        "options": [
+          "whereas",
+          "thus",
+          "anyway",
+          "however"
+        ],
+        "korean": "그는 10분 만에 그림을 끝마친 반면에, 여동생은 매우 깔끔하게 그리기 위해 한 시간을 들였어요.",
+        "explanation": "\"whereas\"는 걸린 시간과 태도의 차이를 대조합니다."
       }
     ]
   },
   {
     "keyExpression": "oilier to",
+    "baseForm": "oilier to",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1681,74 +1696,71 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "This soup feels [much oilier to me than the last bowl].",
-        "answer": "much oilier to me than the last bowl",
+        "english": "The fried potatoes tasted [oilier to me without lemon juice] to balance them.",
+        "answer": "oilier to me without lemon juice",
         "tokens": [
-          "much",
           "oilier",
           "to",
           "me",
-          "than",
-          "the",
-          "last",
-          "bowl"
+          "without",
+          "lemon",
+          "juice"
         ],
         "options": [
-          "much",
           "oilier",
           "to",
           "me",
-          "than",
-          "the",
-          "last",
-          "bowl"
+          "without",
+          "lemon",
+          "juice"
         ],
-        "korean": "이 찌개는 지난번 그릇보다 나에게 훨씬 더 기름지게 느껴져요.",
-        "explanation": "개인적 미각으로 느끼는 기름진 정도의 비교입니다."
+        "korean": "맛을 잡아줄 레몬즙이 없으니 튀긴 감자가 내 입맛에는 더 기름지게(느끼하게) 느껴졌어요.",
+        "explanation": "\"oilier to me\"는 내 입맛에 더 기름지다는 뜻입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Deep-fried dumplings often taste [oilier to, sweeter to, cooler to, calmer to] customers if the frying oil temperature is too low.",
+        "english": "Eating fried chicken two nights in a row felt noticeably [oilier to, sweeter to, fresher to, louder to] the family.",
         "answer": "oilier to",
         "options": [
           "oilier to",
           "sweeter to",
-          "cooler to",
-          "calmer to"
-        ],
-        "korean": "튀김 기름 온도가 너무 낮으면 군만두가 손님들에게 더 기름지게 느껴지곤 합니다.",
-        "explanation": "튀김 요리의 기름진 식감 설명입니다."
-      },
-      {
-        "type": "multiple-choice",
-        "english": "The heavy cream sauce felt [oilier to, fresher to, greener to, lighter to] her digestive system after the long workout.",
-        "answer": "oilier to",
-        "options": [
-          "oilier to",
           "fresher to",
-          "greener to",
-          "lighter to"
+          "louder to"
         ],
-        "korean": "진한 크림소스는 긴 운동 후 그녀의 소화기관에 더부룩하고 기름지게 느껴졌습니다.",
-        "explanation": "위에 부담을 주는 기름진 느낌입니다."
+        "korean": "이틀 연속으로 프라이드치킨을 먹는 것은 가족들에게 눈에 띄게 더 기름지게 느껴졌어요.",
+        "explanation": "\"oilier to\"는 특정 사람에게 기름지게 다가옴을 나타냅니다."
       },
       {
         "type": "multiple-choice",
-        "english": "Skimming the floating fat off the simmering broth makes it taste far less [oilier to, hotter to, saltier to, sourer to] dinner guests.",
+        "english": "The warm soup tasted [oilier to, colder to, harder to, drier to] her after adding extra butter.",
         "answer": "oilier to",
         "options": [
           "oilier to",
-          "hotter to",
-          "saltier to",
-          "sourer to"
+          "colder to",
+          "harder to",
+          "drier to"
         ],
-        "korean": "끓는 육수 위에 뜬 기름을 걷어내면 저녁 식사 손님들에게 훨씬 덜 기름지게 느껴집니다.",
-        "explanation": "기름기를 걷어내어 담백하게 만드는 조리법입니다."
+        "korean": "버터를 더 넣은 뒤 따뜻한 수프가 그녀의 입맛에 더 기름지게 느껴졌어요.",
+        "explanation": "\"oilier to her\"는 그녀에게 기름지게 느껴짐입니다."
+      },
+      {
+        "type": "multiple-choice",
+        "english": "This thick pasta dish was much [oilier to, cleaner to, sharper to, softer to] our dinner guests than the light salad.",
+        "answer": "oilier to",
+        "options": [
+          "oilier to",
+          "cleaner to",
+          "sharper to",
+          "softer to"
+        ],
+        "korean": "이 진한 파스타 요리는 가벼운 샐러드보다 저녁 손님들의 입맛에 훨씬 더 기름지게 느껴졌어요.",
+        "explanation": "\"oilier to guests\"는 손님들의 미각에 기름지게 다가옴을 뜻합니다."
       }
     ]
   },
   {
     "keyExpression": "break from",
+    "baseForm": "break from",
     "sentences": [
       {
         "type": "multiple-choice",
@@ -1765,67 +1777,67 @@
       },
       {
         "type": "drag-and-drop",
-        "english": "Let's take a short [break from cooking and order takeout tonight].",
-        "answer": "break from cooking and order takeout tonight",
+        "english": "We decided to take a [two-week break from computer screens during vacation].",
+        "answer": "two-week break from computer screens during vacation",
         "tokens": [
+          "two-week",
           "break",
           "from",
-          "cooking",
-          "and",
-          "order",
-          "takeout",
-          "tonight"
+          "computer",
+          "screens",
+          "during",
+          "vacation"
         ],
         "options": [
+          "two-week",
           "break",
           "from",
-          "cooking",
-          "and",
-          "order",
-          "takeout",
-          "tonight"
+          "computer",
+          "screens",
+          "during",
+          "vacation"
         ],
-        "korean": "오늘 밤엔 요리로부터 잠시 쉬어가며 배달 음식을 시켜 먹자.",
-        "explanation": "요리를 하루 쉬고 배달 음식을 먹자는 제안입니다."
+        "korean": "우리는 방학 동안 컴퓨터 화면으로부터 2주간의 휴식기를 갖기로 결정했어요.",
+        "explanation": "\"break from screens\"는 화면을 잠시 멀리하고 쉬는 것입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "After months of grueling computer screen time, she took a weekend [break from, jump into, march toward, look into] all social media and smartphones.",
+        "english": "After studying all morning, he took a short fifteen-minute [break from, race with, battle against, push to] his books to drink water.",
         "answer": "break from",
         "options": [
           "break from",
-          "jump into",
-          "march toward",
-          "look into"
+          "race with",
+          "battle against",
+          "push to"
         ],
-        "korean": "컴퓨터 화면을 보며 보낸 몇 달간의 고된 시간 끝에 그녀는 주말 동안 모든 소셜 미디어와 스마트폰으로부터 잠시 휴식기를 가졌습니다.",
-        "explanation": "디지털 디톡스 휴식입니다."
+        "korean": "아침 내내 공부한 뒤, 그는 물을 마시기 위해 책으로부터 짧은 15분간의 휴식 시간을 가졌어요.",
+        "explanation": "\"break from studying\"은 공부를 잠시 쉬는 시간입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "A brief ten-minute [break from, rush into, dive under, fall behind] intense study helps restore mental concentration.",
+        "english": "Taking a weekend [break from, dance with, run at, cry for] noisy city life made everyone feel refreshed and peaceful.",
         "answer": "break from",
         "options": [
           "break from",
-          "rush into",
-          "dive under",
-          "fall behind"
+          "dance with",
+          "run at",
+          "cry for"
         ],
-        "korean": "집중적인 공부로부터의 짧은 10분간의 휴식은 정신적 집중력을 되찾는 데 큰 도움이 됩니다.",
-        "explanation": "학습 중 짧은 재충전 휴식입니다."
+        "korean": "시끄러운 도시 생활로부터 주말 휴식기를 가진 것은 모두를 상쾌하고 평화롭게 만들어 주었어요.",
+        "explanation": "\"break from city life\"는 일상이나 도시를 벗어난 휴식입니다."
       },
       {
         "type": "multiple-choice",
-        "english": "The band decided to take a year-long [break from, climb up, push toward, fall down] touring to spend precious time with their families.",
+        "english": "She took a three-day [break from, jump to, look through, touch with] social media to focus on reading her new novel.",
         "answer": "break from",
         "options": [
           "break from",
-          "climb up",
-          "push toward",
-          "fall down"
+          "jump to",
+          "look through",
+          "touch with"
         ],
-        "korean": "그 밴드는 가족들과 소중한 시간을 보내기 위해 투어 공연으로부터 1년간의 휴식기를 갖기로 결정했습니다.",
-        "explanation": "활동을 잠시 중단하고 쉬는 기간입니다."
+        "korean": "그녀는 새 소설을 읽는 데 집중하기 위해 소셜 미디어로부터 3일간의 휴식기를 가졌어요.",
+        "explanation": "\"break from social media\"는 SNS를 잠시 쉬는 기간입니다."
       }
     ]
   }

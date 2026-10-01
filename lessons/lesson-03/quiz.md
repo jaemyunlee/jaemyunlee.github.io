@@ -2,18 +2,18 @@
 
 ## Quiz 1
 - **Type**: multiple-choice
-- **English**: Our eldest daughter is remarkably [strong-willed, soft-spoken, short-tempered, open-minded] and never gives up until she solves the puzzle herself.
+- **English**: My little sister is very [strong-willed, soft-spoken, short-tempered, open-minded] and never gives up when she wants to do something.
 - **Answer**: strong-willed
 - **Options**: strong-willed, soft-spoken, short-tempered, open-minded
-- **Korean**: 우리 큰딸은 대단히 의지가 강하고 고집이 있어서, 스스로 퍼즐을 풀 때까지 절대 포기하지 않아요.
+- **Korean**: 내 여동생은 매우 의지가 강하고 고집이 있어서, 무언가를 하고 싶을 때 절대 포기하지 않아요.
 - **Explanation**: "strong-willed"는 "의지가 강한, 자기주관이 뚜렷한"을 뜻합니다.
 
 ## Quiz 2
 - **Type**: multiple-choice
-- **English**: Dad drove to soccer practice and [picked her up, dropped her off, checked her in, pointed her out] right when the rain began to pour.
+- **English**: Dad drove to the bus stop and [picked her up, dropped her off, checked her in, pointed her out] right when the rain began to pour.
 - **Answer**: picked her up
 - **Options**: picked her up, dropped her off, checked her in, pointed her out
-- **Korean**: 아빠는 축구 연습장으로 차를 몰고 가 비가 쏟아지기 시작할 때 딱 맞춰 그녀를 태우러 가셨어요.
+- **Korean**: 아빠는 버스 정류장으로 차를 몰고 가 비가 쏟아지기 시작할 때 딱 맞춰 그녀를 태우러 가셨어요.
 - **Explanation**: "pick someone up"은 차로 사람을 "태우러 가다, 데리러 가다"라는 핵심 구동사입니다.
 
 ## Quiz 3
@@ -21,7 +21,7 @@
 - **English**: Even though everyone else wanted to take a rest, the energetic toddler [kept on going, turned around, backed away, gave up] without slowing down.
 - **Answer**: kept on going
 - **Options**: kept on going, turned around, backed away, gave up
-- **Korean**: 다른 사람들은 모두 쉬고 싶어 했지만, 에너지 넘치는 걸음마 아기는 속도를 줄이지 않고 지치지도 않고 계속 나아갔어요.
+- **Korean**: 다른 사람들은 모두 쉬고 싶어 했지만, 에너지 넘치는 아기는 속도를 줄이지 않고 지치지도 않고 계속 나아갔어요.
 - **Explanation**: "keep on going"은 멈추지 않고 "계속해서 나아가다, 계속하다"라는 뜻입니다.
 
 ## Quiz 4

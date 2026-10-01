@@ -10,201 +10,200 @@
 
 ## Quiz 2
 - **Type**: multiple-choice
-- **English**: [Obviously, Surprisingly, Secretly, Rarely], we cannot finish all this work today because two team members are out sick.
+- **English**: [Obviously, Surprisingly, Secretly, Rarely], we cannot go to the park today because it is raining hard.
 - **Answer**: Obviously
 - **Options**: Obviously, Surprisingly, Secretly, Rarely
-- **Korean**: 팀원 두 명이 아파서 결근했으니 당연히 오늘 이 모든 업무를 끝낼 수는 없죠.
-- **Explanation**: "Obviously"는 "당연히, 명백하게"라는 뜻으로 누구나 쉽게 짐작할 수 있는 당연한 사실을 덧붙일 때 씁니다.
+- **Korean**: 비가 많이 내리니 당연히 오늘 공원에 갈 수는 없죠.
+- **Explanation**: "Obviously"는 "당연히, 명백하게"라는 뜻으로 누구나 쉽게 짐작할 수 있는 명백한 사실을 전할 때 씁니다.
 
 ## Quiz 3
 - **Type**: multiple-choice
-- **English**: Even though our seats were way up in the [nosebleed, front row, VIP box, orchestra] section, the stadium atmosphere was electric.
+- **English**: Even though our tickets were in the [nosebleed, front row, VIP box, orchestra] section, we still enjoyed the big concert.
 - **Answer**: nosebleed
 - **Options**: nosebleed, front row, VIP box, orchestra
-- **Korean**: 비록 우리 좌석이 맨 꼭대기 구역(하늘석)이었지만, 경기장 열기는 대단했어요.
-- **Explanation**: "nosebleed section" 또는 "nosebleed seats"는 경기장이나 공연장의 "맨 꼭대기 높은 좌석(코피가 날 정도로 높다는 비유)"을 뜻합니다.
+- **Korean**: 비록 우리 표가 맨 꼭대기 구역(하늘석)이었지만, 우리는 여전히 큰 콘서트를 즐길 수 있었어요.
+- **Explanation**: "nosebleed section" 또는 "nosebleed seats"는 경기장이나 콘서트장의 "맨 꼭대기 높은 좌석(코피가 날 정도로 높다는 비유)"을 뜻합니다.
 
 ## Quiz 4
 - **Type**: multiple-choice
-- **English**: Our hotel room was on the tenth floor, so we had a [decent, terrible, blurry, blind] view of the city skyline.
+- **English**: Our hotel was not expensive, but it had a [decent, terrible, dirty, noisy] room and clean beds.
 - **Answer**: decent
-- **Options**: decent, terrible, blurry, blind
-- **Korean**: 호텔 방이 10층이어서 도시 스카이라인의 꽤 괜찮은 뷰를 즐길 수 있었어요.
-- **Explanation**: "decent"는 "꽤 괜찮은, 만족스러운, 버젓한"을 뜻하는 원어민 빈출 형용사입니다.
+- **Options**: decent, terrible, dirty, noisy
+- **Korean**: 우리 호텔은 비싸지 않았지만, 꽤 괜찮은 방과 깨끗한 침대가 있었어요.
+- **Explanation**: "decent"는 아주 훌륭하진 않아도 "꽤 괜찮은, 만족스러운, 적당한"을 뜻하는 필수 일상 형용사입니다.
 
 ## Quiz 5
 - **Type**: multiple-choice
-- **English**: The theater ticket was fifty percent off because the seat had an [obstructed, unlimited, crystal-clear, immaculate] view behind a support pillar.
+- **English**: The movie ticket was cheaper because the seat had an [obstructed, unlimited, crystal-clear, open] view behind a tall person.
 - **Answer**: obstructed
-- **Options**: obstructed, unlimited, crystal-clear, immaculate
-- **Korean**: 지지 기둥 뒤편이라 시야가 가려진 좌석이어서 극장 티켓이 50% 할인되었어요.
-- **Explanation**: "obstructed"는 기둥이나 구조물에 의해 "시야가 가려진, 방해된"을 뜻합니다 ("obstructed view": 시야 제한석).
+- **Options**: obstructed, unlimited, crystal-clear, open
+- **Korean**: 키 큰 사람 뒤라 시야가 가려진 자리여서 영화 티켓이 더 저렴했어요.
+- **Explanation**: "obstructed"는 기둥이나 사람 등에 의해 "시야가 가려진, 방해된"을 뜻합니다 ("obstructed view": 시야 제한석).
 
 ## Quiz 6
 - **Type**: multiple-choice
-- **English**: [Compared to, Regardless of, In spite of, In place of] the expensive rent in the city center, this suburban apartment is quite affordable.
+- **English**: [Compared to, Regardless of, In spite of, In place of] my old phone, this new phone is very fast.
 - **Answer**: Compared to
 - **Options**: Compared to, Regardless of, In spite of, In place of
-- **Korean**: 도심의 비싼 집세와 비교하면, 이 교외 아파트는 꽤 저렴한 편이에요.
-- **Explanation**: "Compared to ~"는 "~에 비하면, ~와 비교했을 때"라는 뜻으로 두 대상의 비용이나 상태를 대조할 때 씁니다.
+- **Korean**: 내 옛날 휴대폰과 비교하면, 이 새 휴대폰은 정말 빨라요.
+- **Explanation**: "Compared to ~"는 "~에 비하면, ~와 비교했을 때"라는 뜻으로 두 대상을 쉽게 대조할 때 씁니다.
 
 ## Quiz 7
 - **Type**: multiple-choice
-- **English**: [At least, Above all, By no means, In contrast], that is what our manager explained during the morning meeting.
-- **Answer**: At least
-- **Options**: At least, Above all, By no means, In contrast
-- **Korean**: 적어도 아침 회의 때 우리 매니저가 설명해 준 바로는 그랬어요.
-- **Explanation**: "At least"는 "적어도, 최소한"이라는 뜻으로 자신이 알고 있거나 들은 한계를 조심스럽게 전할 때 쓰입니다.
+- **English**: You should drink [at least, at most, at best, at once] eight cups of water every day to stay healthy.
+- **Answer**: at least
+- **Options**: at least, at most, at best, at once
+- **Korean**: 건강을 유지하려면 매일 적어도 물 여덟 잔은 마셔야 해요.
+- **Explanation**: "at least"는 "적어도, 최소한"이라는 뜻으로 최소 수량이나 기준을 나타냅니다.
 
 ## Quiz 8
 - **Type**: multiple-choice
-- **English**: After cooking dinner together a few times, he [started to, stopped to, refused to, forgot to] really enjoy culinary arts.
+- **English**: It [started to, stopped to, refused to, forgot to] rain, so we ran inside the house.
 - **Answer**: started to
 - **Options**: started to, stopped to, refused to, forgot to
-- **Korean**: 몇 번 함께 저녁을 요리해 본 뒤로, 그는 요리하는 것을 진짜 좋아하기 시작했어요.
-- **Explanation**: "start to (동사원형)"는 "~하기 시작하다"라는 뜻입니다.
+- **Korean**: 비가 내리기 시작해서, 우리는 집 안으로 뛰어 들어갔어요.
+- **Explanation**: "started to (동사원형)"는 어떤 행동이나 상태가 "~하기 시작했다"라는 뜻입니다.
 
 ## Quiz 9
 - **Type**: multiple-choice
-- **English**: My cousin fractured his wrist playing volleyball and was [in a cast, in a rush, in disguise, in trouble] for over a month.
+- **English**: He fell off his bike and had to keep his arm [in a cast, in a rush, in disguise, in trouble] for four weeks.
 - **Answer**: in a cast
 - **Options**: in a cast, in a rush, in disguise, in trouble
-- **Korean**: 내 사촌은 배구를 하다가 손목에 금이 가서 한 달 넘게 깁스를 하고 있었어요.
+- **Korean**: 그는 자전거에서 넘어져 팔에 4주 동안 깁스를 하고 있어야 했어요.
 - **Explanation**: "in a cast"는 팔이나 다리에 "깁스를 하고 있는 상태"를 나타냅니다.
 
 ## Quiz 10
 - **Type**: multiple-choice
-- **English**: With heavy snow completely blocking the mountain pass, there was [no way, no doubt, some chance, every reason] we could reach the cabin tonight.
+- **English**: There was [no way, no doubt, some chance, every reason] we could catch the bus because we left home too late.
 - **Answer**: no way
 - **Options**: no way, no doubt, some chance, every reason
-- **Korean**: 폭설이 산길을 완전히 막아버려서 오늘 밤 우리가 오두막에 도달할 수 있는 방법은 절대 없었어요.
-- **Explanation**: "There was no way (that) ~"는 "~할 방법이 전혀 없다 / 절대 불가능하다"는 강한 불가능의 의미를 나타냅니다.
+- **Korean**: 집에서 너무 늦게 나와서 버스를 탈 수 있는 방법은 전혀 없었어요.
+- **Explanation**: "There is no way ~"는 "~할 방법이 전혀 없다 / 절대 불가능하다"라는 강한 불가능의 일상 표현입니다.
 
 ## Quiz 11
 - **Type**: multiple-choice
-- **English**: We thought the café was completely closed, but it [turned out, looked like, caught on, went down] they were just taking a brief lunch break.
+- **English**: We thought the shop was closed, but it [turned out, looked like, caught on, went down] they were just eating lunch.
 - **Answer**: turned out
 - **Options**: turned out, looked like, caught on, went down
-- **Korean**: 우리는 카페가 아예 문을 닫은 줄 알았는데, 알고 보니 잠깐 점심 휴식을 취하는 중이었던 것으로 밝혀졌어요.
-- **Explanation**: "turn out (that) ~"은 "알고 보니 ~임이 드러나다 / 결국 ~로 밝혀지다"라는 뜻의 구동사입니다.
+- **Korean**: 우리는 가게가 문을 닫은 줄 알았는데, 알고 보니 그냥 점심을 먹고 있던 것이었어요.
+- **Explanation**: "turn out (that) ~"은 "알고 보니 ~임이 드러나다 / 결과적으로 ~로 밝혀지다"라는 뜻입니다.
 
 ## Quiz 12
 - **Type**: multiple-choice
-- **English**: We drove to the coastal town for the weekend market and decided to [spend the night, waste the time, pass the buck, lose the face] at a seaside bed-and-breakfast.
+- **English**: It was too late to drive home safely, so we decided to [spend the night, waste the time, pass the buck, lose the face] at a nearby motel.
 - **Answer**: spend the night
 - **Options**: spend the night, waste the time, pass the buck, lose the face
-- **Korean**: 우리는 주말 시장을 보러 해안가 마을로 운전해 갔고, 바닷가 민박집에서 하룻밤 묵고 오기로 결정했어요.
-- **Explanation**: "spend the night"은 어디서 "하룻밤을 묵다 / 자고 오다"를 뜻하는 자연스러운 숙어 표현입니다.
+- **Korean**: 집까지 안전하게 운전하기엔 너무 늦어서, 우리는 근처 모텔에서 하룻밤 자고 가기로 했어요.
+- **Explanation**: "spend the night"은 어디서 "하룻밤을 자다 / 묵고 가다"를 뜻하는 일상 회화 표현입니다.
 
 ## Quiz 13
 - **Type**: multiple-choice
-- **English**: I asked our neighbor if we could borrow his lawn mower, and he said he did not [mind, notice, forget, regret] sharing it at all.
+- **English**: I asked my friend if I could borrow her pen, and she said she did not [mind, notice, forget, regret] at all.
 - **Answer**: mind
 - **Options**: mind, notice, forget, regret
-- **Korean**: 이웃에게 잔디깎이를 빌려도 되는지 물어봤는데, 그는 빌려주는 것을 전혀 언짢아하지 않는다고 말했어요.
-- **Explanation**: "mind"는 "신경 쓰다, 언짢아하다, 개의치 않다"의 의미로 부정문/의문문에서 자주 쓰입니다.
+- **Korean**: 친구에게 펜을 빌려도 되는지 물어봤는데, 그녀는 전혀 신경 안 쓴다(괜찮다)고 말했어요.
+- **Explanation**: "mind"는 "신경 쓰다, 꺼리다, 언짢아하다"라는 뜻으로, 부정문이나 의문문에서 부탁이나 허락을 구할 때 자주 쓰입니다.
 
 ## Quiz 14
 - **Type**: multiple-choice
-- **English**: The limited-edition running shoes [went on sale, took a break, made a scene, dropped the ball] at midnight, and they sold out in under three minutes.
+- **English**: The concert tickets [went on sale, took a break, made a scene, dropped the ball] at nine in the morning, and they sold out fast.
 - **Answer**: went on sale
 - **Options**: went on sale, took a break, made a scene, dropped the ball
-- **Korean**: 한정판 러닝화 판매가 자정에 공식 시작되었는데, 3분도 안 되어 전량 매진되었어요.
-- **Explanation**: "go on sale"은 "판매가 시작되다"를 의미합니다. 과거형은 "went on sale"입니다.
+- **Korean**: 콘서트 티켓이 아침 9시에 판매가 시작되었고, 금방 매진되었어요.
+- **Explanation**: "go on sale"은 티켓이나 물건이 "판매를 시작하다"를 뜻합니다 (과거형: went on sale).
 
 ## Quiz 15
 - **Type**: multiple-choice
-- **English**: I really love that nostalgic animated movie, but I cannot remember [what year that came out, what time it closed, how much it earned, where it disappeared].
+- **English**: I love that old animated movie, but I cannot remember [what year that came out, what time it closed, how much it earned, where it disappeared].
 - **Answer**: what year that came out
 - **Options**: what year that came out, what time it closed, how much it earned, where it disappeared
-- **Korean**: 그 추억의 애니메이션 영화를 정말 좋아하는데, 몇 년도에 나왔는지는 기억이 잘 안 나요.
-- **Explanation**: "come out"은 노래, 영화, 책 등이 세상에 "발매되다 / 출시되다 / 나오다"라는 뜻입니다.
+- **Korean**: 그 옛날 만화 영화를 정말 좋아하는데, 몇 년도에 나왔는지는 기억이 잘 안 나요.
+- **Explanation**: "come out"은 영화, 노래, 책 등이 세상에 "출시되다 / 개봉하다 / 나오다"라는 뜻입니다.
 
 ## Quiz 16
 - **Type**: multiple-choice
-- **English**: Was the company founded back in 2011 or 2012? Yes, I believe it was right [around there, far beyond, out of sight, down under].
+- **English**: Did he arrive at two or three o'clock? Yes, I think it was right [around there, far beyond, out of sight, down under].
 - **Answer**: around there
 - **Options**: around there, far beyond, out of sight, down under
-- **Korean**: 그 회사가 2011년이나 2012년쯤 창업했나요? 네, 제 생각엔 바로 그 무렵 언저리였던 것 같아요.
-- **Explanation**: "around there"는 특정 연도나 시기, 장소의 "그 언저리, 그 무렵, 대략 그쯤"을 뜻합니다.
+- **Korean**: 그가 2시나 3시쯤 도착했나요? 네, 제 생각엔 대략 그 무렵쯤이었던 것 같아요.
+- **Explanation**: "around there"는 시간이나 숫자, 장소의 "그 언저리, 그 무렵, 대략 그쯤"을 뜻합니다.
 
 ## Quiz 17
 - **Type**: multiple-choice
-- **English**: I did not care for abstract art at first, but over time the unique paintings began to [grow on, run down, burn out, fall behind] me.
+- **English**: I did not like this green tea at first, but over time it began to [grow on, run down, burn out, fall behind] me.
 - **Answer**: grow on
 - **Options**: grow on, run down, burn out, fall behind
-- **Korean**: 처음엔 추상 미술에 별 관심이 없었지만, 시간이 흐르면서 그 독특한 그림들이 점점 마음에 들기 시작했어요.
-- **Explanation**: "grow on (누구)"는 처음엔 별로였지만 "차츰 점점 마음에 들다 / 정이 들다"라는 멋진 표현입니다.
+- **Korean**: 처음엔 이 녹차가 별로였지만, 시간이 지나면서 점점 마음에 들기 시작했어요.
+- **Explanation**: "grow on (누구)"는 처음엔 마음에 안 들거나 어색했지만 "차츰 점점 마음에 들다 / 정이 들다"라는 뜻입니다.
 
 ## Quiz 18
 - **Type**: multiple-choice
-- **English**: I cannot go to the cinema tonight because I have two extensive research essays [due, lost, past, late] early tomorrow morning.
+- **English**: I cannot play games tonight because my English homework is [due, lost, past, late] tomorrow morning.
 - **Answer**: due
 - **Options**: due, lost, past, late
-- **Korean**: 내일 아침 일찍까지 제출해야 하는 방대한 연구 에세이가 두 편이나 있어서 오늘 밤 영화관에 갈 수 없어요.
+- **Korean**: 내일 아침까지 제출해야 하는 영어 숙제가 있어서 오늘 밤에는 게임을 할 수 없어요.
 - **Explanation**: "due (시점)"은 과제, 요금, 보고서 등이 "~까지 마감인 / 제출해야 하는"을 의미합니다.
 
 ## Quiz 19
 - **Type**: multiple-choice
-- **English**: We were taking a road trip along the coast right when the artist's new single [came out, gave up, ran down, fell through] last Friday.
+- **English**: A great new movie [came out, gave up, ran down, fell through] in theaters last Friday.
 - **Answer**: came out
 - **Options**: came out, gave up, ran down, fell through
-- **Korean**: 지난주 금요일 그 가수의 신곡 싱글이 막 발표되었을 때 우리는 해안 도로를 여행하던 중이었어요.
-- **Explanation**: "come out"은 새로운 노래나 작품이 "발표되다 / 출시되다 / 세상에 나오다"를 뜻합니다.
+- **Korean**: 지난주 금요일에 극장에 아주 좋은 새 영화가 개봉했어요(나왔어요).
+- **Explanation**: "come out"은 영화나 음악 등이 세상에 "나오다 / 개봉하다 / 발매되다"를 뜻합니다 (과거형: came out).
 
 ## Quiz 20
 - **Type**: multiple-choice
-- **English**: With all flights fully booked during the blizzard, we thought it was pretty [unlikely, realistic, certain, obvious] that we could fly home in time.
+- **English**: It is [unlikely, certain, definite, guaranteed] that the bus will be on time during this heavy rain.
 - **Answer**: unlikely
-- **Options**: unlikely, realistic, certain, obvious
-- **Korean**: 눈보라로 모든 항공편이 매진되어서 우리는 제시간에 비행기를 타고 집에 갈 수 있는 가능성이 거의 없다고 생각했어요.
-- **Explanation**: "unlikely"는 "있을 법하지 않은, 가망 없는, 가능성이 낮은"이라는 뜻입니다.
+- **Options**: unlikely, certain, definite, guaranteed
+- **Korean**: 이렇게 폭우가 쏟아지는 동안에는 버스가 정시에 올 가능성이 낮아요(그럴 것 같지 않아요).
+- **Explanation**: "unlikely"는 어떤 일이 일어날 "가능성이 낮은, 그럴 것 같지 않은"을 뜻하는 유용한 형용사입니다.
 
 ## Quiz 21
 - **Type**: multiple-choice
-- **English**: Because her elderly grandfather uses a wheelchair, the stadium usher escorted them to the spacious [handicap seats, front rows, standing pits, aisle spots] on the main concourse.
+- **English**: Please keep the [handicap seats, luggage bins, driver cabins, exit doors] open for people who need them.
 - **Answer**: handicap seats
-- **Options**: handicap seats, front rows, standing pits, aisle spots
-- **Korean**: 연로하신 할아버지께서 휠체어를 타시기 때문에 경기장 안내원이 메인 통로의 넓은 장애인 전용석으로 안내해 드렸어요.
-- **Explanation**: "handicap seats"는 휠체어나 깁스를 한 관객을 배려한 "장애인/교통약자 전용석"을 뜻합니다.
+- **Options**: handicap seats, luggage bins, driver cabins, exit doors
+- **Korean**: 몸이 불편하거나 도움이 필요한 분들을 위해 장애인 전용 좌석을 비워 두세요.
+- **Explanation**: "handicap seats"는 버스나 경기장, 극장의 "장애인/교통약자 전용 좌석"을 뜻합니다.
 
 ## Quiz 22
 - **Type**: multiple-choice
-- **English**: We spent the entire afternoon [trying to, failing to, refusing to, forgetting to] find an affordable hotel room in the busy tourist district.
+- **English**: I am [trying to, stopping to, hating to, failing to] finish my English homework before dinner time.
 - **Answer**: trying to
-- **Options**: trying to, failing to, refusing to, forgetting to
-- **Korean**: 우리는 붐비는 관광지 구역에서 저렴한 호텔 방을 찾아보려고 애쓰며 오후 내내 시간을 보냈어요.
-- **Explanation**: "try to (동사원형)"는 "~하려고 노력하다, 애쓰다, 시도하다"라는 뜻으로 일상에서 무언가를 하려고 할 때 가장 자연스럽게 쓰는 핵심 표현입니다.
+- **Options**: trying to, stopping to, hating to, failing to
+- **Korean**: 저는 저녁 식사 시간 전에 영어 숙제를 끝내려고 노력하는(애쓰는) 중이에요.
+- **Explanation**: "try to (동사원형)"는 목표를 이루기 위해 "~하려고 애쓰다 / 노력하다"라는 뜻입니다.
 
 ## Quiz 23
 - **Type**: multiple-choice
-- **English**: They packed the luggage and drove [all the way, on the road, out of line, by the way] to the Grand Canyon for spring break.
+- **English**: She walked [all the way, half the time, out of breath, at once] home from the train station in the snow.
 - **Answer**: all the way
-- **Options**: all the way, on the road, out of line, by the way
-- **Korean**: 그들은 짐을 싸서 봄방학 여행으로 그랜드 캐니언까지 먼 길을 차로 쭉 운전해서 갔어요.
-- **Explanation**: "all the way"는 먼 거리나 목적지까지 "끝까지, 내내, 쭉" 이동하거나 거칠 때 사용하는 생생한 표현입니다.
+- **Options**: all the way, half the time, out of breath, at once
+- **Korean**: 그녀는 눈 속에서 기차역부터 집까지 먼 길을 내내 걸어왔어요.
+- **Explanation**: "all the way"는 어떤 장소나 목적지까지 "먼 길을 내내 / 끝까지 완전히"라는 뜻입니다.
 
 ## Quiz 24
 - **Type**: multiple-choice
-- **English**: When ticket registration opened at 9 AM, thousands of anxious fans logged in [at once, in turn, one by one, off hand], causing the server to crash.
+- **English**: Please do not all talk [at once, at peace, at hand, at home]; speak one by one so I can hear you.
 - **Answer**: at once
-- **Options**: at once, in turn, one by one, off hand
-- **Korean**: 오전 9시에 티켓 예매가 열렸을 때 수천 명의 애타는 팬들이 한꺼번에 접속해서 서버가 다운되었어요.
-- **Explanation**: "at once"는 "동시에, 한꺼번에, 일제히"라는 뜻으로, 여러 동작이나 상황이 한순간에 몰려서 일어날 때 자주 쓰입니다.
+- **Options**: at once, at peace, at hand, at home
+- **Korean**: 모두 한꺼번에(동시에) 말씀하지 마시고, 제가 들을 수 있게 한 분씩 말씀해 주세요.
+- **Explanation**: "at once"는 여러 사람이 행동할 때 "한꺼번에, 동시에"라는 의미를 가집니다.
 
 ## Quiz 25
 - **Type**: multiple-choice
-- **English**: If any guests have dietary restrictions, you should notify the wedding banquet team [in advance, after all, on time, by chance] so they can prepare alternate dishes.
+- **English**: You should buy your train ticket [in advance, in danger, in return, in person] to get a good seat by the window.
 - **Answer**: in advance
-- **Options**: in advance, after all, on time, by chance
-- **Korean**: 식이요법 제한이 있는 하객이 있다면 연회 팀이 대체 음식을 준비할 수 있도록 사전에(미리) 알려주어야 해요.
-- **Explanation**: "in advance"는 어떤 일이나 상황이 일어나기 전에 "미리, 사전에"라는 뜻으로 예약이나 연락 시 필수적으로 쓰이는 표현입니다.
+- **Options**: in advance, in danger, in return, in person
+- **Korean**: 창가 쪽 좋은 자리를 잡으려면 기차표를 미리(사전에) 사두는 것이 좋아요.
+- **Explanation**: "in advance"는 어떤 일이 일어나기 전에 "미리, 사전에"를 뜻하는 일상 필수 부사구입니다.
 
 ## Quiz 26
 - **Type**: multiple-choice
-- **English**: When taking an international flight, it is always wise to arrive at the airport well [ahead of time, out of breath, off the hook, under the weather] to clear customs.
+- **English**: We arrived at the bus terminal [ahead of time, out of line, out of control, out of date], so we had time to drink a warm coffee.
 - **Answer**: ahead of time
-- **Options**: ahead of time, out of breath, off the hook, under the weather
-- **Korean**: 국제선을 탈 때는 세관 검사를 여유 있게 통과할 수 있도록 공항에 시간 여유를 두고 미리 도착하는 것이 언제나 현명해요.
-- **Explanation**: "ahead of time"은 "in advance"와 마찬가지로 약속이나 일정에 앞서 "미리, 사전에, 시간 여유를 두고"라는 뜻의 매우 친숙한 구어체 표현입니다.
-
+- **Options**: ahead of time, out of line, out of control, out of date
+- **Korean**: 우리는 버스 터미널에 예정 시간보다 일찍(미리) 도착해서, 따뜻한 커피 한 잔을 마실 시간이 있었어요.
+- **Explanation**: "ahead of time"은 예정된 시각이나 일정보다 "미리, 시간 여유 있게 일찍"을 의미합니다.

@@ -92,7 +92,7 @@
 - **Type**: multiple-choice
 - **English**: The car suddenly [went around a corner, backed up a hill, stopped at a sign, blew a radiator] too fast, and the unsecured groceries slid across the backseat.
 - **Answer**: went around a corner
-- **Options**: went around a corner, backed up a hill, stopped at a sign,, blew a radiator
+- **Options**: went around a corner, backed up a hill, stopped at a sign, blew a radiator
 - **Korean**: 차가 너무 빠르게 길모퉁이(코너)를 도는 바람에 고정되지 않은 장보기 식료품들이 뒷좌석 바닥으로 미끄러져 쏟아졌어요.
 - **Explanation**: "go around a corner"는 운전 중에 "길모퉁이/코너를 돌다"라는 뜻입니다 (과거형: went around a corner).
 
@@ -116,7 +116,7 @@
 - **Type**: multiple-choice
 - **English**: Living in the forest with wildlife sightings and endless cabin chores means there is never a [dull moment, bright future, clear sky, deep ocean].
 - **Answer**: dull moment
-- **Options**: dull moment, bright future, clear sky,, deep ocean
+- **Options**: dull moment, bright future, clear sky, deep ocean
 - **Korean**: 야생동물 출몰과 끝없는 오두막 일거리 속에서 숲속에 산다는 것은 지루하거나 심심한 순간이 결코 없다는 것을 의미합니다.
 - **Explanation**: "never a dull moment"는 언제나 활기차고 사건이 끊이지 않아 "지루할 틈이 없다"라는 관용 표현입니다.
 
