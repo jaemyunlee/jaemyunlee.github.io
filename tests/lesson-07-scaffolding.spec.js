@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Lesson 07 Scaffolding & Integration', () => {
 
-  test('Lesson 07 page loads and displays header badges and coming-soon pre-release state', async ({ page }) => {
+  test('Lesson 07 page loads and displays header badges and navigation tabs in published mode', async ({ page }) => {
     await page.goto('/lessons/lesson-07/index.html');
 
     // Header badge
@@ -13,16 +13,14 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     const statusBadge = page.locator('#lesson-status-badge');
     await expect(statusBadge).toHaveText('Step 1: 퀴즈');
 
-    // Hidden draft badge is not present for public coming-soon lesson
+    // Hidden draft badge is not present
     await expect(page.locator('.lesson-header-section .badge-hidden')).toHaveCount(0);
 
-    // Coming soon notification banner is visible
+    // Coming soon notification banner is hidden in published mode
     const comingSoonBanner = page.locator('#coming-soon-banner');
-    await expect(comingSoonBanner).toBeVisible();
-    await expect(comingSoonBanner).toContainText('본영상 공개 예정');
-    await expect(comingSoonBanner).toContainText('켈리(Kelly)의 생생한 목소리 오디오와 22개의 퀴즈');
+    await expect(comingSoonBanner).toBeHidden();
 
-    // Step navigation tabs: Steps 1 & 2 enabled, Steps 3, 4, 5, writing deactivated/disabled
+    // Step navigation tabs: Steps 1, 2, 3, 4, 5, writing all active and enabled
     const tab1 = page.locator('.step-tab-btn[data-step="1"]');
     const tab2 = page.locator('.step-tab-btn[data-step="2"]');
     const tab3 = page.locator('.step-tab-btn[data-step="3"]');
@@ -39,14 +37,14 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
 
     await expect(tab1).not.toHaveClass(/deactivated/);
     await expect(tab2).not.toHaveClass(/deactivated/);
-    await expect(tab3).toHaveClass(/deactivated/);
-    await expect(tab4).toHaveClass(/deactivated/);
-    await expect(tab5).toHaveClass(/deactivated/);
-    await expect(tabWriting).toHaveClass(/deactivated/);
-    await expect(tab3).toBeDisabled();
-    await expect(tab4).toBeDisabled();
-    await expect(tab5).toBeDisabled();
-    await expect(tabWriting).toBeDisabled();
+    await expect(tab3).not.toHaveClass(/deactivated/);
+    await expect(tab4).not.toHaveClass(/deactivated/);
+    await expect(tab5).not.toHaveClass(/deactivated/);
+    await expect(tabWriting).not.toHaveClass(/deactivated/);
+    await expect(tab3).toBeEnabled();
+    await expect(tab4).toBeEnabled();
+    await expect(tab5).toBeEnabled();
+    await expect(tabWriting).toBeEnabled();
 
     await expect(tab1.locator('.step-label')).toHaveText('퀴즈');
     await expect(tab2.locator('.step-label')).toHaveText('핵심 문장');
@@ -55,17 +53,35 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     await expect(tab5.locator('.step-label')).toHaveText('스피킹 퀴즈');
     await expect(tabWriting.locator('.step-label')).toHaveText('영작하기');
 
-    // Locked coming-soon steps display lock icons
-    await expect(tab3.locator('.step-lock-icon')).toBeVisible();
-    await expect(tab3.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tab4.locator('.step-lock-icon')).toBeVisible();
-    await expect(tab4.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tab5.locator('.step-lock-icon')).toBeVisible();
-    await expect(tab5.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tabWriting.locator('.step-lock-icon')).toBeVisible();
-    await expect(tabWriting.locator('.step-lock-icon')).toHaveText('🔒');
-    await expect(tab1.locator('.step-lock-icon')).toHaveCount(0);
-    await expect(tab2.locator('.step-lock-icon')).toHaveCount(0);
+    // No lock icons in published mode
+    await expect(tab3.locator('.step-lock-icon')).toHaveCount(0);
+    await expect(tab4.locator('.step-lock-icon')).toHaveCount(0);
+    await expect(tab5.locator('.step-lock-icon')).toHaveCount(0);
+    await expect(tabWriting.locator('.step-lock-icon')).toHaveCount(0);
+
+    // Clicking Step 3 activates Video & Script section
+    await tab3.click();
+    const videoSection = page.locator('#video-section');
+    await expect(videoSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 3: 전체 영상');
+
+    // Clicking Step 4 activates Dictation section
+    await tab4.click();
+    const dictationSection = page.locator('#dictation-section');
+    await expect(dictationSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 4: 받아쓰기');
+
+    // Clicking Step 5 activates Review Quiz section
+    await tab5.click();
+    const reviewQuizSection = page.locator('#review-quiz-section');
+    await expect(reviewQuizSection).toBeVisible();
+    await expect(statusBadge).toHaveText('Step 5: 스피킹 퀴즈');
+
+    // Clicking Writing Tab activates Reflection section
+    await tabWriting.click();
+    const reflectionSection = page.locator('#reflection-section');
+    await expect(reflectionSection).toBeVisible();
+    await expect(statusBadge).toHaveText('✍️ 영작하기');
   });
 
   test('Lesson 07 loads all 22 quizzes matching requested types and target expressions', async ({ page }) => {
@@ -231,37 +247,48 @@ test.describe('Lesson 07 Scaffolding & Integration', () => {
     expect(audioCheck.failed).toEqual([]);
   });
 
-  test('Lesson 07 card is displayed in catalog with coming-soon badge and scheduled date (10월 3일)', async ({ page }) => {
+  test('Lessons catalog and Home page display Lesson 07 as published (no coming-soon badge)', async ({ page }) => {
+    // 1. Lessons catalog page
     await page.goto('/lessons.html');
-    const card = page.locator('#card-lesson-07');
-    await expect(card).toBeVisible();
-
-    const badge = card.locator('.badge-coming-soon');
-    await expect(badge).toBeVisible();
-    await expect(badge).toContainText('10월 3일');
+    const lesson07Card = page.locator('#card-lesson-07');
+    await expect(lesson07Card).toBeVisible({ timeout: 5000 });
+    await expect(lesson07Card).not.toHaveClass(/coming-soon/);
+    await expect(lesson07Card.locator('.badge-coming-soon')).toHaveCount(0);
 
     // Verify 22 퀴즈 count pill
-    const meta = card.locator('.lesson-card-meta');
+    const meta = lesson07Card.locator('.lesson-card-meta');
     await expect(meta).toContainText('22 퀴즈');
 
-    // Verify Action button leads to lesson-07
-    const btn = card.locator('.lesson-card-btn');
-    await expect(btn).toBeVisible();
-    await expect(btn).toContainText('학습 시작하기');
-  });
+    // Verify action button shows start learning
+    const actionBtn = page.locator('#card-lesson-07 .lesson-card-btn');
+    await expect(actionBtn).toContainText('학습 시작하기');
 
-  test('Lesson 07 card is displayed on home page (index.html) with coming-soon badge', async ({ page }) => {
+    // 2. Home page (index.html)
     await page.goto('/index.html');
-    const card = page.locator('#card-lesson-07');
-    await expect(card).toBeVisible();
+    const homeCard = page.locator('#card-lesson-07');
+    await expect(homeCard).toBeVisible({ timeout: 5000 });
+    await expect(homeCard).not.toHaveClass(/coming-soon/);
+    await expect(homeCard.locator('.badge-coming-soon')).toHaveCount(0);
 
-    const title = card.locator('.lesson-card-title');
+    const title = homeCard.locator('.lesson-card-title');
     await expect(title).toBeVisible();
     await expect(title).toContainText('김치');
+  });
 
-    const badge = card.locator('.badge-coming-soon');
-    await expect(badge).toBeVisible();
-    await expect(badge).toContainText('10월 3일');
+  test('App.lessons contains Lesson 07 with published status and 22 vocabCount', async ({ page }) => {
+    await page.goto('/lessons.html');
+
+    const lesson07Data = await page.evaluate(() => {
+      const les = window.App.lessons.find(l => l.id === 'lesson-07');
+      return les;
+    });
+
+    expect(lesson07Data).toBeDefined();
+    expect(lesson07Data.id).toBe('lesson-07');
+    expect(lesson07Data.speaker).toBe('Kelly');
+    expect(lesson07Data.vocabCount).toBe(22);
+    expect(lesson07Data.status).toBe('published');
+    expect(lesson07Data.avatar).toContain('kelly.jpg');
   });
 
   test('Dedicated standalone quiz page loads for Lesson 07 Q1 and shows CTA', async ({ page }) => {
